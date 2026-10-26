@@ -1,0 +1,4086 @@
+[
+ {
+  "page": "荒野石魔",
+  "en": "Wilderness Golem",
+  "image": "Wilderness_Golem_Anim.gif",
+  "locations": [],
+  "location_text": "农场",
+  "hp": 30,
+  "damage": "5",
+  "defense": 1,
+  "speed": 3,
+  "xp": 5,
+  "drops": [
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)72",
+    "en": "Diamond",
+    "zh": "钻石",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)86",
+    "en": "Earth Crystal",
+    "zh": "地晶",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)771",
+    "en": "Fiber",
+    "zh": "纤维",
+    "qty": null,
+    "note": "90%",
+    "link": null
+   },
+   {
+    "id": "(O)771",
+    "en": "Fiber",
+    "zh": "纤维",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(H)40",
+    "en": "Living Hat",
+    "zh": "活的帽子",
+    "qty": null,
+    "note": "0.01%",
+    "link": null
+   },
+   {
+    "id": "(O)770",
+    "en": "Mixed Seeds",
+    "zh": "混合种子",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)273",
+    "en": "Rice Shoot",
+    "zh": "稻苗",
+    "qty": null,
+    "note": "6.25%，仅在[[春季]]",
+    "link": null
+   },
+   {
+    "id": "(O)770",
+    "en": "Mixed Seeds",
+    "zh": "混合种子",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)749",
+    "en": "Omni Geode",
+    "zh": "万象晶球",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "臭虫",
+  "en": "Bug",
+  "image": "Bug_Anim.gif",
+  "locations": [],
+  "location_text": "矿井",
+  "hp": 1,
+  "damage": "8",
+  "defense": 0,
+  "speed": 2,
+  "xp": 1,
+  "drops": [
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "76%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "史莱姆（怪物）",
+  "en": "Slimes",
+  "image": "Green_Slime_Anim.gif",
+  "locations": [
+   "矿井",
+   "骷髅洞穴",
+   "采石场矿井",
+   "秘密森林",
+   "火山地牢",
+   "姜岛"
+  ],
+  "location_text": "矿井、骷髅洞穴、采石场矿井、秘密森林、火山地牢、老虎史莱姆小树林",
+  "hp": null,
+  "damage": "各不相同",
+  "defense": null,
+  "speed": null,
+  "xp": null,
+  "drops": [
+   {
+    "id": "(O)92",
+    "en": "Sap",
+    "zh": "树液",
+    "qty": null,
+    "note": "除了大史莱姆",
+    "link": null
+   },
+   {
+    "id": "(O)766",
+    "en": "Slime",
+    "zh": "史莱姆泥",
+    "qty": null,
+    "note": "所有史莱姆",
+    "link": null
+   },
+   {
+    "id": "(O)292",
+    "en": "Mahogany Seed",
+    "zh": "桃花心木种子",
+    "qty": null,
+    "note": "秘密森林",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "金属大头",
+  "en": "Metal Head",
+  "image": "Metal_Head_Anim.gif",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 40,
+  "damage": "15",
+  "defense": 8,
+  "speed": 2,
+  "xp": 6,
+  "drops": [
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)378",
+    "en": "Copper Ore",
+    "zh": "铜矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)378",
+    "en": "Copper Ore",
+    "zh": "铜矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "65%",
+    "link": null
+   },
+   {
+    "id": "(H)51",
+    "en": "Squire's Helmet",
+    "zh": "护卫头盔",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "岩石蟹",
+  "en": "Rock Crab",
+  "image": "Rock_Crab.png",
+  "locations": [],
+  "location_text": "矿井",
+  "hp": 30,
+  "damage": "5",
+  "defense": 1,
+  "speed": 2,
+  "xp": 4,
+  "drops": [
+   {
+    "id": "(O)717",
+    "en": "Crab",
+    "zh": "螃蟹",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   },
+   {
+    "id": "(O)286",
+    "en": "Cherry Bomb",
+    "zh": "樱桃炸弹",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "暗影狂徒",
+  "en": "Shadow Brute",
+  "image": "Shadow_Brute.png",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 160,
+  "damage": "18",
+  "defense": 2,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "1-3, 10%",
+    "link": null
+   },
+   {
+    "id": "(O)334",
+    "en": "Copper Bar",
+    "zh": "铜锭",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)335",
+    "en": "Iron Bar",
+    "zh": "铁锭",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.05%",
+    "link": null
+   },
+   {
+    "id": "(O)108",
+    "en": "Rare Disc",
+    "zh": "稀有圆盘",
+    "qty": null,
+    "note": "0.3%",
+    "link": null
+   },
+   {
+    "id": "(O)203",
+    "en": "Strange Bun",
+    "zh": "奇怪的小面包",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "蝙蝠",
+  "en": "Bats",
+  "image": "Bat_Anim.gif",
+  "locations": [
+   "矿井",
+   "骷髅洞穴"
+  ],
+  "location_text": "矿井、骷髅洞穴",
+  "hp": 24,
+  "damage": "06, 07, 15, 30, 13, 14",
+  "defense": 1,
+  "speed": 3,
+  "xp": 3,
+  "drops": [],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "石碳幽灵",
+  "en": "Carbon Ghost",
+  "image": "Carbon_Ghost_Anim.gif",
+  "locations": [],
+  "location_text": "Skull Cavern",
+  "hp": 190,
+  "damage": "25",
+  "defense": 3,
+  "speed": 4,
+  "xp": 20,
+  "drops": [
+   {
+    "id": "(O)749",
+    "en": "Omni Geode",
+    "zh": "万象晶球",
+    "qty": null,
+    "note": "99%",
+    "link": null
+   },
+   {
+    "id": "(O)338",
+    "en": "Refined Quartz",
+    "zh": "精炼石英",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)875",
+    "en": "Ectoplasm",
+    "zh": "灵外质",
+    "qty": null,
+    "note": "9.5%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "铱蟹",
+  "en": "Iridium Crab",
+  "image": "Iridium_Crab.png",
+  "locations": [],
+  "location_text": "骷髅洞穴",
+  "hp": 240,
+  "damage": "15",
+  "defense": 3,
+  "speed": 3,
+  "xp": 20,
+  "drops": [
+   {
+    "id": "(O)732",
+    "en": "Crab Cakes",
+    "zh": "蟹黄糕",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "幽灵",
+  "en": "Ghost",
+  "image": "Ghost_Anim.gif",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 96,
+  "damage": "10",
+  "defense": 3,
+  "speed": 4,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)97",
+    "en": "Dwarf Scroll II",
+    "zh": "矮人卷轴 II",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)156",
+    "en": "Ghostfish",
+    "zh": "鬼鱼",
+    "qty": null,
+    "note": "8%",
+    "link": null
+   },
+   {
+    "id": "(O)338",
+    "en": "Refined Quartz",
+    "zh": "精炼石英",
+    "qty": null,
+    "note": "8%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "95%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)384",
+    "en": "Gold Ore",
+    "zh": "黄金矿石",
+    "qty": null,
+    "note": "1-3, 20%",
+    "link": null
+   },
+   {
+    "id": "(O)875",
+    "en": "Ectoplasm",
+    "zh": "灵外质",
+    "qty": null,
+    "note": "9.5%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "苍蝇",
+  "en": "Cave Fly",
+  "image": "Cave_Fly.png",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 22,
+  "damage": "6",
+  "defense": 1,
+  "speed": 2,
+  "xp": 10,
+  "drops": [
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "90%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "蛆",
+  "en": "Grub",
+  "image": "Grub_Anim.gif",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 20,
+  "damage": "4",
+  "defense": 0,
+  "speed": 1,
+  "xp": 2,
+  "drops": [
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "60%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)273",
+    "en": "Rice Shoot",
+    "zh": "稻苗",
+    "qty": null,
+    "note": "10% (5%+5%)",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "石魔",
+  "en": "Stone Golem",
+  "image": "Stone_Golem_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "矿井",
+  "hp": 45,
+  "damage": "5",
+  "defense": 5,
+  "speed": 2,
+  "xp": 5,
+  "drops": [
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)80",
+    "en": "Quartz",
+    "zh": "石英",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": null,
+    "note": "90%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "灰尘精灵",
+  "en": "Dust Sprite",
+  "image": "Dust_Sprite.png",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 40,
+  "damage": "6",
+  "defense": 2,
+  "speed": 3,
+  "xp": 2,
+  "drops": [
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)433",
+    "en": "Coffee Bean",
+    "zh": "咖啡豆",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)414",
+    "en": "Crystal Fruit",
+    "zh": "水晶果",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)97",
+    "en": "Dwarf Scroll II",
+    "zh": "矮人卷轴 II",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)84",
+    "en": "Frozen Tear",
+    "zh": "泪晶",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "骷髅",
+  "en": "Skeleton",
+  "image": "Skeleton_Anim.gif",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 140,
+  "damage": "10",
+  "defense": 1,
+  "speed": 2,
+  "xp": 8,
+  "drops": [
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(W)5",
+    "en": "Bone Sword",
+    "zh": "骨剑",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)579",
+    "en": "Prehistoric Scapula",
+    "zh": "史前肩胛骨",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "熔岩蟹",
+  "en": "Lava Crab",
+  "image": "Lava_Crab.png",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 120,
+  "damage": "15",
+  "defense": 3,
+  "speed": 3,
+  "xp": 12,
+  "drops": [
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)717",
+    "en": "Crab",
+    "zh": "螃蟹",
+    "qty": null,
+    "note": "25%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "暗影萨满",
+  "en": "Shadow Shaman",
+  "image": "Shadow_Shaman.png",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 80,
+  "damage": "17",
+  "defense": 2,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "1-3, 10%",
+    "link": null
+   },
+   {
+    "id": "(O)334",
+    "en": "Copper Bar",
+    "zh": "铜锭",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)335",
+    "en": "Iron Bar",
+    "zh": "铁锭",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.05%",
+    "link": null
+   },
+   {
+    "id": "(O)108",
+    "en": "Rare Disc",
+    "zh": "稀有圆盘",
+    "qty": null,
+    "note": "0.3%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "木乃伊",
+  "en": "Mummy",
+  "image": "Mummy_Anim.gif",
+  "locations": [],
+  "location_text": "Skull Cavern",
+  "hp": 260,
+  "damage": "30",
+  "defense": 0,
+  "speed": 2,
+  "xp": 20,
+  "drops": [
+   {
+    "id": "(O)428",
+    "en": "Cloth",
+    "zh": "布料",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)428",
+    "en": "Cloth",
+    "zh": "布料",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)856",
+    "en": "Curiosity Lure",
+    "zh": "珍稀诱钩",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)243",
+    "en": "Miner's Treat",
+    "zh": "矿工特供",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "99%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   },
+   {
+    "id": "(O)485",
+    "en": "Red Cabbage Seeds",
+    "zh": "红叶卷心菜种子",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "甲虫",
+  "en": "Armored Bug",
+  "image": "Armored_Bug_Anim.gif",
+  "locations": [],
+  "location_text": "Skull Cavern",
+  "hp": 1,
+  "damage": "8",
+  "defense": 0,
+  "speed": 2,
+  "xp": 1,
+  "drops": [
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "76%",
+    "link": null
+   },
+   {
+    "id": "(O)874",
+    "en": "Bug Steak",
+    "zh": "虫肉块",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可"
+ },
+ {
+  "page": "突变苍蝇",
+  "en": "Mutant Fly",
+  "image": "Mutant_Fly.png",
+  "locations": [
+   "突变虫穴"
+  ],
+  "location_text": "突变虫穴",
+  "hp": 66,
+  "damage": "12",
+  "defense": 1,
+  "speed": 2,
+  "xp": 10,
+  "drops": [
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "90%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "突变蛆",
+  "en": "Mutant Grub",
+  "image": "Mutant_Grub_Anim.gif",
+  "locations": [
+   "突变虫穴"
+  ],
+  "location_text": "突变虫穴",
+  "hp": 100,
+  "damage": "12",
+  "defense": 0,
+  "speed": 1,
+  "xp": 6,
+  "drops": [
+   {
+    "id": "(O)456",
+    "en": "Algae Soup",
+    "zh": "海藻汤",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "60%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "霸王喷火龙",
+  "en": "Pepper Rex",
+  "image": "Pepper_Rex.gif",
+  "locations": [],
+  "location_text": "Skull Cavern",
+  "hp": 300,
+  "damage": "15",
+  "defense": 5,
+  "speed": 2,
+  "xp": 7,
+  "drops": [
+   {
+    "id": "(O)580",
+    "en": "Prehistoric Tibia",
+    "zh": "史前胫骨",
+    "qty": null,
+    "note": "30%",
+    "link": null
+   },
+   {
+    "id": "(O)583",
+    "en": "Prehistoric Rib",
+    "zh": "史前肋骨",
+    "qty": null,
+    "note": "30%",
+    "link": null
+   },
+   {
+    "id": "(O)584",
+    "en": "Prehistoric Vertebra",
+    "zh": "史前脊骨",
+    "qty": null,
+    "note": "30%",
+    "link": null
+   },
+   {
+    "id": "(O)107",
+    "en": "Dinosaur Egg",
+    "zh": "恐龙蛋",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "幽灵头骨",
+  "en": "Haunted Skull",
+  "image": "Haunted_Skull_Anim.gif",
+  "locations": [
+   "采石场矿井",
+   "矿井"
+  ],
+  "location_text": "采石场矿井矿井地牢层（随机出现）",
+  "hp": 160,
+  "damage": "15",
+  "defense": 1,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)531",
+    "en": "Aquamarine Ring",
+    "zh": "海蓝宝石戒指",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(W)2",
+    "en": "Dark Sword",
+    "zh": "黑暗剑",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)86",
+    "en": "Earth Crystal",
+    "zh": "地晶",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)279",
+    "en": "Magic Rock Candy",
+    "zh": "魔法糖冰棍",
+    "qty": null,
+    "note": "0.13%",
+    "link": null
+   },
+   {
+    "id": "(O)288",
+    "en": "Mega Bomb",
+    "zh": "超级炸弹",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)725",
+    "en": "Oak Resin",
+    "zh": "橡树树脂",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)581",
+    "en": "Prehistoric Skull",
+    "zh": "史前头骨",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)534",
+    "en": "Ruby Ring",
+    "zh": "红宝石戒指",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)582",
+    "en": "Skeletal Hand",
+    "zh": "手部骨骼",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)273",
+    "en": "Rice Shoot",
+    "zh": "稻苗",
+    "qty": null,
+    "note": "21.43%",
+    "link": null
+   },
+   {
+    "id": "(O)275",
+    "en": "Artifact Trove",
+    "zh": "古物宝藏",
+    "qty": null,
+    "note": "1.30%",
+    "link": null
+   },
+   {
+    "id": "(O)749",
+    "en": "Omni Geode",
+    "zh": "万象晶球",
+    "qty": null,
+    "note": "1.30%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "熔岩潜伏怪",
+  "en": "Lava Lurk",
+  "image": "Lava_Lurk_Anim.gif",
+  "locations": [
+   "火山地牢"
+  ],
+  "location_text": "火山地牢",
+  "hp": 220,
+  "damage": "15",
+  "defense": 5,
+  "speed": 2,
+  "xp": 12,
+  "drops": [
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)852",
+    "en": "Dragon Tooth",
+    "zh": "龙牙",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "矮人哨兵",
+  "en": "Dwarvish Sentry",
+  "image": "Dwarvish_Sentry.png",
+  "locations": [
+   "火山地牢"
+  ],
+  "location_text": "火山地牢",
+  "hp": 300,
+  "damage": "18",
+  "defense": 5,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)60",
+    "en": "Emerald",
+    "zh": "绿宝石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)62",
+    "en": "Aquamarine",
+    "zh": "海蓝宝石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)64",
+    "en": "Ruby",
+    "zh": "红宝石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)66",
+    "en": "Amethyst",
+    "zh": "紫水晶",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)68",
+    "en": "Topaz",
+    "zh": "黄水晶",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)70",
+    "en": "Jade",
+    "zh": "翡翠",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)72",
+    "en": "Diamond",
+    "zh": "钻石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "熔岩大头",
+  "en": "Hot Head",
+  "image": "Hot_Head.png",
+  "locations": [
+   "火山地牢"
+  ],
+  "location_text": "火山地牢",
+  "hp": 215,
+  "damage": "18",
+  "defense": 8,
+  "speed": 2,
+  "xp": 16,
+  "drops": [
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)378",
+    "en": "Copper Ore",
+    "zh": "铜矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)378",
+    "en": "Copper Ore",
+    "zh": "铜矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.05%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.01%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)833",
+    "en": "Pineapple Seeds",
+    "zh": "菠萝种子",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)833",
+    "en": "Pineapple Seeds",
+    "zh": "菠萝种子",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "65%",
+    "link": null
+   },
+   {
+    "id": "(H)51",
+    "en": "Squire's Helmet",
+    "zh": "护卫头盔",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "假熔岩菇",
+  "en": "False Magma Cap",
+  "image": "False_Magma_Cap_Anim.gif",
+  "locations": [
+   "火山地牢"
+  ],
+  "location_text": "火山地牢",
+  "hp": 290,
+  "damage": "15",
+  "defense": 3,
+  "speed": 3,
+  "xp": 14,
+  "drops": [
+   {
+    "id": "(O)851",
+    "en": "Magma Cap",
+    "zh": "熔岩菇",
+    "qty": null,
+    "note": "99%",
+    "link": null
+   },
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "熔岩精灵",
+  "en": "Magma Sprite",
+  "image": "Magma_Sprite_Anim.gif",
+  "locations": [
+   "火山地牢"
+  ],
+  "location_text": "火山地牢",
+  "hp": 220,
+  "damage": "15",
+  "defense": 8,
+  "speed": 2,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "熔岩火球",
+  "en": "Magma Sparker",
+  "image": "Magma_Sparker_Anim.gif",
+  "locations": [
+   "火山地牢"
+  ],
+  "location_text": "火山地牢",
+  "hp": 310,
+  "damage": "15",
+  "defense": 8,
+  "speed": 2,
+  "xp": 17,
+  "drops": [
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "熔岩掘地虫",
+  "en": "Magma Duggy",
+  "image": "Magma_Duggy.png",
+  "locations": [
+   "火山地牢"
+  ],
+  "location_text": "火山地牢",
+  "hp": 380,
+  "damage": "16",
+  "defense": 0,
+  "speed": 2,
+  "xp": 18,
+  "drops": [
+   {
+    "id": "(O)831",
+    "en": "Taro Tuber",
+    "zh": "芋头块茎",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)831",
+    "en": "Taro Tuber",
+    "zh": "芋头块茎",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)288",
+    "en": "Mega Bomb",
+    "zh": "超级炸弹",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)848",
+    "en": "Cinder Shard",
+    "zh": "火山晶石",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "暗影狙击手",
+  "en": "Shadow Sniper",
+  "image": "Shadow_Sniper_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 300,
+  "damage": "18",
+  "defense": 2,
+  "speed": 3,
+  "xp": 20,
+  "drops": [
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)335",
+    "en": "Iron Bar",
+    "zh": "铁锭",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)334",
+    "en": "Copper Bar",
+    "zh": "铜锭",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)203",
+    "en": "Strange Bun",
+    "zh": "奇怪的小面包",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)108",
+    "en": "Rare Disc",
+    "zh": "稀有圆盘",
+    "qty": null,
+    "note": "0.3%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "1-3,10%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.05%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "蜘蛛",
+  "en": "Spider",
+  "image": "Spider.png",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "矿井（挑战之神庙激活）",
+  "hp": 200,
+  "damage": "15",
+  "defense": 2,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)335",
+    "en": "Iron Bar",
+    "zh": "铁锭",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)334",
+    "en": "Copper Bar",
+    "zh": "铜锭",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)203",
+    "en": "Strange Bun",
+    "zh": "奇怪的小面包",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)108",
+    "en": "Rare Disc",
+    "zh": "稀有圆盘",
+    "qty": null,
+    "note": "0.3%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "1-3,10%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.05%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "腐臭幽灵",
+  "en": "Putrid Ghost",
+  "image": "Putrid_Ghost.png",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "矿井（挑战之神庙激活）",
+  "hp": 500,
+  "damage": "25",
+  "defense": 3,
+  "speed": 4,
+  "xp": 25,
+  "drops": [
+   {
+    "id": "(O)749",
+    "en": "Omni Geode",
+    "zh": "万象晶球",
+    "qty": null,
+    "note": "99%",
+    "link": null
+   },
+   {
+    "id": "(O)875",
+    "en": "Ectoplasm",
+    "zh": "灵外质",
+    "qty": null,
+    "note": "9.5%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "蓝鱿鱼",
+  "en": "Blue Squid",
+  "image": "Blue_Squid_Anim.gif",
+  "locations": [
+   "矿井",
+   "任务"
+  ],
+  "location_text": "危险的矿井（接受任务或激活挑战之神庙）",
+  "hp": 310,
+  "damage": "18",
+  "defense": 2,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)814",
+    "en": "Squid Ink",
+    "zh": "鱿鱼墨汁",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)288",
+    "en": "Mega Bomb",
+    "zh": "超级炸弹",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "皇家飞蛇",
+  "en": "Royal Serpent",
+  "image": "Royal_Serpent.png",
+  "locations": [],
+  "location_text": "骷髅洞穴",
+  "hp": 150,
+  "damage": "32-48",
+  "defense": 0,
+  "speed": 2,
+  "xp": 20,
+  "drops": [
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)446",
+    "en": "Rabbit's Foot",
+    "zh": "兔子的脚",
+    "qty": null,
+    "note": "0.8%",
+    "link": null
+   },
+   {
+    "id": "(O)485",
+    "en": "Red Cabbage Seeds",
+    "zh": "红叶卷心菜种子",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)226",
+    "en": "Spicy Eel",
+    "zh": "香辣鳗鱼",
+    "qty": null,
+    "note": "6%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "99%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "掘地虫",
+  "en": "Duggy",
+  "image": "Duggy.png",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 40,
+  "damage": "6",
+  "defense": 0,
+  "speed": 2,
+  "xp": 10,
+  "drops": [
+   {
+    "id": "(O)286",
+    "en": "Cherry Bomb",
+    "zh": "樱桃炸弹",
+    "qty": null,
+    "note": "25%",
+    "link": null
+   },
+   {
+    "id": "(O)105",
+    "en": "Chewing Stick",
+    "zh": "咀嚼洁齿棒",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)72",
+    "en": "Diamond",
+    "zh": "钻石",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)86",
+    "en": "Earth Crystal",
+    "zh": "地晶",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)535",
+    "en": "Geode",
+    "zh": "晶球",
+    "qty": null,
+    "note": "25%",
+    "link": null
+   },
+   {
+    "id": "(O)280",
+    "en": "Yam",
+    "zh": "山药",
+    "qty": null,
+    "note": "3%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "鱿鱼娃",
+  "en": "Squid Kid",
+  "image": "Squid_Kid_Anim.gif",
+  "locations": [],
+  "location_text": "矿井",
+  "hp": 1,
+  "damage": "18",
+  "defense": 2,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)288",
+    "en": "Mega Bomb",
+    "zh": "超级炸弹",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)814",
+    "en": "Squid Ink",
+    "zh": "鱿鱼墨汁",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "飞蛇",
+  "en": "Serpent",
+  "image": "Serpent_Anim.gif",
+  "locations": [],
+  "location_text": "Skull Cavern",
+  "hp": 150,
+  "damage": "23",
+  "defense": 0,
+  "speed": 2,
+  "xp": 20,
+  "drops": [
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)446",
+    "en": "Rabbit's Foot",
+    "zh": "兔子的脚",
+    "qty": null,
+    "note": "0.8%",
+    "link": null
+   },
+   {
+    "id": "(O)485",
+    "en": "Red Cabbage Seeds",
+    "zh": "红叶卷心菜种子",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)226",
+    "en": "Spicy Eel",
+    "zh": "香辣鳗鱼",
+    "qty": null,
+    "note": "6%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "99%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "蛆（危险）",
+  "en": "Grub (dangerous)",
+  "image": "Grub_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 265,
+  "damage": "12-13",
+  "defense": 0,
+  "speed": 1,
+  "xp": 2,
+  "drops": [
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "60%",
+    "link": null
+   },
+   {
+    "id": "(O)273",
+    "en": "Rice Shoot",
+    "zh": "稻苗",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "臭虫（危险）",
+  "en": "Bug (dangerous)",
+  "image": "Bug_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 250,
+  "damage": "15-16",
+  "defense": 0,
+  "speed": 2,
+  "xp": 1,
+  "drops": [
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "76%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "苍蝇（危险）",
+  "en": "Cave Fly (dangerous)",
+  "image": "Cave_Fly_Dangerous.png",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 266,
+  "damage": "13-15",
+  "defense": 2,
+  "speed": 2,
+  "xp": 10,
+  "drops": [
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "90%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "掘地虫（危险）",
+  "en": "Duggy (dangerous)",
+  "image": "Duggy_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 280,
+  "damage": "8",
+  "defense": 0,
+  "speed": 2,
+  "xp": 10,
+  "drops": [
+   {
+    "id": "(O)286",
+    "en": "Cherry Bomb",
+    "zh": "樱桃炸弹",
+    "qty": null,
+    "note": "25%",
+    "link": null
+   },
+   {
+    "id": "(O)535",
+    "en": "Geode",
+    "zh": "晶球",
+    "qty": null,
+    "note": "25%",
+    "link": null
+   },
+   {
+    "id": "(O)86",
+    "en": "Earth Crystal",
+    "zh": "地晶",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)280",
+    "en": "Yam",
+    "zh": "山药",
+    "qty": null,
+    "note": "3%",
+    "link": null
+   },
+   {
+    "id": "(O)105",
+    "en": "Chewing Stick",
+    "zh": "咀嚼洁齿棒",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)72",
+    "en": "Diamond",
+    "zh": "钻石",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "灰尘精灵（危险）",
+  "en": "Dust Sprite (dangerous)",
+  "image": "Dust_Sprite_Dangerous_Anim.gif",
+  "locations": [],
+  "location_text": "The Mines",
+  "hp": 280,
+  "damage": "13-15",
+  "defense": 6,
+  "speed": 3,
+  "xp": 2,
+  "drops": [
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)414",
+    "en": "Crystal Fruit",
+    "zh": "水晶果",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)84",
+    "en": "Frozen Tear",
+    "zh": "泪晶",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)433",
+    "en": "Coffee Bean",
+    "zh": "咖啡豆",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)97",
+    "en": "Dwarf Scroll II",
+    "zh": "矮人卷轴 II",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "熔岩蟹（危险）",
+  "en": "Lava Crab (dangerous)",
+  "image": "Lava_Crab_Dangerous.png",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 340,
+  "damage": "19-26",
+  "defense": 8,
+  "speed": 3,
+  "xp": 12,
+  "drops": [
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)717",
+    "en": "Crab",
+    "zh": "螃蟹",
+    "qty": null,
+    "note": "25%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "金属大头（危险）",
+  "en": "Metal Head (dangerous)",
+  "image": "Metal_Head_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 280,
+  "damage": "19-26",
+  "defense": 24,
+  "speed": 2,
+  "xp": 6,
+  "drops": [
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "65%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)378",
+    "en": "Copper Ore",
+    "zh": "铜矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)378",
+    "en": "Copper Ore",
+    "zh": "铜矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "岩石蟹（危险）",
+  "en": "Rock Crab (dangerous)",
+  "image": "Rock_Crab_Dangerous.png",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 272,
+  "damage": "13",
+  "defense": 2,
+  "speed": 2,
+  "xp": 4,
+  "drops": [
+   {
+    "id": "(O)286",
+    "en": "Cherry Bomb",
+    "zh": "樱桃炸弹",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)717",
+    "en": "Crab",
+    "zh": "螃蟹",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "甲虫（危险）",
+  "en": "Armored Bug (dangerous)",
+  "image": "Armored_Bug_Dangerous_Anim.gif",
+  "locations": [
+   "骷髅洞穴"
+  ],
+  "location_text": "危险的骷髅洞穴",
+  "hp": 250,
+  "damage": "20-27",
+  "defense": 0,
+  "speed": 2,
+  "xp": 1,
+  "drops": [
+   {
+    "id": "(O)684",
+    "en": "Bug Meat",
+    "zh": "虫肉",
+    "qty": null,
+    "note": "76%",
+    "link": null
+   },
+   {
+    "id": "(O)157",
+    "en": "White Algae",
+    "zh": "白藻",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)114",
+    "en": "Ancient Seed",
+    "zh": "古代种子",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "暗影狂徒（危险）",
+  "en": "Shadow Brute (dangerous)",
+  "image": "Shadow_Brute_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 370,
+  "damage": "22-32",
+  "defense": 6,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "1-3, 10%",
+    "link": null
+   },
+   {
+    "id": "(O)334",
+    "en": "Copper Bar",
+    "zh": "铜锭",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)203",
+    "en": "Strange Bun",
+    "zh": "奇怪的小面包",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)335",
+    "en": "Iron Bar",
+    "zh": "铁锭",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)108",
+    "en": "Rare Disc",
+    "zh": "稀有圆盘",
+    "qty": null,
+    "note": "0.3%",
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.05%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "暗影萨满（危险）",
+  "en": "Shadow Shaman (dangerous)",
+  "image": "Shadow_Shaman_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 310,
+  "damage": "21-30",
+  "defense": 6,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)769",
+    "en": "Void Essence",
+    "zh": "虚空精华",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "1-3, 10%",
+    "link": null
+   },
+   {
+    "id": "(O)334",
+    "en": "Copper Bar",
+    "zh": "铜锭",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)335",
+    "en": "Iron Bar",
+    "zh": "铁锭",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)108",
+    "en": "Rare Disc",
+    "zh": "稀有圆盘",
+    "qty": null,
+    "note": "0.3%",
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.05%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "骷髅（危险）",
+  "en": "Skeleton (dangerous)",
+  "image": "Skeleton_Dangerous_Anim.gif",
+  "locations": [
+   "矿井",
+   "采石场矿井"
+  ],
+  "location_text": "危险的矿井采石场矿井",
+  "hp": 655,
+  "damage": "16-18",
+  "defense": 2,
+  "speed": 2,
+  "xp": 8,
+  "drops": [
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(W)5",
+    "en": "Bone Sword",
+    "zh": "骨剑",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)579",
+    "en": "Prehistoric Scapula",
+    "zh": "史前肩胛骨",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "骷髅法师",
+  "en": "Skeleton Mage",
+  "image": "Skeleton_Mage_Dangerous_Anim.gif",
+  "locations": [
+   "矿井",
+   "采石场矿井"
+  ],
+  "location_text": "危险的矿井采石场矿井",
+  "hp": 355,
+  "damage": "20-25",
+  "defense": 2,
+  "speed": 2,
+  "xp": 8,
+  "drops": [
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "40%",
+    "link": null
+   },
+   {
+    "id": "(O)881",
+    "en": "Bone Fragment",
+    "zh": "骨头碎片",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(W)5",
+    "en": "Bone Sword",
+    "zh": "骨剑",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)579",
+    "en": "Prehistoric Scapula",
+    "zh": "史前肩胛骨",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "鱿鱼娃（危险）",
+  "en": "Squid Kid (dangerous)",
+  "image": "Squid_Kid_Dangerous.png",
+  "locations": [
+   "矿井",
+   "骷髅洞穴"
+  ],
+  "location_text": "危险的矿井、骷髅洞穴",
+  "hp": 250,
+  "damage": "22-32",
+  "defense": 6,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "75%",
+    "link": null
+   },
+   {
+    "id": "(O)814",
+    "en": "Squid Ink",
+    "zh": "鱿鱼墨汁",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)336",
+    "en": "Gold Bar",
+    "zh": "金锭",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)288",
+    "en": "Mega Bomb",
+    "zh": "超级炸弹",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "石魔（危险）",
+  "en": "Stone Golem (dangerous)",
+  "image": "Stone_Golem_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 283,
+  "damage": "13",
+  "defense": 28,
+  "speed": 2,
+  "xp": 5,
+  "drops": [
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": null,
+    "note": "90%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)380",
+    "en": "Iron Ore",
+    "zh": "铁矿石",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)80",
+    "en": "Quartz",
+    "zh": "石英",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)96",
+    "en": "Dwarf Scroll I",
+    "zh": "矮人卷轴 I",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "竹节虫",
+  "en": "Stick Bug",
+  "image": "Stick_Bug_Animated.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 700,
+  "damage": "20",
+  "defense": 2,
+  "speed": 3,
+  "xp": 4,
+  "drops": [
+   {
+    "id": "(O)858",
+    "en": "Qi Gem",
+    "zh": "齐钻",
+    "qty": null,
+    "note": "100%",
+    "link": null
+   },
+   {
+    "id": "(O)858",
+    "en": "Qi Gem",
+    "zh": "齐钻",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)829",
+    "en": "Ginger",
+    "zh": "姜",
+    "qty": null,
+    "note": "100%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "木乃伊（危险）",
+  "en": "Mummy (dangerous)",
+  "image": "Mummy_Dangerous_Anim.gif",
+  "locations": [
+   "骷髅洞穴"
+  ],
+  "location_text": "危险的骷髅洞穴",
+  "hp": 445,
+  "damage": "38-55",
+  "defense": 0,
+  "speed": 2,
+  "xp": 20,
+  "drops": [
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "99%",
+    "link": null
+   },
+   {
+    "id": "(O)768",
+    "en": "Solar Essence",
+    "zh": "太阳精华",
+    "qty": null,
+    "note": "15%",
+    "link": null
+   },
+   {
+    "id": "(O)428",
+    "en": "Cloth",
+    "zh": "布料",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)428",
+    "en": "Cloth",
+    "zh": "布料",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)243",
+    "en": "Miner's Treat",
+    "zh": "矿工特供",
+    "qty": null,
+    "note": "4%",
+    "link": null
+   },
+   {
+    "id": "(O)856",
+    "en": "Curiosity Lure",
+    "zh": "珍稀诱钩",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "可以"
+ },
+ {
+  "page": "幽灵头骨（危险）",
+  "en": "Haunted Skull (dangerous)",
+  "image": "Haunted_Skull_Dangerous_Anim.gif",
+  "locations": [
+   "矿井"
+  ],
+  "location_text": "危险的矿井",
+  "hp": 310,
+  "damage": "19-26",
+  "defense": 2,
+  "speed": 3,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)531",
+    "en": "Aquamarine Ring",
+    "zh": "海蓝宝石戒指",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)275",
+    "en": "Artifact Trove",
+    "zh": "古物宝藏",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)287",
+    "en": "Bomb",
+    "zh": "炸弹",
+    "qty": null,
+    "note": "2%",
+    "link": null
+   },
+   {
+    "id": "(O)98",
+    "en": "Dwarf Scroll III",
+    "zh": "矮人卷轴 III",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)99",
+    "en": "Dwarf Scroll IV",
+    "zh": "矮人卷轴 IV",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)288",
+    "en": "Mega Bomb",
+    "zh": "超级炸弹",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   },
+   {
+    "id": "(O)108",
+    "en": "Rare Disc",
+    "zh": "稀有圆盘",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)534",
+    "en": "Ruby Ring",
+    "zh": "红宝石戒指",
+    "qty": null,
+    "note": "1.3%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "铱石魔",
+  "en": "Iridium Golem",
+  "image": "Iridium_Golem_Anim.gif",
+  "locations": [],
+  "location_text": "荒野农场",
+  "hp": 430,
+  "damage": "15",
+  "defense": 1,
+  "speed": 6,
+  "xp": 15,
+  "drops": [
+   {
+    "id": "(O)SkillBook_1",
+    "en": "Bait And Bobber",
+    "zh": "鱼饵和浮漂",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)BroccoliSeeds",
+    "en": "Broccoli Seeds",
+    "zh": "西蓝花种子",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)CarrotSeeds",
+    "en": "Carrot Seeds",
+    "zh": "胡萝卜种子",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)382",
+    "en": "Coal",
+    "zh": "煤炭",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)SkillBook_4",
+    "en": "Combat Quarterly",
+    "zh": "战斗季刊",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)72",
+    "en": "Diamond",
+    "zh": "钻石",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)86",
+    "en": "Earth Crystal",
+    "zh": "地晶",
+    "qty": null,
+    "note": "0.5%",
+    "link": null
+   },
+   {
+    "id": "(O)771",
+    "en": "Fiber",
+    "zh": "纤维",
+    "qty": null,
+    "note": "90%",
+    "link": null
+   },
+   {
+    "id": "(O)771",
+    "en": "Fiber",
+    "zh": "纤维",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": null,
+    "note": "3%，判定两次",
+    "link": null
+   },
+   {
+    "id": "(O)527",
+    "en": "Iridium Band",
+    "zh": "铱环",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(H)40",
+    "en": "Living Hat",
+    "zh": "活的帽子",
+    "qty": null,
+    "note": "0.02%",
+    "link": null
+   },
+   {
+    "id": "(O)SkillBook_3",
+    "en": "Mining Monthly",
+    "zh": "采矿月刊",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)770",
+    "en": "Mixed Seeds",
+    "zh": "混合种子",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)770",
+    "en": "Mixed Seeds",
+    "zh": "混合种子",
+    "qty": null,
+    "note": "20%",
+    "link": null
+   },
+   {
+    "id": "(O)749",
+    "en": "Omni Geode",
+    "zh": "万象晶球",
+    "qty": null,
+    "note": "5%",
+    "link": null
+   },
+   {
+    "id": "(O)PowdermelonSeeds",
+    "en": "Powdermelon Seeds",
+    "zh": "霜瓜种子",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)SkillBook_0",
+    "en": "Stardew Valley Almanac",
+    "zh": "星露谷年历",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)SummerSquashSeeds",
+    "en": "Summer Squash Seeds",
+    "zh": "金皮西葫芦种子",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)SkillBook_2",
+    "en": "Woodcutter's Weekly",
+    "zh": "樵夫周刊",
+    "qty": null,
+    "note": "0.2%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)386",
+    "en": "Iridium Ore",
+    "zh": "铱矿石",
+    "qty": null,
+    "note": "1%",
+    "link": null
+   },
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": null,
+    "note": "0.1%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ },
+ {
+  "page": "松露蟹",
+  "en": "Truffle Crab",
+  "image": "Truffle_Crab_Anim.gif",
+  "locations": [],
+  "location_text": "农场",
+  "hp": 30,
+  "damage": "5",
+  "defense": 1,
+  "speed": 2,
+  "xp": 4,
+  "drops": [
+   {
+    "id": "(O)717",
+    "en": "Crab",
+    "zh": "螃蟹",
+    "qty": null,
+    "note": "25%",
+    "link": null
+   },
+   {
+    "id": "(O)430",
+    "en": "Truffle",
+    "zh": "松露",
+    "qty": null,
+    "note": "99.9%",
+    "link": null
+   },
+   {
+    "id": "(O)430",
+    "en": "Truffle",
+    "zh": "松露",
+    "qty": null,
+    "note": "50%",
+    "link": null
+   },
+   {
+    "id": "(O)430",
+    "en": "Truffle",
+    "zh": "松露",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   },
+   {
+    "id": "(O)432",
+    "en": "Truffle Oil",
+    "zh": "松露油",
+    "qty": null,
+    "note": "10%",
+    "link": null
+   }
+  ],
+  "slayer_group": "是"
+ }
+]

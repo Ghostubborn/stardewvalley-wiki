@@ -1,0 +1,1138 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "verifiedAt": "2026-10-23",
+    "archiveDate": "2025-12-18",
+    "license": "CC BY-NC-SA 3.0",
+    "attribution": "星露谷物语中文 Wiki 与 Stardew Valley Wiki；本手册按任务改写并节选基础规则。",
+    "verification": "对照本地 page-text.jsonl 和 Wiki 原始修订正文人工核验；平台按键以原始图片名称与正文共同确认。",
+    "scope": "依据 2025-12-18 归档；不代表后续版本与 MOD 的规则。"
+  },
+  "sources": {
+    "控制": {
+      "title": "控制",
+      "url": "https://zh.stardewvalleywiki.com/%E6%8E%A7%E5%88%B6",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=50821",
+      "revisionId": 50821,
+      "revisionAt": "2024-12-23T07:42:41Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "1b5f5ccc00b14fd19f0076f6f99d2b6fa7e92017",
+      "textSha256": "feb4e07d738c4fcf8af5e8511b4f48340ea349704e8c1810f882820669b6389a"
+    },
+    "游戏内时间": {
+      "title": "游戏内时间",
+      "url": "https://zh.stardewvalleywiki.com/%E6%B8%B8%E6%88%8F%E5%86%85%E6%97%B6%E9%97%B4",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=53461",
+      "revisionId": 53461,
+      "revisionAt": "2025-10-14T01:20:29Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "985c2f6392c0eb799170ae3d0309d4eb73ba2c37",
+      "textSha256": "0fc027e0d785351223f7e71685b163ac801268093804d41882cee090d4bba594"
+    },
+    "天气": {
+      "title": "天气",
+      "url": "https://zh.stardewvalleywiki.com/%E5%A4%A9%E6%B0%94",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=53964",
+      "revisionId": 53964,
+      "revisionAt": "2025-12-11T15:15:55Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "d701750ea7aab56fb4d84341033e37a86da3c114",
+      "textSha256": "bcab8eb46e72e2bb9df6730f3ea974e773af7a113e36941a596b8e79836d258c"
+    },
+    "季节": {
+      "title": "季节",
+      "url": "https://zh.stardewvalleywiki.com/%E5%AD%A3%E8%8A%82",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=53453",
+      "revisionId": 53453,
+      "revisionAt": "2025-10-14T01:20:26Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "1617ae910cf800c1cbc3a9ee115dbb4e61f73db3",
+      "textSha256": "a65458cf728cd66290b4afba9dcc305a94fa31d58d76f9e5dcfb0af05acc56cb"
+    },
+    "新手指南": {
+      "title": "新手指南",
+      "url": "https://zh.stardewvalleywiki.com/%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=53534",
+      "revisionId": 53534,
+      "revisionAt": "2025-10-14T01:21:01Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "5f0c26d909e611dbebb3c536668b8ef5db1fbcc8",
+      "textSha256": "8cff35b1c7840acff988f30ce8a60daa8ee4963359abd88ca6542deb88738f15"
+    },
+    "生命值": {
+      "title": "生命值",
+      "url": "https://zh.stardewvalleywiki.com/%E7%94%9F%E5%91%BD%E5%80%BC",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=50214",
+      "revisionId": 50214,
+      "revisionAt": "2024-11-05T01:57:21Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "75beea2d2e4198df0e5bbb38cfa6fca2d0f0e2b0",
+      "textSha256": "327b799350b879e8769e09ecade80804e8d503ad1795cc797810b3df7b03092c"
+    },
+    "友谊": {
+      "title": "友谊",
+      "url": "https://zh.stardewvalleywiki.com/%E5%8F%8B%E8%B0%8A",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=54071",
+      "revisionId": 54071,
+      "revisionAt": "2025-12-13T09:54:34Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "0be132541223cf740adf61b98e8e537edf6c7095",
+      "textSha256": "cdb26452379d54cf9e5f36d4c6d348f169b863dd1f14ddfa452d9f1a63371e47"
+    },
+    "能量": {
+      "title": "能量",
+      "url": "https://zh.stardewvalleywiki.com/%E8%83%BD%E9%87%8F",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=52697",
+      "revisionId": 52697,
+      "revisionAt": "2025-08-26T10:43:03Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "27a5453c1cac6ab40a345b831219923a25293f2c",
+      "textSha256": "a0cec88e0e5c8f1130828698f3bbd96f628b8c82f69dd94acc6bf2a2531628a0"
+    },
+    "技能": {
+      "title": "技能",
+      "url": "https://zh.stardewvalleywiki.com/%E6%8A%80%E8%83%BD",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=52272",
+      "revisionId": 52272,
+      "revisionAt": "2025-06-30T05:18:15Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "a750cacdad3d9e1804fe9f2f481f42d3e458b2c9",
+      "textSha256": "7ee25e982b184944a41b9083f12e82226974bbf1dc11acdad7d988515cdc6b32"
+    },
+    "农作物": {
+      "title": "农作物",
+      "url": "https://zh.stardewvalleywiki.com/%E5%86%9C%E4%BD%9C%E7%89%A9",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=52699",
+      "revisionId": 52699,
+      "revisionAt": "2025-08-27T02:43:47Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "09645c683dbfef5535e198571a260205a4518cb8",
+      "textSha256": "eb9575f83849461aa4879f62697a89972c90a1e5db124650baba0c5a2e0cfb06"
+    },
+    "任务": {
+      "title": "任务",
+      "url": "https://zh.stardewvalleywiki.com/%E4%BB%BB%E5%8A%A1",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=54004",
+      "revisionId": 54004,
+      "revisionAt": "2025-12-11T15:16:36Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "31d7177783239c39fff6256a01c980bcdd399967",
+      "textSha256": "fd7830fc7b410f743beebb01bb283113e75c0c5296be29cc380f03bf574c98be"
+    },
+    "钓鱼": {
+      "title": "钓鱼",
+      "url": "https://zh.stardewvalleywiki.com/%E9%92%93%E9%B1%BC",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=53523",
+      "revisionId": 53523,
+      "revisionAt": "2025-10-14T01:20:53Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "b3def3a0770a4b8bc1c5d8998a72fff4d09ea553",
+      "textSha256": "40c97233c7401e58c9c13c43d1097a5d87a1a7bd4e03f0e42e9fde395454b8d2"
+    },
+    "存档": {
+      "title": "存档",
+      "url": "https://zh.stardewvalleywiki.com/%E5%AD%98%E6%A1%A3",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=47161",
+      "revisionId": 47161,
+      "revisionAt": "2024-08-01T13:19:25Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "c3394704db8232199e367e4d20a967e7e0be1042",
+      "textSha256": "e92ff9c66587b9e4bc9e535e5a31ac8864f4eaa4a6506c6cb55dc2a988f15b68"
+    },
+    "物品栏": {
+      "title": "物品栏",
+      "url": "https://zh.stardewvalleywiki.com/%E7%89%A9%E5%93%81%E6%A0%8F",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=36724",
+      "revisionId": 36724,
+      "revisionAt": "2024-02-16T05:57:39Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "82d99d5c8c9c59975e9bd7f40f7039e590116fe5",
+      "textSha256": "4b67580f659637883fb96846f52f912ed94494362fb050e4c8ae7ce2f82622f8"
+    },
+    "合作": {
+      "title": "合作",
+      "url": "https://zh.stardewvalleywiki.com/%E5%90%88%E4%BD%9C",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=53939",
+      "revisionId": 53939,
+      "revisionAt": "2025-12-07T23:51:08Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "d60284a3bdf690b97b40634c42cb97b1f1b07f48",
+      "textSha256": "2984068456635f1ab97728bb7538966697c167c3e5bdd07411acf11ade924501"
+    },
+    "移动操作方式": {
+      "title": "移动操作方式",
+      "url": "https://zh.stardewvalleywiki.com/%E7%A7%BB%E5%8A%A8%E6%93%8D%E4%BD%9C%E6%96%B9%E5%BC%8F",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=48910",
+      "revisionId": 48910,
+      "revisionAt": "2024-09-20T02:15:31Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "fbd6c49c7d4a72c7207c317f6d630a3b184fa2a3",
+      "textSha256": "fbf5ec77f98044a69297e12e07c8fb79ea6558e3154380343cea889a7c2005f4"
+    },
+    "训练用鱼竿": {
+      "title": "训练用鱼竿",
+      "url": "https://zh.stardewvalleywiki.com/%E8%AE%AD%E7%BB%83%E7%94%A8%E9%B1%BC%E7%AB%BF",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=51042",
+      "revisionId": 51042,
+      "revisionAt": "2025-02-01T12:06:42Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "7b5dc87ddd1e1fda1d805c1de114077fe155bd21",
+      "textSha256": "f6e8a588908bd7271ee48b5f5e7c3ccb2a053b203df2136d4160f82d71fc6047"
+    },
+    "手机存档": {
+      "title": "手机存档",
+      "url": "https://zh.stardewvalleywiki.com/%E6%89%8B%E6%9C%BA%E5%AD%98%E6%A1%A3",
+      "revisionUrl": "https://zh.stardewvalleywiki.com/mediawiki/index.php?oldid=53599",
+      "revisionId": 53599,
+      "revisionAt": "2025-10-14T01:21:35Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/zh-pages.jsonl",
+      "sourceSha1": "66c33e275fc5ec253b994edfd0e632bda29c1a75",
+      "textSha256": "df7b5ed0deb57da2a8a4d7861e85a8c7729cff6922234e7cfee1608fe9041f13"
+    },
+    "Mobile Controls": {
+      "title": "Mobile Controls",
+      "url": "https://stardewvalleywiki.com/Mobile_Controls",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189843",
+      "revisionId": 189843,
+      "revisionAt": "2025-12-05T19:22:29Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "506f854b66cda7e3c71cc8c21e2425a2907ed908",
+      "textSha256": "06f9e03ef68aef715fae0fc99c12b8b0cc3e354daf4e6fc9e666686a8e6a5b53"
+    }
+  },
+  "entries": {
+    "新手指南": {
+      "title": "新手指南",
+      "summary": "先学会种下一小块地、照顾体力和保存进度，再选择自己喜欢的活动。",
+      "sections": [
+        {
+          "heading": "先做这三步",
+          "sources": [
+            "新手指南",
+            "农作物",
+            "存档"
+          ],
+          "steps": [
+            "清理一小片土地；如果背包里有当季种子，用锄头开垦后播种。草原农场开局没有防风草种子，可以先到杂货店购买。",
+            "用喷壶给播种的土地浇水，缺水时到池塘边补满。之后每天照顾这小块地即可。",
+            "查看右上角时间和能量条，留出回家时间；上床并完成过夜结算后再退出。"
+          ]
+        },
+        {
+          "heading": "不知道下一步时",
+          "sources": [
+            "新手指南"
+          ],
+          "bullets": [
+            "读信和任务栏，先了解游戏正在提示你什么。",
+            "家里的电视会提供次日天气、生活提示和料理节目。",
+            "今天想认识居民、采集、种地或练习钓鱼，选一件尝试即可。"
+          ]
+        },
+        {
+          "heading": "不用把每天排满",
+          "sources": [
+            "季节",
+            "任务"
+          ],
+          "paragraphs": [
+            "季节会循环，可以游玩的年份没有上限。先熟悉自己喜欢的活动；接任务时再检查有没有明确的截止时间。"
+          ],
+          "note": "这是起步建议，不是每日必须完成的清单。"
+        }
+      ],
+      "related": [
+        "控制",
+        "物品栏",
+        "能量",
+        "游戏内时间"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "新手指南",
+        "农作物",
+        "存档",
+        "季节",
+        "任务"
+      ]
+    },
+    "控制": {
+      "title": "控制",
+      "summary": "先区分“使用工具”和“交互”，再按你玩游戏的设备查操作。",
+      "sections": [
+        {
+          "heading": "动作不对时先检查",
+          "sources": [
+            "控制",
+            "移动操作方式"
+          ],
+          "bullets": [
+            "确认快捷栏当前选中了什么，再靠近目标并面向它。",
+            "键鼠快捷键可以在游戏菜单的“选项”中查看和修改。",
+            "手机的操作布局也在“选项”中选择；下面的触屏和按键操作各有适用布局。"
+          ]
+        }
+      ],
+      "related": [
+        "钓鱼攻略",
+        "物品栏"
+      ],
+      "verifiedAt": "2026-10-23",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "键鼠",
+          "sections": [
+            {
+              "heading": "键鼠默认操作",
+              "sources": [
+                "控制"
+              ],
+              "facts": [
+                [
+                  "移动",
+                  "W / A / S / D"
+                ],
+                [
+                  "使用工具、放置物品",
+                  "鼠标左键，或 C"
+                ],
+                [
+                  "查看、交互",
+                  "鼠标右键，或 X"
+                ],
+                [
+                  "打开菜单、物品栏",
+                  "Esc，或 E"
+                ],
+                [
+                  "任务清单",
+                  "F"
+                ],
+                [
+                  "地图",
+                  "M"
+                ],
+                [
+                  "切换快捷栏行",
+                  "Tab"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "手机",
+          "sections": [
+            {
+              "heading": "默认触屏移动",
+              "sources": [
+                "移动操作方式",
+                "Mobile Controls"
+              ],
+              "steps": [
+                "在快捷栏选中要用的物品。点地面移动，点目标进行交互。",
+                "触碰石头、木头等目标会自动选取合适工具；镰刀需要自己先选中。",
+                "想固定操作按钮时，在“选项”中选择“触屏移动 & 摇杆 & 按键”。"
+              ],
+              "note": "持有可赠送的物品时点击居民，可能会直接送出该物品；先确认手里拿的是什么。"
+            },
+            {
+              "heading": "显示摇杆和双按钮时",
+              "sources": [
+                "移动操作方式"
+              ],
+              "facts": [
+                [
+                  "左侧摇杆",
+                  "移动人物"
+                ],
+                [
+                  "右侧的左按钮",
+                  "使用工具，可按住重复使用"
+                ],
+                [
+                  "右侧的右按钮",
+                  "查看或交互"
+                ]
+              ],
+              "note": "此处只适用于“触屏移动 & 摇杆 & 按键”布局；其他触屏布局的区域和手势不同。"
+            }
+          ]
+        },
+        {
+          "id": "controller",
+          "label": "手柄",
+          "sections": [
+            {
+              "heading": "按手柄型号找默认按键",
+              "sources": [
+                "控制"
+              ],
+              "facts": [
+                [
+                  "移动",
+                  "左摇杆或方向键"
+                ],
+                [
+                  "使用工具",
+                  "Xbox：X · PlayStation：□ · Switch：Y"
+                ],
+                [
+                  "查看、交互",
+                  "Xbox：A · PlayStation：× · Switch：A"
+                ],
+                [
+                  "打开菜单",
+                  "Xbox：菜单键 / B · PlayStation：Options / ○ · Switch：+ / B"
+                ],
+                [
+                  "切换快捷栏行",
+                  "Xbox：LB / RB · PlayStation：L1 / R1 · Switch：L / R"
+                ]
+              ],
+              "note": "按键以归档 Wiki 的默认映射为准；系统改键或自定义映射后，以你游戏显示的按键为准。"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "控制",
+        "移动操作方式",
+        "Mobile Controls"
+      ]
+    },
+    "物品栏": {
+      "title": "物品栏",
+      "summary": "先把要用的东西放进快捷栏，再整理多余物品。",
+      "sections": [
+        {
+          "heading": "背包与快捷栏",
+          "sources": [
+            "物品栏"
+          ],
+          "bullets": [
+            "初始背包为 12 格。快捷栏中选中的格子决定当前使用或拿着的物品。",
+            "打开物品栏可移动物品、拆分堆叠；自动整理按钮会按游戏顺序重新排列。",
+            "杂货店出售背包升级：2,000 金扩至 24 格，之后 10,000 金扩至 36 格。"
+          ]
+        },
+        {
+          "heading": "空间不足时",
+          "sources": [
+            "物品栏"
+          ],
+          "paragraphs": [
+            "先整理或转移物品，再决定是否丢弃。拖到垃圾桶是永久删除；把物品丢到地面或水边也可能丢失。"
+          ],
+          "note": "商店窗口中的点击可能是出售，而不是整理。进行操作前先确认当前打开的界面。"
+        }
+      ],
+      "related": [
+        "控制",
+        "存档"
+      ],
+      "verifiedAt": "2026-10-23",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "键鼠",
+          "sections": [
+            {
+              "heading": "键鼠整理",
+              "sources": [
+                "物品栏",
+                "控制"
+              ],
+              "steps": [
+                "按 E 或 Esc 打开物品栏，点击并移动物品到目标格。",
+                "右键可从堆叠中取出一件；Shift + 右键可拆出一半。",
+                "有多行空间后，关闭菜单按 Tab 切换快捷栏行。"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "手机",
+          "sections": [
+            {
+              "heading": "触屏整理",
+              "sources": [
+                "Mobile Controls"
+              ],
+              "steps": [
+                "拖动物品堆到目标位置，或点击自动整理按钮。",
+                "按住物品堆会出现数量选择，按住越久数量增加越快；选好数量后再移动。"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "controller",
+          "label": "手柄",
+          "sections": [
+            {
+              "heading": "手柄整理",
+              "sources": [
+                "控制"
+              ],
+              "bullets": [
+                "打开菜单后，用左摇杆移动光标，用确认键选择物品或格子。",
+                "确认键：Xbox A、PlayStation ×、Switch A。",
+                "回到游戏后，Xbox LB / RB、PlayStation L1 / R1、Switch L / R 可切换快捷栏行。"
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "物品栏",
+        "控制",
+        "Mobile Controls"
+      ]
+    },
+    "游戏内时间": {
+      "title": "游戏内时间",
+      "summary": "看清游戏时钟是否暂停，再离开游戏查资料。",
+      "sections": [
+        {
+          "heading": "一天的边界",
+          "sources": [
+            "游戏内时间",
+            "能量"
+          ],
+          "facts": [
+            [
+              "早晨 06:00",
+              "新的一天开始。"
+            ],
+            [
+              "午夜 00:00 之后",
+              "入睡越晚，通常恢复的能量越少。"
+            ],
+            [
+              "凌晨 02:00",
+              "还没睡觉也会强制昏倒；不要只看剩余能量。"
+            ]
+          ],
+          "note": "随时上床睡觉都可以提前结束这一天，不需要等到深夜。"
+        },
+        {
+          "heading": "单人游戏",
+          "sources": [
+            "游戏内时间",
+            "钓鱼"
+          ],
+          "bullets": [
+            "打开物品栏、菜单或对话界面时，游戏内时钟通常暂停。",
+            "钓鱼小游戏和查看钓鱼宝箱时会暂停；站在水边等鱼咬钩时仍会走时。",
+            "暂停时，时钟数字会变灰并闪烁。查资料前先确认游戏内状态。"
+          ]
+        },
+        {
+          "heading": "多人联机与分屏不同",
+          "sources": [
+            "合作"
+          ],
+          "bullets": [
+            "两名及以上玩家在线时，仅自己打开菜单、聊天、商店或钓鱼小游戏，通常不会暂停其他人的世界。",
+            "本地分屏需要所有玩家都打开菜单或面板，才会暂停。",
+            "多人联机需要暂停时可先与队友约好；房主可用聊天指令 /pause 暂停，/resume 恢复。"
+          ]
+        },
+        {
+          "heading": "时钟也影响行动",
+          "sources": [
+            "游戏内时间",
+            "天气"
+          ],
+          "paragraphs": [
+            "商店营业、居民行程和部分鱼的出现都跟时间有关。查到了地点，也要再核对当天的季节、天气和开放时段。"
+          ]
+        }
+      ],
+      "related": [
+        "合作",
+        "存档",
+        "能量"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "游戏内时间",
+        "能量",
+        "钓鱼",
+        "合作",
+        "天气"
+      ]
+    },
+    "季节": {
+      "title": "季节",
+      "summary": "每季 28 天。普通室外作物能不能收获，要同时看生长天数和下一季。",
+      "sections": [
+        {
+          "heading": "季末播种前算一次",
+          "sources": [
+            "季节",
+            "农作物"
+          ],
+          "steps": [
+            "先看种子适合哪些季节，以及基础生长需要几天。",
+            "在没有加速、播种当天及之后每天浇水的前提下：首获日 = 播种日期 + 生长天数。",
+            "如果收获日超过 28 日，再看作物是否也能在下一季生长。不能跨季，就赶不上本季收获。"
+          ],
+          "note": "例如生长 10 天的普通春季作物：春 18 日种、每天浇水，可在春 28 日首获；春 19 日种通常赶不上。"
+        },
+        {
+          "heading": "漏浇水与换季不是一回事",
+          "sources": [
+            "农作物",
+            "季节"
+          ],
+          "bullets": [
+            "生长天数不包含播种当天。漏浇一天水会暂停生长一天，通常不会因此直接枯死。",
+            "换到作物不适合的季节时，普通室外作物会枯死，即使之前每天都浇水。",
+            "枯死的普通作物可以用镰刀清除；跨季作物需按自己的生长季节判断。"
+          ]
+        },
+        {
+          "heading": "也留意其他季节变化",
+          "sources": [
+            "季节"
+          ],
+          "paragraphs": [
+            "鱼、野外采集物和商店种子也会随季节变化。只追踪你正在关注的目标即可；季节会再次循环。"
+          ],
+          "note": "这里说明普通室外耕作的基础规则。肥料、职业和特殊种植地点需要查看对应条目。"
+        }
+      ],
+      "related": [
+        "天气",
+        "游戏内时间",
+        "新手指南"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "季节",
+        "农作物"
+      ]
+    },
+    "天气": {
+      "title": "天气",
+      "summary": "电视预报的是明天；当前天气还会影响钓鱼和居民行程。",
+      "sections": [
+        {
+          "heading": "先确认你查的是哪一天",
+          "sources": [
+            "天气"
+          ],
+          "steps": [
+            "在家中电视选择“天气预报”，查看第二天的预报。",
+            "安排今天的行动时，以今天的实际天气为准，不要把明天的预报当作今天。",
+            "查某条鱼或居民行程时，同时核对季节、时刻和天气分支。"
+          ]
+        },
+        {
+          "heading": "下雨与下雪",
+          "sources": [
+            "新手指南",
+            "天气"
+          ],
+          "bullets": [
+            "下雨会为室外农作物浇水，可以把这部分时间留给其他活动。",
+            "下雪不等于下雨；雪天种下的作物仍需要浇水。",
+            "雷雨可能带来闪电，除了浇水，也要留意农场设施与作物。"
+          ]
+        }
+      ],
+      "related": [
+        "季节",
+        "钓鱼攻略",
+        "游戏内时间"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "天气",
+        "新手指南"
+      ]
+    },
+    "能量": {
+      "title": "能量",
+      "summary": "体力快见底时先停手；还有能量也不代表能熬过凌晨两点。",
+      "sections": [
+        {
+          "heading": "先检查能量条",
+          "sources": [
+            "能量"
+          ],
+          "bullets": [
+            "锄地、砍树、敲石头和抛竿会消耗能量。镰刀和武器的使用不消耗能量。",
+            "能量到 0 或更低会精疲力尽，无法跑动和钓鱼；继续消耗可能直接昏倒。",
+            "先停下耗体力的工作，再补充食物或回家睡觉。"
+          ]
+        },
+        {
+          "heading": "吃之前看恢复数值",
+          "sources": [
+            "能量",
+            "新手指南"
+          ],
+          "steps": [
+            "在物品说明中看能量与生命的恢复数值；不是所有物品都能补充体力，有些反而扣除。",
+            "选中可食用物品后使用交互动作，并在食用提示中确认。键鼠默认是右键或 X。",
+            "能量已经见底时，吃东西可以让你继续行动，但不一定清除当天的精疲力尽状态。"
+          ]
+        },
+        {
+          "heading": "睡觉与恢复",
+          "sources": [
+            "能量",
+            "合作"
+          ],
+          "bullets": [
+            "睡觉会结束当前一天。通常在午夜前入睡、且没有精疲力尽时，可恢复全部能量。",
+            "晚睡、昏倒或精疲力尽可能降低次日恢复量。",
+            "多人游戏中可以躺在床上选择不睡，缓慢恢复能量；这不是所有单人模式都适用的休息方式。"
+          ]
+        }
+      ],
+      "related": [
+        "生命值",
+        "游戏内时间",
+        "控制"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "能量",
+        "新手指南",
+        "合作"
+      ]
+    },
+    "生命值": {
+      "title": "生命值",
+      "summary": "受伤后先看生命条，确认安全再补充恢复物品。",
+      "sections": [
+        {
+          "heading": "受伤时做什么",
+          "sources": [
+            "生命值"
+          ],
+          "steps": [
+            "生命值不足或进入危险区域时，留意能量条旁边的生命条。",
+            "受到怪物攻击或爆炸会扣生命；生命值降到 0 可能昏迷，并损失金币或物品。",
+            "选能恢复生命的食物，查看说明后再吃；睡觉也能恢复生命。"
+          ]
+        },
+        {
+          "heading": "和能量分别判断",
+          "sources": [
+            "生命值",
+            "能量"
+          ],
+          "bullets": [
+            "生命与能量是两种不同的数值：还剩体力，也可能因受伤倒下。",
+            "恢复食物的效果各不相同。准备进入危险区域前，确认携带物品的生命恢复量。"
+          ]
+        }
+      ],
+      "related": [
+        "能量",
+        "物品栏",
+        "存档"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "生命值",
+        "能量"
+      ]
+    },
+    "技能": {
+      "title": "技能",
+      "summary": "做对应的活动会积累经验；白天的提示不代表新配方已经马上可用。",
+      "sections": [
+        {
+          "heading": "经验从哪里来",
+          "sources": [
+            "技能"
+          ],
+          "facts": [
+            [
+              "耕种",
+              "收获农作物、照顾动物。"
+            ],
+            [
+              "采矿",
+              "敲碎岩石和矿石。"
+            ],
+            [
+              "采集",
+              "捡拾野外采集物、砍树。"
+            ],
+            [
+              "钓鱼",
+              "完成钓鱼小游戏或收获蟹笼。"
+            ],
+            [
+              "战斗",
+              "击败怪物。"
+            ]
+          ]
+        },
+        {
+          "heading": "看等级与解锁",
+          "sources": [
+            "技能"
+          ],
+          "bullets": [
+            "在游戏菜单的技能页查看当前等级；相应工具的熟练度会随等级提高。",
+            "白天达到升级条件可能出现提示；由升级解锁的新配方需要完成当天结算后获得。",
+            "达到 5 级、10 级时会有职业选择。可以到看到选项时再比较，不必开局就规划全部路线。"
+          ]
+        }
+      ],
+      "related": [
+        "钓鱼攻略",
+        "能量",
+        "存档"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "技能"
+      ]
+    },
+    "钓鱼攻略": {
+      "title": "钓鱼攻略",
+      "summary": "抛竿、看到感叹号后收线、控制绿条，是三个不同的步骤。",
+      "sections": [
+        {
+          "heading": "小游戏里控制的是绿条",
+          "sources": [
+            "钓鱼"
+          ],
+          "steps": [
+            "鱼上钩后，让小鱼图标尽量留在绿色长条里面。",
+            "按住使用工具键会让绿条上升，松开会下降；用短按和松开的节奏调整。",
+            "鱼在绿条中时，右侧进度会上升；填满即钓到鱼，清空则鱼逃走。"
+          ],
+          "note": "绿条有惯性，落到底部还会反弹；持续猛按可能让它冲过目标。"
+        },
+        {
+          "heading": "一直失败时",
+          "sources": [
+            "训练用鱼竿",
+            "钓鱼"
+          ],
+          "bullets": [
+            "鱼店以 25 金出售训练用鱼竿。低于钓鱼 5 级时，它会提供更大的绿条，适合先练习。",
+            "训练用鱼竿能钓的鱼有限，且不能装备鱼饵或渔具；查目标鱼时也要检查鱼竿是否适用。",
+            "反复没遇到目标鱼，要核对水域、季节、天气和时间；操作成功不等于目标鱼符合出现条件。"
+          ]
+        },
+        {
+          "heading": "查资料时注意游戏是否暂停",
+          "sources": [
+            "钓鱼",
+            "合作"
+          ],
+          "paragraphs": [
+            "单人模式的钓鱼小游戏会暂停游戏内时钟，等鱼咬钩时不会。多人联机中，打开钓鱼小游戏通常不会暂停世界。"
+          ]
+        }
+      ],
+      "related": [
+        "控制",
+        "技能",
+        "天气",
+        "游戏内时间"
+      ],
+      "verifiedAt": "2026-10-23",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "键鼠",
+          "sections": [
+            {
+              "heading": "键鼠：从抛竿到上钩",
+              "sources": [
+                "钓鱼",
+                "控制"
+              ],
+              "steps": [
+                "选中鱼竿，面向水面。按住鼠标左键或 C 蓄力，松开抛竿。",
+                "等待人物头顶出现黄色感叹号，并伴随提示音。立刻再按一次左键或 C。",
+                "出现“上钩了！”后，继续用相同按键控制绿条；钓起垃圾时不会进入小游戏。"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "手机",
+          "sections": [
+            {
+              "heading": "手机：先用明确的工具按钮",
+              "sources": [
+                "移动操作方式",
+                "钓鱼"
+              ],
+              "steps": [
+                "若触屏布局让你分不清操作，在“选项”选择“触屏移动 & 摇杆 & 按键”。",
+                "选中鱼竿，靠近水面并面朝水。按住右侧两个按钮中的左按钮（使用工具），松开抛竿。",
+                "头顶出现黄色感叹号时，再点一次这个工具按钮；进入小游戏后用同一按钮的按住、松开控制绿条。"
+              ],
+              "note": "这些步骤针对显示摇杆和双按钮的布局。其他触屏布局操作区域不同，不需要用手指拖动绿色长条。"
+            }
+          ]
+        },
+        {
+          "id": "controller",
+          "label": "手柄",
+          "sections": [
+            {
+              "heading": "手柄：使用工具键钓鱼",
+              "sources": [
+                "钓鱼",
+                "控制"
+              ],
+              "steps": [
+                "选中鱼竿，面向水面，按住对应工具键蓄力，松开抛竿。",
+                "出现黄色感叹号时，再按一次同一个工具键。",
+                "进入小游戏后，按住让绿条升高、松开让它降低。"
+              ],
+              "facts": [
+                [
+                  "Xbox",
+                  "X"
+                ],
+                [
+                  "PlayStation",
+                  "□ 方块键"
+                ],
+                [
+                  "Switch",
+                  "Y"
+                ]
+              ],
+              "note": "以上是默认按键；如果做过系统改键，以当前映射为准。"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "钓鱼",
+        "训练用鱼竿",
+        "合作",
+        "控制",
+        "移动操作方式"
+      ]
+    },
+    "友谊": {
+      "title": "友谊",
+      "summary": "聊天和合适的礼物都能帮助认识居民，先从你想结识的人开始。",
+      "sections": [
+        {
+          "heading": "送礼前确认两件事",
+          "sources": [
+            "友谊"
+          ],
+          "steps": [
+            "先看该居民对这件物品的喜好；价格高或品质好，不代表对方一定喜欢。",
+            "选中礼物、靠近居民后交互即可送出。先确认手中物品，避免误送。",
+            "在游戏菜单“社交”页点击居民所在行，可查看已经获知的礼物喜好记录。"
+          ]
+        },
+        {
+          "heading": "次数与生日",
+          "sources": [
+            "友谊"
+          ],
+          "bullets": [
+            "通常每人每天可送 1 件、每周最多 2 件礼物；新的一周从周日开始。",
+            "生日当天即使本周已送过两次，仍可额外送一件；喜好带来的变化会被放大。",
+            "配偶等特殊情况另有规则；这里说明普通居民送礼的基础限制。"
+          ]
+        },
+        {
+          "heading": "找到住处还不等于找到人",
+          "sources": [
+            "友谊",
+            "游戏内时间",
+            "天气"
+          ],
+          "paragraphs": [
+            "居民会随日期、时刻、天气和进度改变行程。前往之前再核对当天安排；关系不足时，私人房间也可能无法进入。"
+          ],
+          "note": "可以先聊天、从方便获得的合适礼物开始；不用把所有人每天都拜访一遍。"
+        }
+      ],
+      "related": [
+        "控制",
+        "游戏内时间",
+        "天气"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "友谊",
+        "游戏内时间",
+        "天气"
+      ]
+    },
+    "合作": {
+      "title": "合作",
+      "summary": "先确认平台、房主和小屋，再开始邀请。",
+      "sections": [
+        {
+          "heading": "开始之前",
+          "sources": [
+            "合作"
+          ],
+          "bullets": [
+            "原版多人不能跨游戏平台联机；PC 的 Windows、macOS、Linux 可以互联。",
+            "房主拥有存档。其他玩家需要房主在线并开放游戏，才能进入该农场。",
+            "每位新加入的农场帮手需要一座联机小屋；现有单人农场也可以增加小屋后邀请。"
+          ]
+        },
+        {
+          "heading": "PC 主持一个新农场",
+          "sources": [
+            "合作"
+          ],
+          "steps": [
+            "标题界面选择“合作”→“主持”→“主持新农场”。",
+            "按准备加入的玩家人数配置联机小屋，检查金钱共享等选项。",
+            "进入农场后，在“选项”中查找邀请方式或邀请码；朋友从“合作”加入。"
+          ],
+          "note": "主机、移动端的联机入口和限制不同。手机的实验性联机不使用这套 PC 邀请步骤。"
+        },
+        {
+          "heading": "先约定这两件事",
+          "sources": [
+            "合作"
+          ],
+          "bullets": [
+            "是否共享金币，以及由谁购买公共设施。",
+            "何时暂停、何时一起睡觉。多人中只打开自己的物品栏通常不会停时。"
+          ],
+          "note": "本地分屏所有人都打开菜单才会暂停；PC 房主也可通过 /pause 和 /resume 控制暂停。"
+        }
+      ],
+      "related": [
+        "游戏内时间",
+        "存档",
+        "物品栏"
+      ],
+      "verifiedAt": "2026-10-23",
+      "sources": [
+        "合作"
+      ]
+    },
+    "存档": {
+      "title": "存档",
+      "summary": "完整过夜会保存进度；手机还提供额外的备份与继续方式。",
+      "sections": [
+        {
+          "heading": "退出前确认保存完成",
+          "sources": [
+            "存档",
+            "游戏内时间",
+            "手机存档"
+          ],
+          "steps": [
+            "回床上睡觉，完成当天可能出现的升级选择和收入结算。",
+            "等待保存完成、进入新一天，再通过游戏菜单退出。",
+            "不要把打开菜单、暂停游戏或离开窗口当作已经存档。"
+          ]
+        }
+      ],
+      "related": [
+        "游戏内时间",
+        "合作"
+      ],
+      "verifiedAt": "2026-10-23",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "电脑 / 主机",
+          "sections": [
+            {
+              "heading": "以完整过夜为准",
+              "sources": [
+                "存档",
+                "游戏内时间",
+                "合作"
+              ],
+              "bullets": [
+                "标准存档记录到上一次完成的一天；当天还没结束就退出，会失去当天尚未保存的进度。",
+                "多人需要所有玩家完成睡觉与结算。存档由房主持有。",
+                "跨设备移动或修改存档前，先复制备份，并检查两边游戏版本是否兼容。"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "手机",
+          "sections": [
+            {
+              "heading": "需要中途停下时",
+              "sources": [
+                "手机存档"
+              ],
+              "steps": [
+                "在游戏“选项”中查找“保存备份 / Save Backup”，完成备份后再退出；节日或事件期间可能无法使用。",
+                "下次加载时，如果询问是否从离开处继续，选择继续才会使用该备份；拒绝继续会加载清晨的标准存档。",
+                "切到后台可能触发紧急存档，但保存需要时间；立即强制关闭可能导致它没有完成。"
+              ],
+              "note": "手机备份不是另一个永久存档槽；完整过夜会清理此前的日内备份。重要进度仍以正常保存为准。"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "存档",
+        "游戏内时间",
+        "手机存档",
+        "合作"
+      ]
+    }
+  }
+}

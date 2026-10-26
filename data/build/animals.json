@@ -1,0 +1,245 @@
+[
+ {
+  "page": "绵羊",
+  "en": "Sheep",
+  "image": "Sheep.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)440",
+    "en": "Wool",
+    "zh": "动物毛",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": 8000
+ },
+ {
+  "page": "鸡",
+  "en": "Chicken",
+  "image": "White_Chicken.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)176",
+    "en": "Egg",
+    "zh": "蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": null,
+    "en": "Brown Egg",
+    "zh": "棕色蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)174",
+    "en": "Large Egg",
+    "zh": "大鸡蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": null,
+    "en": "Large Brown Egg",
+    "zh": "棕色大鸡蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": 800
+ },
+ {
+  "page": "牛",
+  "en": "Cow",
+  "image": "White_Cow.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)184",
+    "en": "Milk",
+    "zh": "牛奶",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)186",
+    "en": "Large Milk",
+    "zh": "大壶牛奶",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": 1500
+ },
+ {
+  "page": "虚空鸡",
+  "en": "Void Chicken",
+  "image": "Void_Chicken.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)305",
+    "en": "Void Egg",
+    "zh": "虚空蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": null
+ },
+ {
+  "page": "猪",
+  "en": "Pig",
+  "image": "Pig.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)430",
+    "en": "Truffle",
+    "zh": "松露",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": 16000
+ },
+ {
+  "page": "兔子",
+  "en": "Rabbit",
+  "image": "Rabbit.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)446",
+    "en": "Rabbit's Foot",
+    "zh": "兔子的脚",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)440",
+    "en": "Wool",
+    "zh": "动物毛",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": 8000
+ },
+ {
+  "page": "鸭",
+  "en": "Duck",
+  "image": "Duck.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)442",
+    "en": "Duck Egg",
+    "zh": "鸭蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)444",
+    "en": "Duck Feather",
+    "zh": "鸭毛",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": 1200
+ },
+ {
+  "page": "山羊",
+  "en": "Goat",
+  "image": "Goat.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)436",
+    "en": "Goat Milk",
+    "zh": "羊奶",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": null,
+    "en": "Large Goat Milk",
+    "zh": "大瓶羊奶",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": 4000
+ },
+ {
+  "page": "恐龙",
+  "en": "Dinosaur",
+  "image": "Dinosaur.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)107",
+    "en": "Dinosaur Egg",
+    "zh": "恐龙蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": null
+ },
+ {
+  "page": "鸵鸟",
+  "en": "Ostrich",
+  "image": "Ostrich.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)289",
+    "en": "Ostrich Egg",
+    "zh": "鸵鸟蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": null
+ },
+ {
+  "page": "金色的鸡",
+  "en": "Golden Chicken",
+  "image": "Golden_Chicken.png",
+  "building": [],
+  "produce": [
+   {
+    "id": "(O)928",
+    "en": "Golden Egg",
+    "zh": "金蛋",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "buy_price": null
+ }
+]

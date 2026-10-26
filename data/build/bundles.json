@@ -1,0 +1,1765 @@
+[
+ {
+  "room": "工艺室",
+  "reward": "桥梁修理",
+  "bundles": [
+   {
+    "name": "春季采集收集包",
+    "items": [
+     {
+      "id": "(O)16",
+      "en": "Wild Horseradish",
+      "zh": "野山葵",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季采集"
+     },
+     {
+      "id": "(O)18",
+      "en": "Daffodil",
+      "zh": "黄水仙",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季采集，花舞节皮埃尔的商店购买"
+     },
+     {
+      "id": "(O)20",
+      "en": "Leek",
+      "zh": "韭葱",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季采集"
+     },
+     {
+      "id": "(O)22",
+      "en": "Dandelion",
+      "zh": "蒲公英",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季采集，花舞节皮埃尔的商店购买"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)495",
+      "en": "Spring Seeds",
+      "zh": "春季种子",
+      "qty": 30,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "夏季采集收集包",
+    "items": [
+     {
+      "id": "(O)398",
+      "en": "Grape",
+      "zh": "葡萄",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季采集，秋季耕种"
+     },
+     {
+      "id": "(O)396",
+      "en": "Spice Berry",
+      "zh": "香味浆果",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季采集，农场的洞穴（果蝠选项）"
+     },
+     {
+      "id": "(O)402",
+      "en": "Sweet Pea",
+      "zh": "甜豌豆",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季采集"
+     }
+    ],
+    "slots": 3,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)496",
+      "en": "Summer Seeds",
+      "zh": "夏季种子",
+      "qty": 30,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "秋季采集收集包",
+    "items": [
+     {
+      "id": "(O)404",
+      "en": "Common Mushroom",
+      "zh": "普通蘑菇",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季采集，秘密森林采集（春季或秋季），农场的洞穴（蘑菇选项），采集蘑菇树"
+     },
+     {
+      "id": "(O)406",
+      "en": "Wild Plum",
+      "zh": "野梅",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季采集"
+     },
+     {
+      "id": "(O)408",
+      "en": "Hazelnut",
+      "zh": "榛子",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季采集"
+     },
+     {
+      "id": "(O)410",
+      "en": "Blackberry",
+      "zh": "黑莓",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季采集，农场的洞穴（果蝠选项）"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)497",
+      "en": "Fall Seeds",
+      "zh": "秋季种子",
+      "qty": 30,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "冬季采集收集包",
+    "items": [
+     {
+      "id": "(O)412",
+      "en": "Winter Root",
+      "zh": "冬根",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "冬季耕种土地或远古斑点，在矿井41-79层蓝色史莱姆泥掉落"
+     },
+     {
+      "id": "(O)414",
+      "en": "Crystal Fruit",
+      "zh": "水晶果",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "冬季采集，矿井41-79层灰尘精灵掉落"
+     },
+     {
+      "id": "(O)416",
+      "en": "Snow Yam",
+      "zh": "雪山药",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "冬季耕种土地或远古斑点"
+     },
+     {
+      "id": "(O)418",
+      "en": "Crocus",
+      "zh": "番红花",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "冬季采集"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)498",
+      "en": "Winter Seeds",
+      "zh": "冬季种子",
+      "qty": 30,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "建筑收集包",
+    "items": [
+     {
+      "id": "(O)388",
+      "en": "Wood",
+      "zh": "木材",
+      "qty": 99,
+      "note": null,
+      "link": null,
+      "source_text": "斧头砍伐树或者地上的木头"
+     },
+     {
+      "id": "(O)388",
+      "en": "Wood",
+      "zh": "木材",
+      "qty": 99,
+      "note": null,
+      "link": null,
+      "source_text": "斧头砍伐树或者地上的木头"
+     },
+     {
+      "id": "(O)390",
+      "en": "Stone",
+      "zh": "石头",
+      "qty": 99,
+      "note": null,
+      "link": null,
+      "source_text": "用十字镐砸石头"
+     },
+     {
+      "id": "(O)709",
+      "en": "Hardwood",
+      "zh": "硬木",
+      "qty": 10,
+      "note": null,
+      "link": null,
+      "source_text": "升级后的斧头砍伐大树桩或大圆木，破坏矿井里的板条箱"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)114",
+      "en": "Charcoal Kiln",
+      "zh": "煤炭窑",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "异国情调采集收集包",
+    "items": [
+     {
+      "id": "(O)88",
+      "en": "Coconut",
+      "zh": "椰子",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "沙漠采集"
+     },
+     {
+      "id": "(O)90",
+      "en": "Cactus Fruit",
+      "zh": "仙人掌果子",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "沙漠采集"
+     },
+     {
+      "id": "(O)78",
+      "en": "Cave Carrot",
+      "zh": "山洞萝卜",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井，破坏箱子或耕种土地"
+     },
+     {
+      "id": "(O)420",
+      "en": "Red Mushroom",
+      "zh": "红蘑菇",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井采集，秘密森林采集（夏季或秋季），农场的洞穴（蘑菇选项），采集蘑菇树"
+     },
+     {
+      "id": "(O)422",
+      "en": "Purple Mushroom",
+      "zh": "紫蘑菇",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井，农场的洞穴（蘑菇选项），森林农场地图秋季采集"
+     },
+     {
+      "id": "(O)724",
+      "en": "Maple Syrup",
+      "zh": "枫糖浆",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "采集枫树"
+     },
+     {
+      "id": "(O)725",
+      "en": "Oak Resin",
+      "zh": "橡树树脂",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "采集橡树"
+     },
+     {
+      "id": "(O)726",
+      "en": "Pine Tar",
+      "zh": "松焦油",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "采集松树"
+     },
+     {
+      "id": "(O)257",
+      "en": "Morel",
+      "zh": "羊肚菌",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秘密森林采集（春季），农场的洞穴（蘑菇选项）"
+     }
+    ],
+    "slots": 5,
+    "cost": null,
+    "choose": true,
+    "reward": [
+     {
+      "id": "(O)235",
+      "en": "Autumn's Bounty",
+      "zh": "秋日恩赐",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ]
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/收集包#工艺室"
+ },
+ {
+  "room": "茶水间",
+  "reward": "温室",
+  "bundles": [
+   {
+    "name": "春季作物收集包",
+    "items": [
+     {
+      "id": "(O)24",
+      "en": "Parsnip",
+      "zh": "防风草",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季农作物"
+     },
+     {
+      "id": "(O)188",
+      "en": "Green Bean",
+      "zh": "青豆",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季农作物"
+     },
+     {
+      "id": "(O)190",
+      "en": "Cauliflower",
+      "zh": "花椰菜",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季农作物"
+     },
+     {
+      "id": "(O)192",
+      "en": "Potato",
+      "zh": "土豆",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季农作物"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)465",
+      "en": "Speed-Gro",
+      "zh": "生长激素",
+      "qty": 20,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "夏季作物收集包",
+    "items": [
+     {
+      "id": "(O)256",
+      "en": "Tomato",
+      "zh": "西红柿",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季农作物"
+     },
+     {
+      "id": "(O)260",
+      "en": "Hot Pepper",
+      "zh": "辣椒",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季农作物"
+     },
+     {
+      "id": "(O)258",
+      "en": "Blueberry",
+      "zh": "蓝莓",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季农作物"
+     },
+     {
+      "id": "(O)254",
+      "en": "Melon",
+      "zh": "甜瓜",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季农作物"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)621",
+      "en": "Quality Sprinkler",
+      "zh": "优质洒水器",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "秋季作物收集包",
+    "items": [
+     {
+      "id": "(O)270",
+      "en": "Corn",
+      "zh": "玉米",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季/秋季农作物"
+     },
+     {
+      "id": "(O)272",
+      "en": "Eggplant",
+      "zh": "茄子",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季农作物"
+     },
+     {
+      "id": "(O)276",
+      "en": "Pumpkin",
+      "zh": "南瓜",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季农作物"
+     },
+     {
+      "id": "(O)280",
+      "en": "Yam",
+      "zh": "山药",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季农作物"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)10",
+      "en": "Bee House",
+      "zh": "蜂房",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "高品质作物收集包",
+    "items": [
+     {
+      "id": "(O)24",
+      "en": "Parsnip",
+      "zh": "防风草",
+      "qty": 5,
+      "quality": "gold",
+      "note": "金星品质",
+      "source_text": "金星品质的春季农作物"
+     },
+     {
+      "id": "(O)254",
+      "en": "Melon",
+      "zh": "甜瓜",
+      "qty": 5,
+      "quality": "gold",
+      "note": "金星品质",
+      "source_text": "金星品质的夏季农作物"
+     },
+     {
+      "id": "(O)276",
+      "en": "Pumpkin",
+      "zh": "南瓜",
+      "qty": 5,
+      "quality": "gold",
+      "note": "金星品质",
+      "source_text": "金星品质的秋季农作物"
+     },
+     {
+      "id": "(O)270",
+      "en": "Corn",
+      "zh": "玉米",
+      "qty": 5,
+      "quality": "gold",
+      "note": "金星品质",
+      "source_text": "金星品质的夏季/秋季农作物"
+     }
+    ],
+    "slots": 3,
+    "cost": null,
+    "choose": true,
+    "reward": [
+     {
+      "id": "(BC)15",
+      "en": "Preserves Jar",
+      "zh": "罐头瓶",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "动物收集包",
+    "items": [
+     {
+      "id": "(O)186",
+      "en": "Large Milk",
+      "zh": "大壶牛奶",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "牛"
+     },
+     {
+      "id": null,
+      "en": "Large Brown Egg",
+      "zh": "棕色大鸡蛋",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "鸡"
+     },
+     {
+      "id": "(O)174",
+      "en": "Large Egg",
+      "zh": "大鸡蛋",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "鸡"
+     },
+     {
+      "id": null,
+      "en": "Large Goat Milk",
+      "zh": "大瓶羊奶",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "山羊"
+     },
+     {
+      "id": "(O)440",
+      "en": "Wool",
+      "zh": "动物毛",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "绵羊、兔子"
+     },
+     {
+      "id": "(O)442",
+      "en": "Duck Egg",
+      "zh": "鸭蛋",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "鸭"
+     }
+    ],
+    "slots": 5,
+    "cost": null,
+    "choose": true,
+    "reward": [
+     {
+      "id": "(BC)16",
+      "en": "Cheese Press",
+      "zh": "压酪机",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "工匠收集包",
+    "items": [
+     {
+      "id": "(O)432",
+      "en": "Truffle Oil",
+      "zh": "松露油",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "松露放入产油机制作"
+     },
+     {
+      "id": "(O)428",
+      "en": "Cloth",
+      "zh": "布料",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "织布机，回收一个湿透的报纸"
+     },
+     {
+      "id": "(O)426",
+      "en": "Goat Cheese",
+      "zh": "山羊奶酪",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "压酪机"
+     },
+     {
+      "id": "(O)424",
+      "en": "Cheese",
+      "zh": "奶酪",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "压酪机"
+     },
+     {
+      "id": null,
+      "en": "Honey",
+      "zh": "蜂蜜",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "蜂房"
+     },
+     {
+      "id": "(O)344",
+      "en": "Jelly",
+      "zh": "果酱",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "罐头瓶"
+     },
+     {
+      "id": "(O)613",
+      "en": "Apple",
+      "zh": "苹果",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季时的苹果树，农场的洞穴（果蝠选项）"
+     },
+     {
+      "id": "(O)634",
+      "en": "Apricot",
+      "zh": "杏子",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季时的杏子树，农场的洞穴（果蝠选项）"
+     },
+     {
+      "id": "(O)635",
+      "en": "Orange",
+      "zh": "橙子",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季时的橙子树，农场的洞穴（果蝠选项）"
+     },
+     {
+      "id": "(O)636",
+      "en": "Peach",
+      "zh": "桃子",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季时的桃子树，农场的洞穴（果蝠选项）"
+     },
+     {
+      "id": "(O)637",
+      "en": "Pomegranate",
+      "zh": "石榴",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季时的石榴树，农场的洞穴（果蝠选项）"
+     },
+     {
+      "id": "(O)638",
+      "en": "Cherry",
+      "zh": "樱桃",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "春季时的樱桃树，农场的洞穴（果蝠选项）"
+     }
+    ],
+    "slots": 6,
+    "cost": null,
+    "choose": true,
+    "reward": [
+     {
+      "id": "(BC)12",
+      "en": "Keg",
+      "zh": "小桶",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/收集包#茶水间"
+ },
+ {
+  "room": "鱼缸",
+  "reward": "移除闪闪发光的巨石",
+  "bundles": [
+   {
+    "name": "河鱼收集包",
+    "items": [
+     {
+      "id": "(O)145",
+      "en": "Sunfish",
+      "zh": "太阳鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于河中，6:00 AM – 7:00 PM，春季和夏季"
+     },
+     {
+      "id": "(O)143",
+      "en": "Catfish",
+      "zh": "鲶鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于河中，任何时间，春季和秋季；夏季的秘密森林池塘與河中。只有当下雨时"
+     },
+     {
+      "id": "(O)706",
+      "en": "Shad",
+      "zh": "西鲱",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于河中，任何时间，春季、夏季和秋季。只有当下雨时"
+     },
+     {
+      "id": "(O)699",
+      "en": "Tiger Trout",
+      "zh": "虎纹鳟鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于河中，6:00 AM – 7:00 PM，秋季和冬季"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "zh": "高级鱼饵（30）"
+     }
+    ]
+   },
+   {
+    "name": "湖鱼收集包",
+    "items": [
+     {
+      "id": "(O)136",
+      "en": "Largemouth Bass",
+      "zh": "大嘴鲈鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于湖中，6:00 AM – 7:00 PM，任何季节"
+     },
+     {
+      "id": "(O)142",
+      "en": "Carp",
+      "zh": "鲤鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于湖中，任何时间，春季、夏季和秋季"
+     },
+     {
+      "id": "(O)700",
+      "en": "Bullhead",
+      "zh": "大头鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于湖中，任何时间，任何季节"
+     },
+     {
+      "id": "(O)698",
+      "en": "Sturgeon",
+      "zh": "鲟鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于湖中，6:00 AM – 7:00 PM，夏季和冬季"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)687",
+      "en": "Dressed Spinner",
+      "zh": "精装旋式鱼饵",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "海鱼收集包",
+    "items": [
+     {
+      "id": "(O)131",
+      "en": "Sardine",
+      "zh": "沙丁鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于海中，6:00 AM – 7:00 PM，春季、秋季和冬季"
+     },
+     {
+      "id": "(O)130",
+      "en": "Tuna",
+      "zh": "金枪鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于海中，6:00 AM – 7:00 PM，夏季和冬季"
+     },
+     {
+      "id": "(O)150",
+      "en": "Red Snapper",
+      "zh": "红鲷鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于海中，6:00 AM – 7:00 PM，夏季和秋季。只有当下雨时"
+     },
+     {
+      "id": "(O)701",
+      "en": "Tilapia",
+      "zh": "罗非鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于海中，6:00 AM – 2:00 PM，夏季和秋季"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "zh": "传送图腾：海滩（5）"
+     }
+    ]
+   },
+   {
+    "name": "夜间垂钓收集包",
+    "items": [
+     {
+      "id": "(O)140",
+      "en": "Walleye",
+      "zh": "大眼鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于河中，12:00 PM – 2:00 AM，秋季。只有当下雨时"
+     },
+     {
+      "id": "(O)132",
+      "en": "Bream",
+      "zh": "鲷鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于河中，6:00 PM – 2:00 AM，任何季节"
+     },
+     {
+      "id": "(O)148",
+      "en": "Eel",
+      "zh": "鳗鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于海中，4:00 PM – 2:00 AM，春季或秋季。只有当下雨时"
+     }
+    ],
+    "slots": 3,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)517",
+      "en": "Glow Ring",
+      "zh": "光辉戒指",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "蟹笼收集包",
+    "items": [
+     {
+      "id": "(O)715",
+      "en": "Lobster",
+      "zh": "龙虾",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(海洋)"
+     },
+     {
+      "id": "(O)716",
+      "en": "Crayfish",
+      "zh": "小龙虾",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(淡水)"
+     },
+     {
+      "id": "(O)717",
+      "en": "Crab",
+      "zh": "螃蟹",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(海洋)，矿井里岩石蟹和熔岩蟹掉落"
+     },
+     {
+      "id": "(O)718",
+      "en": "Cockle",
+      "zh": "鸟蛤",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+     },
+     {
+      "id": "(O)719",
+      "en": "Mussel",
+      "zh": "蚌",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+     },
+     {
+      "id": "(O)720",
+      "en": "Shrimp",
+      "zh": "虾",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(海洋)"
+     },
+     {
+      "id": "(O)721",
+      "en": "Snail",
+      "zh": "蜗牛",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(淡水)"
+     },
+     {
+      "id": "(O)722",
+      "en": "Periwinkle",
+      "zh": "玉黍螺",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(淡水)"
+     },
+     {
+      "id": "(O)723",
+      "en": "Oyster",
+      "zh": "牡蛎",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+     },
+     {
+      "id": "(O)372",
+      "en": "Clam",
+      "zh": "蛤",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+     }
+    ],
+    "slots": 5,
+    "cost": null,
+    "choose": true,
+    "reward": [
+     {
+      "id": "(O)710",
+      "en": "Crab Pot",
+      "zh": "蟹笼",
+      "qty": 3,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "特色鱼类收集包",
+    "items": [
+     {
+      "id": "(O)128",
+      "en": "Pufferfish",
+      "zh": "河豚",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于海中，12:00 PM – 4:00 PM，夏季"
+     },
+     {
+      "id": "(O)156",
+      "en": "Ghostfish",
+      "zh": "鬼鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于矿井的池塘中，任何时间，任何季节。幽灵掉落"
+     },
+     {
+      "id": "(O)164",
+      "en": "Sandfish",
+      "zh": "沙鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于沙漠的池塘中，6:00 AM – 10:00 PM，任何季节"
+     },
+     {
+      "id": "(O)734",
+      "en": "Woodskip",
+      "zh": "木跃鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "发现于秘密森林中，任何时间，任何季节。"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)242",
+      "en": "Dish O' The Sea",
+      "zh": "海之菜肴",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ]
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/收集包#鱼缸"
+ },
+ {
+  "room": "锅炉房",
+  "reward": "修复矿车",
+  "bundles": [
+   {
+    "name": "铁匠的收集包",
+    "items": [
+     {
+      "id": "(O)334",
+      "en": "Copper Bar",
+      "zh": "铜锭",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "于熔炉中熔炼铜矿石"
+     },
+     {
+      "id": "(O)335",
+      "en": "Iron Bar",
+      "zh": "铁锭",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "于熔炉中熔炼铁矿石，打造“熔炼（铁）”配方"
+     },
+     {
+      "id": "(O)336",
+      "en": "Gold Bar",
+      "zh": "金锭",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "于熔炉中熔炼黄金矿石，打造“熔炼（金）”配方"
+     }
+    ],
+    "slots": 3,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)13",
+      "en": "Furnace",
+      "zh": "熔炉",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "地理学家的收集包",
+    "items": [
+     {
+      "id": "(O)80",
+      "en": "Quartz",
+      "zh": "石英",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "在矿井任意层采集"
+     },
+     {
+      "id": "(O)86",
+      "en": "Earth Crystal",
+      "zh": "地晶",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "在矿井1-39层采集，晶球，矿井（1-29层）里掘地虫掉落"
+     },
+     {
+      "id": "(O)84",
+      "en": "Frozen Tear",
+      "zh": "泪晶",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "在矿井40-79层采集，冰封晶球，矿井（40-80层）里灰尘精灵掉落"
+     },
+     {
+      "id": "(O)82",
+      "en": "Fire Quartz",
+      "zh": "火水晶",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "在矿井80-120层采集，岩浆晶球，万象晶球"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)749",
+      "en": "Omni Geode",
+      "zh": "万象晶球",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "冒险家的收集包",
+    "items": [
+     {
+      "id": "(O)766",
+      "en": "Slime",
+      "zh": "史莱姆泥",
+      "qty": 99,
+      "note": null,
+      "link": null,
+      "source_text": "史莱姆（怪物）掉落"
+     },
+     {
+      "id": "(O)767",
+      "en": "Bat Wing",
+      "zh": "蝙蝠翅膀",
+      "qty": 10,
+      "note": null,
+      "link": null,
+      "source_text": "矿井中蝙蝠掉落"
+     },
+     {
+      "id": "(O)768",
+      "en": "Solar Essence",
+      "zh": "太阳精华",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井中幽灵、鱿鱼娃或金属大头掉落，骷髅洞穴中木乃伊掉落"
+     },
+     {
+      "id": "(O)769",
+      "en": "Void Essence",
+      "zh": "虚空精华",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井中暗影狂徒或骷髅洞穴中飞蛇掉落"
+     }
+    ],
+    "slots": 2,
+    "cost": null,
+    "choose": true,
+    "reward": [
+     {
+      "id": "(O)518",
+      "en": "Small Magnet Ring",
+      "zh": "小型磁铁戒指",
+      "qty": 1,
+      "note": null,
+      "link": "小型磁铁戒指"
+     }
+    ]
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/收集包#锅炉房"
+ },
+ {
+  "room": "布告栏",
+  "reward": "友谊 ♡",
+  "bundles": [
+   {
+    "name": "厨师收集包",
+    "items": [
+     {
+      "id": "(O)724",
+      "en": "Maple Syrup",
+      "zh": "枫糖浆",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "收集枫树"
+     },
+     {
+      "id": "(O)259",
+      "en": "Fiddlehead Fern",
+      "zh": "蕨菜",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秘密森林夏季采集"
+     },
+     {
+      "id": "(O)430",
+      "en": "Truffle",
+      "zh": "松露",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "猪"
+     },
+     {
+      "id": "(O)376",
+      "en": "Poppy",
+      "zh": "虞美人花",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季农作物"
+     },
+     {
+      "id": "(O)228",
+      "en": "Maki Roll",
+      "zh": "生鱼寿司",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "烹饪（菜谱来源：酱料女皇、酒吧）"
+     },
+     {
+      "id": "(O)194",
+      "en": "Fried Egg",
+      "zh": "煎鸡蛋",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "烹饪"
+     }
+    ],
+    "slots": 6,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)221",
+      "en": "Pink Cake",
+      "zh": "粉红蛋糕",
+      "qty": 3,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "染料收集包",
+    "items": [
+     {
+      "id": "(O)420",
+      "en": "Red Mushroom",
+      "zh": "红蘑菇",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井采集，秘密森林夏季或秋季采集，农场的洞穴（蘑菇选项），收集蘑菇树"
+     },
+     {
+      "id": "(O)397",
+      "en": "Sea Urchin",
+      "zh": "海胆",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "沙滩采集，使用300个木材修复桥后达到右边沙滩"
+     },
+     {
+      "id": "(O)421",
+      "en": "Sunflower",
+      "zh": "向日葵",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季/秋季农作物"
+     },
+     {
+      "id": "(O)444",
+      "en": "Duck Feather",
+      "zh": "鸭毛",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "鸭"
+     },
+     {
+      "id": "(O)62",
+      "en": "Aquamarine",
+      "zh": "海蓝宝石",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井里的海蓝宝石矿和盒子"
+     },
+     {
+      "id": "(O)266",
+      "en": "Red Cabbage",
+      "zh": "红叶卷心菜",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "夏季农作物（在2+年红叶卷心菜种子可以在皮埃尔的杂货店获得）"
+     }
+    ],
+    "slots": 6,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)25",
+      "en": "Seed Maker",
+      "zh": "种子生产器",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "土地研究收集包",
+    "items": [
+     {
+      "id": "(O)422",
+      "en": "Purple Mushroom",
+      "zh": "紫蘑菇",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井，农场的洞穴（蘑菇选项），森林农场地图秋季采集"
+     },
+     {
+      "id": "(O)392",
+      "en": "Nautilus Shell",
+      "zh": "鹦鹉螺",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "冬季沙滩采集（注：不是古物鹦鹉螺化石）"
+     },
+     {
+      "id": "(O)702",
+      "en": "Chub",
+      "zh": "鲢鱼",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "任意季节在山上的湖泊和河流中发现"
+     },
+     {
+      "id": "(O)536",
+      "en": "Frozen Geode",
+      "zh": "冰封晶球",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "矿井40-79层"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)20",
+      "en": "Recycling Machine",
+      "zh": "回收机",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "饲料收集包",
+    "items": [
+     {
+      "id": "(O)262",
+      "en": "Wheat",
+      "zh": "小麦",
+      "qty": 10,
+      "note": null,
+      "link": null,
+      "source_text": "夏季/秋季农作物"
+     },
+     {
+      "id": "(O)178",
+      "en": "Hay",
+      "zh": "干草",
+      "qty": 10,
+      "note": null,
+      "link": null,
+      "source_text": "玛妮的牧场购买，或一旦你拥有筒仓后使用镰刀收割草地，一旦你拥有鸡舍或畜棚可以收回喂料斗里的干草（高级鸡舍畜棚不能）"
+     },
+     {
+      "id": "(O)613",
+      "en": "Apple",
+      "zh": "苹果",
+      "qty": 3,
+      "note": null,
+      "link": null,
+      "source_text": "秋季的苹果树"
+     }
+    ],
+    "slots": 3,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)104",
+      "en": "Heater",
+      "zh": "加热器",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "魔法师收集包",
+    "items": [
+     {
+      "id": "(O)725",
+      "en": "Oak Resin",
+      "zh": "橡树树脂",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "收集橡树"
+     },
+     {
+      "id": "(O)348",
+      "en": "Wine",
+      "zh": "果酒",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "小桶"
+     },
+     {
+      "id": "(O)446",
+      "en": "Rabbit's Foot",
+      "zh": "兔子的脚",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "兔子，骷髅洞穴的飞蛇掉落（0.8%）"
+     },
+     {
+      "id": "(O)637",
+      "en": "Pomegranate",
+      "zh": "石榴",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "秋季的石榴树，农场的洞穴（果蝠选项）"
+     }
+    ],
+    "slots": 4,
+    "cost": null,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)336",
+      "en": "Gold Bar",
+      "zh": "金锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ]
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/收集包#布告栏"
+ },
+ {
+  "room": "金库",
+  "reward": "修理巴士",
+  "bundles": [
+   {
+    "name": "2,500金收集包",
+    "items": [],
+    "slots": 0,
+    "cost": 2500,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)220",
+      "en": "Chocolate Cake",
+      "zh": "巧克力蛋糕",
+      "qty": 3,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "5,000金收集包",
+    "items": [],
+    "slots": 0,
+    "cost": 5000,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(O)369",
+      "en": "Quality Fertilizer",
+      "zh": "高级肥料",
+      "qty": 30,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "10,000金收集包",
+    "items": [],
+    "slots": 0,
+    "cost": 10000,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)9",
+      "en": "Lightning Rod",
+      "zh": "避雷针",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   },
+   {
+    "name": "25,000金收集包",
+    "items": [],
+    "slots": 0,
+    "cost": 25000,
+    "choose": false,
+    "reward": [
+     {
+      "id": "(BC)21",
+      "en": "Crystalarium",
+      "zh": "宝石复制机",
+      "qty": 1,
+      "note": null,
+      "link": null
+     }
+    ]
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/收集包#金库"
+ },
+ {
+  "room": "废弃Joja超市",
+  "reward": "电影院",
+  "bundles": [
+   {
+    "name": "失踪的收集包",
+    "items": [
+     {
+      "id": "(O)348",
+      "en": "Wine",
+      "zh": "果酒",
+      "qty": 1,
+      "quality": "silver",
+      "note": "银星品质",
+      "source_text": "木桶"
+     },
+     {
+      "id": "(O)807",
+      "en": "Dinosaur Mayonnaise",
+      "zh": "恐龙蛋黄酱",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "蛋黄酱机"
+     },
+     {
+      "id": "(O)74",
+      "en": "Prismatic Shard",
+      "zh": "五彩碎片",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "采矿"
+     },
+     {
+      "id": "(O)454",
+      "en": "Ancient Fruit",
+      "zh": "上古水果",
+      "qty": 5,
+      "quality": "gold",
+      "note": "金星品质",
+      "source_text": "农作物"
+     },
+     {
+      "id": "(O)795",
+      "en": "Void Salmon",
+      "zh": "虚空鲑鱼",
+      "qty": 1,
+      "quality": "gold",
+      "note": "金星品质",
+      "source_text": "钓鱼，巫婆沼泽"
+     },
+     {
+      "id": "(O)445",
+      "en": "Caviar",
+      "zh": "鱼籽酱",
+      "qty": null,
+      "note": null,
+      "link": null,
+      "source_text": "罐头瓶"
+     }
+    ],
+    "slots": 5,
+    "cost": null,
+    "choose": true,
+    "reward": []
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/收集包#废弃Joja超市"
+ }
+]

@@ -1,0 +1,16 @@
+# Local Python environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Large source archives; acquisition/rebuild instructions are in data/README.md.
+/data/raw/
+/data/wiki/
+
+# Machine-local files and credentials
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log

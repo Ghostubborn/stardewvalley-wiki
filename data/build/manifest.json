@@ -1,0 +1,100 @@
+{
+ "generated_at": "2026-10-22T15:19:13+00:00",
+ "sources": {
+  "zh": {
+   "archive": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
+   "dumped": "2025-12-18",
+   "license": "CC BY-NC-SA 3.0（站点信息声明）"
+  },
+  "en": {
+   "archive": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+   "dumped": "2025-12-18",
+   "license": "CC BY-NC-SA 3.0（站点信息声明）"
+  }
+ },
+ "wiki": {
+  "zh_pages_total": 3211,
+  "zh_articles": 1997,
+  "zh_redirects": 303,
+  "en_pages_total": 12476,
+  "images": 7141,
+  "zh_latest_edit": "2025-12-17T18:34:25Z"
+ },
+ "counts": {
+  "pages.json": 1997,
+  "page-text.jsonl": 1997,
+  "items.json": 2905,
+  "recipes.json": 325,
+  "tool-chains.json": 6,
+  "fish.json": 77,
+  "villagers.json": 48,
+  "locations.json": 48,
+  "buildings.json": 29,
+  "bundles.json": 7,
+  "shops.json": 21,
+  "seeds.json": 69,
+  "crops.json": 56,
+  "trees.json": 15,
+  "monsters.json": 58,
+  "animals.json": 11,
+  "minerals.json": 99,
+  "images.json": 7141,
+  "image-coverage.json": 4,
+  "search-index.json": 3087,
+  "names.json": 3
+ },
+ "bytes": {
+  "pages.json": 2367750,
+  "page-text.jsonl": 5206932,
+  "items.json": 1518082,
+  "recipes.json": 221851,
+  "tool-chains.json": 13664,
+  "fish.json": 52838,
+  "villagers.json": 363011,
+  "locations.json": 16717,
+  "buildings.json": 17993,
+  "bundles.json": 36743,
+  "shops.json": 132791,
+  "seeds.json": 41306,
+  "crops.json": 17804,
+  "trees.json": 4640,
+  "monsters.json": 68931,
+  "animals.json": 3724,
+  "minerals.json": 20089,
+  "images.json": 1362295,
+  "image-coverage.json": 12629,
+  "search-index.json": 787558,
+  "names.json": 72951
+ },
+ "page_kinds": {
+  "furniture": 615,
+  "item": 330,
+  "hat": 121,
+  "article": 117,
+  "cooking": 103,
+  "fish": 77,
+  "seed": 69,
+  "weapon": 67,
+  "location": 61,
+  "clothing": 59,
+  "monster": 58,
+  "mineral": 57,
+  "crop": 55,
+  "villager": 48,
+  "artifact": 42,
+  "guide": 22,
+  "tool": 19,
+  "building": 17,
+  "animal": 11,
+  "disambiguation": 11,
+  "achievement": 10,
+  "skill": 10,
+  "fruit_tree": 8,
+  "tree": 7,
+  "npc": 2,
+  "festival": 1
+ },
+ "issues": {
+  "recipe_without_parsed_ingredients": 9
+ }
+}

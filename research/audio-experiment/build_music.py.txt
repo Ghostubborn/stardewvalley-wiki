@@ -1,0 +1,107 @@
+"""Render the project's original instrumental loop using standard Python + ffmpeg.
+
+Run: python3 scripts/build_music.py
+No game soundtrack or third-party recordings are used.
+"""
+from array import array
+import math
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import wave
+
+ROOT = Path(__file__).resolve().parents[1]
+RATE = 22050
+BEAT = 60 / 84
+BARS = 16
+FRAMES = round(BARS * 4 * BEAT * RATE)
+left, right = array("f", [0]) * FRAMES, array("f", [0]) * FRAMES
+
+
+def note(pitch, beat, length, gain, pan=0, voice="pluck"):
+    frequency = 440 * 2 ** ((pitch - 69) / 12)
+    start = round(beat * BEAT * RATE)
+    duration = length * BEAT
+    release = 0.7 if voice == "pad" else 0.45
+    count = round((duration + release) * RATE)
+    gl = gain * math.sqrt((1 - pan) / 2)
+    gr = gain * math.sqrt((1 + pan) / 2)
+    for i in range(count):
+        t = i / RATE
+        phase = math.tau * frequency * t
+        if voice == "pad":
+            envelope = min(1, t / 0.24) * min(1, max(0, (duration + release - t) / release))
+            sound = math.sin(phase) + 0.12 * math.sin(phase * 2)
+        elif voice == "bass":
+            envelope = min(1, t / 0.025) * math.exp(-t / 0.8) * min(1, max(0, (duration + release - t) / release))
+            sound = math.sin(phase) + 0.18 * math.sin(phase * 2)
+        else:
+            envelope = min(1, t / 0.008) * math.exp(-t / (0.32 + duration * 0.35)) * min(1, max(0, (duration + release - t) / release))
+            sound = math.sin(phase) + 0.24 * math.sin(phase * 2) * math.exp(-t * 4) + 0.07 * math.sin(phase * 3) * math.exp(-t * 8)
+        index = (start + i) % FRAMES
+        left[index] += sound * envelope * gl
+        right[index] += sound * envelope * gr
+
+
+# A quiet C-major theme: plucked melody, arpeggios, warm sustained harmony.
+chords = [
+    (36, [60, 64, 67, 71]), (43, [59, 62, 67, 69]),
+    (45, [57, 60, 64, 67]), (41, [57, 60, 64, 65]),
+    (38, [57, 60, 62, 65]), (40, [55, 59, 62, 64]),
+    (41, [57, 60, 64, 65]), (43, [55, 59, 62, 67]),
+]
+melody = [
+    [(0, 76, 1), (1.5, 79, .5), (2, 74, .75), (3, 76, .75)],
+    [(0, 74, 1), (1.5, 71, .5), (2, 67, 1.5)],
+    [(.5, 69, .5), (1, 72, .75), (2, 76, 1), (3.5, 79, .5)],
+    [(0, 77, 1.5), (2, 76, .5), (3, 72, .75)],
+    [(0, 74, .75), (1, 77, .75), (2.5, 76, .5), (3, 74, .75)],
+    [(.5, 71, .75), (1.5, 74, .5), (2.5, 76, 1)],
+    [(0, 72, 1), (1.5, 69, .5), (2, 72, .75), (3, 74, .5)],
+    [(0, 71, 1), (1.5, 69, .5), (2, 67, 1.5)],
+]
+for bar in range(BARS):
+    root, chord = chords[bar % 8]
+    start = bar * 4
+    note(root + 12, start, 2.5, .13, 0, "bass")
+    for index, pitch in enumerate(chord):
+        note(pitch - 12, start, 3.6, .022, (index - 1.5) / 4, "pad")
+    for step, index in enumerate([0, 2, 1, 3, 2, 1]):
+        note(chord[index], start + step * .5 + .5, .7, .055, -.35)
+    for offset, pitch, length in melody[bar % 8]:
+        if bar >= 8 and offset == 0:
+            pitch = min(81, pitch + (2 if bar % 8 in [0, 2, 4] else 0))
+        note(pitch, start + offset, length, .17, .2)
+
+# Short stereo reflections wrap across the boundary for a continuous loop.
+dry_left, dry_right = array("f", left), array("f", right)
+for seconds, level in [(.11, .13), (.23, .09), (.37, .05)]:
+    delay = round(seconds * RATE)
+    for i in range(FRAMES):
+        left[i] += dry_right[(i - delay) % FRAMES] * level
+        right[i] += dry_left[(i - delay) % FRAMES] * level
+
+peak = max(max(map(abs, left)), max(map(abs, right)))
+scale = .65 / peak
+pcm = array("h")
+for l, r in zip(left, right):
+    pcm.extend((round(l * scale * 32767), round(r * scale * 32767)))
+if sys.byteorder != "little":
+    pcm.byteswap()
+output = ROOT / "prototype/assets/audio/valley-day.mp3"
+output.parent.mkdir(parents=True, exist_ok=True)
+with tempfile.TemporaryDirectory(prefix="sdv-music-") as temp:
+    wav_path = Path(temp) / "valley-day.wav"
+    with wave.open(str(wav_path), "wb") as wav:
+        wav.setnchannels(2)
+        wav.setsampwidth(2)
+        wav.setframerate(RATE)
+        wav.writeframes(pcm.tobytes())
+    subprocess.run([
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(wav_path),
+        "-c:a", "libmp3lame", "-b:a", "96k", "-metadata", "title=山谷小调",
+        "-metadata", "comment=Original instrumental composed for this wiki prototype",
+        str(output),
+    ], check=True)
+print(f"{output.relative_to(ROOT)}: {FRAMES / RATE:.2f}s, {output.stat().st_size:,} bytes, peak={peak * scale:.2f}")

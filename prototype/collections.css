@@ -1,0 +1,36 @@
+/* 收集包的逐项提交记录。 */
+.collection-requirements { display: grid; gap: 10px; }
+.collection-progress { margin: 0; padding: 10px 12px; border: 2px solid var(--bark); background: var(--parchment-hi); font-weight: 700; }
+.collection-progress[data-complete="true"] { background: var(--junimo-lo); }
+.collection-rule, .collection-note { margin: 0; font-size: 12px; line-height: 1.6; color: var(--ink-soft); }
+.collection-controls { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; }
+.collection-check { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+.collection-check input { width: 20px; height: 20px; margin: 0; accent-color: var(--junimo); flex: none; }
+.collection-check input:disabled { cursor: default; }
+.collection-list { display: grid; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.collection-requirement { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 8px; padding: 8px; border: 1px solid var(--parchment-lo); background: var(--parchment-hi); }
+.collection-requirement[data-submitted="true"] { border-color: var(--junimo); background: #edf2d6; }
+.collection-requirement.reference-requirement { grid-template-columns: minmax(0, 1fr); }
+.collection-recording { justify-self: start; }
+.collection-submit { font-size: 12px; align-self: start; }
+.collection-item-detail { min-width: 0; }
+.collection-item { display: flex; align-items: center; gap: 10px; min-height: 44px; width: 100%; padding: 0; border: 0; background: transparent; text-align: left; }
+.collection-item:hover strong { text-decoration: underline; }
+.collection-item > .pix, .collection-concealed { width: 32px; height: 32px; flex: none; }
+.collection-concealed { display: grid; place-items: center; border: 2px dashed var(--bark); color: var(--ink-soft); }
+.collection-item > span { min-width: 0; }
+.collection-quantity { display: block; margin-top: 3px; font-size: 12px; color: var(--ink-soft); }
+.collection-source { margin: 5px 0 0; font-size: 12px; line-height: 1.5; color: var(--ink-soft); overflow-wrap: anywhere; }
+.collection-payment { gap: 12px; padding: 12px; border: 1px solid var(--parchment-lo); background: var(--parchment-hi); }
+.collection-payment > .pix { width: 32px; height: 32px; }
+.collection-payment strong, .collection-payment > span > span { display: block; }
+.collection-payment > span > span { font-size: 12px; color: var(--ink-soft); }
+.collection-undo { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; font-size: 12px; }
+.collection-reset:disabled { opacity: .5; cursor: default; }
+.collection-empty { padding: 12px; color: var(--ink-soft); }
+.bundle-progress { display: block; margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--ink-soft); }
+.bundle-progress[data-complete="true"] { color: #28591a; }
+@media (max-width: 480px) {
+  .collection-requirement { grid-template-columns: 66px minmax(0, 1fr); gap: 6px; }
+  .collection-controls .btn { padding-inline: 8px; }
+}

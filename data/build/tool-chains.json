@@ -1,0 +1,597 @@
+[
+ {
+  "family": "斧头",
+  "en": "Axes",
+  "kind": "blacksmith_upgrade",
+  "rule": "须在铁匠铺按顺序逐级升级，每次升级需等待 2 天（来源：铁匠铺条目）",
+  "station": "铁匠铺",
+  "tiers": [
+   {
+    "level": 0,
+    "zh": "斧头",
+    "id": "(T)Axe",
+    "en": "Axe",
+    "cost": null,
+    "currency": null,
+    "materials": [],
+    "effect": "10下砍倒一棵树，5下切开砍倒树留下的大树桩。",
+    "image": "Axe.png"
+   },
+   {
+    "level": 1,
+    "zh": "铜斧头",
+    "id": "(T)CopperAxe",
+    "en": "Copper Axe",
+    "cost": 2000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)334",
+      "en": "Copper Bar",
+      "zh": "铜锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "可以砍伐大树桩。8下砍倒一棵成长完全的树，4下切开大树桩。",
+    "image": "Copper_Axe.png"
+   },
+   {
+    "level": 2,
+    "zh": "钢斧头",
+    "id": "(T)SteelAxe",
+    "en": "Steel Axe",
+    "cost": 5000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)335",
+      "en": "Iron Bar",
+      "zh": "铁锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "可以砍伐大圆木。6下砍倒一棵成长完全的树，3下切开大树桩。",
+    "image": "Steel_Axe.png"
+   },
+   {
+    "level": 3,
+    "zh": "金斧头",
+    "id": "(T)GoldAxe",
+    "en": "Gold Axe",
+    "cost": 10000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)336",
+      "en": "Gold Bar",
+      "zh": "金锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "4下砍倒一棵完全成长的树，2下切开大树桩。",
+    "image": "Gold_Axe.png"
+   },
+   {
+    "level": 4,
+    "zh": "铱斧头",
+    "id": "(T)IridiumAxe",
+    "en": "Iridium Axe",
+    "cost": 25000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)337",
+      "en": "Iridium Bar",
+      "zh": "铱锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "2下砍倒一棵完全成长的树，1下切开大树桩。",
+    "image": "Iridium_Axe.png"
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/斧头"
+ },
+ {
+  "family": "十字镐",
+  "en": "Pickaxes",
+  "kind": "blacksmith_upgrade",
+  "rule": "须在铁匠铺按顺序逐级升级，每次升级需等待 2 天（来源：铁匠铺条目）",
+  "station": "铁匠铺",
+  "tiers": [
+   {
+    "level": 0,
+    "zh": "十字镐",
+    "id": "(T)Pickaxe",
+    "en": "Pickaxe",
+    "cost": null,
+    "currency": null,
+    "materials": [],
+    "effect": "可以敲碎小石头。\n敲碎矿井1-39层中较硬的石头需要两次敲击，多次敲击可以破坏矿井圆石。敲碎铜矿需要三次敲击。\n注意：无法破坏农场中的圆石。",
+    "image": "Pickaxe.png"
+   },
+   {
+    "level": 1,
+    "zh": "铜十字镐",
+    "id": "(T)CopperPickaxe",
+    "en": "Copper Pickaxe",
+    "cost": 2000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)334",
+      "en": "Copper Bar",
+      "zh": "铜锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "可以一击敲碎矿井1-39层中的所有石头，敲碎铜矿与40-79层中的石头需要两次敲击。",
+    "image": "Copper_Pickaxe.png"
+   },
+   {
+    "level": 2,
+    "zh": "钢十字镐",
+    "id": "(T)SteelPickaxe",
+    "en": "Steel Pickaxe",
+    "cost": 5000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)335",
+      "en": "Iron Bar",
+      "zh": "铁锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "农场中的圆石只有钢十字镐能够破坏。\n可以一击敲碎矿井40-79层中的石头，两击敲碎采石场矿井中的石头。\n敲碎铜矿需要一次敲击，铁矿需要两次，金矿需要三次，铱矿需要六次。破坏圆石需要四次敲击。\n可以破坏矿井中阻碍与矮人交谈的障碍物。",
+    "image": "Steel_Pickaxe.png"
+   },
+   {
+    "level": 3,
+    "zh": "金十字镐",
+    "id": "(T)GoldPickaxe",
+    "en": "Gold Pickaxe",
+    "cost": 10000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)336",
+      "en": "Gold Bar",
+      "zh": "金锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "可以敲碎陨石。\n可以一击敲碎矿井80-120层中的石头。\n敲碎铁矿需要一次敲击，金矿需要两次，铱矿需要四次。破坏采石场矿井中的圆石需要四次敲击。",
+    "image": "Gold_Pickaxe.png"
+   },
+   {
+    "level": 4,
+    "zh": "铱十字镐",
+    "id": "(T)IridiumPickaxe",
+    "en": "Iridium Pickaxe",
+    "cost": 25000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)337",
+      "en": "Iridium Bar",
+      "zh": "铱锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "可以一击敲碎采石场矿井与骷髅洞穴中的石头。\n敲碎钻石矿需要两次敲击，其他宝石矿则只需一次。破坏采石场矿井中的圆石只需要三次敲击。",
+    "image": "Iridium_Pickaxe.png"
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/十字镐"
+ },
+ {
+  "family": "锄头",
+  "en": "Hoes",
+  "kind": "blacksmith_upgrade",
+  "rule": "须在铁匠铺按顺序逐级升级，每次升级需等待 2 天（来源：铁匠铺条目）",
+  "station": "铁匠铺",
+  "tiers": [
+   {
+    "level": 0,
+    "zh": "锄头",
+    "id": "(T)Hoe",
+    "en": "Hoe",
+    "cost": null,
+    "currency": null,
+    "materials": [],
+    "effect": "玩家面朝方向1格",
+    "image": "Hoe.png"
+   },
+   {
+    "level": 1,
+    "zh": "铜锄头",
+    "id": "(T)CopperHoe",
+    "en": "Copper Hoe",
+    "cost": 2000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)334",
+      "en": "Copper Bar",
+      "zh": "铜锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "最大范围为玩家面朝方向直线3格",
+    "image": "Copper_Hoe.png"
+   },
+   {
+    "level": 2,
+    "zh": "钢锄头",
+    "id": "(T)SteelHoe",
+    "en": "Steel Hoe",
+    "cost": 5000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)335",
+      "en": "Iron Bar",
+      "zh": "铁锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "最大范围为玩家面朝方向直线5格",
+    "image": "Steel_Hoe.png"
+   },
+   {
+    "level": 3,
+    "zh": "金锄头",
+    "id": "(T)GoldHoe",
+    "en": "Gold Hoe",
+    "cost": 10000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)336",
+      "en": "Gold Bar",
+      "zh": "金锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "最大范围为3x3格",
+    "image": "Gold_Hoe.png"
+   },
+   {
+    "level": 4,
+    "zh": "铱锄头",
+    "id": "(T)IridiumHoe",
+    "en": "Iridium Hoe",
+    "cost": 25000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)337",
+      "en": "Iridium Bar",
+      "zh": "铱锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "最大范围为6x3格",
+    "image": "Iridium_Hoe.png"
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/锄头"
+ },
+ {
+  "family": "喷壶",
+  "en": "Watering Cans",
+  "kind": "blacksmith_upgrade",
+  "rule": "须在铁匠铺按顺序逐级升级，每次升级需等待 2 天（来源：铁匠铺条目）",
+  "station": "铁匠铺",
+  "tiers": [
+   {
+    "level": 0,
+    "zh": "喷壶",
+    "id": "(T)WateringCan",
+    "en": "Watering Can",
+    "cost": null,
+    "currency": null,
+    "materials": [],
+    "effect": "灌满的喷壶一次可以浇灌40次。",
+    "image": "Watering_Can.png"
+   },
+   {
+    "level": 1,
+    "zh": "铜喷壶",
+    "id": "(T)CopperWateringCan",
+    "en": "Copper Watering Can",
+    "cost": 2000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)334",
+      "en": "Copper Bar",
+      "zh": "铜锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "容量提高到55次。\n增大最大浇水面积到直线3格。",
+    "image": "Copper_Watering_Can.png"
+   },
+   {
+    "level": 2,
+    "zh": "钢喷壶",
+    "id": "(T)SteelWateringCan",
+    "en": "Steel Watering Can",
+    "cost": 5000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)335",
+      "en": "Iron Bar",
+      "zh": "铁锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "容量提高到70次。\n增大最大浇水面积到直线5格。",
+    "image": "Steel_Watering_Can.png"
+   },
+   {
+    "level": 3,
+    "zh": "金喷壶",
+    "id": "(T)GoldWateringCan",
+    "en": "Gold Watering Can",
+    "cost": 10000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)336",
+      "en": "Gold Bar",
+      "zh": "金锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "容量提高到85次。\n增大最大浇水面积到3*3（相当于9格）。",
+    "image": "Gold_Watering_Can.png"
+   },
+   {
+    "level": 4,
+    "zh": "铱喷壶",
+    "id": "(T)IridiumWateringCan",
+    "en": "Iridium Watering Can",
+    "cost": 25000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)337",
+      "en": "Iridium Bar",
+      "zh": "铱锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "容量提高到100次。\n增大最大浇水面积到3*6（相当于18格）。",
+    "image": "Iridium_Watering_Can.png"
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/喷壶"
+ },
+ {
+  "family": "垃圾桶（工具）",
+  "en": "Trash Cans",
+  "kind": "blacksmith_upgrade",
+  "rule": "须在铁匠铺按顺序逐级升级，每次升级需等待 2 天（来源：铁匠铺条目）",
+  "station": "铁匠铺",
+  "tiers": [
+   {
+    "level": 0,
+    "zh": "垃圾桶",
+    "id": null,
+    "en": null,
+    "cost": null,
+    "currency": null,
+    "materials": [],
+    "effect": "用于在物品栏中丢弃物品",
+    "image": null
+   },
+   {
+    "level": 1,
+    "zh": "铜垃圾桶",
+    "id": "(T)CopperTrashCan",
+    "en": "Copper Trash Can",
+    "cost": 1000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)334",
+      "en": "Copper Bar",
+      "zh": "铜锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "回收物品价值的15%",
+    "image": "Trash_Can_Copper.png"
+   },
+   {
+    "level": 2,
+    "zh": "钢垃圾桶",
+    "id": "(T)SteelTrashCan",
+    "en": "Steel Trash Can",
+    "cost": 2500,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)335",
+      "en": "Iron Bar",
+      "zh": "铁锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "回收物品价值的30%",
+    "image": "Trash_Can_Steel.png"
+   },
+   {
+    "level": 3,
+    "zh": "金垃圾桶",
+    "id": "(T)GoldTrashCan",
+    "en": "Gold Trash Can",
+    "cost": 5000,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)336",
+      "en": "Gold Bar",
+      "zh": "金锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "回收物品价值的45%",
+    "image": "Trash_Can_Gold.png"
+   },
+   {
+    "level": 4,
+    "zh": "铱垃圾桶",
+    "id": "(T)IridiumTrashCan",
+    "en": "Iridium Trash Can",
+    "cost": 12500,
+    "currency": "金",
+    "materials": [
+     {
+      "id": "(O)337",
+      "en": "Iridium Bar",
+      "zh": "铱锭",
+      "qty": 5,
+      "note": null,
+      "link": null
+     }
+    ],
+    "effect": "回收物品价值的60%",
+    "image": "Trash_Can_Iridium.png"
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/垃圾桶（工具）"
+ },
+ {
+  "family": "训练用鱼竿",
+  "kind": "purchase_tiers",
+  "rule": "各级可直接购买，不需要先拥有上一级（来源：工具信息框）",
+  "tiers": [
+   {
+    "level": 0,
+    "zh": "训练用鱼竿",
+    "id": "(T)TrainingRod",
+    "en": "Training Rod",
+    "cost": 25,
+    "currency": "金",
+    "sold_by": "鱼店",
+    "unlock": [],
+    "effect": null,
+    "image": "Training_Rod.png"
+   },
+   {
+    "level": 1,
+    "zh": "竹鱼竿",
+    "id": "(T)BambooPole",
+    "en": "Bamboo Pole",
+    "cost": 500,
+    "currency": "金",
+    "sold_by": "鱼店",
+    "unlock": [],
+    "effect": null,
+    "image": "Bamboo_Pole.png"
+   },
+   {
+    "level": 2,
+    "zh": "玻璃纤维鱼竿",
+    "id": "(T)FiberglassRod",
+    "en": "Fiberglass Rod",
+    "cost": 1800,
+    "currency": "金",
+    "sold_by": "鱼店",
+    "unlock": [
+     {
+      "group": "skill",
+      "skill": "fishing",
+      "skill_zh": "钓鱼",
+      "level": 2,
+      "text": "钓鱼 2 级"
+     }
+    ],
+    "effect": "可以使用鱼饵",
+    "image": "Fiberglass_Rod.png"
+   },
+   {
+    "level": 3,
+    "zh": "铱金鱼竿",
+    "id": "(T)IridiumRod",
+    "en": "Iridium Rod",
+    "cost": 7500,
+    "currency": "金",
+    "sold_by": "鱼店",
+    "unlock": [
+     {
+      "group": "skill",
+      "skill": "fishing",
+      "skill_zh": "钓鱼",
+      "level": 6,
+      "text": "钓鱼 6 级"
+     }
+    ],
+    "effect": "可以使用鱼饵、渔具",
+    "image": "Iridium_Rod.png"
+   },
+   {
+    "level": 4,
+    "zh": "高级铱金鱼竿",
+    "id": "(T)AdvancedIridiumRod",
+    "en": "Advanced Iridium Rod",
+    "cost": 25000,
+    "currency": "金",
+    "sold_by": "鱼店",
+    "unlock": [
+     {
+      "group": "mastery",
+      "skill": "fishing",
+      "text": "钓鱼精通"
+     }
+    ],
+    "effect": "可以使用鱼饵和两个渔具",
+    "image": "Advanced_Iridium_Rod.png"
+   }
+  ],
+  "source": "https://zh.stardewvalleywiki.com/训练用鱼竿"
+ }
+]

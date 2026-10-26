@@ -1,0 +1,45 @@
+// Validate actual generated references and representative previously broken items.
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const root = path.resolve(__dirname, '..');
+const context = { window: {} };
+vm.runInNewContext(fs.readFileSync(path.join(root, 'prototype/data.js'), 'utf8'), context);
+const D = context.window.SDV;
+const images = new Set();
+function collect(value) {
+  if (typeof value === 'string' && /\.(png|gif|jpe?g|webp|svg)$/i.test(value) && !value.startsWith('http')) images.add(value);
+  else if (value && typeof value === 'object') Object.values(value).forEach(collect);
+}
+collect(D);
+for (const name of fs.readdirSync(path.join(root, 'prototype/js')).filter(name => name.endsWith('.js'))) {
+  const code = fs.readFileSync(path.join(root, 'prototype/js', name), 'utf8');
+  for (const match of code.matchAll(/["']([A-Za-z0-9][^"'\n]*\.(?:png|gif|webp|jpg|svg))["']/g)) images.add(match[1]);
+}
+for (const name of images) {
+  const file = path.join(root, 'prototype/assets/img', name);
+  assert(fs.existsSync(file), `Missing file: ${name}`);
+  assert(D.imgs.includes(name), `Image omitted from manifest: ${name}`);
+  const data = fs.readFileSync(file);
+  if (name.toLowerCase().endsWith('.png')) assert.equal(data.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', `Invalid PNG: ${name}`);
+}
+for (const [title, page] of Object.entries(D.pages)) {
+  if (page.id) assert(D.items[page.id], `Orphan item reference: ${title} (${page.id})`);
+}
+for (const [id, filename] of [
+  ['(O)223', 'Cookie.png'], ['(O)438', 'Large_Goat_Milk.png'],
+  ['(S)1000', 'Shirt000.png'], ['(WP)0', 'Wallpaper_001_Icon.png'],
+  ['(FL)0', 'Flooring_01_Icon.png'], ['(T)CopperTrashCan', 'Trash_Can_Copper.png'],
+  ['(FL)56', 'Flooring_66_Icon.png'], ['(FL)MoreFloors:0', 'Flooring_57_Icon.png'],
+  ['(WP)MoreWalls:0', 'Wallpaper_113_Icon.png'],
+  ['(O)348/88', 'Wine.png'], ['(O)398/88', 'Dried_Fruit.png'],
+  ['(F)1557', "'Sun_44'.png"],
+]) assert.equal(D.items[id]?.i, filename, `Incorrect artwork for ${id}`);
+assert(D.items['(O)348/88'].inote, 'Generic variant artwork must be identified');
+assert(D.items['(O)Book_AnimalCatalogue'], 'Underscore/case normalization lost a book');
+const chair = D.pages['水晶椅'];
+assert(D.items[chair.id]?.i, 'Furniture detail lost its image');
+assert.equal(D.pages['骷髅'].id, null, 'A monster must not resolve to same-name furniture');
+console.log(JSON.stringify({ checkedImages: images.size, orphanPageItems: 0, totalItems: Object.keys(D.items).length,
+  itemsWithImages: Object.values(D.items).filter(item => item.i).length, status: 'passed' }));

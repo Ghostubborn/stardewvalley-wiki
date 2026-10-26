@@ -1,0 +1,282 @@
+[
+ {
+  "page": "枫树",
+  "kind": "tree",
+  "image": "Maple_tree_portrait.png",
+  "sapling": {
+   "id": "(O)310",
+   "en": "Maple Seed",
+   "zh": "枫树种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)724",
+    "en": "Maple Syrup",
+    "zh": "枫糖浆",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": null,
+  "price": null
+ },
+ {
+  "page": "松树",
+  "kind": "tree",
+  "image": "Pine_tree_portrait.png",
+  "sapling": {
+   "id": "(O)311",
+   "en": "Pine Cone",
+   "zh": "松果",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)726",
+    "en": "Pine Tar",
+    "zh": "松焦油",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": null,
+  "price": null
+ },
+ {
+  "page": "橡树",
+  "kind": "tree",
+  "image": "Oak_tree_portrait.png",
+  "sapling": {
+   "id": "(O)309",
+   "en": "Acorn",
+   "zh": "橡子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)725",
+    "en": "Oak Resin",
+    "zh": "橡树树脂",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": null,
+  "price": null
+ },
+ {
+  "page": "棕榈树",
+  "kind": "tree",
+  "image": "Palm_tree_portrait.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [],
+  "growth_days": null,
+  "price": null
+ },
+ {
+  "page": "蘑菇树",
+  "kind": "tree",
+  "image": "Mushroom_tree_portrait.png",
+  "sapling": {
+   "id": "(O)891",
+   "en": "Mushroom Tree Seed",
+   "zh": "蘑菇树种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)404",
+    "en": "Common Mushroom",
+    "zh": "普通蘑菇",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)420",
+    "en": "Red Mushroom",
+    "zh": "红蘑菇",
+    "qty": null,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)422",
+    "en": "Purple Mushroom",
+    "zh": "紫蘑菇",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": null,
+  "price": null
+ },
+ {
+  "page": "杏子树",
+  "kind": "fruit_tree",
+  "image": "Apricot_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 28,
+  "price": 500
+ },
+ {
+  "page": "苹果树",
+  "kind": "fruit_tree",
+  "image": "Apple_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 28,
+  "price": 1000
+ },
+ {
+  "page": "樱桃树",
+  "kind": "fruit_tree",
+  "image": "Cherry_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 28,
+  "price": 850
+ },
+ {
+  "page": "橙子树",
+  "kind": "fruit_tree",
+  "image": "Orange_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 28,
+  "price": 1000
+ },
+ {
+  "page": "桃子树",
+  "kind": "fruit_tree",
+  "image": "Peach_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 28,
+  "price": 1500
+ },
+ {
+  "page": "石榴树",
+  "kind": "fruit_tree",
+  "image": "Pomegranate_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 28,
+  "price": 1500
+ },
+ {
+  "page": "香蕉树",
+  "kind": "fruit_tree",
+  "image": "Banana_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "all",
+   "summer"
+  ],
+  "growth_days": 28,
+  "price": null
+ },
+ {
+  "page": "芒果树",
+  "kind": "fruit_tree",
+  "image": "Mango_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "summer",
+   "all"
+  ],
+  "growth_days": 28,
+  "price": null
+ },
+ {
+  "page": "桃花心木树",
+  "kind": "tree",
+  "image": "Mahogany_Tree_Portrait.png",
+  "sapling": {
+   "id": "(O)292",
+   "en": "Mahogany Seed",
+   "zh": "桃花心木种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)92",
+    "en": "Sap",
+    "zh": "树液",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": null,
+  "price": null
+ },
+ {
+  "page": "神秘树",
+  "kind": "tree",
+  "image": "Mystic_Tree_Portrait.png",
+  "sapling": {
+   "id": "(O)MysticTreeSeed",
+   "en": "Mystic Tree Seed",
+   "zh": "神秘树种",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)MysticSyrup",
+    "en": "Mystic Syrup",
+    "zh": "神秘糖浆",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": null,
+  "price": null
+ }
+]

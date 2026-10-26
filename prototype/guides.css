@@ -1,0 +1,29 @@
+/* Scoped to the basics reading panel, including narrow phone screens. */
+.basic-guide { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.basic-guide .guide-intro { margin: 0 0 16px; font-size: 15px; line-height: 1.8; }
+.basic-guide .guide-section { padding: 13px 0; border-top: 1px solid var(--parchment-lo); }
+.basic-guide .guide-section h3 { margin: 0 0 9px; color: var(--bark); font-size: 16px; }
+.basic-guide .guide-section p { margin: 8px 0; line-height: 1.85; }
+.basic-guide .guide-steps, .basic-guide .guide-bullets { margin: 6px 0; padding-left: 24px; }
+.basic-guide .guide-steps li, .basic-guide .guide-bullets li { margin: 7px 0; padding-left: 2px; line-height: 1.85; }
+.basic-guide .guide-steps li::marker { color: var(--bark); font-weight: 700; }
+.basic-guide .guide-note { padding: 9px 11px; background: var(--parchment-hi); border-left: 3px solid var(--menu); font-size: 13px; }
+.basic-guide .guide-platform-label { margin: 0 0 6px; color: var(--ink-soft); font-size: 12px; }
+.basic-guide .guide-platforms { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 12px; }
+.basic-guide .guide-platform { min-height: 40px; padding: 7px 13px; border: 1px solid var(--bark); border-radius: 4px; background: var(--parchment-hi); }
+.basic-guide .guide-platform[aria-pressed="true"] { background: var(--bark); color: var(--parchment-hi); }
+.basic-guide .guide-facts { display: grid; grid-template-columns: minmax(75px, 0.4fr) minmax(0, 1fr); gap: 7px 13px; margin: 8px 0; }
+.basic-guide .guide-facts dt { color: var(--ink-soft); font-weight: 600; }
+.basic-guide .guide-facts dd { margin: 0; min-width: 0; }
+.basic-guide .guide-related { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 8px; margin: 15px 0; }
+.basic-guide .guide-related > span { color: var(--ink-soft); font-size: 12px; }
+.basic-guide .guide-related-link { min-height: 38px; padding: 5px 9px; border: 1px solid var(--parchment-lo); border-radius: 3px; color: var(--bark); background: var(--parchment-hi); }
+.basic-guide .guide-source-footer { padding-top: 12px; border-top: 1px solid var(--parchment-lo); color: var(--ink-soft); font-size: 11px; line-height: 1.8; }
+.basic-guide .guide-source-footer p { margin: 5px 0; }
+.basic-guide .guide-sources summary { min-height: 36px; padding: 6px 0; cursor: pointer; }
+.basic-guide .guide-sources ul { padding-left: 19px; }
+.basic-guide .guide-sources a { color: var(--bark); text-underline-offset: 3px; }
+@media (max-width: 380px) {
+  .basic-guide .guide-facts { grid-template-columns: minmax(65px, 0.36fr) minmax(0, 1fr); gap: 7px 9px; }
+  .basic-guide .guide-platform { padding-right: 10px; padding-left: 10px; }
+}

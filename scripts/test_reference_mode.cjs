@@ -1,0 +1,37 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm');
+const root = path.resolve(__dirname, '../prototype');
+function boot(saved) {
+  const ctx = { window: {}, structuredClone, setTimeout: () => 0, clearTimeout() {}, localStorage: { getItem: () => saved || null } };
+  vm.createContext(ctx);
+  for (const file of ['data.js', 'js/core.js', 'js/tree.js', 'js/spoilers.js', 'js/map-content.js', 'js/browse.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), ctx);
+  return ctx.window.App;
+}
+const A = boot(), fish = A.fishByName.get('沙丁鱼'), seed = A.D.seeds.find(s => s.p === '防风草种子');
+assert.equal(A.conditionsActive(), false);
+assert.equal(A.fishCheck(fish).ok, null, 'An unset scenario must not claim a fish is catchable now');
+assert(A.fishRequirements(A.fishByName.get('传说之鱼')).some(c => c.text.includes('10 级')), 'Static skill requirements must remain available independently of scenario evaluation');
+assert.equal(A.shopCheck(A.locationByName.get('鱼店')).ok, null);
+assert.equal(A.seedCheck(seed), null);
+assert.equal(A.birthdayToday().length, 0);
+assert.equal(A.evalReq({ type: 'date', day: 5, text: '春季 5 日' }).ok, null);
+assert.equal(A.evalReq({ type: 'weekday', wd: 5 }).ok, null);
+const row = A.browse.records('fish').find(r => r.label === '沙丁鱼');
+assert.equal(A.browse.matchesFilters('fish', row, { season: 'spring' }), true, 'Season browsing works without global clock setup');
+assert.equal(A.conditionsActive(), false);
+A.setCond({ season: 'spring', day: 2, year: 1, time: 1000, weather: 'sun' });
+assert.equal(A.conditionsActive(), true, 'Explicit scenario edits opt in');
+assert.equal(A.fishCheck(fish).ok, true);
+assert.equal(A.seedCheck(seed).harvest, 6);
+A.state.plan = [{ type: 'item', id: '(O)388' }];
+A.setProgress(p => { p.tools.斧头 = 2; });
+const saved = JSON.stringify(A.state), restored = boot(saved);
+assert.equal(restored.conditionsActive(), false, 'A stored scenario is not a live game state on the next visit');
+assert.equal(restored.state.cond.day, 2, 'Keep previous inputs for optional reuse');
+assert.equal(restored.state.progress.tools.斧头, 2);
+assert.equal(restored.state.plan[0].id, '(O)388');
+A.setConditionsEnabled(false);
+assert.equal(A.mapContents.points('valley').flatMap(p => p.entries).filter(e => e.kind === 'fish').some(e => e.status === true || e.status === false), false);
+assert.equal(A.browse.matchesFilters('fish', row, { now: true }), true, 'Turning off comparison must release a stale current-condition filter');
+assert.equal(A.spoilers.canView({ type: 'page', id: '姜岛' }), false, 'Scenario preferences do not grant discovery permissions');
+console.log('Reference mode checks passed: optional time conditions, independent category filters, safe restart, preserved progress/bookmarks and neutral map results.');

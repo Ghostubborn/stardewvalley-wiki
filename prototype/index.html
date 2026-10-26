@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>星露谷交互手册 · 原型</title>
+<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=b5ad43735072" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=068915031d13">
+<link rel="stylesheet" href="browse.css?v=57027aa96099">
+<link rel="stylesheet" href="guides.css?v=268492097177">
+<link rel="stylesheet" href="collections.css?v=df70116c3653">
+</head>
+<body>
+<div id="app" data-view="browse">
+
+  <canvas id="map" role="img" aria-label="星露谷地图。地点有可聚焦按钮，点击或回车查看资料。"></canvas>
+  <div class="map-keyboard" id="map-keyboard" role="group" aria-label="地图地点，使用方向键选择，回车查看"></div>
+  <section id="browse" class="browse-view frame" aria-label="分类查询"></section>
+
+  <section id="tree" class="tree" aria-label="成长路线" hidden>
+    <div class="tree-stage" id="tree-stage"></div>
+  </section>
+
+  <!-- 可选的查询场景，不代表实时游戏状态 -->
+  <header class="clock frame" aria-label="可选条件对照">
+    <button class="clock-face" id="clock-toggle" aria-expanded="false" aria-controls="clock-controls">
+      <span class="clock-date" id="clock-date"></span>
+      <span class="clock-time" id="clock-time"></span>
+      <span class="clock-hint" aria-hidden="true">设置</span>
+      <img class="clock-weather pix" id="clock-weather" alt="">
+    </button>
+  </header>
+    <section class="clock-controls frame" id="clock-controls" aria-label="条件对照设置" hidden>
+      <div class="condition-panel-head">
+        <strong>条件对照</strong>
+        <button type="button" id="conditions-close" aria-label="关闭条件对照">×</button>
+      </div>
+      <p class="d-sub">直接查规则，无需填写。想核对特定日期或时段时，再启用对照。</p>
+      <label class="check"><input type="checkbox" id="conditions-enabled"> 启用条件对照</label>
+      <fieldset id="condition-fields">
+      <div class="seg" role="radiogroup" aria-label="季节" id="season-seg"></div>
+      <div class="seg seg-weather" role="radiogroup" aria-label="天气" id="weather-seg"></div>
+      <label class="slider">
+        <span>日期</span>
+        <input type="range" id="day-range" min="1" max="28" step="1">
+        <output id="day-out"></output>
+      </label>
+      <label class="slider">
+        <span>时间</span>
+        <input type="range" id="time-range" min="600" max="2600" step="10">
+        <output id="time-out"></output>
+      </label>
+      <div class="clock-year">
+        <span>年份</span>
+        <div class="seg seg-year" role="radiogroup" aria-label="年份" id="year-seg"></div>
+      </div>
+      </fieldset>
+      <p class="d-sub">条件由你设定，不会自动跟随游戏。</p>
+      <button type="button" class="btn" id="open-progress">已有进度（可选）</button>
+    </section>
+
+  <!-- 左上：今日手账 / 路线分组 -->
+  <aside class="journal frame" id="journal" aria-label="今日手账">
+    <div class="journal-head">
+      <h1 class="journal-title" id="journal-title">今日手账</h1>
+      <div class="journal-actions">
+        <button class="music-toggle" id="music-toggle" type="button" aria-label="背景音乐" aria-pressed="false" aria-controls="background-music" title="播放星露谷 OST · Spring (It's A Big World Outside)">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/></svg>
+          <span id="music-label" aria-hidden="true">音乐关</span>
+        </button>
+        <button class="sheet-handle" id="journal-handle" aria-expanded="false">展开</button>
+      </div>
+    </div>
+    <div class="search">
+      <input id="search" type="search" placeholder="搜物品、人物、地点（中文或英文）" autocomplete="off" aria-label="搜索" aria-controls="search-results">
+      <ul class="search-results frame" id="search-results" role="listbox" hidden></ul>
+    </div>
+    <label class="spoiler-control check"><input type="checkbox" id="spoiler" checked> 防剧透 <span>按需查看后续内容</span></label>
+    <div class="journal-body" id="journal-body"></div>
+    <footer class="wiki-credit">
+      感谢 <a href="https://zh.stardewvalleywiki.com/" target="_blank" rel="noopener noreferrer" title="在新标签页打开星露谷物语中文维基">星露谷 Wiki</a> 社区的资料整理与分享
+    </footer>
+  </aside>
+
+  <!-- 默认居中阅读；主动定位时可并排对照地图或路线。 -->
+  <div class="detail-shade" id="detail-shade" aria-hidden="true" hidden></div>
+  <aside class="detail frame" id="detail" data-mode="reading" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden>
+    <div class="detail-toolbar">
+      <span class="detail-caption" id="detail-caption">资料阅读</span>
+      <button type="button" class="btn" id="detail-mode" hidden>居中阅读</button>
+      <button type="button" class="btn" id="detail-conditions" aria-label="打开条件对照">条件</button>
+      <button type="button" class="detail-close" id="detail-close" aria-label="关闭详情">×</button>
+    </div>
+    <div id="detail-body"></div>
+  </aside>
+
+  <!-- 地图工具 -->
+  <div class="map-tools" id="map-tools" hidden>
+    <div class="seg seg-map frame" role="radiogroup" aria-label="地图" id="map-seg"></div>
+    <label class="fx-toggle frame check"><input type="checkbox" id="fx"> 季节与昼夜效果（示意）</label>
+    <div class="zoom frame">
+      <button id="zoom-in" aria-label="放大">＋</button>
+      <button id="zoom-out" aria-label="缩小">－</button>
+      <button id="zoom-fit" aria-label="显示全图">全</button>
+    </div>
+  </div>
+
+  <!-- 路线工具 -->
+  <div class="tree-tools frame" id="tree-tools" hidden>
+    <span class="tree-reading">每行一条路线 · 向右看后续阶段</span>
+    <div class="seg" role="radiogroup" aria-label="显示范围" id="tree-mode"></div>
+  </div>
+
+  <!-- 底部：工具栏 -->
+  <nav class="hotbar frame" aria-label="查阅视图与收藏">
+    <div class="hotbar-views" role="tablist">
+      <button role="tab" id="tab-browse" data-view="browse" aria-selected="true">分类查询</button>
+      <button role="tab" id="tab-map" data-view="map" aria-selected="false">山谷地图</button>
+      <button role="tab" id="tab-tree" data-view="tree" aria-selected="false">成长路线</button>
+    </div>
+    <ol class="hotbar-slots" id="plan-slots" aria-label="收藏条目" hidden></ol>
+  </nav>
+
+  <div class="tooltip frame" id="tooltip" role="tooltip" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <audio id="background-music" data-src="assets/audio/spring-big-world-outside.mp3" data-title="星露谷 OST · Spring (It's A Big World Outside)" preload="none" loop hidden></audio>
+
+  <dialog class="progress frame" id="progress-dialog" aria-labelledby="progress-title">
+    <form method="dialog" class="progress-inner">
+      <header class="progress-head">
+        <h2 id="progress-title">已有进度 · 可选对照</h2>
+        <button value="close" class="detail-close" aria-label="关闭">×</button>
+      </header>
+      <p class="progress-note" id="progress-note"></p>
+      <div class="presets" id="presets"></div>
+      <div id="progress-body"></div>
+    </form>
+  </dialog>
+  <dialog class="frame spoiler-dialog" id="spoiler-dialog" aria-labelledby="spoiler-title">
+    <h2 id="spoiler-title">显示全部内容？</h2>
+    <p>搜索、地图和路线将显示尚未探索的地点、人物和奖励。也可以保持防剧透，只展开想查的条目。</p>
+    <div class="d-actions"><button type="button" class="btn primary" id="keep-spoilers">保持防剧透</button><button type="button" class="btn" id="show-spoilers">显示全部内容</button></div>
+  </dialog>
+</div>
+
+<script src="data.js?v=5ba820b17b17"></script>
+<script src="js/core.js?v=e4c715b2c561"></script>
+<script src="js/map.js?v=2046674457d8"></script>
+<script src="js/tree.js?v=15e4b567d14c"></script>
+<script src="js/spoilers.js?v=ea0a7e770ecf"></script>
+<script src="js/map-content.js?v=47049c4a7fa1"></script>
+<script src="js/browse-home.js?v=32699dd378a2"></script>
+<script src="js/browse-views.js?v=945c14a9f983"></script>
+<script src="js/browse.js?v=dcbc32d1ad07"></script>
+<script src="js/guides.js?v=2ec8ebe07194"></script>
+<script src="js/schedules.js?v=d56a0dac5398"></script>
+<script src="js/collections.js?v=2fb93b583a9d"></script>
+<script src="js/ui.js?v=1fd33393afc2"></script>
+<script src="js/music.js?v=55ef2e0cd239"></script>
+</body>
+</html>

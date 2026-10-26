@@ -1,0 +1,1056 @@
+[
+ {
+  "page": "秘密森林",
+  "en": "Secret Woods",
+  "image": "SecretWoods.png",
+  "map": "valley",
+  "x": 40,
+  "y": 100,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "老师傅香炸奶酪卷"
+  ],
+  "categories": [
+   "地点",
+   "森林地点"
+  ]
+ },
+ {
+  "page": "农舍",
+  "en": "Farmhouse",
+  "image": "House_(tier_1).png",
+  "map": "valley",
+  "x": 148,
+  "y": 80,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": "无",
+  "address": "农场",
+  "occupants": [],
+  "categories": [
+   "成就",
+   "农场建筑"
+  ]
+ },
+ {
+  "page": "拖车",
+  "en": "Trailer",
+  "image": "Trailer.png",
+  "map": "valley",
+  "x": 255,
+  "y": 110,
+  "open_hours": "上午9:00至晚上8:00",
+  "open_ranges": [
+   [
+    900,
+    2000
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "潘姆",
+   "潘妮"
+  ],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "铁匠铺",
+  "en": "Blacksmith",
+  "image": "Blacksmith.png",
+  "map": "valley",
+  "x": 280,
+  "y": 120,
+  "open_hours": "上午9:00至下午4:00",
+  "open_ranges": [
+   [
+    900,
+    1600
+   ]
+  ],
+  "closed": "社区中心重建后的每个星期五",
+  "address": "穿过鹈鹕镇的小河的东岸",
+  "occupants": [
+   "克林特"
+  ],
+  "categories": [
+   "城镇地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "社区中心",
+  "en": "Community Center",
+  "image": "Community_Center_ZH.png",
+  "map": "valley",
+  "x": 227,
+  "y": 61,
+  "open_hours": "全天",
+  "open_ranges": [
+   [
+    600,
+    2600
+   ]
+  ],
+  "closed": "无",
+  "address": null,
+  "occupants": [
+   "祝尼魔"
+  ],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "哈维的诊所",
+  "en": "Harvey's Clinic",
+  "image": "Medical_Clinic.png",
+  "map": "valley",
+  "x": 218,
+  "y": 92,
+  "open_hours": "上午9:00至下午3:00",
+  "open_ranges": [
+   [
+    900,
+    1500
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "哈维"
+  ],
+  "categories": [
+   "城镇地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "皮埃尔的杂货店",
+  "en": "Pierre's General Store",
+  "image": "Pierres_shop_ZH.png",
+  "map": "valley",
+  "x": 225,
+  "y": 100,
+  "open_hours": "商店：上午9点到下午5点\n建筑：上午9点到晚上9点",
+  "open_ranges": [
+   [
+    900,
+    1700
+   ],
+   [
+    900,
+    2100
+   ]
+  ],
+  "closed": "星期三",
+  "address": "小镇广场北边",
+  "occupants": [
+   "皮埃尔",
+   "卡洛琳",
+   "阿比盖尔"
+  ],
+  "categories": [
+   "商店",
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "星之果实酒吧",
+  "en": "The Stardrop Saloon",
+  "image": "Saloon_ZH.png",
+  "map": "valley",
+  "x": 237,
+  "y": 109,
+  "open_hours": "中午12:00至凌晨12:00",
+  "open_ranges": [
+   [
+    1200,
+    2400
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "格斯"
+  ],
+  "categories": [
+   "城镇地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "旅行货车",
+  "en": "Traveling Cart",
+  "image": "Traveling_Cart.png",
+  "map": "valley",
+  "x": 80,
+  "y": 125,
+  "open_hours": "星期五和星期日：早上6点至晚上8点\n夜市：下午5点至凌晨2点\n沙漠节：中午12点至凌晨2点",
+  "open_ranges": [
+   [
+    600,
+    2000
+   ],
+   [
+    1700,
+    2600
+   ],
+   [
+    1200,
+    2600
+   ]
+  ],
+  "closed": "星期一至星期四，以及星期六",
+  "address": "煤矿森林",
+  "occupants": [],
+  "categories": [
+   "Category:商店",
+   "森林地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "博物馆",
+  "en": "Museum",
+  "image": "Museum.png",
+  "map": "valley",
+  "x": 290,
+  "y": 130,
+  "open_hours": "上午8:00至下午6:00",
+  "open_ranges": [
+   [
+    800,
+    1800
+   ]
+  ],
+  "closed": "节日",
+  "address": "镇的东边, 铁匠铺的南面",
+  "occupants": [
+   "冈瑟"
+  ],
+  "categories": [
+   "城镇地点",
+   "成就"
+  ]
+ },
+ {
+  "page": "Joja超市",
+  "en": "JojaMart",
+  "image": "Jojamart_ZH.png",
+  "map": "valley",
+  "x": 287,
+  "y": 89,
+  "open_hours": "上午9:00到晚上11:00",
+  "open_ranges": [
+   [
+    900,
+    2300
+   ]
+  ],
+  "closed": "玩家完成社区中心的所有收集包后",
+  "address": "铁匠铺的北面",
+  "occupants": [
+   "莫里斯"
+  ],
+  "categories": [
+   "城镇地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "下水道",
+  "en": "The Sewers",
+  "image": "Sewer_JA.png",
+  "map": "valley",
+  "x": 225,
+  "y": 140,
+  "open_hours": "永久",
+  "open_ranges": [],
+  "closed": "无",
+  "address": null,
+  "occupants": [
+   "科罗布斯"
+  ],
+  "categories": [
+   "地点",
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "鱼店",
+  "en": "Fish Shop",
+  "image": "Fish_Shop_ZH.png",
+  "map": "valley",
+  "x": 274,
+  "y": 194,
+  "open_hours": "上午9:00至下午5:00",
+  "open_ranges": [
+   [
+    900,
+    1700
+   ]
+  ],
+  "closed": "不下雨的星期六（可进入建筑，但无法买卖物品）",
+  "address": null,
+  "occupants": [
+   "威利"
+  ],
+  "categories": [
+   "沙滩地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "沙漠",
+  "en": "The Desert",
+  "image": null,
+  "map": "valley",
+  "x": null,
+  "y": null,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "桑迪",
+   "沙漠商人",
+   "齐先生"
+  ],
+  "categories": [
+   "地点",
+   "沙漠地点"
+  ]
+ },
+ {
+  "page": "赌场",
+  "en": "Casino",
+  "image": "Casino_ZH.png",
+  "map": "valley",
+  "x": 20,
+  "y": 20,
+  "open_hours": "上午9:00至晚上11:50",
+  "open_ranges": [
+   [
+    900,
+    2350
+   ]
+  ],
+  "closed": "无",
+  "address": "沙漠",
+  "occupants": [
+   "齐先生"
+  ],
+  "categories": [
+   "商店",
+   "沙漠地点"
+  ]
+ },
+ {
+  "page": "绿洲",
+  "en": "Oasis",
+  "image": "Oasis_ZH.png",
+  "map": "valley",
+  "x": 20,
+  "y": 20,
+  "open_hours": "上午9:00至晚上11:50",
+  "open_ranges": [
+   [
+    900,
+    2350
+   ]
+  ],
+  "closed": "沙漠节期间、\n秋季15日下午1点之后",
+  "address": "沙漠",
+  "occupants": [
+   "桑迪"
+  ],
+  "categories": [
+   "商店",
+   "沙漠地点"
+  ]
+ },
+ {
+  "page": "废弃的屋子",
+  "en": "Abandoned House",
+  "image": "Hat_Shop_ZH.png",
+  "map": "valley",
+  "x": 90,
+  "y": 170,
+  "open_hours": "全天",
+  "open_ranges": [
+   [
+    600,
+    2600
+   ]
+  ],
+  "closed": "无",
+  "address": "煤矿森林",
+  "occupants": [],
+  "categories": [
+   "森林地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "玛妮的牧场",
+  "en": "Marnie's Ranch",
+  "image": "Ranch.png",
+  "map": "valley",
+  "x": 142,
+  "y": 123,
+  "open_hours": "建筑可进入：上午9:00至下午6:00\n营业时间：上午9:00至下午4:00",
+  "open_ranges": [
+   [
+    900,
+    1800
+   ],
+   [
+    900,
+    1600
+   ]
+  ],
+  "closed": "周一和周二\n(建筑仍然可进入)",
+  "address": null,
+  "occupants": [
+   "玛妮",
+   "贾斯",
+   "谢恩"
+  ],
+  "categories": [
+   "森林地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "法师塔",
+  "en": "Wizard's Tower",
+  "image": null,
+  "map": "valley",
+  "x": 68,
+  "y": 120,
+  "open_hours": "早上6:00至晚上11:00",
+  "open_ranges": [
+   [
+    600,
+    2300
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "法师"
+  ],
+  "categories": [
+   "森林地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "探险家公会",
+  "en": "Adventurer's Guild",
+  "image": "Adventurer's_Guild.gif",
+  "map": "valley",
+  "x": 293,
+  "y": 30,
+  "open_hours": "下午2:00至凌晨2:00",
+  "open_ranges": [
+   [
+    1400,
+    2600
+   ]
+  ],
+  "closed": null,
+  "address": "矿井东边，深山的东北方",
+  "occupants": [
+   "马龙",
+   "吉尔"
+  ],
+  "categories": [
+   "地点",
+   "深山地点",
+   "商店",
+   "建筑"
+  ]
+ },
+ {
+  "page": "木匠的商店",
+  "en": "Carpenter's Shop",
+  "image": "Carpenter's_Shop.png",
+  "map": "valley",
+  "x": 237,
+  "y": 49,
+  "open_hours": "上午9:00至下午5:00",
+  "open_ranges": [
+   [
+    900,
+    1700
+   ]
+  ],
+  "closed": "星期二",
+  "address": null,
+  "occupants": [
+   "罗宾",
+   "德米特里厄斯",
+   "塞巴斯蒂安",
+   "玛鲁"
+  ],
+  "categories": [
+   "深山地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "矿井",
+  "en": "The Mines",
+  "image": "MinesEntrance.png",
+  "map": "valley",
+  "x": 284,
+  "y": 28,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": "无",
+  "address": null,
+  "occupants": [
+   "矮人"
+  ],
+  "categories": [
+   "地点",
+   "深山地点"
+  ]
+ },
+ {
+  "page": "温泉",
+  "en": "Spa",
+  "image": "Spa_ZH.png",
+  "map": "valley",
+  "x": 188,
+  "y": 20,
+  "open_hours": "全天",
+  "open_ranges": [
+   [
+    600,
+    2600
+   ]
+  ],
+  "closed": "无",
+  "address": null,
+  "occupants": [],
+  "categories": [
+   "深山地点"
+  ]
+ },
+ {
+  "page": "女巫小屋",
+  "en": "Witch's Hut",
+  "image": "Witch's_Hut.png",
+  "map": "valley",
+  "x": 230,
+  "y": 5,
+  "open_hours": "全天",
+  "open_ranges": [
+   [
+    600,
+    2600
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "女巫",
+   "仆从"
+  ],
+  "categories": []
+ },
+ {
+  "page": "莉亚的农舍",
+  "en": "Leah's Cottage",
+  "image": "Leah's_Cottage.png",
+  "map": "valley",
+  "x": 148,
+  "y": 134,
+  "open_hours": "上午10:00至下午6:00",
+  "open_ranges": [
+   [
+    1000,
+    1800
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "莉亚"
+  ],
+  "categories": [
+   "森林地点"
+  ]
+ },
+ {
+  "page": "农场",
+  "en": "The Farm",
+  "image": null,
+  "map": "valley",
+  "x": 146,
+  "y": 86,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": null,
+  "occupants": [],
+  "categories": [
+   "游戏玩法"
+  ]
+ },
+ {
+  "page": "巴士站",
+  "en": "Bus Stop",
+  "image": "Bus.png",
+  "map": "valley",
+  "x": 175,
+  "y": 75,
+  "open_hours": "上午10:00至下午5:00",
+  "open_ranges": [
+   [
+    1000,
+    1700
+   ]
+  ],
+  "closed": null,
+  "address": "巴士站",
+  "occupants": [],
+  "categories": [
+   "地点",
+   "传送途径"
+  ]
+ },
+ {
+  "page": "河间大道1号",
+  "en": "1 River Road",
+  "image": "1_River_Road.png",
+  "map": "valley",
+  "x": 240,
+  "y": 100,
+  "open_hours": "上午8点至晚上8点",
+  "open_ranges": [
+   [
+    800,
+    2000
+   ]
+  ],
+  "closed": null,
+  "address": "河间大道1号",
+  "occupants": [
+   "乔治",
+   "艾芙琳",
+   "亚历克斯"
+  ],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "柳巷1号",
+  "en": "1 Willow Lane",
+  "image": "1_Willow_Lane.png",
+  "map": "valley",
+  "x": 200,
+  "y": 125,
+  "open_hours": "上午9:00至晚上8:00",
+  "open_ranges": [
+   [
+    900,
+    2000
+   ]
+  ],
+  "closed": null,
+  "address": "柳巷1号",
+  "occupants": [
+   "乔迪",
+   "肯特",
+   "山姆",
+   "文森特"
+  ],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "艾利欧特小屋",
+  "en": "Elliott's Cabin",
+  "image": "Elliott's_Cabin.png",
+  "map": "valley",
+  "x": 268,
+  "y": 174,
+  "open_hours": "上午10点至下午6点",
+  "open_ranges": [
+   [
+    1000,
+    1800
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "艾利欧特"
+  ],
+  "categories": [
+   "沙滩地点"
+  ]
+ },
+ {
+  "page": "柳巷2号",
+  "en": "2 Willow Lane",
+  "image": "2_Willow_Lane.png",
+  "map": "valley",
+  "x": 213,
+  "y": 130,
+  "open_hours": "上午9:00至晚上8:00",
+  "open_ranges": [
+   [
+    900,
+    2000
+   ]
+  ],
+  "closed": null,
+  "address": "柳巷2号",
+  "occupants": [
+   "艾米丽",
+   "海莉"
+  ],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "镇长的庄园",
+  "en": "Mayor's Manor",
+  "image": "Mayor's_Manor.png",
+  "map": "valley",
+  "x": 250,
+  "y": 125,
+  "open_hours": "上午8:30~晚上10:00",
+  "open_ranges": [
+   [
+    830,
+    2200
+   ]
+  ],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "刘易斯"
+  ],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "帐篷",
+  "en": "Tent",
+  "image": "Tent.png",
+  "map": "valley",
+  "x": 252,
+  "y": 30,
+  "open_hours": "上午6:00至凌晨2:00",
+  "open_ranges": [
+   [
+    600,
+    2600
+   ]
+  ],
+  "closed": null,
+  "address": "深山",
+  "occupants": [
+   "莱纳斯"
+  ],
+  "categories": [
+   "深山地点"
+  ]
+ },
+ {
+  "page": "狗窝",
+  "en": "Dog Pen",
+  "image": "Dog_Pen_ZH.png",
+  "map": "valley",
+  "x": 243,
+  "y": 111,
+  "open_hours": "全天",
+  "open_ranges": [
+   [
+    600,
+    2600
+   ]
+  ],
+  "closed": "无",
+  "address": null,
+  "occupants": [
+   "达斯迪"
+  ],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "冰淇淋摊",
+  "en": "Ice Cream Stand",
+  "image": "Ice_Cream_Stand_ZH.png",
+  "map": "valley",
+  "x": 270,
+  "y": 135,
+  "open_hours": "下午1:00到下午5:00",
+  "open_ranges": [
+   [
+    1300,
+    1700
+   ]
+  ],
+  "closed": "周三 • 雨天",
+  "address": "在博物馆旁边",
+  "occupants": [
+   "亚历克斯"
+  ],
+  "categories": [
+   "城镇地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "电影院",
+  "en": "Movie Theater",
+  "image": "Movie_Theater_ZH.png",
+  "map": "valley",
+  "x": 287,
+  "y": 89,
+  "open_hours": "上午 9:00 到晚上 9:00",
+  "open_ranges": [
+   [
+    900,
+    2100
+   ]
+  ],
+  "closed": null,
+  "address": "社区线：废弃的Joja超市\nJoja线：Joja仓库",
+  "occupants": [],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "沙漠商人",
+  "en": "Desert Trader",
+  "image": "Desert_Trader.png",
+  "map": "valley",
+  "x": 30,
+  "y": 5,
+  "open_hours": "一直开放",
+  "open_ranges": [],
+  "closed": "夜市期间 (冬季15-17)",
+  "address": "沙漠",
+  "occupants": [],
+  "categories": [
+   "商店"
+  ]
+ },
+ {
+  "page": "Joja仓库",
+  "en": "Joja Warehouse",
+  "image": "Joja_Warehouse.png",
+  "map": "valley",
+  "x": 227,
+  "y": 61,
+  "open_hours": "全天",
+  "open_ranges": [
+   [
+    600,
+    2600
+   ]
+  ],
+  "closed": "无",
+  "address": null,
+  "occupants": [],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "墓园",
+  "en": "Graveyard",
+  "image": "Graveyard.png",
+  "map": "valley",
+  "x": 235,
+  "y": 130,
+  "open_hours": "一直开放",
+  "open_ranges": [],
+  "closed": "从不关闭",
+  "address": null,
+  "occupants": [],
+  "categories": [
+   "城镇地点"
+  ]
+ },
+ {
+  "page": "姜岛",
+  "en": "Ginger Island",
+  "image": "Ginger_Island.png",
+  "map": "island_small",
+  "x": 360,
+  "y": 214,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": null,
+  "occupants": [
+   "雷欧",
+   "贝啼",
+   "蜗牛教授",
+   "姜岛商人",
+   "齐先生"
+  ],
+  "categories": [
+   "地点"
+  ]
+ },
+ {
+  "page": "姜岛商人",
+  "en": "Island Trader",
+  "image": "Island_Trader.png",
+  "map": "island",
+  "x": 200,
+  "y": 110,
+  "open_hours": "一直开放",
+  "open_ranges": [],
+  "closed": null,
+  "address": "姜岛",
+  "occupants": [
+   "姜岛商人"
+  ],
+  "categories": [
+   "岛屿地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "齐先生的核桃房",
+  "en": "Qi's Walnut Room",
+  "image": "Qi's_Walnut_Room.png",
+  "map": "island",
+  "x": 65,
+  "y": 115,
+  "open_hours": "一直开放",
+  "open_ranges": [],
+  "closed": null,
+  "address": "姜岛",
+  "occupants": [
+   "齐先生"
+  ],
+  "categories": [
+   "岛屿地点",
+   "商店"
+  ]
+ },
+ {
+  "page": "岛屿办事处",
+  "en": "Island Field Office",
+  "image": "Island_Field_Office.png",
+  "map": "island",
+  "x": 210,
+  "y": 82,
+  "open_hours": "一直开放",
+  "open_ranges": [],
+  "closed": null,
+  "address": "姜岛北部",
+  "occupants": [
+   "蜗牛教授"
+  ],
+  "categories": [
+   "岛屿地点"
+  ]
+ },
+ {
+  "page": "树屋",
+  "en": "Treehouse",
+  "image": "Treehouse_Exterior.png",
+  "map": "valley",
+  "x": 240,
+  "y": 30,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": "深山",
+  "occupants": [
+   "雷欧"
+  ],
+  "categories": [
+   "深山地点"
+  ]
+ },
+ {
+  "page": "顶峰",
+  "en": "The Summit",
+  "image": "The_Summit.png",
+  "map": "valley",
+  "x": 200,
+  "y": 1,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": null,
+  "occupants": [],
+  "categories": [
+   "地点",
+   "深山地点"
+  ]
+ },
+ {
+  "page": "书摊老板",
+  "en": "Bookseller",
+  "image": "Bookseller.png",
+  "map": "valley",
+  "x": 287,
+  "y": 70,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": "小镇河流对岸，在 Joja超市上面",
+  "occupants": [],
+  "categories": []
+ },
+ {
+  "page": "精通山洞",
+  "en": "Mastery Cave",
+  "image": "Mastery_Cave.png",
+  "map": "valley",
+  "x": 140,
+  "y": 180,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": "从不",
+  "address": "煤矿森林",
+  "occupants": [],
+  "categories": [
+   "地点"
+  ]
+ },
+ {
+  "page": "大树桩（地点）",
+  "en": "Giant Stump",
+  "image": "Giant_Stump.png",
+  "map": "valley",
+  "x": 100,
+  "y": 120,
+  "open_hours": null,
+  "open_ranges": [],
+  "closed": null,
+  "address": "煤矿森林，池塘与玛妮的牧场之间",
+  "occupants": [],
+  "categories": [
+   "森林地点",
+   "商店"
+  ]
+ }
+]
