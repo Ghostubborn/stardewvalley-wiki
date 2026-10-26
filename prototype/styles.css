@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SDV Pixel";
-  src: url("assets/fonts/pixel-subset.woff2?v=b5ad43735072") format("woff2");
+  src: url("assets/fonts/pixel-subset.woff2?v=802e257fd024") format("woff2");
   font-display: swap;
 }
 
@@ -175,6 +175,8 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .journal-head { display: flex; align-items: center; justify-content: space-between; }
 .journal-title { margin: 0; font: 24px/1.2 var(--pixel); font-weight: normal; }
 .journal-actions { display: flex; align-items: center; gap: 6px; }
+.repo-link { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 5px; border: 1px solid var(--bark); background: var(--parchment-hi); color: var(--bark); font-size: 11px; white-space: nowrap; text-decoration: none; }
+.repo-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .music-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 7px; border: 2px solid var(--bark); background: var(--parchment-hi); font-size: 12px; white-space: nowrap; }
 .music-toggle[aria-pressed="true"] { background: var(--walnut); color: var(--parchment-hi); }
 .music-toggle svg { flex: none; }
@@ -198,6 +200,7 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .journal-body { overflow: auto; padding-right: 4px; margin-right: -4px; scrollbar-width: thin; }
 .wiki-credit { flex: none; margin-top: 10px; padding: 8px 0 4px; border-top: 1px solid var(--parchment-lo); font-size: 11px; line-height: 1.6; color: var(--ink-soft); }
 .wiki-credit a { color: var(--bark); text-underline-offset: 3px; }
+.wiki-credit .feedback-link { display: block; padding-top: 4px; }
 .group { border-top: 2px dotted var(--bark); padding: 8px 0 6px; }
 .group:first-child { border-top: 0; }
 .group > summary {
@@ -553,3 +556,7 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 }
 .point-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .point-heading h3 { margin: 0; }
+@media (max-width: 380px) {
+  .repo-link { width: 30px; min-height: 40px; flex: none; }
+  .repo-link span { display: none; }
+}

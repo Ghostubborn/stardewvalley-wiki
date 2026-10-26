@@ -81,6 +81,12 @@
             img(A.SEASON_ICON[season]), el("strong", null, A.SEASON_ZH[season]),
             shortcut("farming", "作物", { season }), shortcut("fish", "鱼类", { season, type: "rod" })))),
           shortcut("villagers", "查看居民生日与礼物"))));
+    const feedback = el("section", { class: "home-feedback", "aria-labelledby": "feedback-title" },
+      el("h2", { id: "feedback-title" }, "一起把手册做得更好"),
+      el("p", null, "发现资料错误、缺少的内容，或有不顺手的地方？欢迎通过 GitHub 提出建议。附上相关条目和遇到的问题，会更方便核对。"),
+      el("div", { class: "wiki-credit-links" },
+        el("a", { href: "https://github.com/Ghostubborn/stardewvalley-wiki/issues/new", target: "_blank", rel: "noopener noreferrer" }, "提交反馈（GitHub Issues）↗"),
+        el("a", { href: "https://github.com/Ghostubborn/stardewvalley-wiki", target: "_blank", rel: "noopener noreferrer" }, "查看 GitHub 仓库 ↗")));
     const credits = el("footer", { class: "home-credits", "aria-labelledby": "wiki-thanks-title" },
       el("h2", { id: "wiki-thanks-title" }, "资料来源与致谢"),
       el("p", null, "本手册的游戏资料主要整理自星露谷 Wiki 的中英文归档。感谢 Wiki 的编辑者、翻译者和所有贡献者，持续整理、核对与分享这些资料，让更多玩家能够了解星露谷。"),
@@ -89,7 +95,7 @@
         el("a", { href: "https://stardewvalleywiki.com/", target: "_blank", rel: "noopener noreferrer", title: "在新标签页打开" }, "Stardew Valley Wiki（英文）↗")),
       el("p", { class: "home-credit-note" }, "各条目保留原文来源，便于继续查阅与核对。原 Wiki 未作本站的防剧透处理。"));
     return [el("header", { class: "home-heading" }, el("p", { class: "eyebrow" }, "星露谷交互手册"),
-      el("h2", null, "想查什么，直接开始"), el("p", null, "查条件、看用途、理清升级路线。无需填写存档，也不必连接游戏。")), grid, reading, credits];
+      el("h2", null, "想查什么，直接开始"), el("p", null, "查条件、看用途、理清升级路线。无需填写存档，也不必连接游戏。")), grid, reading, feedback, credits];
   }
   A.browseHome = { render };
 })();

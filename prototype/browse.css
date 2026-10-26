@@ -50,6 +50,9 @@
 .wiki-credit-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
 .wiki-credit-links a { display: inline-flex; align-items: center; min-height: 40px; color: var(--bark); text-underline-offset: 4px; font-size: 13px; }
 .home-credits .home-credit-note { font-size: 11px; }
+.home-feedback { margin-top: 24px; padding: 14px 16px; border: 1px solid var(--parchment-lo); background: var(--parchment-hi); }
+.home-feedback h2 { margin: 0; font: 17px/1.5 var(--pixel); }
+.home-feedback p { margin: 8px 0 0; font-size: 13px; line-height: 1.8; color: var(--ink-soft); }
 .home-season-links { display: grid; gap: 4px; margin-top: 8px; }
 .home-season-links > div { display: flex; align-items: center; gap: 9px; }
 .home-season-links .pix { width: 20px; height: 20px; }
