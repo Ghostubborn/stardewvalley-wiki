@@ -2,7 +2,14 @@
 (function () {
   "use strict";
   const App = window.App;
-  const { D, el, img, money, matsText } = App;
+  const { D, el, img, money, matsText, t, N, nameOf } = App;
+  const EN = App.EN;
+  // 节点 title 是中文 ID（防剧透规则按它判断），name 是显示名。
+  const chainEffect = (chain, i) => (EN ? EN.chains?.[chain.family]?.tiers?.[i]?.effect : chain.tiers[i].effect) || null;
+  const familyName = (chain) => (EN ? EN.chains?.[chain.family]?.name : null) || chain.family.replace("（工具）", "");
+  const buildingName = (zh) => (EN ? EN.buildings?.[zh]?.name || N(zh) : zh);
+  const roomReward = (room) => (EN ? EN.bundles?.[room.room]?.reward : room.reward) || "";
+  const levelName = (skill, level) => t("{skill} {level} 级", { skill: App.skillName(skill), level });
 
   // ———————————————————— 模型 ————————————————————
   const nodes = new Map();
@@ -39,104 +46,106 @@
   };
 
   // —— 技能 ——
-  const skills = lane("skills", "技能", "成长条件", 74);
+  const skills = lane("skills", t("技能"), t("成长条件"), 74);
   for (const sk of App.SKILLS) {
-    const r = row(skills, "skill:" + sk.id, sk.zh, sk.icon);
+    const r = row(skills, "skill:" + sk.id, sk.name, sk.icon);
     for (let lv = 1; lv <= 10; lv++) {
       const ul = (D.skillUnlocks[sk.id] || {})[lv] || [];
       add(r, {
-        id: `skill:${sk.id}:${lv}`, kind: "skill", col: lv, title: `${sk.zh} ${lv} 级`, short: `${lv} 级`, icon: null,
-        state: { type: "skill", skill: sk.id, level: lv, text: `${sk.zh} ${lv} 级` },
+        id: `skill:${sk.id}:${lv}`, kind: "skill", col: lv, title: `${sk.zh} ${lv} 级`, name: levelName(sk.id, lv), short: t("{n} 级", { n: lv }), icon: null,
+        state: { type: "skill", skill: sk.id, level: lv, text: levelName(sk.id, lv) },
         reqs: lv > 1 ? [ref(`skill:${sk.id}:${lv - 1}`, "level")] : [],
         unlocks: ul.map((u) => unlockOf(u.id || u.z)),
-        info: { what: ul.length ? `解锁配方：${ul.map((u) => u.z).join("、")}` : "这一级没有新配方；职业选择见技能条目。", source: "技能" },
+        info: { what: ul.length ? t("解锁配方：{list}", { list: App.list(ul.map((u) => nameOf(u.id || u.z))) }) : t("这一级没有新配方；职业选择见技能条目。"), source: "技能" },
       });
     }
   }
 
   // —— 装备进阶：鱼竿（可直接购买）与洒水器（独立配方） ——
-  const gear = lane("gear", "装备进阶", "成长条件", 80);
+  const gear = lane("gear", t("装备进阶"), t("成长条件"), 80);
   {
-    const r = row(gear, "rod", "鱼竿", App.ROD_CHAIN.tiers[2].image);
+    const r = row(gear, "rod", t("鱼竿"), App.ROD_CHAIN.tiers[2].image);
     const cols = [0, 1, 2, 6, 10];
-    App.ROD_CHAIN.tiers.forEach((t, i) => {
+    App.ROD_CHAIN.tiers.forEach((tier, i) => {
       const reqs = [];
-      for (const u of t.unlock || []) {
-        if (u.group === "skill") reqs.push(ref(`skill:${u.skill}:${u.level}`, "skill", u.text));
-        if (u.group === "mastery") reqs.push(ref("skill:fishing:10", "skill", "钓鱼 10 级"), { type: "info", text: "钓鱼精通", hint: "精通进度暂未记录" });
+      for (const u of tier.unlock || []) {
+        if (u.group === "skill") reqs.push(ref(`skill:${u.skill}:${u.level}`, "skill", levelName(u.skill, u.level)));
+        if (u.group === "mastery") reqs.push(ref("skill:fishing:10", "skill", levelName("fishing", 10)), { type: "info", text: t("钓鱼精通"), hint: t("精通进度暂未记录") });
       }
+      const name = nameOf(tier.id || tier.zh), shop = N(tier.sold_by || "鱼店");
       add(r, {
-        id: `rod:${i}`, kind: "item", col: cols[i], title: t.zh, icon: t.image, itemId: t.id,
-        sub: `${t.sold_by || "鱼店"} ${money(t.cost)}`, place: "鱼店",
-        state: { type: "rod", tier: i, text: `拥有${t.zh}` }, reqs,
+        id: `rod:${i}`, kind: "item", col: cols[i], title: tier.zh, name, icon: tier.image, itemId: tier.id,
+        sub: `${shop} ${money(tier.cost)}`, place: "鱼店",
+        state: { type: "rod", tier: i, text: t("拥有{item}", { item: name }) }, reqs,
         series: i > 0 ? `rod:${i - 1}` : null,
-        info: { what: t.effect, action: `在${t.sold_by || "鱼店"}花 ${money(t.cost)} 购买`, note: "各级都能直接购买，不需要先拥有上一级。", source: "钓竿" },
+        info: { what: chainEffect(App.ROD_CHAIN, i), action: t("在{shop}花 {cost} 购买", { shop, cost: money(tier.cost) }), note: t("各级都能直接购买，不需要先拥有上一级。"), source: "钓竿" },
       });
     });
   }
   {
-    const r = row(gear, "sprinkler", "洒水器", "Sprinkler.png");
+    const r = row(gear, "sprinkler", t("洒水器"), "Sprinkler.png");
     const tiers = [["洒水器", 2], ["优质洒水器", 6], ["铱制洒水器", 9]];
     tiers.forEach(([zh, lv], i) => {
       const it = item(zh);
       const recipe = (App.recipesByOut.get(it.id) || [])[0];
       const buy = (App.shopsByItem.get(it.id) || [])[0];
-      const paths = [{ label: "打造", reqs: [ref(`skill:farming:${lv}`, "skill", `耕种 ${lv} 级`)] }];
+      const paths = [{ label: t("打造"), reqs: [ref(`skill:farming:${lv}`, "skill", levelName("farming", lv))] }];
       if (buy) {
-        paths.push({ label: `${buy.shop}购买`, reqs: [{ type: "area", area: "sewers", text: "可进入下水道" }, { type: "weekday", wd: 5 }] });
+        paths.push({ label: t("{shop}购买", { shop: N(buy.shop) }), reqs: [{ type: "area", area: "sewers", text: t("可进入{place}", { place: App.areaTitle("sewers") }) }, { type: "weekday", wd: 5 }] });
       }
+      const name = App.itemName(it);
       add(r, {
-        id: `sprinkler:${i}`, kind: "item", col: lv, title: zh, icon: it.i, itemId: it.id,
-        sub: recipe ? matsText(recipe.in.map((x) => ({ zh: x.z, qty: x.q }))) : "",
-        state: { type: "owned", id: it.id, text: `已有${zh}` }, paths, series: i > 0 ? `sprinkler:${i - 1}` : null,
-        info: { what: it.d, note: "三档洒水器是独立配方，不需要先做低一档。", source: zh },
+        id: `sprinkler:${i}`, kind: "item", col: lv, title: zh, name, icon: it.i, itemId: it.id,
+        sub: recipe ? matsText(recipe.in.map((x) => ({ id: x.id, zh: x.z, qty: x.q }))) : "",
+        state: { type: "owned", id: it.id, text: t("已有{item}", { item: name }) }, paths, series: i > 0 ? `sprinkler:${i - 1}` : null,
+        info: { what: App.itemDesc(it), note: t("三档洒水器是独立配方，不需要先做低一档。"), source: zh },
       });
     });
   }
 
   // —— 工具：铁匠铺逐级升级 ——
-  const tools = lane("tools", "工具", "成长条件", 80);
+  const tools = lane("tools", t("工具"), t("成长条件"), 80);
   const toolUnlocks = D.progression.tool_unlocks;
   for (const ch of D.chains.filter((c) => c.kind === "blacksmith_upgrade")) {
-    const name = ch.family.replace("（工具）", "");
-    const r = row(tools, "tool:" + ch.family, name, ch.tiers[1].image);
-    ch.tiers.forEach((t, i) => {
+    const r = row(tools, "tool:" + ch.family, familyName(ch), ch.tiers[1].image);
+    ch.tiers.forEach((tier, i) => {
       const extra = toolUnlocks.filter((u) => u.family === ch.family && u.tier === i);
+      const name = nameOf(tier.id || tier.zh), prev = i ? nameOf(ch.tiers[i - 1].id || ch.tiers[i - 1].zh) : null;
       add(r, {
-        id: `tool:${ch.family}:${i}`, kind: "tool", col: i * 2.5, title: t.zh, icon: t.image, itemId: t.id,
-        sub: i ? `${matsText(t.materials)} · ${money(t.cost)}` : "初始工具", place: i ? "铁匠铺" : null,
-        state: i ? { type: "tool", family: ch.family, tier: i, text: `拥有${t.zh}` } : "always",
+        id: `tool:${ch.family}:${i}`, kind: "tool", col: i * 2.5, title: tier.zh, name, icon: tier.image, itemId: tier.id,
+        sub: i ? `${matsText(tier.materials)} · ${money(tier.cost)}` : t("初始工具"), place: i ? "铁匠铺" : null,
+        state: i ? { type: "tool", family: ch.family, tier: i, text: t("拥有{item}", { item: name }) } : "always",
         reqs: i ? [ref(`tool:${ch.family}:${i - 1}`, "upgrade")] : [],
-        cost: t.cost, materials: t.materials,
+        cost: tier.cost, materials: tier.materials,
         unlocks: extra.map((u) => ({ z: u.text, i: null, text: true })),
         info: {
-          what: t.effect, action: i ? `把${ch.tiers[i - 1].zh}交给克林特，付 ${money(t.cost)} 和 ${matsText(t.materials)}，等待 2 天` : null,
-          note: i ? "必须按顺序升级，不能跳级。" : null, source: ch.family,
+          what: chainEffect(ch, i), action: i ? t("把{prev}交给克林特，付 {cost} 和 {materials}，等待 2 天", { prev, cost: money(tier.cost), materials: matsText(tier.materials) }) : null,
+          note: i ? t("必须按顺序升级，不能跳级。") : null, source: ch.family,
         },
       });
     });
   }
 
   // —— 地区准入 ——
-  const areas = lane("areas", "地区准入", "世界进度", 80);
+  const areas = lane("areas", t("地区准入"), t("世界进度"), 80);
   const A = D.progression.areas.reduce((m, a) => ((m[a.id] = a), m), {});
   const areaNode = (r, id, col, reqs, extra = {}) =>
     add(r, {
-      id: "area:" + id, kind: "area", col, title: A[id].title, icon: extra.icon || null, place: extra.place || A[id].title,
+      id: "area:" + id, kind: "area", col, title: A[id].title, name: App.areaTitle(id), icon: extra.icon || null, place: extra.place || A[id].title,
       state: "derived", reqs, area: id, sub: extra.sub || A[id].requires.map((q) => q.text).join(" + "),
       info: { quote: A[id].quote, source: A[id].source, ...extra.info },
     });
   {
-    const r = row(areas, "mines", "矿井", "Mining_Skill_Icon.png");
-    add(r, { id: "date:mines", kind: "milestone", col: 0, title: "春季 5 日", sub: "第一年开放矿井", state: A.mines.requires[0], icon: "Spring.png",
+    const r = row(areas, "mines", App.areaTitle("mines"), "Mining_Skill_Icon.png");
+    add(r, { id: "date:mines", kind: "milestone", col: 0, title: "春季 5 日", name: t("春季 5 日"), sub: t("第一年开放矿井"), state: A.mines.requires[0], icon: "Spring.png",
       info: { quote: A.mines.quote, source: A.mines.source } });
-    areaNode(r, "mines", 1, [ref("date:mines", "gate")], { sub: "坍方清除后", icon: null });
+    areaNode(r, "mines", 1, [ref("date:mines", "gate")], { sub: t("坍方清除后"), icon: null });
     [[40, "铁矿石", 4], [80, "黄金矿石", 6], [120, "头骨钥匙", 8]].forEach(([depth, zh, col], i, arr) => {
       const it = item(zh);
       add(r, {
-        id: `mine:${depth}`, kind: "milestone", col, title: `矿井 ${depth} 层`, icon: it.i,
-        sub: depth === 120 ? "获得头骨钥匙" : `${zh}开始常见`,
-        state: { type: "mine_depth", depth, text: `到达矿井 ${depth} 层` },
+        id: `mine:${depth}`, kind: "milestone", col, title: `矿井 ${depth} 层`, name: t("矿井 {n} 层", { n: depth }), icon: it.i,
+        sub: depth === 120 ? t("获得头骨钥匙") : t("{item}开始常见", { item: App.itemName(it) }),
+        state: { type: "mine_depth", depth, text: t("到达矿井 {n} 层", { n: depth }) },
         reqs: [i ? ref(`mine:${arr[i - 1][0]}`, "level") : ref("area:mines", "gate")],
         unlocks: [unlockOf(zh)],
         info: {
@@ -147,75 +156,75 @@
     });
   }
   {
-    const r = row(areas, "secret_woods", "秘密森林", "Hardwood.png");
-    areaNode(r, "secret_woods", 5, [ref("tool:斧头:2", "gate", "钢斧头")], { sub: "钢斧头劈开大圆木", icon: "Hardwood.png" });
+    const r = row(areas, "secret_woods", App.areaTitle("secret_woods"), "Hardwood.png");
+    areaNode(r, "secret_woods", 5, [ref("tool:斧头:2", "gate", nameOf("钢斧头"))], { sub: t("钢斧头劈开大圆木"), icon: "Hardwood.png" });
   }
   {
-    const r = row(areas, "museum", "博物馆", "Rusty_Key.png");
-    add(r, { id: "museum:60", kind: "milestone", col: 4, title: "捐赠 60 件", icon: "Rusty_Key.png", sub: "冈瑟送出生锈的钥匙",
-      state: { type: "museum", count: 60, text: "博物馆捐赠 60 件" }, place: "博物馆",
+    const r = row(areas, "museum", N("博物馆"), "Rusty_Key.png");
+    add(r, { id: "museum:60", kind: "milestone", col: 4, title: "捐赠 60 件", name: t("捐赠 60 件"), icon: "Rusty_Key.png", sub: t("冈瑟送出生锈的钥匙"),
+      state: { type: "museum", count: 60, text: t("博物馆捐赠 60 件") }, place: "博物馆",
       info: { quote: A.sewers.quote, source: A.sewers.source } });
-    areaNode(r, "sewers", 6, [ref("museum:60", "gate")], { sub: "用生锈的钥匙进入", icon: "Sewer.png" });
-    add(r, { id: "shop:krobus", kind: "milestone", col: 8, title: "科罗布斯的商店", icon: "Krobus_Icon.png", sub: "周五出售铱制洒水器",
+    areaNode(r, "sewers", 6, [ref("museum:60", "gate")], { sub: t("用生锈的钥匙进入"), icon: "Sewer.png" });
+    add(r, { id: "shop:krobus", kind: "milestone", col: 8, title: "科罗布斯的商店", name: t("科罗布斯的商店"), icon: "Krobus_Icon.png", sub: t("周五出售铱制洒水器"),
       state: "derived", reqs: [ref("area:sewers", "gate")], place: "下水道",
       unlocks: ["铱制洒水器", "虚空精华", "星之果实"].map(unlockOf),
-      info: { what: "下水道里的商店，部分商品按星期轮换。", source: "科罗布斯" } });
+      info: { what: t("下水道里的商店，部分商品按星期轮换。"), source: "科罗布斯" } });
   }
   {
-    const r = row(areas, "witch_swamp", "巫婆沼泽", null);
-    areaNode(r, "witch_swamp", 9, [ref("cc:complete", "gate", "社区中心修复")], { sub: "法师任务之后" });
+    const r = row(areas, "witch_swamp", App.areaTitle("witch_swamp"), null);
+    areaNode(r, "witch_swamp", 9, [ref("cc:complete", "gate", t("社区中心修复"))], { sub: t("法师任务之后") });
   }
 
   // —— 社区中心 ——
-  const cc = lane("cc", "社区中心", "世界进度", 80);
+  const cc = lane("cc", t("社区中心"), t("世界进度"), 80);
   const ROOM_TO = {
     工艺室: { area: "quarry", col: 5 }, 金库: { area: "desert", col: 5 },
     茶水间: { feature: "greenhouse" }, 锅炉房: { feature: "minecarts" },
   };
   const BUNDLE_ICON = ["Bundle_Green.png", "Bundle_Yellow.png", "Bundle_Orange.png", "Bundle_Teal.png", "Bundle_Red.png", "Bundle_Purple.png"];
   for (const room of D.bundles.filter((r) => r.room !== "废弃Joja超市")) {
-    const r = row(cc, "room:" + room.room, room.room, null);
+    const r = row(cc, "room:" + room.room, N(room.room), null);
     add(r, {
-      id: "room:" + room.room, kind: "room", col: 0, title: room.room, icon: BUNDLE_ICON[App.ROOMS.indexOf(room.room) % 6],
-      sub: `${room.bundles.length} 个收集包`, place: "社区中心", room: room.room,
-      state: { type: "room", room: room.room, text: `完成${room.room}` },
+      id: "room:" + room.room, kind: "room", col: 0, title: room.room, name: N(room.room), icon: BUNDLE_ICON[App.ROOMS.indexOf(room.room) % 6],
+      sub: t("{n} 个收集包", { n: room.bundles.length }), place: "社区中心", room: room.room,
+      state: { type: "room", room: room.room, text: t("完成{room}", { room: N(room.room) }) },
       unlocks: room.bundles.slice(0, 3).map((b) => unlockOf(b.items[0]?.id || b.items[0]?.zh)),
-      info: { what: room.bundles.map((b) => b.name).join("、"), source: "收集包" },
+      info: { what: App.list(room.bundles.map((b) => N(b.name))), source: "收集包" },
     });
     const feature = ROOM_TO[room.room]?.feature && D.progression.features.find((f) => f.id === ROOM_TO[room.room].feature);
     add(r, {
-      id: "reward:" + room.room, kind: "reward", col: 2.5, title: room.reward, icon: null, sub: "房间奖励",
+      id: "reward:" + room.room, kind: "reward", col: 2.5, title: room.reward, name: roomReward(room), icon: null, sub: t("房间奖励"),
       state: "derived", reqs: [ref("room:" + room.room, "gate")], place: "社区中心",
-      info: feature ? { quote: feature.quote, source: feature.source, note: `Joja 路线：${feature.joja}` } : { source: "收集包" },
+      info: feature ? { quote: feature.quote, source: feature.source, note: t("Joja 路线：{route}", { route: feature.joja }) } : { source: "收集包" },
     });
     const to = ROOM_TO[room.room];
     if (to && to.area) {
-      areaNode(r, to.area, to.col, [ref("reward:" + room.room, "gate")], { sub: room.reward });
+      areaNode(r, to.area, to.col, [ref("reward:" + room.room, "gate")], { sub: roomReward(room) });
       if (to.area === "desert") {
-        add(r, { id: "area:skull_cavern", kind: "area", col: 7.5, title: "骷髅洞穴", icon: "Skull_Key.png", place: "沙漠", area: "skull_cavern",
-          state: "derived", reqs: [ref("area:desert", "gate"), ref("mine:120", "gate", "头骨钥匙")], sub: "沙漠 + 头骨钥匙",
+        add(r, { id: "area:skull_cavern", kind: "area", col: 7.5, title: "骷髅洞穴", name: App.areaTitle("skull_cavern"), icon: "Skull_Key.png", place: "沙漠", area: "skull_cavern",
+          state: "derived", reqs: [ref("area:desert", "gate"), ref("mine:120", "gate", nameOf("头骨钥匙"))], sub: t("沙漠 + 头骨钥匙"),
           info: { quote: A.skull_cavern.quote, source: A.skull_cavern.source } });
       }
     }
   }
   {
-    const r = row(cc, "cc:after", "修复之后", null);
-    add(r, { id: "cc:complete", kind: "milestone", col: 6, title: "社区中心修复", icon: "Golden_Walnut.png", sub: "完成全部 6 个房间",
+    const r = row(cc, "cc:after", t("修复之后"), null);
+    add(r, { id: "cc:complete", kind: "milestone", col: 6, title: "社区中心修复", name: t("社区中心修复"), icon: "Golden_Walnut.png", sub: t("完成全部 6 个房间"),
       state: "derived", reqs: App.ROOMS.map((room) => ref("room:" + room, "converge")), place: "社区中心",
-      info: { what: "也可以走 Joja 路线：在 Joja 社区发展申请书里买下全部项目。", source: "社区中心" } });
+      info: { what: t("也可以走 Joja 路线：在 Joja 社区发展申请书里买下全部项目。"), source: "社区中心" } });
     const boat = D.progression.boat;
-    add(r, { id: "boat", kind: "milestone", col: 8, title: "威利的船", icon: "Battery_Pack.png", place: "鱼店",
-      sub: matsText(boat.materials), state: { type: "flag", flag: "boat_repaired", text: "船已修好" },
+    add(r, { id: "boat", kind: "milestone", col: 8, title: "威利的船", name: EN?.progression?.boat?.title || t("威利的船"), icon: "Battery_Pack.png", place: "鱼店",
+      sub: matsText(boat.materials), state: { type: "flag", flag: "boat_repaired", text: t("船已修好") },
       reqs: [ref("cc:complete", "gate")], materials: boat.materials,
-      info: { quote: A.ginger_island.quote, source: "姜岛", action: `在鱼店里屋交付 ${matsText(boat.materials)}` } });
-    areaNode(r, "ginger_island", 10, [ref("boat", "gate")], { sub: `船票 ${money(boat.ticket)}`, icon: "Golden_Walnut.png", place: "鱼店" });
+      info: { quote: A.ginger_island.quote, source: A.ginger_island.source, action: t("在鱼店里屋交付 {materials}", { materials: matsText(boat.materials) }) } });
+    areaNode(r, "ginger_island", 10, [ref("boat", "gate")], { sub: t("船票 {price}", { price: money(boat.ticket) }), icon: "Golden_Walnut.png", place: "鱼店" });
   }
 
   // —— 农场建筑 ——
-  const farm = lane("farm", "农场建筑", "世界进度", 80);
+  const farm = lane("farm", t("农场建筑"), t("世界进度"), 80);
   const chainCols = { 农舍: [0, 3, 6, 9], 鸡舍: [1, 4, 7], 畜棚: [1, 4, 7], 小屋: [1, 4] };
   for (const ch of App.BUILDING_CHAINS) {
-    const r = row(farm, "bld:" + ch.chain, ch.chain, ch.tiers[0].image);
+    const r = row(farm, "bld:" + ch.chain, buildingName(ch.chain), ch.tiers[0].image);
     ch.tiers.forEach((b, i) => {
       const unlocks = [];
       for (const m of (b.description || "").matchAll(/解锁([^。，\n]+)/g)) {
@@ -225,14 +234,17 @@
         }
       }
       const label = b.name.replace(/^农舍（(.+)）$/, "$1");
+      const title = label === b.name ? b.name : label;
+      const costText = EN ? EN.buildings?.[b.name]?.cost_text : b.cost_text;
       add(r, {
-        id: `bld:${ch.chain}:${i}`, kind: "building", col: (chainCols[ch.chain] || [0, 3, 6, 9])[i], title: label === b.name ? b.name : label,
+        id: `bld:${ch.chain}:${i}`, kind: "building", col: (chainCols[ch.chain] || [0, 3, 6, 9])[i], title, name: EN ? buildingName(b.name) : title,
         icon: b.image, place: i || ch.chain !== "农舍" ? "木匠的商店" : "农舍",
-        sub: b.cost ? `${money(b.cost)}${b.materials.length ? " · " + matsText(b.materials) : ""}` : (b.cost_text || ""),
-        state: ch.chain === "农舍" && i === 0 ? "always" : { type: "building", chain: ch.chain, tier: i, text: `建好${b.name}` },
+        sub: b.cost ? `${money(b.cost)}${b.materials.length ? " · " + matsText(b.materials) : ""}` : (costText || ""),
+        state: ch.chain === "农舍" && i === 0 ? "always" : { type: "building", chain: ch.chain, tier: i, text: t("建好{building}", { building: buildingName(b.name) }) },
         reqs: i ? [ref(`bld:${ch.chain}:${i - 1}`, "upgrade")] : [], materials: b.materials, cost: b.cost,
         unlocks,
-        info: { what: (b.description || "").replace(/^由.+?升级\s*/, ""), action: b.cost ? `向罗宾支付 ${money(b.cost)}${b.materials.length ? "，材料 " + matsText(b.materials) : ""}${b.build_days ? `，建造 ${b.build_days} 天` : ""}` : null, source: b.page },
+        info: { what: EN ? EN.buildings?.[b.name]?.desc || null : (b.description || "").replace(/^由.+?升级\s*/, ""),
+          action: b.cost ? t("向罗宾支付 {cost}", { cost: money(b.cost) }) + (b.materials.length ? t("，材料 {list}", { list: matsText(b.materials) }) : "") + (b.build_days ? t("，建造 {n} 天", { n: b.build_days }) : "") : null, source: b.page },
       });
     });
   }
@@ -393,7 +405,7 @@
     }
   }
 
-  const BADGE = { done: "✓", ready: "下一步", locked: "未满足", unknown: "?" };
+  const BADGE = { done: "✓", ready: t("下一步"), locked: t("未满足"), unknown: "?" };
   function refresh() {
     if (!built) return;
     const S = App.spoilers;
@@ -402,7 +414,7 @@
     const placeholders = new Set();
     for (const [r, label] of rowEls) {
       const shown = r.nodes.some(S.node);
-      label.replaceChildren(shown && S.textAllowed(r.name) ? r.name : "未探索路线");
+      label.replaceChildren(shown && S.textAllowed(r.name) ? r.name : t("未探索路线"));
       const hidden = r.nodes.find(id => !S.node(id));
       if (hidden) placeholders.add(hidden);
     }
@@ -414,23 +426,23 @@
       node.hidden = !allowed && !placeholders.has(id);
       if (!allowed) {
         node.className = "node protected-node";
-        node.append(el("span", { class: "n-title" }, "后续内容"), el("span", { class: "n-sub" }, "点击选择查看"));
-        node.setAttribute("aria-label", "后续内容，点击选择是否查看");
+        node.append(el("span", { class: "n-title" }, t("后续内容")), el("span", { class: "n-sub" }, t("点击选择查看")));
+        node.setAttribute("aria-label", t("后续内容，点击选择是否查看"));
         continue;
       }
       if (n.kind === "skill") {
         const unlocks = n.unlocks.filter(u => S.canView({ type: u.id ? "item" : "page", id: u.id || u.z }));
-        node.append(el("span", { class: "n-title" }, n.short), el("span", { class: "n-unlocks" }, unlocks.slice(0, 4).map(u => img(u.i, null, u.z))));
+        node.append(el("span", { class: "n-title" }, n.short), el("span", { class: "n-unlocks" }, unlocks.slice(0, 4).map(u => img(u.i, null, nameOf(u.id || u.z)))));
       } else {
         // 特殊里程碑的图标也可能提前透露奖励。
         const iconSafe = !S.active() || !["milestone", "area", "reward"].includes(n.kind);
         node.append(iconSafe && n.icon ? img(n.icon, "icon") : el("span", { class: "icon" }),
-          el("span", { class: "n-title" }, n.title), el("span", { class: "n-sub" }, S.textAllowed(n.sub) ? n.sub || "" : "详细条件按需查看"));
+          el("span", { class: "n-title" }, n.name), el("span", { class: "n-sub" }, S.textAllowed(n.sub) ? n.sub || "" : t("详细条件按需查看")));
       }
       node.append(el("span", { class: "badge", "aria-hidden": "true" }));
       node.className = `node ${n.kind} ${App.conditionsActive() ? "s-" + st : "s-reference"}`;
       node.querySelector(".badge").textContent = App.conditionsActive() ? BADGE[st] : "";
-      node.setAttribute("aria-label", App.conditionsActive() ? `${n.title}：${{ done: "已完成", ready: "前置条件满足", locked: "条件未满足", unknown: "未确认" }[st]}` : `${n.title}，查看材料与前置关系`);
+      node.setAttribute("aria-label", App.conditionsActive() ? t("{name}：{status}", { name: n.name, status: { done: t("已完成"), ready: t("前置条件满足"), locked: t("条件未满足"), unknown: t("未确认") }[st] }) : t("{name}，查看材料与前置关系", { name: n.name }));
       let dim = false;
       if (laneFilter && n.lane !== laneFilter) dim = true;
       if (App.conditionsActive() && mode === "next" && st !== "ready") dim = true;

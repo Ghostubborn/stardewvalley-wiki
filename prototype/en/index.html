@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* 语言版本：没有手动选择过时，按浏览器首选语言进入中文版或英文版；切换过一次后按所选版本。保留 #条目。 */
+(function () {
+  try {
+    var page = document.documentElement.lang.indexOf("en") === 0 ? "en" : "zh";
+    var pref = null;
+    try { pref = localStorage.getItem("sdv-lang"); } catch (e) {}
+    if (pref !== "en" && pref !== "zh") {
+      var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+      pref = "en";
+      for (var i = 0; i < langs.length; i++) {
+        var l = String(langs[i]).toLowerCase();
+        if (l.indexOf("zh") === 0) { pref = "zh"; break; }
+        if (l.indexOf("en") === 0) break;
+      }
+    }
+    if (pref === page) return;
+    var path = location.pathname;
+    var root = page === "en" ? path.replace(/en\/(?:index\.html)?$/, "") : path.replace(/index\.html$/, "");
+    location.replace((pref === "en" ? root + "en/" : root) + location.search + location.hash);
+  } catch (e) {}
+})();
+</script>
+<title>Stardew Valley Interactive Guide · Prototype</title>
+<meta name="description" content="A Stardew Valley reference: browse fish, villager gifts, crops, bundles and upgrade paths by category, with spoiler protection on by default. Data from the Stardew Valley Wiki.">
+<link rel="alternate" hreflang="zh-Hans" href="https://stardewvalley-wiki.pages.dev/">
+<link rel="alternate" hreflang="en" href="https://stardewvalley-wiki.pages.dev/en/">
+<link rel="alternate" hreflang="x-default" href="https://stardewvalley-wiki.pages.dev/en/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Stardew Valley Interactive Guide">
+<meta property="og:title" content="Stardew Valley Interactive Guide">
+<meta property="og:description" content="Browse fish, villager gifts, crops, bundles and upgrade paths by category, with spoiler protection on by default. Data from the Stardew Valley Wiki.">
+<meta property="og:url" content="https://stardewvalley-wiki.pages.dev/en/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://stardewvalley-wiki.pages.dev/assets/social/preview-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=87fc65b65f00" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=d26a84e7abe2">
+<link rel="stylesheet" href="browse.css?v=90899f28765b">
+<link rel="stylesheet" href="guides.css?v=268492097177">
+<link rel="stylesheet" href="collections.css?v=df70116c3653">
+</head>
+<body>
+<div id="app" data-view="browse">
+
+  <canvas id="map" role="img" aria-label="Stardew Valley map. Places have focusable buttons; click or press Enter to view an entry."></canvas>
+  <div class="map-keyboard" id="map-keyboard" role="group" aria-label="Map places; use the arrow keys to choose and Enter to open"></div>
+  <section id="browse" class="browse-view frame" aria-label="Browse"></section>
+
+  <section id="tree" class="tree" aria-label="Progression" hidden>
+    <div class="tree-stage" id="tree-stage"></div>
+  </section>
+
+  <!-- 可选的查询场景，不代表实时游戏状态 -->
+  <header class="clock frame" aria-label="Optional date check">
+    <button class="clock-face" id="clock-toggle" aria-expanded="false" aria-controls="clock-controls">
+      <span class="clock-date" id="clock-date"></span>
+      <span class="clock-time" id="clock-time"></span>
+      <span class="clock-hint" aria-hidden="true">Set</span>
+      <img class="clock-weather pix" id="clock-weather" alt="">
+    </button>
+  </header>
+    <section class="clock-controls frame" id="clock-controls" aria-label="Date check settings" hidden>
+      <div class="condition-panel-head">
+        <strong>Date check</strong>
+        <button type="button" id="conditions-close" aria-label="Close date check">×</button>
+      </div>
+      <p class="d-sub">Browse the rules directly; nothing to fill in. Turn this on only to check a specific date or time.</p>
+      <label class="check"><input type="checkbox" id="conditions-enabled"> Turn on date check</label>
+      <fieldset id="condition-fields">
+      <div class="seg" role="radiogroup" aria-label="Season" id="season-seg"></div>
+      <div class="seg seg-weather" role="radiogroup" aria-label="Weather" id="weather-seg"></div>
+      <label class="slider">
+        <span>Day</span>
+        <input type="range" id="day-range" min="1" max="28" step="1">
+        <output id="day-out"></output>
+      </label>
+      <label class="slider">
+        <span>Time</span>
+        <input type="range" id="time-range" min="600" max="2600" step="10">
+        <output id="time-out"></output>
+      </label>
+      <div class="clock-year">
+        <span>Year</span>
+        <div class="seg seg-year" role="radiogroup" aria-label="Year" id="year-seg"></div>
+      </div>
+      </fieldset>
+      <p class="d-sub">You set these; they don't follow your game.</p>
+      <button type="button" class="btn" id="open-progress">Your progress (optional)</button>
+    </section>
+
+  <!-- 左上：今日手账 / 路线分组 -->
+  <aside class="journal frame" id="journal" aria-label="Journal">
+    <div class="journal-head">
+      <h1 class="journal-title" id="journal-title">Journal</h1>
+      <div class="journal-actions">
+        <a class="lang-switch" id="lang-switch" href="./" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh" title="切换到中文">中文</a>
+        <a class="repo-link" href="https://github.com/Ghostubborn/stardewvalley-wiki" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View the source or make a suggestion (opens in a new tab)"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 5-6 7 6 7M16 5l6 7-6 7M14 3l-4 18"/></svg><span>GitHub ↗</span></a>
+        <button class="music-toggle" id="music-toggle" type="button" aria-label="Background music" aria-pressed="false" aria-controls="background-music" title="Play Stardew Valley OST · Spring (It&#x27;s A Big World Outside)">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/></svg>
+          <span id="music-label" aria-hidden="true">Music off</span>
+        </button>
+        <button class="sheet-handle" id="journal-handle" aria-expanded="false">Show</button>
+      </div>
+    </div>
+    <div class="search">
+      <input id="search" type="search" placeholder="Search items, villagers, places" autocomplete="off" aria-label="Search" aria-controls="search-results">
+      <ul class="search-results frame" id="search-results" role="listbox" hidden></ul>
+    </div>
+    <label class="spoiler-control check"><input type="checkbox" id="spoiler" checked> Spoiler protection <span>show later content on demand</span></label>
+    <div class="journal-body" id="journal-body"></div>
+    <footer class="wiki-credit">
+      Thanks to the <a href="https://stardewvalleywiki.com/" target="_blank" rel="noopener noreferrer" title="Open the Stardew Valley Wiki in a new tab">Stardew Valley Wiki</a> community for gathering and sharing this information
+      <a class="feedback-link" href="https://github.com/Ghostubborn/stardewvalley-wiki/issues/new" target="_blank" rel="noopener noreferrer">Feedback ↗</a>
+    </footer>
+  </aside>
+
+  <!-- 默认居中阅读；主动定位时可并排对照地图或路线。 -->
+  <div class="detail-shade" id="detail-shade" aria-hidden="true" hidden></div>
+  <aside class="detail frame" id="detail" data-mode="reading" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden>
+    <div class="detail-toolbar">
+      <span class="detail-caption" id="detail-caption">Entry</span>
+      <button type="button" class="btn" id="detail-mode" hidden>Reading view</button>
+      <button type="button" class="btn" id="detail-conditions" aria-label="Open date check">Date</button>
+      <button type="button" class="detail-close" id="detail-close" aria-label="Close details">×</button>
+    </div>
+    <div id="detail-body"></div>
+  </aside>
+
+  <!-- 地图工具 -->
+  <div class="map-tools" id="map-tools" hidden>
+    <div class="seg seg-map frame" role="radiogroup" aria-label="Map" id="map-seg"></div>
+    <label class="fx-toggle frame check"><input type="checkbox" id="fx"> Season and day–night effects (illustrative)</label>
+    <div class="zoom frame">
+      <button id="zoom-in" aria-label="Zoom in">＋</button>
+      <button id="zoom-out" aria-label="Zoom out">－</button>
+      <button id="zoom-fit" aria-label="Show the whole map">Fit</button>
+    </div>
+  </div>
+
+  <!-- 路线工具 -->
+  <div class="tree-tools frame" id="tree-tools" hidden>
+    <span class="tree-reading">One path per row · later stages to the right</span>
+    <div class="seg" role="radiogroup" aria-label="Show" id="tree-mode"></div>
+  </div>
+
+  <!-- 底部：工具栏 -->
+  <nav class="hotbar frame" aria-label="Views and saved entries">
+    <div class="hotbar-views" role="tablist">
+      <button role="tab" id="tab-browse" data-view="browse" aria-selected="true">Browse</button>
+      <button role="tab" id="tab-map" data-view="map" aria-selected="false">Valley map</button>
+      <button role="tab" id="tab-tree" data-view="tree" aria-selected="false">Progression</button>
+    </div>
+    <ol class="hotbar-slots" id="plan-slots" aria-label="Save entry" hidden></ol>
+  </nav>
+
+  <div class="tooltip frame" id="tooltip" role="tooltip" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <audio id="background-music" data-src="assets/audio/spring-big-world-outside.mp3" data-title="Stardew Valley OST · Spring (It&#x27;s A Big World Outside)" preload="none" loop hidden></audio>
+
+  <dialog class="progress frame" id="progress-dialog" aria-labelledby="progress-title">
+    <form method="dialog" class="progress-inner">
+      <header class="progress-head">
+        <h2 id="progress-title">Your progress · optional</h2>
+        <button value="close" class="detail-close" aria-label="Close">×</button>
+      </header>
+      <p class="progress-note" id="progress-note"></p>
+      <div class="presets" id="presets"></div>
+      <div id="progress-body"></div>
+    </form>
+  </dialog>
+  <dialog class="frame spoiler-dialog" id="spoiler-dialog" aria-labelledby="spoiler-title">
+    <h2 id="spoiler-title">Show everything?</h2>
+    <p>Search, the map and Progression will show places, characters and rewards you may not have reached. You can also keep spoiler protection on and open only the entries you want.</p>
+    <div class="d-actions"><button type="button" class="btn primary" id="keep-spoilers">Keep spoiler protection</button><button type="button" class="btn" id="show-spoilers">Show everything</button></div>
+  </dialog>
+</div>
+
+<script src="data.js?v=5ba820b17b17"></script>
+<script src="js/strings.en.js?v=8d4991c3721d"></script>
+<script src="data.en.js?v=b771d55a7577"></script>
+<script src="js/i18n.js?v=a8528ce00f89"></script>
+<script src="js/core.js?v=aa4c25c8db3d"></script>
+<script src="js/map.js?v=ea89ad22ed18"></script>
+<script src="js/tree.js?v=1b75de8b607d"></script>
+<script src="js/spoilers.js?v=5bfe7ec8ac50"></script>
+<script src="js/map-content.js?v=b5871b470fa5"></script>
+<script src="js/browse-home.js?v=15ad9dfd2d6c"></script>
+<script src="js/browse-views.js?v=f55293eed62f"></script>
+<script src="js/browse.js?v=98ed160f02d0"></script>
+<script src="js/guides.js?v=f54182cd9425"></script>
+<script src="js/schedules.js?v=d7703b34b5da"></script>
+<script src="js/collections.js?v=dfafae1fbb7b"></script>
+<script src="js/ui.js?v=6ad65ddb56ff"></script>
+<script src="js/music.js?v=7de624dccbd2"></script>
+</body>
+</html>

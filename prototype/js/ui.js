@@ -2,12 +2,14 @@
 (function () {
   "use strict";
   const App = window.App;
-  const { D, el, img, money, fmtTime, state } = App;
+  const { D, el, img, money, fmtTime, state, t, N, nameOf } = App;
+  const EN = App.EN;
   const $ = (id) => document.getElementById(id);
   const P = () => App.progression;
   const S = App.spoilers;
   const visible = (type, id) => S.canView({ type, id });
-  const safeText = (text, fallback = "后续说明已收起") => S.textAllowed(text) ? text : fallback;
+  const safeText = (text, fallback = t("后续说明已收起")) => S.textAllowed(text) ? text : fallback;
+  const nodeName = (n) => n?.name || n?.title || "";
   state.view = "browse";
   let current = null; // 当前选中 { type, id }
   let pointReturn = null;
@@ -18,9 +20,9 @@
 
   // ———————————————————— 提示与通知 ————————————————————
   const tip = $("tooltip");
-  App.showTip = (t, x, y) => {
-    if (!t) return App.hideTip();
-    tip.replaceChildren(...[el("b", null, safeText(t.title, "未探索内容")), t.why ? el("span", { class: "t-why" }, safeText(t.why)) : null].filter(Boolean));
+  App.showTip = (info, x, y) => {
+    if (!info) return App.hideTip();
+    tip.replaceChildren(...[el("b", null, safeText(info.title, t("未探索内容"))), info.why ? el("span", { class: "t-why" }, safeText(info.why)) : null].filter(Boolean));
     tip.hidden = false;
     const r = tip.getBoundingClientRect();
     tip.style.left = Math.min(window.innerWidth - r.width - 8, x + 16) + "px";
@@ -47,7 +49,7 @@
     const wSeg = $("weather-seg");
     for (const [k, w] of Object.entries(App.WEATHER)) {
       wSeg.append(el("button", { role: "radio", dataset: { v: k }, title: w.zh, "aria-label": w.zh, onclick: () => App.setCond({ weather: k }) },
-        img(w.icon), w.short.slice(0, 1)));
+        img(w.icon), EN ? "" : w.short.slice(0, 1)));
     }
     const ySeg = $("year-seg");
     [1, 2, 3].forEach((y) => ySeg.append(el("button", { role: "radio", dataset: { v: y }, onclick: () => App.setCond({ year: y }) }, y === 3 ? "3+" : String(y))));
@@ -72,13 +74,13 @@
     $("conditions-enabled").checked = active;
     $("condition-fields").disabled = !active;
     const wd = App.WEEKDAY_ZH[App.weekday(C.day)];
-    $("clock-date").replaceChildren(`${App.SEASON_SHORT[C.season]} ${C.day} 日`,
-      el("small", { class: "clock-sub" }, `对照 · ${wd} · 第 ${C.year === 3 ? "3+" : C.year} 年`));
+    $("clock-date").replaceChildren(t("{season} {day} 日", { season: App.SEASON_SHORT[C.season], day: C.day }),
+      el("small", { class: "clock-sub" }, t("对照 · {weekday} · 第 {year} 年", { weekday: wd, year: C.year === 3 ? "3+" : C.year })));
     $("clock-time").textContent = fmtTime(C.time);
     const wi = App.WEATHER[C.weather];
     $("clock-weather").src = App.iconSrc(C.weather === "wind" && C.season === "fall" ? "Pollen_fall.png" : wi.icon);
     $("clock-weather").alt = wi.zh;
-    if (!active) $("clock-date").replaceChildren("条件对照", el("small", { class: "clock-sub" }, "可选 · 不影响直接查阅"));
+    if (!active) $("clock-date").replaceChildren(t("条件对照"), el("small", { class: "clock-sub" }, t("可选 · 不影响直接查阅")));
     $("clock-time").hidden = !active;
     $("clock-weather").hidden = !active;
     $("fx").disabled = !active;
@@ -90,16 +92,16 @@
     }
     for (const b of $("year-seg").children) b.setAttribute("aria-checked", String(+b.dataset.v === C.year));
     $("day-range").value = C.day;
-    $("day-out").textContent = `${C.day} 日`;
+    $("day-out").textContent = t("{day} 日", { day: C.day });
     $("time-range").value = App.timeToMinutes(C.time);
     $("time-out").textContent = fmtTime(C.time);
   }
 
   // ———————————————————— 手账（按条件分组） ————————————————————
   function condText() {
-    if (!App.conditionsActive()) return "未启用条件对照";
+    if (!App.conditionsActive()) return t("未启用条件对照");
     const C = state.cond;
-    return `${App.SEASON_ZH[C.season]} ${C.day} 日 · ${App.WEATHER[C.weather].zh} · ${fmtTime(C.time)}`;
+    return `${t("{season} {day} 日", { season: App.SEASON_ZH[C.season], day: C.day })} · ${App.WEATHER[C.weather].zh} · ${fmtTime(C.time)}`;
   }
   function positionConditions() {
     // Only the fixed-height trigger reserves space. The panel overlays content.
@@ -111,7 +113,7 @@
     if (open && !wasOpen) conditionsReturnFocus = document.activeElement;
     panel.hidden = !open;
     $("clock-toggle").setAttribute("aria-expanded", String(open));
-    document.querySelector(".clock-hint").textContent = open ? "收起" : "设置";
+    document.querySelector(".clock-hint").textContent = open ? t("收起") : t("设置");
     positionConditions();
     if (open) $("conditions-enabled").focus({ preventScroll: true });
     else if (wasOpen && restoreFocus) {
@@ -130,7 +132,7 @@
     rows.slice(0, limit).forEach((r) => ul.append(el("li", null, r)));
     d.append(ul);
     if (rows.length > limit) {
-      const more = el("button", { class: "more", type: "button" }, `再显示 ${rows.length - limit} 项`);
+      const more = el("button", { class: "more", type: "button" }, t("再显示 {n} 项", { n: rows.length - limit }));
       more.addEventListener("click", () => { rows.slice(limit).forEach((r) => ul.append(el("li", null, r))); more.remove(); });
       d.append(more);
     }
@@ -151,8 +153,8 @@
     const st = P().status(n.id);
     const miss = st.paths.find((p) => p.ok !== false) || st.paths[0];
     const need = n.materials?.length ? App.matsText(n.materials) + (n.cost ? ` · ${money(n.cost)}` : "") : (n.sub || "");
-    return row({ icon: n.icon || App.itemInfo(n.itemId)?.i, name: n.title, sub: safeText(need || (miss && miss.checks.map((c) => c.text).join("、"))),
-      tail: n.place && visible("location", n.place) ? "去" + n.place.replace("的商店", "").slice(0, 5) : "", ref: { type: "node", id: n.id } });
+    return row({ icon: n.icon || App.itemInfo(n.itemId)?.i, name: nodeName(n), sub: safeText(need || (miss && App.list(miss.checks.map((c) => c.text)))),
+      tail: n.place && visible("location", n.place) ? (EN ? N(n.place) : "去" + n.place.replace("的商店", "").slice(0, 5)) : "", ref: { type: "node", id: n.id } });
   }
 
   function renderJournal() {
@@ -160,39 +162,39 @@
     const scroll = body.scrollTop;
     body.replaceChildren();
     if (state.view === "browse") {
-      $("journal-title").textContent = "资料查询";
-      $("journal").setAttribute("aria-label", "资料分类与搜索");
-      body.append(el("p", { class: "d-sub" }, "直接查资料，沿着材料、用途和前置条件继续了解。"));
+      $("journal-title").textContent = t("资料查询");
+      $("journal").setAttribute("aria-label", t("资料分类与搜索"));
+      body.append(el("p", { class: "d-sub" }, t("直接查资料，沿着材料、用途和前置条件继续了解。")));
       const list = el("div", { class: "browse-nav" });
       for (const c of App.browse.categories) list.append(el("button", { type: "button", "aria-current": App.browse.category === c.id ? "page" : null,
         onclick: () => App.openBrowse(c.id) }, img(c.icon), c.title));
       body.append(list); body.scrollTop = scroll; return;
     }
     if (state.view === "tree") {
-      $("journal-title").textContent = "成长路线";
-      $("journal").setAttribute("aria-label", "成长路线分组");
+      $("journal-title").textContent = t("成长路线");
+      $("journal").setAttribute("aria-label", t("成长路线分组"));
       renderLaneList(body);
       body.scrollTop = scroll;
       return;
     }
-    $("journal-title").textContent = "地图查阅";
-    $("journal").setAttribute("aria-label", "地图地点与资料");
+    $("journal-title").textContent = t("地图查阅");
+    $("journal").setAttribute("aria-label", t("地图地点与资料"));
     if (!App.conditionsActive()) {
-      body.append(el("p", { class: "d-sub" }, "按地点浏览商店、居民与水域。数字标记可展开同一片区域的资料。"));
+      body.append(el("p", { class: "d-sub" }, t("按地点浏览商店、居民与水域。数字标记可展开同一片区域的资料。")));
       const places = ["皮埃尔的杂货店", "木匠的商店", "铁匠铺", "鱼店"].map(name => App.locationByName.get(name)).filter(l => l && visible("location", l.p));
-      body.append(group("地点速查", places.length, "查看开放时段、商品和位置", places.map(l => row({ icon: l.i, name: l.p, sub: safeText(l.hours || "地点资料"), ref: { type: "location", id: l.p } }))));
+      body.append(group(t("地点速查"), places.length, t("查看开放时段、商品和位置"), places.map(l => row({ icon: l.i, name: N(l.p), sub: safeText(App.locText(l).hours || t("地点资料")), ref: { type: "location", id: l.p } }))));
       const waters = App.mapContents.points(App.map.mapKey).filter(p => p.entries.some(e => e.kind === "fish"));
-      body.append(group("已展示的钓鱼水域", waters.length, "按水域查鱼和出现条件", waters.slice(0, 5).map(p => {
-        const button = row({ icon: "Fishing_Skill_Icon.png", name: p.title, sub: `${p.entries.filter(e => e.kind === "fish").length} 条鱼类资料` });
+      body.append(group(t("已展示的钓鱼水域"), waters.length, t("按水域查鱼和出现条件"), waters.slice(0, 5).map(p => {
+        const button = row({ icon: "Fishing_Skill_Icon.png", name: p.title, sub: t("{n} 条鱼类资料", { n: p.entries.filter(e => e.kind === "fish").length }) });
         button.addEventListener("click", () => { App.openMapPlaces([p.id]); App.map.locatePoint(p.id); }); return button;
       })));
-      body.append(actions(btn("打开鱼类图鉴", () => App.openBrowse("fish")), btn("按条件对照（可选）", openConditions)));
+      body.append(actions(btn(t("打开鱼类图鉴"), () => App.openBrowse("fish")), btn(t("按条件对照（可选）"), openConditions)));
       body.scrollTop = scroll; return;
     }
     const C = state.cond;
 
     const next = mixedFrontier();
-    if (next.length) body.append(group("可继续了解的目标", next.length, "按已确认的前置条件列出，材料与资金仍需核对", next.map(nodeRow), { limit: 4, open: false }));
+    if (next.length) body.append(group(t("可继续了解的目标"), next.length, t("按已确认的前置条件列出，材料与资金仍需核对"), next.map(nodeRow), { limit: 4, open: false }));
 
     const fish = D.fish.filter(f => visible("fish", f.p) && (App.fishMethod ? App.fishMethod(f) === "rod" : !f.crab)).map((f) => ({ f, c: App.fishCheck(f) }));
     const rooms = state.progress.rooms;
@@ -208,34 +210,34 @@
     const fishRows = can.map(({ f, c }) => {
       const end = endOf(f);
       const need = needFor(f);
-      const places = safeText(c.where.length ? c.where.filter(n => visible("location", n)).slice(0, 3).join("、") : f.lt || "", "地点条件见详情");
-      const sub = [need.length ? "收集包尚无提交记录" : null, f.legend ? "传说鱼" : null, places].filter(Boolean).join(" · ");
-      return row({ icon: f.i, name: f.p, sub, tail: end < 2600 ? `到 ${fmtTime(end)}` : "全天", tailClass: end < 2600 && App.timeToMinutes(end) - App.timeToMinutes(C.time) <= 60 ? "bad" : "", ref: { type: "fish", id: f.p } });
+      const places = safeText(c.where.length ? App.list(c.where.filter(n => visible("location", n)).slice(0, 3).map(N)) : App.fishText(f).lt || "", t("地点条件见详情"));
+      const sub = [need.length ? t("收集包尚无提交记录") : null, f.legend ? t("传说鱼") : null, places].filter(Boolean).join(" · ");
+      return row({ icon: f.i, name: N(f.p), sub, tail: end < 2600 ? t("到 {time}", { time: fmtTime(end) }) : t("全天"), tailClass: end < 2600 && App.timeToMinutes(end) - App.timeToMinutes(C.time) <= 60 ? "bad" : "", ref: { type: "fish", id: f.p } });
     });
-    maybe.forEach(({ f, c }) => fishRows.push(row({ icon: f.i, name: f.p, sub: safeText(c.checks.filter((x) => x.ok === null).map((x) => x.hint || x.text).join("；")), tail: "待确认", tailClass: "", ref: { type: "fish", id: f.p } })));
-    body.append(group("按条件查鱼", can.length, `${condText()}；有未记录提交的收集包用途会附注`, fishRows, { limit: 6, empty: "当前没有能确认的结果，可调整条件或查看鱼类图鉴。" }));
+    maybe.forEach(({ f, c }) => fishRows.push(row({ icon: f.i, name: N(f.p), sub: safeText(App.clauses(c.checks.filter((x) => x.ok === null).map((x) => x.hint || x.text))), tail: t("待确认"), tailClass: "", ref: { type: "fish", id: f.p } })));
+    body.append(group(t("按条件查鱼"), can.length, t("{conditions}；有未记录提交的收集包用途会附注", { conditions: condText() }), fishRows, { limit: 6, empty: t("当前没有能确认的结果，可调整条件或查看鱼类图鉴。") }));
 
     const biz = D.locations.filter((l) => visible("location", l.p) && App.BUSINESSES.has(l.p) && l.R?.length && !(App.AREAS.desert && ["赌场", "绿洲"].includes(l.p) && App.areaState("desert").state !== "open"));
     const shops = biz.map((l) => ({ l, s: App.shopCheck(l) })).filter((x) => x.s);
     const open = shops.filter((x) => x.s.ok === true);
-    const shopRows = open.map(({ l, s }) => row({ icon: villagerIcon(l.occ?.[0]) || l.i, name: l.p, sub: s.text, tail: s.soon ? "快打烊" : "营业中", tailClass: s.soon ? "bad" : "good", ref: { type: "location", id: l.p } }));
-    shops.filter((x) => x.s.ok !== true).forEach(({ l, s }) => shopRows.push(row({ icon: villagerIcon(l.occ?.[0]) || l.i, name: l.p, sub: s.text,
-      tail: s.ok === false ? "关门" : "待确认", tailClass: s.ok === false ? "bad" : "", ref: { type: "location", id: l.p } })));
-    body.append(group("按常规时段查店铺", open.length, `${App.WEEKDAY_ZH[App.weekday(C.day)]} ${fmtTime(C.time)}；节日、事件与店主施工需另行核对`, shopRows, { limit: Math.max(4, open.length) }));
+    const shopRows = open.map(({ l, s }) => row({ icon: villagerIcon(l.occ?.[0]) || l.i, name: N(l.p), sub: s.text, tail: s.soon ? t("快打烊") : t("营业中"), tailClass: s.soon ? "bad" : "good", ref: { type: "location", id: l.p } }));
+    shops.filter((x) => x.s.ok !== true).forEach(({ l, s }) => shopRows.push(row({ icon: villagerIcon(l.occ?.[0]) || l.i, name: N(l.p), sub: s.text,
+      tail: s.ok === false ? t("关门") : t("待确认"), tailClass: s.ok === false ? "bad" : "", ref: { type: "location", id: l.p } })));
+    body.append(group(t("按常规时段查店铺"), open.length, t("{weekday} {time}；节日、事件与店主施工需另行核对", { weekday: App.WEEKDAY_ZH[App.weekday(C.day)], time: fmtTime(C.time) }), shopRows, { limit: Math.max(4, open.length) }));
 
     const bd = App.birthdayToday().filter(v => visible("villager", v.p));
     if (bd.length) {
-      body.append(group("今天生日", bd.length, "生日当天送礼，好感度变化是平时的 8 倍", bd.map((v) => row({
-        icon: v.i, name: v.p, sub: "最爱：" + v.love.filter(id => visible("item", id)).slice(0, 3).map((id) => D.items[id]?.z).filter(Boolean).join("、"), ref: { type: "villager", id: v.p },
+      body.append(group(t("今天生日"), bd.length, t("生日当天送礼，好感度变化是平时的 8 倍"), bd.map((v) => row({
+        icon: v.i, name: N(v.p), sub: t("最爱：{list}", { list: App.list(v.love.filter(id => visible("item", id)).slice(0, 3).map((id) => D.items[id] && App.itemName(D.items[id]))) }), ref: { type: "villager", id: v.p },
       }))));
     }
 
     const seeds = D.seeds.filter(s => visible("item", s.id)).map((s) => ({ s, c: App.seedCheck(s) })).filter((x) => x.c && x.c.ok);
     seeds.sort((a, b) => a.c.harvest - b.c.harvest);
-    body.append(group("现在种还来得及", seeds.length, `今天种下，在季节结束前能收获（${App.SEASON_ZH[C.season]}剩 ${28 - C.day} 天）`, seeds.map(({ s, c }) => {
+    body.append(group(t("现在种还来得及"), seeds.length, t("今天种下，在季节结束前能收获（{season}剩 {n} 天）", { season: App.SEASON_ZH[C.season], n: 28 - C.day }), seeds.map(({ s, c }) => {
       const price = Object.values(s.buy)[0];
-      return row({ icon: s.crop?.i || s.i, name: s.crop?.z || s.p, sub: c.text, tail: price ? money(price) : "", ref: { type: "item", id: s.id } });
-    }), { limit: 5, empty: "本季剩下的天数不够任何作物成熟。" }));
+      return row({ icon: s.crop?.i || s.i, name: s.crop ? nameOf(s.crop.id || s.crop.z) : N(s.p), sub: c.text, tail: price ? money(price) : "", ref: { type: "item", id: s.id } });
+    }), { limit: 5, empty: t("本季剩下的天数不够任何作物成熟。") }));
     body.scrollTop = scroll;
   }
   // 每个分组轮流取一个，避免前几项全是同一类
@@ -254,7 +256,7 @@
   }
 
   function renderLaneList(body) {
-    body.append(el("p", { class: "d-sub tree-reading-note" }, "纵向按类别分组，每一行是一条路线；向右看后续等级或阶段。点击节点可查材料、前置与用途。"));
+    body.append(el("p", { class: "d-sub tree-reading-note" }, t("纵向按类别分组，每一行是一条路线；向右看后续等级或阶段。点击节点可查材料、前置与用途。")));
     const list = el("ul", { class: "lane-list" });
     for (const l of P().lanes) {
       const ids = l.rows.flatMap((r) => r.nodes).filter(S.node);
@@ -263,43 +265,50 @@
       const b = el("button", { class: "lane-btn", type: "button", "aria-pressed": String(pressed) },
         el("span", { class: "ln" }, l.name), el("span", { class: "lg" }, l.group),
         el("span", { class: "stats" },
-          App.conditionsActive() ? el("span", { class: "ok" }, `已完成 ${sts.filter((s) => s === "done").length}`) : null,
-          App.conditionsActive() ? el("span", { class: "rd" }, `前置满足 ${sts.filter((s) => s === "ready").length}`) : null,
-          el("span", null, `当前展示 ${ids.length}`)));
+          App.conditionsActive() ? el("span", { class: "ok" }, t("已完成 {n}", { n: sts.filter((s) => s === "done").length })) : null,
+          App.conditionsActive() ? el("span", { class: "rd" }, t("前置满足 {n}", { n: sts.filter((s) => s === "ready").length })) : null,
+          el("span", null, t("当前展示 {n}", { n: ids.length }))));
       b.addEventListener("click", () => { App.tree.setLane(pressed ? null : l.id); renderJournal(); });
       list.append(el("li", null, b));
     }
-    body.append(group("按条件分组", P().lanes.length, "点一组只看这组；再点一次恢复全部", [list], { limit: 1 }));
+    body.append(group(t("按条件分组"), P().lanes.length, t("点一组只看这组；再点一次恢复全部"), [list], { limit: 1 }));
     const next = P().frontier().filter(n => S.node(n.id)).sort((a, b) => a.col - b.col);
-    if (App.conditionsActive()) body.append(group("按已填进度对照", next.length, "材料和实际持有状态仍需核对", next.map(nodeRow), { limit: 5, open: false }));
+    if (App.conditionsActive()) body.append(group(t("按已填进度对照"), next.length, t("材料和实际持有状态仍需核对"), next.map(nodeRow), { limit: 5, open: false }));
     const legend = el("div", { class: "legend" },
-      el("span", null, el("i"), "实线：必须先完成"),
-      el("span", null, el("i", { class: "series" }), "虚线：同系列进阶，不是前置"),
-      el("span", null, el("i", { class: "cross" }), "点线：跨分组的条件"),
-      el("span", null, el("i", { class: "lit" }), "金色：选中目标还要走的路"));
-    body.append(group("图例", 4, null, [legend], { limit: 1 }));
+      el("span", null, el("i"), t("实线：必须先完成")),
+      el("span", null, el("i", { class: "series" }), t("虚线：同系列进阶，不是前置")),
+      el("span", null, el("i", { class: "cross" }), t("点线：跨分组的条件")),
+      el("span", null, el("i", { class: "lit" }), t("金色：选中目标还要走的路")));
+    body.append(group(t("图例"), 4, null, [legend], { limit: 1 }));
   }
 
   // ———————————————————— 搜索 ————————————————————
+  // 中文版：主名是中文、副名是英文；英文版反过来。两种名称都可以搜索。
   const searchIndex = [];
+  const ROUTE = t("路线");
+  function searchEntry(zh, en, extra) {
+    return EN ? { t: en || zh, en: zh, ...extra } : { t: zh, en: en || "", ...extra };
+  }
   function buildSearch() {
     const seen = new Set();
     for (const n of P().nodes.values()) {
       if (n.kind === "skill") continue;
-      searchIndex.push({ t: n.title, en: "", k: "路线", ref: { type: "node", id: n.id }, i: n.icon || App.itemInfo(n.itemId)?.i });
+      searchIndex.push(searchEntry(n.title, EN ? nodeName(n) : "", { k: ROUTE, ref: { type: "node", id: n.id }, i: n.icon || App.itemInfo(n.itemId)?.i }));
     }
     for (const [title, p] of Object.entries(D.pages)) {
+      // 中文站特有的消歧义页没有英文对应条目，英文版不收入搜索。
+      if (EN && p.k === "disambiguation" && !p.e) continue;
       let ref = { type: "page", id: title };
       if (App.fishByName.has(title)) ref = { type: "fish", id: title };
       else if (App.villagerByName.has(title)) ref = { type: "villager", id: title };
       else if (App.locationByName.has(title)) ref = { type: "location", id: title };
       else if (p.id) ref = { type: "item", id: p.id };
-      searchIndex.push({ t: title, en: p.e || "", a: p.a || [], k: p.kz, ref, i: p.i || D.items[p.id]?.i });
+      searchIndex.push(searchEntry(title, EN ? (p.id && D.items[p.id]?.e) || N(title) : p.e, { a: p.a || [], k: t(p.kz), ref, i: p.i || D.items[p.id]?.i }));
       if (p.id) seen.add(p.id);
     }
     for (const [id, it] of Object.entries(D.items)) {
       if (seen.has(id)) continue;
-      searchIndex.push({ t: it.z, en: it.e || "", k: it.c || "物品", ref: { type: "item", id }, i: it.i });
+      searchIndex.push(searchEntry(it.z, it.e, { k: t(it.c || "物品"), ref: { type: "item", id }, i: it.i }));
     }
   }
   function search(q) {
@@ -307,17 +316,17 @@
     if (!q) return [];
     const out = [];
     for (const e of searchIndex) {
-      const t = e.t.toLowerCase(), en = e.en.toLowerCase();
+      const name = e.t.toLowerCase(), en = e.en.toLowerCase();
       if (!S.canView(e.ref)) {
-        if (t === q || en === q || (e.a || []).some(a => a.toLowerCase() === q)) out.push({ e: { t: "受保护的条目", en: "", k: "按需查看", ref: e.ref, i: null, protected: true }, s: e.ref.type === "node" ? 20 : 0 });
+        if (name === q || en === q || (e.a || []).some(a => a.toLowerCase() === q)) out.push({ e: { t: t("受保护的条目"), en: "", k: t("按需查看"), ref: e.ref, i: null, protected: true }, s: e.ref.type === "node" ? 20 : 0 });
         continue;
       }
       let s = -1;
-      if (t === q || en === q) s = 0;
-      else if (t.startsWith(q) || en.startsWith(q)) s = 1;
-      else if (t.includes(q)) s = 2;
+      if (name === q || en === q) s = 0;
+      else if (name.startsWith(q) || en.startsWith(q)) s = 1;
+      else if (name.includes(q)) s = 2;
       else if (en.includes(q) || (e.a || []).some((a) => a.toLowerCase().includes(q))) s = 3;
-      if (s >= 0) out.push({ e, s: s * 100 + t.length + (e.k === "路线" ? 20 : 0) });
+      if (s >= 0) out.push({ e, s: s * 100 + name.length + (e.k === ROUTE ? 20 : 0) });
     }
     out.sort((a, b) => a.s - b.s);
     const dedup = new Set();
@@ -331,10 +340,11 @@
     const choose = (e) => { close(); input.value = ""; App.select(e.ref, { from: "search" }); };
     const paint = () => {
       list.replaceChildren();
-      if (!results.length) { list.append(el("li", { class: "empty" }, S.active() ? "未找到可展示结果。可输入完整名称查阅；防剧透已开启。" : "没有找到。试试中文全名或英文名。")); list.hidden = false; return; }
+      if (!results.length) { list.append(el("li", { class: "empty" }, S.active() ? t("未找到可展示结果。可输入完整名称查阅；防剧透已开启。") : t("没有找到。试试中文全名或英文名。"))); list.hidden = false; return; }
       results.forEach((e, i) => {
+        // 英文版不显示中文副名；中文仍可用于检索。
         const li = el("li", { role: "option", "aria-selected": String(i === active) }, e.protected ? protectedImage() : img(e.i),
-          el("span", null, e.t, e.en ? el("span", { class: "en" }, e.en) : null), el("span", { class: "kind" }, e.k));
+          el("span", null, e.t, e.en && !EN ? el("span", { class: "en" }, e.en) : null), el("span", { class: "kind" }, e.k));
         li.addEventListener("mousedown", (ev) => { ev.preventDefault(); choose(e); });
         list.append(li);
       });
@@ -358,8 +368,8 @@
     detail.dataset.mode = detailMode;
     $("detail-shade").hidden = detail.hidden || detailMode !== "reading";
     $("detail-mode").hidden = state.view === "browse";
-    $("detail-mode").textContent = detailMode === "context" ? "居中阅读" : state.view === "map" ? "对照地图" : "对照路线";
-    $("detail-caption").textContent = $("detail-title")?.textContent || "资料阅读";
+    $("detail-mode").textContent = detailMode === "context" ? t("居中阅读") : state.view === "map" ? t("对照地图") : t("对照路线");
+    $("detail-caption").textContent = $("detail-title")?.textContent || t("资料阅读");
     detail.setAttribute("role", detailMode === "reading" ? "dialog" : "region");
     if (detailMode === "reading") detail.setAttribute("aria-modal", "false");
     else detail.removeAttribute("aria-modal");
@@ -380,23 +390,23 @@
       const [cls, sym] = MARK[String(c.ok)];
       if (S.active() && !S.textAllowed([c.text, c.hint].filter(Boolean).join(" "), S.title(current))) {
         return el("li", null, foldContent(() => el("div", { class: "check-row" }, el("span", { class: "mark " + cls }, sym),
-          el("span", null, c.text, c.hint ? el("span", { class: "hint" }, c.hint) : null)), "此项条件涉及后续内容。", "查看这项条件"));
+          el("span", null, c.text, c.hint ? el("span", { class: "hint" }, c.hint) : null)), t("此项条件涉及后续内容。"), t("查看这项条件")));
       }
-      return el("li", { class: "check-row" }, el("span", { class: "mark " + cls, "aria-label": { ok: "满足", no: "未满足", unk: "未确认", info: "说明" }[cls] }, sym),
+      return el("li", { class: "check-row" }, el("span", { class: "mark " + cls, "aria-label": { ok: t("满足"), no: t("未满足"), unk: t("未确认"), info: t("说明") }[cls] }, sym),
         el("span", null, c.text, c.hint ? el("span", { class: "hint" }, c.hint) : null));
     }));
   }
-  function stateChip(ok, labels = ["可以", "条件未满足", "未确认"]) {
+  function stateChip(ok, labels = [t("可以"), t("条件未满足"), t("未确认")]) {
     if (!App.conditionsActive()) return null;
     const [cls, text] = ok === true ? ["ok", labels[0]] : ok === false ? ["no", labels[1]] : ["unk", labels[2]];
     return el("span", { class: "path-state " + cls }, text);
   }
   // replaceChildren 会把 null 变成文字“null”，先过滤掉空值
-  function foldContent(content, label = "这部分可能涉及后续内容", action = "查看这部分") {
+  function foldContent(content, label = t("这部分可能涉及后续内容"), action = t("查看这部分")) {
     const box = el("div", { class: "spoiler-fold", dataset: { spoilerScoped: "true" } });
     const collapse = () => {
-      const open = btn(action + "（可能剧透）", () => {
-        const close = btn("收起这部分", () => { collapse(); box.querySelector("button").focus(); });
+      const open = btn(t("{action}（可能剧透）", { action }), () => {
+        const close = btn(t("收起这部分"), () => { collapse(); box.querySelector("button").focus(); });
         box.replaceChildren(typeof content === "function" ? content() : content, close); close.focus();
       });
       box.replaceChildren(el("p", null, label), open);
@@ -412,14 +422,14 @@
       content.dataset.spoilerScoped = "true";
       return content;
     }
-    return foldContent(content, title ? `${title}包含后续内容。` : "此段说明涉及尚未查看的内容。", title ? "查看" + title : "查看这段说明");
+    return foldContent(content, title ? t("{title}包含后续内容。", { title }) : t("此段说明涉及尚未查看的内容。"), title ? t("查看{title}", { title }) : t("查看这段说明"));
   }
   function fillDetail(...parts) { dbody.replaceChildren(...parts.flat().filter(Boolean).map(protectContent)); }
   function section(title, ...content) {
     return el("section", { class: "d-section" }, el("h3", null, title), ...content);
   }
   function protectedImage() {
-    return el("span", { class: "noimg protected-icon", role: "img", "aria-label": "图片已隐藏", title: "防剧透：图片已隐藏",
+    return el("span", { class: "noimg protected-icon", role: "img", "aria-label": t("图片已隐藏"), title: t("防剧透：图片已隐藏"),
       html: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10V7a5 5 0 0 1 10 0v3"/><rect x="4" y="10" width="16" height="11" rx="1"/><path d="M12 14v3"/></svg>' });
   }
   function head(icon, title, sub, imageNote, concealed = false) {
@@ -430,39 +440,45 @@
   function itemChip(idOrZh, qty) {
     const it = App.itemInfo(idOrZh) || { z: idOrZh };
     const ref = it.id ? { type: "item", id: it.id } : { type: "page", id: it.z };
-    if (!S.canView(ref)) return btn("后续物品 · 按需查看", () => App.select(ref));
-    const b = el("button", { class: "chip", type: "button" }, img(it.i), `${it.z}${App.qtyText(qty)}`);
+    if (!S.canView(ref)) return btn(t("后续物品 · 按需查看"), () => App.select(ref));
+    const b = el("button", { class: "chip", type: "button" }, img(it.i), `${App.itemName(it)}${App.qtyText(qty)}`);
     b.addEventListener("click", () => App.select(it.id ? { type: "item", id: it.id } : { type: "page", id: it.z }));
     return b;
   }
-  function itemGroup(ids, label = "其他关联物品", limit = 8) {
+  function itemGroup(ids, label = t("其他关联物品"), limit = 8) {
     const unique = [...new Set(ids.filter(Boolean))];
     const known = unique.filter(id => S.canView({ type: "item", id }));
     const hidden = unique.filter(id => !S.canView({ type: "item", id }));
     const box = el("div", { class: "item-group", dataset: { spoilerScoped: "true" } });
     const chips = el("div", { class: "chips" }, known.slice(0, limit).map(id => itemChip(id)));
     box.append(chips);
-    if (known.length > limit) box.append(btn(`查看其余 ${known.length - limit} 项`, e => {
+    if (known.length > limit) box.append(btn(t("查看其余 {n} 项", { n: known.length - limit }), e => {
       chips.append(...known.slice(limit).map(id => itemChip(id))); e.currentTarget.remove();
     }));
     if (hidden.length) box.append(foldContent(() => el("div", { class: "chips" }, hidden.map(id => {
       const it = App.itemInfo(id);
-      return btn(it?.z || "物品资料", () => App.select({ type: "item", id }));
-    })), label + "涉及后续内容。", "查看" + label));
+      return btn(it ? App.itemName(it) : t("物品资料"), () => App.select({ type: "item", id }));
+    })), t("{label}涉及后续内容。", { label }), t("查看{title}", { title: label })));
     return box;
   }
   function sourceFragments(text) {
     const box = el("div", { class: "source-fragments", dataset: { spoilerScoped: "true" } });
-    const chunks = (text || "").match(/[^。；;•·\n]+[。；;]?/g) || [];
+    // 中文按句号、分号切分；英文按句末标点切分，避免把完整句子拆碎。
+    const chunks = EN ? (text || "").split(/\n|;|•|(?<=[.!?])\s+/).map(x => x.trim()).filter(Boolean) : (text || "").match(/[^。；;•·\n]+[。；;]?/g) || [];
     const visible = chunks.filter(t => S.textAllowed(t, S.title(current)));
     const protectedParts = chunks.filter(t => !S.textAllowed(t, S.title(current)));
     visible.forEach(t => box.append(el("p", { class: "d-sub" }, t.trim())));
     if (protectedParts.length) box.append(foldContent(() => el("div", null, protectedParts.map(t => el("p", { class: "d-sub" }, t.trim()))),
-      "其他来源涉及后续内容。", "查看其他来源"));
+      t("其他来源涉及后续内容。"), t("查看其他来源")));
     return box;
   }
   function sourceLine(title) {
     const p = D.pages[title];
+    if (EN) {
+      const url = App.pageInfo(title)?.u || (p?.e ? "https://stardewvalleywiki.com/" + encodeURIComponent(p.e.replace(/ /g, "_")) : null);
+      if (!url) return el("p", { class: "d-source" }, t("资料来源：Stardew Valley Wiki 2025-12-18 归档快照。原站内容未作防剧透处理。"));
+      return el("p", { class: "d-source" }, t("资料：Stardew Valley Wiki"), " “", el("a", { href: url, target: "_blank", rel: "noopener" }, N(title)), "”", t("，2025-12-18 归档快照。原站内容未作防剧透处理。"));
+    }
     const url = p ? p.u : "https://zh.stardewvalleywiki.com/" + encodeURIComponent(title);
     return el("p", { class: "d-source" }, "资料：中文 Wiki《", el("a", { href: url, target: "_blank", rel: "noopener" }, title), "》，2025-12-18 归档快照。原站内容未作防剧透处理。");
   }
@@ -470,7 +486,7 @@
   function btn(label, fn, primary) { return el("button", { class: "btn" + (primary ? " primary" : ""), type: "button", onclick: fn }, label); }
   function planBtn(ref) {
     const inPlan = state.plan.some((p) => p.type === ref.type && p.id === ref.id);
-    return btn(inPlan ? "取消收藏" : "收藏条目", () => { togglePlan(ref); renderDetail(); });
+    return btn(inPlan ? t("取消收藏") : t("收藏条目"), () => { togglePlan(ref); renderDetail(); });
   }
 
   function matTree(nodes) {
@@ -478,12 +494,12 @@
     for (const n of nodes) {
       if (n.generic) {
         ul.append(el("li", { class: "generic-material" }, el("span", { class: "generic-material-icon", "aria-hidden": "true" }, "◇"),
-          el("span", null, n.z), el("span", { class: "q" }, "×" + n.qty)));
+          el("span", null, N(n.z)), el("span", { class: "q" }, "×" + n.qty)));
         continue;
       }
       const ref = n.id ? { type: "item", id: n.id } : { type: "page", id: n.z };
       if (!S.canView(ref)) {
-        ul.append(el("li", { class: "concealed-material" }, btn("其他材料 · 按需查看", () => App.select(ref))));
+        ul.append(el("li", { class: "concealed-material" }, btn(t("其他材料 · 按需查看"), () => App.select(ref))));
         continue;
       }
       const li = el("li", null, img(n.i), el("span", null, itemChip(n.id || n.z),
@@ -498,20 +514,23 @@
   function renderPaths(paths) {
     const box = el("div", { class: "acquisition-paths", dataset: { spoilerScoped: "true" } });
     paths.forEach((p, i) => {
-      if (i) box.append(el("div", { class: "or" }, "或"));
+      if (i) box.append(el("div", { class: "or" }, t("或")));
       const div = el("div", { class: "path" + (App.conditionsActive() && p.ok === true ? " is-ok" : "") });
-      div.append(el("div", { class: "path-head" }, el("span", { class: "path-name" }, p.label + (p.where && !p.label.includes(p.where) ? ` · ${p.where}` : "")), stateChip(p.ok, ["已核验条件满足", "条件未满足", "仍需确认"])));
+      const where = p.where && N(p.where);
+      div.append(el("div", { class: "path-head" }, el("span", { class: "path-name" }, p.label + (where && !p.label.includes(where) ? ` · ${where}` : "")), stateChip(p.ok, [t("已核验条件满足"), t("条件未满足"), t("仍需确认")])));
       const checks = [...p.checks];
-      if (p.cost) checks.push({ ok: undefined, text: `花费 ${money(p.cost, p.currency)}` });
-      if (p.barter?.length) checks.push({ ok: undefined, text: "以物换物：" + App.matsText(p.barter.map((b) => ({ zh: b.z, qty: b.q }))) });
-      if (p.time) checks.push({ ok: undefined, text: `耗时 ${p.time}` });
+      if (p.cost) checks.push({ ok: undefined, text: t("花费 {cost}", { cost: money(p.cost, p.currency) }) });
+      if (p.barter?.length) checks.push({ ok: undefined, text: t("以物换物：{list}", { list: App.matsText(p.barter.map((b) => ({ id: b.id, zh: b.z, qty: b.q }))) }) });
+      // 耗时是 Wiki 原文；英文版取英文条目的加工时间字段。
+      const time = EN ? p.recipe && App.pageInfo(p.recipe.out.pg)?.f?.crafttime : p.time;
+      if (time) checks.push({ ok: undefined, text: t("耗时 {time}", { time }) });
       if (p.note) checks.push({ ok: undefined, text: p.note });
-      if (p.stations?.length) checks.push({ ok: undefined, text: `设备：${p.stations.map((s) => s.z).join("、")}` });
+      if (p.stations?.length) checks.push({ ok: undefined, text: t("设备：{list}", { list: App.list(p.stations.map((s) => nameOf(s.id || s.z))) }) });
       if (checks.length) div.append(checkList(checks));
       if (p.inputs?.length) div.append(matTree(App.materialTree(p.inputs)));
       if (p.recipe && !(p.recipe.uc || []).some(c => c.group === "initial")) {
-        const select = el("select", { "aria-label": "此配方的学习状态", class: "recipe-status" },
-          [["unknown", "未确认"], ["yes", "我已学会"], ["no", "尚未学会"]].map(([value, label]) => el("option", { value }, label)));
+        const select = el("select", { "aria-label": t("此配方的学习状态"), class: "recipe-status" },
+          [["unknown", t("未确认")], ["yes", t("我已学会")], ["no", t("尚未学会")]].map(([value, label]) => el("option", { value }, label)));
         const learned = state.progress.recipes?.[p.recipe.id];
         select.value = learned === true ? "yes" : learned === false ? "no" : "unknown";
         select.addEventListener("change", () => App.setProgress(progress => {
@@ -519,125 +538,132 @@
           if (select.value === "unknown") delete progress.recipes[p.recipe.id];
           else progress.recipes[p.recipe.id] = select.value === "yes";
         }));
-        div.append(el("details", { class: "optional-record" }, el("summary", null, "记录已学配方（可选）"),
-          el("label", { class: "recipe-confirm" }, "配方状态", select)));
+        div.append(el("details", { class: "optional-record" }, el("summary", null, t("记录已学配方（可选）")),
+          el("label", { class: "recipe-confirm" }, t("配方状态"), select)));
       }
       if (p.where && App.map && (App.locationByName.has(p.where) || App.AREAS[p.where])) {
-        div.append(actions(btn("在地图上找到" + p.where, () => showOnMap(p.where))));
+        div.append(actions(btn(t("在地图上找到{place}", { place: N(p.where) }), () => showOnMap(p.where))));
       }
       box.append(protectContent(div));
     });
     const assumptions = [...new Set(paths.flatMap(p => p.assumptions || []))];
-    if (assumptions.length) box.append(sourceFragments(assumptions.join("；")));
+    if (assumptions.length) box.append(sourceFragments(App.clauses(assumptions)));
     return box;
   }
 
   function usageSection(id) {
     const parts = [];
     const uses = App.usedIn.get(id) || [];
-    if (uses.length) parts.push(el("p", { class: "d-sub" }, "可以用来做"), itemGroup(uses.map(r => r.out.id || r.out.z), "后续用途"));
+    if (uses.length) parts.push(el("p", { class: "d-sub" }, t("可以用来做")), itemGroup(uses.map(r => r.out.id || r.out.z), t("后续用途")));
     const bundles = App.bundleUse.get(id) || [];
-    if (bundles.length) parts.push(el("p", { class: "d-sub" }, "收集包"), el("div", { class: "chips" }, bundles.filter(b => S.canView({ type: "bundle", id: `${b.room}:${b.bundle.name}` })).map(b => {
+    if (bundles.length) parts.push(el("p", { class: "d-sub" }, t("收集包")), el("div", { class: "chips" }, bundles.filter(b => S.canView({ type: "bundle", id: `${b.room}:${b.bundle.name}` })).map(b => {
       const index = b.bundle.items.findIndex(item => item.id === id);
       const submitted = App.collections?.isSubmitted(b.room, b.bundle, index);
-      return btn(`${b.room} · ${b.bundle.name}${submitted ? "（已提交）" : ""}`, () => App.select({ type: "bundle", id: `${b.room}:${b.bundle.name}` }));
+      return btn(`${N(b.room)} · ${N(b.bundle.name)}${submitted ? t("（已提交）") : ""}`, () => App.select({ type: "bundle", id: `${b.room}:${b.bundle.name}` }));
     })));
     const gifts = App.giftsByItem.get(id);
-    for (const [taste, label] of [["love", "最爱这件礼物"], ["like", "喜欢这件礼物"]]) {
+    for (const [taste, label] of [["love", t("最爱这件礼物")], ["like", t("喜欢这件礼物")]]) {
       const names = (gifts?.[taste] || []).filter(name => visible("villager", name));
       if (!names.length) continue;
       const chips = el("div", { class: "chips" });
-      const chip = name => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: name }) }, img(App.villagerByName.get(name)?.i), name);
+      const chip = name => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: name }) }, img(App.villagerByName.get(name)?.i), N(name));
       chips.append(...names.slice(0, 8).map(chip));
       const group = el("div", { dataset: { spoilerScoped: "true" } }, chips);
-      if (names.length > 8) group.append(btn(`查看其余 ${names.length - 8} 位`, e => { chips.append(...names.slice(8).map(chip)); e.currentTarget.remove(); }));
+      if (names.length > 8) group.append(btn(t("查看其余 {n} 位", { n: names.length - 8 }), e => { chips.append(...names.slice(8).map(chip)); e.currentTarget.remove(); }));
       parts.push(el("p", { class: "d-sub" }, label), group);
     }
-    return parts.length ? section("用途", ...parts) : null;
+    return parts.length ? section(t("用途"), ...parts) : null;
   }
 
   function renderFish(f) {
     const source = pointReturn?.pointId && App.mapContents.find(pointReturn.pointId);
     const c = source ? App.mapContents.fishStatus(f, [source.x, source.y, source.map]) : App.fishCheck(f);
-    const it = D.items[f.id] || {};
+    const it = { id: f.id, ...(D.items[f.id] || {}) };
     const method = App.fishMethod(f);
-    const weatherText = f.W?.includes("any") ? "任意天气" : f.W?.map(w => App.WEATHER[w]?.zh || w).join("、") || f.wt || "详见原文";
-    const habitats = App.fishHabitats(f).filter(h => S.textAllowed(h.location));
+    const text = App.fishText(f), original = App.clauses([text.lt, text.st, text.tt, text.wt]);
+    const weatherText = f.W?.includes("any") ? t("任意天气") : App.list(f.W?.map(w => App.WEATHER[w]?.zh || w) || []) || text.wt || t("详见原文");
+    const habitats = App.fishHabitats(f).filter(h => S.textAllowed(h.location) && S.textAllowed(N(h.location)));
     const rules = el("div", { class: "habitat-list", dataset: { spoilerScoped: "true" } }, habitats.map(h => {
       const facts = [
-        { text: "季节：" + (h.seasons?.map(s => App.SEASON_ZH[s]).join("、") || "详见原文") },
-        { text: "时段：" + (f.tt || "详见原文") },
-        { text: "天气：" + weatherText },
-        h.depth ? { text: `需要到达矿井 ${h.depth} 层水域` } : null,
-        h.level ? { text: `钓鱼等级至少 ${h.level} 级` } : null,
-        h.winterTotem ? { text: "冬季需要雨水图腾改变天气" } : null,
+        { text: t("季节：{value}", { value: App.list(h.seasons?.map(s => App.SEASON_ZH[s]) || []) || t("详见原文") }) },
+        { text: t("时段：{value}", { value: (EN ? f.T?.length && App.timeSpans(f.T) : f.tt) || text.tt || t("详见原文") }) },
+        { text: t("天气：{value}", { value: weatherText }) },
+        h.depth ? { text: t("需要到达矿井 {n} 层水域", { n: h.depth }) } : null,
+        h.level ? { text: t("钓鱼等级至少 {n} 级", { n: h.level }) } : null,
+        h.winterTotem ? { text: t("冬季需要雨水图腾改变天气") } : null,
         h.unknown ? { text: h.unknown } : null,
       ].filter(Boolean);
-      return el("details", { class: "habitat", open: habitats.length === 1 }, el("summary", null, h.location), checkList(facts));
+      return el("details", { class: "habitat", open: habitats.length === 1 }, el("summary", null, N(h.location)), checkList(facts));
     }));
+    const desc = App.itemDesc(it);
     fillDetail(
-      head(f.i, f.p, `鱼 · 售价 ${money(f.pr)}${f.d ? ` · 难度 ${f.d}` : ""}`),
-      it.d ? el("p", { class: "d-summary" }, it.d) : null,
-      section("获取条件", el("p", { class: "d-sub" }, method === "rod" ? "用钓竿捕获；不同水域的季节或额外要求可能不同。" : method === "crab" ? "使用蟹笼，需核对水体、放置与诱饵要求。" : "在海滩采集。"),
+      head(f.i, N(f.p), t("鱼 · 售价 {price}", { price: money(f.pr) }) + (f.d ? t(" · 难度 {n}", { n: f.d }) : "")),
+      desc ? el("p", { class: "d-summary" }, desc) : null,
+      section(t("获取条件"), el("p", { class: "d-sub" }, method === "rod" ? t("用钓竿捕获；不同水域的季节或额外要求可能不同。") : method === "crab" ? t("使用蟹笼，需核对水体、放置与诱饵要求。") : t("在海滩采集。")),
         App.fishRequirements(f).length ? checkList(App.fishRequirements(f)) : null,
-        source ? el("p", { class: "d-sub" }, "从地图查看：" + source.title) : null,
-        method === "rod" && habitats.length ? rules : sourceFragments([f.lt, f.st, f.tt, f.wt].filter(Boolean).join("；"))),
-      el("details", { class: "reference-original" }, el("summary", null, "核对 Wiki 原文条件"), sourceFragments([f.lt, f.st, f.tt, f.wt].filter(Boolean).join("；"))),
+        source ? el("p", { class: "d-sub" }, t("从地图查看：{place}", { place: source.title })) : null,
+        method === "rod" && habitats.length ? rules : sourceFragments(original)),
+      original ? el("details", { class: "reference-original" }, el("summary", null, t("核对 Wiki 原文条件")), sourceFragments(original)) : null,
       usageSection(f.id),
-      method === "rod" ? section("条件对照（可选）", App.conditionsActive() ? el("div", null,
-        el("div", { class: "path-head" }, el("span", { class: "d-sub" }, condText()), stateChip(c.ok, ["符合已核验条件", "条件不符", "待确认"])),
-        checkList(c.checks), sourceFragments((c.assumptions || []).join("；"))) : el("p", { class: "d-sub" }, "需要核对特定日期或时段时，再设置条件。"),
-        actions(btn(App.conditionsActive() ? "调整对照条件" : "设置条件再对照", openConditions))) : null,
-      actions(f.pins.length ? btn("在地图上查看", () => showOnMap(null, { type: "fish", id: f.p })) : null, planBtn({ type: "fish", id: f.p })),
+      method === "rod" ? section(t("条件对照（可选）"), App.conditionsActive() ? el("div", null,
+        el("div", { class: "path-head" }, el("span", { class: "d-sub" }, condText()), stateChip(c.ok, [t("符合已核验条件"), t("条件不符"), t("待确认")])),
+        checkList(c.checks), sourceFragments(App.clauses(c.assumptions || []))) : el("p", { class: "d-sub" }, t("需要核对特定日期或时段时，再设置条件。")),
+        actions(btn(App.conditionsActive() ? t("调整对照条件") : t("设置条件再对照"), openConditions))) : null,
+      actions(f.pins.length ? btn(t("在地图上查看"), () => showOnMap(null, { type: "fish", id: f.p })) : null, planBtn({ type: "fish", id: f.p })),
       sourceLine(f.p));
   }
 
   function renderLocation(name) {
     const l = App.locationByName.get(name);
-    const page = D.pages[name] || {};
+    const page = App.pageInfo(name) || {};
+    const lt = App.locText(l);
     const s = l && App.shopCheck(l);
     const area = D.progression.areas.find((a) => a.title === name);
     const nodesHere = [...P().nodes.values()].filter((n) => n.place === name && S.node(n.id));
     const shop = D.shops.find((x) => x.p === name || (name === "下水道" && x.p === "科罗布斯"));
     fillDetail(
-      head(villagerIcon(l?.occ?.[0]) || page.i, name, [page.kz, l?.addr].filter(Boolean).join(" · ")),
+      head(villagerIcon(l?.occ?.[0]) || D.pages[name]?.i, N(name), [page.kz, lt.addr].filter(Boolean).join(" · ")),
       page.s ? el("p", { class: "d-summary" }, page.s) : null,
-      s ? section("营业规则", App.conditionsActive() ? el("div", { class: "path-head" }, el("span", { class: "d-sub" }, condText()), stateChip(s.ok, ["常规时段内", "没开门", "未确认"])) : null,
-        checkList([App.conditionsActive() ? { ok: s.ok, text: s.text } : null, l.hours ? { ok: undefined, text: "营业时间：" + l.hours.replace(/\n/g, "；") } : null, l.closed && l.closed !== "无" ? { ok: undefined, text: "休息：" + l.closed } : null].filter(Boolean))) : null,
+      s ? section(t("营业规则"), App.conditionsActive() ? el("div", { class: "path-head" }, el("span", { class: "d-sub" }, condText()), stateChip(s.ok, [t("常规时段内"), t("没开门"), t("未确认")])) : null,
+        checkList([App.conditionsActive() ? { ok: s.ok, text: s.text } : null, lt.hours ? { ok: undefined, text: t("营业时间：{hours}", { hours: lt.hours.replace(/\n/g, EN ? "; " : "；") }) } : null,
+          lt.closed && !["无", "Never", "None"].includes(lt.closed) ? { ok: undefined, text: t("休息：{days}", { days: lt.closed }) } : null].filter(Boolean))) : null,
       area ? areaSection(area.id) : null,
-      l?.occ?.length ? section("住在这里", el("div", { class: "chips" }, l.occ.map((n) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: n }) }, img(villagerIcon(n)), n)))) : null,
-      nodesHere.length ? section("相关升级与解锁", el("ul", { class: "checks" }, nodesHere.slice(0, 10).map((n) => {
+      l?.occ?.length ? section(t("住在这里"), el("div", { class: "chips" }, l.occ.map((n) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: n }) }, img(villagerIcon(n)), N(n))))) : null,
+      nodesHere.length ? section(t("相关升级与解锁"), el("ul", { class: "checks" }, nodesHere.slice(0, 10).map((n) => {
         const st = P().status(n.id).status;
         const [cls, sym] = App.conditionsActive() ? { done: ["ok", "✓"], ready: ["unk", "★"], locked: ["no", "✗"], unknown: ["unk", "?"] }[st] : ["info", "·"];
-        return el("li", { class: "check-row" }, el("span", { class: "mark " + cls }, sym), el("button", { class: "row", type: "button", style: "padding:0", onclick: () => App.select({ type: "node", id: n.id }, { switchView: true }) }, el("span", { class: "main" }, el("span", { class: "name" }, n.title), el("span", { class: "sub" }, st === "ready" ? "下一步可以做" : n.sub || ""))));
+        return el("li", { class: "check-row" }, el("span", { class: "mark " + cls }, sym), el("button", { class: "row row-text", type: "button", style: "padding:0", onclick: () => App.select({ type: "node", id: n.id }, { switchView: true }) }, el("span", { class: "main" }, el("span", { class: "name" }, nodeName(n)), el("span", { class: "sub" }, st === "ready" ? t("下一步可以做") : n.sub || ""))));
       }))) : null,
-      shop && shop.stock.length ? section("出售", el("div", { class: "chips" }, shop.stock.slice(0, 18).map((e) => {
+      shop && shop.stock.length ? section(t("出售"), el("div", { class: "chips" }, shop.stock.slice(0, 18).map((e) => {
         const b = itemChip(e.id || e.z);
-        b.append(el("span", { class: "hint" }, " " + (e.bt?.length ? App.matsText(e.bt.map((x) => ({ zh: x.z, qty: x.q }))) : money(e.pr, e.cur)) + (e.n?.find((n) => /^周/.test(n)) ? " · " + e.n.find((n) => /^周/.test(n)) : "")));
+        const day = App.weekdayNote(e.n?.find((n) => /^周/.test(n)));
+        b.append(el("span", { class: "hint" }, " " + (e.bt?.length ? App.matsText(e.bt.map((x) => ({ id: x.id, zh: x.z, qty: x.q }))) : money(e.pr, e.cur)) + (day ? " · " + day : "")));
         return b;
       }))) : null,
-      actions(btn("在地图上查看", () => showOnMap(name)), planBtn({ type: "location", id: name })),
+      actions(btn(t("在地图上查看"), () => showOnMap(name)), planBtn({ type: "location", id: name })),
       sourceLine(name));
   }
 
   function areaSection(id) {
     const a = App.areaState(id);
-    return section("进入条件", App.conditionsActive() ? el("div", { class: "path-head" }, el("span", { class: "d-sub" }, "按已有进度对照"), stateChip(a.state === "open" ? true : a.state === "locked" ? false : null, ["已开放", "还没开放", "未确认"])) : null,
+    return section(t("进入条件"), App.conditionsActive() ? el("div", { class: "path-head" }, el("span", { class: "d-sub" }, t("按已有进度对照")), stateChip(a.state === "open" ? true : a.state === "locked" ? false : null, [t("已开放"), t("还没开放"), t("未确认")])) : null,
       checkList(a.checks), el("p", { class: "quote" }, a.area.quote));
   }
 
   function renderVillager(name) {
     const v = App.villagerByName.get(name);
-    const bd = v.bd ? `${App.SEASON_ZH[v.bd.season]} ${v.bd.day} 日` : "未知";
+    const bd = v.bd ? t("{season} {day} 日", { season: App.SEASON_ZH[v.bd.season], day: v.bd.day }) : t("未知");
     const isBd = App.conditionsActive() && v.bd && v.bd.season === state.cond.season && v.bd.day === state.cond.day;
+    const addr = EN ? EN.villagers?.[name]?.addr : v.addr;
+    const summary = App.pageInfo(name)?.s;
     fillDetail(
-      head(v.i, v.p, `生日：${bd}${v.addr ? ` · 住在${v.addr}` : ""}`),
-      isBd ? el("p", { class: "d-summary" }, el("b", null, "所设日期是生日。"), "送最爱的礼物，好感度变化是平时的 8 倍。") : (D.pages[name]?.s ? el("p", { class: "d-summary" }, D.pages[name].s) : null),
-      v.love.length ? section("最爱的礼物", itemGroup(v.love, "其他最爱礼物")) : null,
-      v.like.length ? section("喜欢的礼物", itemGroup(v.like, "其他喜欢礼物")) : null,
+      head(v.i, N(v.p), t("生日：{date}", { date: bd }) + (addr ? t(" · 住在{place}", { place: addr }) : "")),
+      isBd ? el("p", { class: "d-summary" }, el("b", null, t("所设日期是生日。")), t("送最爱的礼物，好感度变化是平时的 8 倍。")) : (summary ? el("p", { class: "d-summary" }, summary) : null),
+      v.love.length ? section(t("最爱的礼物"), itemGroup(v.love, t("其他最爱礼物"))) : null,
+      v.like.length ? section(t("喜欢的礼物"), itemGroup(v.like, t("其他喜欢礼物"))) : null,
       App.schedules?.render(name),
-      v.fam?.length ? section("家人", el("div", { class: "chips" }, v.fam.map((n) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: n }) }, img(villagerIcon(n)), n)))) : null,
-      actions(App.mapContents.homePins(v).length ? btn("在地图上查看住处", () => showOnMap(null, { type: "villager", id: name })) : null, planBtn({ type: "villager", id: name })),
+      v.fam?.length ? section(t("家人"), el("div", { class: "chips" }, v.fam.map((n) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: n }) }, img(villagerIcon(n)), N(n))))) : null,
+      actions(App.mapContents.homePins(v).length ? btn(t("在地图上查看住处"), () => showOnMap(null, { type: "villager", id: name })) : null, planBtn({ type: "villager", id: name })),
       sourceLine(name));
   }
 
@@ -647,55 +673,57 @@
     const node = [...P().nodes.values()].find((n) => n.itemId && n.itemId === it.id);
     const craft = paths.find((p) => p.inputs?.length && p.kind !== "upgrade" && S.textAllowed(JSON.stringify(p)));
     const totals = craft ? [...App.rawTotals(App.materialTree(craft.inputs)).values()] : [];
-    const page = D.pages[it.pg] || {};
+    const page = App.pageInfo(it.pg) || {};
     const seed = D.seeds.find(s => s.id === it.id);
     const growing = seed && App.seedCheck(seed);
+    const desc = App.itemDesc(it);
     fillDetail(
-      head(it.i, it.z, [it.c, it.p ? `售价 ${money(it.p)}` : null, it.e].filter(Boolean).join(" · "), it.inote),
-      it.d ? el("p", { class: "d-summary" }, it.d) : null,
-      seed ? section("种植规则", checkList([
-        { text: "适生季节：" + (seed.S.map(s => App.SEASON_ZH[s]).join("、") || "见原文") },
-        { text: seed.g ? `基础生长时间：${seed.g} 天` : "生长时间依具体种植规则而定" },
-        seed.rg ? { text: `首次成熟后，每 ${seed.rg} 天再收获` } : null,
+      head(it.i, App.itemName(it), [it.c && t(it.c), it.p ? t("售价 {price}", { price: money(it.p) }) : null, EN ? null : it.e].filter(Boolean).join(" · "), it.inote && (EN ? null : it.inote)),
+      desc ? el("p", { class: "d-summary" }, desc) : null,
+      seed ? section(t("种植规则"), checkList([
+        { text: t("适生季节：{value}", { value: App.list(seed.S.map(s => App.SEASON_ZH[s])) || t("见原文") }) },
+        { text: seed.g ? t("基础生长时间：{n} 天", { n: seed.g }) : t("生长时间依具体种植规则而定") },
+        seed.rg ? { text: t("首次成熟后，每 {n} 天再收获", { n: seed.rg }) } : null,
       ].filter(Boolean)), seed.crop ? itemChip(seed.crop.id || seed.crop.z) : null) : null,
-      paths.length ? section("获取途径（满足任意一条即可）", renderPaths(paths)) : section("获取途径", page.f?.source ? sourceFragments(page.f.source) : el("p", { class: "d-sub" }, "暂缺可核对的获取资料，可继续查看原 Wiki。")),
-      totals.length > 1 ? section("原料合计（按第一条制作途径）", el("div", { class: "chips" }, totals.map((t) => itemChip(t.id || t.z, t.qty)))) : null,
+      paths.length ? section(t("获取途径（满足任意一条即可）"), renderPaths(paths)) : section(t("获取途径"), page.f?.source ? sourceFragments(page.f.source) : el("p", { class: "d-sub" }, t("暂缺可核对的获取资料，可继续查看原 Wiki。"))),
+      totals.length > 1 ? section(t("原料合计（按第一条制作途径）"), el("div", { class: "chips" }, totals.map((x) => itemChip(x.id || x.z, x.qty)))) : null,
       usageSection(it.id),
-      seed ? section("收获日期估算（可选）", growing ? el("div", null, el("p", { class: "d-summary" }, growing.text),
-        el("p", { class: "d-sub" }, (growing.assumptions || []).join("；"))) : el("p", { class: "d-sub" }, "需要估算收获日时，再选择播种日期。"),
-        actions(btn("设置播种日期", openConditions))) : null,
-      actions(node ? btn("在成长路线中查看", () => App.select({ type: "node", id: node.id }, { switchView: true })) : null, planBtn({ type: "item", id: it.id || it.z })),
+      seed ? section(t("收获日期估算（可选）"), growing ? el("div", null, el("p", { class: "d-summary" }, growing.text),
+        el("p", { class: "d-sub" }, App.clauses(growing.assumptions || []))) : el("p", { class: "d-sub" }, t("需要估算收获日时，再选择播种日期。")),
+        actions(btn(t("设置播种日期"), openConditions))) : null,
+      actions(node ? btn(t("在成长路线中查看"), () => App.select({ type: "node", id: node.id }, { switchView: true })) : null, planBtn({ type: "item", id: it.id || it.z })),
       it.pg ? sourceLine(it.pg) : null);
   }
 
   function renderPage(title) {
-    const p = D.pages[title];
-    if (!p) return renderItem(title);
+    const raw = D.pages[title];
+    if (!raw) return renderItem(title);
+    const p = { ...App.pageInfo(title), i: raw.i, e: raw.e };
     const pins = D.pins.filter((x) => x.t === title);
     const guideIcon = { 新手指南: "Spring.png", 控制: "Controls_Icon.png", 钓鱼攻略: "Fishing_Skill_Icon.png", 物品栏: "Chest.png",
       游戏内时间: "Time_Icon.png", 季节: "Calendar.png", 天气: "Sunny.png", 能量: "Farming_Skill_Icon.png", 生命值: "Combat_Skill_Icon.png",
       技能: "Farming_Skill_Icon.png", 友谊: "HeartIconLarge.png", 合作: "Maplocation.png" }[title];
-    const heading = head(p.i || guideIcon, title, [p.kz, p.e].filter(Boolean).join(" · "));
-    if (title === "存档" && !p.i) heading.replaceChild(el("span", { role: "img", "aria-label": "存档", style: "display:grid;place-items:center;width:48px;height:48px;flex:none;color:var(--bark)",
+    const heading = head(p.i || guideIcon, N(title), [p.kz, EN ? null : p.e].filter(Boolean).join(" · "));
+    if (title === "存档" && !p.i) heading.replaceChild(el("span", { role: "img", "aria-label": N("存档"), style: "display:grid;place-items:center;width:48px;height:48px;flex:none;color:var(--bark)",
       html: '<svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h13l4 4v14H3V3h1zm3 0v6h9V3M7 21v-8h10v8"/><path d="M13 3v4"/></svg>' }), heading.firstChild);
     fillDetail(
       heading,
       App.guides?.has(title) ? App.guides.render(title) : null,
       p.s && !App.guides?.has(title) ? el("p", { class: "d-summary" }, p.s) : null,
-      Object.keys(p.f).length ? section("要点", el("dl", { class: "kv" }, Object.entries(p.f).slice(0, 8).map(([k, v]) => [el("dt", null, FIELD_ZH[k] || k), el("dd", null, v)]))) : null,
-      p.sec.length && !App.guides?.has(title) ? (S.active() ? foldContent(section("条目章节", el("p", { class: "d-sub" }, p.sec.join("、"))), "完整章节可能包含事件、秘密或后续奖励", "查看完整章节目录") : section("条目章节", el("p", { class: "d-sub" }, p.sec.join("、")))) : null,
-      actions(pins.length ? btn("在地图上查看", () => showOnMap(null, { type: "page", id: title })) : null, planBtn({ type: "page", id: title })),
+      Object.keys(p.f).length ? section(t("要点"), el("dl", { class: "kv" }, Object.entries(p.f).slice(0, 8).map(([k, v]) => [el("dt", null, FIELD_ZH[k] || k), el("dd", null, v)]))) : null,
+      p.sec.length && !App.guides?.has(title) ? (S.active() ? foldContent(section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec))), t("完整章节可能包含事件、秘密或后续奖励"), t("查看完整章节目录")) : section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec)))) : null,
+      actions(pins.length ? btn(t("在地图上查看"), () => showOnMap(null, { type: "page", id: title })) : null, planBtn({ type: "page", id: title })),
       sourceLine(title));
   }
-  const FIELD_ZH = { source: "来源", season: "季节", location: "地点", time: "时间", weather: "天气", recipe: "配方", ingredients: "材料", sellprice: "售价",
+  const FIELD_ZH = Object.fromEntries(Object.entries({ source: "来源", season: "季节", location: "地点", time: "时间", weather: "天气", recipe: "配方", ingredients: "材料", sellprice: "售价",
     openhours: "营业时间", closed: "休息", address: "地址", occupants: "居民", birthday: "生日", marriage: "可结婚", growth: "生长", produces: "产出",
-    craftingstation: "加工设备", crafttime: "耗时", buff: "增益", edibility: "能量" };
+    craftingstation: "加工设备", crafttime: "耗时", buff: "增益", edibility: "能量" }).map(([k, v]) => [k, t(v)]));
 
   function renderNode(id) {
     const n = P().nodes.get(id);
     const st = P().status(id);
     const laneName = P().lanes.find((l) => l.id === n.lane).name;
-    const STATUS = { done: "已完成", ready: "已知前置满足", locked: "条件还没满足", unknown: "进度未确认" };
+    const STATUS = { done: t("已完成"), ready: t("已知前置满足"), locked: t("条件还没满足"), unknown: t("进度未确认") };
     const steps = (App.conditionsActive() ? P().stepsTo(id) : [...P().ancestors(id)]).filter((x) => x !== id);
     const kids = [...(P().children.get(id) || [])].map((x) => P().nodes.get(x));
     const acquisition = n.itemId ? App.acquisitions(n.itemId, App.itemInfo(n.itemId)?.z) : [];
@@ -705,29 +733,29 @@
     const pathsBox = el("div");
     st.paths.forEach((p, i) => {
       if (!p.checks.length) return;
-      if (i) pathsBox.append(el("div", { class: "or" }, "或"));
+      if (i) pathsBox.append(el("div", { class: "or" }, t("或")));
       pathsBox.append(el("div", { class: "path" + (App.conditionsActive() && p.ok === true ? " is-ok" : "") },
-        el("div", { class: "path-head" }, el("span", { class: "path-name" }, p.label || "前置条件"), stateChip(p.ok, ["已满足", "未满足", "未确认"])),
+        el("div", { class: "path-head" }, el("span", { class: "path-name" }, p.label || t("前置条件")), stateChip(p.ok, [t("已满足"), t("未满足"), t("未确认")])),
         checkList(p.checks)));
     });
     fillDetail(
-      head(n.icon || App.itemInfo(n.itemId)?.i, n.title, App.conditionsActive() ? `${laneName} · ${STATUS[st.status]}` : `${laneName} · 材料与前置关系`),
+      head(n.icon || App.itemInfo(n.itemId)?.i, nodeName(n), App.conditionsActive() ? `${laneName} · ${STATUS[st.status]}` : t("{lane} · 材料与前置关系", { lane: laneName })),
       n.info?.what ? el("p", { class: "d-summary" }, n.info.what) : null,
-      n.info?.action || mats ? section("怎么做", n.info?.action ? el("p", null, n.info.action) : null, mats ? matTree(mats) : null) : null,
-      pathsBox.childNodes.length ? section("需要先满足", pathsBox) : null,
-      steps.length ? section(App.conditionsActive() ? `待对照的 ${steps.length} 个前置` : "关联前置路线", el("ol", { class: "steps" }, steps.map((sid) => {
+      n.info?.action || mats ? section(t("怎么做"), n.info?.action ? el("p", null, n.info.action) : null, mats ? matTree(mats) : null) : null,
+      pathsBox.childNodes.length ? section(t("需要先满足"), pathsBox) : null,
+      steps.length ? section(App.conditionsActive() ? t("待对照的 {n} 个前置", { n: steps.length }) : t("关联前置路线"), el("ol", { class: "steps" }, steps.map((sid) => {
         const s = P().nodes.get(sid);
-        return el("li", null, el("button", { type: "button", onclick: () => App.select({ type: "node", id: sid }) }, s.title, el("span", { class: "hint" }, s.sub || "")));
+        return el("li", null, el("button", { type: "button", onclick: () => App.select({ type: "node", id: sid }) }, nodeName(s), el("span", { class: "hint" }, s.sub || "")));
       }))) : null,
-      n.unlocks.length || kids.length ? section("完成后解锁", el("div", { class: "chips" },
-        n.unlocks.map((u) => u.text ? el("span", { class: "chip static" }, u.z) : u.pg ? el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "page", id: u.pg }) }, img(u.i), u.z) : itemChip(u.id || u.z)),
-        kids.filter((k) => k.kind !== "skill" || k.row !== n.row).map((k) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "node", id: k.id }) }, img(k.icon), k.title)))) : null,
+      n.unlocks.length || kids.length ? section(t("完成后解锁"), el("div", { class: "chips" },
+        n.unlocks.map((u) => u.text ? el("span", { class: "chip static" }, u.z) : u.pg ? el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "page", id: u.pg }) }, img(u.i), N(u.z)) : itemChip(u.id || u.z)),
+        kids.filter((k) => k.kind !== "skill" || k.row !== n.row).map((k) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "node", id: k.id }) }, img(k.icon), nodeName(k))))) : null,
       n.info?.note ? el("p", { class: "quote" }, n.info.note) : null,
-      n.info?.quote ? el("p", { class: "quote" }, "“" + n.info.quote + "”") : null,
+      n.info?.quote ? el("p", { class: "quote" }, t("“{quote}”", { quote: n.info.quote })) : null,
       actions(
-        n.itemId ? btn("查看完整获取方式与用途", () => App.select({ type: "item", id: n.itemId })) : null,
-        markable && App.conditionsActive() ? btn(st.status === "done" ? "标记为未完成" : "标记为已完成", () => markNode(n, st.status !== "done")) : null,
-        n.place ? btn("在地图上找到" + n.place, () => showOnMap(n.place)) : null,
+        n.itemId ? btn(t("查看完整获取方式与用途"), () => App.select({ type: "item", id: n.itemId })) : null,
+        markable && App.conditionsActive() ? btn(st.status === "done" ? t("标记为未完成") : t("标记为已完成"), () => markNode(n, st.status !== "done")) : null,
+        n.place ? btn(t("在地图上找到{place}", { place: N(n.place) }), () => showOnMap(n.place)) : null,
         planBtn({ type: "node", id })),
       n.info?.source ? sourceLine(n.info.source) : null);
   }
@@ -736,17 +764,17 @@
     const { room, bundle } = App.browse.bundle(id);
     const requirements = App.collections ? App.collections.renderRequirements(room, bundle) : el("div", { class: "bundle-requirements" });
     for (const item of App.collections ? [] : bundle.items) {
-      const target = item.id ? itemChip(item.id, item.qty) : el("span", { class: "chip static" }, safeText(item.zh), App.qtyText(item.qty));
+      const target = item.id ? itemChip(item.id, item.qty) : el("span", { class: "chip static" }, safeText(N(item.zh)), App.qtyText(item.qty));
       requirements.append(el("div", { class: "bundle-requirement" }, target,
         item.note ? el("span", { class: "d-sub" }, safeText(item.note)) : null,
         item.source_text ? protectContent(el("p", { class: "d-sub" }, item.source_text)) : null));
     }
-    const reward = section("完成奖励", el("div", { class: "chips" }, (bundle.reward || []).map(item => itemChip(item.id || item.zh, item.qty))));
-    fillDetail(head("Bundle_Green.png", bundle.name, room.room),
-      el("p", { class: "d-summary" }, bundle.cost ? `交付 ${money(bundle.cost)}。` : bundle.choose ? `从 ${bundle.items.length} 项中任选 ${bundle.slots} 项交付。` : `交付下列 ${bundle.slots || bundle.items.length} 项要求的物品。`),
-      bundle.items.length || bundle.cost ? section("所需材料与数量", requirements) : null,
-      bundle.reward?.length ? (S.active() ? foldContent(reward, "完成奖励按需查看", "查看完成奖励") : reward) : null,
-      actions(btn("查看房间路线", () => App.select({ type: "node", id: "room:" + room.room }, { switchView: true }))), sourceLine("收集包"));
+    const reward = section(t("完成奖励"), el("div", { class: "chips" }, (bundle.reward || []).map(item => itemChip(item.id || item.zh, item.qty))));
+    fillDetail(head("Bundle_Green.png", N(bundle.name), N(room.room)),
+      el("p", { class: "d-summary" }, bundle.cost ? t("交付 {cost}。", { cost: money(bundle.cost) }) : bundle.choose ? t("从 {total} 项中任选 {n} 项交付。", { total: bundle.items.length, n: bundle.slots }) : t("交付下列 {n} 项要求的物品。", { n: bundle.slots || bundle.items.length })),
+      bundle.items.length || bundle.cost ? section(t("所需材料与数量"), requirements) : null,
+      bundle.reward?.length ? (S.active() ? foldContent(reward, t("完成奖励按需查看"), t("查看完成奖励")) : reward) : null,
+      actions(btn(t("查看房间路线"), () => App.select({ type: "node", id: "room:" + room.room }, { switchView: true }))), sourceLine("收集包"));
   }
 
   function markNode(n, done) {
@@ -767,7 +795,7 @@
     }, n.id);
     const after = [...P().nodes.keys()].filter((id) => P().status(id).status === "done" && !before.has(id) && id !== n.id);
     const opened = after.map((id) => P().nodes.get(id)).filter((x) => x.kind === "area");
-    if (done) App.toast(opened.length && !S.active() ? `${n.title} 完成，${opened.map((x) => x.title).join("、")} 已开放` : `${n.title} 已标记完成`);
+    if (done) App.toast(opened.length && !S.active() ? t("{name} 完成，{places} 已开放", { name: nodeName(n), places: App.list(opened.map(nodeName)) }) : t("{name} 已标记完成", { name: nodeName(n) }));
   }
 
   function renderDetail() {
@@ -776,10 +804,10 @@
     const scroll = detail.scrollTop;
     if (ref.type === "point") renderPointList(ref);
     else if (!S.canView(ref)) {
-      dbody.replaceChildren(head(null, "尚未确认探索的内容", "防剧透已开启", null, true),
-        el("p", { class: "d-summary" }, "此条目可能涉及你尚未到达的游戏内容。可以只查看这一条，关联的后续内容仍会收起。"),
-        actions(btn("仅查看此条（可能剧透）", () => S.reveal(ref), true), btn("我已了解此内容", () => S.reveal(ref, true))),
-        el("p", { class: "d-sub" }, "“仅查看”在本次浏览有效；“已了解”会保存在这台设备，不修改游戏完成进度。"));
+      dbody.replaceChildren(head(null, t("尚未确认探索的内容"), t("防剧透已开启"), null, true),
+        el("p", { class: "d-summary" }, t("此条目可能涉及你尚未到达的游戏内容。可以只查看这一条，关联的后续内容仍会收起。")),
+        actions(btn(t("仅查看此条（可能剧透）"), () => S.reveal(ref), true), btn(t("我已了解此内容"), () => S.reveal(ref, true))),
+        el("p", { class: "d-sub" }, t("“仅查看”在本次浏览有效；“已了解”会保存在这台设备，不修改游戏完成进度。")));
     }
     else if (ref.type === "fish") renderFish(App.fishByName.get(ref.id));
     else if (ref.type === "location") renderLocation(ref.id);
@@ -790,7 +818,7 @@
     else if (ref.type === "area") P().nodes.has("area:" + ref.id) ? renderNode("area:" + ref.id) : renderLocation(App.AREAS[ref.id].title);
     else renderPage(ref.id);
     if (pointReturn && ref.type !== "point") {
-      dbody.prepend(btn("← 返回地点列表", returnToPoints));
+      dbody.prepend(btn(t("← 返回地点列表"), returnToPoints));
     }
     detail.hidden = false;
     updateDetailPresentation();
@@ -865,14 +893,14 @@
     const entries = points.flatMap(p => p.entries);
     const filter = pointStates.get(ref.id) || { kind: "all", query: "", now: false };
     pointStates.set(ref.id, filter);
-    const title = points.length === 1 ? points[0].title : `附近 ${points.length} 个地点`;
-    const tabs = el("div", { class: "point-tabs", role: "group", "aria-label": "地点内容类型" });
-    const input = el("input", { type: "search", class: "point-search", placeholder: "在此地点查找", "aria-label": "筛选地点内容", value: filter.query });
+    const title = points.length === 1 ? points[0].title : t("附近 {n} 个地点", { n: points.length });
+    const tabs = el("div", { class: "point-tabs", role: "group", "aria-label": t("地点内容类型") });
+    const input = el("input", { type: "search", class: "point-search", placeholder: t("在此地点查找"), "aria-label": t("筛选地点内容"), value: filter.query });
     const check = el("input", { type: "checkbox", checked: filter.now });
-    const nowLabel = el("label", { class: "check point-now" }, check, "只看符合当前条件的鱼");
+    const nowLabel = el("label", { class: "check point-now" }, check, t("只看符合当前条件的鱼"));
     const count = el("p", { class: "d-sub", role: "status" });
     const results = el("div", { class: "point-results" });
-    const kinds = [["all", "全部"], ["fish", "鱼类"], ["location", "地点"], ["villager", "居民"], ["other", "其他"]];
+    const kinds = [["all", t("全部")], ["fish", t("鱼类")], ["location", t("地点")], ["villager", t("居民")], ["other", t("其他")]];
     const paint = () => {
       for (const b of tabs.children) b.setAttribute("aria-pressed", String(b.dataset.kind === filter.kind));
       nowLabel.hidden = !App.conditionsActive() || !entries.some(e => e.kind === "fish") || !["all", "fish"].includes(filter.kind);
@@ -885,7 +913,7 @@
         if (!found.length) continue;
         const rows = el("div", { class: "point-rows" });
         for (const entry of found) {
-          const tail = entry.kind === "fish" ? !App.conditionsActive() ? "查看条件" : entry.status === true ? "条件符合" : entry.status === false ? "条件不符" : "待确认" : entry.kind === "villager" ? "住处" : "查看";
+          const tail = entry.kind === "fish" ? !App.conditionsActive() ? t("查看条件") : entry.status === true ? t("条件符合") : entry.status === false ? t("条件不符") : t("待确认") : entry.kind === "villager" ? t("住处") : t("查看");
           const b = row({ icon: entry.icon, name: entry.label, sub: entry.subtitle, tail, tailClass: entry.status === true ? "good" : "" });
           b.dataset.entry = point.id + "/" + entry.key;
           if (entry.concealed) b.replaceChild(protectedImage(), b.firstChild);
@@ -895,14 +923,14 @@
           });
           rows.append(b);
         }
-        const locate = btn("定位", () => { setDetailMode("context"); App.map.locatePoint(point.id); });
-        locate.setAttribute("aria-label", `在地图上定位${point.title}`);
+        const locate = btn(t("定位"), () => { setDetailMode("context"); App.map.locatePoint(point.id); });
+        locate.setAttribute("aria-label", t("在地图上定位{place}", { place: point.title }));
         const heading = el("div", { class: "point-heading" }, el("h3", null, point.title), locate);
         results.append(el("section", { class: "d-section" }, heading,
           el("p", { class: "d-sub" }, App.mapContents.positionNote(point)), rows));
       }
-      count.textContent = `${total} 条可查看资料`;
-      if (!total) results.append(el("p", { class: "empty-note" }, "当前筛选没有结果。"), btn("显示全部已知内容", () => { filter.query = ""; filter.now = false; filter.kind = "all"; input.value = ""; check.checked = false; paint(); }));
+      count.textContent = t("{n} 条可查看资料", { n: total });
+      if (!total) results.append(el("p", { class: "empty-note" }, t("当前筛选没有结果。")), btn(t("显示全部已知内容"), () => { filter.query = ""; filter.now = false; filter.kind = "all"; input.value = ""; check.checked = false; paint(); }));
     };
     for (const [kind, label] of kinds) {
       if (kind !== "all" && !entries.some(e => e.kind === kind)) continue;
@@ -910,9 +938,9 @@
     }
     input.addEventListener("input", () => { filter.query = input.value; paint(); });
     check.addEventListener("change", () => { filter.now = check.checked; paint(); });
-    dbody.replaceChildren(head(entries.some(e => e.kind === "fish") ? "Fishing_Skill_Icon.png" : "Maplocation.png", points.length ? title : "此地点暂无可展示内容", "按地点查看资料，选择条目了解详情"),
+    dbody.replaceChildren(head(entries.some(e => e.kind === "fish") ? "Fishing_Skill_Icon.png" : "Maplocation.png", points.length ? title : t("此地点暂无可展示内容"), t("按地点查看资料，选择条目了解详情")),
       el("div", { class: "point-controls" }, tabs, input, nowLabel), count, results,
-      el("p", { class: "d-sub" }, "小点表示地点，数字“处”表示附近地点的合并入口。居民标记表示住处，不代表此刻位置。"));
+      el("p", { class: "d-sub" }, t("小点表示地点，数字“处”表示附近地点的合并入口。居民标记表示住处，不代表此刻位置。")));
     paint();
   }
   function focusPins(ref, pins) {
@@ -934,11 +962,11 @@
       const located = ref.type === "fish" ? focusFish(App.fishByName.get(ref.id))
         : ref.type === "villager" ? focusPins(ref, App.mapContents.homePins(App.villagerByName.get(ref.id)))
         : ref.type === "page" ? focusPins(ref, D.pins.filter(p => p.t === ref.id).map(p => [p.x, p.y, p.map])) : false;
-      if (!located) App.toast("当前展示范围内没有可定位的地点。");
+      if (!located) App.toast(t("当前展示范围内没有可定位的地点。"));
       return;
     }
     App.map.setRelated([place]);
-    if (!App.map.focusPlace(place)) App.toast("当前展示范围内没有可定位的地点。");
+    if (!App.map.focusPlace(place)) App.toast(t("当前展示范围内没有可定位的地点。"));
   }
 
   function setView(v, { preserveDetail = false } = {}) {
@@ -1017,10 +1045,12 @@
     return D.pages[ref.id]?.i;
   }
   function refName(ref) {
-    if (!S.canView(ref)) return "受保护的条目";
-    if (ref.type === "node") return P().nodes.get(ref.id)?.title;
-    if (ref.type === "item") return App.itemInfo(ref.id)?.z;
-    return ref.id;
+    if (!S.canView(ref)) return t("受保护的条目");
+    if (ref.type === "node") return nodeName(P().nodes.get(ref.id));
+    if (ref.type === "item") return App.itemName(App.itemInfo(ref.id));
+    if (ref.type === "bundle") return N(ref.id.split(":").slice(1).join(":"));
+    if (ref.type === "area") return App.areaTitle(ref.id);
+    return N(ref.id);
   }
   function refDone(ref) {
     if (!S.canView(ref)) return null;
@@ -1031,9 +1061,9 @@
   }
   function togglePlan(ref) {
     const i = state.plan.findIndex((p) => p.type === ref.type && p.id === ref.id);
-    if (i >= 0) { state.plan.splice(i, 1); App.toast("已取消收藏"); }
-    else if (state.plan.length >= 8) { App.toast("快捷收藏最多 8 个条目，先移出一个"); return; }
-    else { state.plan.push({ type: ref.type, id: ref.id }); App.toast(`已收藏：${refName(ref)}`); }
+    if (i >= 0) { state.plan.splice(i, 1); App.toast(t("已取消收藏")); }
+    else if (state.plan.length >= 8) { App.toast(t("快捷收藏最多 8 个条目，先移出一个")); return; }
+    else { state.plan.push({ type: ref.type, id: ref.id }); App.toast(t("已收藏：{name}", { name: refName(ref) })); }
     App.emit("plan");
   }
   function renderPlan() {
@@ -1043,8 +1073,8 @@
     for (let i = 0; i < state.plan.length; i++) {
       const ref = state.plan[i];
       const mark = App.conditionsActive() ? refDone(ref) : null;
-      const b = el("button", { class: "slot", type: "button", title: refName(ref), "aria-label": `${refName(ref)}${mark === "ok" ? "（已完成）" : mark === "next" ? "（下一步）" : mark === "now" ? "（现在能钓）" : ""}` },
-        img(refIcon(ref)), mark ? el("span", { class: "slot-state" + (mark === "ok" ? " ok" : "") }, { ok: "✓", next: "★", now: "鱼" }[mark]) : null);
+      const b = el("button", { class: "slot", type: "button", title: refName(ref), "aria-label": `${refName(ref)}${mark === "ok" ? t("（已完成）") : mark === "next" ? t("（下一步）") : mark === "now" ? t("（现在能钓）") : ""}` },
+        img(refIcon(ref)), mark ? el("span", { class: "slot-state" + (mark === "ok" ? " ok" : "") }, { ok: "✓", next: "★", now: t("鱼") }[mark]) : null);
       b.addEventListener("click", () => App.select(ref, { from: "search", switchView: ref.type === "node" }));
       ol.append(el("li", null, b));
     }
@@ -1061,10 +1091,10 @@
     const shown = values.filter(allowed);
     const box = el("div", { class: "known-levels" }, levels(shown, current, onPick));
     if (shown.length !== values.length) {
-      const disclosure = el("details", { class: "known-level-disclosure" }, el("summary", null, "直接填写已有档位"));
+      const disclosure = el("details", { class: "known-level-disclosure" }, el("summary", null, t("直接填写已有档位")));
       disclosure.addEventListener("toggle", () => {
         if (disclosure.open && !disclosure.querySelector(".levels")) disclosure.append(
-          el("p", { class: "d-sub" }, "只展开" + title + "的档位供你填写，不会展开其他资料。"), levels(values, current, onPick));
+          el("p", { class: "d-sub" }, t("只展开{title}的档位供你填写，不会展开其他资料。", { title })), levels(values, current, onPick));
         else if (!disclosure.open) for (const child of [...disclosure.children].slice(1)) child.remove();
       });
       box.append(disclosure);
@@ -1075,46 +1105,48 @@
     const pr = state.progress;
     const presetBox = $("presets");
     presetBox.replaceChildren(...Object.entries(App.PRESETS).filter(([k]) => !S.active() || ["fresh", "unknown"].includes(k)).map(([k, p]) => btn(p.label, () => { App.applyPreset(k); renderProgress(); }, state.preset === k)));
-    $("progress-note").textContent = (S.active() ? "只填写你已了解的进度，也可以全部留空。可进入某地不代表已经探索。" : (App.PRESETS[state.preset]?.note || "自定义进度。")) + " 设置只保存在这台设备。";
+    $("progress-note").textContent = (S.active() ? t("只填写你已了解的进度，也可以全部留空。可进入某地不代表已经探索。") : (App.PRESETS[state.preset]?.note || t("自定义进度。"))) + " " + t("设置只保存在这台设备。");
     const body = $("progress-body");
     const set = (fn) => { App.setProgress(fn); renderProgress(); };
     const skills = el("div", { class: "p-grid" });
-    for (const s of App.SKILLS) skills.append(el("span", null, img(s.icon), s.zh), levels([...Array(11).keys()].map((v) => [v, String(v)]), pr.skills[s.id], (v) => set((p) => { p.skills[s.id] = v; })));
+    for (const s of App.SKILLS) skills.append(el("span", null, img(s.icon), s.name), levels([...Array(11).keys()].map((v) => [v, String(v)]), pr.skills[s.id], (v) => set((p) => { p.skills[s.id] = v; })));
     const tools = el("div", { class: "p-grid" });
     for (const ch of D.chains.filter((c) => c.kind === "blacksmith_upgrade")) {
-      tools.append(el("span", null, ch.family.replace("（工具）", "")), knownLevels(ch.tiers.map((t, i) => [i, t.zh, t.image]), pr.tools[ch.family],
-        v => set(p => { p.tools[ch.family] = v; }), ([i]) => S.node(`tool:${ch.family}:${i}`), ch.family.replace("（工具）", "")));
+      const family = P().lanes.find(l => l.id === "tools").rows.find(r => r.id === "tool:" + ch.family)?.name || ch.family;
+      tools.append(el("span", null, family), knownLevels(ch.tiers.map((tier, i) => [i, nameOf(tier.id || tier.zh), tier.image]), pr.tools[ch.family],
+        v => set(p => { p.tools[ch.family] = v; }), ([i]) => S.node(`tool:${ch.family}:${i}`), family));
     }
-    tools.append(el("span", null, "鱼竿（最高）"), knownLevels([[-1, "没有"], ...App.ROD_CHAIN.tiers.map((t, i) => [i, t.zh, t.image])], pr.rod,
-      v => set(p => { p.rod = v; }), ([i]) => i === -1 || S.node(`rod:${i}`), "鱼竿"));
+    tools.append(el("span", null, t("鱼竿（最高）")), knownLevels([[-1, t("没有")], ...App.ROD_CHAIN.tiers.map((tier, i) => [i, nameOf(tier.id || tier.zh), tier.image])], pr.rod,
+      v => set(p => { p.rod = v; }), ([i]) => i === -1 || S.node(`rod:${i}`), t("鱼竿")));
     const blds = el("div", { class: "p-grid" });
     for (const ch of App.BUILDING_CHAINS) {
-      const opts = ch.tiers.map((b, i) => [i, b.name.replace(/^农舍（(.+)）$/, "$1"), null]);
-      blds.append(el("span", null, ch.chain), knownLevels(ch.chain === "农舍" ? opts : [[-1, "没有"], ...opts], pr.buildings[ch.chain],
-        v => set(p => { p.buildings[ch.chain] = v; }), ([i]) => i === -1 || S.node(`bld:${ch.chain}:${i}`), ch.chain));
+      const opts = ch.tiers.map((b, i) => [i, nodeName(P().nodes.get(`bld:${ch.chain}:${i}`)), null]);
+      const chainName = EN ? EN.buildings?.[ch.chain]?.name || N(ch.chain) : ch.chain;
+      blds.append(el("span", null, chainName), knownLevels(ch.chain === "农舍" ? opts : [[-1, t("没有")], ...opts], pr.buildings[ch.chain],
+        v => set(p => { p.buildings[ch.chain] = v; }), ([i]) => i === -1 || S.node(`bld:${ch.chain}:${i}`), chainName));
     }
     const rooms = el("div", { class: "rooms" });
-    rooms.append(el("label", null, el("input", { type: "checkbox", checked: pr.rooms == null, onchange: (e) => set((p) => { p.rooms = e.target.checked ? null : []; }) }), "未确认"));
+    rooms.append(el("label", null, el("input", { type: "checkbox", checked: pr.rooms == null, onchange: (e) => set((p) => { p.rooms = e.target.checked ? null : []; }) }), t("未确认")));
     for (const r of App.ROOMS) {
-      rooms.append(el("label", null, el("input", { type: "checkbox", disabled: pr.rooms == null, checked: !!pr.rooms?.includes(r), onchange: (e) => set((p) => { p.rooms = (p.rooms || []).filter((x) => x !== r).concat(e.target.checked ? [r] : []); }) }), r));
+      rooms.append(el("label", null, el("input", { type: "checkbox", disabled: pr.rooms == null, checked: !!pr.rooms?.includes(r), onchange: (e) => set((p) => { p.rooms = (p.rooms || []).filter((x) => x !== r).concat(e.target.checked ? [r] : []); }) }), N(r)));
     }
     const num = (label, key, max, unit) => {
-      const out = el("output", null, pr[key] == null ? "未确认" : `${pr[key]} ${unit}`);
+      const out = el("output", null, pr[key] == null ? t("未确认") : t(unit, { n: pr[key] }));
       const input = el("input", { type: "range", min: 0, max, value: pr[key] ?? 0, "aria-label": label });
-      input.addEventListener("input", () => { state.progress[key] = +input.value; out.textContent = `${input.value} ${unit}`; });
+      input.addEventListener("input", () => { state.progress[key] = +input.value; out.textContent = t(unit, { n: input.value }); });
       input.addEventListener("change", () => set((p) => { p[key] = +input.value; }));
-      return el("div", { class: "num-row" }, input, out, btn("未确认", () => set((p) => { p[key] = null; })));
+      return el("div", { class: "num-row" }, input, out, btn(t("未确认"), () => set((p) => { p[key] = null; })));
     };
     const world = el("div", { class: "p-grid" },
-      el("span", null, "博物馆捐赠"), num("博物馆捐赠", "museum", 95, "件"),
-      el("span", null, img("Mining_Skill_Icon.png"), "矿井最深"), num("矿井最深", "mineDepth", 120, "层"));
-    if (S.node("boat")) world.append(el("span", null, "威利的船"), levels([[false, "没修"], [true, "已修好"]], pr.flags.boat_repaired, (v) => set((p) => { p.flags.boat_repaired = v; })));
+      el("span", null, t("博物馆捐赠")), num(t("博物馆捐赠"), "museum", 95, "{n} 件"),
+      el("span", null, img("Mining_Skill_Icon.png"), t("矿井最深")), num(t("矿井最深"), "mineDepth", 120, "{n} 层"));
+    if (S.node("boat")) world.append(el("span", null, nodeName(P().nodes.get("boat"))), levels([[false, t("没修")], [true, t("已修好")]], pr.flags.boat_repaired, (v) => set((p) => { p.flags.boat_repaired = v; })));
     body.replaceChildren(
-      el("section", { class: "p-section" }, el("h3", null, "技能等级"), skills),
-      el("section", { class: "p-section" }, el("h3", null, "工具"), tools),
-      el("section", { class: "p-section" }, el("h3", null, "农场建筑"), blds),
-      el("section", { class: "p-section" }, el("h3", null, "社区中心（已完成的房间）"), rooms),
-      el("section", { class: "p-section" }, el("h3", null, "其他进度"), world));
+      el("section", { class: "p-section" }, el("h3", null, t("技能等级")), skills),
+      el("section", { class: "p-section" }, el("h3", null, t("工具")), tools),
+      el("section", { class: "p-section" }, el("h3", null, t("农场建筑")), blds),
+      el("section", { class: "p-section" }, el("h3", null, t("社区中心（已完成的房间）")), rooms),
+      el("section", { class: "p-section" }, el("h3", null, t("其他进度")), world));
   }
 
   // ———————————————————— 深链接 ————————————————————
@@ -1124,7 +1156,8 @@
     if (state.view === "browse" && App.browse.category) parts.push(`cat=${App.browse.category}`);
     if (current) parts.push(`sel=${current.type}:${encodeURIComponent(current.id)}`);
     const hash = "#" + parts.join("&");
-    if (location.hash !== hash) history[hashReady ? "pushState" : "replaceState"](null, "", hash);
+    // 英文页有 <base href="../">，只写 "#…" 会被解析到中文页路径。
+    if (location.hash !== hash) history[hashReady ? "pushState" : "replaceState"](null, "", location.pathname + location.search + hash);
   }
   function readHash() {
     readingHash = true;
@@ -1151,6 +1184,8 @@
 
   // ———————————————————— 初始化 ————————————————————
   function bind() {
+    // 切换语言：记住选择，并带上当前查看的条目。
+    $("lang-switch")?.addEventListener("click", e => { e.preventDefault(); window.L10N.switchTo(e.currentTarget.dataset.lang); });
     for (const b of document.querySelectorAll(".hotbar-views button")) b.addEventListener("click", () => {
       if (b.dataset.view === "browse") App.select(null);
       setView(b.dataset.view); b.focus({ preventScroll: true });
@@ -1166,14 +1201,14 @@
     $("zoom-out").addEventListener("click", () => App.map.zoom(1 / 1.5));
     $("zoom-fit").addEventListener("click", () => App.map.fit());
     const mapSeg = $("map-seg");
-    for (const [k, label] of [["valley", "山谷"], ["island", "姜岛"]]) {
+    for (const [k, label] of [["valley", t("山谷")], ["island", App.areaTitle("ginger_island")]]) {
       mapSeg.append(el("button", { role: "radio", dataset: { v: k }, onclick: () => {
         if (k === "island" && !S.area("ginger_island")) App.select({ type: "area", id: "ginger_island" });
         else App.map.setMap(k);
-      } }, k === "island" && !S.area("ginger_island") ? "其他地区" : label));
+      } }, k === "island" && !S.area("ginger_island") ? t("其他地区") : label));
     }
     const modeSeg = $("tree-mode");
-    for (const [k, label] of [["all", "全部路线"], ["next", "下一步"], ["done", "已完成"]]) {
+    for (const [k, label] of [["all", t("全部路线")], ["next", t("下一步")], ["done", t("已完成")]]) {
       modeSeg.append(el("button", { role: "radio", dataset: { v: k }, onclick: () => { App.tree.setMode(k); paintModes(); } }, label));
     }
     $("spoiler").checked = S.active();
@@ -1187,7 +1222,7 @@
     $("fx").addEventListener("change", (e) => { state.fx = e.target.checked; App.emit("fx"); });
     $("journal-handle").addEventListener("click", () => {
       const collapsed = $("journal").classList.toggle("collapsed");
-      $("journal-handle").textContent = collapsed ? "展开" : "收起";
+      $("journal-handle").textContent = collapsed ? t("展开") : t("收起");
       $("journal-handle").setAttribute("aria-expanded", String(!collapsed));
     });
     window.addEventListener("keydown", (e) => {
@@ -1208,7 +1243,7 @@
     $("spoiler").checked = S.active();
     for (const b of $("map-seg").children) {
       b.setAttribute("aria-checked", String(b.dataset.v === App.map.mapKey));
-      if (b.dataset.v === "island") b.textContent = S.area("ginger_island") ? "姜岛" : "其他地区";
+      if (b.dataset.v === "island") b.textContent = S.area("ginger_island") ? App.areaTitle("ginger_island") : t("其他地区");
     }
     for (const b of $("tree-mode").children) {
       b.hidden = b.dataset.v !== "all" && !App.conditionsActive();

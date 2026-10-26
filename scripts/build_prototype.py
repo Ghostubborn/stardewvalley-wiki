@@ -6,6 +6,7 @@
 
 import base64
 import hashlib
+import html
 import json
 import os
 import re
@@ -22,6 +23,9 @@ IMG_OUT = os.path.join(PROTO, "assets", "img")
 FONT_SRC = os.path.join(PROTO, "assets", "fonts", "fusion-pixel-12px-proportional-zh_hans.otf")
 FONT_OUT = os.path.join(PROTO, "assets", "fonts", "pixel-subset.woff2")
 PYFTSUBSET = os.path.join(ROOT, ".venv", "bin", "pyftsubset")
+UI_EN = os.path.join(ROOT, "data", "i18n", "ui.en.json")
+SITE = "https://stardewvalley-wiki.pages.dev/"
+CJK = re.compile(r"[㐀-鿿]")
 
 UI_IMAGES = [
     "Controls_Icon.png",
@@ -331,11 +335,102 @@ def main():
         f.write("/* 由 scripts/build_prototype.py 生成；数据来自星露谷物语中文 Wiki（CC BY-NC-SA 3.0）的 2025-12-18 归档。 */\n")
         f.write("window.SDV = " + payload + ";\n")
 
-    subset_font(payload)
+    english = build_english()
+    subset_font(payload + english)
     version_assets()
     print(json.dumps({"data_js_mb": round(os.path.getsize(os.path.join(PROTO, "data.js")) / 1e6, 2),
                       "items": len(out_items), "pages": len(out_pages), "pins": len(pins), "recipes": len(recipes),
                       "images_copied": copied, "images_missing": missing}, ensure_ascii=False))
+
+
+def build_english():
+    """英文版：data.en.js（英文 Wiki 的显示文本）、js/strings.en.js（界面词典）和 en/index.html。"""
+    data, report = runpy.run_path(os.path.join(ROOT, "scripts", "build_en.py"))["build"]()
+    missing = report["missing"]
+    if missing:
+        print("英文资料缺口：", json.dumps(missing, ensure_ascii=False))
+    payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+    with open(os.path.join(PROTO, "data.en.js"), "w", encoding="utf-8") as f:
+        f.write("/* 由 scripts/build_prototype.py 生成；英文显示文本来自 Stardew Valley Wiki（CC BY-NC-SA 3.0）的 2025-12-18 归档。 */\n")
+        f.write("window.SDV_EN = " + payload + ";\n")
+    with open(UI_EN, encoding="utf-8") as f:
+        ui = json.load(f)
+    strings = json.dumps(ui, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+    with open(os.path.join(PROTO, "js", "strings.en.js"), "w", encoding="utf-8") as f:
+        f.write("/* 由 scripts/build_prototype.py 从 data/i18n/ui.en.json 生成：界面文案，以中文原文为键。 */\n")
+        f.write("window.SDV_UI_EN = " + strings + ";\n")
+    page = english_page(ui)
+    os.makedirs(os.path.join(PROTO, "en"), exist_ok=True)
+    with open(os.path.join(PROTO, "en", "index.html"), "w", encoding="utf-8") as f:
+        f.write(page)
+    print("英文版：", json.dumps(report["counts"], ensure_ascii=False))
+    return payload + strings + page
+
+
+# 英文页只改显示文字与语言相关的属性；脚本和注释原样保留。
+EN_HEAD = {
+    "title": "Stardew Valley Interactive Guide · Prototype",
+    "description": "A Stardew Valley reference: browse fish, villager gifts, crops, bundles and upgrade paths by category, with spoiler protection on by default. Data from the Stardew Valley Wiki.",
+    "og_description": "Browse fish, villager gifts, crops, bundles and upgrade paths by category, with spoiler protection on by default. Data from the Stardew Valley Wiki.",
+}
+TEXT_ATTRS = ("aria-label", "title", "placeholder", "alt", "data-title")
+
+
+def english_page(ui):
+    with open(os.path.join(PROTO, "index.html"), encoding="utf-8") as f:
+        page = f.read()
+    missing = []
+
+    def tr(text):
+        core = text.strip()
+        if not core or not CJK.search(core):
+            return text
+        value = ui.get(html.unescape(core))
+        if value is None:
+            missing.append(core)
+            return text
+        return text.replace(core, html.escape(value, quote=False))
+
+    def attr(match):
+        name, value = match.group(1), match.group(2)
+        if not CJK.search(value):
+            return match.group(0)
+        out = ui.get(html.unescape(value))
+        if out is None:
+            missing.append(value)
+            return match.group(0)
+        return f'{name}="{html.escape(out)}"'
+
+    parts = re.split(r"(<script\b.*?</script>|<!--.*?-->)", page, flags=re.S)
+    for i in range(0, len(parts), 2):
+        chunk = parts[i]
+        chunk = re.sub(r"<title>.*?</title>", f"<title>{EN_HEAD['title']}</title>", chunk)
+        chunk = re.sub(r'(<meta name="description" content=")[^"]*"', lambda m: m.group(1) + html.escape(EN_HEAD["description"]) + '"', chunk)
+        chunk = re.sub(r'(<meta property="og:site_name" content=")[^"]*"', r'\1Stardew Valley Interactive Guide"', chunk)
+        chunk = re.sub(r'(<meta property="og:title" content=")[^"]*"', r'\1Stardew Valley Interactive Guide"', chunk)
+        chunk = re.sub(r'(<meta property="og:description" content=")[^"]*"', lambda m: m.group(1) + html.escape(EN_HEAD["og_description"]) + '"', chunk)
+        chunk = chunk.replace(f'<meta property="og:url" content="{SITE}">', f'<meta property="og:url" content="{SITE}en/">')
+        chunk = chunk.replace('<meta property="og:locale" content="zh_CN">', '<meta property="og:locale" content="en_US">')
+        chunk = chunk.replace("assets/social/preview-zh.png", "assets/social/preview-en.png")
+        chunk = re.sub(r'href="([^"]+)" data-href-en="([^"]+)"', r'href="\2"', chunk)
+        chunk = re.sub(r"(%s)=\"([^\"]*)\"" % "|".join(TEXT_ATTRS), attr, chunk)
+        chunk = re.sub(r">([^<>]+)<", lambda m: ">" + tr(m.group(1)) + "<", chunk)
+        parts[i] = chunk
+    page = "".join(parts)
+    # 切换按钮在英文页指向中文版，按钮文字保持中文。
+    page = re.sub(r'<a class="lang-switch"[^>]*>EN</a>',
+                  '<a class="lang-switch" id="lang-switch" href="./" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh" title="切换到中文">中文</a>', page)
+    page = page.replace('<html lang="zh-CN">', '<html lang="en">', 1)
+    # 英文页在 /en/，静态资源与中文页共用根目录的文件。
+    page = page.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<base href="../">', 1)
+    page = page.replace('<script src="js/i18n.js', '<script src="js/strings.en.js"></script>\n<script src="data.en.js"></script>\n<script src="js/i18n.js', 1)
+    if missing:
+        raise ValueError("英文页缺少翻译：" + json.dumps(sorted(set(missing)), ensure_ascii=False))
+    visible = re.sub(r"<script\b.*?</script>|<!--.*?-->", "", page, flags=re.S)
+    leftover = [x for x in CJK.findall(re.sub(r'title="切换到中文">中文<', "", visible))]
+    if leftover:
+        raise ValueError("英文页仍有中文：" + "".join(leftover)[:80])
+    return page
 
 
 def subset_font(payload):
@@ -376,18 +471,21 @@ def version_assets():
                      "assets/fonts/pixel-subset.woff2?v=" + digest(FONT_OUT), css)
         with open(css_path, "w", encoding="utf-8") as f:
             f.write(css)
-    html_path = os.path.join(PROTO, "index.html")
-    with open(html_path, encoding="utf-8") as f:
-        html = f.read()
     def replace(match):
         attr, name = match.group(1), match.group(2)
         path = os.path.join(PROTO, name)
         if not name.endswith((".js", ".css", ".woff2")) or not os.path.isfile(path):
             return match.group(0)
         return f'{attr}="{name}?v={digest(path)}"'
-    html = re.sub(r'(src|href)="([^"?]+)(?:\?[^\"]*)?"', replace, html)
-    with open(html_path, "w", encoding="utf-8") as f:
-        f.write(html)
+    # 两个语言版本的页面引用同一批根目录资源（英文页通过 <base href="../">）。
+    for html_path in (os.path.join(PROTO, "index.html"), os.path.join(PROTO, "en", "index.html")):
+        if not os.path.isfile(html_path):
+            continue
+        with open(html_path, encoding="utf-8") as f:
+            page = f.read()
+        page = re.sub(r'(src|href)="([^"?]+)(?:\?[^\"]*)?"', replace, page)
+        with open(html_path, "w", encoding="utf-8") as f:
+            f.write(page)
 
 
 if __name__ == "__main__":

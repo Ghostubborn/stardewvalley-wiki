@@ -3,9 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* 语言版本：没有手动选择过时，按浏览器首选语言进入中文版或英文版；切换过一次后按所选版本。保留 #条目。 */
+(function () {
+  try {
+    var page = document.documentElement.lang.indexOf("en") === 0 ? "en" : "zh";
+    var pref = null;
+    try { pref = localStorage.getItem("sdv-lang"); } catch (e) {}
+    if (pref !== "en" && pref !== "zh") {
+      var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+      pref = "en";
+      for (var i = 0; i < langs.length; i++) {
+        var l = String(langs[i]).toLowerCase();
+        if (l.indexOf("zh") === 0) { pref = "zh"; break; }
+        if (l.indexOf("en") === 0) break;
+      }
+    }
+    if (pref === page) return;
+    var path = location.pathname;
+    var root = page === "en" ? path.replace(/en\/(?:index\.html)?$/, "") : path.replace(/index\.html$/, "");
+    location.replace((pref === "en" ? root + "en/" : root) + location.search + location.hash);
+  } catch (e) {}
+})();
+</script>
 <title>星露谷交互手册 · 原型</title>
-<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=802e257fd024" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=4089fabddaa2">
+<meta name="description" content="星露谷物语资料查询：按分类查鱼、居民礼物、作物、收集包与升级路线，默认防剧透。资料整理自星露谷 Wiki。">
+<link rel="alternate" hreflang="zh-Hans" href="https://stardewvalley-wiki.pages.dev/">
+<link rel="alternate" hreflang="en" href="https://stardewvalley-wiki.pages.dev/en/">
+<link rel="alternate" hreflang="x-default" href="https://stardewvalley-wiki.pages.dev/en/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="星露谷交互手册">
+<meta property="og:title" content="星露谷交互手册">
+<meta property="og:description" content="按分类查鱼、居民礼物、作物、收集包与升级路线，默认防剧透。资料整理自星露谷 Wiki。">
+<meta property="og:url" content="https://stardewvalley-wiki.pages.dev/">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://stardewvalley-wiki.pages.dev/assets/social/preview-zh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=87fc65b65f00" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=d26a84e7abe2">
 <link rel="stylesheet" href="browse.css?v=90899f28765b">
 <link rel="stylesheet" href="guides.css?v=268492097177">
 <link rel="stylesheet" href="collections.css?v=df70116c3653">
@@ -64,6 +101,7 @@
     <div class="journal-head">
       <h1 class="journal-title" id="journal-title">今日手账</h1>
       <div class="journal-actions">
+        <a class="lang-switch" id="lang-switch" href="en/" hreflang="en" lang="en" data-lang="en" title="Switch to English">EN</a>
         <a class="repo-link" href="https://github.com/Ghostubborn/stardewvalley-wiki" target="_blank" rel="noopener noreferrer" aria-label="GitHub 仓库" title="查看源码或提出建议（在新标签页打开）"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 5-6 7 6 7M16 5l6 7-6 7M14 3l-4 18"/></svg><span>GitHub ↗</span></a>
         <button class="music-toggle" id="music-toggle" type="button" aria-label="背景音乐" aria-pressed="false" aria-controls="background-music" title="播放星露谷 OST · Spring (It's A Big World Outside)">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/></svg>
@@ -79,7 +117,7 @@
     <label class="spoiler-control check"><input type="checkbox" id="spoiler" checked> 防剧透 <span>按需查看后续内容</span></label>
     <div class="journal-body" id="journal-body"></div>
     <footer class="wiki-credit">
-      感谢 <a href="https://zh.stardewvalleywiki.com/" target="_blank" rel="noopener noreferrer" title="在新标签页打开星露谷物语中文维基">星露谷 Wiki</a> 社区的资料整理与分享
+      感谢 <a href="https://zh.stardewvalleywiki.com/" data-href-en="https://stardewvalleywiki.com/" target="_blank" rel="noopener noreferrer" title="在新标签页打开星露谷物语中文维基">星露谷 Wiki</a> 社区的资料整理与分享
       <a class="feedback-link" href="https://github.com/Ghostubborn/stardewvalley-wiki/issues/new" target="_blank" rel="noopener noreferrer">反馈建议 ↗</a>
     </footer>
   </aside>
@@ -146,18 +184,19 @@
 </div>
 
 <script src="data.js?v=5ba820b17b17"></script>
-<script src="js/core.js?v=e4c715b2c561"></script>
-<script src="js/map.js?v=2046674457d8"></script>
-<script src="js/tree.js?v=15e4b567d14c"></script>
-<script src="js/spoilers.js?v=ea0a7e770ecf"></script>
-<script src="js/map-content.js?v=47049c4a7fa1"></script>
-<script src="js/browse-home.js?v=bf54adfd7b1c"></script>
-<script src="js/browse-views.js?v=945c14a9f983"></script>
-<script src="js/browse.js?v=dcbc32d1ad07"></script>
-<script src="js/guides.js?v=2ec8ebe07194"></script>
-<script src="js/schedules.js?v=d56a0dac5398"></script>
-<script src="js/collections.js?v=2fb93b583a9d"></script>
-<script src="js/ui.js?v=1fd33393afc2"></script>
-<script src="js/music.js?v=55ef2e0cd239"></script>
+<script src="js/i18n.js?v=a8528ce00f89"></script>
+<script src="js/core.js?v=aa4c25c8db3d"></script>
+<script src="js/map.js?v=ea89ad22ed18"></script>
+<script src="js/tree.js?v=1b75de8b607d"></script>
+<script src="js/spoilers.js?v=5bfe7ec8ac50"></script>
+<script src="js/map-content.js?v=b5871b470fa5"></script>
+<script src="js/browse-home.js?v=15ad9dfd2d6c"></script>
+<script src="js/browse-views.js?v=f55293eed62f"></script>
+<script src="js/browse.js?v=98ed160f02d0"></script>
+<script src="js/guides.js?v=f54182cd9425"></script>
+<script src="js/schedules.js?v=d7703b34b5da"></script>
+<script src="js/collections.js?v=dfafae1fbb7b"></script>
+<script src="js/ui.js?v=6ad65ddb56ff"></script>
+<script src="js/music.js?v=7de624dccbd2"></script>
 </body>
 </html>

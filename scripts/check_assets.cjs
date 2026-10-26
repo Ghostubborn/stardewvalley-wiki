@@ -41,5 +41,23 @@ assert(D.items['(O)Book_AnimalCatalogue'], 'Underscore/case normalization lost a
 const chair = D.pages['水晶椅'];
 assert(D.items[chair.id]?.i, 'Furniture detail lost its image');
 assert.equal(D.pages['骷髅'].id, null, 'A monster must not resolve to same-name furniture');
+// Both language entry pages must reference files that exist; /en/ resolves them from the root via <base href="../">.
+const pages = ['prototype/index.html', 'prototype/en/index.html'];
+for (const page of pages) {
+  const html = fs.readFileSync(path.join(root, page), 'utf8');
+  if (page.includes('/en/')) {
+    assert(html.includes('<html lang="en">') && html.includes('<base href="../">'), 'English page must declare its language and asset base');
+    assert(!/[㐀-鿿]/.test(html.replace(/<script\b[\s\S]*?<\/script>|<!--[\s\S]*?-->/g, '').replace('title="切换到中文">中文<', '')), 'English page shows Chinese text');
+  }
+  for (const [, ref] of html.matchAll(/(?:src|href)="([^"#:]+?)(?:\?[^"]*)?"/g)) {
+    if (ref.endsWith('/')) continue;
+    assert(fs.existsSync(path.join(root, 'prototype', ref)), `${page} references a missing file: ${ref}`);
+  }
+}
+const english = { window: {} };
+vm.runInNewContext(fs.readFileSync(path.join(root, 'prototype/data.en.js'), 'utf8'), english);
+vm.runInNewContext(fs.readFileSync(path.join(root, 'prototype/js/strings.en.js'), 'utf8'), english);
+assert(Object.keys(english.window.SDV_EN.names).length > 1000 && english.window.SDV_EN.guides && english.window.SDV_EN.progression, 'English data is incomplete');
+assert(Object.keys(english.window.SDV_UI_EN).length > 800, 'English interface strings are incomplete');
 console.log(JSON.stringify({ checkedImages: images.size, orphanPageItems: 0, totalItems: Object.keys(D.items).length,
-  itemsWithImages: Object.values(D.items).filter(item => item.i).length, status: 'passed' }));
+  itemsWithImages: Object.values(D.items).filter(item => item.i).length, languagePages: pages.length, status: 'passed' }));

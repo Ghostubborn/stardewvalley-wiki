@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SDV Pixel";
-  src: url("assets/fonts/pixel-subset.woff2?v=802e257fd024") format("woff2");
+  src: url("assets/fonts/pixel-subset.woff2?v=87fc65b65f00") format("woff2");
   font-display: swap;
 }
 
@@ -172,11 +172,14 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
   position: absolute; top: 16px; left: 16px; width: 318px; max-height: calc(100% - 108px);
   display: flex; flex-direction: column; z-index: 6; padding: 14px 14px 8px;
 }
-.journal-head { display: flex; align-items: center; justify-content: space-between; }
-.journal-title { margin: 0; font: 24px/1.2 var(--pixel); font-weight: normal; }
-.journal-actions { display: flex; align-items: center; gap: 6px; }
+/* 标题较长（如英文 “Progression”）时，操作按钮换到下一行右侧，不挤出面板。 */
+.journal-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 8px; }
+.journal-title { margin: 0; font: 24px/1.2 var(--pixel); font-weight: normal; white-space: nowrap; }
+.journal-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .repo-link { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 5px; border: 1px solid var(--bark); background: var(--parchment-hi); color: var(--bark); font-size: 11px; white-space: nowrap; text-decoration: none; }
 .repo-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.lang-switch { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; min-height: 32px; padding: 0 6px; border: 2px solid var(--bark); background: var(--parchment-hi); color: var(--bark); font-size: 12px; white-space: nowrap; text-decoration: none; }
+.lang-switch:hover, .lang-switch:focus-visible { background: var(--walnut); color: var(--parchment-hi); }
 .music-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 7px; border: 2px solid var(--bark); background: var(--parchment-hi); font-size: 12px; white-space: nowrap; }
 .music-toggle[aria-pressed="true"] { background: var(--walnut); color: var(--parchment-hi); }
 .music-toggle svg { flex: none; }
@@ -216,6 +219,7 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
   padding: 4px 6px; border: 0; background: none; text-align: left; line-height: 1.35;
 }
 .row:hover, .row.is-selected { background: var(--parchment-hi); }
+.row.row-text { grid-template-columns: minmax(0, 1fr); }
 .row img { width: 24px; height: 24px; }
 .row .main { min-width: 0; }
 .row .name { display: block; font-weight: 600; }
@@ -558,5 +562,6 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .point-heading h3 { margin: 0; }
 @media (max-width: 380px) {
   .repo-link { width: 30px; min-height: 40px; flex: none; }
+  .lang-switch { min-height: 40px; flex: none; }
   .repo-link span { display: none; }
 }

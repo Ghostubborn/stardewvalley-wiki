@@ -5,7 +5,7 @@
   const saved = A.state.spoilers;
   A.state.spoilers = { enabled: saved?.enabled !== false, known: Array.isArray(saved?.known) ? saved.known.filter(x => typeof x === "string") : [] };
   const revealed = new Set(); // 临时查看不写入个人进度或跨会话保留
-  let memo = new Map(), blockedNames = null;
+  let memo = new Map(), blockedNames = null, blockedEnglish = null;
   const nodesByTitle = new Map(), nodesByItem = new Map();
   for (const n of P.nodes.values()) {
     nodesByTitle.set(n.title, n);
@@ -25,7 +25,8 @@
     "金色核桃", "齐钻", "齐豆", "齐瓜", "银河之魂", "无限之刃", "无限之锤", "无限匕首", "谜之盒", "金色谜之盒",
     "神秘树", "神秘糖浆", "肯特", "锻造", "附魔", "祝尼魔小屋", "传送塔", "姜岛图腾柱", "魔法墨水", "黑暗护身符",
   ]);
-  const lateTitle = /姜岛|火山|核桃|齐先生|齐钻|精通|完美|无限|银河|附魔|女巫|巫婆|金色谜之盒|失落|秘密纸条|秘密森林|骷髅|头骨钥匙|生锈的钥匙|传送塔|传送图腾|沙漠|下水道|海盗湾|宝石鸟|饕餮|锻造/;
+  // 以下水道居民命名的家具等物品同样透露隐藏角色（例如科罗布斯的肖像）。
+  const lateTitle = /姜岛|火山|核桃|齐先生|齐钻|精通|完美|无限|银河|附魔|女巫|巫婆|金色谜之盒|失落|秘密纸条|秘密森林|骷髅|头骨钥匙|生锈的钥匙|传送塔|传送图腾|沙漠|下水道|海盗湾|宝石鸟|饕餮|锻造|科罗布斯/;
   const storyType = /quest|event|achievement|monster|special/i;
   const earlySources = /皮埃尔|铁匠铺|木匠|玛妮|旅行货车|鱼店|星之果实酒吧|农场|鹈鹕镇|煤矿森林|沙滩|河流|海洋|深山|高山湖泊|初始|商店购买/;
   const protectedSource = /姜岛|火山|核桃|齐先生|齐钻|精通|完美|骷髅|巫婆|女巫|沙漠|下水道|科罗布斯|桑迪|矮人|秘密森林|特别任务|爱心事件|剧情|附魔|锻造/;
@@ -35,7 +36,7 @@
     if (ref.type === "node") return P.nodes.get(ref.id)?.title || "";
     if (ref.type === "area") return A.AREAS[ref.id]?.title || "";
     if (ref.type === "item") return A.itemInfo(ref.id)?.z || ref.id;
-    if (ref.type === "bundle") return A.browse?.bundle(ref.id)?.bundle.name || "收集包";
+    if (ref.type === "bundle") return A.browse?.bundle(ref.id)?.bundle.name || "收集包"; // 中文 ID
     return ref.id;
   }
   const acknowledged = name => revealed.has(name) || A.state.spoilers.known.includes(name);
@@ -101,16 +102,40 @@
     memo.set(name, result);
     return result;
   }
+  // 英文版显示的是英文名称，受保护的条目也要按英文名称识别（整词、区分大小写，避免误伤普通词）。
+  function englishNames(name) {
+    const out = new Set();
+    const add = value => {
+      if (!value || value === name || /[㐀-鿿]/.test(value) || value.length < 3) return;
+      out.add(value);
+      if (value.startsWith("The ")) out.add(value.slice(4));
+    };
+    add(A.EN.names?.[name]); add(D.pages[name]?.e); add(nodesByTitle.get(name)?.name);
+    const it = A.itemInfo(name);
+    if (it?.id) add(it.e);
+    return out;
+  }
   function textAllowed(text, context = "") {
     if (!active() || !text) return true;
-    if (context) text = text.split(context).join("");
+    if (context) {
+      text = text.split(context).join("");
+      const own = A.EN && (A.EN.names?.[context] || D.pages[context]?.e || nodesByTitle.get(context)?.name);
+      if (own) text = text.split(own).join("");
+    }
     if (!blockedNames) {
       const names = new Set([...Object.keys(D.pages), ...Object.values(D.items).map(i => i.z), ...nodesByTitle.keys(), ...discoveries]);
       // A numeric skill requirement is a rule, not a future reward or place.
       // It may be needed to explain a currently requested item or basic control.
       blockedNames = [...names].filter(name => name.length >= 2 && nodesByTitle.get(name)?.kind !== "skill" && !canView({ type: "page", id: name }));
+      blockedEnglish = null;
+      if (A.EN) {
+        const english = new Set(blockedNames.flatMap(name => [...englishNames(name)]));
+        const words = [...english].sort((a, b) => b.length - a.length).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+        if (words.length) blockedEnglish = new RegExp(`(?<![A-Za-z])(?:${words.join("|")})(?![A-Za-z])`);
+      }
     }
-    return !blockedNames.some(name => text.includes(name));
+    if (blockedNames.some(name => text.includes(name))) return false;
+    return !(blockedEnglish && blockedEnglish.test(text));
   }
   // 归档中具体钓鱼标记所属的地点；坐标不是遮罩范围，也不用于推断相邻点位。
   function mapPointArea(ref, point) {
@@ -125,7 +150,7 @@
     const area = mapPointArea(ref, point);
     return !area || canView({ type: "area", id: area });
   }
-  function reset() { memo = new Map(); blockedNames = null; }
+  function reset() { memo = new Map(); blockedNames = null; blockedEnglish = null; }
   A.on(reason => { if (reason === "progress:preset") revealed.clear(); reset(); });
   A.spoilers = {
     active, canView, title, textAllowed, mapPoint, mapPointArea,

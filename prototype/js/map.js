@@ -338,7 +338,8 @@
       }
       button.dataset.id = marker.id;
       button.tabIndex = index === 0 ? 0 : -1;
-      button.setAttribute("aria-label", `${marker.title}，${marker.aggregate ? "聚合标记，" : App.mapContents.positionNote(marker.points[0]) + "，"}${marker.entries.length} 条资料，${marker.entries.length > 1 ? "查看列表" : "查看详情"}`);
+      button.setAttribute("aria-label", App.t("{title}，{kind}，{n} 条资料，{action}", { title: marker.title, kind: marker.aggregate ? App.t("聚合标记") : App.mapContents.positionNote(marker.points[0]),
+        n: marker.entries.length, action: marker.entries.length > 1 ? App.t("查看列表") : App.t("查看详情") }));
       button.style.left = `${marker.x - 22}px`; button.style.top = `${marker.y - 22}px`;
     });
   }
@@ -390,7 +391,11 @@
           // particular shop, resident or fish.
           ctx.fillStyle = "#5b2b2a"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
           ctx.font = 'bold 15px "PingFang SC", sans-serif'; ctx.fillText(String(marker.points.length), sx, sy - 4);
-          ctx.font = '10px "SDV Pixel", sans-serif'; ctx.fillText("处", sx, sy + 8);
+          // “处”在英文版是一个单词，按徽章内宽缩小字号。
+          const unit = App.t("处");
+          let size = 10;
+          do ctx.font = `${size}px "SDV Pixel", sans-serif`; while (ctx.measureText(unit).width > 24 && --size > 7);
+          ctx.fillText(unit, sx, sy + 8);
         } else if (im) {
           const scale = Math.min(24 / im.naturalWidth, 24 / im.naturalHeight);
           const w = Math.max(1, Math.round(im.naturalWidth * scale)), h = Math.max(1, Math.round(im.naturalHeight * scale));
@@ -407,8 +412,8 @@
       }
       if (selected || hover?.key === marker.id) pixelText(many ? marker.title : primary.label, sx, sy - 27);
       hits.push({ x: sx, y: sy, r: W <= 760 ? 27 : 24, box: [sx - 20, sy - 20, sx + 34, sy + 26], key: marker.id, marker,
-        tip: { title: marker.title, why: marker.aggregate ? `${marker.entries.length} 条资料 · 小点表示各地点，点击选择并定位`
-          : primary.concealed ? "名称与条件已收起，点击选择查看" : `${App.mapContents.positionNote(marker.points[0])} · ${many ? marker.entries.length + " 条资料，点击查看" : primary.subtitle || "点击查看资料"}` } });
+        tip: { title: marker.title, why: marker.aggregate ? App.t("{n} 条资料 · 小点表示各地点，点击选择并定位", { n: marker.entries.length })
+          : primary.concealed ? App.t("名称与条件已收起，点击选择查看") : `${App.mapContents.positionNote(marker.points[0])} · ${many ? App.t("{n} 条资料，点击查看", { n: marker.entries.length }) : primary.subtitle || App.t("点击查看资料")}` } });
     }
     syncKeyboardMarkers(visibleMarkers);
   }

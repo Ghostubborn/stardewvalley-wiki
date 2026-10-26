@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..', 'prototype');
 const context = { window: {}, structuredClone, setTimeout: () => 0, clearTimeout() {}, localStorage: { getItem: () => null } };
 vm.createContext(context);
-for (const file of ['data.js', 'js/core.js', 'js/schedules.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
+for (const file of ['data.js', 'js/i18n.js', 'js/core.js', 'js/schedules.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
 const A = context.window.App;
 const spring = { season: 'spring', day: 10, weather: 'sun', time: 1200 };
 const vincent = A.D.schedules['文森特'].groups.find(g => /每个季节9日和23日/.test(g.label));

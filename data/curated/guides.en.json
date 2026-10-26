@@ -1,0 +1,1138 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "verifiedAt": "2026-10-26",
+    "archiveDate": "2025-12-18",
+    "license": "CC BY-NC-SA 3.0",
+    "attribution": "Stardew Valley Wiki and the Chinese Stardew Valley Wiki; basic rules excerpted and rewritten as task-focused answers for this handbook.",
+    "verification": "Checked by hand against the archived English wiki revisions in data/wiki/en-pages.jsonl; controller buttons confirmed from both the button image names and the page text. Mobile saves cite the English wiki's own Mobile Saves page. Two small fishing details not stated on the English pages (the green bar bouncing off the bottom, the \"!\" being yellow) follow the Chinese wiki's Fishing page.",
+    "scope": "Based on the 2025-12-18 archive; does not cover later game versions or mods."
+  },
+  "sources": {
+    "控制": {
+      "title": "Controls",
+      "url": "https://stardewvalleywiki.com/Controls",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189644",
+      "revisionId": 189644,
+      "revisionAt": "2025-11-15T03:48:16Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "8d0019ff155d11ddc37b7dedf485211429a78b50",
+      "textSha256": "fe15839874436b6410e0efce5b182400c8ef6bf55b7c493cabfc0df7f30eb4ef"
+    },
+    "游戏内时间": {
+      "title": "Day Cycle",
+      "url": "https://stardewvalleywiki.com/Day_Cycle",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=188803",
+      "revisionId": 188803,
+      "revisionAt": "2025-09-16T01:29:09Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "47c3f4f0f674fbb402619f343d2221b85ce19e1b",
+      "textSha256": "6c0f1bb898bc47b9d11231cdbf36fd23408df5af07732303129c598190eb01b8"
+    },
+    "天气": {
+      "title": "Weather",
+      "url": "https://stardewvalleywiki.com/Weather",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189737",
+      "revisionId": 189737,
+      "revisionAt": "2025-11-20T18:29:30Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "a5f580f30c9c2cdb9b39d054efd952dad6b8ca99",
+      "textSha256": "d48b50fb9cbeeed333fc39b4ccd8333c6c724bb41f7d38844e18732c966ba1f2"
+    },
+    "季节": {
+      "title": "Seasons",
+      "url": "https://stardewvalleywiki.com/Seasons",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=183403",
+      "revisionId": 183403,
+      "revisionAt": "2025-01-09T07:21:39Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "3ef9f4d14a91523effd55af6ff4192e2d5c75a70",
+      "textSha256": "c635b61ae55164ed47664f684b6619c44f285ba833f6e403ed253481436c37b4"
+    },
+    "新手指南": {
+      "title": "Getting Started",
+      "url": "https://stardewvalleywiki.com/Getting_Started",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189808",
+      "revisionId": 189808,
+      "revisionAt": "2025-11-27T20:53:19Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "25fe8913f3ae88c1103ae70d3b1aee59eaadf2f4",
+      "textSha256": "64f1ab528b55642bad472a16d88a55612dbe59d5066fc4d2c5c487b48d184a99"
+    },
+    "生命值": {
+      "title": "Health",
+      "url": "https://stardewvalleywiki.com/Health",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=188777",
+      "revisionId": 188777,
+      "revisionAt": "2025-09-16T01:12:02Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "053262198384ed6f578815212520bff14ffc5568",
+      "textSha256": "38f361007404a427217c21f936404fcd7234f5e7ef6b6c3e04bf1372748acf4a"
+    },
+    "友谊": {
+      "title": "Friendship",
+      "url": "https://stardewvalleywiki.com/Friendship",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189835",
+      "revisionId": 189835,
+      "revisionAt": "2025-12-04T11:07:56Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "9ae2b77cf4474b82bb9e54a08c894253e62cb9d6",
+      "textSha256": "0a56b4f47a04954aa1d75f31c1897bf61ce3ff7a603299ae669f76ad3158bee8"
+    },
+    "能量": {
+      "title": "Energy",
+      "url": "https://stardewvalleywiki.com/Energy",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=188776",
+      "revisionId": 188776,
+      "revisionAt": "2025-09-16T01:11:34Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "5fe93e21398ad9221f3159a9c3678f299f538baa",
+      "textSha256": "cbebb952d6d3d2ea5bc254d36b9d29febadead2178b8e8d43baa6ea3ab287707"
+    },
+    "技能": {
+      "title": "Skills",
+      "url": "https://stardewvalleywiki.com/Skills",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189790",
+      "revisionId": 189790,
+      "revisionAt": "2025-11-24T01:19:54Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "1ad16deb6cfc49d0c72426a055a81280765d34cc",
+      "textSha256": "2e05b55927ac12b28e36d6823ae6bc43ba4effc81f6e304b40cde912b088c248"
+    },
+    "农作物": {
+      "title": "Crops",
+      "url": "https://stardewvalleywiki.com/Crops",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=184764",
+      "revisionId": 184764,
+      "revisionAt": "2025-02-12T18:41:05Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "08a2b24cbbe9cbbb994bf5e4d306c1a774e458e9",
+      "textSha256": "0ad42b4342d044956d6e4745624fceba5124a036cea23665d98b791729554584"
+    },
+    "任务": {
+      "title": "Quests",
+      "url": "https://stardewvalleywiki.com/Quests",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189854",
+      "revisionId": 189854,
+      "revisionAt": "2025-12-08T00:24:58Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "c6122eb46d814601ace7646cd399ab002cf72be3",
+      "textSha256": "aec1f6ba73093a50de1b8588f0b830386cae264aa70d47d8830df7c502ef4642"
+    },
+    "钓鱼": {
+      "title": "Fishing",
+      "url": "https://stardewvalleywiki.com/Fishing",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189410",
+      "revisionId": 189410,
+      "revisionAt": "2025-10-29T16:02:47Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "358f231e57e73f55b054351b2a62c07da090b821",
+      "textSha256": "21d93ae2b7dac285d94ef6afcd0475133dc9e810ed31905905c7437361c4478a"
+    },
+    "存档": {
+      "title": "Saves",
+      "url": "https://stardewvalleywiki.com/Saves",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189853",
+      "revisionId": 189853,
+      "revisionAt": "2025-12-07T22:17:03Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "b1549675bf8ed0b6cbf4acab78a7f4a5c4b39197",
+      "textSha256": "4e41ebb8ef0169fdd858c7e6c8e605288ec3f3c3e532b2c9233fcc7cea293a34"
+    },
+    "物品栏": {
+      "title": "Inventory",
+      "url": "https://stardewvalleywiki.com/Inventory",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=171695",
+      "revisionId": 171695,
+      "revisionAt": "2024-05-26T20:27:12Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "49034e37690d0ad18073f3b42d43142c2c120e28",
+      "textSha256": "42bc545c0dd8a1ac98bd106b57d513a7104dd7827775b45f9882f28a12a51934"
+    },
+    "合作": {
+      "title": "Multiplayer",
+      "url": "https://stardewvalleywiki.com/Multiplayer",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=188513",
+      "revisionId": 188513,
+      "revisionAt": "2025-08-28T08:42:02Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "63b28dc22724b921fce030eff0d72e72cb58d848",
+      "textSha256": "2729a8bc72f1ba622cb71d809509b99710e32a7ffbe2e0983f1942292d542f7b"
+    },
+    "移动操作方式": {
+      "title": "Mobile Controls",
+      "url": "https://stardewvalleywiki.com/Mobile_Controls",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189843",
+      "revisionId": 189843,
+      "revisionAt": "2025-12-05T19:22:29Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "506f854b66cda7e3c71cc8c21e2425a2907ed908",
+      "textSha256": "06f9e03ef68aef715fae0fc99c12b8b0cc3e354daf4e6fc9e666686a8e6a5b53"
+    },
+    "训练用鱼竿": {
+      "title": "Training Rod",
+      "url": "https://stardewvalleywiki.com/Training_Rod",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=186976",
+      "revisionId": 186976,
+      "revisionAt": "2025-06-14T16:42:03Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "b421e70ac719217172a7ffdaad32ed6bb53e69dd",
+      "textSha256": "3bd64d91e039bfdacff9af8c0169902d1c15b2ba0eb865d3dee50b4cf650d625"
+    },
+    "手机存档": {
+      "title": "Mobile Saves",
+      "url": "https://stardewvalleywiki.com/Mobile_Saves",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=175805",
+      "revisionId": 175805,
+      "revisionAt": "2024-08-15T02:19:40Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "ffa9d4304d5bcdbdc3719476040b887f856503c1",
+      "textSha256": "7d131dd52426cfd2e8b022b0103fd8283ee58978706a5a1806d7303adf6c2ecc"
+    },
+    "Mobile Controls": {
+      "title": "Mobile Controls",
+      "url": "https://stardewvalleywiki.com/Mobile_Controls",
+      "revisionUrl": "https://stardewvalleywiki.com/mediawiki/index.php?oldid=189843",
+      "revisionId": 189843,
+      "revisionAt": "2025-12-05T19:22:29Z",
+      "archiveDate": "2025-12-18",
+      "archiveUrl": "https://archive.org/details/wiki-stardewvalleywiki.com_mediawiki-20251218",
+      "localSource": "data/wiki/en-pages.jsonl",
+      "sourceSha1": "506f854b66cda7e3c71cc8c21e2425a2907ed908",
+      "textSha256": "06f9e03ef68aef715fae0fc99c12b8b0cc3e354daf4e6fc9e666686a8e6a5b53"
+    }
+  },
+  "entries": {
+    "新手指南": {
+      "title": "Getting Started",
+      "summary": "First learn to plant a small plot, manage your Energy and save your progress; then pick the activities you enjoy.",
+      "sections": [
+        {
+          "heading": "Start with these three steps",
+          "sources": [
+            "新手指南",
+            "农作物",
+            "存档"
+          ],
+          "steps": [
+            "Clear a small patch of land. If you have seeds for the current season, till the soil with your Hoe and plant them. The Meadowlands Farm doesn't start with Parsnip Seeds, so buy some seeds at Pierre's General Store first.",
+            "Water the planted soil with your Watering Can, refilling it at a pond or river when it runs dry. After that, just look after this small plot every day.",
+            "Keep an eye on the clock in the top right and on your Energy bar, and leave time to get home. Go to bed and get through the end-of-day summary before you quit."
+          ]
+        },
+        {
+          "heading": "When you don't know what to do next",
+          "sources": [
+            "新手指南"
+          ],
+          "bullets": [
+            "Read your mail and your Journal to see what the game is pointing you toward.",
+            "The TV at home shows tomorrow's weather forecast, everyday tips (Livin' Off The Land) and a cooking show (The Queen of Sauce).",
+            "Pick one thing to try today: meeting villagers, foraging, farming or practicing your fishing."
+          ]
+        },
+        {
+          "heading": "You don't need to fill every day",
+          "sources": [
+            "季节",
+            "任务"
+          ],
+          "paragraphs": [
+            "Seasons repeat, and there's no limit on how many years you can play. Get to know the activities you enjoy first; when you take on a quest, check whether it has a deadline."
+          ],
+          "note": "These are suggestions for getting started, not a checklist to finish every day."
+        }
+      ],
+      "related": [
+        "控制",
+        "物品栏",
+        "能量",
+        "游戏内时间"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "新手指南",
+        "农作物",
+        "存档",
+        "季节",
+        "任务"
+      ]
+    },
+    "控制": {
+      "title": "Controls",
+      "summary": "First tell \"use tool\" apart from \"check / do action\", then look up the controls for the device you play on.",
+      "sections": [
+        {
+          "heading": "If an action isn't working, check this first",
+          "sources": [
+            "控制",
+            "移动操作方式"
+          ],
+          "bullets": [
+            "Check what's selected on your toolbar, then move close to the target and face it.",
+            "Keyboard & mouse hotkeys can be viewed and reassigned in the Options tab of the game menu.",
+            "On mobile, the control style is also chosen in Options; the touch and button controls below each apply to particular layouts."
+          ]
+        }
+      ],
+      "related": [
+        "钓鱼攻略",
+        "物品栏"
+      ],
+      "verifiedAt": "2026-10-26",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "Keyboard & mouse",
+          "sections": [
+            {
+              "heading": "Default keyboard & mouse controls",
+              "sources": [
+                "控制"
+              ],
+              "facts": [
+                [
+                  "Move",
+                  "W / A / S / D"
+                ],
+                [
+                  "Use tool, place item",
+                  "Left-click, or C"
+                ],
+                [
+                  "Check / do action",
+                  "Right-click, or X"
+                ],
+                [
+                  "Open menu / inventory",
+                  "Esc, or E"
+                ],
+                [
+                  "Journal",
+                  "F"
+                ],
+                [
+                  "Map",
+                  "M"
+                ],
+                [
+                  "Shift toolbar",
+                  "Tab"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "sections": [
+            {
+              "heading": "Default tap-to-move controls",
+              "sources": [
+                "移动操作方式",
+                "Mobile Controls"
+              ],
+              "steps": [
+                "Select the item you want on the toolbar. Tap the ground to walk there, or tap a target to interact with it.",
+                "Tapping stones, wood and similar targets automatically selects the right tool; the Scythe is the exception and must be selected yourself.",
+                "For fixed on-screen buttons, choose \"Tap-to-move & Joystick & Buttons\" in Options."
+              ],
+              "note": "If a giftable item is selected when you tap a villager, they may receive it as a gift when you reach them, so check what you're holding first."
+            },
+            {
+              "heading": "With the joystick and two buttons shown",
+              "sources": [
+                "移动操作方式"
+              ],
+              "facts": [
+                [
+                  "Joystick (left)",
+                  "Move your farmer"
+                ],
+                [
+                  "Left button",
+                  "Use tool; hold to keep using it"
+                ],
+                [
+                  "Right button",
+                  "Check / do action"
+                ]
+              ],
+              "note": "This applies only to the \"Tap-to-move & Joystick & Buttons\" layout; other touch layouts use different screen areas and gestures."
+            }
+          ]
+        },
+        {
+          "id": "controller",
+          "label": "Controller",
+          "sections": [
+            {
+              "heading": "Default buttons by controller",
+              "sources": [
+                "控制"
+              ],
+              "facts": [
+                [
+                  "Move",
+                  "Left Joystick or D-pad"
+                ],
+                [
+                  "Use tool",
+                  "Xbox: X · PlayStation: Square · Switch: Y"
+                ],
+                [
+                  "Check / do action",
+                  "Xbox: A · PlayStation: Cross · Switch: A"
+                ],
+                [
+                  "Open menu",
+                  "Xbox: Menu (Start on Xbox 360) / B · PlayStation: Options / Circle · Switch: + / B"
+                ],
+                [
+                  "Shift toolbar",
+                  "Xbox: LB / RB · PlayStation: L1 / R1 · Switch: L / R"
+                ]
+              ],
+              "note": "These are the default mappings in the archived wiki; if you've remapped buttons in your system settings, go by the buttons your game shows."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "控制",
+        "移动操作方式",
+        "Mobile Controls"
+      ]
+    },
+    "物品栏": {
+      "title": "Inventory",
+      "summary": "Put the things you need on the toolbar first, then deal with the extras.",
+      "sections": [
+        {
+          "heading": "Backpack and toolbar",
+          "sources": [
+            "物品栏"
+          ],
+          "bullets": [
+            "Your backpack starts with 12 slots. The selected toolbar slot decides which item you're using or holding.",
+            "Open the inventory to move items and split stacks; the Auto-Sort button re-sorts items in game order.",
+            "Pierre's General Store sells backpack upgrades: 2,000g for 24 slots, then 10,000g for 36 slots."
+          ]
+        },
+        {
+          "heading": "When you run out of space",
+          "sources": [
+            "物品栏"
+          ],
+          "paragraphs": [
+            "Sort or move items before deciding what to throw away. Dragging an item to the Trash Can deletes it permanently, and items dropped near water may be lost for good."
+          ],
+          "note": "In a shop window, clicking an item may sell it instead of moving it. Check which screen is open before you act."
+        }
+      ],
+      "related": [
+        "控制",
+        "存档"
+      ],
+      "verifiedAt": "2026-10-26",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "Keyboard & mouse",
+          "sections": [
+            {
+              "heading": "Sorting with keyboard & mouse",
+              "sources": [
+                "物品栏",
+                "控制"
+              ],
+              "steps": [
+                "Press E or Esc to open the inventory, then click an item and move it to another slot.",
+                "Right-click a stack to take out one item; Shift + right-click takes half the stack.",
+                "Once you have more than one row, close the menu and press Tab to shift the toolbar to the next row."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "sections": [
+            {
+              "heading": "Sorting on a touchscreen",
+              "sources": [
+                "Mobile Controls"
+              ],
+              "steps": [
+                "Drag a stack to where you want it, or tap the organize button.",
+                "Press and hold a stack to bring up a counter that rises faster the longer you hold; pick the amount, then move it."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "controller",
+          "label": "Controller",
+          "sections": [
+            {
+              "heading": "Sorting with a controller",
+              "sources": [
+                "控制"
+              ],
+              "bullets": [
+                "In the menu, move the cursor with the Left Joystick and press the Select button on an item or slot.",
+                "Select button: Xbox A, PlayStation Cross, Switch A.",
+                "Back in the game, Xbox LB / RB, PlayStation L1 / R1 or Switch L / R shift the toolbar."
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "物品栏",
+        "控制",
+        "Mobile Controls"
+      ]
+    },
+    "游戏内时间": {
+      "title": "Day Cycle",
+      "summary": "Check whether the game clock is paused before you step away to look something up.",
+      "sections": [
+        {
+          "heading": "Where the day starts and ends",
+          "sources": [
+            "游戏内时间",
+            "能量"
+          ],
+          "facts": [
+            [
+              "6am",
+              "A new day begins."
+            ],
+            [
+              "After midnight (12am)",
+              "The later you go to bed, the less Energy you usually recover."
+            ],
+            [
+              "2am",
+              "If you're still up, you pass out, however much Energy you have left."
+            ]
+          ],
+          "note": "You can go to bed at any time to end the day early; there's no need to wait until late at night."
+        },
+        {
+          "heading": "Single-player",
+          "sources": [
+            "游戏内时间",
+            "钓鱼"
+          ],
+          "bullets": [
+            "The in-game clock usually pauses while the inventory, a menu or a dialogue is open.",
+            "The clock pauses during the fishing minigame and while you look through a treasure chest, but keeps running while you wait for a bite.",
+            "While paused, the clock blinks in grayed-out text. Check the game's state before you step away to look something up."
+          ]
+        },
+        {
+          "heading": "Multiplayer and split-screen work differently",
+          "sources": [
+            "合作"
+          ],
+          "bullets": [
+            "With two or more players, opening your own menu, chat, a shop or the fishing minigame usually won't pause the game for anyone.",
+            "In local split-screen, time only pauses when every player has a menu or window open.",
+            "If you need to pause in multiplayer, agree on it with the others first; the host can type /pause in chat to pause and /resume to continue."
+          ]
+        },
+        {
+          "heading": "The clock affects what you can do",
+          "sources": [
+            "游戏内时间",
+            "天气"
+          ],
+          "paragraphs": [
+            "Shop hours, villager schedules and some fish all depend on the time. Even once you know a location, check that day's season, weather and opening hours."
+          ]
+        }
+      ],
+      "related": [
+        "合作",
+        "存档",
+        "能量"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "游戏内时间",
+        "能量",
+        "钓鱼",
+        "合作",
+        "天气"
+      ]
+    },
+    "季节": {
+      "title": "Seasons",
+      "summary": "Each season lasts 28 days. Whether a regular outdoor crop can be harvested depends on both its growth time and the next season.",
+      "sections": [
+        {
+          "heading": "Do the math before planting late in a season",
+          "sources": [
+            "季节",
+            "农作物"
+          ],
+          "steps": [
+            "Check which seasons the seed grows in and how many days it takes to grow.",
+            "Assuming no speed boosts and watering on the day you plant and every day after: first harvest = planting date + growth days.",
+            "If that falls after day 28, check whether the crop also grows next season. If it doesn't, it won't be ready this season."
+          ],
+          "note": "Example: a spring-only crop that takes 10 days, planted on Spring 18 and watered daily, can first be harvested on Spring 28; planted on Spring 19, it usually won't make it."
+        },
+        {
+          "heading": "A missed watering isn't the same as a season change",
+          "sources": [
+            "农作物",
+            "季节"
+          ],
+          "bullets": [
+            "Growth time doesn't count the day you plant. Missing a day of watering pauses growth for that day; it doesn't usually kill the crop.",
+            "When the season changes to one the crop can't grow in, regular outdoor crops wither and die, even if you watered them every day.",
+            "Dead crops can be cleared with the Scythe; for multi-season crops, go by their own growing seasons."
+          ]
+        },
+        {
+          "heading": "Other things change with the seasons too",
+          "sources": [
+            "季节"
+          ],
+          "paragraphs": [
+            "Fish, forage and the seeds sold in shops also change with the season. Just keep track of what you're after; the seasons will come around again."
+          ],
+          "note": "This covers the basic rules for regular outdoor farming. For fertilizer, professions and special growing locations, see their own pages."
+        }
+      ],
+      "related": [
+        "天气",
+        "游戏内时间",
+        "新手指南"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "季节",
+        "农作物"
+      ]
+    },
+    "天气": {
+      "title": "Weather",
+      "summary": "The TV forecast is for tomorrow; today's weather also affects fishing and villager schedules.",
+      "sections": [
+        {
+          "heading": "Check which day you're looking at",
+          "sources": [
+            "天气"
+          ],
+          "steps": [
+            "On the TV at home, choose \"Weather Report\" to see the forecast for the next day.",
+            "Plan today around today's actual weather; don't mistake tomorrow's forecast for today's.",
+            "When looking up a fish or a villager's schedule, check the season, time of day and weather together."
+          ]
+        },
+        {
+          "heading": "Rain and snow",
+          "sources": [
+            "新手指南",
+            "天气"
+          ],
+          "bullets": [
+            "Rain waters your outdoor crops, so you can spend that time on other things.",
+            "Snow isn't rain: crops such as Winter Seeds still need watering on snowy days.",
+            "Storms water crops too, but lightning can strike the farm and destroy crops and trees."
+          ]
+        }
+      ],
+      "related": [
+        "季节",
+        "钓鱼攻略",
+        "游戏内时间"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "天气",
+        "新手指南"
+      ]
+    },
+    "能量": {
+      "title": "Energy",
+      "summary": "Stop when your Energy is nearly gone, and remember that Energy to spare won't keep you going past 2am.",
+      "sections": [
+        {
+          "heading": "Check your Energy bar first",
+          "sources": [
+            "能量"
+          ],
+          "bullets": [
+            "Hoeing, chopping trees, breaking rocks and casting a fishing rod use Energy. Using the Scythe or weapons doesn't.",
+            "At 0 Energy you become exhausted: you move much more slowly and can't cast a fishing rod. Keep using Energy and you'll pass out.",
+            "Stop any Energy-draining work first, then eat something or go home to sleep."
+          ]
+        },
+        {
+          "heading": "Check what it restores before you eat",
+          "sources": [
+            "能量",
+            "新手指南"
+          ],
+          "steps": [
+            "Check the item's description for the Energy and Health it restores. Not every item restores Energy, and some take it away.",
+            "Select the food and use the action button, then confirm when asked to eat it. On keyboard & mouse the default is right-click or X.",
+            "If your Energy has already run out, eating lets you keep going, but it may not clear that day's exhaustion."
+          ]
+        },
+        {
+          "heading": "Sleep and recovery",
+          "sources": [
+            "能量",
+            "合作"
+          ],
+          "bullets": [
+            "Sleeping ends the day. Going to bed by midnight without being exhausted normally restores your Energy to full.",
+            "Going to bed late, passing out or being exhausted can reduce the Energy you wake up with.",
+            "In multiplayer you can stand in bed and decline to sleep to slowly regain Energy; this doesn't work in single-player."
+          ]
+        }
+      ],
+      "related": [
+        "生命值",
+        "游戏内时间",
+        "控制"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "能量",
+        "新手指南",
+        "合作"
+      ]
+    },
+    "生命值": {
+      "title": "Health",
+      "summary": "When you get hurt, check your Health bar and make sure you're safe before using healing items.",
+      "sections": [
+        {
+          "heading": "What to do when you're hurt",
+          "sources": [
+            "生命值"
+          ],
+          "steps": [
+            "When your Health is low or you're heading into a dangerous area, watch the Health bar next to the Energy bar.",
+            "Monster attacks and explosions reduce Health. At 0 Health you pass out and can lose gold or items.",
+            "Choose food that restores Health and check its description before eating it; sleeping also restores Health."
+          ]
+        },
+        {
+          "heading": "Judge it separately from Energy",
+          "sources": [
+            "生命值",
+            "能量"
+          ],
+          "bullets": [
+            "Health and Energy are two separate values: you can still be knocked out by injuries with Energy to spare.",
+            "Healing foods vary. Before heading into a dangerous area, check how much Health the items you carry restore."
+          ]
+        }
+      ],
+      "related": [
+        "能量",
+        "物品栏",
+        "存档"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "生命值",
+        "能量"
+      ]
+    },
+    "技能": {
+      "title": "Skills",
+      "summary": "Doing an activity earns XP in its skill; a level-up notice during the day doesn't mean new recipes are ready yet.",
+      "sections": [
+        {
+          "heading": "Where XP comes from",
+          "sources": [
+            "技能"
+          ],
+          "facts": [
+            [
+              "Farming",
+              "Harvesting crops and caring for animals."
+            ],
+            [
+              "Mining",
+              "Breaking rocks and ore."
+            ],
+            [
+              "Foraging",
+              "Picking up forage and chopping down trees."
+            ],
+            [
+              "Fishing",
+              "Completing the fishing minigame or harvesting crab pots."
+            ],
+            [
+              "Combat",
+              "Defeating monsters."
+            ]
+          ]
+        },
+        {
+          "heading": "Levels and unlocks",
+          "sources": [
+            "技能"
+          ],
+          "bullets": [
+            "Check your current levels on the Skills tab of the game menu; your proficiency with the related tools rises with each level.",
+            "Leveling up during the day may show a notice; recipes unlocked by that level are granted overnight.",
+            "At levels 5 and 10 you choose a profession. You can compare the options when they appear; there's no need to plan your whole path from the start."
+          ]
+        }
+      ],
+      "related": [
+        "钓鱼攻略",
+        "能量",
+        "存档"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "技能"
+      ]
+    },
+    "钓鱼攻略": {
+      "title": "Fishing Strategy",
+      "summary": "Casting, reeling in when the \"!\" appears, and controlling the green bar are three separate steps.",
+      "sections": [
+        {
+          "heading": "In the minigame, you control the green bar",
+          "sources": [
+            "钓鱼"
+          ],
+          "steps": [
+            "Once a fish is hooked, keep the small fish icon inside the green bar as much as you can.",
+            "Holding the Use Tool button makes the green bar rise; letting go makes it fall. Adjust with a rhythm of short presses and releases.",
+            "While the fish is inside the green bar, the progress bar on the right fills up. Fill it to catch the fish; if it empties, the fish escapes."
+          ],
+          "note": "The green bar has momentum and bounces off the bottom; holding the button down too long can make it overshoot the fish."
+        },
+        {
+          "heading": "If you keep losing fish",
+          "sources": [
+            "训练用鱼竿",
+            "钓鱼"
+          ],
+          "bullets": [
+            "Willy's Fish Shop sells the Training Rod for 25g. Until you reach Fishing level 5, it gives you a larger green bar, which makes it good for practice.",
+            "The Training Rod can only catch certain basic fish and can't use bait or tackle; when looking up a fish, also check that your rod can catch it.",
+            "If your target fish never shows up, check the body of water, season, weather and time; handling the minigame well doesn't mean the fish's conditions are met."
+          ]
+        },
+        {
+          "heading": "Check whether the game is paused before looking things up",
+          "sources": [
+            "钓鱼",
+            "合作"
+          ],
+          "paragraphs": [
+            "In single-player, the fishing minigame pauses the in-game clock, but waiting for a bite does not. In multiplayer, the fishing minigame doesn't pause the world."
+          ]
+        }
+      ],
+      "related": [
+        "控制",
+        "技能",
+        "天气",
+        "游戏内时间"
+      ],
+      "verifiedAt": "2026-10-26",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "Keyboard & mouse",
+          "sections": [
+            {
+              "heading": "Keyboard & mouse: from cast to catch",
+              "sources": [
+                "钓鱼",
+                "控制"
+              ],
+              "steps": [
+                "Select your fishing rod and face the water. Hold left-click or C to charge the cast, then release to cast.",
+                "Wait for a yellow \"!\" above your farmer's head, along with a sound. Press left-click or C again right away.",
+                "Once the fish is hooked, control the green bar with the same button. Trash and other non-fish catches skip the minigame."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "sections": [
+            {
+              "heading": "Mobile: start with an on-screen tool button",
+              "sources": [
+                "移动操作方式",
+                "钓鱼"
+              ],
+              "steps": [
+                "If the touch layout makes the controls unclear, choose \"Tap-to-move & Joystick & Buttons\" in Options.",
+                "Select your fishing rod, go to the water's edge and face the water. Hold the left of the two buttons (use tool), then release to cast.",
+                "When a yellow \"!\" appears above your head, tap the same button again; in the minigame, hold and release it to control the green bar."
+              ],
+              "note": "These steps are for the layout that shows the joystick and two buttons. Other touch layouts use different screen areas."
+            }
+          ]
+        },
+        {
+          "id": "controller",
+          "label": "Controller",
+          "sections": [
+            {
+              "heading": "Controller: fish with the Use Tool button",
+              "sources": [
+                "钓鱼",
+                "控制"
+              ],
+              "steps": [
+                "Select your fishing rod and face the water. Hold the Use Tool button to charge, then release to cast.",
+                "When a yellow \"!\" appears, press the same button again.",
+                "In the minigame, hold the button to raise the green bar and release it to let the bar fall."
+              ],
+              "facts": [
+                [
+                  "Xbox",
+                  "X"
+                ],
+                [
+                  "PlayStation",
+                  "Square"
+                ],
+                [
+                  "Switch",
+                  "Y"
+                ]
+              ],
+              "note": "These are the default buttons; if you've remapped buttons in your system settings, go by your current mapping."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "钓鱼",
+        "训练用鱼竿",
+        "合作",
+        "控制",
+        "移动操作方式"
+      ]
+    },
+    "友谊": {
+      "title": "Friendship",
+      "summary": "Chatting and well-chosen gifts both help you get to know villagers; start with the people you'd like to befriend.",
+      "sections": [
+        {
+          "heading": "Check two things before giving a gift",
+          "sources": [
+            "友谊"
+          ],
+          "steps": [
+            "First check how that villager feels about the item; an expensive or high-quality item isn't necessarily one they'll like.",
+            "Select the gift, walk up to the villager and interact with them to give it. Check what you're holding first so you don't give the wrong item.",
+            "On the Social tab of the game menu, click a villager's row to open their Gift Log of the preferences you've learned."
+          ]
+        },
+        {
+          "heading": "Gift limits and birthdays",
+          "sources": [
+            "友谊"
+          ],
+          "bullets": [
+            "You can usually give each villager one gift a day and up to two a week; a new week starts on Sunday.",
+            "On a villager's birthday you can give a gift even if you've already given two that week, and the effect of their likes and dislikes is multiplied.",
+            "Spouses and other special cases have their own rules; this covers the basic limits for ordinary villagers."
+          ]
+        },
+        {
+          "heading": "Knowing where someone lives isn't finding them",
+          "sources": [
+            "友谊",
+            "游戏内时间",
+            "天气"
+          ],
+          "paragraphs": [
+            "Villagers' schedules change with the date, time of day, weather and certain events. Check where they'll be today before heading over; without enough friendship, you may not be able to enter their bedroom."
+          ],
+          "note": "Start by chatting and with suitable gifts that are easy to get; there's no need to visit everyone every day."
+        }
+      ],
+      "related": [
+        "控制",
+        "游戏内时间",
+        "天气"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "友谊",
+        "游戏内时间",
+        "天气"
+      ]
+    },
+    "合作": {
+      "title": "Multiplayer",
+      "summary": "Sort out the platform, the host and the cabins before you start inviting people.",
+      "sections": [
+        {
+          "heading": "Before you start",
+          "sources": [
+            "合作"
+          ],
+          "bullets": [
+            "The base game doesn't support cross-platform multiplayer, except between PC versions (Windows, macOS and Linux).",
+            "The host owns the save. Other players can only join that farm while the host is online and has it open to others.",
+            "Each new farmhand needs a cabin; you can also add cabins to an existing single-player farm and then invite people."
+          ]
+        },
+        {
+          "heading": "Hosting a new farm on PC",
+          "sources": [
+            "合作"
+          ],
+          "steps": [
+            "On the title screen, choose Co-Op → Host → Host New Farm.",
+            "Add one cabin for each player who'll join, and check settings such as whether money is shared.",
+            "Once in the game, find the invite option or invite code in Options; your friends join from Co-Op."
+          ],
+          "note": "Consoles and mobile have different ways to join and different restrictions. Mobile's experimental multiplayer doesn't use these PC invite steps."
+        },
+        {
+          "heading": "Agree on these two things first",
+          "sources": [
+            "合作"
+          ],
+          "bullets": [
+            "Whether to share money, and who pays for shared buildings.",
+            "When to pause and when to go to bed together. In multiplayer, opening just your own inventory usually doesn't stop the clock."
+          ],
+          "note": "In local split-screen, the game only pauses when everyone has a menu open; on PC the host can also pause with /pause and resume with /resume."
+        }
+      ],
+      "related": [
+        "游戏内时间",
+        "存档",
+        "物品栏"
+      ],
+      "verifiedAt": "2026-10-26",
+      "sources": [
+        "合作"
+      ]
+    },
+    "存档": {
+      "title": "Saves",
+      "summary": "Getting through a full night saves your progress; mobile also offers extra ways to back up and resume.",
+      "sections": [
+        {
+          "heading": "Make sure the game has saved before you quit",
+          "sources": [
+            "存档",
+            "游戏内时间",
+            "手机存档"
+          ],
+          "steps": [
+            "Go to bed and get through any level-up choices and the end-of-day shipping summary.",
+            "Wait for the save to finish and the new day to begin, then quit from the game menu.",
+            "Don't treat opening a menu, pausing or leaving the window as saving."
+          ]
+        }
+      ],
+      "related": [
+        "游戏内时间",
+        "合作"
+      ],
+      "verifiedAt": "2026-10-26",
+      "platforms": [
+        {
+          "id": "pc",
+          "label": "PC / Console",
+          "sections": [
+            {
+              "heading": "Only a completed night counts",
+              "sources": [
+                "存档",
+                "游戏内时间",
+                "合作"
+              ],
+              "bullets": [
+                "A standard save holds your progress as of the last completed day; quitting before the day ends loses that day's unsaved progress.",
+                "In multiplayer, every player must sleep and click through the end-of-day screens. The save is kept by the host.",
+                "Before moving a save to another device or editing it, make a backup copy and check that the game versions on both sides are compatible."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mobile",
+          "label": "Mobile",
+          "sections": [
+            {
+              "heading": "When you need to stop mid-day",
+              "sources": [
+                "手机存档"
+              ],
+              "steps": [
+                "In the game's Options, use \"Save Backup\" and let it finish before you quit; it isn't available during certain festivals, cutscenes and other events.",
+                "The next time you load, if you're asked \"Would you like to restore from where you previously left off?\", choose Yes to use the backup; choosing No loads the standard 6am save.",
+                "Switching away from the app can trigger an emergency save, but saving takes a few seconds; force-closing the app right away may stop it from finishing."
+              ],
+              "note": "A mobile backup isn't a separate permanent save slot; the next overnight save deletes it. Rely on the regular save for important progress."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "存档",
+        "游戏内时间",
+        "手机存档",
+        "合作"
+      ]
+    }
+  }
+}

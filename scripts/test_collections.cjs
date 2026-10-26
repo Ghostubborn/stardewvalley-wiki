@@ -22,7 +22,7 @@ function boot(saved) {
     localStorage: { getItem: () => saved || null },
     document: { createElement: tag => new Node(tag), createTextNode: text => new Node('', text) } };
   vm.createContext(ctx);
-  for (const file of ['data.js', 'js/core.js', 'js/tree.js', 'js/spoilers.js', 'js/browse.js', 'js/collections.js', 'js/browse-views.js']) {
+  for (const file of ['data.js', 'js/i18n.js', 'js/core.js', 'js/tree.js', 'js/spoilers.js', 'js/browse.js', 'js/collections.js', 'js/browse-views.js']) {
     vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), ctx, { filename: file });
   }
   ctx.window.App.select = () => {};

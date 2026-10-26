@@ -7,12 +7,13 @@
   let requested = false;
   let requestId = 0;
   audio.volume = 0.25;
+  const t = (text, vars) => (window.App?.t || window.L10N.t)(text, vars);
 
   function render(playing = false, loading = false) {
     button.setAttribute("aria-pressed", String(playing));
     button.setAttribute("aria-busy", String(loading));
-    button.title = loading ? "正在缓冲，点击停止" : `${playing ? "暂停" : "播放"}${audio.dataset.title}`;
-    label.textContent = loading ? "加载中" : playing ? "音乐开" : "音乐关";
+    button.title = loading ? t("正在缓冲，点击停止") : t(playing ? "暂停{title}" : "播放{title}", { title: audio.dataset.title });
+    label.textContent = loading ? t("加载中") : playing ? t("音乐开") : t("音乐关");
   }
   function stop() {
     requested = false;
@@ -23,7 +24,7 @@
   function failed() {
     if (!requested) return;
     stop();
-    window.App?.toast("背景音乐暂时无法播放，点击音乐按钮可重试。");
+    window.App?.toast(t("背景音乐暂时无法播放，点击音乐按钮可重试。"));
   }
   button.addEventListener("click", async () => {
     if (requested) { stop(); return; }

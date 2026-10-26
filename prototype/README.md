@@ -52,6 +52,17 @@ python3 -I -m http.server 8765 --bind 127.0.0.1 --directory prototype
 - 地图和路线共享选中目标、可选对照与收藏条目；支持搜索（中文、英文、别名）和深链接（`#view=tree&sel=node:…`）。
 - **背景音乐**：手账标题旁的“音乐关 / 音乐开”按钮播放 ConcernedApe 的原版 OST《Spring (It's A Big World Outside)》。默认关闭，首次点击才加载本站音频，以 25% 音量循环播放；地图和路线切换时连续播放，刷新后重新关闭。手机端收起手账时也可操作。音源与署名见 [音频说明](assets/audio/README.md)。
 
+## 语言版本
+
+- `/` 是中文版，`/en/` 是英文版（Stardew Valley Interactive Guide）。没有手动选择过时，首次访问按浏览器首选语言进入：中文浏览器进中文版，其他语言默认英文版。点页头的 “EN / 中文” 切换后记住选择（本机 `localStorage` 的 `sdv-lang`），之后按所选版本打开。切换和自动跳转都保留 `#` 后的当前条目。
+- 两个版本共用同一份资料、图片与脚本。条目名、地点名等内部 ID 始终是中文，深链接、收藏、进度和防剧透规则不受语言影响；英文版只替换显示内容。
+- 英文显示内容不经机器翻译：名称、摘要、信息框字段、游戏内物品说明、鱼类条件、营业时间、工具效果、建筑说明、收集包、配方来源、商店备注和 41 位居民的日程，均由 `scripts/build_en.py` 取自英文 Wiki 同一归档（2025-12-18）。新手指南和世界进度说明另有对照英文 Wiki 改写的 `data/curated/guides.en.json`、`progression.en.json`。英文资料缺失时不显示该段，不回退为中文。
+- 界面文案以中文原文为键，英文写在 `data/i18n/ui.en.json`；`python3 -I scripts/i18n_keys.py --missing` 列出缺少英文的界面文案。
+- 防剧透在英文版同样生效：受保护条目的英文名按整词识别，搜索、分类、地图与路线不提前露出。
+- 构建时生成 `data.en.js`、`js/strings.en.js` 与 `en/index.html`（英文标题、描述与 Open Graph 信息，链接预览显示英文）。
+
+检查：`node scripts/test_language_redirect.cjs`（首次访问跳转与记住选择）；在 `/en/` 用 `agent-browser eval --stdin < scripts/test_english_browser.js` 遍历全部分类、详情、地图与路线，确认防剧透开关两种状态下都没有中文残留、未翻译文案或缺失名称；`scripts/test_english_spoilers_browser.js` 检查英文名称不泄露受保护内容。
+
 ## 防剧透
 
 - 搜索框下的全局开关默认开启，旧存储没有该设置时同样开启。模糊搜索不推荐受保护名称；准确输入中文、英文或完整别名时提供中性入口。
@@ -76,6 +87,9 @@ python3 -I -m http.server 8765 --bind 127.0.0.1 --directory prototype
 
 ```text
 index.html / styles.css
+en/index.html 英文版入口，由 scripts/build_prototype.py 生成
+js/i18n.js   显示语言、界面文案查询与语言切换
+js/strings.en.js 英文界面文案，由 data/i18n/ui.en.json 生成
 js/core.js   数据索引、条件与进度求值、获取途径、材料树
 js/map.js    地图渲染与交互
 js/map-content.js 同地点内容、跨类型聚合与逐点条件
@@ -88,6 +102,7 @@ js/guides.js  基础短指南、平台切换与来源
 js/schedules.js  原文日程条件分支与地点跳转
 js/collections.js  本机收集包提交记录、缺项与撤销
 data.js      由 scripts/build_prototype.py 生成
+data.en.js   英文显示内容（取自英文 Wiki 归档），由 scripts/build_en.py 生成
 assets/      用到的 2,514 个 Wiki 图像、像素字体子集（Fusion Pixel，OFL）
 assets/audio/spring-big-world-outside.mp3 原版 OST，来源记录在同名 JSON
 ```

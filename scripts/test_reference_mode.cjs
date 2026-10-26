@@ -4,7 +4,7 @@ const root = path.resolve(__dirname, '../prototype');
 function boot(saved) {
   const ctx = { window: {}, structuredClone, setTimeout: () => 0, clearTimeout() {}, localStorage: { getItem: () => saved || null } };
   vm.createContext(ctx);
-  for (const file of ['data.js', 'js/core.js', 'js/tree.js', 'js/spoilers.js', 'js/map-content.js', 'js/browse.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), ctx);
+  for (const file of ['data.js', 'js/i18n.js', 'js/core.js', 'js/tree.js', 'js/spoilers.js', 'js/map-content.js', 'js/browse.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), ctx);
   return ctx.window.App;
 }
 const A = boot(), fish = A.fishByName.get('沙丁鱼'), seed = A.D.seeds.find(s => s.p === '防风草种子');

@@ -1,0 +1,86 @@
+{
+ "_note": "English display text for progression.json. Keys and gate logic stay in the Chinese file; this file only replaces visible text. Each quote is taken from the English Stardew Valley Wiki archive (WikiTeam 2025-12-18); “…” marks omitted clauses, and list items are joined into one line. source is the Chinese page ID whose English counterpart contains the quote.",
+ "areas": {
+  "mines": {
+   "title": "The Mines",
+   "requires": [{"text": "From Spring 5, Year 1", "short": "Opens on Spring 5"}],
+   "quote": "They are blocked by rock debris until the 5th day of Spring (Year 1), when the Player receives a letter from Morris stating that the landslide blocking the entrance to the mine has been removed.",
+   "source": "矿井"
+  },
+  "secret_woods": {
+   "title": "Secret Woods",
+   "requires": [{"text": "Steel Axe", "short": "Needs a Steel Axe"}],
+   "quote": "The entrance is initially blocked by a large log that can be cleared after upgrading to at least a Steel Axe.",
+   "source": "秘密森林"
+  },
+  "quarry": {
+   "title": "Quarry",
+   "requires": [{"text": "Complete the Crafts Room (Bridge Repair)", "joja": "Joja Community Development Form: 25,000g", "short": "Needs the bridge repaired (Crafts Room)"}],
+   "quote": "The Quarry is unlocked by completing the Crafts Room bundles in the Community Center or by purchasing \"Bridge\" from the Joja Community Development Form for 25,000g.",
+   "source": "采石场"
+  },
+  "sewers": {
+   "title": "The Sewers",
+   "requires": [{"text": "Donate 60 items to the Museum (Rusty Key)", "short": "Needs the Rusty Key"}],
+   "quote": "It is obtained from Gunther in a cutscene the morning after 60 items have been donated to the Museum.",
+   "source": "生锈的钥匙"
+  },
+  "desert": {
+   "title": "The Desert",
+   "requires": [{"text": "Complete the Vault (Bus Repair)", "joja": "Joja Community Development Form: 40,000g", "short": "Needs the bus repaired (Vault)"}],
+   "quote": "The desert is inaccessible until the Bus at the Bus Stop has been repaired by completing the Vault Bundles at the Community Center or by purchasing \"Bus Repair\" for 40,000g from the Joja Community Development Form.",
+   "source": "沙漠"
+  },
+  "skull_cavern": {
+   "title": "Skull Cavern",
+   "requires": [
+    {"text": "Access to the Desert", "short": "Needs Desert access"},
+    {"text": "Reach floor 120 of the Mines (Skull Key)", "short": "Needs the Skull Key"}
+   ],
+   "quote": "The Skull Key is obtained on Floor 120 of the Mines, found in a chest. It unlocks the door to the Skull Cavern in the Desert and the Junimo Kart arcade game in the Stardrop Saloon.",
+   "source": "头骨钥匙"
+  },
+  "witch_swamp": {
+   "title": "Witch's Swamp",
+   "requires": [{"text": "The Wizard's quests after the Community Center is restored (or every Joja project is bought)", "short": "Opens after the Community Center"}],
+   "quote": "The Witch's Swamp is an underground location that becomes accessible after completing the \"Dark Talisman\" Quest. … The questline to access the Witch's Hut involves two quests, which become available after completing the Community Center bundles or the Joja Community Development Form.",
+   "source": "巫婆沼泽"
+  },
+  "ginger_island": {
+   "title": "Ginger Island",
+   "requires": [
+    {"text": "Community Center restored (or every Joja project bought)", "short": "After the Community Center"},
+    {"text": "Repair Willy's boat: Hardwood ×200, Battery Pack ×5, Iridium Bar ×5", "short": "Needs Willy's boat repaired"}
+   ],
+   "quote": "When the player completes the Community Center Bundles or views the Joja Warehouse completion cutscene, Willy will mail the player an invitation to come to the back room of his shop. … The boat can provide transportation to and from Ginger Island at a ticket price of 1,000g … To repair the boat, the player must provide: Hardwood ×200 for the hull, Iridium Bar ×5 for the anchor, Battery Pack ×5 for the ticket stand.",
+   "source": "鱼店"
+  }
+ },
+ "features": {
+  "greenhouse": {
+   "title": "Greenhouse",
+   "joja": "Joja Community Development Form: 35,000g",
+   "quote": "It can be repaired by completing the Pantry Bundles for the Community Center or by purchasing \"Greenhouse\" from the Joja Community Development Form for 35,000g.",
+   "source": "温室"
+  },
+  "minecarts": {
+   "title": "Minecarts",
+   "joja": "Joja Community Development Form: 15,000g",
+   "quote": "The Minecart is a method of travel unlocked after completing the Boiler Room Bundles or by purchasing \"Minecarts\" from the Joja Community Development Form at JojaMart for 15,000g.",
+   "source": "矿车"
+  }
+ },
+ "boat": {"title": "Willy's Boat"},
+ "ore_hints": {
+  "铜矿石": {"text": "From floor 2 of the Mines", "quote": "Copper Ore begins to appear on Floor 2.", "source": "矿井"},
+  "铁矿石": {"text": "Mostly Mines floors 41–79", "quote": "The Mines (Floors 41 - 79) have a high concentration of Iron Nodes with potential abundance at Floors 71 - 79.", "source": "铁矿石"},
+  "黄金矿石": {"text": "Mines floor 80 and deeper", "quote": "Gold Nodes in the Mines at floors 80+", "source": "黄金矿石"},
+  "铱矿石": {"text": "Quarry, Skull Cavern, Volcano Dungeon", "quote": "Iridium Nodes can be found in the Quarry, Skull Cavern, and Volcano Dungeon.", "source": "铱矿石"}
+ },
+ "tool_unlocks": [
+  {"text": "Can chop Large Stumps"},
+  {"text": "Can chop Large Logs"},
+  {"text": "Can break boulders on the Farm"},
+  {"text": "Can break a meteorite"}
+ ]
+}

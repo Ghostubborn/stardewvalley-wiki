@@ -2,7 +2,7 @@
    A zoom change never splits entries that share the same location. */
 (function () {
   "use strict";
-  const A = window.App, D = A.D;
+  const A = window.App, D = A.D, { t, N } = A;
   const entrances = new Set(["mines", "secret_woods", "quarry", "sewers", "desert"]);
   const areaTitles = new Set(D.progression.areas.map(a => a.title));
   const pointId = (map, x, y) => `${map}:${x}:${y}`;
@@ -15,7 +15,7 @@
     return id && D.items[id] ? { type: "item", id } : ref;
   }
   const refKey = ref => { ref = canonicalRef(ref); return `${ref.type}:${ref.id}`; };
-  const safe = (text, fallback = "详细条件见条目") => A.spoilers.textAllowed(text) ? text : fallback;
+  const safe = (text, fallback = t("详细条件见条目")) => A.spoilers.textAllowed(text) ? text : fallback;
 
   function homePins(v) {
     if (v.pins.length) return v.pins.slice(0, 1);
@@ -49,45 +49,47 @@
       if (areaTitles.has(l.p)) continue;
       const business = A.BUSINESSES.has(l.p) || D.shops.some(s => s.p === l.p);
       const status = business ? A.shopCheck(l) : null;
+      const hours = A.locText(l).hours;
       add({ type: "location", id: l.p }, l.x, l.y, l.map, {
-        kind: "location", label: l.p, icon: l.i,
-        subtitle: status ? safe(status.text) : l.hours ? safe("开放时间：" + l.hours) : "地点资料", status: status?.ok,
+        kind: "location", label: N(l.p), icon: l.i,
+        subtitle: status ? safe(status.text) : hours ? safe(t("开放时间：{hours}", { hours })) : t("地点资料"), status: status?.ok,
       });
     }
     for (const f of D.fish) {
       for (const pin of f.pins) {
         const c = fishStatus(f, pin);
+        const text = A.fishText(f);
         add({ type: "fish", id: f.p }, ...pin, {
-          kind: "fish", label: f.p, icon: f.i, status: c.ok,
-          subtitle: safe([f.st, f.tt, f.wt && (f.W.includes("any") ? "任意天气" : A.WEATHER[f.W[0]]?.zh || f.wt)].filter(Boolean).join(" · ")),
+          kind: "fish", label: N(f.p), icon: f.i, status: c.ok,
+          subtitle: safe([text.st, A.EN && f.T?.length ? A.timeSpans(f.T) : text.tt, text.wt && (f.W.includes("any") ? t("任意天气") : A.WEATHER[f.W[0]]?.zh || text.wt)].filter(Boolean).join(" · ").replace(/\n/g, " ")),
         });
       }
     }
     for (const v of D.villagers) {
       for (const pin of homePins(v)) add({ type: "villager", id: v.p }, ...pin, {
-        kind: "villager", label: v.p, icon: v.i, subtitle: "住处位置 · 送礼与生日", status: null,
+        kind: "villager", label: N(v.p), icon: v.i, subtitle: t("住处位置 · 送礼与生日"), status: null,
       });
     }
     for (const p of D.pins) {
       if (["fish", "location", "villager"].includes(p.k) || areaTitles.has(p.t)
         || A.fishByName.has(p.t) || A.villagerByName.has(p.t) || A.locationByName.has(p.t)) continue;
-      add({ type: "page", id: p.t }, p.x, p.y, p.map, { kind: "other", label: p.t, icon: p.i, subtitle: D.pages[p.t]?.kz || "相关资料" });
+      add({ type: "page", id: p.t }, p.x, p.y, p.map, { kind: "other", label: N(p.t), icon: p.i, subtitle: D.pages[p.t]?.kz ? t(D.pages[p.t].kz) : t("相关资料") });
     }
     for (const a of D.progression.areas) {
       const readable = A.spoilers.area(a.id);
       if (!readable && !entrances.has(a.id)) continue;
       add({ type: "area", id: a.id }, a.x, a.y, a.map, {
-        kind: "location", label: readable ? a.title : "入口信息", icon: null, concealed: !readable,
-        subtitle: readable ? "进入条件与地点资料" : "名称与条件已收起，按需查看",
+        kind: "location", label: readable ? A.areaTitle(a.id) : t("入口信息"), icon: null, concealed: !readable,
+        subtitle: readable ? t("进入条件与地点资料") : t("名称与条件已收起，按需查看"),
       });
     }
     const result = [...byPoint.values()].map(p => {
       const locations = p.entries.filter(e => e.kind === "location" && !e.concealed);
       const meta = D.mapPoints[p.id] || {};
       p.precision = meta.precision || "region";
-      p.title = locations.map(e => e.label).join(" / ") || (meta.title && safe(meta.title, ""))
-        || (p.entries.every(e => e.kind === "fish") ? "钓鱼点" : p.entries.every(e => e.concealed) ? "入口信息" : "地图地点");
-      p.entries.sort((a, b) => a.label.localeCompare(b.label, "zh-CN"));
+      p.title = locations.map(e => e.label).join(" / ") || (meta.title && safe(N(meta.title), ""))
+        || (p.entries.every(e => e.kind === "fish") ? t("钓鱼点") : p.entries.every(e => e.concealed) ? t("入口信息") : t("地图地点"));
+      p.entries.sort((a, b) => a.label.localeCompare(b.label, A.locale));
       return p;
     });
     return (cache[map] = result);
@@ -98,7 +100,7 @@
   }
 
   function positionNote(point) {
-    return { building: "建筑位置", entrance: "入口位置，内部地点见条目", water: "水域示意，具体钓法见条目", region: "区域示意" }[point.precision] || "区域示意";
+    return { building: t("建筑位置"), entrance: t("入口位置，内部地点见条目"), water: t("水域示意，具体钓法见条目"), region: t("区域示意") }[point.precision] || t("区域示意");
   }
 
   function cluster(points, project, distance = 48) {
@@ -121,7 +123,7 @@
     }
     return groups.map(g => ({ ...g, aggregate: g.points.length > 1, id: g.points.map(p => p.id).sort().join(";"),
       entries: g.points.flatMap(p => p.entries.map(e => ({ ...e, pointId: p.id }))),
-      title: g.points.length === 1 ? g.points[0].title : `附近 ${g.points.length} 个地点`,
+      title: g.points.length === 1 ? g.points[0].title : t("附近 {n} 个地点", { n: g.points.length }),
     }));
   }
   A.mapContents = { points, find, cluster, refKey, fishStatus, homePins, positionNote };
