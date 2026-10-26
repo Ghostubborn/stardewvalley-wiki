@@ -12,6 +12,10 @@ python3 -I -m http.server 8765 --bind 127.0.0.1 --directory prototype
 
 打开 [http://127.0.0.1:8765/](http://127.0.0.1:8765/)。仓库包含已生成的页面、数据和运行资源，无需安装前端依赖或重新生成资料。
 
+## Cloudflare Pages
+
+连接本仓库的 `main` 分支，框架选择 `None`，构建命令填写 `node scripts/check_assets.cjs`，输出目录填写 `prototype`。不需要环境变量。完整设置与直接上传方式见[部署说明](docs/cloudflare-pages.md)。
+
 ## 项目内容
 
 - [`prototype/`](prototype/README.md)：静态网站、交互代码及运行资源。

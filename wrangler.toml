@@ -1,0 +1,4 @@
+# Cloudflare Pages publishes only the generated static website.
+name = "stardewvalley-wiki"
+pages_build_output_dir = "./prototype"
+compatibility_date = "2026-10-26"
