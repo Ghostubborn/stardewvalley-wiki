@@ -1,0 +1,2359 @@
+{
+ "settings": 1,
+ "files": {
+  "'Boat'_Location.png": {
+   "sha1": "c7ff99ba27404c821cc9e620a7e2e0e6dccab64d",
+   "full": [
+    "'Boat'_Location.webp",
+    64056
+   ]
+  },
+  "1.5.6_beach_close.png": {
+   "sha1": "f30ca9d3c63b4b6d0276ca25723135b993412352",
+   "thumb": [
+    "1.5.6_beach_close.thumb.webp",
+    131752
+   ]
+  },
+  "1.5.6_beach_far.png": {
+   "sha1": "f53789a0b8eb69cb56d6154b697f44b8533cda7b",
+   "thumb": [
+    "1.5.6_beach_far.thumb.webp",
+    130798
+   ]
+  },
+  "1.5.6_corners_close.png": {
+   "sha1": "709a273d31fdee9c5ed6f25f7760cb1a7e9a0e97",
+   "thumb": [
+    "1.5.6_corners_close.thumb.webp",
+    179782
+   ]
+  },
+  "1.5.6_corners_far.png": {
+   "sha1": "527af0c6129c3ffed8f86ddcb4639fe75592bd72",
+   "thumb": [
+    "1.5.6_corners_far.thumb.webp",
+    179276
+   ]
+  },
+  "1.5.6_forest_close.png": {
+   "sha1": "01abb0db5c109fc2bc01e6e6c393c8f810327fda",
+   "thumb": [
+    "1.5.6_forest_close.thumb.webp",
+    119410
+   ]
+  },
+  "1.5.6_forest_far.png": {
+   "sha1": "f72d28a90ad68e3280a39d8b61a01c934ab3923f",
+   "thumb": [
+    "1.5.6_forest_far.thumb.webp",
+    119078
+   ]
+  },
+  "1.5.6_hilltop_close.png": {
+   "sha1": "0047de9bccf1873e093ee2c45399e80bd22896ae",
+   "thumb": [
+    "1.5.6_hilltop_close.thumb.webp",
+    148554
+   ]
+  },
+  "1.5.6_hilltop_far.png": {
+   "sha1": "a04a866c47aeda3e1d86b61168b91175f0bce2ea",
+   "thumb": [
+    "1.5.6_hilltop_far.thumb.webp",
+    148364
+   ]
+  },
+  "1.5.6_river_close.png": {
+   "sha1": "364de64ea319f00af8b0ca6fcb42e04145a22e80",
+   "thumb": [
+    "1.5.6_river_close.thumb.webp",
+    132442
+   ]
+  },
+  "1.5.6_river_far.png": {
+   "sha1": "6b3a531abc8f2958ee99316c5eaae2548f9c7b5a",
+   "thumb": [
+    "1.5.6_river_far.thumb.webp",
+    134942
+   ]
+  },
+  "1.5.6_standard_close.png": {
+   "sha1": "2415b7dcef2c9f7737aead1f1d158a61c2eeded6",
+   "thumb": [
+    "1.5.6_standard_close.thumb.webp",
+    164512
+   ]
+  },
+  "1.5.6_standard_far.png": {
+   "sha1": "5d86407541f662e750372c9983c88347ebe01d5b",
+   "thumb": [
+    "1.5.6_standard_far.thumb.webp",
+    164176
+   ]
+  },
+  "1.5.6_wild_close.png": {
+   "sha1": "79ef08cc3be211e7275b4346e85c120ea2ee1d8e",
+   "thumb": [
+    "1.5.6_wild_close.thumb.webp",
+    143582
+   ]
+  },
+  "1.5.6_wild_far.png": {
+   "sha1": "0cdb4e1187d3e9abe0f5839313ae16255ef1146d",
+   "thumb": [
+    "1.5.6_wild_far.thumb.webp",
+    141534
+   ]
+  },
+  "1.6_8p_beach_close.png": {
+   "sha1": "63aa68c1e5d074779a8433179d30824401fa2e36",
+   "thumb": [
+    "1.6_8p_beach_close.thumb.webp",
+    132250
+   ]
+  },
+  "1.6_8p_beach_separate.png": {
+   "sha1": "d927c2941874ccf1fd605ea6eb887ecd94e3781c",
+   "thumb": [
+    "1.6_8p_beach_separate.thumb.webp",
+    133078
+   ]
+  },
+  "1.6_8p_corners_close.png": {
+   "sha1": "946bfd1eda32b2331d7217f3474c453cd13ccc4b",
+   "thumb": [
+    "1.6_8p_corners_close.thumb.webp",
+    179642
+   ]
+  },
+  "1.6_8p_corners_separate.png": {
+   "sha1": "28339c6b641e7d1a894192cad13a1a775a627533",
+   "thumb": [
+    "1.6_8p_corners_separate.thumb.webp",
+    179410
+   ]
+  },
+  "1.6_8p_forest_close.png": {
+   "sha1": "912d48f43e8da8975c394d4b8660d5ab2b75c7c9",
+   "thumb": [
+    "1.6_8p_forest_close.thumb.webp",
+    119664
+   ]
+  },
+  "1.6_8p_forest_separate.png": {
+   "sha1": "1e9ad1488c8d7809466b4697d72461eee46edea6",
+   "thumb": [
+    "1.6_8p_forest_separate.thumb.webp",
+    120110
+   ]
+  },
+  "1.6_8p_hilltop_close.png": {
+   "sha1": "9a6867b8ca28bee10acd40c3769d685f58206dab",
+   "thumb": [
+    "1.6_8p_hilltop_close.thumb.webp",
+    148572
+   ]
+  },
+  "1.6_8p_hilltop_separate.png": {
+   "sha1": "eefa7a7a090cef72b5f8ec06f49ef42596cfe697",
+   "thumb": [
+    "1.6_8p_hilltop_separate.thumb.webp",
+    149068
+   ]
+  },
+  "1.6_8p_meadow_close.png": {
+   "sha1": "da6bbaf9cdeda49e4c176cdbfb2805ba954dce68",
+   "thumb": [
+    "1.6_8p_meadow_close.thumb.webp",
+    152088
+   ]
+  },
+  "1.6_8p_meadow_separate.png": {
+   "sha1": "1c24adf1852cfdf090fcf4482fc191b94d8b85b9",
+   "thumb": [
+    "1.6_8p_meadow_separate.thumb.webp",
+    151800
+   ]
+  },
+  "1.6_8p_river_close.png": {
+   "sha1": "7cd2ed5078e73f8e4f650db52b8f8a83b4003715",
+   "thumb": [
+    "1.6_8p_river_close.thumb.webp",
+    131680
+   ]
+  },
+  "1.6_8p_river_separate.png": {
+   "sha1": "58ef761b0050a9aec8491f1a1a3e42e6c75515d5",
+   "thumb": [
+    "1.6_8p_river_separate.thumb.webp",
+    133314
+   ]
+  },
+  "1.6_8p_standard_close.png": {
+   "sha1": "833e1f7a69f62a2174040c191a4adc325667216f",
+   "thumb": [
+    "1.6_8p_standard_close.thumb.webp",
+    164770
+   ]
+  },
+  "1.6_8p_standard_separate.png": {
+   "sha1": "ecc853073f3c6fac2522f1627baf8ea32fdf8769",
+   "thumb": [
+    "1.6_8p_standard_separate.thumb.webp",
+    164636
+   ]
+  },
+  "1.6_8p_wild_close.png": {
+   "sha1": "80b956d6419dd44cc512094b9326cd5f23420c92",
+   "thumb": [
+    "1.6_8p_wild_close.thumb.webp",
+    142242
+   ]
+  },
+  "1.6_8p_wild_separate.png": {
+   "sha1": "0213ac124d1f482b9fc91da1caaceaf1aa80b896",
+   "thumb": [
+    "1.6_8p_wild_separate.thumb.webp",
+    141770
+   ]
+  },
+  "1.6_meadow_close.png": {
+   "sha1": "1c02e6004e5fd7d40626dd5b6603316bd8f22bf8",
+   "thumb": [
+    "1.6_meadow_close.thumb.webp",
+    152388
+   ]
+  },
+  "1.6_meadow_far.png": {
+   "sha1": "c58808b99e9c5d37c59d5aded864e78d2d24b7ff",
+   "thumb": [
+    "1.6_meadow_far.thumb.webp",
+    152244
+   ]
+  },
+  "1_River_Road_Interior.png": {
+   "sha1": "f615be90ef98fe3f48776919454b9b9b5c8fe0b7",
+   "full": [
+    "1_River_Road_Interior.webp",
+    139966
+   ],
+   "thumb": [
+    "1_River_Road_Interior.thumb.webp",
+    78968
+   ]
+  },
+  "1_Willow_Lane_Interior.png": {
+   "sha1": "077b1ba105ee8b020e6955ca1b7435728301a428",
+   "full": [
+    "1_Willow_Lane_Interior.webp",
+    159992
+   ]
+  },
+  "254Kegs_Quarry.png": {
+   "sha1": "856325c66a103762c80cb01013e5839fae8d6e07",
+   "full": [
+    "254Kegs_Quarry.webp",
+    822396
+   ],
+   "thumb": [
+    "254Kegs_Quarry.thumb.webp",
+    102564
+   ]
+  },
+  "2_Willow_Lane_Interior.png": {
+   "sha1": "7f49db9156c7a666a5858fab698f3af43f9e8480",
+   "full": [
+    "2_Willow_Lane_Interior.webp",
+    199782
+   ],
+   "thumb": [
+    "2_Willow_Lane_Interior.thumb.webp",
+    90264
+   ]
+  },
+  "4CornersFarmDistances.png": {
+   "sha1": "f43d0269fee3a5303312dd90b5cc8b41bf57ebc3",
+   "full": [
+    "4CornersFarmDistances.webp",
+    191040
+   ],
+   "thumb": [
+    "4CornersFarmDistances.thumb.webp",
+    149122
+   ]
+  },
+  "61_total_makeover_outfits.png": {
+   "sha1": "ef71753d2f300d978e7d5bd59ab11a7eeaf73247",
+   "full": [
+    "61_total_makeover_outfits.webp",
+    133994
+   ],
+   "thumb": [
+    "61_total_makeover_outfits.thumb.webp",
+    73380
+   ]
+  },
+  "Alex's_Locker.jpg": {
+   "sha1": "7ec2dd9a8d1c9a40c45af5c5983574378ab6edc4",
+   "full": [
+    "Alex's_Locker.webp",
+    71876
+   ]
+  },
+  "Alex's_locker_ZH.png": {
+   "sha1": "db95ab03e6e6c36c8a5d18b2c0b9e048c34c38c8",
+   "full": [
+    "Alex's_locker_ZH.webp",
+    103372
+   ]
+  },
+  "AnglerLocations.png": {
+   "sha1": "2d1f5eaef30b82d625bb5b39e4e06bc0cbd01aeb",
+   "full": [
+    "AnglerLocations.webp",
+    56248
+   ]
+  },
+  "BackwoodsForageLocations.png": {
+   "sha1": "02f59ad6cfce67f313d52edf9a378566c8f337be",
+   "full": [
+    "BackwoodsForageLocations.webp",
+    109778
+   ]
+  },
+  "BackwoodsForageLocations_ZH.png": {
+   "sha1": "4742a9f25df3899558d694296702f8f0c595d312",
+   "full": [
+    "BackwoodsForageLocations_ZH.webp",
+    181332
+   ]
+  },
+  "Banana_Shrine.png": {
+   "sha1": "6a16fdd1e1f2865529bb823c008ac16a74670aef",
+   "full": [
+    "Banana_Shrine.webp",
+    40730
+   ]
+  },
+  "BeachDistances.png": {
+   "sha1": "edfd559b4e183750f167887ac12d75d3439686bd",
+   "full": [
+    "BeachDistances.webp",
+    93114
+   ],
+   "thumb": [
+    "BeachDistances.thumb.webp",
+    32738
+   ]
+  },
+  "BeachFarmDistances.png": {
+   "sha1": "6afbdef808b67559e5ea8ffbd5f0f583486a2ba8",
+   "full": [
+    "BeachFarmDistances.webp",
+    318108
+   ],
+   "thumb": [
+    "BeachFarmDistances.thumb.webp",
+    79200
+   ]
+  },
+  "BeachForageLocations.png": {
+   "sha1": "d40f3e7498784b7f9d08e5961b76733fc4e96f3a",
+   "full": [
+    "BeachForageLocations.webp",
+    94984
+   ],
+   "thumb": [
+    "BeachForageLocations.thumb.webp",
+    46708
+   ]
+  },
+  "Beach_Farm.png": {
+   "sha1": "993dcdd408e69279da4f1b4b7aa41c65f11ce73d",
+   "thumb": [
+    "Beach_Farm.thumb.webp",
+    131108
+   ]
+  },
+  "Beach_Overview.jpg": {
+   "sha1": "c0753f9a2e9d9d116024f5080d159f40f75874c7",
+   "full": [
+    "Beach_Overview.webp",
+    754880
+   ],
+   "thumb": [
+    "Beach_Overview.thumb.webp",
+    43014
+   ]
+  },
+  "Big_Tree.png": {
+   "sha1": "4ef05d9b4ded5e91f2f3a54b8ddd029156a6b2f5",
+   "thumb": [
+    "Big_Tree.thumb.webp",
+    107194
+   ]
+  },
+  "Blackberry_Basket_JA.jpg": {
+   "sha1": "6680e87aad7fee36dc464a60159e0b353100feac",
+   "full": [
+    "Blackberry_Basket_JA.webp",
+    350990
+   ],
+   "thumb": [
+    "Blackberry_Basket_JA.thumb.webp",
+    110922
+   ]
+  },
+  "Bones.jpg": {
+   "sha1": "461f328f4efb11cf42f64636abfdac71d12df92c",
+   "full": [
+    "Bones.webp",
+    53302
+   ]
+  },
+  "BusStopForageLocations.png": {
+   "sha1": "381ce30dec788263b9fd82493361fe4d17419a72",
+   "full": [
+    "BusStopForageLocations.webp",
+    78724
+   ]
+  },
+  "Bus_Repair.png": {
+   "sha1": "91509c8e5dbad7cb9679fae08513af0bf8280694",
+   "full": [
+    "Bus_Repair.webp",
+    157780
+   ],
+   "thumb": [
+    "Bus_Repair.thumb.webp",
+    66460
+   ]
+  },
+  "Bus_stop.jpg": {
+   "sha1": "58ebc2c5f46f741abca5b91b31f09fd7d7899fa5",
+   "full": [
+    "Bus_stop.webp",
+    291998
+   ],
+   "thumb": [
+    "Bus_stop.thumb.webp",
+    132956
+   ]
+  },
+  "Cabin_upgrade_2.png": {
+   "sha1": "4bbbf0b949822d31cbdf2fbf4e9d32ebea87767d",
+   "full": [
+    "Cabin_upgrade_2.webp",
+    67050
+   ],
+   "thumb": [
+    "Cabin_upgrade_2.thumb.webp",
+    44684
+   ]
+  },
+  "Cabin_upgrade_2_no_cellar_351_kegs.png": {
+   "sha1": "0e5929ec307492ccd7b910798c708a7ed75af79b",
+   "full": [
+    "Cabin_upgrade_2_no_cellar_351_kegs.webp",
+    67714
+   ],
+   "thumb": [
+    "Cabin_upgrade_2_no_cellar_351_kegs.thumb.webp",
+    79660
+   ]
+  },
+  "CalderaDistances.png": {
+   "sha1": "3ad33bb40cb85d9d0f5607ece39de21549cedc23",
+   "full": [
+    "CalderaDistances.webp",
+    42638
+   ]
+  },
+  "Calicojack_game.png": {
+   "sha1": "d7a828ea2747306a415d151455ace47c5c0ee395",
+   "full": [
+    "Calicojack_game.webp",
+    31528
+   ],
+   "thumb": [
+    "Calicojack_game.thumb.webp",
+    6438
+   ]
+  },
+  "Calicojack_lose.png": {
+   "sha1": "45948aafdccb915c9850333edc6fc0a2b21b9ad9",
+   "full": [
+    "Calicojack_lose.webp",
+    28864
+   ],
+   "thumb": [
+    "Calicojack_lose.thumb.webp",
+    5700
+   ]
+  },
+  "Calicojack_win.png": {
+   "sha1": "f2b9af5533ac92ff612a5a8bdb5a2db997ddea42",
+   "full": [
+    "Calicojack_win.webp",
+    30962
+   ],
+   "thumb": [
+    "Calicojack_win.thumb.webp",
+    6450
+   ]
+  },
+  "Carpenter's_Shop_Interior.png": {
+   "sha1": "748aac11b6f205b17994bdf4816f3c7014b92f15",
+   "full": [
+    "Carpenter's_Shop_Interior.webp",
+    59532
+   ]
+  },
+  "Casino.png": {
+   "sha1": "98690c6acf3ad2576580de5ada96fa414695b798",
+   "icon": [
+    "Casino.icon.webp",
+    5312
+   ]
+  },
+  "Casino_ZH.png": {
+   "sha1": "920aa4696a66ac70fa4087ebccb3d4e413dcf185",
+   "icon": [
+    "Casino_ZH.icon.webp",
+    5238
+   ]
+  },
+  "Cellar_Inside.png": {
+   "sha1": "b74287cee8bb2db6ead34d27779b995ca6a6919a",
+   "full": [
+    "Cellar_Inside.webp",
+    115888
+   ],
+   "thumb": [
+    "Cellar_Inside.thumb.webp",
+    51952
+   ]
+  },
+  "CindersapForest.png": {
+   "sha1": "86bbc0137511968dddbfc3ce61bbf55e8a29cd45",
+   "full": [
+    "CindersapForest.webp",
+    528164
+   ],
+   "thumb": [
+    "CindersapForest.thumb.webp",
+    144922
+   ]
+  },
+  "Clinic_Interior.png": {
+   "sha1": "b9b7cbe5a4aff40f4fbd0e7829994cec6853266e",
+   "full": [
+    "Clinic_Interior.webp",
+    124426
+   ]
+  },
+  "Community_Center_Boiler_Room.png": {
+   "sha1": "2049b0d9c0cb8b256f2e0060776535f85d11fc96",
+   "full": [
+    "Community_Center_Boiler_Room.webp",
+    28890
+   ]
+  },
+  "Community_center_party.jpg": {
+   "sha1": "98977ba0bc79c6c92cc8236d016c9326bd3a5b9d",
+   "full": [
+    "Community_center_party.webp",
+    520342
+   ],
+   "thumb": [
+    "Community_center_party.thumb.webp",
+    90980
+   ]
+  },
+  "CrimsonfishLocations.png": {
+   "sha1": "e0642b6dc83641efb0c506ec1c614a8b0f36f5b6",
+   "full": [
+    "CrimsonfishLocations.webp",
+    51644
+   ]
+  },
+  "Dance_Of_The_Moonlight_Jellies.jpg": {
+   "sha1": "fde123869ff9251ee22309c455baa1582fc91ef8",
+   "full": [
+    "Dance_Of_The_Moonlight_Jellies.webp",
+    318614
+   ],
+   "thumb": [
+    "Dance_Of_The_Moonlight_Jellies.thumb.webp",
+    45584
+   ]
+  },
+  "Dance_Of_The_Moonlight_Jellies_-_2.jpg": {
+   "sha1": "0ca2e87e34e3eaed1ebb2558c27e3577455291f7",
+   "full": [
+    "Dance_Of_The_Moonlight_Jellies_-_2.webp",
+    191650
+   ],
+   "thumb": [
+    "Dance_Of_The_Moonlight_Jellies_-_2.thumb.webp",
+    37868
+   ]
+  },
+  "DesertDistances.png": {
+   "sha1": "043f1503857e6cd75b0b869b22a57aabfbc537ee",
+   "full": [
+    "DesertDistances.webp",
+    62528
+   ],
+   "thumb": [
+    "DesertDistances.thumb.webp",
+    154246
+   ]
+  },
+  "DesertForageLocations.png": {
+   "sha1": "79c17217cfb26a5af119125142d31131736153c0",
+   "full": [
+    "DesertForageLocations.webp",
+    80508
+   ],
+   "thumb": [
+    "DesertForageLocations.thumb.webp",
+    101054
+   ]
+  },
+  "Desert_Festival.png": {
+   "sha1": "00391ac984e313afa2388325853134d14b0ae108",
+   "full": [
+    "Desert_Festival.webp",
+    90494
+   ],
+   "icon": [
+    "Desert_Festival.icon.webp",
+    10200
+   ]
+  },
+  "Desert_Festival_ZH.png": {
+   "sha1": "71dcac25566213c4c6de58e18c29d23c92ba912e",
+   "full": [
+    "Desert_Festival_ZH.webp",
+    90850
+   ]
+  },
+  "Dining-room.png": {
+   "sha1": "c540f5e6b59f7274cc281bb6991992d38297aa5a",
+   "full": [
+    "Dining-room.webp",
+    45264
+   ]
+  },
+  "DungeonFloor.jpg": {
+   "sha1": "592b7240ec18cd1fd7fc6eaba518e8a63b4dfb18",
+   "full": [
+    "DungeonFloor.webp",
+    245538
+   ],
+   "thumb": [
+    "DungeonFloor.thumb.webp",
+    24892
+   ]
+  },
+  "EggHuntEggs.jpg": {
+   "sha1": "9d552206b24215839754189bd7c233bac8b9548d",
+   "full": [
+    "EggHuntEggs.webp",
+    525766
+   ],
+   "thumb": [
+    "EggHuntEggs.thumb.webp",
+    57662
+   ]
+  },
+  "EggHuntEggsY2.jpg": {
+   "sha1": "59ec27a1e99e2d2e5868e2061b46df034ec58463",
+   "full": [
+    "EggHuntEggsY2.webp",
+    1026904
+   ],
+   "thumb": [
+    "EggHuntEggsY2.thumb.webp",
+    65644
+   ]
+  },
+  "Egg_Festival.png": {
+   "sha1": "2c30dee7e461fb989eec019ac1165e08706f94a9",
+   "full": [
+    "Egg_Festival.webp",
+    124022
+   ],
+   "icon": [
+    "Egg_Festival.icon.webp",
+    12276
+   ]
+  },
+  "Egg_Festival_18_Eggs.jpg": {
+   "sha1": "684966c20480adc564476c266a9eddaec26bca15",
+   "full": [
+    "Egg_Festival_18_Eggs.webp",
+    569406
+   ],
+   "thumb": [
+    "Egg_Festival_18_Eggs.thumb.webp",
+    60730
+   ]
+  },
+  "Emily_2_Hearts.png": {
+   "sha1": "d8d36c83e06fd4560dfccc80704c99f3658a09eb",
+   "full": [
+    "Emily_2_Hearts.webp",
+    89332
+   ]
+  },
+  "Example.jpg": {
+   "sha1": "d6f8ce6e9019442d82e65501de2215d50cbe46c1",
+   "full": [
+    "Example.webp",
+    105468
+   ],
+   "thumb": [
+    "Example.thumb.webp",
+    27500
+   ]
+  },
+  "Farm_RanchingDistances.png": {
+   "sha1": "730288c0588ef27a274901c11f66b3d56e5f50b3",
+   "full": [
+    "Farm_RanchingDistances.webp",
+    297466
+   ],
+   "thumb": [
+    "Farm_RanchingDistances.thumb.webp",
+    114630
+   ]
+  },
+  "Feast_of_the_Winterstar.png": {
+   "sha1": "a0774f48628d6150aee5daf7c9175610fa0d8842",
+   "full": [
+    "Feast_of_the_Winterstar.webp",
+    601704
+   ],
+   "thumb": [
+    "Feast_of_the_Winterstar.thumb.webp",
+    85488
+   ]
+  },
+  "Feast_of_the_Winterstar_Secret_Santa.png": {
+   "sha1": "ad7df5a8dfa1acc0493d70e649cef9ef8224f242",
+   "full": [
+    "Feast_of_the_Winterstar_Secret_Santa.webp",
+    607518
+   ],
+   "thumb": [
+    "Feast_of_the_Winterstar_Secret_Santa.thumb.webp",
+    88216
+   ]
+  },
+  "Festival_of_Ice_1.jpg": {
+   "sha1": "507bbdec88ec1ff88df1c08b0856bddfe37cc9ae",
+   "full": [
+    "Festival_of_Ice_1.webp",
+    129988
+   ],
+   "thumb": [
+    "Festival_of_Ice_1.thumb.webp",
+    31560
+   ]
+  },
+  "Festival_of_Ice_2.jpg": {
+   "sha1": "6644fe6fb5a538e864ec8508364caea3404adab0",
+   "full": [
+    "Festival_of_Ice_2.webp",
+    176230
+   ],
+   "thumb": [
+    "Festival_of_Ice_2.thumb.webp",
+    30212
+   ]
+  },
+  "Finished_Boiler_Room.png": {
+   "sha1": "b40c6ca972a7339625089ebee7b50b520af6f3fe",
+   "full": [
+    "Finished_Boiler_Room.webp",
+    29024
+   ]
+  },
+  "Finished_Crafts_Room.png": {
+   "sha1": "d56c1f8276b1f3bfc6572171e8682da4c5a7ef3d",
+   "full": [
+    "Finished_Crafts_Room.webp",
+    35998
+   ]
+  },
+  "Fishing_Infograph_Day.png": {
+   "sha1": "93777e0b8f7099a2ac8c7a229f22f0c5a6042732",
+   "full": [
+    "Fishing_Infograph_Day.webp",
+    611286
+   ],
+   "thumb": [
+    "Fishing_Infograph_Day.thumb.webp",
+    90130
+   ]
+  },
+  "Fishing_Infograph_Night.png": {
+   "sha1": "56795ea9f96673a6aebaea43aac3969634da2e67",
+   "full": [
+    "Fishing_Infograph_Night.webp",
+    583080
+   ],
+   "thumb": [
+    "Fishing_Infograph_Night.thumb.webp",
+    87118
+   ]
+  },
+  "Fixed_sewer_gate.png": {
+   "sha1": "ffd9ce5682a2ba7a71dc58f234f6570a3212b7d0",
+   "full": [
+    "Fixed_sewer_gate.webp",
+    338450
+   ],
+   "thumb": [
+    "Fixed_sewer_gate.thumb.webp",
+    85892
+   ]
+  },
+  "Fixin_the_boat.png": {
+   "sha1": "c44e3667b4364e27421784742416b24c44ac6916",
+   "full": [
+    "Fixin_the_boat.webp",
+    117442
+   ]
+  },
+  "Flower_Festival.jpg": {
+   "sha1": "08ed1509f3397adb41c72b7df94830b5861d6c5a",
+   "full": [
+    "Flower_Festival.webp",
+    341002
+   ],
+   "thumb": [
+    "Flower_Festival.thumb.webp",
+    89634
+   ]
+  },
+  "Foliage_Print_Location.png": {
+   "sha1": "c340f3c40fbb5fd08b2bf2bc6f919893e3da7c27",
+   "full": [
+    "Foliage_Print_Location.webp",
+    217956
+   ],
+   "thumb": [
+    "Foliage_Print_Location.thumb.webp",
+    40586
+   ]
+  },
+  "ForestDistances.png": {
+   "sha1": "5e377206c33f1a4b73acc53b8c9f6c4c1a9d13db",
+   "full": [
+    "ForestDistances.webp",
+    499062
+   ],
+   "thumb": [
+    "ForestDistances.thumb.webp",
+    123258
+   ]
+  },
+  "ForestFarmDistances.png": {
+   "sha1": "4c30d62d3654786dacf61d9d51790c65d5eb4107",
+   "full": [
+    "ForestFarmDistances.webp",
+    136004
+   ],
+   "thumb": [
+    "ForestFarmDistances.thumb.webp",
+    109050
+   ]
+  },
+  "ForestForageLocations.png": {
+   "sha1": "0bc2719b535e427a4e61a7ac753b6a63a7f148d6",
+   "full": [
+    "ForestForageLocations.webp",
+    525634
+   ],
+   "thumb": [
+    "ForestForageLocations.thumb.webp",
+    134004
+   ]
+  },
+  "ForestPondFishingZones.png": {
+   "sha1": "bf1ed86f9278f9b62258b3f87059be953bd90617",
+   "full": [
+    "ForestPondFishingZones.webp",
+    39578
+   ]
+  },
+  "ForestRiverFishingZones.png": {
+   "sha1": "dfb26106b58422a8f79b87acbd9276572bf11cd1",
+   "full": [
+    "ForestRiverFishingZones.webp",
+    211830
+   ],
+   "thumb": [
+    "ForestRiverFishingZones.thumb.webp",
+    75674
+   ]
+  },
+  "Four_Corners_Farm.png": {
+   "sha1": "a98e3f097c74e0a9e1db43938b2b4d4310662201",
+   "full": [
+    "Four_Corners_Farm.webp",
+    275592
+   ],
+   "thumb": [
+    "Four_Corners_Farm.thumb.webp",
+    178840
+   ]
+  },
+  "Gate_Sewer_Key.png": {
+   "sha1": "b932e188e9c21cc971fece57048a6cb8b0e05897",
+   "full": [
+    "Gate_Sewer_Key.webp",
+    251996
+   ],
+   "thumb": [
+    "Gate_Sewer_Key.thumb.webp",
+    69856
+   ]
+  },
+  "Gem_Birds_Puzzle.png": {
+   "sha1": "7405a77bf11cb702653e6306e815b7c07447e98b",
+   "full": [
+    "Gem_Birds_Puzzle.webp",
+    118218
+   ]
+  },
+  "Giant_Stump.png": {
+   "sha1": "ddbc039e54c2894928e114d2c54a166bbbb0dfc5",
+   "icon": [
+    "Giant_Stump.icon.webp",
+    10104
+   ]
+  },
+  "Ginger_Island_Beach_Small.png": {
+   "sha1": "715534ea876a03bd898f157cd702974dca982c4a",
+   "full": [
+    "Ginger_Island_Beach_Small.webp",
+    48112
+   ]
+  },
+  "Ginger_Island_East.png": {
+   "sha1": "d45eaaa7df4ba8b6ef4f46444743783aee456a60",
+   "full": [
+    "Ginger_Island_East.webp",
+    98754
+   ],
+   "thumb": [
+    "Ginger_Island_East.thumb.webp",
+    55070
+   ]
+  },
+  "Ginger_Island_North.png": {
+   "sha1": "506e7b0d02aa83d4872154cbdce7c19248b3839f",
+   "full": [
+    "Ginger_Island_North.webp",
+    172924
+   ],
+   "thumb": [
+    "Ginger_Island_North.thumb.webp",
+    153710
+   ]
+  },
+  "Ginger_Island_South.png": {
+   "sha1": "b31eecff10824315dcc37ece7c6a8b7ccb0005f2",
+   "full": [
+    "Ginger_Island_South.webp",
+    65456
+   ],
+   "thumb": [
+    "Ginger_Island_South.thumb.webp",
+    132052
+   ]
+  },
+  "Ginger_Island_Volcano.png": {
+   "sha1": "db55984ef994f27034cdbedfad2aecca8c1300b6",
+   "full": [
+    "Ginger_Island_Volcano.webp",
+    68020
+   ]
+  },
+  "Ginger_Island_West.png": {
+   "sha1": "3fcda9140a9ee306275890cd81ae27866aadffb8",
+   "full": [
+    "Ginger_Island_West.webp",
+    293034
+   ],
+   "thumb": [
+    "Ginger_Island_West.thumb.webp",
+    123562
+   ]
+  },
+  "GlacierfishLocations.png": {
+   "sha1": "903a80085899f26944c9f687c41d34b9729853ff",
+   "full": [
+    "GlacierfishLocations.webp",
+    46204
+   ]
+  },
+  "GlacierfishLocations_ZH.png": {
+   "sha1": "66e192015eddbd30d10201bcbda727f2e1cd2e0e",
+   "full": [
+    "GlacierfishLocations_ZH.webp",
+    87708
+   ]
+  },
+  "Golden_Walnuts_All_Locations.png": {
+   "sha1": "633a88eca00970db3beaa1c24f3075710d4d6744",
+   "full": [
+    "Golden_Walnuts_All_Locations.webp",
+    2186612
+   ],
+   "thumb": [
+    "Golden_Walnuts_All_Locations.thumb.webp",
+    64506
+   ]
+  },
+  "Golden_Walnuts_All_Locations_zh-CN.png": {
+   "sha1": "3e47405b32bff8e5c68720360e0bb50f54f5da6e",
+   "full": [
+    "Golden_Walnuts_All_Locations_zh-CN.webp",
+    2212060
+   ],
+   "thumb": [
+    "Golden_Walnuts_All_Locations_zh-CN.thumb.webp",
+    64922
+   ]
+  },
+  "Graveyard.png": {
+   "sha1": "68e30335d62ca26a20467b4b5c0522af91d3336e",
+   "icon": [
+    "Graveyard.icon.webp",
+    18204
+   ]
+  },
+  "Harvey_Location_Cutscene.jpg": {
+   "sha1": "57348d567e482ff449d19c9b98b9c88b3dcb3fdb",
+   "full": [
+    "Harvey_Location_Cutscene.webp",
+    199070
+   ],
+   "thumb": [
+    "Harvey_Location_Cutscene.thumb.webp",
+    27002
+   ]
+  },
+  "Harvey_Location_Cutscene_ZH.png": {
+   "sha1": "14524f4a1345f4033a402c488bcb1f2710b79b07",
+   "full": [
+    "Harvey_Location_Cutscene_ZH.webp",
+    111004
+   ],
+   "thumb": [
+    "Harvey_Location_Cutscene_ZH.thumb.webp",
+    19850
+   ]
+  },
+  "Hill-topFarmDistances.png": {
+   "sha1": "26c0ed8857722f9a287cda0c834919be059a3bd1",
+   "full": [
+    "Hill-topFarmDistances.webp",
+    181836
+   ],
+   "thumb": [
+    "Hill-topFarmDistances.thumb.webp",
+    133336
+   ]
+  },
+  "Iridium_Krobus_Location.png": {
+   "sha1": "fc5887732bd3620a1739719f7874ae9e4fe1a516",
+   "full": [
+    "Iridium_Krobus_Location.webp",
+    154124
+   ],
+   "thumb": [
+    "Iridium_Krobus_Location.thumb.webp",
+    127744
+   ]
+  },
+  "IslandFarm_Before.png": {
+   "sha1": "336c20f957fcb4a95c527565251b37afcc68b739",
+   "full": [
+    "IslandFarm_Before.webp",
+    173034
+   ],
+   "thumb": [
+    "IslandFarm_Before.thumb.webp",
+    50340
+   ]
+  },
+  "IslandNorthDistances.png": {
+   "sha1": "17cb2cb3f419bfdd6eafbe12e4ea4177dec99adb",
+   "full": [
+    "IslandNorthDistances.webp",
+    217018
+   ],
+   "thumb": [
+    "IslandNorthDistances.thumb.webp",
+    162612
+   ]
+  },
+  "IslandSouthDistances.png": {
+   "sha1": "11e327ddaf09c6f42a1c0f12f7e1104b8d556067",
+   "full": [
+    "IslandSouthDistances.webp",
+    63230
+   ],
+   "thumb": [
+    "IslandSouthDistances.thumb.webp",
+    133798
+   ]
+  },
+  "IslandSouthEastDistances.png": {
+   "sha1": "48e2dc71aea317cf624f9c9f6f7c51ea33a20121",
+   "full": [
+    "IslandSouthEastDistances.webp",
+    53788
+   ]
+  },
+  "IslandWestDistances.png": {
+   "sha1": "ae0a6417a7580b49a3e24a57e12192c3b2497b8c",
+   "full": [
+    "IslandWestDistances.webp",
+    302804
+   ],
+   "thumb": [
+    "IslandWestDistances.thumb.webp",
+    91034
+   ]
+  },
+  "Island_Trader.png": {
+   "sha1": "2b2ccab2c9a14da0a7a29e77d724b79c0d2c7a29",
+   "icon": [
+    "Island_Trader.icon.webp",
+    9816
+   ]
+  },
+  "JojaMart_Closed.png": {
+   "sha1": "459c44b2ec3272d04dbe01eaca05f37838c19d9f",
+   "full": [
+    "JojaMart_Closed.webp",
+    120420
+   ]
+  },
+  "Joja_Completion_Cermony.png": {
+   "sha1": "968306feed3727325c12e19d4afe22c3ef2da1d9",
+   "full": [
+    "Joja_Completion_Cermony.webp",
+    86042
+   ],
+   "thumb": [
+    "Joja_Completion_Cermony.thumb.webp",
+    113110
+   ]
+  },
+  "Joja_Warehouse_Interior.png": {
+   "sha1": "3dd427d3bff8826eebcc8a0c53359c7dfb111abe",
+   "full": [
+    "Joja_Warehouse_Interior.webp",
+    42958
+   ],
+   "thumb": [
+    "Joja_Warehouse_Interior.thumb.webp",
+    30002
+   ]
+  },
+  "Joja_train.jpg": {
+   "sha1": "2862471fd93ee0e701fe9d701f0230b6669def80",
+   "full": [
+    "Joja_train.webp",
+    160162
+   ],
+   "thumb": [
+    "Joja_train.thumb.webp",
+    33890
+   ]
+  },
+  "Jojaworkersfixingbus.png": {
+   "sha1": "aae98f90b2264c2b165fafb36abd0cb87ed1d8aa",
+   "full": [
+    "Jojaworkersfixingbus.webp",
+    159332
+   ],
+   "thumb": [
+    "Jojaworkersfixingbus.thumb.webp",
+    52114
+   ]
+  },
+  "Junimo_Kart.png": {
+   "sha1": "3416b36a2060bbaa733c61d32c961c6cd83e588b",
+   "icon": [
+    "Junimo_Kart.icon.webp",
+    5578
+   ]
+  },
+  "Junimo_Kart_Level_2.png": {
+   "sha1": "3c0d2955a80786e4799857f54cb5d4a20e4bfffe",
+   "full": [
+    "Junimo_Kart_Level_2.webp",
+    248782
+   ],
+   "thumb": [
+    "Junimo_Kart_Level_2.thumb.webp",
+    65440
+   ]
+  },
+  "Junimo_Kart_Level_3.png": {
+   "sha1": "f67bb92b92ef2f8297725475d75544096731471c",
+   "full": [
+    "Junimo_Kart_Level_3.webp",
+    210022
+   ],
+   "thumb": [
+    "Junimo_Kart_Level_3.thumb.webp",
+    60570
+   ]
+  },
+  "Junimo_Kart_Level_4.png": {
+   "sha1": "e9a8a4ce6f3fc1a8ee7cfaa98c85a1abf8abad44",
+   "full": [
+    "Junimo_Kart_Level_4.webp",
+    172228
+   ],
+   "thumb": [
+    "Junimo_Kart_Level_4.thumb.webp",
+    54416
+   ]
+  },
+  "Junimo_Kart_Level_5.png": {
+   "sha1": "b1a034022a1bbedbfc9c4d63d162457cdca54b88",
+   "full": [
+    "Junimo_Kart_Level_5.webp",
+    137204
+   ],
+   "thumb": [
+    "Junimo_Kart_Level_5.thumb.webp",
+    29610
+   ]
+  },
+  "Junimo_Kart_Level_6.png": {
+   "sha1": "877c3b332bb42e88231e1424df9e17cac626393b",
+   "full": [
+    "Junimo_Kart_Level_6.webp",
+    226122
+   ],
+   "thumb": [
+    "Junimo_Kart_Level_6.thumb.webp",
+    55212
+   ]
+  },
+  "Junimo_plush.jpg": {
+   "sha1": "05c878c56908442aeb2e4fc70aa47fc6e95b997a",
+   "full": [
+    "Junimo_plush.webp",
+    236952
+   ],
+   "thumb": [
+    "Junimo_plush.thumb.webp",
+    83618
+   ]
+  },
+  "Junimo_plush_ZH.jpg": {
+   "sha1": "4a4ffb72e0d5bd33223e46362f7286ac961022b3",
+   "full": [
+    "Junimo_plush_ZH.webp",
+    236866
+   ],
+   "thumb": [
+    "Junimo_plush_ZH.thumb.webp",
+    83678
+   ]
+  },
+  "Kegs_in_Small_Barn_x90.png": {
+   "sha1": "0a6abc9966bd3f71286b499838fa1f0e83474b09",
+   "full": [
+    "Kegs_in_Small_Barn_x90.webp",
+    152826
+   ],
+   "thumb": [
+    "Kegs_in_Small_Barn_x90.thumb.webp",
+    84596
+   ]
+  },
+  "Larger-corner-room.png": {
+   "sha1": "1d556b7d462315d0b6984eac4e85155774b541a5",
+   "thumb": [
+    "Larger-corner-room.thumb.webp",
+    45688
+   ]
+  },
+  "Leah's_Cottage_Interior.png": {
+   "sha1": "c4d8e67292818d1eb4c6748d9b06fc9e5138596c",
+   "full": [
+    "Leah's_Cottage_Interior.webp",
+    151852
+   ]
+  },
+  "Leah_Seven_Hearts_Rain_1.jpg": {
+   "sha1": "82f0b3e29709f9679e5572a88901cb15a450028b",
+   "full": [
+    "Leah_Seven_Hearts_Rain_1.webp",
+    219136
+   ]
+  },
+  "LegendLocations.png": {
+   "sha1": "8ab72e57151e44c8bcc1ac848987293b34a649e5",
+   "full": [
+    "LegendLocations.webp",
+    68784
+   ]
+  },
+  "Luau.png": {
+   "sha1": "f8143df028bba585f4bac3b6e8ec3778451e968f",
+   "icon": [
+    "Luau.icon.webp",
+    9622
+   ]
+  },
+  "Marnie's_Ranch_Interior.png": {
+   "sha1": "f5e22576cbb4a8149a194c7ce396452dee9dff76",
+   "full": [
+    "Marnie's_Ranch_Interior.webp",
+    60990
+   ]
+  },
+  "Mastery_Cave.png": {
+   "sha1": "f3e84b14434306c6d2cf01bf41b3df85768fec41",
+   "icon": [
+    "Mastery_Cave.icon.webp",
+    3192
+   ]
+  },
+  "Max_cellar_layout.png": {
+   "sha1": "e59a0970649b7939d93395ab411e19e37941a966",
+   "full": [
+    "Max_cellar_layout.webp",
+    179120
+   ],
+   "thumb": [
+    "Max_cellar_layout.thumb.webp",
+    62882
+   ]
+  },
+  "Mayor's_Manor_Cellar.png": {
+   "sha1": "61fd5972605c5b01c9d67c1acda5cb7f64d54b03",
+   "full": [
+    "Mayor's_Manor_Cellar.webp",
+    172534
+   ],
+   "thumb": [
+    "Mayor's_Manor_Cellar.thumb.webp",
+    75038
+   ]
+  },
+  "Meadowlands_Farm.png": {
+   "sha1": "9f64241c36be037aa4fa33acbe5c64db54193cd6",
+   "thumb": [
+    "Meadowlands_Farm.thumb.webp",
+    151752
+   ]
+  },
+  "Mereperson.png": {
+   "sha1": "5674e67eece451b33984ba1a99e914fa10b311d1",
+   "full": [
+    "Mereperson.webp",
+    216170
+   ],
+   "thumb": [
+    "Mereperson.thumb.webp",
+    41900
+   ]
+  },
+  "Mine_Overview.png": {
+   "sha1": "8f15592a55b496bb2678fed252d244aa399d267c",
+   "full": [
+    "Mine_Overview.webp",
+    44814
+   ]
+  },
+  "Minecart_Town.png": {
+   "sha1": "276dff641c58d99be52a15a7b84a5c1ab0bb8306",
+   "full": [
+    "Minecart_Town.webp",
+    106424
+   ]
+  },
+  "MountainDistances.png": {
+   "sha1": "dd23b824fab7c83fb6804156cf121f47aba60991",
+   "full": [
+    "MountainDistances.webp",
+    240310
+   ],
+   "thumb": [
+    "MountainDistances.thumb.webp",
+    39886
+   ]
+  },
+  "MountainForageLocations.png": {
+   "sha1": "e5802723726d738014390377898b3c33e7d81095",
+   "full": [
+    "MountainForageLocations.webp",
+    242130
+   ],
+   "thumb": [
+    "MountainForageLocations.thumb.webp",
+    40840
+   ]
+  },
+  "MountainLakeFishingZones.png": {
+   "sha1": "9f00dbb78e9230105a07f194b32ba72f23b6fed4",
+   "full": [
+    "MountainLakeFishingZones.webp",
+    67024
+   ]
+  },
+  "Multiplayer.jpg": {
+   "sha1": "7a0576a29752e63e9cb65f2f87da4de6499e7e32",
+   "full": [
+    "Multiplayer.webp",
+    716836
+   ],
+   "thumb": [
+    "Multiplayer.thumb.webp",
+    100054
+   ]
+  },
+  "MutantBugLairDistances.png": {
+   "sha1": "bfe2af4799c73af2849712d8edd48f82a2e244e5",
+   "full": [
+    "MutantBugLairDistances.webp",
+    61246
+   ],
+   "thumb": [
+    "MutantBugLairDistances.thumb.webp",
+    66954
+   ]
+  },
+  "Mutant_Bug_Lair.png": {
+   "sha1": "acf2b9880be0a0edfb488278a3f0a2e963f11e8c",
+   "icon": [
+    "Mutant_Bug_Lair.icon.webp",
+    6666
+   ]
+  },
+  "Never_looked_better.jpg": {
+   "sha1": "9e2d6a6ce4173a6ef089d474d7ddc468ff9dc000",
+   "full": [
+    "Never_looked_better.webp",
+    235044
+   ],
+   "thumb": [
+    "Never_looked_better.thumb.webp",
+    42068
+   ]
+  },
+  "NightMarket.jpg": {
+   "sha1": "8b3e648aa13e9f185ba8aa305412f85719319bdb",
+   "full": [
+    "NightMarket.webp",
+    190782
+   ],
+   "thumb": [
+    "NightMarket.thumb.webp",
+    43932
+   ]
+  },
+  "Old_Mariner_Pre-FirstHouseUpgrade_Dialogue.png": {
+   "sha1": "4a304db552e210d1ef0437157dc3b8120e813414",
+   "full": [
+    "Old_Mariner_Pre-FirstHouseUpgrade_Dialogue.webp",
+    176810
+   ],
+   "thumb": [
+    "Old_Mariner_Pre-FirstHouseUpgrade_Dialogue.thumb.webp",
+    50540
+   ]
+  },
+  "Optimal_cellar_layout.png": {
+   "sha1": "5b29825a9834975a92bf49264138693611391b7a",
+   "full": [
+    "Optimal_cellar_layout.webp",
+    139384
+   ],
+   "thumb": [
+    "Optimal_cellar_layout.thumb.webp",
+    59656
+   ]
+  },
+  "Optimal_cellar_layout_mobile.png": {
+   "sha1": "dc61aa858d98c8077f653a9c72b5d2b0934d435d",
+   "full": [
+    "Optimal_cellar_layout_mobile.webp",
+    145870
+   ],
+   "thumb": [
+    "Optimal_cellar_layout_mobile.thumb.webp",
+    59806
+   ]
+  },
+  "Pelican_Town.png": {
+   "sha1": "9f9d2ead79884b2f86e9fe208689c4d20fa80bd3",
+   "icon": [
+    "Pelican_Town.icon.webp",
+    17508
+   ]
+  },
+  "Phaqcmclo8c41.png": {
+   "sha1": "d0e7a352363bdb4c6bb54d17c33017cc4b8e4bf0",
+   "full": [
+    "Phaqcmclo8c41.webp",
+    59698
+   ]
+  },
+  "Pierre's_General_Store_Interior.png": {
+   "sha1": "309939c161e5205a6032b2f4c718d12946bef74d",
+   "full": [
+    "Pierre's_General_Store_Interior.webp",
+    108064
+   ]
+  },
+  "PirateCaveParty.png": {
+   "sha1": "3b4e598a538de4acfaea372b72d25f08637d8895",
+   "full": [
+    "PirateCaveParty.webp",
+    119070
+   ],
+   "thumb": [
+    "PirateCaveParty.thumb.webp",
+    47392
+   ]
+  },
+  "Player_Driven_Bus.jpg": {
+   "sha1": "e2a17402a8151db86a8ddff812b8e810d14d7c01",
+   "full": [
+    "Player_Driven_Bus.webp",
+    598058
+   ],
+   "thumb": [
+    "Player_Driven_Bus.thumb.webp",
+    98362
+   ]
+  },
+  "Prehistoric_Level.png": {
+   "sha1": "080823dd362c3e11b1fa22c18c02d59b2cd8d038",
+   "full": [
+    "Prehistoric_Level.webp",
+    186830
+   ],
+   "thumb": [
+    "Prehistoric_Level.thumb.webp",
+    47268
+   ]
+  },
+  "Present_Train.png": {
+   "sha1": "d5df1c540b4dae93a5a41e17317fa3f514f13038",
+   "full": [
+    "Present_Train.webp",
+    66978
+   ]
+  },
+  "PressureNozzleDemo.png": {
+   "sha1": "adbab484a1ea28de5b0aa4c59e998ade165662b7",
+   "full": [
+    "PressureNozzleDemo.webp",
+    104374
+   ],
+   "thumb": [
+    "PressureNozzleDemo.thumb.webp",
+    47800
+   ]
+  },
+  "Quarry.png": {
+   "sha1": "f19d2fae23fad9a07cc57e3ca64436d6742c986f",
+   "full": [
+    "Quarry.webp",
+    124260
+   ],
+   "icon": [
+    "Quarry.icon.webp",
+    11926
+   ],
+   "thumb": [
+    "Quarry.thumb.webp",
+    106576
+   ]
+  },
+  "Quarry_Mine_Location.png": {
+   "sha1": "ac46cd8851257d9b8bf8b17779405a4941f1565e",
+   "full": [
+    "Quarry_Mine_Location.webp",
+    56610
+   ],
+   "thumb": [
+    "Quarry_Mine_Location.thumb.webp",
+    12014
+   ]
+  },
+  "Quarry_Mine_Map.png": {
+   "sha1": "4ae5e112fe38939f25c2052e200b0536bcb8de38",
+   "full": [
+    "Quarry_Mine_Map.webp",
+    281222
+   ],
+   "thumb": [
+    "Quarry_Mine_Map.thumb.webp",
+    57448
+   ]
+  },
+  "Quarry_tiles.png": {
+   "sha1": "9482ece26319e980108db24feb16ad6dc57b0192",
+   "full": [
+    "Quarry_tiles.webp",
+    55964
+   ]
+  },
+  "RailroadForageLocations.png": {
+   "sha1": "7fe0b01ac99230f87499d91bec50d8490911fb01",
+   "full": [
+    "RailroadForageLocations.webp",
+    87976
+   ],
+   "thumb": [
+    "RailroadForageLocations.thumb.webp",
+    58730
+   ]
+  },
+  "Railroad_with_train.png": {
+   "sha1": "73c12047ced723e7bd7416565ced5cfed799ee8c",
+   "full": [
+    "Railroad_with_train.webp",
+    184346
+   ],
+   "thumb": [
+    "Railroad_with_train.thumb.webp",
+    41248
+   ]
+  },
+  "Rare_Green_Jelly.png": {
+   "sha1": "81abe8353a1d497e3fc0ceb5b8032575c7f5f881",
+   "full": [
+    "Rare_Green_Jelly.webp",
+    139108
+   ],
+   "thumb": [
+    "Rare_Green_Jelly.thumb.webp",
+    36052
+   ]
+  },
+  "Restored_community_centre.png": {
+   "sha1": "9312ad5ad67777d41508f7de828b51b394467ae1",
+   "full": [
+    "Restored_community_centre.webp",
+    159770
+   ],
+   "thumb": [
+    "Restored_community_centre.thumb.webp",
+    30826
+   ]
+  },
+  "Rice_beach_farm.png": {
+   "sha1": "9bfbea9660fee13d8129eb123ac59eeababc43be",
+   "full": [
+    "Rice_beach_farm.webp",
+    353114
+   ],
+   "thumb": [
+    "Rice_beach_farm.thumb.webp",
+    111848
+   ]
+  },
+  "Rice_forest_farm.png": {
+   "sha1": "377f1ea9b8d3f5d95e9a6cb204b317755e586850",
+   "full": [
+    "Rice_forest_farm.webp",
+    204252
+   ],
+   "thumb": [
+    "Rice_forest_farm.thumb.webp",
+    101884
+   ]
+  },
+  "Rice_four_corners_farm.png": {
+   "sha1": "fea75b1274af5dcc9b5de7094f32d7f7f91ef650",
+   "full": [
+    "Rice_four_corners_farm.webp",
+    260178
+   ],
+   "thumb": [
+    "Rice_four_corners_farm.thumb.webp",
+    144680
+   ]
+  },
+  "Rice_hilltop_farm.png": {
+   "sha1": "dfb513bce54ac00138f39e78cc9ec50361995edd",
+   "full": [
+    "Rice_hilltop_farm.webp",
+    237362
+   ],
+   "thumb": [
+    "Rice_hilltop_farm.thumb.webp",
+    125248
+   ]
+  },
+  "Rice_meadowlands_farm.png": {
+   "sha1": "d70cb26053e6f599b848cf2451e1762aa2414ed1",
+   "full": [
+    "Rice_meadowlands_farm.webp",
+    547502
+   ],
+   "thumb": [
+    "Rice_meadowlands_farm.thumb.webp",
+    122328
+   ]
+  },
+  "Rice_riverland_farm.png": {
+   "sha1": "85fd12f2a9d32e87376e794b88f042cd59ed9611",
+   "full": [
+    "Rice_riverland_farm.webp",
+    187174
+   ],
+   "thumb": [
+    "Rice_riverland_farm.thumb.webp",
+    106718
+   ]
+  },
+  "Rice_standard_farm.png": {
+   "sha1": "6acc74f1b2b6888b119dddfe6604173b43d38088",
+   "full": [
+    "Rice_standard_farm.webp",
+    207194
+   ],
+   "thumb": [
+    "Rice_standard_farm.thumb.webp",
+    105968
+   ]
+  },
+  "Rice_wilderness_farm.png": {
+   "sha1": "f979cb5b257e4fbad6a1d23ca507b77d0acd908c",
+   "full": [
+    "Rice_wilderness_farm.webp",
+    224902
+   ],
+   "thumb": [
+    "Rice_wilderness_farm.thumb.webp",
+    112196
+   ]
+  },
+  "Riding_1.jpg": {
+   "sha1": "492dea4652f888d03ccbdb92ffcb2272648fa8ed",
+   "full": [
+    "Riding_1.webp",
+    308056
+   ]
+  },
+  "Riding_2.jpg": {
+   "sha1": "9fba8fa607002ab67056806e590b8926e56f0adf",
+   "full": [
+    "Riding_2.webp",
+    314630
+   ]
+  },
+  "RiverlandFarmDistances.png": {
+   "sha1": "7967ecd777caa365aa6c4d4fb51d81940aeb3ab7",
+   "full": [
+    "RiverlandFarmDistances.webp",
+    176852
+   ],
+   "thumb": [
+    "RiverlandFarmDistances.thumb.webp",
+    92310
+   ]
+  },
+  "Robins_Lost_Axe.png": {
+   "sha1": "f03da4982cd1d6ba8bd8172457e2666fb4af15b5",
+   "full": [
+    "Robins_Lost_Axe.webp",
+    359604
+   ],
+   "thumb": [
+    "Robins_Lost_Axe.thumb.webp",
+    109148
+   ]
+  },
+  "Saloon_Interior.png": {
+   "sha1": "6fdc206169732b40feb1e4b3c5e7e2cae57bc57d",
+   "full": [
+    "Saloon_Interior.webp",
+    80422
+   ]
+  },
+  "Saloon_Interior_ZH.png": {
+   "sha1": "9837e44e6272935a2ce48d2af23c4d7f724ac5dd",
+   "full": [
+    "Saloon_Interior_ZH.webp",
+    80418
+   ]
+  },
+  "SecretWoods.png": {
+   "sha1": "e1f8d666405b96217d9fdf4eb7eb58271a8e00f3",
+   "icon": [
+    "SecretWoods.icon.webp",
+    6090
+   ]
+  },
+  "SecretWoodsDistances.png": {
+   "sha1": "73c30776eb0d1bb547d8688bfc666e2fc2a213b3",
+   "full": [
+    "SecretWoodsDistances.webp",
+    45166
+   ]
+  },
+  "SecretWoodsForageLocations.png": {
+   "sha1": "e0439416621484b643b23675fffaf4e0d78d179e",
+   "full": [
+    "SecretWoodsForageLocations.webp",
+    65408
+   ],
+   "thumb": [
+    "SecretWoodsForageLocations.thumb.webp",
+    63260
+   ]
+  },
+  "Secretwoods_entrance.png": {
+   "sha1": "019d12cc32c52ea6ed411153ef7859d62cf1b329",
+   "full": [
+    "Secretwoods_entrance.webp",
+    44886
+   ]
+  },
+  "Sewer_Confrontation_Krobos_Dwarf.png": {
+   "sha1": "d0164207dface8f1a31867591452ebf9ed07da72",
+   "full": [
+    "Sewer_Confrontation_Krobos_Dwarf.webp",
+    65280
+   ]
+  },
+  "Shane_4_Hearts.png": {
+   "sha1": "74a802563c754b03b0a9cdf9d4828a3dc1c86598",
+   "full": [
+    "Shane_4_Hearts.webp",
+    44126
+   ]
+  },
+  "Shane_6_Hearts_1.png": {
+   "sha1": "3776c21c811ea26a1f56c22bf71de2b5a9c66ebe",
+   "thumb": [
+    "Shane_6_Hearts_1.thumb.webp",
+    61652
+   ]
+  },
+  "Shane_6_Hearts_2.png": {
+   "sha1": "b42edf1cca60a774bf2403d0ee9ee768d0ce9a9b",
+   "thumb": [
+    "Shane_6_Hearts_2.thumb.webp",
+    64072
+   ]
+  },
+  "Shane_8_Hearts.png": {
+   "sha1": "975edbd13e5ff0d3f7fb38ae9153c2155415b2ee",
+   "full": [
+    "Shane_8_Hearts.webp",
+    56440
+   ],
+   "thumb": [
+    "Shane_8_Hearts.thumb.webp",
+    23164
+   ]
+  },
+  "Shed_Inside.png": {
+   "sha1": "5e0377ec9cdd881461a59addd39d7d91b9205180",
+   "full": [
+    "Shed_Inside.webp",
+    72926
+   ]
+  },
+  "Shipping.png": {
+   "sha1": "790638a1aa5aa4d3a11975cb7b11d3f4479b2f31",
+   "icon": [
+    "Shipping.icon.webp",
+    7486
+   ]
+  },
+  "Shrine_of_Challenge_1.png": {
+   "sha1": "451a29ac721eb43edf2318426bc4cccb644ae130",
+   "full": [
+    "Shrine_of_Challenge_1.webp",
+    51890
+   ]
+  },
+  "Simplest_Slime_Hutch_design.png": {
+   "sha1": "f61c55a7f58c72fa36115e6cedad8d5b4cd7105e",
+   "full": [
+    "Simplest_Slime_Hutch_design.webp",
+    78466
+   ]
+  },
+  "Skullkeyentrance.jpg": {
+   "sha1": "054b165825409daab27cf6d90171e94583800bc0",
+   "full": [
+    "Skullkeyentrance.webp",
+    57802
+   ]
+  },
+  "Slime_safe_farm.png": {
+   "sha1": "b875d83faf561e253bcc565e7e01b9f7347c5b91",
+   "full": [
+    "Slime_safe_farm.webp",
+    101078
+   ],
+   "thumb": [
+    "Slime_safe_farm.thumb.webp",
+    41564
+   ]
+  },
+  "Soundtrack_Album_Cover.png": {
+   "sha1": "2964a36579b8111d5272d2176c5c4b311a80f854",
+   "full": [
+    "Soundtrack_Album_Cover.webp",
+    307686
+   ],
+   "thumb": [
+    "Soundtrack_Album_Cover.thumb.webp",
+    99390
+   ]
+  },
+  "Spa_Interior.png": {
+   "sha1": "ec36496af2a1db6829079d33b97e4de5db48143c",
+   "full": [
+    "Spa_Interior.webp",
+    190676
+   ],
+   "thumb": [
+    "Spa_Interior.thumb.webp",
+    54268
+   ]
+  },
+  "Spirit's_Eve_Haunted_Maze.jpg": {
+   "sha1": "53ac7b237f0d2067ea68d3c68feb81053e541214",
+   "full": [
+    "Spirit's_Eve_Haunted_Maze.webp",
+    403750
+   ],
+   "thumb": [
+    "Spirit's_Eve_Haunted_Maze.thumb.webp",
+    57050
+   ]
+  },
+  "Spirits_Eve.png": {
+   "sha1": "53e240f2fec4173d33a7956c21169ef38f82e622",
+   "full": [
+    "Spirits_Eve.webp",
+    308884
+   ],
+   "thumb": [
+    "Spirits_Eve.thumb.webp",
+    57452
+   ]
+  },
+  "Squirrel_Figurine_Location.png": {
+   "sha1": "3ac7952a0432ea3c4d97626246a20f5066c99950",
+   "full": [
+    "Squirrel_Figurine_Location.webp",
+    492410
+   ],
+   "thumb": [
+    "Squirrel_Figurine_Location.thumb.webp",
+    105102
+   ]
+  },
+  "StandardFarmDistances.png": {
+   "sha1": "56c3edc24e780722e895609e8970d10a1c2ed130",
+   "full": [
+    "StandardFarmDistances.webp",
+    158208
+   ],
+   "thumb": [
+    "StandardFarmDistances.thumb.webp",
+    125312
+   ]
+  },
+  "StardewValleyFair.png": {
+   "sha1": "b8abec90c2a14e9ca6dccb43c143da025c4ca777",
+   "full": [
+    "StardewValleyFair.webp",
+    49382
+   ]
+  },
+  "Stardew_Museum_Interior.png": {
+   "sha1": "169a89dc44bc8ae1bc17db0a5b1e0e31a7b04219",
+   "full": [
+    "Stardew_Museum_Interior.webp",
+    163174
+   ],
+   "thumb": [
+    "Stardew_Museum_Interior.thumb.webp",
+    46908
+   ]
+  },
+  "Stardew_Museum_Organized.png": {
+   "sha1": "c81357514edf322110069c03c572a4be463e123e",
+   "full": [
+    "Stardew_Museum_Organized.webp",
+    205942
+   ],
+   "thumb": [
+    "Stardew_Museum_Organized.thumb.webp",
+    63598
+   ]
+  },
+  "Stardew_Secret_Cave.png": {
+   "sha1": "dd680d000a0697d0ff10ad4f53e0a82e8760d6de",
+   "thumb": [
+    "Stardew_Secret_Cave.thumb.webp",
+    97830
+   ]
+  },
+  "Stardew_Valley_Hero_Trophy.jpg": {
+   "sha1": "35622a0b326baf7ffdbb0bbabd389a0469f17ae4",
+   "full": [
+    "Stardew_Valley_Hero_Trophy.webp",
+    270390
+   ],
+   "thumb": [
+    "Stardew_Valley_Hero_Trophy.thumb.webp",
+    44994
+   ]
+  },
+  "Stardew_deluxe_barn_136_kegs.png": {
+   "sha1": "31ace3d25d2818c11b2e535664020251082ac9d8",
+   "full": [
+    "Stardew_deluxe_barn_136_kegs.webp",
+    181040
+   ],
+   "thumb": [
+    "Stardew_deluxe_barn_136_kegs.thumb.webp",
+    76102
+   ]
+  },
+  "Taro_beach_farm.png": {
+   "sha1": "09e4f26bcd5e7f72ed7b82d24bcac8c0b7593642",
+   "full": [
+    "Taro_beach_farm.webp",
+    365222
+   ],
+   "thumb": [
+    "Taro_beach_farm.thumb.webp",
+    118668
+   ]
+  },
+  "Taro_forest_farm.png": {
+   "sha1": "a0f1cf2022d21a5c0ecc239207da1a4caf8883c2",
+   "full": [
+    "Taro_forest_farm.webp",
+    211928
+   ],
+   "thumb": [
+    "Taro_forest_farm.thumb.webp",
+    107976
+   ]
+  },
+  "Taro_four_corners_farm.png": {
+   "sha1": "4ad9021231d51b62c56a07389fffd10fb8180024",
+   "full": [
+    "Taro_four_corners_farm.webp",
+    291582
+   ],
+   "thumb": [
+    "Taro_four_corners_farm.thumb.webp",
+    149718
+   ]
+  },
+  "Taro_ginger_island.png": {
+   "sha1": "20ee2354f2f7c22c6d76e8c0d9ce147ee68dca94",
+   "full": [
+    "Taro_ginger_island.webp",
+    352262
+   ],
+   "thumb": [
+    "Taro_ginger_island.thumb.webp",
+    115722
+   ]
+  },
+  "Taro_hilltop_farm.png": {
+   "sha1": "f66efe1816609f18526a3d0f1cd3ccb3e739427f",
+   "full": [
+    "Taro_hilltop_farm.webp",
+    259470
+   ],
+   "thumb": [
+    "Taro_hilltop_farm.thumb.webp",
+    129962
+   ]
+  },
+  "Taro_riverland_farm.png": {
+   "sha1": "90fd622727cee64375ccbdf2b21fc0e276c05d96",
+   "full": [
+    "Taro_riverland_farm.webp",
+    190666
+   ],
+   "thumb": [
+    "Taro_riverland_farm.thumb.webp",
+    121820
+   ]
+  },
+  "Taro_standard_farm.png": {
+   "sha1": "5e849d4552b1f70937bb972ae07ae34dfb7c17e9",
+   "full": [
+    "Taro_standard_farm.webp",
+    246856
+   ],
+   "thumb": [
+    "Taro_standard_farm.thumb.webp",
+    113962
+   ]
+  },
+  "Taro_wilderness_farm.png": {
+   "sha1": "5adba0510e17209e59258c3c2b6273710e35d177",
+   "full": [
+    "Taro_wilderness_farm.webp",
+    227642
+   ],
+   "thumb": [
+    "Taro_wilderness_farm.thumb.webp",
+    118036
+   ]
+  },
+  "TheMountainLake.png": {
+   "sha1": "04b7996265d948271cf6c1d04c27cf787e0be967",
+   "full": [
+    "TheMountainLake.webp",
+    122260
+   ]
+  },
+  "The_Mountain.png": {
+   "sha1": "73cbb9c5b23e47a341a287733f6f0ecd188ad6c8",
+   "full": [
+    "The_Mountain.webp",
+    226386
+   ],
+   "icon": [
+    "The_Mountain.icon.webp",
+    5380
+   ],
+   "thumb": [
+    "The_Mountain.thumb.webp",
+    41830
+   ]
+  },
+  "The_Summit.png": {
+   "sha1": "93cd8e517e757950141b0efa4db5af291b78a441",
+   "icon": [
+    "The_Summit.icon.webp",
+    4070
+   ]
+  },
+  "The_Tunnel_entrance.jpg": {
+   "sha1": "7c4f1cd7f1d463f4c498046ca2cd1c1bd8c06a71",
+   "full": [
+    "The_Tunnel_entrance.webp",
+    163944
+   ]
+  },
+  "ThewaytoTheAlleywayBuffet.png": {
+   "sha1": "bf7a520a84683323bc27379285184c580fa9e424",
+   "full": [
+    "ThewaytoTheAlleywayBuffet.webp",
+    87430
+   ],
+   "thumb": [
+    "ThewaytoTheAlleywayBuffet.thumb.webp",
+    106530
+   ]
+  },
+  "TownDistances.png": {
+   "sha1": "dfaa80130ab99310256b3118313774f32daefab9",
+   "full": [
+    "TownDistances.webp",
+    623446
+   ],
+   "thumb": [
+    "TownDistances.thumb.webp",
+    124328
+   ]
+  },
+  "TownForageLocations.png": {
+   "sha1": "d8c37e4db55f0ac55d2e78555d1f1e8e9d55b2fe",
+   "full": [
+    "TownForageLocations.webp",
+    591190
+   ],
+   "thumb": [
+    "TownForageLocations.thumb.webp",
+    146710
+   ]
+  },
+  "Tracking.jpg": {
+   "sha1": "77f0317de004d2a0b7817e49d13023464fdc96db",
+   "full": [
+    "Tracking.webp",
+    195428
+   ]
+  },
+  "Treehouse_Interior.png": {
+   "sha1": "adeb501212cdd9ff82ffd40a68412e73b535cd4d",
+   "full": [
+    "Treehouse_Interior.webp",
+    20476
+   ]
+  },
+  "Trout_Derby.png": {
+   "sha1": "6d47c5acd4ee256d4cca7bce892f3849ecedfa66",
+   "icon": [
+    "Trout_Derby.icon.webp",
+    9280
+   ]
+  },
+  "UFO_ZH.png": {
+   "sha1": "d0876734e742bce91a78121327d239c471dcd74f",
+   "full": [
+    "UFO_ZH.webp",
+    48854
+   ]
+  },
+  "VolcanoDungeon_Entryway.png": {
+   "sha1": "56c025ac4896f095d713853a75298e89d2303ac2",
+   "full": [
+    "VolcanoDungeon_Entryway.webp",
+    43182
+   ]
+  },
+  "Walnutdownrivervolcano.PNG": {
+   "sha1": "c57c0d3bd8af38c647bf95d344d3bcb78aba34ed",
+   "full": [
+    "Walnutdownrivervolcano.webp",
+    76232
+   ]
+  },
+  "Walnutgembirdshrine.PNG": {
+   "sha1": "086f14ce02996ce1ee69a6d32a77945b35378ebd",
+   "thumb": [
+    "Walnutgembirdshrine.thumb.webp",
+    71870
+   ]
+  },
+  "Walnuthuntingmonsters.png": {
+   "sha1": "3ef1131503581ef00a790e13679ead560d498321",
+   "full": [
+    "Walnuthuntingmonsters.webp",
+    68074
+   ]
+  },
+  "Walnutnorthdigsiteright.png": {
+   "sha1": "7cb3b44ba2b21835af070a17c8d36d58017b0788",
+   "full": [
+    "Walnutnorthdigsiteright.webp",
+    43146
+   ]
+  },
+  "Walnuttopleftvolcano.png": {
+   "sha1": "c0f159a4c1a41be447d781a2bf42dfbf9e7359af",
+   "thumb": [
+    "Walnuttopleftvolcano.thumb.webp",
+    58324
+   ]
+  },
+  "Walnutwestaroundthecliff.png": {
+   "sha1": "bda11b88b63f1e7e3c4ad3206d1748bec16c4d53",
+   "full": [
+    "Walnutwestaroundthecliff.webp",
+    276854
+   ]
+  },
+  "Walnutwestoverlookingfarm.png": {
+   "sha1": "89a01bbfb6a01ddae612e07c742d017d31ed2354",
+   "full": [
+    "Walnutwestoverlookingfarm.webp",
+    110540
+   ]
+  },
+  "Warp_Totem_Desert_location.png": {
+   "sha1": "418e2cd9f5d3305bfc0cb68aa6562ad761accd5d",
+   "full": [
+    "Warp_Totem_Desert_location.webp",
+    48502
+   ]
+  },
+  "WildernessFarmDistances.png": {
+   "sha1": "ffcf211232fb3590035a33f79731e7473c83652b",
+   "full": [
+    "WildernessFarmDistances.webp",
+    170630
+   ],
+   "thumb": [
+    "WildernessFarmDistances.thumb.webp",
+    114048
+   ]
+  },
+  "Winning_Golden_Pumpkin.png": {
+   "sha1": "073ae63800d270e1558e2b7aa72d2a7fc2b32dd2",
+   "full": [
+    "Winning_Golden_Pumpkin.webp",
+    238074
+   ],
+   "thumb": [
+    "Winning_Golden_Pumpkin.thumb.webp",
+    45742
+   ]
+  },
+  "Winter12Mariner.jpg": {
+   "sha1": "ae019c8aacdfd4677e707b2fddfdce411d915cb7",
+   "full": [
+    "Winter12Mariner.webp",
+    131712
+   ]
+  },
+  "Winter_Tip.png": {
+   "sha1": "e9d740ace8d2cf48feb82e66383f600296bbbe61",
+   "full": [
+    "Winter_Tip.webp",
+    54398
+   ],
+   "thumb": [
+    "Winter_Tip.thumb.webp",
+    20082
+   ]
+  },
+  "Witch's_Hut_Interior.png": {
+   "sha1": "0b0b5c3c90c84023d9f2aaf94e49ceee372fd1f5",
+   "full": [
+    "Witch's_Hut_Interior.webp",
+    83924
+   ]
+  },
+  "Witch's_Swamp.png": {
+   "sha1": "4660565ed42a66ef5077064a27155981f1688435",
+   "icon": [
+    "Witch's_Swamp.icon.webp",
+    3812
+   ]
+  },
+  "Year2maze.png": {
+   "sha1": "8523e23f4925c6d8f609c6e1e64ce1dcb3e7200b",
+   "full": [
+    "Year2maze.webp",
+    1314652
+   ],
+   "thumb": [
+    "Year2maze.thumb.webp",
+    58950
+   ]
+  }
+ }
+}

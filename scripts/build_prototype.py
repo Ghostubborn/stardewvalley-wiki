@@ -13,9 +13,14 @@ import re
 import runpy
 import shutil
 import subprocess
+import sys
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+
+from sdvdata.webp import WebP  # noqa: E402
+
 BUILD = os.path.join(ROOT, "data", "build")
 CURATED = os.path.join(ROOT, "data", "curated")
 PROTO = os.path.join(ROOT, "prototype")
@@ -25,6 +30,8 @@ FONT_OUT = os.path.join(PROTO, "assets", "fonts", "pixel-subset.woff2")
 PYFTSUBSET = os.path.join(ROOT, ".venv", "bin", "pyftsubset")
 UI_EN = os.path.join(ROOT, "data", "i18n", "ui.en.json")
 SITE = "https://stardewvalley-wiki.pages.dev/"
+# 当作图标的大图（地点全景、节日截图）超过这个大小就换成长边 192 像素的 WebP。
+ICON_BYTES = 60_000
 CJK = re.compile(r"[㐀-鿿]")
 
 UI_IMAGES = [
@@ -64,6 +71,8 @@ def main():
     items = load("items.json")
     images = load("images.json")
     used_images = {name for name in UI_IMAGES if name in images}
+    webp = WebP(ROOT, IMG_OUT)
+    derived = set()  # 转换出来的 WebP 图标
 
     with open(os.path.join(CURATED, "map-positions.json"), encoding="utf-8") as f:
         calibration = json.load(f)["points"]
@@ -107,6 +116,13 @@ def main():
         if name:
             if name not in images:
                 raise ValueError(f"图片引用没有对应归档文件：{name}")
+            meta = images[name]
+            # 图标只显示 48～80 像素，不必为它下载几 MB 的全景图（鹈鹕镇的地图有 3.7 MB）。
+            if meta.get("bytes", 0) > ICON_BYTES and max(meta.get("w") or 0, meta.get("h") or 0) > 192:
+                small = webp.name(meta, "icon")
+                if small:
+                    derived.add(small)
+                    return small
             used_images.add(name)
         return name
 
@@ -211,7 +227,7 @@ def main():
         x, y, key = position(l, wiki=True) or [None, None, l["map"]]
         locations.append({
             "p": l["page"], "en": l["en"], "map": key, "x": x, "y": y,
-            "i": img(l["image"]) if l["image"] and images.get(l["image"], {}).get("bytes", 0) < 200_000 else None,
+            "i": img(l["image"]),
             "hours": l["open_hours"], "R": l["open_ranges"], "closed": l["closed"], "cd": days,
             "cdc": bool(days and re.search(r"后|之后|以后|如果|若", closed)),
             "addr": l["address"], "occ": l["occupants"],
@@ -356,7 +372,8 @@ def main():
             return "data:image/png;base64," + base64.b64encode(f.read()).decode()
 
     # 条目正文按条目单独写到 prototype/articles/，这里只记下文件名（ar）。
-    articles, article_text, article_images = runpy.run_path(os.path.join(ROOT, "scripts", "build_articles.py"))["build"]()
+    articles, article_text, article_images = runpy.run_path(os.path.join(ROOT, "scripts", "build_articles.py"))["build"](webp)
+    webp.run()
     for title, key in articles["zh"].items():
         if title in out_pages:
             out_pages[title]["ar"] = key
@@ -386,7 +403,7 @@ def main():
         # 重新生成必须修复旧的、不完整的复制结果，不能因为文件存在就跳过。
         shutil.copyfile(os.path.join(ROOT, meta["path"]), dest)
         copied += 1
-    data["imgs"] = sorted(n for n in used_images if n and n in images)
+    data["imgs"] = sorted({n for n in used_images if n and n in images} | derived)
     # 条目正文里的图片只按文件名引用，不进图标清单。
     for name in article_images:
         meta = images.get(name)
@@ -394,7 +411,7 @@ def main():
             shutil.copyfile(os.path.join(ROOT, meta["path"]), os.path.join(IMG_OUT, name))
             copied += 1
     # 以前构建留下、现在没有引用的图片删掉，部署时不再上传。
-    keep = set(used_images) | set(article_images)
+    keep = set(used_images) | set(article_images) | derived
     for name in os.listdir(IMG_OUT):
         if name not in keep:
             os.remove(os.path.join(IMG_OUT, name))

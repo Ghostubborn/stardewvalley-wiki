@@ -24,6 +24,8 @@ function texts(node, out = []) {
   if (typeof node === 'string') out.push(node);
   else if (Array.isArray(node)) {
     // Runs: ["i", item ID, label] / ["l", page key, label]; keys are internal Chinese IDs, labels are shown.
+    // Page keys may name a section ("版本历史#1.6"); the page part has to exist.
+    if (node.length === 3 && node[0] === 'l' && typeof node[1] === 'string' && typeof node[2] === 'string') linkKeys.add(node[1]);
     if (node.length === 3 && (node[0] === 'i' || node[0] === 'l') && typeof node[1] === 'string' && typeof node[2] === 'string') out.push(node[2]);
     else if (node.length === 3 && node[0] === 'f' && typeof node[1] === 'string') images.add(node[1]);
     else node.forEach(child => texts(child, out));
@@ -33,14 +35,18 @@ function texts(node, out = []) {
 function checkBlocks(blocks, where) {
   for (const block of blocks) {
     assert(BLOCKS.has(block[0]), `${where}: unknown block ${block[0]}`);
-    if (block[0] === 'g') for (const [file, , , large] of block[1]) { if (file) images.add(file); else assert(large, `${where}: figure without an image or a link`); }
+    // Figures: [image, width, caption] or, for large maps, [thumbnail, width, caption, full-size WebP];
+    // [null, 0, caption, wiki file] only links to the wiki when no WebP could be made.
+    if (block[0] === 'g') for (const [file, , , large] of block[1]) {
+      if (file) { images.add(file); if (large) images.add(large); } else { assert(large, `${where}: figure without an image or a link`); linkOnly++; }
+    }
     if (block[0] === 'd') checkBlocks(block[2], where);
     if (block[0] === 't') for (const row of block[1]) for (const cell of row) if (!Array.isArray(cell) && cell.b) checkBlocks(cell.b, where);
   }
 }
 
-let checked = 0, bytes = { zh: 0, en: 0 };
-const images = new Set();
+let checked = 0, linkOnly = 0, bytes = { zh: 0, en: 0 };
+const images = new Set(), linkKeys = new Set();
 for (const [lang, pages] of [['zh', D.pages], ['en', E.pages]]) {
   const keys = Object.entries(pages).filter(([, p]) => p.ar);
   assert(keys.length > 1900, `${lang}: articles for most pages (${keys.length})`);
@@ -91,6 +97,23 @@ const calendar = JSON.stringify(article('zh', '作物生长日历'));
 assert(calendar.includes('["f","Blue_Jazz_Stage_6.png"') || /\["f","[^"]*Stage[^"]*"/.test(calendar), 'the crop growth calendar keeps its stage images');
 assert(JSON.stringify(article('zh', '樱桃树')).includes('["f","Cherry_Stage_1.png"'), 'growth stage tables keep their images');
 assert(JSON.stringify(article('zh', '温室')).includes('Optimaliridiumgreenhouse.png'), 'layout figures are kept as images or links');
+// Version history rows link to the version's section; portraits and galleries are figure groups.
+const parsnip = article('zh', '防风草').s.find(([h]) => h === '历史');
+assert(parsnip && JSON.stringify(parsnip).includes('["l","版本历史#1.4","1.4"]'), 'version history rows link to the version section');
+assert(article('en', '防风草').s.some(([h]) => h === 'History'), 'English articles keep their History section');
+const portraits = article('zh', '潘妮').s.find(([h]) => h === '肖像');
+assert(portraits && portraits[2].flatMap(b => b[0] === 'g' ? b[1] : []).filter(([file, width]) => file && width === 64).length >= 20, 'villager portraits are shown at 64 px');
+assert(JSON.stringify(article('zh', '温室')).includes('"Broken_Greenhouse.png",224,["初始状态"]'), 'gallery sections keep their captions');
+// Large maps ship as a thumbnail plus the full-size WebP.
+assert(JSON.stringify(article('zh', '鹈鹕镇')).includes('["TownDistances.thumb.webp",320,'), 'large maps show a thumbnail');
+assert(JSON.stringify(article('zh', '鹈鹕镇')).includes('"TownDistances.webp"]'), 'the thumbnail opens the full-size image');
+assert.equal(linkOnly, 0, 'every large figure ships as WebP');
+// Images on a line of their own keep the wiki's size; images in tables keep their set width;
+// heavy screenshots ship as WebP of the same size.
+assert(JSON.stringify(article('zh', '控制')).includes('["XboxControllerMap_ZH.png",512,'), 'controller maps are shown at their wiki size');
+assert(JSON.stringify(article('zh', '鹈鹕镇')).includes('["f","Blacksmith.png",200]'), 'building pictures in tables keep their width');
+assert(JSON.stringify(article('zh', '金色核桃')).includes('"Walnutwestaroundthecliff.webp"'), 'heavy screenshots ship as WebP');
+for (const key of linkKeys) assert(D.pages[key.split('#')[0]], `link to a missing page: ${key}`);
 // Every image an article shows is shipped with the site.
 for (const file of images) assert(fs.existsSync(path.join(root, 'assets', 'img', file)), `article image missing from assets: ${file}`);
-console.log(`Article checks passed: ${checked} files, ${(bytes.zh / 1e6).toFixed(1)} MB zh + ${(bytes.en / 1e6).toFixed(1)} MB en, ${images.size} images, structure, markup, language and key content.`);
+console.log(`Article checks passed: ${checked} files, ${(bytes.zh / 1e6).toFixed(1)} MB zh + ${(bytes.en / 1e6).toFixed(1)} MB en, ${images.size} images, ${linkKeys.size} links, structure, markup, language and key content.`);

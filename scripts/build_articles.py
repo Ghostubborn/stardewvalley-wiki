@@ -11,13 +11,17 @@ import json
 import os
 import re
 import sys
+from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 from sdvdata import article as AR  # noqa: E402
+from sdvdata.webp import WebP  # noqa: E402
 
 OUT = os.path.join(ROOT, "prototype", "articles")
+CJK = re.compile(r"[㐀-鿿]")
+IMG_OUT = os.path.join(ROOT, "prototype", "assets", "img")
 # Wiki 首页只是导航。
 SKIP_PAGES = {"Stardew Valley Wiki"}
 
@@ -26,6 +30,7 @@ LABELS = {
         "main": "主条目：", "see_also": "另见：", "list_sep": "、", "details": "详情", "energy": "能量", "health": "生命值",
         "none": "无", "inedible": "不可食用", "friendship": "好感度 {n}", "no_friendship": "不影响好感度",
         "crafting_source": "配方来源", "friendship_page": "友谊", "gift_list_page": "礼物列表",
+        "version_page": "版本历史", "history_sep": "：",
         # Template:Recipes 的表头（hide= 里写的列不显示）。
         "recipe_cols": [("name", "名称"), ("description", "描述"), ("ingredients", "所需原料"), ("restores", "能量 / 生命值"),
                         ("buff", "增益效果"), ("duration", "增益时长"), ("recipe", "食谱来源"), ("sellprice", "售出价格")],
@@ -35,6 +40,7 @@ LABELS = {
         # 操作说明里用图标表示的鼠标键和手柄键（文件名去掉平台前缀后按这里改写，其余照写按键名）。
         "icons": {"left-click": "左键", "right-click": "右键", "mouse middle key light": "鼠标中键", "left stick": "左摇杆",
                   "right stick": "右摇杆", "dpad": "十字键", "touch pad": "触控板", "menu": "菜单键", "view": "查看键",
+                  "start": "开始键", "back": "返回键", "options": "选项键", "share": "分享键",
                   "plus": "+", "minus": "-", "square": "方块键", "cross": "叉键", "circle": "圆圈键", "triangle": "三角键"},
         "weathers": {"": "任意", "rainy": "雨天", "sunny": "晴天", "snowy": "雪天"},
     },
@@ -43,6 +49,7 @@ LABELS = {
         "health": "Health", "none": "N/A", "inedible": "Inedible", "friendship": "{n} friendship",
         "no_friendship": "No effect on friendship", "crafting_source": "Recipe Source(s)",
         "friendship_page": "Friendship", "gift_list_page": "List of All Gifts",
+        "version_page": "Version History", "history_sep": ": ",
         "recipe_cols": [("name", "Name"), ("description", "Description"), ("ingredients", "Ingredients"),
                         ("restores", "Energy / Health"), ("buff", "Buff(s)"), ("duration", "Buff Duration"),
                         ("recipe", "Recipe Source(s)"), ("sellprice", "Sell Price")],
@@ -103,19 +110,26 @@ INFOBOX = {
                     ("sellprice", "Sell Price")],
     },
 }
+
+
 def image_index():
-    """归档图片：小写、下划线写法的文件名 → {'file', 'w', 'h'}（两个 Wiki 的图片归档合在一起）。"""
+    """归档图片：小写、下划线写法的文件名 → {'file', 'w', 'h', 'bytes', 'path'}（两个 Wiki 的图片归档合在一起）。"""
     with open(os.path.join(ROOT, "data", "build", "images.json"), encoding="utf-8") as f:
         images = json.load(f)
     index = {name.strip().replace(" ", "_").casefold(): meta for name, meta in images.items()}
     return lambda name: index.get((name or "").strip().replace(" ", "_").casefold())
 
 
+def webp_images(image, webp):
+    """正文图片 → 派生的 WebP（thumb 缩略图、full 同尺寸）；GIF，或者没有 cwebp 又没有旧结果时为 None。"""
+    return lambda file, kind: webp.name(image(file), kind)
+
+
 def article_key(title):
     return hashlib.sha1(title.encode("utf-8")).hexdigest()[:10]
 
 
-def zh_articles(image):
+def zh_articles(image, derive):
     import build_data as BD
     b = BD.Builder()
     pages, _ = b.build_pages()
@@ -130,7 +144,7 @@ def zh_articles(image):
 
     handlers = dict(BD.make_renderer(b.catalog, b.npc_zh, b.bundle_zh).handlers)
     icons = _icons("zh")
-    render = _rich_render(handlers, b.catalog, link_key, image, lambda en: b.npc_zh.get(en, en),
+    render = _rich_render(handlers, b.catalog, link_key, image, derive, lambda en: b.npc_zh.get(en, en),
                           lambda raw: b.catalog.zh_name(raw),
                           pre=lambda t: icons(re.sub(r"\[\[(?:File|文件):HeartIcon[^\]]*\]\]", "❤", t or "")))
 
@@ -138,7 +152,7 @@ def zh_articles(image):
         r = b.zh.get(b.resolve(BD.norm_title(title)))
         return r["text"] if r else None
 
-    builder = AR.ArticleBuilder("zh", get_page, render, LABELS["zh"], link_key, None, INFOBOX["zh"], image)
+    builder = AR.ArticleBuilder("zh", get_page, render, LABELS["zh"], link_key, None, INFOBOX["zh"], image, derive)
     out = {}
     for p in pages:
         if p["title"] in SKIP_PAGES:
@@ -146,10 +160,14 @@ def zh_articles(image):
         article = builder.build(p["title"], get_page(p["title"]))
         if article:
             out[p["title"]] = article
-    return out, builder.used_images | render.used_images
+    # 整页重定向的中文名（“体力”→“能量”）；英文名另有对照，不算在内。
+    synonyms = _synonyms((BD.norm_title(r["title"]), b.resolve(BD.norm_title(r["redirect"])))
+                         for r in b.zh_all if r["ns"] == 0 and r["redirect"] and not r.get("redirect_fragment"))
+    synonyms = {t: [n for n in names if CJK.search(n)] for t, names in synonyms.items() if t in out}
+    return out, builder.used_images | render.used_images, render.dropped_images, synonyms
 
 
-def en_articles(image):
+def en_articles(image, derive):
     import build_en as EN
     e = EN.English()
     with open(os.path.join(ROOT, "data", "build", "pages.json"), encoding="utf-8") as f:
@@ -174,14 +192,15 @@ def en_articles(image):
 
     handlers = dict(e.handlers)
     icons = _icons("en")
-    render = _rich_render(handlers, e.catalog, link_key, image, lambda en: en, lambda raw: raw, clean=label_only, paren=" ({})",
+    render = _rich_render(handlers, e.catalog, link_key, image, derive, lambda en: en, lambda raw: raw, clean=label_only, paren=" ({})",
                           pre=lambda t: icons(re.sub(r"</?p\b[^>]*>", "\n", re.sub(r"\[\[(?:File|Image):HeartIcon[^\]]*\]\]", "❤", t or ""))))
 
     def get_page(title):
         row = e.en.get(resolve(title))
         return row["text"] if row and not row["redirect"] else None
 
-    builder = AR.ArticleBuilder("en", get_page, render, LABELS["en"], link_key, None, INFOBOX["en"], image)
+    p_en = {p["title"]: p.get("en") for p in zh_pages}
+    builder = AR.ArticleBuilder("en", get_page, render, LABELS["en"], link_key, None, INFOBOX["en"], image, derive)
     out = {}
     for p in zh_pages:
         if not p.get("en") or p["title"] in SKIP_PAGES:
@@ -192,7 +211,22 @@ def en_articles(image):
         article = builder.build(p["en"], text)
         if article:
             out[p["title"]] = article
-    return out, builder.used_images | render.used_images
+    # 整页重定向的英文名（“Exhaustion”→“Energy”、英式拼写“Travelling Cart”）。
+    synonyms = _synonyms((EN.norm_title(r["title"]), e.title_zh.get(resolve(r["redirect"])))
+                         for r in e.en.values() if r["ns"] == 0 and r["redirect"] and not r.get("redirect_fragment"))
+    synonyms = {t: [n for n in names if not CJK.search(n) and n.casefold() != (p_en.get(t) or "").casefold()]
+                for t, names in synonyms.items() if t in out}
+    return out, builder.used_images | render.used_images, render.dropped_images, synonyms
+
+
+def _synonyms(pairs):
+    """(重定向名, 条目) → {条目: [重定向名, …]}：正文搜索时提示 Wiki 的写法。只取不指向某一节的整页重定向，
+    指向小节的（“能量滋补水”→ 哈维的诊所的医疗用品）是条目里的一部分，不是别名。"""
+    out = defaultdict(set)
+    for name, title in pairs:
+        if title and name.casefold() != title.casefold():
+            out[title].add(name)
+    return {title: sorted(names) for title, names in out.items()}
 
 
 def _icons(lang):
@@ -203,12 +237,16 @@ def _icons(lang):
         button = re.fullmatch(r"(?:360|PS4|Switch|XboxOne) (.+)", name, flags=re.I)
         if button:
             key = button.group(1)
-            return icons.get(key.lower(), key) if key.lower() not in ("logo",) else ""
-        return icons.get(name.lower(), m.group(0))
+            label = icons.get(key.lower(), key) if key.lower() not in ("logo",) else ""
+        else:
+            label = icons.get(name.lower(), m.group(0))
+        # 图标后面紧跟着同样的文字（“[[File:360 A.png]]A”“[[File:360 Left Stick.png]]<br />左摇杆”）时不再重复。
+        rest = re.sub(r"^\s*(?:<br\s*/?>\s*)?", "", m.string[m.end():m.end() + 40], flags=re.I)
+        return "" if label and label != m.group(0) and rest.startswith(label) else label
     return lambda text: re.sub(r"\[\[(?:File|文件|Image):([^|\]]+)[^\]]*\]\]", replace, text or "")
 
 
-def _rich_render(handlers, catalog, link_key, image, npc_page, page_name, clean=lambda s: s, pre=lambda s: s, paren="（{}）"):
+def _rich_render(handlers, catalog, link_key, image, derive, npc_page, page_name, clean=lambda s: s, pre=lambda s: s, paren="（{}）"):
     """行内渲染：在纯文本渲染的基础上，物品名保留物品 ID（显示图标），居民与条目名保留站内链接。"""
     name0, npc0 = handlers["name"], handlers["npc"]
 
@@ -236,9 +274,10 @@ def _rich_render(handlers, catalog, link_key, image, npc_page, page_name, clean=
         return head + paren.format(extra) if extra else head
 
     handlers.update(name=name, npc=npc)
-    renderer = AR.LinkRenderer(handlers, link_key, image)
+    renderer = AR.LinkRenderer(handlers, link_key, image, derive)
     render = lambda text: clean(renderer.render(pre(text)))
     render.used_images = renderer.used_images
+    render.dropped_images = renderer.dropped_images
     return render
 
 
@@ -270,8 +309,9 @@ def _block_text(block):
     return _text(block[1])
 
 
-def search_corpus(articles):
-    """全文搜索用的纯文本：[[条目, [[小节标题, 文字], …]], …]，搜索时才下载。"""
+def search_corpus(articles, synonyms):
+    """全文搜索用的纯文本：[[条目, [[小节标题, 文字], …], 别名?], …]，搜索时才下载。
+    别名是 Wiki 里整页重定向到这个条目的名称，搜索时提示 Wiki 的写法。"""
     out = []
     for title, article in articles.items():
         sections = []
@@ -280,11 +320,11 @@ def search_corpus(articles):
             if text.strip():
                 sections.append([heading or "", text])
         if sections:
-            out.append([title, sections])
+            out.append([title, sections, synonyms[title]] if synonyms.get(title) else [title, sections])
     return out
 
 
-def write(lang, articles):
+def write(lang, articles, synonyms):
     """每个条目一个 JSON（文件名取中文条目名的散列），删掉不再生成的旧文件；返回 {条目: 文件名}。"""
     folder = os.path.join(OUT, lang)
     os.makedirs(folder, exist_ok=True)
@@ -303,7 +343,7 @@ def write(lang, articles):
             f.write(payload)
     keep.add("search.json")
     with open(os.path.join(folder, "search.json"), "w", encoding="utf-8") as f:
-        json.dump(search_corpus(articles), f, ensure_ascii=False, separators=(",", ":"))
+        json.dump(search_corpus(articles, synonyms), f, ensure_ascii=False, separators=(",", ":"))
     for name in os.listdir(folder):
         if name.endswith(".json") and name not in keep:
             os.remove(os.path.join(folder, name))
@@ -325,14 +365,22 @@ def headings(articles):
     return "\n".join(out)
 
 
-def build():
+def build(webp=None):
+    """webp：build_prototype.py 传入同一个转换器（图标也用它），由它统一等编码完成；单独运行时这里自己做完。"""
     image = image_index()
-    (zh, zh_images), (en, en_images) = zh_articles(image), en_articles(image)
+    own = webp is None
+    webp = webp or WebP(ROOT, IMG_OUT)
+    derive = webp_images(image, webp)
+    (zh, zh_images, zh_dropped, zh_synonyms), (en, en_images, en_dropped, en_synonyms) = zh_articles(image, derive), en_articles(image, derive)
     sizes = {lang: round(sum(len(json.dumps(a, ensure_ascii=False, separators=(",", ":")).encode()) for a in arts.values()) / 1e6, 2)
              for lang, arts in (("zh", zh), ("en", en))}
-    index = {"zh": write("zh", zh), "en": write("en", en)}
+    index = {"zh": write("zh", zh, zh_synonyms), "en": write("en", en, en_synonyms)}
     images = sorted(zh_images | en_images)
-    print("条目正文：", json.dumps({"zh": len(zh), "en": len(en), "mb": sizes, "images": len(images)}, ensure_ascii=False))
+    if own:
+        webp.run(keep_others=True)
+    # 行内大图做不了缩略图的（动图）不显示，这里只报告数量。
+    print("条目正文：", json.dumps({"zh": len(zh), "en": len(en), "mb": sizes, "images": len(images),
+                                  "inline_dropped": {"zh": len(zh_dropped), "en": len(en_dropped)}}, ensure_ascii=False))
     return index, headings(zh) + "\n" + headings(en), images
 
 

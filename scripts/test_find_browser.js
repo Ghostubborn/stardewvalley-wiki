@@ -1,7 +1,8 @@
 // Run in the local app (Chinese page) with agent-browser eval --stdin < scripts/test_find_browser.js
 // Full-text search: the search box offers an article-text search, results list entries with the
-// matching section and a highlighted excerpt, opening a result scrolls to that section, and with
-// spoiler protection on nothing protected shows up in the results.
+// matching section and a highlighted excerpt, opening a result scrolls to that section, English names
+// and full-width letters still match, misspelt names and other names for an entry ("体力" → "能量") get
+// suggestions, and with spoiler protection on nothing protected shows up in the results or the suggestions.
 (async () => {
   const A = App, S = A.spoilers, assert = (value, message) => { if (!value) throw new Error(message); };
   const saved = structuredClone(A.state);
@@ -33,6 +34,19 @@
     const luau = [...body.querySelectorAll(".find-list > li")].find(li => li.querySelector(".find-title").textContent.startsWith("夏威夷宴会"));
     assert(luau, "festival articles are searchable");
 
+    // Tolerance: English names on the Chinese site, full-width letters, misspelt names.
+    A.select({ type: "find", id: "ＰＡＲＳＮＩＰ" });
+    await settle();
+    assert(body.textContent.includes("同时查找了：防风草") && body.querySelectorAll(".find-list > li").length > 10, "an English name also searches the Chinese name");
+    A.select({ type: "find", id: "防风菜 种子" });
+    await settle();
+    assert(body.querySelector(".find-better a")?.textContent === "防风草 种子", "a misspelt name suggests the corrected query");
+    input.focus(); input.value = "鹈鹕真"; input.dispatchEvent(new Event("input", { bubbles: true }));
+    assert([...list.querySelectorAll("li")].some(li => li.textContent.startsWith("鹈鹕镇")), "name search lists similar names");
+    A.select({ type: "find", id: "体力" });
+    await settle();
+    assert(body.querySelector(".find-wiki-name a")?.textContent === "能量", "names the wiki redirects point to the wiki's wording");
+
     S.setEnabled(true);
     A.applyPreset("unknown");
     A.select({ type: "find", id: "姜岛" });
@@ -44,7 +58,12 @@
     await settle();
     const text = [...body.querySelectorAll(".find-list")].map(x => x.textContent).join(" ");
     for (const name of ["姜岛", "科罗布斯", "齐先生", "骷髅洞穴", "火山地牢"]) assert(!text.includes(name), `no protected name in excerpts: ${name}`);
-    return JSON.stringify({ result: "article-text search entry, ranked results with excerpts, section jump, fold entries, spoiler-safe results", viewport: [innerWidth, innerHeight] });
+    A.select({ type: "find", id: "krobus" });
+    await settle();
+    assert(!body.textContent.includes("科罗布斯"), "protected names are not searched or shown as alternatives");
+    input.focus(); input.value = "科罗布丝"; input.dispatchEvent(new Event("input", { bubbles: true }));
+    assert(![...list.querySelectorAll("li")].some(li => li.textContent.includes("科罗布斯")), "similar names skip protected entries");
+    return JSON.stringify({ result: "article-text search entry, ranked results with excerpts, section jump, fold entries, English names, misspelt names, the wiki's wording, spoiler-safe results", viewport: [innerWidth, innerHeight] });
   } finally {
     A.select(null);
     Object.assign(A.state, saved);

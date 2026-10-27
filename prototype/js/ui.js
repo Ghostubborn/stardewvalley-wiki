@@ -311,27 +311,59 @@
       if (seen.has(id) || it.x) continue;
       searchIndex.push(searchEntry(it.z, it.e, { k: t(it.c || "物品"), ref: { type: "item", id }, i: it.i }));
     }
+    for (const e of searchIndex) { e.ft = fold(e.t); e.fe = fold(e.en); e.fa = (e.a || []).map(fold); }
+  }
+  // 搜索容错：英文不分大小写，全角字母数字按半角比较（逐字替换，长度不变，原文位置照用）。
+  function fold(text) {
+    const low = text.toLowerCase();
+    return (low.length === text.length ? low : text).replace(/[\uff01-\uff5e]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xfee0)).replace(/\u3000/g, " ");
+  }
+  function editDistance(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      const cur = [i];
+      for (let j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (Math.min(...cur) > max) return max + 1;
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  // 名称打错一两个字时找相近的条目名：和整个名称或同样长的开头比较，编辑距离不超过长度的四分之一（至少 1 个字）。
+  function similarNames(q, limit = 5) {
+    q = fold(q.trim());
+    const max = Math.max(1, Math.floor(q.length / 4)), out = [];
+    for (const e of searchIndex) {
+      let d = max + 1;
+      for (const name of [e.ft, e.fe]) if (name) d = Math.min(d, editDistance(q, name, max), editDistance(q, name.slice(0, q.length), max) + 0.5);
+      if (d <= max && S.canView(e.ref)) out.push({ e, d: d + (e.k === ROUTE ? 0.2 : 0) });
+    }
+    out.sort((a, b) => a.d - b.d || a.e.t.length - b.e.t.length);
+    const seen = new Set();
+    return out.filter(({ e }) => !seen.has(e.t + e.k) && seen.add(e.t + e.k)).slice(0, limit).map(x => x.e);
   }
   function search(q) {
-    q = q.trim().toLowerCase();
+    q = fold(q.trim());
     if (!q) return [];
     const out = [];
     for (const e of searchIndex) {
-      const name = e.t.toLowerCase(), en = e.en.toLowerCase();
+      const name = e.ft, en = e.fe;
       if (!S.canView(e.ref)) {
-        if (name === q || en === q || (e.a || []).some(a => a.toLowerCase() === q)) out.push({ e: { t: t("受保护的条目"), en: "", k: t("按需查看"), ref: e.ref, i: null, protected: true }, s: e.ref.type === "node" ? 20 : 0 });
+        if (name === q || en === q || e.fa.some(a => a === q)) out.push({ e: { t: t("受保护的条目"), en: "", k: t("按需查看"), ref: e.ref, i: null, protected: true }, s: e.ref.type === "node" ? 20 : 0 });
         continue;
       }
       let s = -1;
       if (name === q || en === q) s = 0;
       else if (name.startsWith(q) || en.startsWith(q)) s = 1;
       else if (name.includes(q)) s = 2;
-      else if (en.includes(q) || (e.a || []).some((a) => a.toLowerCase().includes(q))) s = 3;
+      else if (en.includes(q) || e.fa.some((a) => a.includes(q))) s = 3;
       if (s >= 0) out.push({ e, s: s * 100 + name.length + (e.k === ROUTE ? 20 : 0) });
     }
     out.sort((a, b) => a.s - b.s);
     const dedup = new Set();
     const found = out.filter(({ e }) => { const k = e.t + e.k; if (dedup.has(k)) return false; dedup.add(k); return true; }).slice(0, 14).map((x) => x.e);
+    // 没有名称对得上（多半是打错了字）：列出相近的名称。
+    if (!found.length) found.push(...similarNames(q).map(e => ({ ...e, near: true })));
     // 名称之外，还可以在条目正文里找（第一次使用时才下载正文文字）。
     const raw = q.trim();
     if (raw.length >= (EN ? 3 : 2)) found.push({ t: t("在条目正文中搜索“{q}”", { q: raw }), en: "", k: t("全文"), ref: { type: "find", id: raw }, i: null, find: true });
@@ -346,6 +378,7 @@
     const paint = () => {
       list.replaceChildren();
       if (!results.length) { list.append(el("li", { class: "empty" }, S.active() ? t("未找到可展示结果。可输入完整名称查阅；防剧透已开启。") : t("没有找到。试试中文全名或英文名。"))); list.hidden = false; return; }
+      if (results[0].near) list.append(el("li", { class: "empty" }, t("没有完全相同的名称，下面是相近的：")));
       results.forEach((e, i) => {
         // 英文版不显示中文副名；中文仍可用于检索。
         const li = el("li", { role: "option", "aria-selected": String(i === active), class: e.find ? "find-entry" : null },
@@ -599,7 +632,7 @@
     return (App.articleRequest = articleCache.get(key));
   }
   const refHref = ref => `${location.pathname}#view=${state.view}&sel=${ref.type}:${encodeURIComponent(ref.id)}`;
-  // 片段：文字，["i", 物品 ID, 文字]（带图标），["l", 条目, 文字]（站内链接）。
+  // 片段：文字，["i", 物品 ID, 文字]（带图标），["l", 条目, 文字]（站内链接，可以带小节：“版本历史#1.6”）。
   function articleRuns(parts) {
     const out = [];
     for (const part of parts || []) {
@@ -611,19 +644,33 @@
       if (kind === "f") { out.push(articleImage(id, label)); continue; }
       const item = kind === "i" ? D.items[id] : null;
       if (kind === "i" && !item) { out.push(label); continue; }
-      const ref = item ? { type: "item", id } : titleRef(id);
-      out.push(el("a", { class: item ? "art-item" : "art-link", href: refHref(ref), onclick: e => { e.preventDefault(); App.select(ref); } },
-        item && App.hasImage(item.i) ? img(item.i, "art-icon") : null, label));
+      const [page, anchor] = item ? [id] : id.split("#");
+      const ref = item ? { type: "item", id } : titleRef(page);
+      out.push(el("a", { class: item ? "art-item" : "art-link", href: refHref(ref), onclick: e => {
+        e.preventDefault();
+        // 链到小节时：打开条目后展开正文、滚到那一节。
+        if (anchor && articleKey(page)) focusSection = { title: page, heading: anchor };
+        App.select(ref);
+      } }, item && App.hasImage(item.i) ? img(item.i, "art-icon") : null, label));
     }
     return out;
   }
-  // 正文图片：归档里边长不超过 400 像素的图按原尺寸显示（窄屏缩小），更大的只给原图链接。
-  const articleImage = (file, width) => el("img", { class: "art-img", src: App.iconSrc(file), width: width || null, alt: "", loading: "lazy", decoding: "async" });
+  // 正文图片：归档里边长不超过 400 像素的图按原尺寸显示（窄屏缩小）；大地图、信息图显示缩略图，点开是原尺寸的 WebP。
+  function articleImage(file, width, cls) {
+    const node = el("img", { class: "art-img" + (cls ? " " + cls : ""), src: App.iconSrc(file), width: width || null, alt: "", loading: "lazy", decoding: "async" });
+    // 像素画按整数倍缩小时保持像素感；缩小比例不是整数（截图、建筑图缩到表格里）时平滑显示，免得出现锯齿。
+    node.addEventListener("load", () => {
+      const ratio = node.naturalWidth / (width || node.naturalWidth);
+      if (ratio > 1.01 && Math.abs(ratio - Math.round(ratio)) > 0.05) node.classList.add("art-thumb");
+    }, { once: true });
+    return node;
+  }
   const wikiFile = file => "https://stardewvalleywiki.com/File:" + encodeURIComponent(file.replace(/ /g, "_"));
   function articleGallery(entries) {
+    // 缩略图、图集最宽 320 像素；单独占一行的图（键位图、时间轴）照 Wiki 的尺寸，占满一行。
     return el("div", { class: "art-gallery" }, entries.map(([file, width, caption, large]) => file
-      ? el("figure", null, el("a", { href: App.iconSrc(file), target: "_blank", rel: "noopener", "aria-label": t("查看原图") }, articleImage(file, width)),
-        caption?.length ? el("figcaption", null, articleRuns(caption)) : null)
+      ? el("figure", { class: width > 320 ? "art-wide" : null }, el("a", { href: App.iconSrc(large || file), target: "_blank", rel: "noopener", "aria-label": t("查看原图") },
+        articleImage(file, width, large ? "art-thumb" : "")), caption?.length ? el("figcaption", null, articleRuns(caption)) : null)
       : el("figure", { class: "art-large" }, el("a", { href: wikiFile(large), target: "_blank", rel: "noopener" },
         caption?.length ? runsText(caption) : t("查看原图"), " ↗"))));
   }
@@ -762,10 +809,20 @@
 
   // ———————————————————— 正文全文搜索 ————————————————————
   // 各条目正文的纯文字按语言打包成一个文件，第一次搜索正文时才下载（压缩后约 1.4 MB）。
+  // 每条为 [条目, 小节, Wiki 里重定向到这个条目的名称?]。载入后给每个小节加上折叠过大小写、全半角的文字
+  // （[小节标题, 文字, 查找用的文字]），别名记到 corpus.aliases（折叠后的名称 → 条目）。
   let corpusRequest = null;
   function loadCorpus() {
     corpusRequest ||= fetch(`articles/${EN ? "en" : "zh"}/search.json`).then(r => (r.ok ? r.json() : null)).catch(() => null)
-      .then(corpus => { if (!corpus) corpusRequest = null; return corpus; });
+      .then(corpus => {
+        if (!corpus) { corpusRequest = null; return corpus; }
+        corpus.aliases = new Map();
+        for (const [title, sections, aliases] of corpus) {
+          for (const section of sections) section.push(fold(section[0] + "\n" + section[1]));
+          for (const alias of aliases || []) corpus.aliases.set(fold(alias), title);
+        }
+        return corpus;
+      });
     return (App.corpusRequest = corpusRequest);
   }
   const findIcon = () => el("span", { class: "noimg find-icon", role: "img", "aria-label": t("全文"),
@@ -779,40 +836,86 @@
     const target = heading && [...box.querySelectorAll(".art-section > :first-child")].find(h => h.textContent === heading);
     target?.scrollIntoView({ block: "start" });
   }
+  // 在折叠过的文字里找位置，再从原文截取，全角、半角写法不同也能标出来。
   function markTerms(text, terms) {
-    const pattern = new RegExp(`(${terms.map(x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "gi");
-    return text.split(pattern).map((part, i) => (i % 2 ? el("mark", null, part) : part));
+    const low = fold(text), out = [];
+    let pos = 0;
+    for (;;) {
+      let at = -1, len = 0;
+      for (const term of terms) {
+        const i = low.indexOf(term, pos);
+        if (i >= 0 && (at < 0 || i < at || (i === at && term.length > len))) { at = i; len = term.length; }
+      }
+      if (at < 0) break;
+      if (at > pos) out.push(text.slice(pos, at));
+      out.push(el("mark", null, text.slice(at, at + len)));
+      pos = at + len;
+    }
+    if (pos < text.length) out.push(text.slice(pos));
+    return out;
   }
   function snippet(text, terms) {
-    const low = text.toLowerCase();
-    const at = Math.max(0, Math.min(...terms.map(x => low.indexOf(x)).filter(i => i >= 0)));
+    const low = fold(text);
+    const found = terms.map(x => low.indexOf(x)).filter(i => i >= 0);
+    const at = found.length ? Math.min(...found) : 0;
     const start = Math.max(0, at - 36), end = Math.min(text.length, at + 90);
     return (start ? "…" : "") + text.slice(start, end).replace(/\s*\n\s*/g, " · ") + (end < text.length ? "…" : "");
   }
+  // 一个关键词的几种写法：原词；另一种语言的条目名（中文版输入英文名、英文版输入中文名）；
+  // 英文名的复数（“parsnips”）去掉词尾正好是条目名时，也按条目名找。
+  function termForms(term) {
+    const forms = new Set([term]);
+    const singular = /^[a-z]{3,}s$/.test(term) ? [term.slice(0, -1), term.replace(/ies$/, "y"), term.replace(/es$/, "")] : [];
+    for (const e of searchIndex) {
+      const english = EN ? e.ft : e.fe;
+      if ((e.fe === term || singular.includes(english)) && S.canView(e.ref)) forms.add(e.ft);
+    }
+    return [...forms];
+  }
+  function queryTerms(q) {
+    const whole = fold(q.trim());
+    // 整个查询是另一种语言的名称（“Ancient Fruit”）时不拆开。
+    if (/\s/.test(whole) && searchIndex.some(e => e.fe === whole && S.canView(e.ref))) return [termForms(whole)];
+    return whole.split(/\s+/).filter(Boolean).map(termForms);
+  }
   function findInArticles(corpus, q) {
-    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+    const groups = queryTerms(q), terms = [...new Set(groups.flat())];
     const hits = [];
     let hidden = 0;
     for (const [title, sections] of corpus) {
       const ref = titleRef(title);
       let best = null, matched = 0;
-      for (const [heading, text] of sections) {
-        const low = (heading + "\n" + text).toLowerCase();
-        if (!terms.every(term => low.includes(term))) continue;
+      for (const [heading, text, low] of sections) {
+        if (!groups.every(forms => forms.some(form => low.includes(form)))) continue;
         matched++;
         const cut = snippet(text, terms);
         // 防剧透：剧情章节、受保护的小节标题和摘录都不列出。
         if (S.active() && (STORY_SECTION.test(heading) || !S.textAllowed(heading + " " + cut, title))) continue;
-        const score = terms.reduce((n, term) => n + low.split(term).length - 1, 0) + (terms.some(term => heading.toLowerCase().includes(term)) ? 5 : 0);
+        const head = fold(heading);
+        const score = terms.reduce((n, term) => n + low.split(term).length - 1, 0) + (terms.some(term => head.includes(term)) ? 5 : 0);
         if (!best || score > best.score) best = { heading, cut, score };
       }
       if (!matched) continue;
       if (!best || !S.canView(ref)) { hidden++; continue; }
-      const named = terms.every(term => N(title).toLowerCase().includes(term));
+      const name = fold(N(title));
+      const named = groups.every(forms => forms.some(form => name.includes(form)));
       hits.push({ title, ref, heading: best.heading, snippet: best.cut, sections: matched, score: best.score + (named ? 100 : 0) });
     }
     hits.sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
     return { hits, hidden, terms };
+  }
+  // 没有结果时：正文里一次都没出现的词换成最相近的条目名，给出改过的查询。
+  function correctQuery(corpus, q) {
+    let changed = false;
+    const words = q.trim().split(/\s+/).filter(Boolean).map(word => {
+      const form = fold(word);
+      if (corpus.some(([, sections]) => sections.some(section => section[2].includes(form)))) return word;
+      const near = similarNames(word, 1)[0];
+      if (!near) return word;
+      changed = true;
+      return near.t;
+    });
+    return changed ? words.join(" ") : null;
   }
   function renderFind(q) {
     const box = el("div", { class: "find-results", dataset: { spoilerScoped: "true" } }, el("p", { class: "d-sub" }, t("正在载入条目正文…")));
@@ -824,8 +927,20 @@
       if (!corpus) { box.replaceChildren(el("p", { class: "d-sub" }, t("条目正文载入失败，请稍后再试。"))); return; }
       const { hits, hidden, terms } = findInArticles(corpus, q);
       const shown = hits.slice(0, 80);
+      const typed = new Set([fold(q.trim()), ...fold(q).split(/\s+/)]);
+      const also = terms.filter(term => !typed.has(term));
+      const better = hits.length ? null : correctQuery(corpus, q);
+      // Wiki 里的写法：“体力”是“能量”的重定向，提示改搜“能量”。先整句对（“Travelling Cart”），再逐个词对。
+      const wikiTitle = title => (title && S.canView(titleRef(title)) ? N(title) : null);
+      const words = q.trim().split(/\s+/);
+      const renamed = words.map(word => wikiTitle(corpus.aliases.get(fold(word))) || word);
+      const wikiName = wikiTitle(corpus.aliases.get(fold(q.trim()))) || (renamed.some((word, i) => word !== words[i]) ? renamed.join(" ") : null);
+      const findLink = query => el("a", { href: refHref({ type: "find", id: query }), onclick: e => { e.preventDefault(); App.select({ type: "find", id: query }); } }, query);
       box.replaceChildren(...[
         el("p", { class: "d-sub" }, hits.length ? t("{n} 个条目的正文提到“{q}”。", { n: hits.length, q }) : t("没有条目的正文提到“{q}”。", { q })),
+        also.length ? el("p", { class: "d-sub" }, t("同时查找了：{list}", { list: App.list(also) })) : null,
+        wikiName ? el("p", { class: "d-sub find-wiki-name" }, t("Wiki 里多写作："), findLink(wikiName)) : null,
+        better && better !== wikiName ? el("p", { class: "d-sub find-better" }, t("是不是要找："), findLink(better)) : null,
         shown.length ? el("ol", { class: "find-list" }, shown.map(hit => el("li", null,
           el("a", { class: "find-title", href: refHref(hit.ref), onclick: e => {
             e.preventDefault(); focusSection = { title: hit.title, heading: hit.heading }; App.select(hit.ref, { from: "find" });

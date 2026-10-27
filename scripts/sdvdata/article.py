@@ -6,10 +6,13 @@
 块：["p", 片段] 段落 · ["n", 片段] 提示（主条目等） · ["h", 片段] 小标题（; 行）
     ["l", 有序, [[层级, 片段], …]] 列表 · ["q", 片段, 出处片段] 引文
     ["t", 行, 标题] 表格，单元格为片段或 {"h": 1, "c": 跨列, "r": 跨行, "v": 片段, "b": 块}
-    ["d", 标题, [块, …]] 折叠的详情 · ["g", [[图片, 宽, 说明片段, 大图], …]] 图片组（缩略图、图集）
+    ["d", 标题, [块, …]] 折叠的详情 · ["g", [[图片, 宽, 说明片段, 大图], …]] 图片组（缩略图、图集、肖像）
 片段：字符串，或 ["i", 物品 ID, 文字]、["l", 条目, 文字]、["f", 图片, 显示宽度]。
-行内图片只收录边长不超过 IMAGE_LIMIT 的归档文件，缩略图和图集放宽到 FIGURE_LIMIT（或文件不超过 FIGURE_BYTES）；
-更大的地图、信息图只给出原图链接。
+条目链接可以带小节（"版本历史#1.6"），打开条目后滚到那一节。
+图片按 Wiki 指定的宽度显示（行内最宽 IMAGE_LIMIT，缩略图和图集 320，单独占一行的 WIDE_LIMIT）。
+边长不超过 FIGURE_LIMIT（或文件不超过 FIGURE_BYTES）的图照原尺寸发布，超过 HEAVY_BYTES 的转成同尺寸的 WebP；
+更大的地图、信息图显示 WebP 缩略图，图片组里的“大图”是原尺寸的 WebP。做不了 WebP 时图片为 None，
+“大图”是 Wiki 原图文件名，只给链接。
 
 只处理星露谷 Wiki 实际用到的写法；不认识的模板不显示，不猜测内容。
 """
@@ -24,16 +27,18 @@ from . import wikitext as wt
 _MARK = re.compile("\x0e([ilf])([^\x1f\x0e\x0f]*)\x1f([^\x0e\x0f]*)\x0f")
 # 折叠详情、引文和图片组在展开阶段写成独立的行，块解析时识别。
 _DETAILS_OPEN, _DETAILS_CLOSE, _QUOTE, _FIGURE = "\x03D", "\x03/D", "\x03Q", "\x03G"
-IMAGE_LIMIT = 400   # 行内图片（表格里的作物阶段、头像、品质星）
-FIGURE_LIMIT = 800  # 缩略图和图集（布局图、截图）；更大的地图、信息图只给原图链接
+IMAGE_LIMIT = 400   # 行内图片的显示宽度（表格里的作物阶段、建筑图、头像、品质星）
+FIGURE_LIMIT = 800  # 缩略图和图集（布局图、截图）；更大的地图、信息图转成 WebP（缩略图 + 原尺寸）
 FIGURE_BYTES = 200_000  # 像素画截图压缩后很小（温室布局图 914 像素只有 25 KB），不超过这个大小的也收录
+WIDE_LIMIT = 720    # 单独占一行的图（手柄键位图、形象演变时间轴）按 Wiki 的尺寸显示，最宽不超过正文栏
+HEAVY_BYTES = 150_000  # 超过这个大小的图（GIF 动图除外）转成同尺寸的 WebP，截图通常能小一半以上
 _FILE_PREFIX = r"(?:File|文件|Image|图像)"
 _FLOATING = {"thumb", "thumbnail", "frame", "framed", "frameless", "left", "right"}
 
-# 不收录的章节：版本历史、参考文献、图集、外部链接、肖像（只有图片）。
+# 不收录的章节：参考文献（脚注已去掉）、外部链接（只有站外网址）、导航。
 SKIP_SECTIONS = {
-    "历史", "参考", "参考资料", "参考文献", "画廊", "图集", "图库", "外部链接", "肖像", "设定演变", "导航",
-    "history", "references", "reference", "gallery", "external links", "portraits", "concept art", "navigation",
+    "参考", "参考资料", "参考文献", "外部链接", "导航",
+    "references", "reference", "external links", "navigation",
 }
 # 只作页面装饰或导航的模板。
 _DROP_TEMPLATES = re.compile(
@@ -77,17 +82,31 @@ def image_options(parts):
     return width, floating, caption
 
 
-def pick_image(image, name, width, limit=IMAGE_LIMIT, max_bytes=0):
-    """归档里的图片 → (文件名, 显示宽度, 是否超出 limit)；没有这张图返回 None。width 为负数时表示指定的高度。"""
+def pick_image(image, name, width, limit=IMAGE_LIMIT, max_bytes=0, cap=IMAGE_LIMIT):
+    """归档里的图片 → (文件名, 显示宽度, 是否超出 limit, 字节数)；没有这张图返回 None。width 为负数时表示指定的高度；
+    显示宽度不超过 cap。"""
     meta = image(name)
     if not meta:
         return None
     w, h = meta.get("w") or 0, meta.get("h") or 0
     if width is not None and width < 0:
         width = round(w * -width / h) if h else None
-    shown = min(width or w or 48, w or width or 48, IMAGE_LIMIT)
+    shown = min(width or w or 48, w or width or 48, cap)
     small_file = meta.get("bytes", 0) <= max_bytes and max(w, h) <= 2000
-    return meta["file"], shown, max(w, h) > limit and not small_file
+    return meta["file"], shown, max(w, h) > limit and not small_file, meta.get("bytes", 0)
+
+
+def ship_image(picked, webp, inline):
+    """pick_image 选出的图 → (显示用的文件, 原尺寸 WebP 或 None)；做不出缩略图时返回 None。
+    webp(文件名, "thumb" 或 "full") 返回派生的 WebP 文件名，做不了时为 None。行内图不需要原尺寸。"""
+    file, _, large, size = picked
+    if large:
+        thumb = webp(file, "thumb") if webp else None
+        full = None if inline or not thumb else webp(file, "full")
+        return (thumb, full) if thumb and (inline or full) else None
+    if size > HEAVY_BYTES and webp:
+        return webp(file, "full") or file, None
+    return file, None
 
 
 def runs(text):
@@ -130,11 +149,13 @@ def has_image(parts):
 class LinkRenderer(wt.Renderer):
     """在纯文本渲染的基础上保留站内条目链接（[[目标|文字]] → 链接标记）。"""
 
-    def __init__(self, handlers, link_key, image=None):
+    def __init__(self, handlers, link_key, image=None, webp=None):
         super().__init__(handlers)
         self.link_key = link_key
         self.image = image  # 文件名 → 归档图片信息；没有时行内图片不显示
+        self.webp = webp    # (文件名, 种类) → 派生的 WebP，见 ship_image
         self.used_images = set()
+        self.dropped_images = set()  # 做不了缩略图的大图（动图），构建时报告数量
 
     def render(self, text):
         # 跨行的粗体、斜体标记没有配对，渲染后会剩下单独的引号。
@@ -153,18 +174,25 @@ class LinkRenderer(wt.Renderer):
             target = parts[0].strip()
             kind = wt.classify_link(target)
             if kind == "file" and self.image:
-                # 行内小图（品质星、作物阶段、头像）照原样显示；大图和找不到的图不显示。
+                # 行内图（品质星、作物阶段、表格里的建筑图）按 Wiki 指定的宽度显示，最宽 IMAGE_LIMIT；
+                # 文件太大的换成 WebP 缩略图，找不到的图不显示。
                 width, _, _ = image_options(parts[1:])
-                picked = pick_image(self.image, target.split(":", 1)[1], width)
-                if picked and not picked[2]:
-                    self.used_images.add(picked[0])
-                    out.append(image_mark(picked[0], picked[1]))
+                picked = pick_image(self.image, target.split(":", 1)[1], width, FIGURE_LIMIT, FIGURE_BYTES)
+                shipped = ship_image(picked, self.webp, inline=True) if picked else None
+                if shipped:
+                    self.used_images.add(shipped[0])
+                    out.append(image_mark(shipped[0], picked[1]))
+                elif picked:
+                    self.dropped_images.add(picked[0])
             elif kind == "page" or kind == "interwiki" or target.startswith(":"):
                 label = parts[-1] if len(parts) > 1 else target.split("#")[0].lstrip(":")
                 if kind == "interwiki" and len(parts) == 1:
                     label = target.split(":", 1)[-1]
                 label = strip_marks(self._links(label))
                 key = self.link_key(target.lstrip(":")) if kind == "page" else None
+                anchor = target.partition("#")[2].replace("_", " ").strip()
+                if key and anchor:
+                    key += "#" + anchor
                 out.append(link_mark(key, label) if key and label.strip() else label)
             last = end
         out.append(text[last:])
@@ -175,8 +203,9 @@ class ArticleBuilder:
     """lang：zh 或 en；get_page(标题) 返回 wikitext（含模板页）；render 为保留标记的行内渲染；
     labels 为该语言的固定文字；link_key(链接目标) 返回站内条目名；npc_key(英文名) 返回居民条目名。"""
 
-    def __init__(self, lang, get_page, render, labels, link_key, npc_key, infobox_labels, image=None):
+    def __init__(self, lang, get_page, render, labels, link_key, npc_key, infobox_labels, image=None, webp=None):
         self.image = image
+        self.webp = webp  # (文件名, 种类) → 派生的 WebP，见 ship_image
         self.used_images = set()
         self.lang = lang
         self.get_page = get_page
@@ -228,6 +257,9 @@ class ArticleBuilder:
     @staticmethod
     def _prepare(text, transcluded):
         text = wt.strip_comments(text)
+        # 脚注先去掉：<ref name="…"> 里的等号会让模板参数被当成命名参数（{{History|1.6|说明<ref name="x">…}}）。
+        text = re.sub(r"<references[^>]*/>|<references[^>]*>.*?</references>", "", text, flags=re.S | re.I)
+        text = re.sub(r"<ref[^>/]*/>|<ref[^>]*>.*?</ref>", "", text, flags=re.S | re.I)
         # 段落、分区标签换成换行；模板里的 <p> 也一样，这样跨段的引文仍是完整的一行模板。
         text = re.sub(r"</?(?:p|div|center|blockquote|poem)\b[^>]*>", "\n", text, flags=re.I)
         if transcluded:
@@ -244,16 +276,18 @@ class ArticleBuilder:
     def _cleanup(self, text):
         text = _unwrap_heading_tables(text)
         # 图集与浮动缩略图写成独立的图片行（\x03G名\x1f宽\x1f说明），连续的几行组成一组。
+        # 居民肖像（128 像素）按 64 像素显示，一组几十张也不占太多地方。
         def gallery(m):
+            width = "64" if "portraitgallery" in m.group(1) else ""
             lines = []
-            for line in m.group(1).split("\n"):
+            for line in m.group(2).split("\n"):
                 parts = wt.split_top(line.strip())
                 name = re.sub(r"^%s:" % _FILE_PREFIX, "", parts[0].strip(), flags=re.I).strip() if parts else ""
                 if name and re.search(r"\.(png|gif|jpe?g|webp)$", name, re.I):
                     _, _, caption = image_options(parts[1:])
-                    lines.append(f"{_FIGURE}{name}\x1f\x1f{caption}")
+                    lines.append(f"{_FIGURE}{name}\x1f{width}\x1f{caption}")
             return "\n" + "\n".join(lines) + "\n" if lines else "\n"
-        text = re.sub(r"<gallery[^>]*>(.*?)</gallery>", gallery, text, flags=re.S | re.I)
+        text = re.sub(r"<gallery([^>]*)>(.*?)</gallery>", gallery, text, flags=re.S | re.I)
         text = _figures(text)
         text = re.sub(r"<references[^>]*/>|<references[^>]*>.*?</references>", "", text, flags=re.S | re.I)
         text = re.sub(r"<ref[^>/]*/>|<ref[^>]*>.*?</ref>", "", text, flags=re.S | re.I)
@@ -306,7 +340,9 @@ class ArticleBuilder:
                 info = wt.first_template(body, "")
                 return self._row_template(row, info[1] if info else {}, target)
             return self._expand(self._prepare(page, transcluded=True), depth + 1)
-        if _DROP_TEMPLATES.match(low) or low in ("history", "!-", "gallery"):
+        if low == "history":
+            return self._history(args, depth, line_start, line_end)
+        if _DROP_TEMPLATES.match(low) or low in ("!-", "gallery"):
             return ""
         if low in ("main article", "main", "see also", "further"):
             pages = [args[k] for k in sorted((k for k in args if k.isdigit()), key=int) if args[k].strip()]
@@ -394,6 +430,20 @@ class ArticleBuilder:
                         "fishlocations mountain", "fishlocations forest", "fishlocations river"}
 
     # —— 具体模板 ——
+    def _history(self, args, depth, line_start, line_end):
+        """{{History|版本|说明}}：一条版本更新记录，写成列表项，版本号链接到版本历史条目的那一节。"""
+        version = (args.get("1") or "").strip()
+        body = self._expand(args.get("2") or "", depth + 1).strip()
+        if not version or not body:
+            return ""
+        label = (args.get("version label") or version).strip()
+        # 说明分几条写的（“\n:* …”“\n** …”）作为下一级列表；其余换行留在同一项里。
+        body = re.sub(r"\n(?![ \t]*[:*#])", "<br>", body)
+        if body[:1] in (":", "*", "#"):
+            body = "\n" + body
+        item = f"* [[{self.labels['version_page']}#{version}|{label}]]{self.labels['history_sep']}{body}"
+        return ("" if line_start else "\n") + item + ("" if line_end else "\n")
+
     def _recipes(self, args):
         what = (args.get("1") or "").strip().lower()
         if what in ("foot", "footer"):
@@ -569,8 +619,8 @@ class ArticleBuilder:
                 flush()
                 entries = []
                 while i < len(lines) and lines[i].strip().startswith(_FIGURE):
-                    name, width, caption = (lines[i].strip()[len(_FIGURE):].split("\x1f") + ["", ""])[:3]
-                    entry = self._figure(name, int(width) if width.lstrip("-").isdigit() else None, caption)
+                    name, width, caption, mode = (lines[i].strip()[len(_FIGURE):].split("\x1f") + ["", "", ""])[:4]
+                    entry = self._figure(name, int(width) if width.lstrip("-").isdigit() else None, caption, mode == "wide")
                     if entry:
                         entries.append(entry)
                     i += 1
@@ -636,19 +686,25 @@ class ArticleBuilder:
         flush()
         return out
 
-    def _figure(self, name, width, caption):
-        """图片组的一项：[文件, 显示宽度, 说明片段]；超出 IMAGE_LIMIT 的大图为 [None, 0, 说明片段, 文件]（只给链接）。"""
+    def _figure(self, name, width, caption, wide=False):
+        """图片组的一项：[文件, 显示宽度, 说明片段]；大图为 [缩略图, 显示宽度, 说明片段, 原尺寸 WebP]，
+        做不了 WebP 时为 [None, 0, 说明片段, Wiki 原图文件名]（只给链接）。
+        缩略图、图集最宽 320 像素；单独占一行的图（wide）照 Wiki 的尺寸，最宽 WIDE_LIMIT（缩略图本身 640 像素宽）。"""
         if not self.image:
             return None
-        picked = pick_image(self.image, name, width, FIGURE_LIMIT, FIGURE_BYTES)
+        picked = pick_image(self.image, name, width, FIGURE_LIMIT, FIGURE_BYTES, cap=WIDE_LIMIT if wide else IMAGE_LIMIT)
         if not picked:
             return None
-        file, shown, large = picked
+        shown = picked[1]
         text = runs(self.render(caption)) if caption else []
-        if large:
-            return [None, 0, text, file]
-        self.used_images.add(file)
-        return [file, min(shown, 320), text]
+        shipped = ship_image(picked, self.webp, inline=False)
+        if not shipped:
+            return [None, 0, text, picked[0]]
+        file, full = shipped
+        self.used_images.update(x for x in shipped if x)
+        if full:
+            return [file, min(shown, 640 if wide else 320), text, full]
+        return [file, shown if wide else min(shown, 320), text]
 
     def table(self, raw):
         parsed = wt._parse_table(raw)
@@ -768,7 +824,8 @@ def grange_points(price, quality):
 
 
 def _figures(text):
-    """浮动的缩略图（[[File:名|thumb|说明]]）单独成行，块解析时组成图片组；行内小图留给行内渲染。"""
+    """浮动的缩略图（[[File:名|thumb|说明]]）和单独占一行的图单独成行，块解析时组成图片组；
+    段落、表格里的小图留给行内渲染。"""
     out, pos = [], 0
     for m in re.finditer(r"\[\[%s:" % _FILE_PREFIX, text, flags=re.I):
         if m.start() < pos:
@@ -776,11 +833,15 @@ def _figures(text):
         end = wt._match_close(text, m.start(), "[[", "]]")
         parts = wt.split_top(text[m.start() + 2:end - 2])
         width, floating, caption = image_options(parts[1:])
-        if not floating:
+        line_start = text.rfind("\n", 0, m.start()) + 1
+        line_end = text.find("\n", end)
+        alone = not text[line_start:m.start()].strip() and not text[end:line_end if line_end >= 0 else len(text)].strip()
+        if not floating and not alone:
             continue
         name = parts[0].split(":", 1)[1].strip()
         out.append(text[pos:m.start()])
-        out.append(f"\n{_FIGURE}{name}\x1f{width if width is not None else ''}\x1f{caption.replace(chr(10), ' ')}\n")
+        mode = "" if floating else "wide"
+        out.append(f"\n{_FIGURE}{name}\x1f{width if width is not None else ''}\x1f{caption.replace(chr(10), ' ')}\x1f{mode}\n")
         pos = end
     out.append(text[pos:])
     return "".join(out)

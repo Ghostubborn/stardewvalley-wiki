@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SDV Pixel";
-  src: url("assets/fonts/pixel-subset.woff2?v=bfd1a90f538d") format("woff2");
+  src: url("assets/fonts/pixel-subset.woff2?v=4f7bdc5df87b") format("woff2");
   font-display: swap;
 }
 
@@ -399,9 +399,12 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .art-fold > .btn { margin-top: 8px; }
 .art-img { max-width: 100%; height: auto; vertical-align: middle; image-rendering: pixelated; }
 .art-table .art-img { max-height: 160px; width: auto; }
+/* 大地图的缩略图是缩小过的，平滑显示；像素画原图仍按像素放大。 */
+.art-img.art-thumb { image-rendering: auto; }
 .art-gallery { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 8px; }
 .art-gallery figure { margin: 0; max-width: 320px; font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
 .art-gallery figcaption { margin-top: 2px; }
+.art-gallery figure.art-wide { max-width: 100%; }
 .art-gallery .art-large a { color: var(--bark); text-underline-offset: 3px; }
 /* 正文全文搜索 */
 .noimg.find-icon { border: 0; background: none; color: var(--bark); }
