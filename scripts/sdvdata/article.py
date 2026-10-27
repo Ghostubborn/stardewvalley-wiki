@@ -6,21 +6,29 @@
 块：["p", 片段] 段落 · ["n", 片段] 提示（主条目等） · ["h", 片段] 小标题（; 行）
     ["l", 有序, [[层级, 片段], …]] 列表 · ["q", 片段, 出处片段] 引文
     ["t", 行, 标题] 表格，单元格为片段或 {"h": 1, "c": 跨列, "r": 跨行, "v": 片段, "b": 块}
-    ["d", 标题, [块, …]] 折叠的详情
-片段：字符串，或 ["i", 物品 ID, 文字]、["l", 条目, 文字]。
+    ["d", 标题, [块, …]] 折叠的详情 · ["g", [[图片, 宽, 说明片段, 大图], …]] 图片组（缩略图、图集）
+片段：字符串，或 ["i", 物品 ID, 文字]、["l", 条目, 文字]、["f", 图片, 显示宽度]。
+行内图片只收录边长不超过 IMAGE_LIMIT 的归档文件，缩略图和图集放宽到 FIGURE_LIMIT（或文件不超过 FIGURE_BYTES）；
+更大的地图、信息图只给出原图链接。
 
 只处理星露谷 Wiki 实际用到的写法；不认识的模板不显示，不猜测内容。
 """
 
 import html
+import math
 import re
 
 from . import wikitext as wt
 
 # 渲染结果里用控制字符包住物品与条目链接，最后再拆成片段（\x01、\x02 已被英文渲染用来连接相邻名称）。
-_MARK = re.compile("\x0e([il])([^\x1f\x0e\x0f]*)\x1f([^\x0e\x0f]*)\x0f")
-# 折叠详情与引文在展开阶段写成独立的行，块解析时识别。
-_DETAILS_OPEN, _DETAILS_CLOSE, _QUOTE = "\x03D", "\x03/D", "\x03Q"
+_MARK = re.compile("\x0e([ilf])([^\x1f\x0e\x0f]*)\x1f([^\x0e\x0f]*)\x0f")
+# 折叠详情、引文和图片组在展开阶段写成独立的行，块解析时识别。
+_DETAILS_OPEN, _DETAILS_CLOSE, _QUOTE, _FIGURE = "\x03D", "\x03/D", "\x03Q", "\x03G"
+IMAGE_LIMIT = 400   # 行内图片（表格里的作物阶段、头像、品质星）
+FIGURE_LIMIT = 800  # 缩略图和图集（布局图、截图）；更大的地图、信息图只给原图链接
+FIGURE_BYTES = 200_000  # 像素画截图压缩后很小（温室布局图 914 像素只有 25 KB），不超过这个大小的也收录
+_FILE_PREFIX = r"(?:File|文件|Image|图像)"
+_FLOATING = {"thumb", "thumbnail", "frame", "framed", "frameless", "left", "right"}
 
 # 不收录的章节：版本历史、参考文献、图集、外部链接、肖像（只有图片）。
 SKIP_SECTIONS = {
@@ -42,8 +50,44 @@ def link_mark(key, label):
     return f"\x0el{key}\x1f{label}\x0f"
 
 
+def image_mark(file, width):
+    return f"\x0ef{file}\x1f{width}\x0f"
+
+
 def strip_marks(text):
-    return _MARK.sub(lambda m: m.group(3), text or "").replace("\x0e", "").replace("\x0f", "").replace("\x1f", "")
+    return _MARK.sub(lambda m: "" if m.group(1) == "f" else m.group(3), text or "").replace("\x0e", "").replace("\x0f", "").replace("\x1f", "")
+
+
+def image_options(parts):
+    """[[File:名|选项…|说明]] → (显示宽度或 None, 是否浮动缩略图, 说明原文)。"""
+    width, floating, caption = None, False, ""
+    for part in parts:
+        opt = part.strip()
+        low = opt.lower()
+        m = re.fullmatch(r"(\d+)?(?:x(\d+))?px", low)
+        if m and (m.group(1) or m.group(2)):
+            width = int(m.group(1)) if m.group(1) else -int(m.group(2))
+        elif low in _FLOATING:
+            floating = True
+        elif low in ("center", "centre", "none", "border", "baseline", "middle", "top", "bottom", "text-top", "text-bottom", "upright") \
+                or re.match(r"(link|alt|class|page|lang)\s*=", low):
+            continue
+        else:
+            caption = opt
+    return width, floating, caption
+
+
+def pick_image(image, name, width, limit=IMAGE_LIMIT, max_bytes=0):
+    """归档里的图片 → (文件名, 显示宽度, 是否超出 limit)；没有这张图返回 None。width 为负数时表示指定的高度。"""
+    meta = image(name)
+    if not meta:
+        return None
+    w, h = meta.get("w") or 0, meta.get("h") or 0
+    if width is not None and width < 0:
+        width = round(w * -width / h) if h else None
+    shown = min(width or w or 48, w or width or 48, IMAGE_LIMIT)
+    small_file = meta.get("bytes", 0) <= max_bytes and max(w, h) <= 2000
+    return meta["file"], shown, max(w, h) > limit and not small_file
 
 
 def runs(text):
@@ -53,7 +97,9 @@ def runs(text):
         if m.start() > pos:
             out.append(text[pos:m.start()])
         label = m.group(3).strip()
-        if label:
+        if m.group(1) == "f":
+            out.append(["f", m.group(2), int(label) if label.isdigit() else 0])
+        elif label:
             out.append([m.group(1), m.group(2), label])
         pos = m.end()
     if pos < len(text):
@@ -74,15 +120,21 @@ def runs(text):
 
 
 def plain(parts):
-    return "".join(p if isinstance(p, str) else p[2] for p in parts)
+    return "".join(p if isinstance(p, str) else ("" if p[0] == "f" else p[2]) for p in parts)
+
+
+def has_image(parts):
+    return any(isinstance(p, list) and p[0] == "f" for p in parts or [])
 
 
 class LinkRenderer(wt.Renderer):
     """在纯文本渲染的基础上保留站内条目链接（[[目标|文字]] → 链接标记）。"""
 
-    def __init__(self, handlers, link_key):
+    def __init__(self, handlers, link_key, image=None):
         super().__init__(handlers)
         self.link_key = link_key
+        self.image = image  # 文件名 → 归档图片信息；没有时行内图片不显示
+        self.used_images = set()
 
     def render(self, text):
         # 跨行的粗体、斜体标记没有配对，渲染后会剩下单独的引号。
@@ -100,7 +152,14 @@ class LinkRenderer(wt.Renderer):
             parts = wt.split_top(raw[2:-2])
             target = parts[0].strip()
             kind = wt.classify_link(target)
-            if kind == "page" or kind == "interwiki" or target.startswith(":"):
+            if kind == "file" and self.image:
+                # 行内小图（品质星、作物阶段、头像）照原样显示；大图和找不到的图不显示。
+                width, _, _ = image_options(parts[1:])
+                picked = pick_image(self.image, target.split(":", 1)[1], width)
+                if picked and not picked[2]:
+                    self.used_images.add(picked[0])
+                    out.append(image_mark(picked[0], picked[1]))
+            elif kind == "page" or kind == "interwiki" or target.startswith(":"):
                 label = parts[-1] if len(parts) > 1 else target.split("#")[0].lstrip(":")
                 if kind == "interwiki" and len(parts) == 1:
                     label = target.split(":", 1)[-1]
@@ -116,7 +175,9 @@ class ArticleBuilder:
     """lang：zh 或 en；get_page(标题) 返回 wikitext（含模板页）；render 为保留标记的行内渲染；
     labels 为该语言的固定文字；link_key(链接目标) 返回站内条目名；npc_key(英文名) 返回居民条目名。"""
 
-    def __init__(self, lang, get_page, render, labels, link_key, npc_key, infobox_labels):
+    def __init__(self, lang, get_page, render, labels, link_key, npc_key, infobox_labels, image=None):
+        self.image = image
+        self.used_images = set()
         self.lang = lang
         self.get_page = get_page
         self.render = render
@@ -182,7 +243,18 @@ class ArticleBuilder:
 
     def _cleanup(self, text):
         text = _unwrap_heading_tables(text)
-        text = re.sub(r"<gallery[^>]*>.*?</gallery>", "", text, flags=re.S | re.I)
+        # 图集与浮动缩略图写成独立的图片行（\x03G名\x1f宽\x1f说明），连续的几行组成一组。
+        def gallery(m):
+            lines = []
+            for line in m.group(1).split("\n"):
+                parts = wt.split_top(line.strip())
+                name = re.sub(r"^%s:" % _FILE_PREFIX, "", parts[0].strip(), flags=re.I).strip() if parts else ""
+                if name and re.search(r"\.(png|gif|jpe?g|webp)$", name, re.I):
+                    _, _, caption = image_options(parts[1:])
+                    lines.append(f"{_FIGURE}{name}\x1f\x1f{caption}")
+            return "\n" + "\n".join(lines) + "\n" if lines else "\n"
+        text = re.sub(r"<gallery[^>]*>(.*?)</gallery>", gallery, text, flags=re.S | re.I)
+        text = _figures(text)
         text = re.sub(r"<references[^>]*/>|<references[^>]*>.*?</references>", "", text, flags=re.S | re.I)
         text = re.sub(r"<ref[^>/]*/>|<ref[^>]*>.*?</ref>", "", text, flags=re.S | re.I)
         text = re.sub(r"<section[^>]*/?>", "", text, flags=re.I)
@@ -284,11 +356,12 @@ class ArticleBuilder:
         if low == "giftheader":
             return f"\n\x03N{self.labels['main']}[[{self.labels['friendship_page']}]]\n\x03N{self.labels['see_also']}[[{self.labels['gift_list_page']}]]\n"
         if low == "grangeptswrapper":
-            # 展览会各类别：只列出计入该类别的物品；分数按条目里的“价格和品质”表计算。
+            # 展览会各类别：计入该类别的物品与各品质的展览分数（不含职业加成；职业影响见条目正文）。
             if (args.get("1") or "").strip().lower() == "footer":
-                return f"\n{_DETAILS_CLOSE}\n"
+                return f"\n|}}\n{_DETAILS_CLOSE}\n"
             note = self._expand(args.get("note") or "", depth + 1)
-            return f"\n{_DETAILS_OPEN}{(args.get('catname') or '').strip()}\n{note}\n"
+            head = "!!".join(self.labels["grange_cols"])
+            return f"\n{_DETAILS_OPEN}{(args.get('catname') or '').strip()}\n{note}\n{{| class=\"wikitable\"\n!{head}\n"
         if low == "fishlocationheader":
             # 鱼类地点表：Wiki 用 20 个小时格画时间条，这里写成时间段。
             head = ""
@@ -298,7 +371,7 @@ class ArticleBuilder:
         if low == "fishlocationentry":
             return self._fish_entry(args)
         if low == "grangeptsrow":
-            return "\n* {{name|%s}}\n" % (args.get("1") or "").strip()
+            return self._grange_row(args)
         if low == "version":
             return (args.get("2") or args.get("1") or "").strip()
         if low in self.simple_templates or low.startswith("fishlocations "):
@@ -318,7 +391,7 @@ class ArticleBuilder:
 
     # 只做参数替换就能显示的模板（导航条、鱼类地点表等）。
     simple_templates = {"kegproductivity-top", "preservesjarproductivity-top", "fishlocations town", "fishlocations beach",
-                        "fishlocations mountain", "fishlocations forest", "fishlocations river", "grangeptswrapper"}
+                        "fishlocations mountain", "fishlocations forest", "fishlocations river"}
 
     # —— 具体模板 ——
     def _recipes(self, args):
@@ -379,6 +452,20 @@ class ArticleBuilder:
         alt = (args.get("alt") or "").strip()
         name = "{{name|%s%s}}" % (fish, "|alt=" + alt if alt else "") if fish else ""
         return f"\n|-\n|{name}\n|{(args.get('location') or '').strip()}\n|{when}\n|{weather}\n"
+
+    def _grange_row(self, args):
+        """{{Grangeptsrow|英文名|中文名|售价|类别|qualities=0,1,2,4}}：按模块:Calcsellprice、Calcgrangepoints 算各品质的分数。"""
+        # 工匠物品（类别 -26）第一个参数是图标，名称写在第二个参数，计价用 item= 的产品种类。
+        artisan = (args.get("4") or "").strip() == "-26"
+        name = (args.get("item") or ("" if artisan else args.get("1")) or "").strip()
+        label = (args.get("2") or "").strip() if artisan else "{{name|%s}}" % name
+        try:
+            base = int((args.get("3") or "").replace(",", "").strip())
+        except ValueError:
+            return ""
+        qualities = {q.strip() for q in (args.get("qualities") or "0").split(",")}
+        cells = [str(grange_points(sell_price(name, base, q), q)) if str(q) in qualities else "—" for q in (0, 1, 2, 4)]
+        return "\n|-\n|%s\n|%s\n" % (label, "||".join(cells))
 
     def _gifts(self, args):
         rows = []
@@ -442,7 +529,7 @@ class ArticleBuilder:
         def flush():
             if para:
                 parts = runs(self.render("\n".join(para)))
-                if plain(parts).strip():
+                if plain(parts).strip() or has_image(parts):
                     out.append(["p", parts])
                 para.clear()
 
@@ -478,6 +565,18 @@ class ArticleBuilder:
                 if inner:
                     out.append(["d", strip_marks(self.render(title)) or self.labels["details"], inner])
                 continue
+            if s.startswith(_FIGURE):
+                flush()
+                entries = []
+                while i < len(lines) and lines[i].strip().startswith(_FIGURE):
+                    name, width, caption = (lines[i].strip()[len(_FIGURE):].split("\x1f") + ["", ""])[:3]
+                    entry = self._figure(name, int(width) if width.lstrip("-").isdigit() else None, caption)
+                    if entry:
+                        entries.append(entry)
+                    i += 1
+                if entries:
+                    out.append(["g", entries])
+                continue
             if s.startswith(_QUOTE):
                 flush()
                 body, _, source = s[len(_QUOTE):].partition("\x1f")
@@ -501,7 +600,7 @@ class ArticleBuilder:
                     marks = re.match(r"[*#:;]+", t).group(0)
                     body = t[len(marks):].strip()
                     parts = runs(self.render(body))
-                    if plain(parts).strip():
+                    if plain(parts).strip() or has_image(parts):
                         if marks.endswith(":") and items:
                             items[-1][1].extend(["\n", *parts])
                         else:
@@ -536,6 +635,20 @@ class ArticleBuilder:
             i += 1
         flush()
         return out
+
+    def _figure(self, name, width, caption):
+        """图片组的一项：[文件, 显示宽度, 说明片段]；超出 IMAGE_LIMIT 的大图为 [None, 0, 说明片段, 文件]（只给链接）。"""
+        if not self.image:
+            return None
+        picked = pick_image(self.image, name, width, FIGURE_LIMIT, FIGURE_BYTES)
+        if not picked:
+            return None
+        file, shown, large = picked
+        text = runs(self.render(caption)) if caption else []
+        if large:
+            return [None, 0, text, file]
+        self.used_images.add(file)
+        return [file, min(shown, 320), text]
 
     def table(self, raw):
         parsed = wt._parse_table(raw)
@@ -623,6 +736,56 @@ def _take_table(lines, i):
     return "\n".join(chunk) + "\n|}", i
 
 
+def sell_price(item, base, quality, profession=1):
+    """模块:Calcsellprice：品质倍率 1.25/1.5/2，部分工匠物品按原料价换算。"""
+    item = item.lower()
+    mult = {1: 1.25, 2: 1.5, 4: 2}.get(quality, 1)
+    if item in ("coffee", "oil"):
+        profession = 1
+    if "wine" in item:
+        price = base * 3
+    elif "juice" in item:
+        price = math.floor(base * 2.25)
+    elif "jelly" in item or "pickles" in item:
+        price = 50 + base * 2
+    elif "dried" in item:
+        price = math.floor(base * 7.5 + 25)
+    elif item == "honey":
+        price = 100 + base * 2 if base != 100 else 100
+    elif "aged roe" in item:
+        price = 2 * (30 + base // 2)
+    elif "roe" in item:
+        price = 30 + base // 2
+    else:
+        price = base
+    return math.floor(math.floor(profession * 10 * math.floor(mult * price)) / 10)
+
+
+def grange_points(price, quality):
+    """模块:Calcgrangepoints：品质 + 1，售价达到 20、90、200 各加 1 分，300（普通、银星）、400（普通）再加 1 分。"""
+    return (quality + 1 + (price >= 20) + (price >= 90) + (price >= 200)
+            + (price >= 300 and quality < 2) + (price >= 400 and quality < 1))
+
+
+def _figures(text):
+    """浮动的缩略图（[[File:名|thumb|说明]]）单独成行，块解析时组成图片组；行内小图留给行内渲染。"""
+    out, pos = [], 0
+    for m in re.finditer(r"\[\[%s:" % _FILE_PREFIX, text, flags=re.I):
+        if m.start() < pos:
+            continue
+        end = wt._match_close(text, m.start(), "[[", "]]")
+        parts = wt.split_top(text[m.start() + 2:end - 2])
+        width, floating, caption = image_options(parts[1:])
+        if not floating:
+            continue
+        name = parts[0].split(":", 1)[1].strip()
+        out.append(text[pos:m.start()])
+        out.append(f"\n{_FIGURE}{name}\x1f{width if width is not None else ''}\x1f{caption.replace(chr(10), ' ')}\n")
+        pos = end
+    out.append(text[pos:])
+    return "".join(out)
+
+
 def _unwrap_heading_tables(text):
     """表格里放了小标题（排版用的分栏表格、“完整公式”的折叠表格），章节切分会把表格拆断：去掉外层表格，保留内容。"""
     out, pos = [], 0
@@ -666,8 +829,8 @@ def _cell_text(cell):
 
 def _cell_empty(cell):
     if isinstance(cell, dict):
-        return not cell.get("b") and not plain(cell.get("v") or []).strip()
-    return not plain(cell).strip()
+        return not cell.get("b") and not plain(cell.get("v") or []).strip() and not has_image(cell.get("v"))
+    return not plain(cell).strip() and not has_image(cell)
 
 
 _IMAGE_HEADERS = {"图片", "图像", "图标", "image", "images", "icon", "picture"}

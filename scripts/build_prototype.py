@@ -356,7 +356,7 @@ def main():
             return "data:image/png;base64," + base64.b64encode(f.read()).decode()
 
     # 条目正文按条目单独写到 prototype/articles/，这里只记下文件名（ar）。
-    articles, article_text = runpy.run_path(os.path.join(ROOT, "scripts", "build_articles.py"))["build"]()
+    articles, article_text, article_images = runpy.run_path(os.path.join(ROOT, "scripts", "build_articles.py"))["build"]()
     for title, key in articles["zh"].items():
         if title in out_pages:
             out_pages[title]["ar"] = key
@@ -387,6 +387,17 @@ def main():
         shutil.copyfile(os.path.join(ROOT, meta["path"]), dest)
         copied += 1
     data["imgs"] = sorted(n for n in used_images if n and n in images)
+    # 条目正文里的图片只按文件名引用，不进图标清单。
+    for name in article_images:
+        meta = images.get(name)
+        if meta and name not in used_images:
+            shutil.copyfile(os.path.join(ROOT, meta["path"]), os.path.join(IMG_OUT, name))
+            copied += 1
+    # 以前构建留下、现在没有引用的图片删掉，部署时不再上传。
+    keep = set(used_images) | set(article_images)
+    for name in os.listdir(IMG_OUT):
+        if name not in keep:
+            os.remove(os.path.join(IMG_OUT, name))
 
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(PROTO, "data.js"), "w", encoding="utf-8") as f:

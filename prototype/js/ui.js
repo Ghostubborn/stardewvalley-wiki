@@ -331,7 +331,11 @@
     }
     out.sort((a, b) => a.s - b.s);
     const dedup = new Set();
-    return out.filter(({ e }) => { const k = e.t + e.k; if (dedup.has(k)) return false; dedup.add(k); return true; }).slice(0, 14).map((x) => x.e);
+    const found = out.filter(({ e }) => { const k = e.t + e.k; if (dedup.has(k)) return false; dedup.add(k); return true; }).slice(0, 14).map((x) => x.e);
+    // 名称之外，还可以在条目正文里找（第一次使用时才下载正文文字）。
+    const raw = q.trim();
+    if (raw.length >= (EN ? 3 : 2)) found.push({ t: t("在条目正文中搜索“{q}”", { q: raw }), en: "", k: t("全文"), ref: { type: "find", id: raw }, i: null, find: true });
+    return found;
   }
   function bindSearch() {
     const input = $("search");
@@ -344,7 +348,8 @@
       if (!results.length) { list.append(el("li", { class: "empty" }, S.active() ? t("未找到可展示结果。可输入完整名称查阅；防剧透已开启。") : t("没有找到。试试中文全名或英文名。"))); list.hidden = false; return; }
       results.forEach((e, i) => {
         // 英文版不显示中文副名；中文仍可用于检索。
-        const li = el("li", { role: "option", "aria-selected": String(i === active) }, e.protected ? protectedImage() : img(e.i),
+        const li = el("li", { role: "option", "aria-selected": String(i === active), class: e.find ? "find-entry" : null },
+          e.protected ? protectedImage() : e.find ? findIcon() : img(e.i),
           el("span", null, e.t, e.en && !EN ? el("span", { class: "en" }, e.en) : null), el("span", { class: "kind" }, e.k));
         li.addEventListener("mousedown", (ev) => { ev.preventDefault(); choose(e); });
         list.append(li);
@@ -603,6 +608,7 @@
         continue;
       }
       const [kind, id, label] = part;
+      if (kind === "f") { out.push(articleImage(id, label)); continue; }
       const item = kind === "i" ? D.items[id] : null;
       if (kind === "i" && !item) { out.push(label); continue; }
       const ref = item ? { type: "item", id } : titleRef(id);
@@ -611,7 +617,17 @@
     }
     return out;
   }
-  const runsText = parts => (parts || []).map(p => (typeof p === "string" ? p : p[2])).join("");
+  // 正文图片：归档里边长不超过 400 像素的图按原尺寸显示（窄屏缩小），更大的只给原图链接。
+  const articleImage = (file, width) => el("img", { class: "art-img", src: App.iconSrc(file), width: width || null, alt: "", loading: "lazy", decoding: "async" });
+  const wikiFile = file => "https://stardewvalleywiki.com/File:" + encodeURIComponent(file.replace(/ /g, "_"));
+  function articleGallery(entries) {
+    return el("div", { class: "art-gallery" }, entries.map(([file, width, caption, large]) => file
+      ? el("figure", null, el("a", { href: App.iconSrc(file), target: "_blank", rel: "noopener", "aria-label": t("查看原图") }, articleImage(file, width)),
+        caption?.length ? el("figcaption", null, articleRuns(caption)) : null)
+      : el("figure", { class: "art-large" }, el("a", { href: wikiFile(large), target: "_blank", rel: "noopener" },
+        caption?.length ? runsText(caption) : t("查看原图"), " ↗"))));
+  }
+  const runsText = parts => (parts || []).map(p => (typeof p === "string" ? p : p[0] === "f" ? "" : p[2])).join("");
   function cellText(cell) {
     if (Array.isArray(cell)) return runsText(cell);
     return cell.v ? runsText(cell.v) : (cell.b || []).map(blockText).join(" ");
@@ -622,10 +638,16 @@
     if (kind === "t") return block[1].map(row => row.map(cellText).join(" ")).join(" ");
     if (kind === "d") return block[1] + " " + block[2].map(blockText).join(" ");
     if (kind === "q") return runsText(block[1]) + " " + runsText(block[2]);
+    if (kind === "g") return block[1].map(([, , caption]) => runsText(caption)).join(" ");
     return runsText(block[1]);
+  }
+  // 图片文件名（多为英文名称）也按受保护的名称核对，防止图片先于文字透露后续内容。
+  function blockFiles(block) {
+    return JSON.stringify(block).match(/"[^"]+\.(?:png|gif|jpe?g|webp)"/gi)?.map(x => x.slice(1, -1)) || [];
   }
   // 防剧透：段落、列表项、表格行分别核对，涉及后续内容的收起，其余照常显示。
   const allowed = (text, title) => !S.active() || S.textAllowed(text, title);
+  const blockAllowed = (block, title) => allowed(blockText(block), title) && (!S.active() || blockFiles(block).every(S.fileAllowed));
   function articleList(items, ordered) {
     const root = el(ordered ? "ol" : "ul", { class: "art-list" });
     const stack = [[1, root]];
@@ -661,18 +683,19 @@
     if (kind === "l") return articleList(block[2], block[1]);
     if (kind === "t") return articleTable(block[1], block[2]);
     if (kind === "d") return el("details", { class: "art-details" }, el("summary", null, block[1]), guardBlocks(block[2], title));
+    if (kind === "g") return articleGallery(block[1]);
     return null;
   }
   function guardBlocks(blocks, title) {
     const out = [];
     for (const block of blocks) {
-      if (allowed(blockText(block), title)) { out.push(articleBlock(block, title)); continue; }
+      if (blockAllowed(block, title)) { out.push(articleBlock(block, title)); continue; }
       const [kind] = block;
       if (kind === "l" || kind === "t") {
         // 列表、表格只收起涉及后续内容的项或行；表头始终显示。
         const entries = kind === "l" ? block[2] : block[1];
         const head = kind === "t" ? entries.filter(row => row.every(c => !Array.isArray(c) && c.h)) : [];
-        const visible = entries.filter(e => head.includes(e) || allowed(kind === "l" ? runsText(e[1]) : e.map(cellText).join(" "), title));
+        const visible = entries.filter(e => head.includes(e) || blockAllowed(kind === "l" ? ["p", e[1]] : ["t", [e]], title));
         const partial = visible.length > head.length ? (kind === "l" ? articleList(visible, block[1]) : articleTable(visible, block[2])) : null;
         out.push(partial, foldContent(() => articleBlock(block, title),
           t("还有 {n} 项涉及后续内容。", { n: entries.length - visible.length }), t(kind === "l" ? "查看完整列表" : "查看完整表格")));
@@ -709,6 +732,7 @@
       if (!box.isConnected) return;
       box.replaceChildren(...(article ? articleBody(article, title) : [summary && allowed(summary, title) ? el("p", { class: "d-summary" }, summary) : null,
         el("p", { class: "d-sub" }, t("条目内容载入失败，可以查看原 Wiki。"))]));
+      revealSection(box, title);
     });
     return box;
   }
@@ -726,12 +750,93 @@
         const close = btn(t("收起条目全文"), () => { collapse(); box.querySelector("button")?.focus(); });
         box.replaceChildren(heading(), ...(article ? articleBody(article, title, { facts: false, base: 4 })
           : [el("p", { class: "d-sub" }, t("条目内容载入失败，可以查看原 Wiki。"))]), close);
+        revealSection(box, title);
       });
     };
     collapse();
+    // 从正文搜索结果进来：直接展开全文并滚到命中的小节。
+    if (focusSection?.title === title) queueMicrotask(expand);
     return box;
   }
   App.loadArticle = loadArticle;
+
+  // ———————————————————— 正文全文搜索 ————————————————————
+  // 各条目正文的纯文字按语言打包成一个文件，第一次搜索正文时才下载（压缩后约 1.4 MB）。
+  let corpusRequest = null;
+  function loadCorpus() {
+    corpusRequest ||= fetch(`articles/${EN ? "en" : "zh"}/search.json`).then(r => (r.ok ? r.json() : null)).catch(() => null)
+      .then(corpus => { if (!corpus) corpusRequest = null; return corpus; });
+    return (App.corpusRequest = corpusRequest);
+  }
+  const findIcon = () => el("span", { class: "noimg find-icon", role: "img", "aria-label": t("全文"),
+    html: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="10" cy="10" r="6"/><path d="M15 15l6 6"/></svg>' });
+  // 从搜索结果打开条目时，正文载入后滚到命中的那一节。
+  let focusSection = null;
+  function revealSection(box, title) {
+    if (!focusSection || focusSection.title !== title) return;
+    const heading = focusSection.heading;
+    focusSection = null;
+    const target = heading && [...box.querySelectorAll(".art-section > :first-child")].find(h => h.textContent === heading);
+    target?.scrollIntoView({ block: "start" });
+  }
+  function markTerms(text, terms) {
+    const pattern = new RegExp(`(${terms.map(x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "gi");
+    return text.split(pattern).map((part, i) => (i % 2 ? el("mark", null, part) : part));
+  }
+  function snippet(text, terms) {
+    const low = text.toLowerCase();
+    const at = Math.max(0, Math.min(...terms.map(x => low.indexOf(x)).filter(i => i >= 0)));
+    const start = Math.max(0, at - 36), end = Math.min(text.length, at + 90);
+    return (start ? "…" : "") + text.slice(start, end).replace(/\s*\n\s*/g, " · ") + (end < text.length ? "…" : "");
+  }
+  function findInArticles(corpus, q) {
+    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+    const hits = [];
+    let hidden = 0;
+    for (const [title, sections] of corpus) {
+      const ref = titleRef(title);
+      let best = null, matched = 0;
+      for (const [heading, text] of sections) {
+        const low = (heading + "\n" + text).toLowerCase();
+        if (!terms.every(term => low.includes(term))) continue;
+        matched++;
+        const cut = snippet(text, terms);
+        // 防剧透：剧情章节、受保护的小节标题和摘录都不列出。
+        if (S.active() && (STORY_SECTION.test(heading) || !S.textAllowed(heading + " " + cut, title))) continue;
+        const score = terms.reduce((n, term) => n + low.split(term).length - 1, 0) + (terms.some(term => heading.toLowerCase().includes(term)) ? 5 : 0);
+        if (!best || score > best.score) best = { heading, cut, score };
+      }
+      if (!matched) continue;
+      if (!best || !S.canView(ref)) { hidden++; continue; }
+      const named = terms.every(term => N(title).toLowerCase().includes(term));
+      hits.push({ title, ref, heading: best.heading, snippet: best.cut, sections: matched, score: best.score + (named ? 100 : 0) });
+    }
+    hits.sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
+    return { hits, hidden, terms };
+  }
+  function renderFind(q) {
+    const box = el("div", { class: "find-results", dataset: { spoilerScoped: "true" } }, el("p", { class: "d-sub" }, t("正在载入条目正文…")));
+    const heading = el("div", { class: "d-head" }, findIcon(), el("div", null, el("h2", { class: "d-title", id: "detail-title" }, t("正文搜索")),
+      el("div", { class: "d-sub" }, t("“{q}”", { q }))));
+    fillDetail(heading, box);
+    loadCorpus().then(corpus => {
+      if (!box.isConnected) return;
+      if (!corpus) { box.replaceChildren(el("p", { class: "d-sub" }, t("条目正文载入失败，请稍后再试。"))); return; }
+      const { hits, hidden, terms } = findInArticles(corpus, q);
+      const shown = hits.slice(0, 80);
+      box.replaceChildren(...[
+        el("p", { class: "d-sub" }, hits.length ? t("{n} 个条目的正文提到“{q}”。", { n: hits.length, q }) : t("没有条目的正文提到“{q}”。", { q })),
+        shown.length ? el("ol", { class: "find-list" }, shown.map(hit => el("li", null,
+          el("a", { class: "find-title", href: refHref(hit.ref), onclick: e => {
+            e.preventDefault(); focusSection = { title: hit.title, heading: hit.heading }; App.select(hit.ref, { from: "find" });
+          } }, App.hasImage(refIcon(hit.ref)) ? img(refIcon(hit.ref)) : null, N(hit.title),
+            hit.heading ? el("span", { class: "find-sec" }, " · " + hit.heading) : null),
+          el("p", { class: "find-snippet" }, markTerms(hit.snippet, terms))))) : null,
+        hits.length > shown.length ? el("p", { class: "d-sub" }, t("只列出前 {n} 个结果，可以换更具体的词。", { n: shown.length })) : null,
+        hidden ? el("p", { class: "d-sub" }, t("另有 {n} 个条目的相关内容涉及后续内容，开启防剧透时不列出。", { n: hidden })) : null,
+        el("p", { class: "d-sub" }, t("正文来自中文 Wiki 2025-12-18 归档，按小节查找；同一小节里包含全部关键词才算命中。"))].filter(Boolean));
+    });
+  }
   function actions(...btns) { return el("div", { class: "d-actions" }, btns.filter(Boolean)); }
   function btn(label, fn, primary) { return el("button", { class: "btn" + (primary ? " primary" : ""), type: "button", onclick: fn }, label); }
   function planBtn(ref) {
@@ -1175,6 +1280,7 @@
     if (!ref) { detail.hidden = true; updateDetailPresentation(); updateInsets(); return; }
     const scroll = detail.scrollTop;
     if (ref.type === "point") renderPointList(ref);
+    else if (ref.type === "find") renderFind(ref.id);
     else if (!S.canView(ref)) {
       dbody.replaceChildren(head(null, t("尚未确认探索的内容"), t("防剧透已开启"), null, true),
         el("p", { class: "d-summary" }, t("此条目可能涉及你尚未到达的游戏内容。可以只查看这一条，关联的后续内容仍会收起。")),
@@ -1209,7 +1315,7 @@
     if (ref) detailMode = "reading";
     current = ref;
     if (!same) detail.scrollTop = 0;
-    if (!ref || ["map", "search", "journal", "browse", "hash"].includes(opts.from)) pointReturn = null;
+    if (!ref || ["map", "search", "journal", "browse", "hash", "find"].includes(opts.from)) pointReturn = null;
     if (ref?.type === "point") {
       setView("map", { preserveDetail: true }); App.map.select(null); App.map.setRelated([]); App.tree.select(null);
       renderDetail(); if (!same) focusDetailTitle(); writeHash(); return;
@@ -1547,7 +1653,7 @@
       const i = sel.indexOf(":");
       const ref = { type: sel.slice(0, i), id: sel.slice(i + 1) };
       if (ref.type === "item") ref.id = App.canonicalItemId(ref.id);
-      const exists = ref.type === "point" ? ref.id.split(";").some(id => App.mapContents.find(id))
+      const exists = ref.type === "find" ? !!ref.id.trim() : ref.type === "point" ? ref.id.split(";").some(id => App.mapContents.find(id))
         : ref.type === "node" ? P().nodes.has(ref.id) : ref.type === "area" ? !!App.AREAS[ref.id]
         : ref.type === "item" ? !!D.items[ref.id] : ref.type === "fish" ? App.fishByName.has(ref.id)
         : ref.type === "villager" ? App.villagerByName.has(ref.id) : ref.type === "location" ? App.locationByName.has(ref.id)

@@ -119,6 +119,19 @@
     if (it?.id) add(it.e);
     return out;
   }
+  function ensureBlocked() {
+    if (blockedNames) return;
+    const names = new Set([...Object.keys(D.pages), ...Object.values(D.items).map(i => i.z), ...nodesByTitle.keys(), ...discoveries]);
+    // A numeric skill requirement is a rule, not a future reward or place.
+    // It may be needed to explain a currently requested item or basic control.
+    blockedNames = [...names].filter(name => name.length >= 2 && nodesByTitle.get(name)?.kind !== "skill" && !canView({ type: "page", id: name }));
+    blockedEnglish = null;
+    if (A.EN) {
+      const english = new Set(blockedNames.flatMap(name => [...englishNames(name)]));
+      const words = [...english].sort((a, b) => b.length - a.length).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+      if (words.length) blockedEnglish = new RegExp(`(?<![A-Za-z])(?:${words.join("|")})(?![A-Za-z])`);
+    }
+  }
   function textAllowed(text, context = "") {
     if (!active() || !text) return true;
     if (context) {
@@ -126,18 +139,7 @@
       const own = A.EN && (A.EN.names?.[context] || D.pages[context]?.e || nodesByTitle.get(context)?.name);
       if (own) text = text.split(own).join("");
     }
-    if (!blockedNames) {
-      const names = new Set([...Object.keys(D.pages), ...Object.values(D.items).map(i => i.z), ...nodesByTitle.keys(), ...discoveries]);
-      // A numeric skill requirement is a rule, not a future reward or place.
-      // It may be needed to explain a currently requested item or basic control.
-      blockedNames = [...names].filter(name => name.length >= 2 && nodesByTitle.get(name)?.kind !== "skill" && !canView({ type: "page", id: name }));
-      blockedEnglish = null;
-      if (A.EN) {
-        const english = new Set(blockedNames.flatMap(name => [...englishNames(name)]));
-        const words = [...english].sort((a, b) => b.length - a.length).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-        if (words.length) blockedEnglish = new RegExp(`(?<![A-Za-z])(?:${words.join("|")})(?![A-Za-z])`);
-      }
-    }
+    ensureBlocked();
     if (blockedNames.some(name => text.includes(name))) return false;
     return !(blockedEnglish && blockedEnglish.test(text));
   }
@@ -154,10 +156,22 @@
     const area = mapPointArea(ref, point);
     return !area || canView({ type: "area", id: area });
   }
-  function reset() { memo = new Map(); blockedNames = null; blockedEnglish = null; }
+  // 图片文件名用英文名称（Ginger_Island_Map.png）：中文版也按受保护条目的英文名称核对。
+  let blockedFiles = null;
+  function fileAllowed(file) {
+    if (!active() || !file) return true;
+    if (!blockedFiles) {
+      ensureBlocked();
+      const words = [...new Set(blockedNames.flatMap(name => [D.pages[name]?.e, A.itemInfo(name)?.e, nodesByTitle.get(name)?.name]))]
+        .filter(w => w && w.length >= 4 && !/[㐀-鿿]/.test(w)).sort((a, b) => b.length - a.length).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+      blockedFiles = words.length ? new RegExp(`(?<![A-Za-z])(?:${words.join("|")})(?![A-Za-z])`, "i") : /$^/;
+    }
+    return !blockedFiles.test(file.replace(/\.[a-z]+$/i, "").replace(/_/g, " "));
+  }
+  function reset() { memo = new Map(); blockedNames = null; blockedEnglish = null; blockedFiles = null; }
   A.on(reason => { if (reason === "progress:preset") revealed.clear(); reset(); });
   A.spoilers = {
-    active, canView, title, textAllowed, mapPoint, mapPointArea,
+    active, canView, title, textAllowed, fileAllowed, mapPoint, mapPointArea,
     node: id => canView({ type: "node", id }),
     area: id => canView({ type: "area", id }),
     reveal(ref, remember = false) {

@@ -977,5 +977,17 @@
  "Wiki 没有这件物品的条目或获取说明。": "The wiki has no article or source for this item.",
  "产出这件物品的树": "trees that produce it",
  "在下列树上放置树液采集器，会定期产出": "Place a Tapper on one of these trees; it produces this regularly",
- "树木产出": "From trees"
+ "树木产出": "From trees",
+ "查看原图": "View the image",
+ "在条目正文中搜索“{q}”": "Search article text for “{q}”",
+ "全文": "Full text",
+ "正在载入条目正文…": "Loading article text…",
+ "正文搜索": "Article search",
+ "“{q}”": "“{q}”",
+ "条目正文载入失败，请稍后再试。": "Couldn't load the article text; please try again later.",
+ "{n} 个条目的正文提到“{q}”。": "{n} {n|article mentions|articles mention} “{q}”.",
+ "没有条目的正文提到“{q}”。": "No article mentions “{q}”.",
+ "只列出前 {n} 个结果，可以换更具体的词。": "Showing the first {n} results; try a more specific word.",
+ "另有 {n} 个条目的相关内容涉及后续内容，开启防剧透时不列出。": "{n} more {n|article mentions|articles mention} it only in later content, which stays hidden while spoiler protection is on.",
+ "正文来自中文 Wiki 2025-12-18 归档，按小节查找；同一小节里包含全部关键词才算命中。": "Text from the Stardew Valley Wiki archive (2025-12-18). A section matches when it contains every word you typed."
 }

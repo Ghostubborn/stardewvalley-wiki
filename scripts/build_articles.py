@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.join(ROOT, "scripts"))
 from sdvdata import article as AR  # noqa: E402
 
 OUT = os.path.join(ROOT, "prototype", "articles")
-# 作物生长日历几乎都是逐日的生长阶段图片，去掉图片后没有可读内容；首页只是 Wiki 自己的导航。
-SKIP_PAGES = {"作物生长日历", "Stardew Valley Wiki"}
+# Wiki 首页只是导航。
+SKIP_PAGES = {"Stardew Valley Wiki"}
 
 LABELS = {
     "zh": {
@@ -31,6 +31,7 @@ LABELS = {
                         ("buff", "增益效果"), ("duration", "增益时长"), ("recipe", "食谱来源"), ("sellprice", "售出价格")],
         "gift_levels": [("love", "最爱"), ("like", "喜欢"), ("neutral", "一般"), ("dislike", "不喜欢"), ("hate", "讨厌")],
         "fish_cols": ["鱼", "地点", "时间", "天气"], "any_time": "全天",
+        "grange_cols": ["物品", "普通", "银星", "金星", "铱星"],
         # 操作说明里用图标表示的鼠标键和手柄键（文件名去掉平台前缀后按这里改写，其余照写按键名）。
         "icons": {"left-click": "左键", "right-click": "右键", "mouse middle key light": "鼠标中键", "left stick": "左摇杆",
                   "right stick": "右摇杆", "dpad": "十字键", "touch pad": "触控板", "menu": "菜单键", "view": "查看键",
@@ -47,6 +48,7 @@ LABELS = {
                         ("recipe", "Recipe Source(s)"), ("sellprice", "Sell Price")],
         "gift_levels": [("love", "Love"), ("like", "Like"), ("neutral", "Neutral"), ("dislike", "Dislike"), ("hate", "Hate")],
         "fish_cols": ["Fish", "Location", "Time", "Weather"], "any_time": "Any time",
+        "grange_cols": ["Item", "Base", "Silver", "Gold", "Iridium"],
         "icons": {"left-click": "Left-click", "right-click": "Right-click", "mouse middle key light": "Middle-click",
                   "left stick": "Left stick", "right stick": "Right stick", "dpad": "D-pad", "touch pad": "Touch pad",
                   "plus": "+", "minus": "−"},
@@ -101,11 +103,19 @@ INFOBOX = {
                     ("sellprice", "Sell Price")],
     },
 }
+def image_index():
+    """归档图片：小写、下划线写法的文件名 → {'file', 'w', 'h'}（两个 Wiki 的图片归档合在一起）。"""
+    with open(os.path.join(ROOT, "data", "build", "images.json"), encoding="utf-8") as f:
+        images = json.load(f)
+    index = {name.strip().replace(" ", "_").casefold(): meta for name, meta in images.items()}
+    return lambda name: index.get((name or "").strip().replace(" ", "_").casefold())
+
+
 def article_key(title):
     return hashlib.sha1(title.encode("utf-8")).hexdigest()[:10]
 
 
-def zh_articles():
+def zh_articles(image):
     import build_data as BD
     b = BD.Builder()
     pages, _ = b.build_pages()
@@ -120,7 +130,7 @@ def zh_articles():
 
     handlers = dict(BD.make_renderer(b.catalog, b.npc_zh, b.bundle_zh).handlers)
     icons = _icons("zh")
-    render = _rich_render(handlers, b.catalog, link_key, lambda en: b.npc_zh.get(en, en),
+    render = _rich_render(handlers, b.catalog, link_key, image, lambda en: b.npc_zh.get(en, en),
                           lambda raw: b.catalog.zh_name(raw),
                           pre=lambda t: icons(re.sub(r"\[\[(?:File|文件):HeartIcon[^\]]*\]\]", "❤", t or "")))
 
@@ -128,7 +138,7 @@ def zh_articles():
         r = b.zh.get(b.resolve(BD.norm_title(title)))
         return r["text"] if r else None
 
-    builder = AR.ArticleBuilder("zh", get_page, render, LABELS["zh"], link_key, None, INFOBOX["zh"])
+    builder = AR.ArticleBuilder("zh", get_page, render, LABELS["zh"], link_key, None, INFOBOX["zh"], image)
     out = {}
     for p in pages:
         if p["title"] in SKIP_PAGES:
@@ -136,10 +146,10 @@ def zh_articles():
         article = builder.build(p["title"], get_page(p["title"]))
         if article:
             out[p["title"]] = article
-    return out
+    return out, builder.used_images | render.used_images
 
 
-def en_articles():
+def en_articles(image):
     import build_en as EN
     e = EN.English()
     with open(os.path.join(ROOT, "data", "build", "pages.json"), encoding="utf-8") as f:
@@ -164,14 +174,14 @@ def en_articles():
 
     handlers = dict(e.handlers)
     icons = _icons("en")
-    render = _rich_render(handlers, e.catalog, link_key, lambda en: en, lambda raw: raw, clean=label_only, paren=" ({})",
+    render = _rich_render(handlers, e.catalog, link_key, image, lambda en: en, lambda raw: raw, clean=label_only, paren=" ({})",
                           pre=lambda t: icons(re.sub(r"</?p\b[^>]*>", "\n", re.sub(r"\[\[(?:File|Image):HeartIcon[^\]]*\]\]", "❤", t or ""))))
 
     def get_page(title):
         row = e.en.get(resolve(title))
         return row["text"] if row and not row["redirect"] else None
 
-    builder = AR.ArticleBuilder("en", get_page, render, LABELS["en"], link_key, None, INFOBOX["en"])
+    builder = AR.ArticleBuilder("en", get_page, render, LABELS["en"], link_key, None, INFOBOX["en"], image)
     out = {}
     for p in zh_pages:
         if not p.get("en") or p["title"] in SKIP_PAGES:
@@ -182,7 +192,7 @@ def en_articles():
         article = builder.build(p["en"], text)
         if article:
             out[p["title"]] = article
-    return out
+    return out, builder.used_images | render.used_images
 
 
 def _icons(lang):
@@ -198,7 +208,7 @@ def _icons(lang):
     return lambda text: re.sub(r"\[\[(?:File|文件|Image):([^|\]]+)[^\]]*\]\]", replace, text or "")
 
 
-def _rich_render(handlers, catalog, link_key, npc_page, page_name, clean=lambda s: s, pre=lambda s: s, paren="（{}）"):
+def _rich_render(handlers, catalog, link_key, image, npc_page, page_name, clean=lambda s: s, pre=lambda s: s, paren="（{}）"):
     """行内渲染：在纯文本渲染的基础上，物品名保留物品 ID（显示图标），居民与条目名保留站内链接。"""
     name0, npc0 = handlers["name"], handlers["npc"]
 
@@ -226,8 +236,52 @@ def _rich_render(handlers, catalog, link_key, npc_page, page_name, clean=lambda 
         return head + paren.format(extra) if extra else head
 
     handlers.update(name=name, npc=npc)
-    renderer = AR.LinkRenderer(handlers, link_key)
-    return lambda text: clean(renderer.render(pre(text)))
+    renderer = AR.LinkRenderer(handlers, link_key, image)
+    render = lambda text: clean(renderer.render(pre(text)))
+    render.used_images = renderer.used_images
+    return render
+
+
+def _text(node):
+    """片段、单元格或块 → 纯文字（图片不算）。"""
+    if isinstance(node, str):
+        return node
+    if isinstance(node, dict):
+        return _text(node.get("v") or []) + " ".join(_block_text(b) for b in node.get("b") or [])
+    if node and node[0] in ("i", "l") and len(node) == 3 and isinstance(node[1], str):
+        return node[2]
+    if node and node[0] == "f" and len(node) == 3:
+        return ""
+    return "".join(_text(x) for x in node)
+
+
+def _block_text(block):
+    kind = block[0]
+    if kind == "l":
+        return "\n".join(_text(parts) for _, parts in block[2])
+    if kind == "t":
+        return "\n".join(" · ".join(t for t in (_text(c).strip() for c in row) if t) for row in block[1])
+    if kind == "d":
+        return block[1] + "\n" + "\n".join(_block_text(b) for b in block[2])
+    if kind == "q":
+        return _text(block[1])
+    if kind == "g":
+        return " ".join(_text(entry[2]) for entry in block[1])
+    return _text(block[1])
+
+
+def search_corpus(articles):
+    """全文搜索用的纯文本：[[条目, [[小节标题, 文字], …]], …]，搜索时才下载。"""
+    out = []
+    for title, article in articles.items():
+        sections = []
+        for heading, _, blocks in article["s"]:
+            text = re.sub(r"[ \t]+", " ", "\n".join(t for t in (_block_text(b).strip() for b in blocks) if t))
+            if text.strip():
+                sections.append([heading or "", text])
+        if sections:
+            out.append([title, sections])
+    return out
 
 
 def write(lang, articles):
@@ -247,6 +301,9 @@ def write(lang, articles):
                     continue
         with open(path, "w", encoding="utf-8") as f:
             f.write(payload)
+    keep.add("search.json")
+    with open(os.path.join(folder, "search.json"), "w", encoding="utf-8") as f:
+        json.dump(search_corpus(articles), f, ensure_ascii=False, separators=(",", ":"))
     for name in os.listdir(folder):
         if name.endswith(".json") and name not in keep:
             os.remove(os.path.join(folder, name))
@@ -269,12 +326,14 @@ def headings(articles):
 
 
 def build():
-    zh, en = zh_articles(), en_articles()
+    image = image_index()
+    (zh, zh_images), (en, en_images) = zh_articles(image), en_articles(image)
     sizes = {lang: round(sum(len(json.dumps(a, ensure_ascii=False, separators=(",", ":")).encode()) for a in arts.values()) / 1e6, 2)
              for lang, arts in (("zh", zh), ("en", en))}
     index = {"zh": write("zh", zh), "en": write("en", en)}
-    print("条目正文：", json.dumps({"zh": len(zh), "en": len(en), "mb": sizes}, ensure_ascii=False))
-    return index, headings(zh) + "\n" + headings(en)
+    images = sorted(zh_images | en_images)
+    print("条目正文：", json.dumps({"zh": len(zh), "en": len(en), "mb": sizes, "images": len(images)}, ensure_ascii=False))
+    return index, headings(zh) + "\n" + headings(en), images
 
 
 if __name__ == "__main__":

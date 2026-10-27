@@ -397,6 +397,22 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .art-icon { width: 18px; height: 18px; margin-right: 2px; vertical-align: -3px; }
 .art-facts { margin-top: 10px; }
 .art-fold > .btn { margin-top: 8px; }
+.art-img { max-width: 100%; height: auto; vertical-align: middle; image-rendering: pixelated; }
+.art-table .art-img { max-height: 160px; width: auto; }
+.art-gallery { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 8px; }
+.art-gallery figure { margin: 0; max-width: 320px; font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
+.art-gallery figcaption { margin-top: 2px; }
+.art-gallery .art-large a { color: var(--bark); text-underline-offset: 3px; }
+/* 正文全文搜索 */
+.noimg.find-icon { border: 0; background: none; color: var(--bark); }
+.d-head > .find-icon { width: 48px; height: 48px; }
+.search-results li.find-entry { border-top: 1px dashed var(--parchment-lo); }
+.find-list { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.find-title { display: inline-flex; align-items: center; gap: 6px; color: var(--bark); text-underline-offset: 3px; }
+.find-title img { width: 24px; height: 24px; }
+.find-sec { color: var(--ink-soft); font-size: 13px; }
+.find-snippet { margin: 2px 0 0; font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
+.find-snippet mark { background: var(--parchment-lo); color: inherit; padding: 0 1px; }
 
 /* —— 地图工具 —— */
 .map-tools { position: absolute; left: 350px; bottom: 100px; display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; z-index: 4; }

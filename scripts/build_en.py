@@ -384,6 +384,7 @@ class English:
                 self.missing["item_sources"] += 1
         return out
 
+    TRANSMUTE = {"Iron Bar": "Transmute (Fe)", "Gold Bar": "Transmute (Au)"}
     MENTION_SKIP = {"Bugs", "Trivia", "Dialogue", "Quotes", "History", "Questions", "Movies & Concessions"}
 
     def mentions(self, items, wanted, skip_pages):
@@ -644,15 +645,18 @@ class English:
             for row in rows[1:]:
                 if len(row) > max(name_col, src_col):
                     links = wt.page_links(row[name_col]["text"])
-                    if links:
-                        crafting.setdefault(links[0], self.plain(row[src_col]["text"]))
+                    # Rows without an article ("Transmute (Fe)") are keyed by their plain name.
+                    key = links[0] if links else self.plain(row[name_col]["text"]).strip()
+                    if key:
+                        crafting.setdefault(key, self.plain(row[src_col]["text"]))
         page_en = {p["title"]: p.get("en") for p in zh_pages}
         out = {}
         for r in recipes:
             title_en = page_en.get(r["output"]["page"]) or self.title_en.get(r["output"]["zh"])
             unlock = None
             if r["source"].endswith("%E6%89%93%E9%80%A0") or r["source"].endswith("/打造"):
-                unlock = crafting.get(title_en)
+                # The English crafting table lists the bar recipes under their recipe names.
+                unlock = crafting.get(title_en) or crafting.get(self.TRANSMUTE.get(title_en))
             if not unlock and title_en:
                 page, _ = self.page(title_en)
                 fields, _ = self.infobox(page)
