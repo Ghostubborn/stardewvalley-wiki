@@ -975,7 +975,7 @@
  "Wiki 其他条目讲到这件物品": "Other wiki articles that mention this item",
  "：": ": ",
  "Wiki 没有这件物品的条目或获取说明。": "The wiki has no article or source for this item.",
- "树液采集器": "Tapper",
- "在下列树上放置树液采集器或重型树液采集器，会定期产出": "Place a Tapper or Heavy Tapper on one of these trees; it produces this regularly",
- "产出这件物品的树": "trees that produce it"
+ "产出这件物品的树": "trees that produce it",
+ "在下列树上放置树液采集器，会定期产出": "Place a Tapper on one of these trees; it produces this regularly",
+ "树木产出": "From trees"
 }

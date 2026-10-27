@@ -882,9 +882,9 @@
       checks: [R(undefined, t("击败下列怪物时有几率掉落，几率写在名称后面"))] });
     if (id && producedBy.has(id)) paths.push({ kind: "animal", label: t("动物产出"), animals: producedBy.get(id), reqs: [],
       checks: [R(undefined, t("饲养下列动物会产出"))] });
-    // 树液采集器：放在对应的树上定期产出（间隔天数见树的条目）。
-    if (id && tappedFrom.has(id)) paths.push({ kind: "tapper", label: t("树液采集器"), trees: tappedFrom.get(id), refs: ["(BC)105", "(BC)264"], reqs: [],
-      checks: [R(undefined, t("在下列树上放置树液采集器或重型树液采集器，会定期产出"))] });
+    // 树液采集器：放在对应的树上定期产出（间隔天数见树的条目）。说明里不提重型树液采集器（精通后才有），它只在物品列表里按防剧透规则显示。
+    if (id && tappedFrom.has(id)) paths.push({ kind: "tapper", label: t("树木产出"), trees: tappedFrom.get(id), refs: ["(BC)105", "(BC)264"], reqs: [],
+      checks: [R(undefined, t("在下列树上放置树液采集器，会定期产出"))] });
     const ct = id && chainByItem.get(id);
     // 斧头、十字镐、锄头、喷壶的基础款是开局自带的工具。
     if (ct && ct.tier === 0 && ct.chain.kind === "blacksmith_upgrade") {

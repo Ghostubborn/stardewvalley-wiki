@@ -1146,7 +1146,7 @@
       el("p", { class: "d-summary" }, bundle.cost ? t("交付 {cost}。", { cost: money(bundle.cost) }) : bundle.choose ? t("从 {total} 项中任选 {n} 项交付。", { total: bundle.items.length, n: bundle.slots }) : t("交付下列 {n} 项要求的物品。", { n: bundle.slots || bundle.items.length })),
       bundle.items.length || bundle.cost ? section(t("所需材料与数量"), requirements) : null,
       bundle.reward?.length ? (S.active() ? foldContent(reward, t("完成奖励按需查看"), t("查看完成奖励")) : reward) : null,
-      actions(btn(t("查看房间路线"), () => App.select({ type: "node", id: "room:" + room.room }, { switchView: true }))), sourceLine("收集包"));
+      actions(btn(t("查看房间路线"), () => App.select({ type: "node", id: "room:" + room.room }, { switchView: true }))), articleFold("收集包"), sourceLine("收集包"));
   }
 
   function markNode(n, done) {
