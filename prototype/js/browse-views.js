@@ -45,12 +45,13 @@
   function fish(rows) {
     return [...groups(rows, r => r.type)].map(([type, list]) => section(({ rod: t("鱼类图鉴"), crab: t("蟹笼收获"), forage: t("海滩采集") })[type], "fish-collection", list.map(row => {
       const f = A.fishByName.get(row.key);
-      const time = A.EN ? (f.T?.length ? A.timeSpans(f.T) : A.fishText(f).tt) : f.tt;
+      const time = A.fishTimeText(f);
+      const water = { ocean: t("蟹笼放在海水里"), fresh: t("蟹笼放在淡水里") }[f.cw];
       return refButton(row, "fish-specimen", el("span", { class: "fish-art" }, img(row.icon)),
         el("strong", null, row.label), seasons(row.seasons),
         note(type === "forage" ? t("海滩采集，不用钓竿") : safe(time || (f.crab ? t("放置蟹笼后收取") : t("时间见详情")))),
-        note(A.isSubmarineFish(f) ? t("夜市钓鱼潜艇 · 冬季 15–17 日")
-          : A.fishLocations(f).filter(name => A.spoilers.textAllowed(name) && A.spoilers.textAllowed(N(name))).map(N).join(" · ") || t("水域见详情")));
+        note(A.isSubmarineFish(f) ? t("夜市钓鱼潜艇 · 冬季 15–17 日") : water
+          || A.fishLocations(f).filter(name => A.spoilers.textAllowed(name) && A.spoilers.textAllowed(N(name))).map(A.habitatName).join(" · ") || t("水域见详情")));
     }), t("选择一条鱼，查看水域、天气和钓鱼条件。")));
   }
 

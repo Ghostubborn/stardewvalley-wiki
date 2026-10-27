@@ -547,6 +547,18 @@
     };
     section.addEventListener("pointerup", end);
     section.addEventListener("pointercancel", () => { drag = null; section.classList.remove("dragging"); });
+    // 用 Tab 逐个切换节点时，舞台靠 transform 平移，浏览器不会把焦点节点滚进视野；这里把视野移过去。
+    section.addEventListener("focusin", (e) => {
+      const node = e.target.closest?.(".node");
+      if (!node) return;
+      section.scrollLeft = 0; section.scrollTop = 0;
+      const box = section.getBoundingClientRect(), r = node.getBoundingClientRect(), margin = 24;
+      const left = Math.max(box.left, (App.treeInsetLeft || 0) + 8) + margin, right = box.right - margin;
+      const top = box.top + margin, bottom = box.bottom - margin;
+      const dx = r.left < left ? left - r.left : r.right > right ? right - r.right : 0;
+      const dy = r.top < top ? top - r.top : r.bottom > bottom ? bottom - r.bottom : 0;
+      if (dx || dy) animateTo(view.x + dx, view.y + dy, view.z);
+    });
     section.addEventListener("wheel", (e) => {
       e.preventDefault();
       if (e.ctrlKey || e.metaKey) {

@@ -17,6 +17,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 from sdvdata import parse as P  # noqa: E402
+from sdvdata import sources as SRC  # noqa: E402
 from sdvdata import wikitext as wt  # noqa: E402
 from sdvdata.catalog import Catalog  # noqa: E402
 from sdvdata.images import ImageResolver  # noqa: E402
@@ -57,8 +58,19 @@ KIND_ZH = {
     "festival": "节日", "achievement": "成就", "skill": "技能", "disambiguation": "消歧义",
     "guide": "玩法", "article": "条目",
 }
-# 信息框中按条列出的来源：来源、远古斑点、怪物掉落、其他来源、捐赠奖励（古物信息框的 as/md/os/dr）。
-LIST_FIELDS = ("source", "as", "md", "os", "dr")
+# 绑定物品的条目类型；地点、怪物和分类页不能绑定到碰巧同名的家具/物品。
+ITEM_KINDS = {"item", "furniture", "hat", "cooking", "fish", "seed", "weapon", "clothing", "mineral", "crop", "artifact", "tool"}
+# 带口味的工匠物品（“(O)342/16” = 用野山葵做的腌菜）：组合 ID 的前半是产品系列，对应的中文条目写着设备、材料数量和耗时。
+# 398 在组合 ID 里表示果干（单独的 (O)398 是葡萄），见 sdvdata/images.py。
+FLAVOR_PAGES = {
+    "(O)342": "果酱和腌菜", "(O)344": "果酱和腌菜", "(O)348": "果酒", "(O)350": "果汁", "(O)398": "果干",
+    "(O)DriedMushrooms": "蘑菇干", "(O)447": "腌鱼籽", "(O)SmokedFish": "熏鱼", "(O)SpecificBait": "针对性鱼饵",
+    "(O)340": "蜂蜜", "(O)812": "鱼籽", "(O)79": "秘密纸条", "(O)842": "日记残页",
+}
+# 果酱、腌菜合写在一个没有信息框的条目里，设备是罐头瓶，耗时在正文表格。
+JAR_FAMILIES = {"(O)342": "腌菜", "(O)344": "果酱"}
+# 放进设备加工、原料会被用掉的系列；蜂蜜（附近的花）、鱼籽（鱼塘）和纸条不是加工品。
+PROCESSED_FAMILIES = {"(O)342", "(O)344", "(O)348", "(O)350", "(O)398", "(O)DriedMushrooms", "(O)447", "(O)SmokedFish", "(O)SpecificBait"}
 
 
 def load_pages(path):
@@ -198,7 +210,7 @@ def make_renderer(catalog, npc_zh, bundles):
         "!": lambda a: "|", "quote": lambda a: a.get("1", ""), "squote": lambda a: a.get("1", ""),
         "key": lambda a: a.get("1", ""), "nowrap": lambda a: a.get("1", ""), "no wrap": lambda a: a.get("1", ""),
         "tooltip": lambda a: a.get("1", ""), "color": lambda a: a.get("2", ""),
-        "cookingchannel": lambda a: f"烹饪频道（{a.get('1', '')}）",
+        "cookingchannel": lambda a: f"烹饪频道（{a.get('1', '')}）", "duration": lambda a: a.get("1", ""),
     }
     renderer = wt.Renderer(handlers)
     base = renderer.render
@@ -292,11 +304,12 @@ class Builder:
             if not kind:
                 kind = next((k for c, k in CATEGORY_KIND if c in cats), "article")
             item = self._page_item(title, en, fields)
-            if kind not in {"item", "furniture", "hat", "cooking", "fish", "seed", "weapon", "clothing", "mineral", "crop", "artifact", "tool"}:
-                item = None  # 地点、怪物和分类页不能绑定到碰巧同名的家具/物品。
+            if kind not in ITEM_KINDS:
+                item = None
             body = text[info[4]:] if info else text
             sections = wt.sections(body)
-            lead = self.plain(sections[0]["body"]) if sections else ""
+            # 居民、墙纸等条目以引言（开发者语录或游戏内说明）开头；摘要取条目自己的导言。
+            lead = self.plain(re.sub(r"^\s*\{\{\s*[Qq]uote\b(?:[^{}]|\{\{[^{}]*\}\})*\}\}", "", sections[0]["body"])) if sections else ""
             summary = _first_paragraph(lead)
             image = self.image(fields.get("image"), item and item.get("en"), en)
             record = {
@@ -307,7 +320,10 @@ class Builder:
                 "links": [self.resolve(t) for t in wt.page_links(body)],
                 "item_id": item and item.get("id"), "image": image,
                 "fields": {k: self.plain(v) for k, v in fields.items()},
-                "lists": {k: entries for k in LIST_FIELDS if fields.get(k) and (entries := P.list_entries(fields[k], self.plain))},
+                # 逐条来源：家具、帽子按信息框模板的行，其余取来源/远古斑点/怪物掉落/其他来源；古物另有捐赠奖励。
+                "src": P.infobox_sources(kind, fields, self.plain, "zh"),
+                "dr": P.list_entries(fields.get("dr", ""), self.plain),
+                "obtain": SRC.obtain_section(sections, self.plain),
                 "map_pins": self._map_pins(text),
                 "url": zh_url(title), "en_url": en_url(en) if en else None,
                 "rev_id": r["rev_id"], "updated": r["timestamp"], "bytes": len(text),
@@ -367,9 +383,54 @@ class Builder:
                 for npc in npcs:
                     npc_tastes[npc][taste].append(item["id"])
         self.image_resolver.resolve_items(items, self.pages, self.en_redirects)
+        self._fallback_pages(items)
+        self._collection_items(items)
+        for item in items:
+            # 矿井里的石头、杂草等是地图物件，不是可放进背包的物品；没有条目且没译名的是游戏内部占位。
+            item["internal"] = (item.get("obj_type") == "Litter" or item["zh"] == "???"
+                                or (not item["page"] and (item["type"] == "BC" or item["zh"].isascii())))
         self.items = {i["id"]: i for i in items}
         self.npc_tastes = npc_tastes
         return items
+
+    def _fallback_pages(self, items):
+        """没有中文条目的物品：英文名重定向到的英文条目若有中文对应、且是物品类条目，就用它（如 Copper Pan → 淘盘）。"""
+        zh_by_en = {p["en"]: p["title"] for p in self.pages.values() if p["en"]}
+        for item in items:
+            if item["page"]:
+                continue
+            family = FLAVOR_PAGES.get(item.get("made_by"))
+            if family in self.pages:
+                item["page"] = family
+                continue
+            target = item["en"] and self.en_redirects.get(norm_title(item["en"]))
+            title = zh_by_en.get(target) if target else None
+            if title and self.pages[title]["kind"] in ITEM_KINDS:
+                item["page"] = title
+
+    def _collection_items(self, items):
+        """墙纸、地板、纸条和通用上衣同名不同款：按 Wiki 的图标编号区分，并从合集页取逐件来源。"""
+        pages = {k: (self.zh.get(v) or {}).get("text", "") for k, v in SRC.PAGES["zh"].items()}
+        walls = SRC.wallpaper(pages["wallpaper"], self.plain)
+        floors = SRC.flooring(pages["flooring"], self.plain)
+        self.clothing = SRC.match_clothing(SRC.tailoring(pages["tailoring"], self.plain), items, lambda i: i["zh"])
+        quests = SRC.quest_items(pages["quests"], self.plain)
+        for item in items:
+            number = None
+            if item["type"] in ("WP", "FL"):
+                number = SRC.icon_number(item.get("image"))
+                item["src"] = (walls if item["type"] == "WP" else floors).get(number) or []
+            elif item.get("made_by") in ("(O)79", "(O)842"):
+                number = item["id"].split("/", 1)[1]
+            elif item["type"] in ("S", "P"):
+                row = self.clothing.get(item["id"])
+                item["src"] = row["notes"] if row else []
+                if item["en"] == "Shirt" and (m := re.search(r"Shirt(\d+)", item.get("image") or "")):
+                    number = int(m.group(1))
+            if item["zh"] in quests:
+                item["src"] = quests[item["zh"]]
+            if number is not None:
+                item["zh"], item["en"] = f"{item['zh']} #{number}", f"{item['en']} #{number}"
 
     # —— 关系：配方 ——
     def build_recipes(self):
@@ -392,7 +453,73 @@ class Builder:
                     self.issues["recipe_without_parsed_ingredients"] += 1
                     continue
                 self._add_infobox_recipe(recipes, page, info, fields, ingredients, alt_index)
+        recipes += self._tailoring_table_recipes()
+        recipes += self._flavor_recipes()
         return recipes
+
+    def _tailoring_table_recipes(self):
+        """《裁缝》上衣、下装表：布料加“配方”列里任一物品；没有独立条目的服装只有这里的配方。"""
+        sewing = self.catalog.resolve("Sewing Machine") or {}
+        out = []
+        for item_id, row in self.clothing.items():
+            item = self.items[item_id]
+            for index, ref in enumerate(P.item_refs(row["recipe"], self.catalog)):
+                # “{{name|Honey|任意}}”：任意一种蜂蜜都行，没有单一物品 ID，按类别名保留。
+                if not ref.get("id") and ref.get("note") != "任意":
+                    continue
+                out.append({
+                    "id": f"recipe:{item['id']}:tailoring" + (f"#{index + 1}" if index else ""), "kind": "tailoring",
+                    "output": {"page": item["page"], "id": item["id"], "zh": item["zh"], "qty": 1},
+                    "inputs": [{**ref, "qty": 1}],
+                    "stations": [{"id": sewing.get("id"), "en": sewing.get("en"), "zh": sewing.get("zh") or "缝纫机", "qty": None, "note": None, "link": None}],
+                    "time": None, "unlock_text": None, "unlock": [], "source": zh_url("裁缝"),
+                })
+        return out
+
+    def _flavor_recipes(self):
+        """带口味的工匠物品：按产品系列条目的设备、材料数量与耗时，换成具体原料。"""
+        families = {}
+        for family in PROCESSED_FAMILIES:
+            title = FLAVOR_PAGES[family]
+            raw = self.zh.get(title, {}).get("text", "")
+            info = wt.first_template(raw, "Infobox")
+            fields = info[1] if info else {}
+            if family in JAR_FAMILIES:
+                time = None
+                for table in wt.wikitables(raw):
+                    header = [self.plain(c["text"]) for c in table["rows"][0]] if table["rows"] else []
+                    if "时间" in header:
+                        col = header.index("时间")
+                        time = next((self.plain(r[col]["text"]) for r in table["rows"][1:]
+                                     if len(r) > col and self.plain(r[1]["text"]) == JAR_FAMILIES[family]), None)
+                stations = P.item_refs("{{name|Preserves Jar}}", self.catalog)
+                families[family] = {"stations": stations, "qty": 1, "extra": [], "time": time, "title": title}
+            elif fields.get("craftingstation"):
+                qty = re.search(r"[（(](\d+)[）)]", self.plain(fields.get("ingredients", "")))
+                extra = [x for x in P.item_refs(fields.get("ingredients", ""), self.catalog) if x.get("id") != "(O)812"]
+                families[family] = {"stations": P.item_refs(fields["craftingstation"], self.catalog),
+                                    "qty": int(qty.group(1)) if qty and not extra else 1, "extra": extra,
+                                    "time": self.plain(fields.get("crafttime", "")) or None, "title": title}
+        out = []
+        for item in self.items.values():
+            family = families.get(item.get("made_by"))
+            source = self.items.get(item.get("flavor_of"))
+            if not family or not source:
+                continue
+            # 腌鱼籽的原料是同种鱼的鱼籽，不是鱼本身。
+            base_id = f"(O)812/{source['id'].split(')', 1)[1]}" if item["made_by"] == "(O)447" else source["id"]
+            base = self.items.get(base_id)
+            if not base:
+                continue
+            inputs = [{"id": base["id"], "en": base["en"], "zh": base["zh"], "qty": family["qty"], "note": None, "link": None}]
+            out.append({
+                "id": f"recipe:{item['id']}:flavor", "kind": "processing",
+                "output": {"page": family["title"], "id": item["id"], "zh": item["zh"], "qty": 1},
+                "inputs": inputs + [{**x, "qty": x.get("qty") or 1} for x in family["extra"]],
+                "stations": family["stations"], "time": family["time"], "unlock_text": None, "unlock": [],
+                "source": zh_url(family["title"]),
+            })
+        return out
 
     def _add_infobox_recipe(self, recipes, page, info, fields, ingredients, alt_index):
         stations = P.item_refs(fields.get("craftingstation", ""), self.catalog)
@@ -541,27 +668,60 @@ class Builder:
         return chains
 
     # —— 鱼 ——
+    def _linked_rows(self, title, section_titles):
+        """某条目指定章节表格里的 {链接条目: 第三列文本}（夜市潜艇的出现率、蟹笼的水体）。"""
+        out = {}
+        for sec in wt.sections(self.zh.get(title, {}).get("text", "")):
+            if (sec["title"] or "").strip("= ").strip() not in section_titles:
+                continue
+            for table in wt.wikitables(sec["body"]):
+                for row in table["rows"][1:]:
+                    links = wt.page_links(row[1]["text"]) if len(row) > 1 else []
+                    if links:
+                        out.setdefault(self.resolve(links[0]), self.plain(row[2]["text"]) if len(row) > 2 else None)
+        return out
+
     def build_fish(self):
         fish = []
-        for p in self.pages.values():
-            if p["kind"] != "fish":
-                continue
+        # 归档《夜市》“钓鱼潜艇”表：除三种潜艇专属鱼，海参、大海参、章鱼也会在艇内上钩。
+        submarine = self._linked_rows("夜市", ("钓鱼潜艇",))
+        # 归档《蟹笼》“海洋”“淡水”两节分别列出各水体的蟹笼鱼类。
+        ocean, fresh = self._linked_rows("蟹笼", ("海洋",)), self._linked_rows("蟹笼", ("淡水",))
+        pages = [p for p in self.pages.values() if p["kind"] == "fish"]
+        bullets = {}
+        for p in pages:
+            text = self.zh_raw(p["title"])["text"]
+            info = wt.first_template(text, "Infobox")
+            lead = wt.sections(text[info[4]:] if info else text)[0]["body"]
+            # 传说鱼导言列出钓起它的特殊要求（站位、抛竿水域）；齐先生任务的同族鱼沿用原版的要求。
+            if "传奇鱼" in "".join(p["categories"]):
+                bullets[p["title"]] = (P.lead_bullets(lead, self.plain), [self.resolve(t) for t in wt.page_links(lead)])
+        for p in pages:
             info = wt.first_template(self.zh_raw(p["title"])["text"], "Infobox")[1]
             loc_raw = info.get("location", "")
+            own, links = bullets.get(p["title"], ([], []))
+            parent = None if own else next((t for t in links if t != p["title"] and bullets.get(t, ([],))[0]), None)
             fish.append({
                 "page": p["title"], "id": p["item_id"], "en": p["en"], "image": p["image"],
                 "locations": [self.resolve(t) for t in wt.page_links(loc_raw)],
                 "location_text": self.plain(loc_raw) or None,
                 "seasons": P.seasons(info.get("season", "")),
                 "season_text": self.plain(info.get("season", "")) or None,
-                "times": P.time_ranges(self.plain(info.get("time", ""))),
+                "times": P.time_ranges(self.plain(P.regular_part(info.get("time", ""), self.plain, "time"))),
                 "time_text": self.plain(info.get("time", "")) or None,
-                "weather": P.weather(info.get("weather", "")),
+                "weather": P.weather(P.regular_part(info.get("weather", ""), self.plain, "weather")),
                 "weather_text": self.plain(info.get("weather", "")) or None,
                 "difficulty": _int(info.get("difficulty")), "behavior": info.get("behavior") or None,
                 "size": info.get("size") or None, "price": _int(self.plain(info.get("price", ""))),
                 "categories": p["categories"], "map_pins": p["map_pins"],
                 "source_text": self.plain(info.get("source", "")) or None,
+                # 时段、天气按条拆开：鳟鱼大赛、鱿鱼节、瀑布等例外是单独一条，不能和常规时段连成一句。
+                "time_list": P.list_entries(info.get("time", ""), self.plain),
+                "weather_list": P.list_entries(info.get("weather", ""), self.plain),
+                "requirements": own or (bullets[parent][0] if parent else []),
+                "requirements_from": parent,
+                "submarine": submarine.get(p["title"]) if p["title"] in submarine else None,
+                "crab_water": "ocean" if p["title"] in ocean else "fresh" if p["title"] in fresh else None,
             })
         return fish
 
@@ -864,25 +1024,54 @@ class Builder:
                     header = [self.plain(c["text"]) for c in rows[0] if c["header"]]
                     if not header or not any(re.search(r"价格|售价|花费|费用|单价|代价", h) for h in header):
                         continue
+                    # 同时列出购买价格和出售价格（哈维的诊所）时，取购买价格那一列；“其他来源”列另存，不当作购买备注。
+                    buy_col = next((i for i, h in enumerate(header) if "购买价格" in h), None)
+                    other_col = next((i for i, h in enumerate(header) if h == "其他来源"), None)
+                    plain_cols = {i for i, h in enumerate(header) if re.fullmatch(r"描述|效果|图像|图片", h)}
                     for row in rows[1:]:
                         cells = [c["text"] for c in row]
-                        name_idx = next((i for i, c in enumerate(cells[1:], 1) if wt.page_links(c)), None)
+                        # 名称列通常是链接；也有直接写物品名的（哈维的诊所），这时按名称认物品。
+                        name_idx = next((i for i, c in enumerate(cells[1:], 1)
+                                         if wt.page_links(c) or (self.catalog.resolve(self.plain(c)) or {}).get("id")), None)
                         if name_idx is None:
                             continue
                         price_idx = next((i for i in range(len(cells) - 1, name_idx, -1)
                                           if re.search(r"\{\{\s*[Pp]rice|\{\{\s*tprice|\{\{\s*[Nn]ame", cells[i])), None)
+                        if buy_col is not None and buy_col < len(cells) and re.search(r"\{\{\s*[Pp]rice", cells[buy_col]):
+                            price_idx = buy_col
+                        # 按年份分列的价格（铁匠铺矿石：第 1 年 / 第 2 年起）：取第 1 年，其余列带表头写进备注。
+                        yearly = [i for i in range(name_idx + 1, len(cells)) if re.search(r"\{\{\s*[Pp]rice", cells[i])]
+                        if len(yearly) > 1 and all(i < len(header) and re.search(r"年|Year", header[i]) for i in yearly):
+                            price_idx = yearly[0]
+                        else:
+                            yearly = []
                         if price_idx is None:
                             continue
                         refs = P.item_refs(cells[name_idx], self.catalog)
-                        name = refs[0]["zh"] if refs else self.resolve(wt.page_links(cells[name_idx])[0])
+                        links = wt.page_links(cells[name_idx])
+                        name = refs[0]["zh"] if refs else self.resolve(links[0]) if links else self.plain(cells[name_idx])
                         hit = self.catalog.resolve(name) or {}
                         amount, unit = P.price(cells[price_idx])
                         barter = P.item_refs(cells[price_idx], self.catalog)
-                        notes = [self.plain(c) for i, c in enumerate(cells) if i not in (name_idx, price_idx, 0) and self.plain(c)]
+                        # 购买价格之后的出售价格只是回收价，不作购买备注。
+                        skip = {name_idx, price_idx, 0, other_col} | ({price_idx + 1} | plain_cols if price_idx == buy_col else set())
+                        # “描述”列开头是物品说明（详情顶部已显示），只保留 Wiki 附加的说明（如“只能在第二年后购买”）。
+                        item_id = (refs[0]["id"] if refs else None) or hit.get("id")
+                        own_desc = self.plain(self.catalog.description(item_id) or "") if item_id else ""
+                        notes = []
+                        for i, c in enumerate(cells):
+                            text = self.plain(c) if i not in skip else ""
+                            if text and i in yearly[1:]:
+                                text = re.sub(r"\s+", " ", header[i]) + "：" + text
+                            if own_desc and header[i:i + 1] == ["描述"]:
+                                text = text.replace(own_desc, "", 1).strip()
+                            if text:
+                                notes.append(text)
+                        other = P.list_entries(cells[other_col], self.plain) if other_col is not None and other_col < len(cells) else []
                         stock.append({"zh": name, "id": (refs[0]["id"] if refs else None) or hit.get("id"),
                                       "price": amount, "currency": unit, "barter": barter,
                                       "section": _clean_heading(sec["title"]) if sec["title"] else None,
-                                      "notes": notes[-2:] if notes else []})
+                                      "notes": notes[-2:] if notes else [], "other": other})
             info = wt.first_template(raw, "Infobox")
             fields = info[1] if info else {}
             shops.append({"page": p["title"], "en": p["en"], "open_hours": self.plain(fields.get("openhours", "")) or None,
@@ -907,7 +1096,8 @@ class Builder:
 def _first_paragraph(text):
     for para in text.split("\n"):
         para = para.strip()
-        if len(para) > 8 and not para.startswith(("{|", "|", "!")):
+        # “:关于家具，请见……”一类缩进提示不是导言。
+        if len(para) > 8 and not para.startswith(("{|", "|", "!", ":")):
             return para[:400]
     return text[:400] if text else ""
 

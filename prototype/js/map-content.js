@@ -62,7 +62,7 @@
         add({ type: "fish", id: f.p }, ...pin, {
           kind: "fish", label: N(f.p), icon: f.i, status: c.ok,
           // 夜市鱼标在沙滩上，副标题先说明要上潜艇，避免误以为在普通海边就能钓。
-          subtitle: safe([A.isSubmarineFish(f) ? t("夜市钓鱼潜艇 · 冬季 15–17 日") : text.st, A.EN && f.T?.length ? A.timeSpans(f.T) : text.tt, text.wt && (f.W.includes("any") ? t("任意天气") : A.WEATHER[f.W[0]]?.zh || text.wt)].filter(Boolean).join(" · ").replace(/\n/g, " ")),
+          subtitle: safe([A.isSubmarineFish(f) ? t("夜市钓鱼潜艇 · 冬季 15–17 日") : text.st, A.fishTimeText(f), text.wt && A.fishWeatherText(f)].filter(Boolean).join(" · ").replace(/\n/g, " ")),
         });
       }
     }

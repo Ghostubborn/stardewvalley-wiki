@@ -36,7 +36,8 @@
     if (id === "farming") rows = D.seeds.map(s => ({ ref: { type: "item", id: s.id }, key: s.p, label: A.itemName(A.itemInfo(s.id)) || N(s.p), en: D.items[s.id]?.e, icon: s.crop?.i || s.i,
       sub: safe([s.crop && A.nameOf(s.crop.id || s.crop.z), s.g ? t("{n} 天成熟", { n: s.g }) : t("生长条件见详情"), s.rg ? t("每 {n} 天再收获", { n: s.rg }) : null].filter(Boolean).join(" · ")),
       seasons: s.S, type: !s.g || !s.crop ? "special" : s.rg ? "regrow" : "single", matchNow: A.seedCheck(s)?.ok }));
-    if (id === "items") rows = Object.entries(D.items).map(([itemId, it]) => {
+    // 矿井石头、杂草等地图物件和游戏内部占位（x）不是可收集的物品，不列入目录。
+    if (id === "items") rows = Object.entries(D.items).filter(([, it]) => !it.x).map(([itemId, it]) => {
       const p = D.pages[it.pg], recipes = A.recipesByOut.get(itemId) || [];
       const type = p?.k === "cooking" || it.c === "料理" ? "cooking"
         : ["furniture", "clothing", "hat"].includes(p?.k) || ["家具", "上衣", "裤子", "帽子", "壁纸", "地板"].includes(it.c) ? "decor"

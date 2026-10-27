@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SDV Pixel";
-  src: url("assets/fonts/pixel-subset.woff2?v=87fc65b65f00") format("woff2");
+  src: url("assets/fonts/pixel-subset.woff2?v=9b92728f24d2") format("woff2");
   font-display: swap;
 }
 
@@ -370,6 +370,9 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .fx-toggle { padding: 8px 12px; display: flex; align-items: center; background: var(--panel); }
 .seg-map button { min-width: 64px; }
 .zoom { display: flex; padding: 8px; gap: 4px; background: var(--panel); }
+/* 触屏没有滚轮和悬停提示：说明拖动与双指缩放。 */
+.map-hint { display: none; padding: 8px 10px; background: var(--panel); font-size: 13px; align-self: center; }
+@media (pointer: coarse) { .map-hint { display: block; } }
 .zoom button { width: 34px; height: 34px; border: 2px solid var(--bark); background: var(--parchment-hi); font: 16px/1 var(--pixel); }
 
 /* —— 工具栏 —— */

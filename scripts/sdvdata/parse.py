@@ -28,13 +28,11 @@ CURRENCIES = {"walnut": "金色核桃", "qi": "齐币", "gem": "齐钻", "token"
 
 _ENTRY_SEP = "\u0003"
 # 信息框里的来源清单：列表项、换行、“•”分隔，以及相邻的独立 {{Name}}（class=inline 的嵌在句子里，不拆）。
-_LIST_BREAK = re.compile(r"</?(?:li|ul|ol)\b[^>]*>|<br\s*/?>|</?p\b[^>]*>|\s+•\s+", re.I)
+_LIST_BREAK = re.compile(r"</?(?:li|ul|ol)\b[^>]*>|</?br\s*/?>|</?p\b[^>]*>|\s+•\s+", re.I)
 
 
-def list_entries(raw, render):
-    """把信息框的来源类字段拆成逐条文本，render 为对应语言的 wikitext 渲染函数。"""
-    if not raw or not raw.strip():
-        return []
+def _raw_entries(raw):
+    """按列表项、换行、“•”和独立 {{Name}} 切分，返回未渲染的各段（含分隔符替换后的原文）。"""
     pieces, last = [], 0
     for tpl, start, end in wt.iter_templates(raw):
         name, args = wt.parse_template(tpl)
@@ -44,13 +42,90 @@ def list_entries(raw, render):
         last = end
     pieces.append(raw[last:])
     text = _LIST_BREAK.sub(_ENTRY_SEP, "".join(pieces))
-    text = re.sub(r"(?m)^\s*[*#]+\s*", _ENTRY_SEP, text).replace("\n", _ENTRY_SEP)
+    return re.sub(r"(?m)^\s*[*#]+\s*", _ENTRY_SEP, text).replace("\n", _ENTRY_SEP)
+
+
+def list_entries(raw, render):
+    """把信息框的来源类字段拆成逐条文本，render 为对应语言的 wikitext 渲染函数。"""
+    if not raw or not raw.strip():
+        return []
     entries = []
-    for part in render(text).split(_ENTRY_SEP):
+    for part in render(_raw_entries(raw)).split(_ENTRY_SEP):
         part = re.sub(r"\s+", " ", part).strip(" ,，、;；")
         if part and part.upper() != "N/A" and part not in entries:
             entries.append(part)
     return entries
+
+
+# 鱼的时段、天气字段里，常规条件之外还会单列例外（“鳟鱼大赛 任意天气”“瀑布 任意时间”）。
+_PLAIN = {
+    "time": re.compile(r"上午|下午|晚上|凌晨|中午|早上|午夜|至|到|全天|任意时间|任何时间|任何|任意|随时|anytime|any time|all day|[ap]\.?m\.?|\d|[:：–\-~\s.()（）]", re.I),
+    "weather": re.compile(r"晴天|雨天|暴风雨|下雪|刮风|任意天气|任意|任何|晴|雨|雪|风|sunny|sun|rainy|rain|storms?|snow|windy|wind|any|both|\bor\b|\band\b|[•,，、\s]", re.I),
+}
+
+
+def regular_part(raw, render, kind):
+    """只保留常规条件那几段原文，例外条目不参与结构化解析（否则“任意天气”会盖掉“晴天”）。"""
+    if not raw or not raw.strip():
+        return raw or ""
+    pieces = [p for p in _raw_entries(raw).split(_ENTRY_SEP) if p.strip()]
+    plain = [p for p in pieces if not _PLAIN[kind].sub("", render(p)).strip()]
+    return "\n".join(plain) if plain and len(plain) < len(pieces) else raw
+
+
+def lead_bullets(lead, render):
+    """导言里的列表项（传说鱼的“特殊要求”），逐条渲染；指向 Wiki 配图的括注（“位置如下图……所示”）不单独成立，去掉。"""
+    entries = list_entries("\n".join(line for line in lead.split("\n") if line.lstrip().startswith("*")), render)
+    return [re.sub(r"\s*[（(][^（）()]*(?:下图|image below|map below)[^（）()]*[）)]", "", e, flags=re.I).strip() for e in entries]
+
+
+# 家具、帽子的信息框按模板逐行列出来源（木匠的商店、各种目录、成就……），字段本身只是 y 或价格。
+# 行名取自两种语言各自的 Template:Infobox furniture / Infobox mousehat。
+SOURCE_ROWS = {
+    "zh": {"cs": "木匠的商店", "tc": "旅行货车", "qi": "赌场", "fc": "家具目录", "joja": "Joja家具目录",
+           "junimo": "祝尼魔目录", "retro": "复古目录", "trash": "垃圾目录", "wizard": "法师目录", "mu": "向博物馆捐赠",
+           "house": "废弃的屋子", "achievement": "成就", "requires": "要求", "price": "购买价格",
+           "free": "免费", "tcart": "250–2,500金", "sep": "：", "paren": "（{}）"},
+    "en": {"cs": "Carpenter's Shop", "tc": "Traveling Cart", "qi": "Casino", "fc": "Furniture Catalogue",
+           "joja": "Joja Furniture Catalogue", "junimo": "Junimo Catalogue", "retro": "Retro Catalogue",
+           "trash": "Trash Catalogue", "wizard": "Wizard Catalogue", "mu": "Museum Donation",
+           "house": "Abandoned House", "achievement": "Achievement", "requires": "Requirement", "price": "Purchase Price",
+           "free": "free", "tcart": "250–2,500g", "sep": ": ", "paren": " ({})"},
+}
+CATALOGUES = ("fc", "joja", "junimo", "retro", "trash", "wizard")
+
+
+def infobox_sources(kind, fields, render, lang):
+    """信息框里的来源 → [[组键, [逐条文本]]]。组键：source 来源、as 远古斑点、md 怪物掉落、os 其他来源。"""
+    row = SOURCE_ROWS[lang]
+    clean = lambda raw: re.sub(r"\s+", " ", render(raw)).strip()
+    if kind == "furniture":
+        entries = []
+        if fields.get("cs", "").strip():
+            entries.append(row["cs"] + row["sep"] + clean("{{price|%s}}" % fields["cs"].strip()))
+        if fields.get("tc", "").strip().lower() == "y":
+            entries.append(row["tc"] + row["sep"] + row["tcart"])
+        if fields.get("qi", "").strip():
+            entries.append(row["qi"] + row["sep"] + clean("{{price|%s|Qi}}" % fields["qi"].strip()))
+        entries += [row[k] + row["paren"].format(row["free"]) for k in CATALOGUES if fields.get(k, "").strip().lower() == "y"]
+        if fields.get("mu", "").strip():
+            entries.append(row["mu"] + row["sep"] + clean(fields["mu"]))
+        other = list_entries(fields.get("os", ""), render)
+        if fields.get("showheader", "").strip().lower() == "n":
+            entries, other = entries + other, []
+        return [[k, v] for k, v in (("source", entries), ("os", other)) if v]
+    if kind == "hat":
+        entries = list_entries(fields.get("source", ""), render)
+        if not entries and fields.get("achievement", "").strip():
+            ad = clean(fields.get("ad", ""))
+            entries = [row["house"], row["achievement"] + row["sep"] + clean(fields["achievement"]) + (row["paren"].format(ad) if ad else "")]
+        # 裁缝配方（布料 + 材料）另有结构化的裁缝途径，不在这里重复。
+        for key in ("requires", "price"):
+            if fields.get(key, "").strip():
+                entries.append(row[key] + row["sep"] + clean(fields[key]))
+        return [["source", entries]] if entries else []
+    groups = [[k, entries] for k in ("as", "md", "os", "source") if fields.get(k) and (entries := list_entries(fields[k], render))]
+    return groups
 
 
 def item_refs(text, catalog):

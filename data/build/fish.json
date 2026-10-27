@@ -41,7 +41,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "任何"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": "5%",
+  "crab_water": null
  },
  {
   "page": "彩虹贝壳",
@@ -69,7 +79,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "采集 • 虹鳟鱼鱼塘 • 乌龟"
+  "source_text": "采集 • 虹鳟鱼鱼塘 • 乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "河鲈",
@@ -133,7 +149,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "沙鱼",
@@ -178,7 +204,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上8:00"
+  ],
+  "weather_list": [
+   "any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "河豚",
@@ -239,7 +275,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "中午12:00至下午4:00"
+  ],
+  "weather_list": [
+   "sun"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鳀鱼",
@@ -283,7 +329,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "随时"
+  ],
+  "weather_list": [
+   "any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "金枪鱼",
@@ -334,7 +390,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "沙丁鱼",
@@ -381,7 +447,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "螃蟹",
@@ -411,7 +487,13 @@
    "冬季的鱼"
   ],
   "map_pins": [],
-  "source_text": "*蟹笼：海洋\n*怪物掉落物：岩石蟹 • 熔岩蟹\n*乌龟"
+  "source_text": "*蟹笼：海洋\n*怪物掉落物：岩石蟹 • 熔岩蟹\n*乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "ocean"
  },
  {
   "page": "传说之鱼",
@@ -454,7 +536,22 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "随时"
+  ],
+  "weather_list": [
+   "Rain"
+  ],
+  "requirements": [
+   "钓鱼等级达到10（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "浮标必须位于钓鱼区为5的水中，即它必须在各个方向上与岸边（包括桥梁）至少相距5格。",
+   "如果浮标抛进了钓鱼区为3的钓鱼气泡中，依然可以钓到传说之鱼。",
+   "正如《传奇之鱼的秘密》中所建议的那样，山间湖泊中的木桩区域满足此要求。当然，湖中还有其他地方也可以。"
+  ],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "珊瑚",
@@ -480,7 +577,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "采集 • 鱼塘 • 乌龟"
+  "source_text": "采集 • 鱼塘 • 乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鲷鱼",
@@ -529,7 +632,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "下午6:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鲶鱼",
@@ -590,7 +703,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至凌晨12:00"
+  ],
+  "weather_list": [
+   "rain"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "海胆",
@@ -617,7 +740,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "采集 • 鱼塘 • 乌龟"
+  "source_text": "采集 • 鱼塘 • 乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "大嘴鲈鱼",
@@ -663,7 +792,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鹦鹉螺",
@@ -691,7 +830,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "采集 • 冬日星盛宴 • 鱼塘 • 乌龟"
+  "source_text": "采集 • 冬日星盛宴 • 鱼塘 • 乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "蛤",
@@ -722,7 +867,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "* 蟹笼：海洋\n*采集：沙滩\n*采集：危险矿井\n*乌龟"
+  "source_text": "* 蟹笼：海洋\n*采集：沙滩\n*采集：危险矿井\n*乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "ocean"
  },
  {
   "page": "鸟蛤",
@@ -753,7 +904,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "*蟹笼：海洋\n*采集：沙滩\n*乌龟"
+  "source_text": "*蟹笼：海洋\n*采集：沙滩\n*乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "ocean"
  },
  {
   "page": "蚌",
@@ -784,7 +941,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "*蟹笼：海洋\n*采集：沙滩\n*蚌矿\n*乌龟"
+  "source_text": "*蟹笼：海洋\n*采集：沙滩\n*蚌矿\n*乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "ocean"
  },
  {
   "page": "牡蛎",
@@ -815,7 +978,13 @@
    "沙滩采集"
   ],
   "map_pins": [],
-  "source_text": "* 蟹笼: 海洋\n* 采集: 沙滩"
+  "source_text": "* 蟹笼: 海洋\n* 采集: 沙滩",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "ocean"
  },
  {
   "page": "小嘴鲈鱼",
@@ -867,7 +1036,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "虹鳟鱼",
@@ -890,7 +1069,6 @@
   ],
   "time_text": "上午6:00至晚上7:00鳟鱼大赛 全天",
   "weather": [
-   "any",
    "sun"
   ],
   "weather_text": "晴天鳟鱼大赛 任意天气",
@@ -923,7 +1101,19 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00",
+   "鳟鱼大赛 全天"
+  ],
+  "weather_list": [
+   "晴天",
+   "鳟鱼大赛 任意天气"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鮟鱇鱼",
@@ -966,7 +1156,21 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "任何"
+  ],
+  "requirements": [
+   "钓鱼等级达到3（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "玩家必须站在鹈鹕镇上河流的最北端（地图边缘15格以内）。这个范围包括一座独木桥、木桥以北的所有河岸，以及木桥向南3格范围内的河岸。",
+   "没有钓鱼区的限制，只要玩家站在上述范围内，钓鱼浮标可以在河流中的任意位置。"
+  ],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鲢鱼",
@@ -1019,7 +1223,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "木跃鱼",
@@ -1065,7 +1279,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鲑鱼",
@@ -1113,7 +1337,18 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00",
+   "瀑布 任意时间"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "大海参",
@@ -1175,7 +1410,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "下午6:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "任意"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": "4%",
+  "crab_water": null
  },
  {
   "page": "鲟鱼",
@@ -1219,7 +1464,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "比目鱼",
@@ -1282,7 +1537,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上8:00"
+  ],
+  "weather_list": [
+   "任何"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "绯红鱼",
@@ -1325,7 +1590,22 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [
+   "钓鱼技能达到5级（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "玩家需要站在沙滩最东侧的海岸或码头上。要到达该地点，玩家需要使用300木材修复桥梁，或购买第二次社区升级。",
+   "浮标必须落在钓鱼区至少为3的水域中，即距离陆地区域任何方向至少4格的位置。",
+   "如果浮标抛进了钓鱼区为2的钓鱼气泡中，依然可以钓到绯红鱼。"
+  ],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "冰川鱼",
@@ -1368,7 +1648,22 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [
+   "钓鱼等级达到6（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "玩家必须站在特定的位置：煤矿森林中一个形似“箭头”的岛的最南端。遗失之书《渔夫，第二幕》中提示了这一点。",
+   "钓鱼浮标必须位于钓鱼区至少为3的水中，即它必须在各个方向上与岸边（包括桥梁）至少相距4格。",
+   "如果浮标抛进了钓鱼区为2的钓鱼气泡中，依然可以钓到冰川鱼。"
+  ],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "变种鲤鱼",
@@ -1420,7 +1715,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任意时间"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "午夜鲤鱼",
@@ -1492,7 +1797,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "晚上10:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "任何"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "青花鱼",
@@ -1540,7 +1855,18 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至上午11:00",
+   "下午6:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鳗鱼",
@@ -1584,7 +1910,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "下午4:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "rain"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "大比目鱼",
@@ -1634,7 +1970,18 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至上午11:00",
+   "晚上7:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鲱鱼",
@@ -1678,7 +2025,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "龙虾",
@@ -1703,7 +2060,13 @@
    "蟹笼鱼类"
   ],
   "map_pins": [],
-  "source_text": "*蟹笼：海洋\n*乌龟\n*无尽财富之雕像"
+  "source_text": "*蟹笼：海洋\n*乌龟\n*无尽财富之雕像",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "ocean"
  },
  {
   "page": "章鱼",
@@ -1751,7 +2114,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至下午1:00"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": "2.2%",
+  "crab_water": null
  },
  {
   "page": "红鲻鱼",
@@ -1795,7 +2168,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "红鲷鱼",
@@ -1840,7 +2223,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "rain"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鱿鱼",
@@ -1882,7 +2275,18 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "下午6:00至凌晨2:00",
+   "鱿鱼节期间全天"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "虾",
@@ -1907,7 +2311,13 @@
    "蟹笼鱼类"
   ],
   "map_pins": [],
-  "source_text": "蟹笼: 海洋"
+  "source_text": "蟹笼: 海洋",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "ocean"
  },
  {
   "page": "罗非鱼",
@@ -1963,7 +2373,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至下午2:00"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "大眼鱼",
@@ -2029,7 +2449,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "中午12:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "rain"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鲤鱼",
@@ -2091,7 +2521,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任意"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "狗鱼",
@@ -2148,7 +2588,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "太阳鱼",
@@ -2197,7 +2647,18 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "晴天",
+   "刮风"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "麻哈脂鲤",
@@ -2239,7 +2700,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6点至下午7点"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "蛇齿单线鱼",
@@ -2293,7 +2764,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "西鲱",
@@ -2343,7 +2824,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午9:00至凌晨2:00"
+  ],
+  "weather_list": [
+   "rain"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "虎纹鳟鱼",
@@ -2391,7 +2882,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上7:00"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "大头鱼",
@@ -2436,7 +2937,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "鬼鱼",
@@ -2481,7 +2992,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "石鱼",
@@ -2526,7 +3047,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "冰柱鱼",
@@ -2571,7 +3102,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "岩浆鳗鱼",
@@ -2624,7 +3165,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "蝎鲤鱼",
@@ -2669,7 +3220,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "上午6:00至晚上8:00"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "虚空鲑鱼",
@@ -2713,7 +3274,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任意时间"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "史莱姆鱼",
@@ -2763,7 +3334,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任意时间"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "午夜鱿鱼",
@@ -2805,7 +3386,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "夜市的任何时间（17:00-02:00）"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": "21%",
+  "crab_water": null
  },
  {
   "page": "水滴鱼",
@@ -2847,7 +3438,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "夜市的任何时间（17:00-02:00）"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": "10%",
+  "crab_water": null
  },
  {
   "page": "幽灵鱼",
@@ -2889,7 +3490,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "夜市的任何时间（17:00-02:00）"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": "16%",
+  "crab_water": null
  },
  {
   "page": "小龙虾",
@@ -2914,7 +3525,13 @@
    "蟹笼鱼类"
   ],
   "map_pins": [],
-  "source_text": "*蟹笼：淡水\n*乌龟"
+  "source_text": "*蟹笼：淡水\n*乌龟",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "fresh"
  },
  {
   "page": "玉黍螺",
@@ -2939,7 +3556,13 @@
    "蟹笼鱼类"
   ],
   "map_pins": [],
-  "source_text": "蟹笼: 淡水"
+  "source_text": "蟹笼: 淡水",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "fresh"
  },
  {
   "page": "蜗牛",
@@ -2964,7 +3587,13 @@
    "蟹笼鱼类"
   ],
   "map_pins": [],
-  "source_text": "蟹笼：淡水"
+  "source_text": "蟹笼：淡水",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": "fresh"
  },
  {
   "page": "绿藻",
@@ -2989,7 +3618,13 @@
    "钓鱼"
   ],
   "map_pins": [],
-  "source_text": "* 钓鱼竿: 淡水\n* 绿色史莱姆\n* 垃圾桶\n* 鱼塘\n* 猫"
+  "source_text": "* 钓鱼竿: 淡水\n* 绿色史莱姆\n* 垃圾桶\n* 鱼塘\n* 猫",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "白藻",
@@ -3019,7 +3654,13 @@
    "钓鱼"
   ],
   "map_pins": [],
-  "source_text": "*钓鱼竿\n*怪物掉落物\n*鱼塘（鬼鱼）"
+  "source_text": "*钓鱼竿\n*怪物掉落物\n*鱼塘（鬼鱼）",
+  "time_list": [],
+  "weather_list": [],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "狮子鱼",
@@ -3072,7 +3713,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "蓝铁饼鱼",
@@ -3125,7 +3776,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "黄貂鱼",
@@ -3166,7 +3827,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "雌鮟鱇鱼",
@@ -3210,7 +3881,21 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "任何"
+  ],
+  "requirements": [
+   "钓鱼等级达到3（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "玩家必须站在鹈鹕镇上河流的最北端（地图边缘15格以内）。这个范围包括一座独木桥、木桥以北的所有河岸，以及木桥向南3格范围内的河岸。",
+   "没有钓鱼区的限制，只要玩家站在上述范围内，钓鱼浮标可以在河流中的任意位置。"
+  ],
+  "requirements_from": "鮟鱇鱼",
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "绯红鱼之子",
@@ -3253,7 +3938,22 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "任何"
+  ],
+  "requirements": [
+   "钓鱼技能达到5级（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "玩家需要站在沙滩最东侧的海岸或码头上。要到达该地点，玩家需要使用300木材修复桥梁，或购买第二次社区升级。",
+   "浮标必须落在钓鱼区至少为3的水域中，即距离陆地区域任何方向至少4格的位置。",
+   "如果浮标抛进了钓鱼区为2的钓鱼气泡中，依然可以钓到绯红鱼。"
+  ],
+  "requirements_from": "绯红鱼",
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "传说之鱼二代",
@@ -3296,7 +3996,22 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [
+   "钓鱼等级达到10（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "浮标必须位于钓鱼区为5的水中，即它必须在各个方向上与岸边（包括桥梁）至少相距5格。",
+   "如果浮标抛进了钓鱼区为3的钓鱼气泡中，依然可以钓到传说之鱼。",
+   "正如《传奇之鱼的秘密》中所建议的那样，山间湖泊中的木桩区域满足此要求。当然，湖中还有其他地方也可以。"
+  ],
+  "requirements_from": "传说之鱼",
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "小冰川鱼",
@@ -3339,7 +4054,22 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [
+   "钓鱼等级达到6（通过部分食物或附魔有“精通”的鱼竿带来的暂时钓鱼等级提升也算在内）。",
+   "玩家必须站在特定的位置：煤矿森林中一个形似“箭头”的岛的最南端。遗失之书《渔夫，第二幕》中提示了这一点。",
+   "钓鱼浮标必须位于钓鱼区至少为3的水中，即它必须在各个方向上与岸边（包括桥梁）至少相距4格。",
+   "如果浮标抛进了钓鱼区为2的钓鱼气泡中，依然可以钓到冰川鱼。"
+  ],
+  "requirements_from": "冰川鱼",
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "放射性鲤鱼",
@@ -3388,7 +4118,17 @@
     "width": 400.0
    }
   ],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  },
  {
   "page": "虾虎鱼",
@@ -3420,6 +4160,16 @@
    "河鱼"
   ],
   "map_pins": [],
-  "source_text": null
+  "source_text": null,
+  "time_list": [
+   "任何"
+  ],
+  "weather_list": [
+   "Any"
+  ],
+  "requirements": [],
+  "requirements_from": null,
+  "submarine": null,
+  "crab_water": null
  }
 ]

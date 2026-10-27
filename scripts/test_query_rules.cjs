@@ -147,4 +147,61 @@ const seedSources = Object.fromEntries(A.pageInfo('古代种子').src);
 assert.deepEqual([...seedSources.as], ['煤矿森林（0.7%）', '深山（0.7%）']); // arrays come from the VM context
 assert(seedSources.md.includes('苍蝇（0.5%）') && seedSources.os.includes('古物宝藏'));
 assert.deepEqual([...A.pageInfo('古代种子').dr], ['上古种子×1', '上古种子配方']);
-console.log('Query rule checks passed: per-water fishing, unknown exceptions, collection methods, acquisition gates, shop hours/stock, ordinary sources, harvest assumptions, Night Market submarine and artifact sources.');
+
+// Follow-up (2026-10-27): the same classes of problem across the site.
+// 1. Key conditions must be visible in default reading mode and must not be overwritten by exception clauses.
+const trout = fish('虹鳟鱼');
+assert.deepEqual([...trout.W], ['sun'], 'the Trout Derby "any weather" clause must not replace the regular sunny requirement');
+assert(A.fishTimeText(trout).includes('鳟鱼大赛') && A.fishWeatherText(trout).includes('鳟鱼大赛'), 'Trout Derby exception shown');
+assert(A.fishTimeText(fish('鲑鱼')).includes('瀑布') && A.fishTimeText(fish('鱿鱼')).includes('鱿鱼节'));
+reset({ season: 'summer', day: 5, weather: 'rain', time: 1000 });
+assert.equal(A.fishCheck(trout).ok, false, 'rain outside the Trout Derby: not catchable');
+assert(A.fishCheck(trout).checks.some(c => c.ok === undefined && c.text.includes('鳟鱼大赛')), 'the exception is listed beside the regular rule');
+A.setConditionsEnabled(false);
+for (const name of ['海参', '大海参', '章鱼']) {
+  assert(A.fishHabitats(fish(name)).some(h => h.location === '夜市'), `${name}: also caught in the Night Market submarine`);
+  assert(!A.isSubmarineFish(fish(name)), `${name}: not a submarine-only fish`);
+}
+for (const name of ['传说之鱼', '鮟鱇鱼', '绯红鱼', '冰川鱼', '雌鮟鱇鱼', '绯红鱼之子', '传说之鱼二代', '小冰川鱼']) {
+  const rules = A.fishRequirements(fish(name)).map(r => r.text);
+  assert(rules.length >= 3 && !rules.some(r => r.includes('需核对')), `${name}: wiki requirements instead of a "check it yourself" dead end`);
+}
+assert(A.fishRequirements(fish('鮟鱇鱼')).some(r => r.text.includes('最北端')));
+assert(A.fishRequirements(fish('冰川鱼')).some(r => r.text.includes('箭头')));
+assert(A.fishRequirements(fish('传说之鱼')).some(r => r.text.includes('只能钓起一次')));
+assert(A.fishRequirements(fish('传说之鱼二代')).some(r => r.text.includes('大家族')));
+assert.equal(fish('龙虾').cw, 'ocean'); assert.equal(fish('小龙虾').cw, 'fresh');
+assert(A.crabFacts(fish('龙虾')).some(r => r.text.includes('海洋')));
+assert(A.fishHabitats(fish('鲷鱼')).length >= 2, 'river fish whose location is plain text still list their rivers');
+assert(A.shopCheck(A.locationByName.get('皮埃尔的杂货店')).text.includes('休息'), 'closed days visible without a date check');
+assert(A.areaState('desert').checks.some(c => c.note?.includes('Joja')), 'the Joja alternative is a note, not a hint hidden in reading mode');
+assert.deepEqual([...A.latestPlanting(A.D.seeds.find(s => s.p === '防风草种子'))], ['春 24 日']);
+assert.deepEqual([...A.latestPlanting(A.D.seeds.find(s => s.p === '玉米种子'))], ['秋 14 日']);
+const ore = paths('铜矿石').find(p => p.kind === 'buy');
+assert.equal(ore.cost, 75, 'year-1 Blacksmith price'); assert(ore.note.includes('第2年'), 'year-2 price kept as a labelled note');
+assert.equal(paths('能量滋补水').find(p => p.kind === 'buy').cost, 1000, "Harvey's purchase price, not the sell price");
+
+// 2. Every real item has some acquisition data; flavoured goods, crops, clothing and decor have structured routes.
+const fishIds = new Set(A.D.fish.map(f => f.id));
+const noData = Object.entries(A.D.items).filter(([id, it]) => {
+  if (it.x || fishIds.has(id)) return false;
+  const page = A.pageInfo(it.pg) || {};
+  return !A.acquisitions(id, it.z).length && !it.src?.length && !page.src?.length && !page.ob?.length && !page.f?.source && !page.s;
+}).map(([, it]) => it.z);
+assert(noData.length <= 60, `items without any acquisition data: ${noData.length} (${noData.slice(0, 8).join(', ')})`);
+const pickle = paths('腌制野山葵').find(p => p.kind === 'processing');
+assert(pickle && pickle.inputs[0].z === '野山葵' && pickle.stations[0].z === '罐头瓶', 'flavoured goods name their ingredient and machine');
+assert.equal(paths('腌制的河豚鱼籽').find(p => p.kind === 'processing').inputs[0].z, '河豚鱼籽', 'aged roe is made from that fish\'s roe');
+assert.deepEqual([...paths('向日葵蜂蜜').map(p => p.kind)], ['produce'], 'honey: the flower is not consumed');
+assert.deepEqual([...paths('河豚鱼籽').map(p => p.kind)], ['produce'], 'roe comes from a fish pond');
+assert(paths('防风草').some(p => p.kind === 'grow' && p.inputs[0].z === '防风草种子'));
+assert(paths('斧头').some(p => p.kind === 'initial'));
+const overalls = paths('经典背带裤');
+assert.equal(overalls.length, 1); assert.equal(overalls[0].kind, 'tailoring');
+assert(!overalls[0].reqs.some(r => r.type === 'recipe'), 'tailoring needs no learned recipe');
+assert(A.pageInfo('红木椅子').src.flat(2).includes('家具目录（免费）'));
+assert(A.pageInfo('祝尼魔帽子').src.flat(2).some(x => x.includes('成就')));
+assert.equal(A.D.items['(WP)12'].z, '壁纸 #13'); assert(A.D.items['(WP)12'].src.some(x => x.includes('法师目录')));
+assert(A.pageInfo('秘密纸条').ob.some(x => x.startsWith('清除杂草')));
+assert(!A.browse.records('items').some(r => /Stone$/.test(r.label) || r.label === '杂草'), 'mine stones and weeds are map objects, not catalogue items');
+console.log('Query rule checks passed: per-water fishing, unknown exceptions, collection methods, acquisition gates, shop hours/stock, ordinary sources, harvest assumptions, Night Market submarine, artifact sources, exception clauses, legendary requirements, crab water and item sources.');

@@ -50,6 +50,15 @@ def load(name):
         return json.load(f)
 
 
+def cut_sentence(text, limit):
+    """导言摘要截在句末，避免半句话（截不出完整句时才加省略号）。"""
+    if len(text) <= limit:
+        return text
+    head = text[:limit]
+    end = max(head.rfind(mark) for mark in "。！？")
+    return head[:end + 1] if end >= limit // 4 else head.rstrip() + "…"
+
+
 def main():
     pages = load("pages.json")
     items = load("items.json")
@@ -108,7 +117,7 @@ def main():
     out_pages = {}
     for p in pages:
         out_pages[p["title"]] = {
-            "k": p["kind"], "kz": p["kind_zh"], "s": (p["summary"] or "")[:160], "u": p["url"],
+            "k": p["kind"], "kz": p["kind_zh"], "s": cut_sentence(p["summary"] or "", 160), "u": p["url"],
             "e": p["en"], "i": img(p["image"] or item_by_id.get(p["item_id"], {}).get("image")), "id": p["item_id"], "sec": p["sections"][:14],
             "a": p["aliases"][:6], "f": {k: v if k == "source" else v[:120] for k, v in p["fields"].items()
                                          if k in ("source", "season", "location", "time", "weather", "recipe",
@@ -116,13 +125,10 @@ def main():
                                                   "occupants", "birthday", "marriage", "growth", "produces",
                                                   "craftingstation", "crafttime", "buff", "edibility") and v},
         }
-        # 逐条来源（远古斑点、怪物掉落、其他来源或“来源”）与古物的捐赠奖励。
-        lists = p.get("lists") or {}
-        src = [[k, lists[k]] for k in ("as", "md", "os", "source") if lists.get(k)]
-        if src:
-            out_pages[p["title"]]["src"] = src
-        if lists.get("dr"):
-            out_pages[p["title"]]["dr"] = lists["dr"]
+        # 逐条来源（远古斑点、怪物掉落、其他来源或“来源”）、古物的捐赠奖励，以及“获取途径”一类章节。
+        for key, field in (("src", "src"), ("dr", "dr"), ("ob", "obtain")):
+            if p.get(field):
+                out_pages[p["title"]][key] = p[field]
 
     # —— 物品 ——
     referenced = set()
@@ -140,6 +146,11 @@ def main():
             "p": it.get("price"), "d": (it["desc"] or "")[:90], "pg": it["page"],
             "inote": it.get("image_note"),
         }
+        extra = {"src": it.get("src") or None, "x": 1 if it.get("internal") else None}
+        # 蜂蜜随附近的花、鱼籽随鱼塘里的鱼而不同：保留口味来源，详情据此说明产出方式。
+        if it.get("made_by") in ("(O)340", "(O)812"):
+            extra.update(fo=it["flavor_of"], mb=it["made_by"])
+        out_items[it["id"]].update({k: v for k, v in extra.items() if v})
 
     # —— 鱼 ——
     fish_text = {}
@@ -148,11 +159,14 @@ def main():
             r = json.loads(line)
             fish_text[r["title"]] = " ".join(s["text"] for s in r["sections"][:2])
     fish = []
+    # 地点写成纯文字、没有链接的鱼：“河流”指小镇与森林两段河，虾虎鱼在森林河流下游的瀑布。
+    river_text = {"河流": ["鹈鹕镇河流", "煤矿森林河流"], "煤矿森林下方瀑布": ["煤矿森林河流"]}
     for f in load("fish.json"):
         cats = [re.sub(r"[\u200b-\u200f]", "", c) for c in f["categories"]]
         text = fish_text.get(f["page"], "")
+        rules = {"tl": f["time_list"], "wl": f["weather_list"], "req": f["requirements"], "sub": f["submarine"], "cw": f["crab_water"]}
         fish.append({
-            "p": f["page"], "id": f["id"], "i": img(f["image"]), "L": f["locations"], "lt": f["location_text"],
+            "p": f["page"], "id": f["id"], "i": img(f["image"]), "L": f["locations"] or river_text.get(f["location_text"] or "", []), "lt": f["location_text"],
             "S": f["seasons"], "st": f["season_text"], "T": f["times"], "tt": f["time_text"],
             "W": f["weather"], "wt": f["weather_text"], "d": f["difficulty"], "pr": f["price"],
             "pins": wiki_pins(f["map_pins"]),
@@ -160,6 +174,7 @@ def main():
             "crab": "蟹笼鱼类" in cats,
             "legend": "传奇鱼" in cats,
             "qi": "大家族" in text and "任务期间" in text,
+            **{k: v for k, v in rules.items() if v},
         })
         ref({"id": f["id"]})
 
@@ -269,6 +284,11 @@ def main():
 
     for it in items:
         add_item(it)
+    # 商店表里的“其他来源”列（哈维的诊所）：没有独立条目的物品以它作逐条来源。
+    for s in load("shops.json"):
+        for x in s["stock"]:
+            if x.get("other") and x["id"] in out_items and not out_items[x["id"]].get("src"):
+                out_items[x["id"]]["src"] = x["other"]
 
     unresolved = {p["id"] for p in out_pages.values() if p["id"] and p["id"] not in out_items}
     if unresolved:

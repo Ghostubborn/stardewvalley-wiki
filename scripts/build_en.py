@@ -21,6 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 from sdvdata import parse as P  # noqa: E402
+from sdvdata import sources as SRC  # noqa: E402
 from sdvdata import wikitext as wt  # noqa: E402
 from sdvdata.catalog import Catalog  # noqa: E402
 
@@ -107,7 +108,8 @@ def sentence_cut(text, limit=320):
 def first_paragraph(text):
     for para in text.split("\n"):
         para = para.strip()
-        if len(para) > 20 and not para.startswith(("{|", "|", "!", "*", "#")):
+        # “:For furniture, see …”一类缩进提示不是导言。
+        if len(para) > 20 and not para.startswith(("{|", "|", "!", "*", "#", ":")):
             return para
     return ""
 
@@ -218,7 +220,7 @@ class English:
             "!": lambda a: "|", "quote": lambda a: a.get("1", ""), "squote": lambda a: a.get("1", ""),
             "key": lambda a: a.get("1", ""), "nowrap": lambda a: a.get("1", ""), "no wrap": lambda a: a.get("1", ""),
             "tooltip": lambda a: a.get("1", ""), "color": lambda a: a.get("2", ""),
-            "cookingchannel": lambda a: f"The Queen of Sauce ({a.get('1', '').strip()})\n",
+            "cookingchannel": lambda a: f"The Queen of Sauce ({a.get('1', '').strip()})\n", "duration": lambda a: a.get("1", ""),
         }
         base = wt.Renderer(handlers).render
 
@@ -286,11 +288,10 @@ class English:
             sections = wt.sections(text[end:])
             # Villager pages open with a developer quote; the summary should be the article's own lead.
             lead = self.plain(re.sub(r"^\s*\{\{\s*[Qq]uote\b(?:[^{}]|\{\{[^{}]*\}\})*\}\}", "", sections[0]["body"])) if sections else ""
-            lists = {k: entries for k in ("as", "md", "os", "source", "dr")
-                     if fields.get(k) and (entries := P.list_entries(fields[k], self.plain))}
             record = {
-                "src": [[k, lists[k]] for k in ("as", "md", "os", "source") if lists.get(k)],
-                "dr": lists.get("dr"),
+                "src": P.infobox_sources(p["kind"], fields, self.plain, "en"),
+                "dr": P.list_entries(fields.get("dr", ""), self.plain),
+                "ob": SRC.obtain_section(sections, self.plain),
                 "s": sentence_cut(first_paragraph(lead)),
                 "f": {k: v if k == "source" else sentence_cut(v, 160)
                       for k in FIELD_KEYS if fields.get(k) and (v := self.plain(fields[k]))},
@@ -298,6 +299,30 @@ class English:
                 "u": en_url(title),
             }
             out[p["title"]] = {k: v for k, v in record.items() if v}
+        return out
+
+    def item_sources(self, items):
+        """墙纸、地板、服装和任务物品的逐件来源，取自英文 Wiki 的合集页（与中文版同一套对应规则）。"""
+        names = SRC.PAGES["en"]
+        walls = SRC.wallpaper(self.page(names["wallpaper"])[0], self.plain)
+        floors = SRC.flooring(self.page(names["flooring"])[0], self.plain)
+        clothes = SRC.match_clothing(SRC.tailoring(self.page(names["tailoring"])[0], self.plain), items,
+                                     lambda i: re.sub(r" #\d+$", "", i["en"] or ""))
+        quests = SRC.quest_items(self.page(names["quests"])[0], self.plain)
+        out = {}
+        for it in items:
+            entries = []
+            if it["type"] in ("WP", "FL"):
+                entries = (walls if it["type"] == "WP" else floors).get(SRC.icon_number(it.get("image"))) or []
+            elif it["type"] in ("S", "P"):
+                entries = (clothes.get(it["id"]) or {}).get("notes") or []
+            name = self.catalog.en_by_id.get(it["id"])
+            if name in quests:
+                entries = quests[name]
+            if entries:
+                out[it["id"]] = entries
+            elif it.get("src"):
+                self.missing["item_sources"] += 1
         return out
 
     def items(self, items):
@@ -315,15 +340,27 @@ class English:
 
     def fish(self, fish):
         out = {}
+        bullets = {}
         for f in fish:
             text, _ = self.page(f["en"])
-            fields, _ = self.infobox(text)
+            fields, end = self.infobox(text)
             if not fields:
                 self.missing["fish"] += 1
                 continue
             rec = {k: self.plain(fields.get(src, "")) for k, src in
                    (("lt", "location"), ("st", "season"), ("tt", "time"), ("wt", "weather"))}
+            rec.update(tl=P.list_entries(fields.get("time", ""), self.plain), wl=P.list_entries(fields.get("weather", ""), self.plain))
+            # Legendary fish: the lead lists the special requirements (fishing level, standing spot, bobber water).
+            if f["requirements"]:
+                bullets[f["page"]] = P.lead_bullets(wt.sections(text[end:])[0]["body"], self.plain)
             out[f["page"]] = {k: v for k, v in rec.items() if v}
+        for f in fish:
+            req = bullets.get(f["requirements_from"] or f["page"])
+            if f["requirements"] and f["page"] in out:
+                if req:
+                    out[f["page"]]["req"] = req
+                else:
+                    self.missing["fish_requirements"] += 1
         return out
 
     def locations(self, locations):
@@ -451,6 +488,7 @@ class English:
 
     def shops(self, shops):
         out = {}
+        self.shop_other = {}
         for shop in shops:
             text, _ = self.page(shop["en"]) if shop["en"] else (None, None)
             if not text:
@@ -464,19 +502,39 @@ class English:
                     header = [self.plain(c["text"]) for c in rows[0] if c["header"]]
                     if not header or not any(re.search(r"Price|Cost|Trade", h) for h in header):
                         continue
+                    # Same rule as the Chinese build: use "Purchase Price" when a table also lists the sell price,
+                    # and keep "Other Sources" as item sources rather than purchase notes.
+                    buy_col = next((i for i, h in enumerate(header) if h == "Purchase Price"), None)
+                    other_col = next((i for i, h in enumerate(header) if h == "Other Sources"), None)
+                    plain_cols = {i for i, h in enumerate(header) if re.fullmatch(r"Description|Effects?|Image", h)}
                     for row in rows[1:]:
                         cells = [c["text"] for c in row]
-                        name_idx = next((i for i, c in enumerate(cells[1:], 1) if wt.page_links(c)), None)
+                        # Same rule as the Chinese build: a plain item name (Harvey's Clinic) also marks the name column.
+                        name_idx = next((i for i, c in enumerate(cells[1:], 1)
+                                         if wt.page_links(c) or (self.catalog.resolve(self.plain(c)) or {}).get("id")), None)
                         if name_idx is None:
                             continue
                         price_idx = next((i for i in range(len(cells) - 1, name_idx, -1)
                                           if re.search(r"\{\{\s*[Pp]rice|\{\{\s*tprice|\{\{\s*[Nn]ame", cells[i])), None)
+                        if buy_col is not None and buy_col < len(cells) and re.search(r"\{\{\s*[Pp]rice", cells[buy_col]):
+                            price_idx = buy_col
+                        # 按年份分列的价格（铁匠铺矿石：第 1 年 / 第 2 年起）：取第 1 年，其余列带表头写进备注。
+                        yearly = [i for i in range(name_idx + 1, len(cells)) if re.search(r"\{\{\s*[Pp]rice", cells[i])]
+                        if len(yearly) > 1 and all(i < len(header) and re.search(r"年|Year", header[i]) for i in yearly):
+                            price_idx = yearly[0]
+                        else:
+                            yearly = []
                         if price_idx is None:
                             continue
                         refs = P.item_refs(cells[name_idx], self.catalog)
-                        hit = refs[0] if refs else self.catalog.resolve(wt.page_links(cells[name_idx])[0]) or {}
-                        notes = [n for n in (self.plain(c) for i, c in enumerate(cells) if i not in (name_idx, price_idx, 0))
+                        links = wt.page_links(cells[name_idx])
+                        hit = refs[0] if refs else self.catalog.resolve(links[0] if links else self.plain(cells[name_idx])) or {}
+                        skip = {name_idx, price_idx, 0, other_col} | ({price_idx + 1} | plain_cols if price_idx == buy_col else set())
+                        notes = [n for n in ((re.sub(r"\s+", " ", header[i]) + ": " if i in yearly[1:] else "") + self.plain(c)
+                                             for i, c in enumerate(cells) if i not in skip)
                                  if n and n.upper() != "N/A"]
+                        if other_col is not None and other_col < len(cells) and hit.get("id"):
+                            self.shop_other.setdefault(hit["id"], P.list_entries(cells[other_col], self.plain))
                         stock.append({"id": hit.get("id"), "n": [n[:80] for n in notes[-2:]],
                                       "sec": sec["title"].strip("= ").strip() if sec["title"] else None})
             if stock:
@@ -673,6 +731,7 @@ def build():
     data = {
         "pages": e.pages(pages),
         "items": e.items(load("items.json")),
+        "isrc": e.item_sources(load("items.json")),
         "fish": e.fish(load("fish.json")),
         "locations": e.locations(load("locations.json")),
         "villagers": e.villagers(load("villagers.json")),
@@ -683,6 +742,10 @@ def build():
         "recipes": e.recipes(load("recipes.json"), pages),
         "schedules": e.schedules(load("villagers.json")),
     }
+    # Items sold in a shop table that also lists "Other Sources" (Harvey's Clinic): those are the item's sources.
+    for item_id, entries in e.shop_other.items():
+        if entries:
+            data["isrc"].setdefault(item_id, entries)
     data["names"] = e.names(data)
     data["progression"] = curated("progression.en.json")
     data["guides"] = curated("guides.en.json")

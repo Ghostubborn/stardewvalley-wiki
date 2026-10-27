@@ -136,14 +136,16 @@
   function pageInfo(title) {
     const p = D.pages[title];
     if (!p) return null;
-    if (!EN) return { s: p.s, f: p.f, sec: p.sec, u: p.u, kz: p.kz, src: p.src || [], dr: p.dr || [] };
+    if (!EN) return { s: p.s, f: p.f, sec: p.sec, u: p.u, kz: p.kz, src: p.src || [], dr: p.dr || [], ob: p.ob || [] };
     const e = EN.pages?.[title] || {};
-    return { s: e.s || "", f: e.f || {}, sec: e.sec || [], u: e.u || null, kz: t(p.kz), src: e.src || [], dr: e.dr || [] };
+    return { s: e.s || "", f: e.f || {}, sec: e.sec || [], u: e.u || null, kz: t(p.kz), src: e.src || [], dr: e.dr || [], ob: e.ob || [] };
   }
   function fishText(f) {
-    if (!EN) return { lt: f.lt, st: f.st, tt: f.tt, wt: f.wt };
+    // 时段、天气按条拼接，避免列表项渲染后首尾相连（“…晚上7:00鳟鱼大赛 全天”）。
+    const join = list => (list?.length ? L10N.clauses(list) : null);
+    if (!EN) return { lt: f.lt, st: f.st, tt: join(f.tl) || f.tt, wt: join(f.wl) || f.wt };
     const e = EN.fish?.[f.p] || {};
-    return { lt: e.lt || "", st: e.st || "", tt: e.tt || "", wt: e.wt || "" };
+    return { lt: e.lt || "", st: e.st || "", tt: join(e.tl) || e.tt || "", wt: join(e.wl) || e.wt || "" };
   }
   function locText(l) {
     if (!l) return {};
@@ -333,8 +335,8 @@
   }
 
   // ———————————————————— 条件求值 ————————————————————
-  // 结果：{ ok: true | false | null(未确认), text, hint }
-  const R = (ok, text, hint) => ({ ok, text, hint });
+  // 结果：{ ok: true | false | null(未确认), text, hint, note }。hint 只说明对照状态，note 是不依赖对照的补充说明。
+  const R = (ok, text, hint, note) => ({ ok, text, hint, note });
   const ccComplete = () => (state.progress.rooms == null ? null : ROOMS.every((r) => state.progress.rooms.includes(r)));
 
   function evalReq(req) {
@@ -354,8 +356,8 @@
         return R(v >= req.tier, req.text, v >= req.tier ? null : t("目前是{tool}", { tool: nameOf(chain.tiers[v].id || chain.tiers[v].zh) }));
       }
       case "room": {
-        if (P.rooms == null) return R(null, req.text, t("未确认社区中心进度"));
-        return R(P.rooms.includes(req.room), req.text, req.joja ? t("Joja 路线：{route}", { route: req.joja }) : null);
+        if (P.rooms == null) return R(null, req.text, t("未确认社区中心进度"), req.joja ? t("Joja 路线：{route}", { route: req.joja }) : null);
+        return R(P.rooms.includes(req.room), req.text, null, req.joja ? t("Joja 路线：{route}", { route: req.joja }) : null);
       }
       case "museum":
         if (P.museum == null) return R(null, req.text, t("未确认博物馆捐赠数"));
@@ -467,17 +469,41 @@
       { text: t("可一直钓到 {end}", { end: fmtTime(SUBMARINE.end) }) },
     ];
   }
+  // 时段、天气、特殊要求按 Wiki 信息框逐条保存；英文版取英文 Wiki 的同一字段。
+  function fishRules(f) {
+    const e = EN ? EN.fish?.[f.p] || {} : f;
+    return { tl: e.tl || [], wl: e.wl || [], req: e.req || [] };
+  }
+  // 常规时段、天气之外的条目（鳟鱼大赛全天、瀑布任意时间……）要单独显示，不能并进常规条件。
+  const isPlainTime = s => !s.replace(/上午|下午|晚上|凌晨|中午|早上|午夜|至|到|全天|任意时间|任何时间|任何|任意|随时|anytime|any time|all day|[ap]\.?m\.?|\d|[:：–\-~\s.()（）]/gi, "").trim();
+  const isPlainWeather = s => !s.replace(/晴天|雨天|暴风雨|下雪|刮风|任意天气|任意|任何|晴|雨|雪|风|sunny|sun|rainy|rain|storms?|snow|windy|wind|any|both|\bor\b|\band\b|[•,，、\s]/gi, "").trim();
+  const fishTimeExtras = f => fishRules(f).tl.filter(s => !isPlainTime(s));
+  const fishWeatherExtras = f => fishRules(f).wl.filter(s => !isPlainWeather(s));
+  function fishTimeText(f) {
+    const { tl } = fishRules(f), extra = fishTimeExtras(f);
+    // 只有一条文字说明（如“夜市的任何时间”）时直接用原文，不再重复换算后的时段。
+    if (tl.length && extra.length === tl.length) return L10N.clauses(extra);
+    return L10N.clauses([f.T?.length ? timeSpans(f.T) : null, ...extra]) || fishText(f).tt || null;
+  }
+  function fishWeatherText(f) {
+    const base = f.W?.includes("any") ? t("任意天气") : L10N.list((f.W || []).map(w => WEATHER[w]?.zh || w));
+    return L10N.clauses([base, ...fishWeatherExtras(f)]) || fishText(f).wt || null;
+  }
+  // 蟹笼：归档《蟹笼》导言与“海洋”“淡水”两节。
+  function crabFacts(f) {
+    return [{ text: t("放置蟹笼并放入任意鱼饵，第二天收取；选择“诱饵大师”职业后不需要鱼饵") },
+      f.cw === "ocean" ? { text: t("水体：海洋（在任意海水中放置）") } : f.cw === "fresh" ? { text: t("水体：淡水（河流、湖泊、池塘等）") } : null].filter(Boolean);
+  }
   function fishRequirements(f) {
     const facts = [];
     if (isSubmarineFish(f)) facts.push({ text: t("只在夜市的钓鱼潜艇里出现，在普通海边钓不到") },
       { text: t("使用魔法鱼饵时例外：也能在沙滩西南角钓到（站位见原文）") });
-    const level = fishingLevelRequired(f);
-    if (level) facts.push({ text: t("钓鱼等级至少 {n} 级", { n: level }) });
-    if (f.qi) facts.push({ text: t("需在“大家族”特别任务期间捕获；任务鱼的独立要求另见原文") });
-    if (f.legend) {
-      if (!["变种鲤鱼", "放射性鲤鱼"].includes(f.p)) facts.push({ text: t("需核对该鱼的特定站位、抛竿水域或水深") });
-      if (!f.qi) facts.push({ text: t("需核对该角色的传说鱼捕获记录") });
-    }
+    // 传说鱼：Wiki 导言逐条列出的特殊要求（钓鱼等级、站位、浮标所在水域）。
+    const req = fishRules(f).req;
+    if (req.length) facts.push(...req.map(text => ({ text })));
+    else if (fishingLevelRequired(f)) facts.push({ text: t("钓鱼等级至少 {n} 级", { n: fishingLevelRequired(f) }) });
+    if (f.qi) facts.push({ text: t("只在齐先生的“大家族”特别任务期间出现，任务期间可钓起多条") });
+    else if (f.legend) facts.push({ text: t("每个存档只能钓起一次（多人游戏中每位玩家各一次）") });
     return facts;
   }
   const WATER_LOCATIONS = {
@@ -505,6 +531,8 @@
         if (map === "island") locations.add("姜岛");
       }
       if (ISLAND_ALL_SEASONS.has(f.p)) locations.add("姜岛");
+      // 海参、大海参、章鱼也会在夜市潜艇里上钩（归档《夜市》“钓鱼潜艇”表）。
+      if (f.sub) locations.add("夜市");
       list = [...locations].map(location => ({ location }));
       // “农场地图”没有指定农场类型，不能作为一个无条件开放的替代水域。
       list = list.filter(h => h.location !== "农场地图");
@@ -512,6 +540,7 @@
     }
     for (const h of list) {
       h.area = LOCATION_AREA[h.location] || null;
+      if (h.location === "夜市") h.seasons = ["winter"];
       h.seasons ||= (["珊瑚", "海胆"].includes(f.p) || (h.location === "姜岛" && ISLAND_ALL_SEASONS.has(f.p))) ? ["all"] : f.S;
       if (h.location === "姜岛" && f.p === "章鱼") h.unknown = t("姜岛水域的独立季节条件尚未核验");
       if (f.p === "鲶鱼" || f.p === "大眼鱼" || f.p === "红鲷鱼") h.winterTotem = true;
@@ -535,7 +564,7 @@
     if (!conditionsActive()) return { ok: null, method, crab: method === "crab", where: [], locked: [], habitats: [], assumptions,
       checks: [R(null, t("未启用条件对照；可直接查看各水域的获取规则"))] };
     if (method !== "rod") return { ok: null, method, crab: method === "crab", where: [], locked: [], habitats: [], assumptions,
-      checks: [R(null, method === "crab" ? t("蟹笼捕获：还需核对水体、放置与诱饵") : t("沙滩采集物，不是钓竿捕获结果"))] };
+      checks: method === "crab" ? crabFacts(f).map(x => R(undefined, x.text)) : [R(null, t("沙滩采集物，不是钓竿捕获结果"))] };
     let habitats = fishHabitats(f);
     if (F.location) habitats = habitats.filter(h => h.location === F.location);
     if (F.point) {
@@ -552,7 +581,7 @@
     const minLevel = fishingLevelRequired(f);
     if (minLevel) common.push(R(level == null ? null : level >= minLevel, t("钓鱼等级至少 {n} 级", { n: minLevel }), t("使用已填技能等级；食物等临时等级可改变结论")));
     if (f.legend) {
-      if (!["变种鲤鱼", "放射性鲤鱼"].includes(f.p)) common.push(R(F.positionConfirmed?.[f.id] === true ? true : null, t("需核对该鱼的特定站位、抛竿水域或水深"), t("普通地图标记不能确认浮标位置")));
+      if (!["变种鲤鱼", "放射性鲤鱼"].includes(f.p)) common.push(R(F.positionConfirmed?.[f.id] === true ? true : null, t("站位与浮标位置符合上方的特殊要求"), t("普通地图标记不能确认浮标位置")));
       if (!f.qi) common.push(R(F.caught?.[f.id] == null ? null : !F.caught[f.id], t("此角色尚未钓起过这条传说鱼"), t("捕获记录尚未确认")));
     }
     if (F.rod === "training" && (f.d >= 50 || f.p === "虾虎鱼")) common.push(R(false, t("训练用鱼竿不能捕获此目标")));
@@ -570,6 +599,11 @@
         checks.push(R(h.seasons.includes("all") || h.seasons.includes(C.season), h.seasons.includes("all") ? t("任意季节") : L10N.list(h.seasons.map(s => SEASON_ZH[s]))));
       } else checks.push(R(null, t("季节条件资料尚未完整核验")));
       if (h.winterTotem && C.season === "winter") checks.push(R(F.rainTotem == null ? null : !!F.rainTotem, t("冬季需雨水图腾改变天气")));
+      // 潜艇是室内钓鱼：登船时段代替鱼的常规时段，天气不影响。
+      if (h.location === "夜市") {
+        if (h.unknown) checks.push(R(null, h.unknown));
+        return { ...h, checks, ok: combine(checks) };
+      }
       if (f.W?.length) {
         const localRain = h.area === "ginger_island" && F.islandWeather ? ["rain", "storm"].includes(F.islandWeather) : raining;
         const ok = f.W.includes("any") ? true : h.area === "ginger_island" && !F.islandWeather ? null
@@ -579,6 +613,7 @@
       } else checks.push(R(null, t("天气条件尚未完整核验")));
       if (f.T?.length) checks.push(R(f.T.some(([a, b]) => C.time >= a && C.time < b), timeSpans(f.T)));
       else checks.push(R(null, t("时段条件尚未完整核验")));
+      for (const extra of [...fishTimeExtras(f), ...fishWeatherExtras(f)]) checks.push(R(undefined, t("另外：{rule}", { rule: extra })));
       if (h.unknown) checks.push(R(null, h.unknown));
       return { ...h, checks, ok: combine(checks) };
     });
@@ -594,7 +629,15 @@
   function shopCheck(loc) {
     const C = state.cond;
     const hours = locText(loc).hours;
-    if (!conditionsActive()) return loc.hours || loc.R?.length ? { ok: null, text: hours ? t("开放时间：{hours}", { hours: EN ? hours.replace(/\n/g, "; ") : hours }) : t("开放时间见条目"), range: loc.R?.[0] } : null;
+    if (!conditionsActive()) {
+      if (!loc.hours && !loc.R?.length) return null;
+      // 未启用对照时也写出休息日：查购买途径时，休息日和营业时段同样重要。
+      // 中文归档只写“星期三”；英文 Wiki 与下方对照规则都注明社区中心修复后不再休息。
+      const closed = !EN && loc.p === "皮埃尔的杂货店" ? "星期三（社区中心修复前）" : locText(loc).closed;
+      const oneLine = text => text.replace(/\n+/g, EN ? "; " : "；");
+      return { ok: null, range: loc.R?.[0], text: L10N.clauses([hours ? t("开放时间：{hours}", { hours: oneLine(hours) }) : t("开放时间见条目"),
+        closed && !["无", "Never", "None"].includes(closed) ? t("休息：{days}", { days: oneLine(closed) }) : null]) };
+    }
     if (!loc.R || !loc.R.length) return null;
     // 玛妮页面把建筑开放时间列在营业时间之前，买卖不能使用建筑时间。
     const range = [...(loc.p === "玛妮的牧场" ? loc.R[loc.R.length - 1] : loc.R[0])];
@@ -663,6 +706,21 @@
       text: extra ? t("{date}收获，之后还能收 {n} 次", { date: label, n: extra }) : t("{date}收获", { date: label }), extra, assumptions, latestPlantingDay: lastDay - s.g, seasonEnd: dateOf(lastDay) };
   }
 
+  // 最晚播种日：按适生季节的连续区间与基础生长天数推算，作物在区间最后一季的 28 日前成熟。
+  function latestPlanting(s) {
+    if (!s.g || !s.S?.length || s.S.includes("all")) return [];
+    const inSeason = SEASONS.map(x => s.S.includes(x)), out = [];
+    for (let i = 0; i < 4; i++) {
+      if (!inSeason[i] || inSeason[(i + 1) % 4]) continue;
+      let span = 1;
+      while (span < 4 && inSeason[(i - span + 4) % 4]) span++;
+      const latest = 28 * span - s.g;
+      if (latest < 1) continue;
+      out.push(dayLabel(SEASONS[(i - span + 1 + Math.floor((latest - 1) / 28) + 4) % 4], (latest - 1) % 28 + 1));
+    }
+    return out;
+  }
+
   function birthdayToday() {
     if (!conditionsActive()) return [];
     const C = state.cond;
@@ -671,6 +729,8 @@
 
   // ———————————————————— 获取途径 ————————————————————
   const KIND_LABEL = { crafting: t("打造"), cooking: t("烹饪"), processing: t("加工"), tailoring: t("裁缝") };
+  // 只有打造和烹饪配方需要先学会；加工、裁缝放进设备就能做。
+  const LEARNED_KINDS = new Set(["crafting", "cooking"]);
 
   // 配方条件的显示文本：中文用归档原文；英文按结构生成，或取英文 Wiki 的配方来源原文。
   function conditionText(c, recipeId, index) {
@@ -714,7 +774,7 @@
     if (SHOP_AREA[shop]) checks.push(evalReq({ type: "area", area: SHOP_AREA[shop], text: t("可进入{place}", { place: areaTitle(SHOP_AREA[shop]) }) }));
     // 归档《科罗布斯》“商店”节明确说明全天营业，节日也不例外。
     const loc = locationByName.get(location), hours = shop === "科罗布斯" ? { ok: true, text: t("全天营业（节日也开放）") } : loc && shopCheck(loc);
-    checks.push(hours ? R(hours.ok, t("店铺营业：{hours}", { hours: hours.text })) : R(null, t("店铺营业条件尚未完整核验")));
+    checks.push(hours ? R(hours.ok, conditionsActive() || shop === "科罗布斯" ? t("店铺营业：{hours}", { hours: hours.text }) : hours.text) : R(null, t("店铺营业条件尚未完整核验")));
     const season = Object.entries(SEASON_SOURCE).find(([, zh]) => (entry.sec || "").includes(zh))?.[0];
     if (season) checks.push(R(conditionsActive() && state.cond.season === season ? true : null, t("{season}常规库存", { season: SEASON_ZH[season] }), !conditionsActive() || state.cond.season === season ? null : t("非本季可能受特殊解锁影响，尚未核验")));
     const days = notes.map(n => n.match(/^周([一二三四五六日天])$/)).filter(Boolean).map(m => "日一二三四五六".indexOf(m[1] === "天" ? "日" : m[1]));
@@ -730,21 +790,28 @@
     return checks;
   }
 
+  const seedsByCrop = new Map();
+  for (const s of D.seeds) if (s.crop?.id) (seedsByCrop.get(s.crop.id) || seedsByCrop.set(s.crop.id, []).get(s.crop.id)).push(s);
+  // 种子页的价格表：商店长表里没收录的商店（如绿洲的大黄种子）以它为准。旅行货车价格浮动，不在此列。
+  const SEED_SHOPS = ["皮埃尔的杂货店", "Joja超市", "绿洲", "姜岛商人"];
+
   function acquisitions(id, zh) {
     const key = id || "zh:" + zh;
     const paths = [];
+    const item = id && D.items[id];
     const basic = COMMON_SOURCES[zh];
     if (basic) {
       const reqs = basic.area ? [{ type: "area", area: basic.area, text: t("可进入{place}", { place: areaTitle(basic.area) }) }] : [];
       paths.push({ kind: "gather", label: basic.label, note: basic.note, random: !!basic.random, source: zh,
         reqs, checks: [...reqs.map(evalReq), ...(basic.tool ? [R(undefined, t("使用{tool}", { tool: nameOf(basic.tool) }))] : [])] });
     }
-    for (const r of recipesByOut.get(key) || []) {
+    const recipes = recipesByOut.get(key) || [];
+    for (const r of recipes.filter(r => r.k !== "tailoring")) {
       const reqs = conditionReqs(r.uc, r.id);
       const explicitLearned = state.progress.recipes?.[r.id];
       // 已确认学会时，无需再猜当初是通过哪封信/哪一期电视获得。
       if (explicitLearned === true) reqs.splice(0, reqs.length, { type: "recipe", id: r.id });
-      else if (r.k !== "processing" && !(r.uc || []).some(c => c.group === "initial")) reqs.push({ type: "recipe", id: r.id });
+      else if (LEARNED_KINDS.has(r.k) && !(r.uc || []).some(c => c.group === "initial")) reqs.push({ type: "recipe", id: r.id });
       if (r.st?.length) reqs.push({ type: "equipment", ids: r.st.map(s => s.id).filter(Boolean), text: t("可用设备：{list}", { list: L10N.list(r.st.map(s => nameOf(s.id || s.z)), t("或")) }) });
       if (r.k === "cooking") reqs.push({ type: "cooking_access" });
       paths.push({
@@ -752,7 +819,35 @@
         reqs, checks: reqs.map(evalReq),
       });
     }
+    // 裁缝不用学配方：在缝纫机上用 1 块布料加任一可用物品。同一件服装的多种做法合成一条途径。
+    const tailoring = recipes.filter(r => r.k === "tailoring");
+    if (tailoring.length) {
+      const sewing = itemByZh.get("缝纫机");
+      const reqs = [{ type: "info", text: t("在缝纫机上用 1 块布料加下列任一物品") }];
+      paths.push({ kind: "tailoring", label: KIND_LABEL.tailoring, recipe: tailoring[0], options: [...new Set(tailoring.flatMap(r => r.in.map(x => x.id || x.z)))],
+        stations: sewing ? [{ id: sewing, z: "缝纫机" }] : [], reqs, checks: reqs.map(evalReq) });
+    }
+    // 作物：种下对应的种子（种子详情有购买途径与生长规则）。
+    for (const seed of id ? seedsByCrop.get(id) || [] : []) {
+      paths.push({ kind: "grow", label: t("种植"), inputs: [{ id: seed.id, z: seed.p, q: 1 }], reqs: [],
+        checks: [R(undefined, t("适生季节：{value}", { value: L10N.list(seed.S.map(x => SEASON_ZH[x])) || t("见原文") })),
+          seed.g ? R(undefined, t("基础生长时间：{n} 天", { n: seed.g })) : null].filter(Boolean) });
+    }
+    // 蜂蜜随附近的花而不同，鱼籽随鱼塘里的鱼而不同：原料不会被消耗，单独说明产出方式。
+    if (item?.mb === "(O)340" && item.fo) {
+      const beeHouse = itemByZh.get("蜂房");
+      paths.push({ kind: "produce", label: t("蜂房产出"), refs: [item.fo], stations: beeHouse ? [{ id: beeHouse, z: "蜂房" }] : [], reqs: [],
+        checks: [R(undefined, t("蜂房周围 5 格内有成熟的{flower}时产出这种蜂蜜；花不会被消耗", { flower: nameOf(item.fo) }))] });
+    }
+    if (item?.mb === "(O)812" && item.fo) {
+      paths.push({ kind: "produce", label: t("鱼塘产出"), refs: [item.fo], reqs: [],
+        checks: [R(undefined, t("饲养{fish}的鱼塘会产出这种鱼籽", { fish: nameOf(item.fo) }))] });
+    }
     const ct = id && chainByItem.get(id);
+    // 斧头、十字镐、锄头、喷壶的基础款是开局自带的工具。
+    if (ct && ct.tier === 0 && ct.chain.kind === "blacksmith_upgrade") {
+      paths.push({ kind: "initial", label: t("初始拥有"), reqs: [], checks: [R(undefined, t("开始游戏时就有，之后可在铁匠铺升级"))] });
+    }
     if (ct && ct.tier > 0) {
       const tier = ct.chain.tiers[ct.tier];
       if (ct.chain.kind === "blacksmith_upgrade") {
@@ -766,12 +861,16 @@
           note: t("可直接购买，不需要先拥有上一级") });
       }
     }
+    const seedBuy = D.seeds.find(s => s.id === id)?.buy || {};
     for (const { shop, e } of shopsByItem.get(key) || []) {
       const reqs = [];
       // 种子页有独立价格表；它比商店长表中误落入价格列的数字更可靠。
-      const seedPrice = D.seeds.find(s => s.id === id)?.buy?.[shop];
-      paths.push({ kind: "buy", label: t("{shop}购买", { shop: N(shop) }), where: SHOP_LOCATION[shop] || shop, cost: seedPrice ?? e.pr, currency: e.cur,
+      paths.push({ kind: "buy", shop, label: t("{shop}购买", { shop: N(shop) }), where: SHOP_LOCATION[shop] || shop, cost: seedBuy[shop] ?? e.pr, currency: e.cur,
         barter: e.bt, note: L10N.clauses(stockNotes(shop, e)) || null, reqs, checks: purchaseChecks(shop, e) });
+    }
+    for (const shop of SEED_SHOPS) {
+      if (seedBuy[shop] == null || paths.some(p => p.kind === "buy" && p.shop === shop)) continue;
+      paths.push({ kind: "buy", shop, label: t("{shop}购买", { shop: N(shop) }), where: SHOP_LOCATION[shop] || shop, cost: seedBuy[shop], reqs: [], checks: purchaseChecks(shop) });
     }
     for (const r of id ? bundleReward.get(id) || [] : []) {
       const reqs = [{ type: "unknown", text: `${N(r.room)} · ${N(r.bundle.name)}`, hint: t("逐个收集包的完成、领奖状态尚未记录") }];
@@ -781,7 +880,8 @@
       p.ok = combine(p.checks);
       p.scope = t("已收录的条件");
       p.verifiedOnly = true;
-      p.assumptions = [t("未核对背包材料、金币、剩余库存或实际设备摆放"), t("可达和常规营业不保证已满足全部事件条件")];
+      // 开局自带、种植和自然产出没有库存、营业或材料需要核对。
+      p.assumptions = ["initial", "grow", "produce"].includes(p.kind) ? [] : [t("未核对背包材料、金币、剩余库存或实际设备摆放"), t("可达和常规营业不保证已满足全部事件条件")];
     }
     return paths;
   }
@@ -824,8 +924,8 @@
     el, img, iconSrc, money, fmtTime, minutesToTime, timeToMinutes, weekday, qtyText, matsText,
     N, itemName, nameOf, weekdayNote, pageInfo, fishText, locText, itemDesc, areaTitle, skillName, timeSpans, conditionReqs,
     state, setCond, conditionsActive, setConditionsEnabled, setProgress, applyPreset, on: (fn) => listeners.add(fn), emit,
-    evalReq, combine, areaState, fishCheck, fishRequirements, fishHabitats, fishLocations, fishMethod, shopCheck, seedCheck, birthdayToday, ccComplete,
-    isSubmarineFish, habitatName, submarineFacts,
+    evalReq, combine, areaState, fishCheck, fishRequirements, fishHabitats, fishLocations, fishMethod, shopCheck, seedCheck, latestPlanting, birthdayToday, ccComplete,
+    isSubmarineFish, habitatName, submarineFacts, fishRules, fishTimeText, fishWeatherText, crabFacts, LEARNED_KINDS,
     acquisitions, materialTree, rawTotals, itemInfo, canonicalItemId, usedIn, bundleUse, giftsByItem, villagerByName,
     locationByName, fishByName, recipesByOut, shopsByItem, chainByItem, cache: {},
   });

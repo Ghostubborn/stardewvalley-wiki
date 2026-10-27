@@ -307,7 +307,7 @@
       if (p.id) seen.add(p.id);
     }
     for (const [id, it] of Object.entries(D.items)) {
-      if (seen.has(id)) continue;
+      if (seen.has(id) || it.x) continue;
       searchIndex.push(searchEntry(it.z, it.e, { k: t(it.c || "物品"), ref: { type: "item", id }, i: it.i }));
     }
   }
@@ -386,14 +386,16 @@
   const MARK = { true: ["ok", "✓"], false: ["no", "✗"], null: ["unk", "?"], undefined: ["info", "·"] };
   function checkList(checks) {
     return el("ul", { class: "checks", dataset: { spoilerScoped: "true" } }, checks.map((c) => {
+      // 未启用对照时去掉状态和状态提示；note 是补充说明（如 Joja 路线），始终显示。
       if (!App.conditionsActive()) c = { ...c, ok: undefined, hint: null };
       const [cls, sym] = MARK[String(c.ok)];
-      if (S.active() && !S.textAllowed([c.text, c.hint].filter(Boolean).join(" "), S.title(current))) {
-        return el("li", null, foldContent(() => el("div", { class: "check-row" }, el("span", { class: "mark " + cls }, sym),
-          el("span", null, c.text, c.hint ? el("span", { class: "hint" }, c.hint) : null)), t("此项条件涉及后续内容。"), t("查看这项条件")));
+      const extra = [c.hint, c.note].filter(Boolean);
+      const body = () => el("span", null, c.text, extra.map(x => el("span", { class: "hint" }, x)));
+      if (S.active() && !S.textAllowed([c.text, ...extra].join(" "), S.title(current))) {
+        return el("li", null, foldContent(() => el("div", { class: "check-row" }, el("span", { class: "mark " + cls }, sym), body()),
+          t("此项条件涉及后续内容。"), t("查看这项条件")));
       }
-      return el("li", { class: "check-row" }, el("span", { class: "mark " + cls, "aria-label": { ok: t("满足"), no: t("未满足"), unk: t("未确认"), info: t("说明") }[cls] }, sym),
-        el("span", null, c.text, c.hint ? el("span", { class: "hint" }, c.hint) : null));
+      return el("li", { class: "check-row" }, el("span", { class: "mark " + cls, "aria-label": { ok: t("满足"), no: t("未满足"), unk: t("未确认"), info: t("说明") }[cls] }, sym), body());
     }));
   }
   function stateChip(ok, labels = [t("可以"), t("条件未满足"), t("未确认")]) {
@@ -461,13 +463,15 @@
     })), t("{label}涉及后续内容。", { label }), t("查看{title}", { title: label })));
     return box;
   }
-  function sourceFragments(text) {
+  function sourceFragments(text, { joined = false } = {}) {
     const box = el("div", { class: "source-fragments", dataset: { spoilerScoped: "true" } });
     // 中文按句号、分号切分；英文按句末标点切分，避免把完整句子拆碎。
     const chunks = EN ? (text || "").split(/\n|;|•|(?<=[.!?])\s+/).map(x => x.trim()).filter(Boolean) : (text || "").match(/[^。；;•·\n]+[。；;]?/g) || [];
     const visible = chunks.filter(t => S.textAllowed(t, S.title(current)));
     const protectedParts = chunks.filter(t => !S.textAllowed(t, S.title(current)));
-    visible.forEach(t => box.append(el("p", { class: "d-sub" }, t.trim())));
+    // 成段的导言保持一段；逐条来源、前提说明每句一行。
+    if (joined && visible.length) box.append(el("p", { class: "d-sub" }, visible.map(t => t.trim()).join(EN ? " " : "")));
+    else visible.forEach(t => box.append(el("p", { class: "d-sub" }, t.trim())));
     if (protectedParts.length) box.append(foldContent(() => el("div", null, protectedParts.map(t => el("p", { class: "d-sub" }, t.trim()))),
       t("其他来源涉及后续内容。"), t("查看其他来源")));
     return box;
@@ -540,10 +544,13 @@
       const time = EN ? p.recipe && App.pageInfo(p.recipe.out.pg)?.f?.crafttime : p.time;
       if (time) checks.push({ ok: undefined, text: t("耗时 {time}", { time }) });
       if (p.note) checks.push({ ok: undefined, text: p.note });
-      if (p.stations?.length) checks.push({ ok: undefined, text: t("设备：{list}", { list: App.list(p.stations.map((s) => nameOf(s.id || s.z))) }) });
+      // “可用设备”已作为条件列出时，不再重复设备行。
+      if (p.stations?.length && !p.reqs?.some(r => r.type === "equipment")) checks.push({ ok: undefined, text: t("设备：{list}", { list: App.list(p.stations.map((s) => nameOf(s.id || s.z))) }) });
       if (checks.length) div.append(checkList(checks));
       if (p.inputs?.length) div.append(matTree(App.materialTree(p.inputs)));
-      if (p.recipe && !(p.recipe.uc || []).some(c => c.group === "initial")) {
+      if (p.options?.length) div.append(el("p", { class: "d-sub" }, t("可用物品（任选一种）")), itemGroup(p.options, t("可用物品")));
+      if (p.refs?.length) div.append(itemGroup(p.refs, t("相关物品")));
+      if (p.recipe && App.LEARNED_KINDS.has(p.recipe.k) && !(p.recipe.uc || []).some(c => c.group === "initial")) {
         const select = el("select", { "aria-label": t("此配方的学习状态"), class: "recipe-status" },
           [["unknown", t("未确认")], ["yes", t("我已学会")], ["no", t("尚未学会")]].map(([value, label]) => el("option", { value }, label)));
         const learned = state.progress.recipes?.[p.recipe.id];
@@ -596,13 +603,14 @@
     const it = { id: f.id, ...(D.items[f.id] || {}) };
     const method = App.fishMethod(f);
     const text = App.fishText(f), original = App.clauses([text.lt, text.st, text.tt, text.wt]);
-    const weatherText = f.W?.includes("any") ? t("任意天气") : App.list(f.W?.map(w => App.WEATHER[w]?.zh || w) || []) || text.wt || t("详见原文");
+    // 时段、天气按 Wiki 逐条显示：鳟鱼大赛、鱿鱼节、瀑布等例外不会被常规时段盖掉。
+    const weatherText = App.fishWeatherText(f) || t("详见原文");
     const habitats = App.fishHabitats(f).filter(h => S.textAllowed(h.location) && S.textAllowed(N(h.location)));
     const rules = el("div", { class: "habitat-list", dataset: { spoilerScoped: "true" } }, habitats.map(h => {
-      // 夜市潜艇写明日期、登船时段与船票，不只给季节和时段。
-      const facts = h.location === "夜市" ? [...App.submarineFacts(), { text: t("天气：{value}", { value: weatherText }) }] : [
+      // 夜市潜艇写明日期、登船时段与船票，不只给季节和时段；潜艇在室内，天气不影响。
+      const facts = h.location === "夜市" ? [...App.submarineFacts(), f.sub ? { text: t("潜艇中的出现率：{chance}", { chance: f.sub }) } : null].filter(Boolean) : [
         { text: t("季节：{value}", { value: App.list(h.seasons?.map(s => App.SEASON_ZH[s]) || []) || t("详见原文") }) },
-        { text: t("时段：{value}", { value: (EN ? f.T?.length && App.timeSpans(f.T) : f.tt) || text.tt || t("详见原文") }) },
+        { text: t("时段：{value}", { value: App.fishTimeText(f) || t("详见原文") }) },
         { text: t("天气：{value}", { value: weatherText }) },
         h.depth ? { text: t("需要到达矿井 {n} 层水域", { n: h.depth }) } : null,
         h.level ? { text: t("钓鱼等级至少 {n} 级", { n: h.level }) } : null,
@@ -615,10 +623,11 @@
     fillDetail(
       head(f.i, N(f.p), t("鱼 · 售价 {price}", { price: money(f.pr) }) + (f.d ? t(" · 难度 {n}", { n: f.d }) : "")),
       desc ? el("p", { class: "d-summary" }, desc) : null,
-      section(t("获取条件"), el("p", { class: "d-sub" }, method === "rod" ? (App.isSubmarineFish(f) ? t("在夜市的钓鱼潜艇里用钓竿捕获。") : t("用钓竿捕获；不同水域的季节或额外要求可能不同。")) : method === "crab" ? t("使用蟹笼，需核对水体、放置与诱饵要求。") : t("在海滩采集。")),
+      section(t("获取条件"), el("p", { class: "d-sub" }, method === "rod" ? (App.isSubmarineFish(f) ? t("在夜市的钓鱼潜艇里用钓竿捕获。") : t("用钓竿捕获；不同水域的季节或额外要求可能不同。")) : method === "crab" ? t("使用蟹笼捕获。") : t("在海滩采集。")),
+        method === "crab" ? checkList(App.crabFacts(f)) : null,
         App.fishRequirements(f).length ? checkList(App.fishRequirements(f)) : null,
         source ? el("p", { class: "d-sub" }, t("从地图查看：{place}", { place: source.title })) : null,
-        method === "rod" && habitats.length ? rules : sourceFragments(original)),
+        method === "rod" ? (habitats.length ? rules : sourceFragments(original)) : method === "crab" ? null : sourceFragments(original)),
       original ? el("details", { class: "reference-original" }, el("summary", null, t("核对 Wiki 原文条件")), sourceFragments(original)) : null,
       usageSection(f.id),
       method === "rod" ? section(t("条件对照（可选）"), App.conditionsActive() ? el("div", null,
@@ -693,9 +702,18 @@
     const seed = D.seeds.find(s => s.id === it.id);
     const growing = seed && App.seedCheck(seed);
     const desc = App.itemDesc(it);
-    // 古物和矿物以 Wiki 信息框的来源为主；其他物品没有结构化途径时才用它补充。
-    const collectible = ["artifact", "mineral"].includes(D.pages[it.pg]?.k);
-    const wikiSources = page.src?.length && (collectible || !paths.length) ? sourceGroups(page.src) : null;
+    // Wiki 列出的来源：墙纸、服装等按件取合集页表格；条目若写的就是这件物品，取信息框的来源。
+    // 与购买途径重复的商店条目不再列出。
+    const itemSrc = (EN ? EN.isrc?.[it.id] : it.src) || [];
+    const pageAbout = !!it.id && D.pages[it.pg]?.id === it.id;
+    const shops = paths.filter(p => p.kind === "buy").map(p => N(p.shop || p.where)).filter(Boolean);
+    const groups = (itemSrc.length ? [["source", itemSrc]] : pageAbout || !paths.length ? page.src || [] : [])
+      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)))]).filter(([, entries]) => entries.length);
+    const wikiSources = groups.length ? sourceGroups(groups) : null;
+    // 没有结构化途径时，依次用条目的“获取途径”章节、信息框来源原文和导言补充。
+    const fallback = !paths.length && !wikiSources ? (page.ob?.length ? sourceGroups([["source", page.ob]]) : page.f?.source ? sourceFragments(page.f.source) : null) : null;
+    const lead = !paths.length && page.s && page.s !== desc && (!pageAbout || !(wikiSources || fallback))
+      ? [el("p", { class: "source-group-label" }, t("Wiki 条目导言")), sourceFragments(page.s, { joined: true })] : null;
     const donation = page.dr?.length ? section(t("捐赠奖励"), entryList(page.dr)) : null;
     fillDetail(
       head(it.i, App.itemName(it), [it.c && t(it.c), it.p ? t("售价 {price}", { price: money(it.p) }) : null, EN ? null : it.e].filter(Boolean).join(" · "), it.inote && (EN ? null : it.inote)),
@@ -704,9 +722,10 @@
         { text: t("适生季节：{value}", { value: App.list(seed.S.map(s => App.SEASON_ZH[s])) || t("见原文") }) },
         { text: seed.g ? t("基础生长时间：{n} 天", { n: seed.g }) : t("生长时间依具体种植规则而定") },
         seed.rg ? { text: t("首次成熟后，每 {n} 天再收获", { n: seed.rg }) } : null,
+        ...App.latestPlanting(seed).map(date => ({ text: t("最晚播种：{date}（按基础生长天数，未计肥料和职业加速）", { date }) })),
       ].filter(Boolean)), seed.crop ? itemChip(seed.crop.id || seed.crop.z) : null) : null,
       paths.length ? section(t("获取途径（满足任意一条即可）"), renderPaths(paths), wikiSources ? [el("p", { class: "d-sub" }, t("Wiki 还列出这些来源")), wikiSources] : null)
-        : section(t("获取途径"), wikiSources || (page.f?.source ? sourceFragments(page.f.source) : el("p", { class: "d-sub" }, t("暂缺可核对的获取资料，可继续查看原 Wiki。")))),
+        : section(t("获取途径"), wikiSources, fallback, lead, wikiSources || fallback || lead ? null : el("p", { class: "d-sub" }, t("暂缺可核对的获取资料，可继续查看原 Wiki。"))),
       donation && S.active() ? foldContent(donation, t("捐赠奖励按需查看"), t("查看捐赠奖励")) : donation,
       totals.length > 1 ? section(t("原料合计（按第一条制作途径）"), el("div", { class: "chips" }, totals.map((x) => itemChip(x.id || x.z, x.qty)))) : null,
       usageSection(it.id),
@@ -849,7 +868,11 @@
   }
 
   // ———————————————————— 选择与视图 ————————————————————
+  // 鱼也是物品：从材料、礼物或收集包点进来时，打开鱼的详情（水域、时段与天气），而不是通用物品页。
+  const fishByItem = new Map(D.fish.filter(f => f.id).map(f => [f.id, f.p]));
+  const canonicalRef = ref => ref?.type === "item" && fishByItem.has(App.canonicalItemId(ref.id)) ? { type: "fish", id: fishByItem.get(App.canonicalItemId(ref.id)) } : ref;
   App.select = (ref, opts = {}) => {
+    ref = canonicalRef(ref);
     const same = ref && current && ref.type === current.type && ref.id === current.id;
     if (ref && detail.hidden) detailReturnFocus = document.activeElement;
     if (ref) detailMode = "reading";
