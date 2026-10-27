@@ -527,6 +527,17 @@
     const food = eat || pr.buff?.length;
     return section(pr.weapon ? t("武器属性") : food && pr.stats?.length ? t("属性") : food ? t("食用效果") : t("装备效果"), ...parts);
   }
+  function mentionList(entries) {
+    if (!entries.length) return null;
+    const item = m => el("li", null, m.p && D.pages[m.p]
+      ? el("a", { class: "art-link", href: refHref(titleRef(m.p)), onclick: e => { e.preventDefault(); App.select(titleRef(m.p)); } }, N(m.p))
+      : (m.p ? N(m.p) : m.e), t("：") + m.t);
+    const shown = entries.filter(m => S.textAllowed((m.p ? N(m.p) : m.e) + " " + m.t, S.title(current)));
+    const hidden = entries.length - shown.length;
+    return [el("p", { class: "source-group-label" }, t("Wiki 其他条目讲到这件物品")),
+      shown.length ? el("ul", { class: "art-list" }, shown.map(item)) : null,
+      hidden ? foldContent(() => el("ul", { class: "art-list" }, entries.map(item)), t("还有 {n} 项涉及后续内容。", { n: hidden }), t("查看完整列表")) : null];
+  }
   function sourceFragments(text, { joined = false } = {}) {
     const box = el("div", { class: "source-fragments", dataset: { spoilerScoped: "true" } });
     // 中文按句号、分号切分；英文按句末标点切分，避免把完整句子拆碎。
@@ -568,6 +579,159 @@
     }
     return el("p", { class: "d-source" }, "资料：中文 Wiki《", el("a", { href: url, target: "_blank", rel: "noopener" }, title), "》，2025-12-18 归档快照。原站内容未作防剧透处理。");
   }
+  // ———————————————————— Wiki 条目正文 ————————————————————
+  // 正文按条目单独存放（articles/zh、articles/en），打开时才载入；英文版只有英文 Wiki 有的条目才显示。
+  const articleCache = new Map();
+  const articleKey = title => (EN ? EN.pages?.[title]?.ar : D.pages[title]?.ar) || null;
+  function loadArticle(title) {
+    const key = articleKey(title);
+    if (!key) return Promise.resolve(null);
+    if (!articleCache.has(key)) {
+      const request = fetch(`articles/${EN ? "en" : "zh"}/${key}.json`).then(r => (r.ok ? r.json() : null))
+        .catch(() => null).then(article => { if (!article) articleCache.delete(key); return article; });
+      articleCache.set(key, request);
+    }
+    return (App.articleRequest = articleCache.get(key));
+  }
+  const refHref = ref => `${location.pathname}#view=${state.view}&sel=${ref.type}:${encodeURIComponent(ref.id)}`;
+  // 片段：文字，["i", 物品 ID, 文字]（带图标），["l", 条目, 文字]（站内链接）。
+  function articleRuns(parts) {
+    const out = [];
+    for (const part of parts || []) {
+      if (typeof part === "string") {
+        part.split("\n").forEach((line, i) => { if (i) out.push(el("br")); if (line) out.push(line); });
+        continue;
+      }
+      const [kind, id, label] = part;
+      const item = kind === "i" ? D.items[id] : null;
+      if (kind === "i" && !item) { out.push(label); continue; }
+      const ref = item ? { type: "item", id } : titleRef(id);
+      out.push(el("a", { class: item ? "art-item" : "art-link", href: refHref(ref), onclick: e => { e.preventDefault(); App.select(ref); } },
+        item && App.hasImage(item.i) ? img(item.i, "art-icon") : null, label));
+    }
+    return out;
+  }
+  const runsText = parts => (parts || []).map(p => (typeof p === "string" ? p : p[2])).join("");
+  function cellText(cell) {
+    if (Array.isArray(cell)) return runsText(cell);
+    return cell.v ? runsText(cell.v) : (cell.b || []).map(blockText).join(" ");
+  }
+  function blockText(block) {
+    const [kind] = block;
+    if (kind === "l") return block[2].map(([, parts]) => runsText(parts)).join(" ");
+    if (kind === "t") return block[1].map(row => row.map(cellText).join(" ")).join(" ");
+    if (kind === "d") return block[1] + " " + block[2].map(blockText).join(" ");
+    if (kind === "q") return runsText(block[1]) + " " + runsText(block[2]);
+    return runsText(block[1]);
+  }
+  // 防剧透：段落、列表项、表格行分别核对，涉及后续内容的收起，其余照常显示。
+  const allowed = (text, title) => !S.active() || S.textAllowed(text, title);
+  function articleList(items, ordered) {
+    const root = el(ordered ? "ol" : "ul", { class: "art-list" });
+    const stack = [[1, root]];
+    for (const [depth, parts] of items) {
+      while (stack.length > 1 && stack[stack.length - 1][0] > depth) stack.pop();
+      let [level, list] = stack[stack.length - 1];
+      if (depth > level && list.lastElementChild) {
+        const child = el(ordered ? "ol" : "ul", { class: "art-list" });
+        list.lastElementChild.append(child);
+        stack.push([depth, child]);
+        list = child;
+      }
+      list.append(el("li", null, articleRuns(parts)));
+    }
+    return root;
+  }
+  function articleTable(rows, caption) {
+    const table = el("table", { class: "art-table" }, caption ? el("caption", null, caption) : null,
+      el("tbody", null, rows.map(row => el("tr", null, row.map(cell => {
+        const c = Array.isArray(cell) ? { v: cell } : cell;
+        return el(c.h ? "th" : "td", { colspan: c.c || null, rowspan: c.r || null },
+          c.v ? articleRuns(c.v) : (c.b || []).map(b => articleBlock(b)));
+      })))));
+    return el("div", { class: "art-table-wrap" }, table);
+  }
+  function articleBlock(block, title) {
+    const [kind] = block;
+    if (kind === "p") return el("p", null, articleRuns(block[1]));
+    if (kind === "n") return el("p", { class: "art-note" }, articleRuns(block[1]));
+    if (kind === "h") return el("p", { class: "art-term" }, articleRuns(block[1]));
+    if (kind === "q") return el("blockquote", { class: "art-quote" }, el("p", null, articleRuns(block[1])),
+      block[2]?.length ? el("footer", null, "— ", articleRuns(block[2])) : null);
+    if (kind === "l") return articleList(block[2], block[1]);
+    if (kind === "t") return articleTable(block[1], block[2]);
+    if (kind === "d") return el("details", { class: "art-details" }, el("summary", null, block[1]), guardBlocks(block[2], title));
+    return null;
+  }
+  function guardBlocks(blocks, title) {
+    const out = [];
+    for (const block of blocks) {
+      if (allowed(blockText(block), title)) { out.push(articleBlock(block, title)); continue; }
+      const [kind] = block;
+      if (kind === "l" || kind === "t") {
+        // 列表、表格只收起涉及后续内容的项或行；表头始终显示。
+        const entries = kind === "l" ? block[2] : block[1];
+        const head = kind === "t" ? entries.filter(row => row.every(c => !Array.isArray(c) && c.h)) : [];
+        const visible = entries.filter(e => head.includes(e) || allowed(kind === "l" ? runsText(e[1]) : e.map(cellText).join(" "), title));
+        const partial = visible.length > head.length ? (kind === "l" ? articleList(visible, block[1]) : articleTable(visible, block[2])) : null;
+        out.push(partial, foldContent(() => articleBlock(block, title),
+          t("还有 {n} 项涉及后续内容。", { n: entries.length - visible.length }), t(kind === "l" ? "查看完整列表" : "查看完整表格")));
+        continue;
+      }
+      out.push(foldContent(() => articleBlock(block, title), t("这部分涉及后续内容。"), t("查看这部分")));
+    }
+    return out;
+  }
+  // 爱心事件、秘密一类章节写的是剧情，开启防剧透时整节收起。
+  const STORY_SECTION = /心事件|Heart Events?|秘密|Secrets?$/i;
+  function articleBody(article, title, { facts = true, base = 3 } = {}) {
+    const out = [];
+    if (facts && article.f?.length) {
+      const rows = article.f.filter(([label, parts]) => allowed(label + " " + runsText(parts), title));
+      if (rows.length) out.push(el("dl", { class: "kv art-facts" }, rows.flatMap(([label, parts]) => [el("dt", null, label), el("dd", null, articleRuns(parts))])));
+    }
+    for (const [heading, level, blocks] of article.s) {
+      const tag = heading ? "h" + Math.min(6, base + Math.max(0, level - 2)) : null;
+      const content = guardBlocks(blocks, title);
+      if (!heading) { out.push(...content); continue; }
+      const sectionEl = el("section", { class: "art-section", dataset: { spoilerScoped: "true" } }, el(tag, null, heading), content);
+      out.push(S.active() && (STORY_SECTION.test(heading) || !allowed(heading, title))
+        ? foldContent(sectionEl, STORY_SECTION.test(heading) && allowed(heading, title) ? t("{title}写的是剧情内容。", { title: heading }) : t("这一节涉及后续内容。"), t("查看这一节"))
+        : sectionEl);
+    }
+    return out;
+  }
+  // 只有摘要的条目：正文直接显示在详情里。
+  function articleInline(title, summary) {
+    const box = el("div", { class: "article", dataset: { spoilerScoped: "true" } },
+      summary && allowed(summary, title) ? el("p", { class: "d-summary" }, summary) : null, el("p", { class: "d-sub" }, t("正在载入条目内容…")));
+    loadArticle(title).then(article => {
+      if (!box.isConnected) return;
+      box.replaceChildren(...(article ? articleBody(article, title) : [summary && allowed(summary, title) ? el("p", { class: "d-summary" }, summary) : null,
+        el("p", { class: "d-sub" }, t("条目内容载入失败，可以查看原 Wiki。"))]));
+    });
+    return box;
+  }
+  // 其他条目：页尾按需展开 Wiki 条目全文（信息框已在上方，不重复）。
+  function articleFold(title) {
+    if (!articleKey(title)) return null;
+    const box = el("section", { class: "d-section art-fold", dataset: { spoilerScoped: "true" } });
+    const heading = () => el("h3", null, t("Wiki 条目全文"));
+    const collapse = () => box.replaceChildren(heading(), el("p", { class: "d-sub" }, t("原 Wiki 条目的完整内容，按需展开。")),
+      btn(t("展开条目全文"), expand));
+    const expand = () => {
+      box.replaceChildren(heading(), el("p", { class: "d-sub" }, t("正在载入条目内容…")));
+      loadArticle(title).then(article => {
+        if (!box.isConnected) return;
+        const close = btn(t("收起条目全文"), () => { collapse(); box.querySelector("button")?.focus(); });
+        box.replaceChildren(heading(), ...(article ? articleBody(article, title, { facts: false, base: 4 })
+          : [el("p", { class: "d-sub" }, t("条目内容载入失败，可以查看原 Wiki。"))]), close);
+      });
+    };
+    collapse();
+    return box;
+  }
+  App.loadArticle = loadArticle;
   function actions(...btns) { return el("div", { class: "d-actions" }, btns.filter(Boolean)); }
   function btn(label, fn, primary) { return el("button", { class: "btn" + (primary ? " primary" : ""), type: "button", onclick: fn }, label); }
   function planBtn(ref) {
@@ -619,6 +783,7 @@
       if (p.refs?.length) div.append(itemGroup(p.refs, t("相关物品")));
       if (p.monsters?.length) div.append(linkGroup(p.monsters.map(m => pageLink(m.title, m.note)), t("掉落这件物品的怪物")));
       if (p.animals?.length) div.append(linkGroup(p.animals.map(a => pageLink(a.title)), t("产出这件物品的动物")));
+      if (p.trees?.length) div.append(linkGroup(p.trees.map(title => pageLink(title)), t("产出这件物品的树")));
       if (p.recipe && App.LEARNED_KINDS.has(p.recipe.k) && !(p.recipe.uc || []).some(c => c.group === "initial")) {
         const select = el("select", { "aria-label": t("此配方的学习状态"), class: "recipe-status" },
           [["unknown", t("未确认")], ["yes", t("我已学会")], ["no", t("尚未学会")]].map(([value, label]) => el("option", { value }, label)));
@@ -705,7 +870,7 @@
         checkList(c.checks), sourceFragments(App.clauses(c.assumptions || []))) : el("p", { class: "d-sub" }, t("需要核对特定日期或时段时，再设置条件。")),
         actions(btn(App.conditionsActive() ? t("调整对照条件") : t("设置条件再对照"), openConditions))) : null,
       actions(f.pins.length ? btn(t("在地图上查看"), () => showOnMap(null, { type: "fish", id: f.p })) : null, planBtn({ type: "fish", id: f.p })),
-      sourceLine(f.p));
+      articleFold(f.p), sourceLine(f.p));
   }
 
   function renderLocation(name) {
@@ -736,7 +901,7 @@
         return b;
       }))) : null,
       actions(btn(t("在地图上查看"), () => showOnMap(name)), planBtn({ type: "location", id: name })),
-      sourceLine(name));
+      articleFold(name), sourceLine(name));
   }
 
   function areaSection(id) {
@@ -759,7 +924,7 @@
       App.schedules?.render(name),
       v.fam?.length ? section(t("家人"), el("div", { class: "chips" }, v.fam.map((n) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: n }) }, img(villagerIcon(n)), N(n))))) : null,
       actions(App.mapContents.homePins(v).length ? btn(t("在地图上查看住处"), () => showOnMap(null, { type: "villager", id: name })) : null, planBtn({ type: "villager", id: name })),
-      sourceLine(name));
+      articleFold(name), sourceLine(name));
   }
 
   function renderItem(id) {
@@ -778,13 +943,17 @@
     const pageAbout = !!it.id && D.pages[it.pg]?.id === it.id;
     const shops = paths.filter(p => p.kind === "buy").map(p => N(p.shop || p.where)).filter(Boolean);
     const creatures = new Set(paths.flatMap(p => [...(p.monsters || []), ...(p.animals || [])]).map(x => x.title));
+    const trees = new Set(paths.flatMap(p => p.trees || []).map(N));
     const groups = (itemSrc.length ? [["source", itemSrc]] : pageAbout || !paths.length ? page.src || [] : [])
-      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)) && !creatures.has(creatureIn(x)))]).filter(([, entries]) => entries.length);
+      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)) && !creatures.has(creatureIn(x)) && !trees.has(x))])
+      .filter(([, entries]) => entries.length);
     const wikiSources = groups.length ? sourceGroups(groups) : null;
     // 没有结构化途径时，依次用条目的“获取途径”章节、信息框来源原文和导言补充。
     const fallback = !paths.length && !wikiSources ? (page.ob?.length ? sourceGroups([["source", page.ob]]) : page.f?.source ? sourceFragments(page.f.source) : null) : null;
     const lead = !paths.length && page.s && page.s !== desc && (!pageAbout || !(wikiSources || fallback))
       ? [el("p", { class: "source-group-label" }, t("Wiki 条目导言")), sourceFragments(page.s, { joined: true })] : null;
+    // 仍然什么都没有：列出 Wiki 其他条目讲到这件物品的句子（锻造 · 组合戒指），链接到原条目。
+    const mentions = !paths.length && !wikiSources && !fallback && !lead ? mentionList((EN ? EN.mentions?.[it.id] : it.mn) || []) : null;
     const donation = page.dr?.length ? section(t("捐赠奖励"), entryList(page.dr)) : null;
     fillDetail(
       head(it.i, App.itemName(it), [it.c && t(it.c), it.p ? t("售价 {price}", { price: money(it.p) }) : null, EN ? null : it.e].filter(Boolean).join(" · "), it.inote && (EN ? null : it.inote)),
@@ -797,7 +966,8 @@
         ...App.latestPlanting(seed).map(date => ({ text: t("最晚播种：{date}（按基础生长天数，未计肥料和职业加速）", { date }) })),
       ].filter(Boolean)), seed.crop ? itemChip(seed.crop.id || seed.crop.z) : null) : null,
       paths.length ? section(pathsTitle(paths), renderPaths(paths), wikiSources ? [el("p", { class: "d-sub" }, t("Wiki 还列出这些来源")), wikiSources] : null)
-        : section(t("获取途径"), wikiSources, fallback, lead, wikiSources || fallback || lead ? null : el("p", { class: "d-sub" }, t("暂缺可核对的获取资料，可继续查看原 Wiki。"))),
+        : section(t("获取途径"), wikiSources, fallback, lead, mentions, wikiSources || fallback || lead || mentions ? null
+          : el("p", { class: "d-sub" }, it.pg ? t("暂缺可核对的获取资料，可继续查看原 Wiki。") : t("Wiki 没有这件物品的条目或获取说明。"))),
       donation && S.active() ? foldContent(donation, t("捐赠奖励按需查看"), t("查看捐赠奖励")) : donation,
       totals.length > 1 ? section(t("原料合计（按第一条制作途径）"), el("div", { class: "chips" }, totals.map((x) => itemChip(x.id || x.z, x.qty)))) : null,
       usageSection(it.id),
@@ -805,7 +975,7 @@
         el("p", { class: "d-sub" }, App.clauses(growing.assumptions || []))) : el("p", { class: "d-sub" }, t("需要估算收获日时，再选择播种日期。")),
         actions(btn(t("设置播种日期"), openConditions))) : null,
       actions(node ? btn(t("在成长路线中查看"), () => App.select({ type: "node", id: node.id }, { switchView: true })) : null, planBtn({ type: "item", id: it.id || it.z })),
-      it.pg ? sourceLine(it.pg) : null);
+      it.pg ? [articleFold(it.pg), sourceLine(it.pg)] : null);
   }
 
   // 怪物：属性、出没地点与掉落物，取自信息框原文；英文版取英文 Wiki 的同一信息框。
@@ -823,11 +993,21 @@
     // 掉落物按信息框顺序：说明文字（“战斗技能达到5级之后:”）只管它后面的物品。
     const drops = el("div", { class: "drop-list", dataset: { spoilerScoped: "true" } });
     const note = n => n && S.textAllowed(n, title) ? el("span", { class: "hint" }, " " + n) : "";
-    // “见下文中的表格”“See tables”指 Wiki 条目里的变种表，本站没有收录，改为链接到原文。
-    const TABLE_REF = /表格|见变种|\btables?\b/i, url = wikiUrl(title);
+    // “见下文中的表格”“See tables”指条目里的变种表：有条目全文时展开页尾的全文，否则链接到原文。
+    const TABLE_REF = /表格|见变种|\btables?\b/i, url = wikiUrl(title), full = articleKey(title);
+    const openFull = () => {
+      const fold = dbody.querySelector(".art-fold");
+      if (fold && !fold.querySelector(".art-section, .article")) fold.querySelector("button")?.click();
+      fold?.scrollIntoView({ block: "start", behavior: "smooth" });
+    };
     let chips = null;
     for (const d of info.dr) {
-      if (d.t && TABLE_REF.test(d.t) && url) { chips = null; drops.append(el("p", { class: "d-sub" }, el("a", { href: url, target: "_blank", rel: "noopener" }, t("各变种的特殊掉落见原 Wiki 的表格 ↗")))); continue; }
+      if (d.t && TABLE_REF.test(d.t) && (full || url)) {
+        chips = null;
+        drops.append(full ? el("p", null, btn(t("查看各变种的特殊掉落"), openFull))
+          : el("p", { class: "d-sub" }, el("a", { href: url, target: "_blank", rel: "noopener" }, t("各变种的特殊掉落见原 Wiki 的表格 ↗"))));
+        continue;
+      }
       if (d.t) { chips = null; drops.append(protectContent(el("p", { class: "d-sub" }, d.t))); continue; }
       if (!chips) drops.append(chips = el("div", { class: "chips" }));
       const chip = d.id ? itemChip(d.id) : el("span", { class: "chip static" }, EN ? d.e : d.z);
@@ -847,11 +1027,11 @@
       stats.length ? section(t("属性"), checkList(stats)) : null,
       info.lt || places.length ? section(t("出没地点"), placeText ? el("p", null, placeText) : null,
         places.length ? linkGroup(places, t("相关地点")) : null,
-        info.lv ? el("p", { class: "d-sub" }, t("层数：{value}", { value: TABLE_REF.test(info.lv) ? t("各变种不同，见原 Wiki 的表格") : info.lv })) : null) : null,
+        info.lv ? el("p", { class: "d-sub" }, t("层数：{value}", { value: !TABLE_REF.test(info.lv) ? info.lv : full ? t("各变种不同，见页尾的条目全文") : t("各变种不同，见原 Wiki 的表格") })) : null) : null,
       info.dr.length ? section(t("掉落物"), drops) : null,
       variants ? section(t("变种"), linkGroup(variants, t("变种怪物"))) : info.vr.length ? section(t("变种"), el("p", null, App.list(info.vr))) : null,
       actions(pins.length ? btn(t("在地图上查看"), () => showOnMap(null, { type: "page", id: title })) : null, planBtn({ type: "page", id: title })),
-      sourceLine(title));
+      articleFold(title), sourceLine(title));
   }
 
   // 动物：居住建筑、产物，以及玛妮的牧场商品表里的购买途径（营业与休息日同物品）。
@@ -877,7 +1057,7 @@
       paths.length ? section(pathsTitle(paths), renderPaths(paths))
         : page.ob?.length ? section(t("获取途径"), sourceGroups([["source", page.ob]])) : null,
       actions(planBtn({ type: "page", id: title })),
-      sourceLine(title));
+      articleFold(title), sourceLine(title));
   }
 
   function renderPage(title) {
@@ -893,13 +1073,18 @@
     const heading = head(p.i || guideIcon, N(title), [p.kz, EN ? null : p.e].filter(Boolean).join(" · "));
     if (title === "存档" && !p.i) heading.replaceChild(el("span", { role: "img", "aria-label": N("存档"), style: "display:grid;place-items:center;width:48px;height:48px;flex:none;color:var(--bark)",
       html: '<svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h13l4 4v14H3V3h1zm3 0v6h9V3M7 21v-8h10v8"/><path d="M13 3v4"/></svg>' }), heading.firstChild);
+    const guide = App.guides?.has(title);
+    // 有正文的条目直接显示正文（信息框写在最前）；简明指南另有整理好的内容，正文放在页尾按需展开。
+    const inline = !guide && articleKey(title);
     fillDetail(
       heading,
-      App.guides?.has(title) ? App.guides.render(title) : null,
-      p.s && !App.guides?.has(title) ? el("p", { class: "d-summary" }, p.s) : null,
-      Object.keys(p.f).length ? section(t("要点"), el("dl", { class: "kv" }, Object.entries(p.f).slice(0, 8).flatMap(([k, v]) => [el("dt", null, FIELD_ZH[k] || k), el("dd", null, v)]))) : null,
-      p.sec.length && !App.guides?.has(title) ? (S.active() ? foldContent(section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec))), t("完整章节可能包含事件、秘密或后续奖励"), t("查看完整章节目录")) : section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec)))) : null,
+      guide ? App.guides.render(title) : null,
+      inline ? articleInline(title, p.s) : null,
+      p.s && !guide && !inline ? el("p", { class: "d-summary" }, p.s) : null,
+      !inline && Object.keys(p.f).length ? section(t("要点"), el("dl", { class: "kv" }, Object.entries(p.f).slice(0, 8).flatMap(([k, v]) => [el("dt", null, FIELD_ZH[k] || k), el("dd", null, v)]))) : null,
+      !inline && p.sec.length && !guide ? (S.active() ? foldContent(section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec))), t("完整章节可能包含事件、秘密或后续奖励"), t("查看完整章节目录")) : section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec)))) : null,
       actions(pins.length ? btn(t("在地图上查看"), () => showOnMap(null, { type: "page", id: title })) : null, planBtn({ type: "page", id: title })),
+      guide ? articleFold(title) : null,
       sourceLine(title));
   }
   const FIELD_ZH = Object.fromEntries(Object.entries({ source: "来源", season: "季节", location: "地点", time: "时间", weather: "天气", recipe: "配方", ingredients: "材料", sellprice: "售价",
@@ -944,7 +1129,7 @@
         markable && App.conditionsActive() ? btn(st.status === "done" ? t("标记为未完成") : t("标记为已完成"), () => markNode(n, st.status !== "done")) : null,
         n.place ? btn(t("在地图上找到{place}", { place: N(n.place) }), () => showOnMap(n.place)) : null,
         planBtn({ type: "node", id })),
-      n.info?.source ? sourceLine(n.info.source) : null);
+      n.info?.source ? [articleFold(n.info.source), sourceLine(n.info.source)] : null);
   }
 
   function renderBundle(id) {

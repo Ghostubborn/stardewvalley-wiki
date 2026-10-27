@@ -19,8 +19,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects000.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -695,8 +695,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects030.png",
+  "image_kind": "indexed",
   "image_note": null,
   "eat": {
    "e": 25,
@@ -1338,10 +1338,20 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects071.png",
+  "image_kind": "indexed",
   "image_note": null,
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "渔具",
+    "text": "此现象对镶边幸运紫色短裤无效。"
+   },
+   {
+    "page": "彩蛋",
+    "text": "将金锭与幸运紫色短裤放在缝纫机中，可以制作出镶边幸运紫色短裤，镶边幸运紫色短裤依然可以作为任务物品交还或者触发以上其他彩蛋。"
+   }
+  ]
  },
  {
   "id": "(O)72",
@@ -2735,8 +2745,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects094.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": false
  },
@@ -9427,9 +9437,9 @@
   "id": "(O)180",
   "type": "O",
   "type_name": "物品",
-  "en": "Egg",
-  "zh": "蛋",
-  "desc": "一个普通的白色鸡蛋。",
+  "en": "Brown Egg",
+  "zh": "棕色蛋",
+  "desc": "一个普通的棕色鸡蛋。",
   "flavor_of": null,
   "category": -5,
   "category_name": "蛋",
@@ -9490,7 +9500,7 @@
    ]
   },
   "page": "蛋",
-  "image": "Egg.png",
+  "image": "Brown_Egg.png",
   "image_kind": "exact",
   "image_note": null,
   "eat": {
@@ -9503,9 +9513,9 @@
   "id": "(O)182",
   "type": "O",
   "type_name": "物品",
-  "en": "Large Egg",
-  "zh": "大鸡蛋",
-  "desc": "这是个非常大的白色鸡蛋！",
+  "en": "Large Brown Egg",
+  "zh": "棕色大鸡蛋",
+  "desc": "这是个非常大的棕色鸡蛋！",
   "flavor_of": null,
   "category": -5,
   "category_name": "蛋",
@@ -9567,7 +9577,7 @@
    ]
   },
   "page": "大鸡蛋",
-  "image": "Large_Egg.png",
+  "image": "Large_Brown_Egg.png",
   "image_kind": "exact",
   "image_note": null,
   "eat": {
@@ -18224,8 +18234,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects294.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -18249,8 +18259,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects295.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19495,8 +19505,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects313.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19520,8 +19530,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects314.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19545,8 +19555,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects315.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19570,8 +19580,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects316.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19595,8 +19605,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects317.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19620,8 +19630,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects318.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19645,8 +19655,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects319.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19670,8 +19680,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects320.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -19695,8 +19705,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects321.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -26288,8 +26298,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects449.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": false
  },
@@ -26313,8 +26323,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects452.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -26734,8 +26744,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects461.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": false
  },
@@ -33554,8 +33564,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "远古斑点",
-  "image": "Artifact_tile.gif",
-  "image_kind": "alias",
+  "image": "Springobjects590.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": false
  },
@@ -36367,8 +36377,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects674.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -36392,8 +36402,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects675.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -36417,8 +36427,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects676.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -36442,8 +36452,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects677.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -36467,8 +36477,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects678.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -36492,8 +36502,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects679.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -40789,8 +40799,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects742.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -41243,8 +41253,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects750.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -42068,8 +42078,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects784.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -42093,8 +42103,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects785.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -42118,8 +42128,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects786.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -42210,8 +42220,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "任务",
-  "image": "Robins_Lost_Axe.png",
-  "image_kind": "alias",
+  "image": "Springobjects788.png",
+  "image_kind": "indexed",
   "image_note": null,
   "src": [
    "相关任务：罗宾丢失的斧子"
@@ -42276,8 +42286,8 @@
    ]
   },
   "page": "任务",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects789.png",
+  "image_kind": "indexed",
   "image_note": null,
   "src": [
    "相关任务：镇长的“短裤”"
@@ -42304,8 +42314,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects790.png",
+  "image_kind": "indexed",
   "image_note": null,
   "src": [
    "相关任务：黑莓篮子"
@@ -42332,8 +42342,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects792.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -42357,8 +42367,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects793.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -42382,8 +42392,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects794.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -43100,8 +43110,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects803.png",
+  "image_kind": "indexed",
   "image_note": null,
   "eat": {
    "e": -5,
@@ -49920,7 +49930,21 @@
   "image": "Combined_Ring.png",
   "image_kind": "exact",
   "image_note": null,
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "锻造",
+    "text": "姜岛火山地牢火山口的矮人锻造台和迷你锻造台可以让你强化武器，为你的武器和工具附魔，组合戒指，改变武器外形。"
+   },
+   {
+    "page": "锻造",
+    "text": "你可以将两枚不同的戒指合而为一并拥有两者的叠加效果。"
+   },
+   {
+    "page": "锻造",
+    "text": "这会花费20个火山晶石。"
+   }
+  ]
  },
  {
   "id": "(O)881",
@@ -50013,8 +50037,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects882.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -50038,8 +50062,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects883.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -50063,8 +50087,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "杂草",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects884.png",
+  "image_kind": "indexed",
   "image_note": null,
   "internal": true
  },
@@ -52589,8 +52613,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "补给箱",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Supply_Crate_1.png",
+  "image_kind": "alias",
   "image_note": null,
   "internal": false
  },
@@ -52614,8 +52638,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "补给箱",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Supply_Crate_2.png",
+  "image_kind": "alias",
   "image_note": null,
   "internal": false
  },
@@ -52639,8 +52663,8 @@
   "artifact_spot_chances": null,
   "can_be_gift": true,
   "page": "补给箱",
-  "image": null,
-  "image_kind": "missing",
+  "image": "Supply_Crate_3.png",
+  "image_kind": "alias",
   "image_note": null,
   "internal": false
  },
@@ -57389,7 +57413,17 @@
   "image": null,
   "image_kind": "missing",
   "image_note": null,
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "动物",
+    "text": "在初始宠物达到最大好感度，或在第二年还没有宠物的情况下，玩家可在玛妮的牧场购买宠物饲养证以领养新的宠物。"
+   },
+   {
+    "page": "玛妮的牧场",
+    "text": "在初始宠物达到最大好感度，或在第二年还没有宠物的情况下，玩家可以购买宠物饲养证以领养新的宠物。"
+   }
+  ]
  },
  {
   "id": "(O)BlueGrassStarter",
@@ -61838,7 +61872,7 @@
    "kind": "decor",
    "price": 500
   },
-  "page": "骷髅",
+  "page": "骷髅雕像",
   "image": "Skeleton.png",
   "image_kind": "exact",
   "image_note": null,
@@ -62828,7 +62862,7 @@
    "kind": "painting",
    "price": 800
   },
-  "page": null,
+  "page": "《太阳 44》",
   "image": "'Sun_44'.png",
   "image_kind": "exact",
   "image_note": null,
@@ -62954,7 +62988,7 @@
    "kind": "painting",
    "price": 350
   },
-  "page": null,
+  "page": "《太阳 45》",
   "image": "'Sun_45'.png",
   "image_kind": "exact",
   "image_note": null,
@@ -63800,7 +63834,7 @@
    "kind": "painting",
    "price": 1000
   },
-  "page": null,
+  "page": "《热带鱼 173》",
   "image": "'Tropical_Fish_173'.png",
   "image_kind": "exact",
   "image_note": null,
@@ -64070,7 +64104,7 @@
    "kind": "painting",
    "price": 750
   },
-  "page": null,
+  "page": "夜空贴纸 1",
   "image": "Night_Sky_Decal_1.png",
   "image_kind": "exact",
   "image_note": null,
@@ -64106,7 +64140,7 @@
    "kind": "painting",
    "price": 750
   },
-  "page": null,
+  "page": "夜空贴纸 2",
   "image": "Night_Sky_Decal_2.png",
   "image_kind": "exact",
   "image_note": null,
@@ -64124,7 +64158,7 @@
    "kind": "painting",
    "price": 750
   },
-  "page": null,
+  "page": "夜空贴纸 3",
   "image": "Night_Sky_Decal_3.png",
   "image_kind": "exact",
   "image_note": null,
@@ -66393,8 +66427,8 @@
    "price": 350
   },
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "FreeCactus.png",
+  "image_kind": "alias",
   "image_note": null,
   "internal": false
  },
@@ -68858,7 +68892,7 @@
    "kind": "decor",
    "price": 999
   },
-  "page": "祝尼魔屋",
+  "page": "祝尼魔屋家具",
   "image": "Junimo_Hut.png",
   "image_kind": "exact",
   "image_note": null,
@@ -75948,7 +75982,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "蜂蜜",
+    "text": "蜂蜜可通过缝纫机使用布料制成可染色的 简单长裙。"
+   }
+  ]
  },
  {
   "id": "(P)12",
@@ -75978,7 +76018,17 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "橙子",
+    "text": "橙子可通过缝纫机使用布料制成可染色的 休闲短裤。"
+   },
+   {
+    "page": "桃子",
+    "text": "桃子可通过缝纫机使用布料制成可染色的 休闲短裤。"
+   }
+  ]
  },
  {
   "id": "(P)14",
@@ -76004,11 +76054,21 @@
   "desc": "镶了金边的紫色丝织短裤……",
   "flavor_of": null,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Springobjects071.png",
+  "image_kind": "alias",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "渔具",
+    "text": "此现象对镶边幸运紫色短裤无效。"
+   },
+   {
+    "page": "彩蛋",
+    "text": "将金锭与幸运紫色短裤放在缝纫机中，可以制作出镶边幸运紫色短裤，镶边幸运紫色短裤依然可以作为任务物品交还或者触发以上其他彩蛋。"
+   }
+  ]
  },
  {
   "id": "(P)998",
@@ -76023,7 +76083,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "温泉",
+    "text": "如果玩家身穿五彩裤子或五彩神怪裤，则泳衣也会变换颜色。"
+   },
+   {
+    "page": "五彩碎片",
+    "text": "五彩裤子"
+   }
+  ]
  },
  {
   "id": "(P)999",
@@ -76038,7 +76108,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "温泉",
+    "text": "如果玩家身穿五彩裤子或五彩神怪裤，则泳衣也会变换颜色。"
+   },
+   {
+    "page": "五彩碎片",
+    "text": "五彩神怪裤"
+   }
+  ]
  },
  {
   "id": "(S)1000",
@@ -78132,7 +78212,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "意式烤面包",
+    "text": "意式烤面包可通过缝纫机使用布料制成领带部分可染色的 领带衬衫。"
+   }
+  ]
  },
  {
   "id": "(S)1124",
@@ -78254,7 +78340,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "生锈的靴刺",
+    "text": "生锈的靴刺可通过缝纫机使用布料制成可染色的 牛仔披风。"
+   }
+  ]
  },
  {
   "id": "(S)1132",
@@ -78299,7 +78391,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "彩虹贝壳",
+    "text": "彩虹贝壳可通过缝纫机使用布料制成可染色的 比基尼上装。"
+   }
+  ]
  },
  {
   "id": "(S)1135",
@@ -78314,7 +78412,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "诡异玩偶（绿）",
+    "text": "诡异玩偶（绿）可通过缝纫机使用布料制成可染色的 温布斯T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1136",
@@ -78344,7 +78448,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "哈维的诊所",
+    "text": "能量滋补水可通过缝纫机使用布料制成可染色的 运动员夹克衫。"
+   }
+  ]
  },
  {
   "id": "(S)1138",
@@ -78359,7 +78469,21 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "啤酒",
+    "text": "啤酒可通过缝纫机使用布料制成 黑皮夹克。"
+   },
+   {
+    "page": "果酒",
+    "text": "果酒可通过缝纫机使用布料制成 黑皮夹克。"
+   },
+   {
+    "page": "蜜蜂酒",
+    "text": "蜜蜂酒可通过缝纫机使用布料制成 黑皮夹克。"
+   }
+  ]
  },
  {
   "id": "(S)1139",
@@ -78374,7 +78498,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "珊瑚",
+    "text": "珊瑚可通过缝纫机使用布料制成可染色的 吊带上衣。"
+   },
+   {
+    "page": "海胆",
+    "text": "海胆可通过缝纫机使用布料制成可染色的 吊带上衣。"
+   },
+   {
+    "page": "鹦鹉螺",
+    "text": "鹦鹉螺可通过缝纫机使用布料制成可染色的 吊带上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1140",
@@ -78389,7 +78527,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "茄子",
+    "text": "茄子可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
+   },
+   {
+    "page": "小白菜",
+    "text": "小白菜可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
+   },
+   {
+    "page": "甜菜",
+    "text": "甜菜可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
+   }
+  ]
  },
  {
   "id": "(S)1141",
@@ -78419,7 +78571,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "海参",
+    "text": "海参可通过缝纫机使用布料制成可染色的 抹胸背心。"
+   },
+   {
+    "page": "大海参",
+    "text": "大海参可通过缝纫机使用布料制成可染色的 抹胸背心。"
+   }
+  ]
  },
  {
   "id": "(S)1143",
@@ -78586,7 +78748,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "哈维的诊所",
+    "text": "肌肉回复药可通过缝纫机使用布料制成可染色的 冒充肌肉T恤。"
+   },
+   {
+    "page": "图腾面具",
+    "text": "带有图腾面具的一套服装还包括 冒充肌肉T恤（染色RGB值249,174,137） 和 短裤（染色RGB值18,140,23）。"
+   }
+  ]
  },
  {
   "id": "(S)1154",
@@ -78601,7 +78773,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "咖啡豆",
+    "text": "咖啡豆可通过缝纫机使用布料制成可染色的 法兰绒上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1155",
@@ -78616,7 +78794,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "超级炸弹",
+    "text": "超级炸弹可通过缝纫机使用布料制成 轰炸机夹克。"
+   },
+   {
+    "page": "樱桃炸弹",
+    "text": "樱桃炸弹可通过缝纫机使用布料制成 轰炸机夹克。"
+   },
+   {
+    "page": "炸弹",
+    "text": "炸弹可通过缝纫机使用布料制成 轰炸机夹克。"
+   }
+  ]
  },
  {
   "id": "(S)1156",
@@ -78631,7 +78823,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "史前工具",
+    "text": "史前工具可通过缝纫机使用布料制成 原始人上衣。"
+   },
+   {
+    "page": "史前手斧",
+    "text": "史前手斧可通过缝纫机使用布料制成 原始人上衣。"
+   },
+   {
+    "page": "骨发夹",
+    "text": "带有骨发夹的一套中性服装还包括 原始人上衣 和 草裙。"
+   }
+  ]
  },
  {
   "id": "(S)1157",
@@ -78646,7 +78852,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "河鲈",
+    "text": "河鲈可通过缝纫机使用布料制成 钓鱼背心。"
+   },
+   {
+    "page": "大嘴鲈鱼",
+    "text": "大嘴鲈鱼可通过缝纫机使用布料制成 钓鱼背心。"
+   },
+   {
+    "page": "小嘴鲈鱼",
+    "text": "小嘴鲈鱼可通过缝纫机使用布料制成 钓鱼背心。"
+   }
+  ]
  },
  {
   "id": "(S)1158",
@@ -78676,7 +78896,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "啤酒花",
+    "text": "啤酒花可通过缝纫机使用布料制成可染色的 衬衫皮带。"
+   },
+   {
+    "page": "花椰菜",
+    "text": "花椰菜可通过缝纫机使用布料制成可染色的 衬衫皮带。"
+   },
+   {
+    "page": "防风草",
+    "text": "防风草可通过缝纫机使用布料制成可染色的 衬衫皮带。"
+   }
+  ]
  },
  {
   "id": "(S)1160",
@@ -78691,7 +78925,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "晶球",
+    "text": "晶球可通过缝纫机使用布料制成 灰色卫衣。"
+   }
+  ]
  },
  {
   "id": "(S)1161",
@@ -78706,7 +78946,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "冰封晶球",
+    "text": "冰封晶球可通过缝纫机使用布料制成 蓝色卫衣。"
+   }
+  ]
  },
  {
   "id": "(S)1162",
@@ -78721,7 +78967,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "岩浆晶球",
+    "text": "岩浆晶球可通过缝纫机使用布料制成 红色卫衣。"
+   }
+  ]
  },
  {
   "id": "(S)1163",
@@ -78736,7 +78988,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "工作小食",
+    "text": "工作小食可通过缝纫机使用布料制成 牛仔夹克。"
+   }
+  ]
  },
  {
   "id": "(S)1164",
@@ -78751,7 +79009,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "薄煎饼",
+    "text": "薄煎饼可通过缝纫机使用布料制成 运动风衣。"
+   }
+  ]
  },
  {
   "id": "(S)1165",
@@ -78766,7 +79030,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "清汤",
+    "text": "清汤可通过缝纫机使用布料制成 白色武术服。"
+   }
+  ]
  },
  {
   "id": "(S)1166",
@@ -78781,7 +79051,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "醋",
+    "text": "醋可通过缝纫机使用布料制成腰带可染色的 橘色武术服。"
+   }
+  ]
  },
  {
   "id": "(S)1167",
@@ -78796,7 +79072,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "石英",
+    "text": "石英可通过缝纫机使用布料制成 灰色背心。"
+   }
+  ]
  },
  {
   "id": "(S)1168",
@@ -78811,7 +79093,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "海草",
+    "text": "海草可通过缝纫机使用布料制成 海藻上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1169",
@@ -78826,7 +79114,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "黑曜石",
+    "text": "黑曜石可通过缝纫机使用布料制成 带刺背心。"
+   }
+  ]
  },
  {
   "id": "(S)1170",
@@ -78841,7 +79135,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "皂石",
+    "text": "皂石可通过缝纫机使用布料制成 花哨上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1171",
@@ -78856,7 +79156,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "椰汁汤",
+    "text": "椰汁汤可通过缝纫机使用布料制成 绿洲礼服。"
+   }
+  ]
  },
  {
   "id": "(S)1172",
@@ -78871,7 +79177,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "意式蕨菜炖饭",
+    "text": "意式蕨菜炖饭可通过缝纫机使用布料制成 铁匠围裙。"
+   }
+  ]
  },
  {
   "id": "(S)1173",
@@ -78903,7 +79215,21 @@
   "image_kind": "indexed",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "高级肥料",
+    "text": "高级肥料可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
+   },
+   {
+    "page": "高级保湿土壤",
+    "text": "高级保湿土壤可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
+   },
+   {
+    "page": "初级肥料",
+    "text": "初级肥料可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1175",
@@ -78918,7 +79244,21 @@
   "image_kind": "indexed",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "高级肥料",
+    "text": "高级肥料可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
+   },
+   {
+    "page": "高级保湿土壤",
+    "text": "高级保湿土壤可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
+   },
+   {
+    "page": "初级肥料",
+    "text": "初级肥料可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1176",
@@ -78949,7 +79289,9 @@
   "image": "Shirt177.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [],
+  "src": [
+   "沙漠节艾米丽的服装服务处可获得男款变体。"
+  ],
   "internal": false
  },
  {
@@ -78965,7 +79307,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "铁矿石",
+    "text": "铁矿石可通过缝纫机使用布料制成可染色的 龟脖毛衣。"
+   },
+   {
+    "page": "黄金矿石",
+    "text": "黄金矿石可通过缝纫机使用布料制成可染色的 龟脖毛衣。"
+   },
+   {
+    "page": "铜矿石",
+    "text": "铜矿石可通过缝纫机使用布料制成可染色的 龟脖毛衣。"
+   }
+  ]
  },
  {
   "id": "(S)1179",
@@ -78980,7 +79336,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "铱矿石",
+    "text": "铱矿石可通过缝纫机使用布料制成 铱能量上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1180",
@@ -78995,7 +79357,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "爆炒青椒",
+    "text": "爆炒青椒可通过缝纫机使用布料制成 隧道队球衣。"
+   }
+  ]
  },
  {
   "id": "(S)1181",
@@ -79040,7 +79408,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "硅钙石",
+    "text": "硅钙石可通过缝纫机使用布料制成 灰色西装。"
+   }
+  ]
  },
  {
   "id": "(S)1184",
@@ -79055,7 +79429,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "红之盛宴",
+    "text": "红之盛宴可通过缝纫机使用布料制成 红色无尾礼服。"
+   }
+  ]
  },
  {
   "id": "(S)1185",
@@ -79070,7 +79450,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "稀有圆盘",
+    "text": "稀有圆盘可通过缝纫机使用布料制成 藏青色无尾礼服。"
+   }
+  ]
  },
  {
   "id": "(S)1186",
@@ -79085,7 +79471,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "南瓜派",
+    "text": "南瓜派可通过缝纫机使用布料制成 节日上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1187",
@@ -79100,7 +79492,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "铁铅矿",
+    "text": "铁铅矿可通过缝纫机使用布料制成 叶子上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1188",
@@ -79132,7 +79530,13 @@
   "image_kind": "indexed",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "孔雀石",
+    "text": "孔雀石可通过缝纫机使用布料制成 绿色皮带衬衫。"
+   }
+  ]
  },
  {
   "id": "(S)1190",
@@ -79147,7 +79551,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "派对帽（红色）",
+    "text": "带有派对帽（红色）的一套服装还包括 笑脸T恤 和 农夫裤（染色RGB值 226,27,27）。"
+   },
+   {
+    "page": "柠檬石",
+    "text": "柠檬石可通过缝纫机使用布料制成 笑脸T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1191",
@@ -79162,7 +79576,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "雌黄",
+    "text": "雌黄可通过缝纫机使用布料制成可染色的 衬衫领结。"
+   }
+  ]
  },
  {
   "id": "(S)1192",
@@ -79177,7 +79597,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "黄铁矿",
+    "text": "黄铁矿可通过缝纫机使用布料制成 丑角上衣。"
+   },
+   {
+    "page": "螺旋桨帽",
+    "text": "带有螺旋桨帽的一套中性服装还包括 丑角上衣 和 农夫裤（染色RGB值 2,184,224）。"
+   }
+  ]
  },
  {
   "id": "(S)1193",
@@ -79192,7 +79622,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "海洋石",
+    "text": "海洋石可通过缝纫机使用布料制成 海洋上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1194",
@@ -79222,7 +79658,21 @@
   "image_kind": "indexed",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "裁缝",
+    "text": "注意：有三种上衣都叫“丝巾上衣”，均不可染色。"
+   },
+   {
+    "page": "氟磷灰石",
+    "text": "氟磷灰石可通过缝纫机使用布料制成 丝巾上衣。"
+   },
+   {
+    "page": "碧玉",
+    "text": "碧玉可通过缝纫机使用布料制成 丝巾上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1196",
@@ -79237,7 +79687,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "沙岩",
+    "text": "沙岩可通过缝纫机使用布料制成可染色的 背包T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1197",
@@ -79252,7 +79708,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "赤红猫眼石",
+    "text": "赤红猫眼石可通过缝纫机使用布料制成 紫色女式衬衫。"
+   }
+  ]
  },
  {
   "id": "(S)1198",
@@ -79267,7 +79729,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "赤铁矿",
+    "text": "赤铁矿可通过缝纫机使用布料制成 老式Polo衫。"
+   }
+  ]
  },
  {
   "id": "(S)1199",
@@ -79282,7 +79750,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "大理石",
+    "text": "大理石可通过缝纫机使用布料制成 托加长袍。"
+   },
+   {
+    "page": "月桂花冠",
+    "text": "带有月桂花冠的一套中性服装还包括 托加长袍 和 短裙（染色RGB值 247,245,205）。"
+   }
+  ]
  },
  {
   "id": "(S)1200",
@@ -79297,7 +79775,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "陶瓷碎片",
+    "text": "陶瓷碎片可通过缝纫机使用布料制成星星可染色的 星星T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1201",
@@ -79327,7 +79811,13 @@
   "image_kind": "indexed",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "斑点头巾",
+    "text": "带有斑点头巾的一套服装还包括 时髦上衣（女） 和 长裙（染色RGB值 142,1,1）。"
+   }
+  ]
  },
  {
   "id": "(S)1203",
@@ -79342,7 +79832,21 @@
   "image_kind": "indexed",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "裁缝",
+    "text": "注意：有三种上衣都叫“丝巾上衣”，均不可染色。"
+   },
+   {
+    "page": "氟磷灰石",
+    "text": "氟磷灰石可通过缝纫机使用布料制成 丝巾上衣。"
+   },
+   {
+    "page": "碧玉",
+    "text": "碧玉可通过缝纫机使用布料制成 丝巾上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1204",
@@ -79357,7 +79861,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "椰子",
+    "text": "椰子可通过缝纫机使用布料制成 假日T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1205",
@@ -79372,7 +79882,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "绿水镍矿",
+    "text": "绿水镍矿可通过缝纫机使用布料制成 园丁上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1206",
@@ -79387,7 +79903,21 @@
   "image_kind": "indexed",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "裁缝",
+    "text": "注意：有三种上衣都叫“丝巾上衣”，均不可染色。"
+   },
+   {
+    "page": "氟磷灰石",
+    "text": "氟磷灰石可通过缝纫机使用布料制成 丝巾上衣。"
+   },
+   {
+    "page": "碧玉",
+    "text": "碧玉可通过缝纫机使用布料制成 丝巾上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1207",
@@ -79402,7 +79932,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "石化史莱姆",
+    "text": "石化史莱姆可通过缝纫机使用布料制成 史莱姆T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1208",
@@ -79417,7 +79953,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "鹦鹉螺化石",
+    "text": "鹦鹉螺化石可通过缝纫机使用布料制成 挖掘机上衣。"
+   },
+   {
+    "page": "两栖动物化石",
+    "text": "两栖动物化石可通过缝纫机使用布料制成 挖掘机上衣。"
+   },
+   {
+    "page": "棕榈化石",
+    "text": "棕榈化石可通过缝纫机使用布料制成 挖掘机上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1209",
@@ -79446,7 +79996,9 @@
   "image": "Shirt210.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [],
+  "src": [
+   "可在创建角色时选择。（不可染色版本）"
+  ],
   "internal": false
  },
  {
@@ -79462,7 +80014,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "泪晶",
+    "text": "泪晶可通过缝纫机使用布料制成 深色夹克。"
+   }
+  ]
  },
  {
   "id": "(S)1212",
@@ -79477,7 +80035,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "琉璃山药",
+    "text": "琉璃山药可通过缝纫机使用布料制成 日落T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1213",
@@ -79492,7 +80056,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "法式田螺",
+    "text": "法式田螺可通过缝纫机使用布料制成 厨师工作服。"
+   }
+  ]
  },
  {
   "id": "(S)1214",
@@ -79507,7 +80077,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "海之菜肴",
+    "text": "海之菜肴可通过缝纫机使用布料制成 大海T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1215",
@@ -79537,7 +80113,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "蛋",
+    "text": "蛋可通过缝纫机使用布料制成上半部分可染色的 纯色背带裤。"
+   }
+  ]
  },
  {
   "id": "(S)1217",
@@ -79552,7 +80134,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "大壶牛奶",
+    "text": "大壶牛奶可通过缝纫机使用布料制成上半部分可染色的 无袖背带裤。"
+   }
+  ]
  },
  {
   "id": "(S)1218",
@@ -79582,7 +80170,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "太阳精华",
+    "text": "太阳精华可通过缝纫机使用布料制成 由巴上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1220",
@@ -79597,7 +80191,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "精炼石英",
+    "text": "精炼石英可通过缝纫机使用布料制成可染色的 项链T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1221",
@@ -79612,7 +80212,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "秋日恩赐",
+    "text": "秋日恩赐可通过缝纫机使用布料制成 皮带外套。"
+   }
+  ]
  },
  {
   "id": "(S)1222",
@@ -79627,7 +80233,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "矮人卷轴 I",
+    "text": "矮人卷轴 I可通过缝纫机使用布料制成可染色的 金边T恤。"
+   },
+   {
+    "page": "矮人卷轴 II",
+    "text": "矮人卷轴 II可通过缝纫机使用布料制成可染色的 金边T恤。"
+   },
+   {
+    "page": "矮人卷轴 III",
+    "text": "矮人卷轴 III可通过缝纫机使用布料制成可染色的 金边T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1223",
@@ -79642,7 +80262,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "五彩碎片",
+    "text": "五彩T恤（短袖，胸前有五彩方块图案）"
+   }
+  ]
  },
  {
   "id": "(S)1224",
@@ -79657,7 +80283,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "钻石",
+    "text": "钻石可通过缝纫机使用布料制成可染色的 吊坠T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1225",
@@ -79672,7 +80304,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "火把",
+    "text": "火把可通过缝纫机使用布料制成 高热T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1226",
@@ -79687,7 +80325,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "香辣鳗鱼",
+    "text": "香辣鳗鱼可通过缝纫机使用布料制成 火焰T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1227",
@@ -79702,7 +80346,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "有缺口的土罐",
+    "text": "有缺口的土罐可通过缝纫机使用布料制成 古老T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1228",
@@ -79717,7 +80367,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "箭头",
+    "text": "箭头可通过缝纫机使用布料制成 淡雅箭头T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1229",
@@ -79732,7 +80388,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "古代玩偶",
+    "text": "古代玩偶可通过缝纫机使用布料制成 玩偶T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1230",
@@ -79747,7 +80409,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "精灵珠宝",
+    "text": "精灵珠宝可通过缝纫机使用布料制成 珠宝T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1231",
@@ -79762,7 +80430,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "咀嚼洁齿棒",
+    "text": "咀嚼洁齿棒可通过缝纫机使用布料制成 帆布夹克。"
+   }
+  ]
  },
  {
   "id": "(S)1232",
@@ -79777,7 +80451,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "破损的眼镜",
+    "text": "破损的眼镜可通过缝纫机使用布料制成 垃圾桶T恤。"
+   },
+   {
+    "page": "垃圾（物品）",
+    "text": "垃圾可通过缝纫机使用布料制成 垃圾桶T恤。"
+   },
+   {
+    "page": "浮木",
+    "text": "浮木可通过缝纫机使用布料制成 垃圾桶T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1233",
@@ -79792,7 +80480,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "生锈的汤匙",
+    "text": "生锈的汤匙可通过缝纫机使用布料制成 铁锈T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1234",
@@ -79807,7 +80501,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "生锈的齿轮",
+    "text": "生锈的齿轮可通过缝纫机使用布料制成 电路板T恤。"
+   },
+   {
+    "page": "护目镜",
+    "text": "带有护目镜的一套中性服装还包括 电路板T恤 和 宽松裤（染色RGB值 60,99,62）。"
+   }
+  ]
  },
  {
   "id": "(S)1235",
@@ -79822,7 +80526,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "鸡雕像",
+    "text": "鸡雕像可通过缝纫机使用布料制成 绒毛T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1236",
@@ -79837,7 +80547,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "意大利面",
+    "text": "意大利面可通过缝纫机使用布料制成 酱汁T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1237",
@@ -79852,7 +80568,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "古代种子",
+    "text": "古代种子可通过缝纫机使用布料制成 棕色西装。"
+   }
+  ]
  },
  {
   "id": "(S)1238",
@@ -79912,7 +80634,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "鳟鱼汤",
+    "text": "鳟鱼汤可通过缝纫机使用布料制成 护林员制服。"
+   }
+  ]
  },
  {
   "id": "(S)1242",
@@ -79927,7 +80655,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "骨笛",
+    "text": "骨笛可通过缝纫机使用布料制成 蓝色长背心。"
+   }
+  ]
  },
  {
   "id": "(S)1243",
@@ -79942,7 +80676,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "古代鼓",
+    "text": "古代鼓可通过缝纫机使用布料制成 皇室披风。"
+   }
+  ]
  },
  {
   "id": "(S)1244",
@@ -79957,7 +80697,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "黄金遗物",
+    "text": "黄金遗物可通过缝纫机使用布料制成 遗物T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1245",
@@ -79972,7 +80718,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "诡异玩偶（黄）",
+    "text": "诡异玩偶（黄）可通过缝纫机使用布料制成可染色的 波波T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1246",
@@ -79987,7 +80739,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "煎鸡蛋",
+    "text": "煎鸡蛋可通过缝纫机使用布料制成 煎蛋T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1247",
@@ -80002,7 +80760,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "救生汉堡",
+    "text": "救生汉堡可通过缝纫机使用布料制成 汉堡T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1248",
@@ -80017,7 +80781,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "绿藻",
+    "text": "绿藻可通过缝纫机使用布料制成可染色的 有领衬衫。"
+   },
+   {
+    "page": "白藻",
+    "text": "白藻可通过缝纫机使用布料制成可染色的有领衬衫。"
+   }
+  ]
  },
  {
   "id": "(S)1249",
@@ -80032,7 +80806,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "乳酪花椰菜",
+    "text": "乳酪花椰菜可通过缝纫机使用布料制成 烤面包T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1250",
@@ -80047,7 +80827,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "惊喜鲤鱼",
+    "text": "惊喜鲤鱼可通过缝纫机使用布料制成 鲤鱼T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1251",
@@ -80062,7 +80848,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "薯饼",
+    "text": "薯饼可通过缝纫机使用布料制成 红色法兰绒上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1252",
@@ -80077,7 +80869,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "墨西哥薄饼",
+    "text": "墨西哥薄饼可通过缝纫机使用布料制成 薄饼T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1253",
@@ -80092,7 +80890,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "大麦粉",
+    "text": "大麦粉可通过缝纫机使用布料制成 暖色法兰绒上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1254",
@@ -80107,7 +80911,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "糖",
+    "text": "糖可通过缝纫机使用布料制成 砂糖T恤。"
+   },
+   {
+    "page": "标志帽",
+    "text": "带有标志帽的一套服装还包括 砂糖T恤 和 短裙（染色RGB值 249,172,186）。"
+   }
+  ]
  },
  {
   "id": "(S)1255",
@@ -80122,7 +80936,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "巨无霸餐",
+    "text": "巨无霸餐可通过缝纫机使用布料制成 绿色法兰绒上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1256",
@@ -80152,7 +80972,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "羊肚菌",
+    "text": "羊肚菌可通过缝纫机使用布料制成 羊肚菌T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1258",
@@ -80167,7 +80993,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "大葱",
+    "text": "大葱可通过缝纫机使用布料制成 春季T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1259",
@@ -80178,8 +81010,8 @@
   "desc": "与一般的水手服不同，这件的衣领是白色的，而且衣身可以染色。可以染色。",
   "flavor_of": null,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Shirt259a.png",
+  "image_kind": "indexed",
   "image_note": null,
   "src": [],
   "internal": false
@@ -80208,8 +81040,8 @@
   "desc": "与一般的水手服不同，这件的衣领是白色的，而且衣身可以染色。可以染色。",
   "flavor_of": null,
   "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "image": "Shirt261a.png",
+  "image_kind": "indexed",
   "image_note": null,
   "src": [],
   "internal": false
@@ -80261,7 +81093,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "万象晶球",
+    "text": "万象晶球可通过缝纫机使用布料制成 泛光T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1265",
@@ -80276,7 +81114,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "装饰用扇子",
+    "text": "装饰用扇子可通过缝纫机使用布料制成 新娘上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1266",
@@ -80291,7 +81135,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "榛子",
+    "text": "榛子可通过缝纫机使用布料制成 棕色背带裤。"
+   },
+   {
+    "page": "老伙计帽",
+    "text": "带有老伙计帽的一套中性服装还包括 棕色背带裤 和 农夫裤（染色RGB值 130,78,1）。"
+   }
+  ]
  },
  {
   "id": "(S)1267",
@@ -80306,7 +81160,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "冬根",
+    "text": "冬根可通过缝纫机使用布料制成 橘红色领结衫。"
+   }
+  ]
  },
  {
   "id": "(S)1268",
@@ -80321,7 +81181,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "大米",
+    "text": "大米可通过缝纫机使用布料制成 白色背带裤。"
+   }
+  ]
  },
  {
   "id": "(S)1269",
@@ -80336,7 +81202,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "咖啡",
+    "text": "咖啡可通过缝纫机使用布料制成 手冲咖啡T恤。"
+   },
+   {
+    "page": "三倍浓缩咖啡",
+    "text": "三倍浓缩咖啡可通过缝纫机使用布料制成 手冲咖啡T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1270",
@@ -80351,7 +81227,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "鸭蛋",
+    "text": "鸭蛋可通过缝纫机使用布料制成可染色的 绿色T恤夹克。"
+   }
+  ]
  },
  {
   "id": "(S)1271",
@@ -80381,7 +81263,17 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "鱼籽",
+    "text": "鱼籽可通过缝纫机使用布料制成可染色的 圆点上衣。"
+   },
+   {
+    "page": "虚空蛋黄酱",
+    "text": "虚空蛋黄酱可通过缝纫机使用布料制成可染色的 圆点上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1273",
@@ -80396,7 +81288,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "虞美人籽松糕",
+    "text": "虞美人籽松糕可通过缝纫机使用布料制成可染色的 白点上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1274",
@@ -80411,7 +81309,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "蔬菜什锦盖饭",
+    "text": "蔬菜什锦盖饭可通过缝纫机使用布料制成 迷彩上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1275",
@@ -80426,7 +81330,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "枫糖棒",
+    "text": "枫糖棒可通过缝纫机使用布料制成 泥土T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1276",
@@ -80456,7 +81366,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "萝卜沙拉",
+    "text": "萝卜沙拉可通过缝纫机使用布料制成可染色的 男款丝绸上衣 或 女款丝绸上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1278",
@@ -80471,7 +81387,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "章鱼",
+    "text": "章鱼可通过缝纫机使用布料制成可染色的 男款蓝色纽扣汗衫 或 女款蓝色纽扣汗衫。"
+   }
+  ]
  },
  {
   "id": "(S)1279",
@@ -80486,7 +81408,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "鲑鱼",
+    "text": "鲑鱼可通过缝纫机使用布料制成 褪色牛仔上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1280",
@@ -80518,7 +81446,21 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "大黄",
+    "text": "大黄可通过缝纫机使用布料制成仅袖子可染色的 男款绿色纽扣汗衫 或 女款绿色纽扣汗衫。"
+   },
+   {
+    "page": "香味浆果",
+    "text": "香味浆果可通过缝纫机使用布料制成仅袖子可染色的 男款绿色纽扣汗衫 或 女款绿色纽扣汗衫。"
+   },
+   {
+    "page": "草帽",
+    "text": "带有草帽的一套女性服装还包括 绿色纽扣汗衫（袖子染红） 和 短裙（染色RGB值 30,150,71）。"
+   }
+  ]
  },
  {
   "id": "(S)1282",
@@ -80533,7 +81475,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "西红柿",
+    "text": "西红柿可通过缝纫机使用布料制成 番茄T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1283",
@@ -80548,7 +81496,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "海鲜杂烩汤",
+    "text": "海鲜杂烩汤可通过缝纫机使用布料制成可染色的 男款流苏背心 或 女款流苏背心。"
+   }
+  ]
  },
  {
   "id": "(S)1284",
@@ -80563,7 +81517,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "腌鱼籽",
+    "text": "腌鱼籽可通过缝纫机使用布料制成可染色的 男款杂乱T恤 或 女款杂乱T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1285",
@@ -80578,7 +81538,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "鱿鱼墨汁",
+    "text": "鱿鱼墨汁可通过缝纫机使用布料制成 午夜狗T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1286",
@@ -80593,7 +81559,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "虾鸡尾酒",
+    "text": "虾鸡尾酒可通过缝纫机使用布料制成 虾爱好者T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1287",
@@ -80608,7 +81580,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "绿茶",
+    "text": "绿茶可通过缝纫机使用布料制成 绿茶T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1288",
@@ -80623,7 +81601,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "古物宝藏",
+    "text": "古物宝藏可通过缝纫机使用布料制成 饰品上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1289",
@@ -80638,7 +81622,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "枯萎的花束",
+    "text": "枯萎的花束可通过缝纫机使用布料制成 暗色西装。"
+   }
+  ]
  },
  {
   "id": "(S)1290",
@@ -80653,7 +81643,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "海泡布丁",
+    "text": "海泡布丁可通过缝纫机使用布料制成 矿物狗外套。"
+   }
+  ]
  },
  {
   "id": "(S)1291",
@@ -80668,7 +81664,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "熔岩菇",
+    "text": "熔岩菇可通过缝纫机使用布料制成 洋红色T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1292",
@@ -80683,7 +81685,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "姜汁汽水",
+    "text": "姜汁汽水可通过缝纫机使用布料制成 姜汁背带裤。"
+   }
+  ]
  },
  {
   "id": "(S)1293",
@@ -80698,7 +81706,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "香蕉布丁",
+    "text": "香蕉布丁可通过缝纫机使用布料制成 香蕉T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1294",
@@ -80713,7 +81727,17 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "芒果糯米饭",
+    "text": "芒果糯米饭可通过缝纫机使用布料制成 黄色西装。"
+   },
+   {
+    "page": "草帽",
+    "text": "带有草帽的一套男性服装还包括 黄色西装 和 农夫裤（染色RGB值 242,189,2）。"
+   }
+  ]
  },
  {
   "id": "(S)1295",
@@ -80728,7 +81752,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "夏威夷芋泥",
+    "text": "夏威夷芋泥可通过缝纫机使用布料制成 热粉色衬衫。"
+   }
+  ]
  },
  {
   "id": "(S)1296",
@@ -80743,7 +81773,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "热带咖喱",
+    "text": "热带咖喱可通过缝纫机使用布料制成 热带日出T恤。"
+   }
+  ]
  },
  {
   "id": "(S)1297",
@@ -80758,7 +81794,13 @@
   "image_kind": "exact",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "金色椰子",
+    "text": "金色椰子可通过缝纫机使用布料制成可染色的 姜岛比基尼。"
+   }
+  ]
  },
  {
   "id": "(S)1997",
@@ -80773,7 +81815,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "魔法糖冰棍",
+    "text": "魔法糖冰棍可通过缝纫机使用布料制成 魔法斑点衣。"
+   }
+  ]
  },
  {
   "id": "(S)1998",
@@ -80788,7 +81836,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "五彩碎片",
+    "text": "男款五彩上衣 或 女款五彩上衣（白袖子）"
+   }
+  ]
  },
  {
   "id": "(S)1999",
@@ -80803,7 +81857,13 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "五彩碎片",
+    "text": "男款五彩上衣 或 女款五彩上衣（白袖子）"
+   }
+  ]
  },
  {
   "id": "(S)MysteryShirt",
@@ -80832,7 +81892,9 @@
   "image": null,
   "image_kind": "missing",
   "image_note": null,
-  "src": [],
+  "src": [
+   "沙漠节艾米丽的服装服务处可获得男款变体。"
+  ],
   "internal": false
  },
  {
@@ -81337,7 +82399,17 @@
   "image": "Trash_Can_Gold.png",
   "image_kind": "tool-table",
   "image_note": null,
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "大圆木",
+    "text": "一个大圆木也将刷新在鹈鹕镇东部在Joja超市和铁匠铺之间的隐藏区域中，阻挡着玩家前往黄金垃圾桶取得小巷自助餐技能书。"
+   },
+   {
+    "page": "小巷自助餐",
+    "text": "小巷自助餐是一本能力之书，可以在Joja超市和铁匠铺之间被树挡住的黄金垃圾桶中找到，需要通过一个隐藏在栅栏上的洞。"
+   }
+  ]
  },
  {
   "id": "(T)IridiumTrashCan",

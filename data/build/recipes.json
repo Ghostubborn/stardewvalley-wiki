@@ -16835,6 +16835,108 @@
   "source": "https://zh.stardewvalleywiki.com/裁缝"
  },
  {
+  "id": "recipe:(S)1130:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1130",
+   "zh": "背心（女）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)264",
+    "en": "Radish",
+    "zh": "萝卜",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1130:tailoring#2",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1130",
+   "zh": "背心（女）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)266",
+    "en": "Red Cabbage",
+    "zh": "红叶卷心菜",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1130:tailoring#3",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1130",
+   "zh": "背心（女）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)SummerSquash",
+    "en": "Summer Squash",
+    "zh": "金皮西葫芦",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
   "id": "recipe:(S)1131:tailoring",
   "kind": "tailoring",
   "output": {
@@ -16875,6 +16977,40 @@
    "page": null,
    "id": "(S)1132",
    "zh": "短背心（男）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)262",
+    "en": "Wheat",
+    "zh": "小麦",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1133:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1133",
+   "zh": "短背心（女）",
    "qty": 1
   },
   "inputs": [
@@ -16977,6 +17113,40 @@
    "page": null,
    "id": "(S)1136",
    "zh": "80's衬衣（女）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)90",
+    "en": "Cactus Fruit",
+    "zh": "仙人掌果子",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1152:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1152",
+   "zh": "80's衬衣（男）",
    "qty": 1
   },
   "inputs": [
@@ -20133,6 +20303,74 @@
   "source": "https://zh.stardewvalleywiki.com/裁缝"
  },
  {
+  "id": "recipe:(S)1177:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1177",
+   "zh": "普通套头衫（女）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)771",
+    "en": "Fiber",
+    "zh": "纤维",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1177:tailoring#2",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1177",
+   "zh": "普通套头衫（女）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)388",
+    "en": "Wood",
+    "zh": "木材",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
   "id": "recipe:(S)1178:tailoring",
   "kind": "tailoring",
   "output": {
@@ -21023,6 +21261,40 @@
    "page": null,
    "id": "(S)1201",
    "zh": "时髦上衣（男）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)547",
+    "en": "Helvite",
+    "zh": "日光榴石",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1202:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1202",
+   "zh": "时髦上衣（女）",
    "qty": 1
   },
   "inputs": [
@@ -24723,6 +24995,40 @@
   "source": "https://zh.stardewvalleywiki.com/裁缝"
  },
  {
+  "id": "recipe:(S)1997:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1997",
+   "zh": "魔法斑点衣",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)279",
+    "en": "Magic Rock Candy",
+    "zh": "魔法糖冰棍",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
   "id": "recipe:(S)1273:tailoring",
   "kind": "tailoring",
   "output": {
@@ -25243,9 +25549,9 @@
   },
   "inputs": [
    {
-    "id": "(O)275",
-    "en": "Artifact Trove",
-    "zh": "古物宝藏",
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
     "qty": 1,
     "note": null,
     "link": null
@@ -25277,9 +25583,9 @@
   },
   "inputs": [
    {
-    "id": "(O)277",
-    "en": "Wilted Bouquet",
-    "zh": "枯萎的花束",
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
     "qty": 1,
     "note": null,
     "link": null
@@ -25722,6 +26028,40 @@
     "id": "(O)Powdermelon",
     "en": "Powdermelon",
     "zh": "霜瓜",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(P)998:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(P)998",
+   "zh": "五彩裤子",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
     "qty": 1,
     "note": null,
     "link": null
@@ -26219,6 +26559,40 @@
   "source": "https://zh.stardewvalleywiki.com/裁缝"
  },
  {
+  "id": "recipe:(P)999:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(P)999",
+   "zh": "五彩神怪裤",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
   "id": "recipe:(P)10:tailoring",
   "kind": "tailoring",
   "output": {
@@ -26538,6 +26912,210 @@
     "id": "(O)636",
     "en": "Peach",
     "zh": "桃子",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1041:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1041",
+   "zh": "白T恤（女）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)440",
+    "en": "Wool",
+    "zh": "动物毛",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1210:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1210",
+   "zh": "爱心T恤",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)203",
+    "en": "Strange Bun",
+    "zh": "奇怪的小面包",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1998:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1998",
+   "zh": "五彩上衣",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)1999:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)1999",
+   "zh": "五彩上衣",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)74",
+    "en": "Prismatic Shard",
+    "zh": "五彩碎片",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)SoftEdgePullover:tailoring",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)SoftEdgePullover",
+   "zh": "普通套头衫（男）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)771",
+    "en": "Fiber",
+    "zh": "纤维",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)247",
+    "en": "Sewing Machine",
+    "zh": "缝纫机",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": null,
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://zh.stardewvalleywiki.com/裁缝"
+ },
+ {
+  "id": "recipe:(S)SoftEdgePullover:tailoring#2",
+  "kind": "tailoring",
+  "output": {
+   "page": null,
+   "id": "(S)SoftEdgePullover",
+   "zh": "普通套头衫（男）",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": "(O)388",
+    "en": "Wood",
+    "zh": "木材",
     "qty": 1,
     "note": null,
     "link": null

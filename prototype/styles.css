@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SDV Pixel";
-  src: url("assets/fonts/pixel-subset.woff2?v=570d6d8df6b9") format("woff2");
+  src: url("assets/fonts/pixel-subset.woff2?v=bfd1a90f538d") format("woff2");
   font-display: swap;
 }
 
@@ -369,6 +369,34 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .eat-grid th { color: var(--ink-soft); font-size: 12px; border-bottom: 1px solid var(--parchment-lo); }
 .eat-grid td + td { font-variant-numeric: tabular-nums; }
 .drop-list > .chips + .d-sub { margin-top: 10px; }
+/* Wiki 条目正文：段落、列表、表格照原文结构排版，表格过宽时横向滚动。 */
+.article > p, .art-section > p, .art-fold > p, .art-details > p { margin: 8px 0 0; }
+.art-section { margin-top: 18px; }
+.art-section > h3, .art-fold .art-section > h4 { margin: 0 0 4px; font: 12px/1.4 var(--pixel); font-weight: normal; color: var(--bark); }
+.art-section > h4, .art-section > h5, .art-section > h6 { margin: 0 0 2px; font: 12px/1.4 var(--pixel); font-weight: normal; color: var(--ink-soft); }
+.detail[data-mode="reading"] .art-section > h3, .detail[data-mode="reading"] .art-fold .art-section > h4 { font-size: 16px; line-height: 1.5; }
+.detail[data-mode="reading"] .art-section > h4, .detail[data-mode="reading"] .art-section > h5 { font-size: 14px; line-height: 1.5; }
+.art-note { color: var(--ink-soft); font-size: 13px; }
+.art-term { font-weight: bold; }
+.art-list { margin: 6px 0 0; padding-left: 22px; }
+.art-list .art-list { margin-top: 0; }
+.art-quote { margin: 8px 0 0; padding: 4px 12px; border-left: 3px solid var(--parchment-lo); color: var(--ink-soft); }
+.art-quote p { margin: 0; }
+.art-quote footer { font-size: 13px; }
+.art-table-wrap { max-width: 100%; overflow-x: auto; margin-top: 8px; }
+.art-table { border-collapse: collapse; font-size: 13px; line-height: 1.55; }
+.art-table caption { text-align: left; color: var(--ink-soft); font-size: 12px; }
+.art-table th, .art-table td { min-width: 3em; border: 1px solid var(--parchment-lo); padding: 4px 8px; text-align: left; vertical-align: top; }
+.art-table th { background: var(--parchment); font-weight: normal; color: var(--ink-soft); }
+.art-table td > p:first-child, .art-table td > ul:first-child { margin-top: 0; }
+.art-details { margin-top: 8px; }
+.art-details > summary { cursor: pointer; color: var(--bark); }
+.art-item, .art-link { color: var(--bark); text-underline-offset: 3px; }
+.art-item { white-space: nowrap; }
+.art-item + .art-item { margin-left: 6px; }
+.art-icon { width: 18px; height: 18px; margin-right: 2px; vertical-align: -3px; }
+.art-facts { margin-top: 10px; }
+.art-fold > .btn { margin-top: 8px; }
 
 /* —— 地图工具 —— */
 .map-tools { position: absolute; left: 350px; bottom: 100px; display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; z-index: 4; }

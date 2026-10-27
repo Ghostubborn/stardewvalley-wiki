@@ -43,19 +43,13 @@
     "id": "(O)176"
    },
    {
-    "zh": "棕色蛋",
-    "en": "Brown Egg",
-    "page": "蛋",
-    "image": "Brown_Egg.png"
+    "id": "(O)180"
    },
    {
     "id": "(O)174"
    },
    {
-    "zh": "棕色大鸡蛋",
-    "en": "Large Brown Egg",
-    "page": "大鸡蛋",
-    "image": "Large_Brown_Egg.png"
+    "id": "(O)182"
    }
   ],
   "produce": [
@@ -68,7 +62,7 @@
     "link": null
    },
    {
-    "id": null,
+    "id": "(O)180",
     "en": "Brown Egg",
     "zh": "棕色蛋",
     "qty": null,
@@ -84,7 +78,7 @@
     "link": null
    },
    {
-    "id": null,
+    "id": "(O)182",
     "en": "Large Brown Egg",
     "zh": "棕色大鸡蛋",
     "qty": null,

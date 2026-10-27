@@ -55,7 +55,13 @@ class ImageResolver:
         if raw.isdigit():
             number = int(raw)
             if kind == "S" and 1000 <= number < 2000:
+                # 有两种配色的上衣只存了“Shirt259a.png”“Shirt259b.png”。
                 indexed = f"Shirt{number - 1000:03}.png"
+                if not self.find(indexed):
+                    indexed = f"Shirt{number - 1000:03}a.png"
+            elif kind == "O" and self.find(f"Springobjects{number:03}.png"):
+                # Wiki 用游戏贴图的编号文件（Springobjects071.png）配图的物品，如镶边幸运紫色短裤。
+                indexed = f"Springobjects{number:03}.png"
             elif kind == "WP":
                 indexed = f"Wallpaper_{number + 1:03}_Icon.png"
             elif kind == "FL":
@@ -73,8 +79,11 @@ class ImageResolver:
             if hit:
                 return hit, "tool-table", None
         aliases = {"Bait (item)": "Bait.png", "Lost Axe": "Robins_Lost_Axe.png", "Wild Honey": "Honey.png",
-                   "Artifact Spot": "Artifact_tile.gif", "SeedSpot": "Seed_Spot.gif"}
-        hit = self.find(aliases.get(name))
+                   "Artifact Spot": "Artifact_tile.gif", "SeedSpot": "Seed_Spot.gif",
+                   # 同一张贴图的裤子版本（镶边幸运紫色短裤）与 Wiki 补给箱的三种外观。
+                   "Trimmed Lucky Purple Shorts": "Springobjects071.png"}
+        aliases.update({f"(O){922 + i}": f"Supply_Crate_{i + 1}.png" for i in range(3)})
+        hit = self.find(aliases.get(name) or aliases.get(item["id"]) or (raw if not raw.isdigit() else None))
         if hit:
             return hit, "alias", None
         page = pages.get(item.get("page")) or {}

@@ -228,6 +228,7 @@ class English:
             "tooltip": lambda a: a.get("1", ""), "color": lambda a: a.get("2", ""),
             "cookingchannel": lambda a: f"The Queen of Sauce ({a.get('1', '').strip()})\n", "duration": lambda a: a.get("1", ""),
         }
+        self.handlers = handlers  # build_articles.py reuses these and keeps links to other articles
         base = wt.Renderer(handlers).render
 
         def render(text):
@@ -381,6 +382,38 @@ class English:
                 out[it["id"]] = entries
             elif it.get("src"):
                 self.missing["item_sources"] += 1
+        return out
+
+    MENTION_SKIP = {"Bugs", "Trivia", "Dialogue", "Quotes", "History", "Questions", "Movies & Concessions"}
+
+    def mentions(self, items, wanted, skip_pages):
+        """Sentences on other English pages that mention the given items (same rules as the Chinese build)."""
+        # Short names are mostly common words ("Cactus", "Hedge"); a sentence using them isn't about the item.
+        want = {}
+        for it in items:
+            if it["id"] in wanted and it.get("en") and len(it["en"]) >= 9:
+                want.setdefault(it["en"], []).append(it["id"])
+        if not want:
+            return {}
+        known = {it["en"] for it in items if it.get("en")} | set(self.title_zh)
+
+        def sections():
+            for title, row in self.en.items():
+                if (row["ns"] != 0 or row["redirect"] or "History" in title or self.title_zh.get(title) in skip_pages
+                        or not any(n in row["text"] for n in want)):
+                    continue
+                for sec in wt.sections(row["text"]):
+                    heading = (sec["title"] or "").strip()
+                    if heading in self.MENTION_SKIP:
+                        continue
+                    if any(n in sec["body"] for n in want) or heading in want:
+                        yield title, (sec["title"] or "").strip(), self.plain(sec["body"])
+
+        out = {}
+        for name, hits in SRC.mentions(sections(), list(want), known).items():
+            for item_id in want[name]:
+                out[item_id] = [{k: v for k, v in (("p", self.title_zh.get(page)), ("e", None if self.title_zh.get(page) else page), ("t", text)) if v}
+                                for page, text in hits]
         return out
 
     def items(self, items):
@@ -800,6 +833,8 @@ def build():
         "recipes": e.recipes(load("recipes.json"), pages),
         "schedules": e.schedules(load("villagers.json")),
         "monsters": e.monsters(load("monsters.json")),
+        "mentions": e.mentions(load("items.json"), {i["id"] for i in load("items.json") if i.get("mentions")},
+                               {p["title"] for p in pages if p["kind"] in ("villager", "npc")}),
     }
     # Items sold in a shop table that also lists "Other Sources" (Harvey's Clinic): those are the item's sources.
     for item_id, entries in e.shop_other.items():

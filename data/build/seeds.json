@@ -58,7 +58,7 @@
    "旅行货车": {
     "amount": 45,
     "currency": "金",
-    "text": "45金"
+    "text": "135–1,000金"
    }
   },
   "night_market_day": null
@@ -90,7 +90,7 @@
    "旅行货车": {
     "amount": 30,
     "currency": "金",
-    "text": "30金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": null
@@ -112,7 +112,7 @@
    "旅行货车": {
     "amount": 55,
     "currency": "金",
-    "text": "55金"
+    "text": "165–1,000金"
    }
   },
   "night_market_day": null
@@ -134,7 +134,7 @@
    "旅行货车": {
     "amount": 35,
     "currency": "金",
-    "text": "35金"
+    "text": "105–1,000金"
    }
   },
   "night_market_day": null
@@ -173,7 +173,7 @@
    "旅行货车": {
     "amount": 40,
     "currency": "金",
-    "text": "40金"
+    "text": "120–1,000金"
    }
   },
   "night_market_day": 15
@@ -213,7 +213,7 @@
    "旅行货车": {
     "amount": 20,
     "currency": "金",
-    "text": "20金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 16
@@ -252,7 +252,7 @@
    "旅行货车": {
     "amount": 10,
     "currency": "金",
-    "text": "10金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 15
@@ -291,7 +291,7 @@
    "旅行货车": {
     "amount": 25,
     "currency": "金",
-    "text": "25金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 15
@@ -330,7 +330,7 @@
    "旅行货车": {
     "amount": 20,
     "currency": "金",
-    "text": "20金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 15
@@ -359,7 +359,7 @@
    "旅行货车": {
     "amount": 50,
     "currency": "金",
-    "text": "50金"
+    "text": "150–1,000金"
    },
    "绿洲": {
     "amount": 100,
@@ -461,7 +461,7 @@
    "旅行货车": {
     "amount": 30,
     "currency": "金",
-    "text": "30金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 16
@@ -493,7 +493,7 @@
    "旅行货车": {
     "amount": 500,
     "currency": "金",
-    "text": "500金"
+    "text": "1,500–2,500金"
    }
   },
   "night_market_day": null
@@ -530,7 +530,7 @@
    "旅行货车": {
     "amount": 850,
     "currency": "金",
-    "text": "850金"
+    "text": "2,550–4,250金"
    }
   },
   "night_market_day": null
@@ -570,7 +570,7 @@
    "旅行货车": {
     "amount": 75,
     "currency": "金",
-    "text": "75金"
+    "text": "225–1,000金"
    }
   },
   "night_market_day": 16
@@ -609,7 +609,7 @@
    "旅行货车": {
     "amount": 40,
     "currency": "金",
-    "text": "40金"
+    "text": "120–1,000金"
    }
   },
   "night_market_day": 16
@@ -646,7 +646,7 @@
    "旅行货车": {
     "amount": 1000,
     "currency": "金",
-    "text": "1,000金"
+    "text": "3,000–5,000金"
    }
   },
   "night_market_day": null
@@ -683,7 +683,7 @@
    "旅行货车": {
     "amount": 1500,
     "currency": "金",
-    "text": "1,500金"
+    "text": "4,500–7,500金"
    }
   },
   "night_market_day": null
@@ -722,7 +722,7 @@
    "旅行货车": {
     "amount": 20,
     "currency": "金",
-    "text": "20金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 16
@@ -761,7 +761,7 @@
    "旅行货车": {
     "amount": 50,
     "currency": "金",
-    "text": "50金"
+    "text": "150–1,000金"
    }
   },
   "night_market_day": 16
@@ -800,7 +800,7 @@
    "旅行货车": {
     "amount": 20,
     "currency": "金",
-    "text": "20金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 16
@@ -839,7 +839,7 @@
    "旅行货车": {
     "amount": 50,
     "currency": "金",
-    "text": "50金"
+    "text": "150–1,000金"
    }
   },
   "night_market_day": 16
@@ -878,7 +878,7 @@
    "旅行货车": {
     "amount": 25,
     "currency": "金",
-    "text": "25金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 16
@@ -917,7 +917,7 @@
    "旅行货车": {
     "amount": 15,
     "currency": "金",
-    "text": "15金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 15
@@ -956,7 +956,7 @@
    "旅行货车": {
     "amount": 35,
     "currency": "金",
-    "text": "35金"
+    "text": "105–1,000金"
    }
   },
   "night_market_day": 15
@@ -995,7 +995,7 @@
    "旅行货车": {
     "amount": 10,
     "currency": "金",
-    "text": "10金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 15
@@ -1034,7 +1034,7 @@
    "旅行货车": {
     "amount": 40,
     "currency": "金",
-    "text": "40金"
+    "text": "120–1,000金"
    }
   },
   "night_market_day": 16
@@ -1073,7 +1073,7 @@
    "旅行货车": {
     "amount": 200,
     "currency": "金",
-    "text": "200金"
+    "text": "600–1,000金"
    },
    "绿洲": {
     "amount": 400,
@@ -1117,7 +1117,7 @@
    "旅行货车": {
     "amount": 120,
     "currency": "金",
-    "text": "120金"
+    "text": "360–1,000金"
    }
   },
   "night_market_day": 17
@@ -1154,7 +1154,7 @@
    "旅行货车": {
     "amount": 1000,
     "currency": "金",
-    "text": "*1,000金（春季和夏季）\n*200金（1.26% 的概率，不限季节）"
+    "text": "*1,000金（春季和夏季）\n*600–1,000金（1.26% 的概率，不限季节）"
    }
   },
   "night_market_day": null
@@ -1222,7 +1222,7 @@
    "旅行货车": {
     "amount": 250,
     "currency": "金",
-    "text": "250金"
+    "text": "750–1,250金"
    }
   },
   "night_market_day": null
@@ -1293,7 +1293,7 @@
    "旅行货车": {
     "amount": 1500,
     "currency": "金",
-    "text": "1,500金"
+    "text": "4,500–7,500金"
    }
   },
   "night_market_day": null
@@ -1330,7 +1330,7 @@
    "旅行货车": {
     "amount": 25,
     "currency": "金",
-    "text": "25金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 16
@@ -1370,7 +1370,7 @@
    "旅行货车": {
     "amount": 5,
     "currency": "金",
-    "text": "5金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 16
@@ -1407,7 +1407,7 @@
    "旅行货车": {
     "amount": 35,
     "currency": "金",
-    "text": "35金"
+    "text": "105–1,000金"
    }
   },
   "night_market_day": 17
@@ -1439,7 +1439,7 @@
    "旅行货车": {
     "amount": 20,
     "currency": "金",
-    "text": "20金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": null
@@ -1471,7 +1471,7 @@
    "旅行货车": {
     "amount": 5,
     "currency": "金",
-    "text": "5金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": null
@@ -1503,7 +1503,7 @@
    "旅行货车": {
     "amount": 5,
     "currency": "金",
-    "text": "5金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": null
@@ -1540,7 +1540,7 @@
    "旅行货车": {
     "amount": 1000,
     "currency": "金",
-    "text": "1,000金"
+    "text": "3,000–5,000金"
    }
   },
   "night_market_day": null
@@ -1579,7 +1579,7 @@
    "旅行货车": {
     "amount": 15,
     "currency": "金",
-    "text": "15金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 17
@@ -1618,7 +1618,7 @@
    "旅行货车": {
     "amount": 10,
     "currency": "金",
-    "text": "10金"
+    "text": "100–1,000金"
    },
    "绿洲": {
     "amount": 20,
@@ -1660,7 +1660,7 @@
    "旅行货车": {
     "amount": 25,
     "currency": "金",
-    "text": "25金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 17
@@ -1697,7 +1697,7 @@
    "旅行货车": {
     "amount": 10,
     "currency": "金",
-    "text": "10金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 17
@@ -1734,7 +1734,7 @@
    "旅行货车": {
     "amount": 100,
     "currency": "金",
-    "text": "100金"
+    "text": "300–1,000金"
    }
   },
   "night_market_day": 17
@@ -1771,7 +1771,7 @@
    "旅行货车": {
     "amount": 30,
     "currency": "金",
-    "text": "30金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 17
@@ -1808,7 +1808,7 @@
    "旅行货车": {
     "amount": 50,
     "currency": "金",
-    "text": "50金"
+    "text": "150–1,000金"
    }
   },
   "night_market_day": 17
@@ -1847,7 +1847,7 @@
    "旅行货车": {
     "amount": 30,
     "currency": "金",
-    "text": "30金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 17
@@ -1881,7 +1881,7 @@
    "旅行货车": {
     "amount": 10,
     "currency": "金",
-    "text": "10金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": null
@@ -2151,7 +2151,7 @@
    "旅行货车": {
     "amount": 30,
     "currency": "金",
-    "text": "30金"
+    "text": "100–1,000金"
    }
   },
   "night_market_day": 15

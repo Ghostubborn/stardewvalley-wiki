@@ -1,7 +1,7 @@
 // Run on /en/ with agent-browser eval --stdin < scripts/test_english_spoilers_browser.js
 // With spoiler protection on and no progress, English names of protected entries must not appear
-// in categories, the home page, map lists or fuzzy search.
-(() => {
+// in categories, the home page, map lists, fuzzy search or wiki article bodies.
+(async () => {
   const A = App, S = A.spoilers, D = A.D;
   if (A.lang !== "en") throw new Error("Open /en/ first");
   A.applyPreset("unknown"); S.setEnabled(true); A.select(null);
@@ -34,5 +34,21 @@
   const exact = document.getElementById("search-results").textContent;
   input.value = ""; input.dispatchEvent(new Event("input", { bubbles: true }));
   A.setView("browse");
-  return JSON.stringify({ checkedNames: protectedNames.map(x => x.en), leaks: leaks.slice(0, 20), leakCount: leaks.length, exactSearch: exact.slice(0, 120) });
+  // Article bodies load on demand; paragraphs, list items and table rows that name protected places stay folded.
+  const body = document.getElementById("detail-body");
+  const settle = async () => { await A.articleRequest; await new Promise(resolve => setTimeout(resolve, 30)); };
+  let articleBlocks = 0;
+  const refs = [...["天气", "季节", "耕种", "钓鱼", "采矿", "节日", "钓鱼攻略"].map(id => ({ type: "page", id })),
+    { type: "item", id: "(O)72" }, { type: "villager", id: "潘妮" }, { type: "fish", id: "鲶鱼" }];
+  for (const ref of refs) {
+    A.select(ref, { from: "browse" });
+    await settle();
+    // Basics guides and regular entries keep the full article in a fold at the end.
+    body.querySelector(".art-fold button")?.click();
+    await settle();
+    articleBlocks += body.querySelectorAll(".art-section, .article > p, .art-fold > p").length;
+    check("article:" + ref.id, exposed(body));
+  }
+  A.select(null);
+  return JSON.stringify({ checkedNames: protectedNames.map(x => x.en), leaks: leaks.slice(0, 20), leakCount: leaks.length, articleBlocks, exactSearch: exact.slice(0, 120) });
 })();

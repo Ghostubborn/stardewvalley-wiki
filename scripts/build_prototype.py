@@ -139,6 +139,8 @@ def main():
         return i
 
     out_items = {}
+    # 有配方或商店出售的物品已有获取途径，不再附带其他条目里提到它的句子。
+    covered = {r["output"]["id"] for r in load("recipes.json")} | {x["id"] for shop in load("shops.json") for x in shop["stock"] if x.get("id")}
 
     def add_item(it):
         out_items[it["id"]] = {
@@ -149,7 +151,8 @@ def main():
         # 能量与生命值以条目信息框为准；条目不是写这件物品（如哈维的诊所里的药），才用游戏数据按同一公式补算。
         page = page_by_title.get(it["page"]) or {}
         own_eat = page.get("item_id") == it["id"] and (page.get("props") or {}).get("eat")
-        extra = {"src": it.get("src") or None, "x": 1 if it.get("internal") else None, "eat": None if own_eat else it.get("eat")}
+        extra = {"src": it.get("src") or None, "x": 1 if it.get("internal") else None, "eat": None if own_eat else it.get("eat"),
+                 "mn": [{"p": m["page"], "t": m["text"]} for m in it.get("mentions", [])] if it["id"] not in covered else None}
         # 蜂蜜随附近的花、鱼籽随鱼塘里的鱼而不同：保留口味来源，详情据此说明产出方式。
         if it.get("made_by") in ("(O)340", "(O)812"):
             extra.update(fo=it["flavor_of"], mb=it["made_by"])
@@ -305,6 +308,9 @@ def main():
         record = {"p": m["page"], "i": img(m["image"]), "lt": m["location_text"], "L": list(dict.fromkeys(m["locations"])),
                   "lv": m["levels"], "s": m["stats"], "dr": drops, "vr": m["variations"]}
         monsters.append({k: v for k, v in record.items() if v})
+    # 普通树的树液采集器产物（枫糖浆、橡树树脂……）；果树的果实已由种植途径覆盖。
+    trees = [{"p": t["page"], "pr": [x["id"] for x in t["produce"] if x.get("id")]} for t in load("trees.json")
+             if t["kind"] == "tree" and any(x.get("id") for x in t["produce"])]
     animals = []
     for a in load("animals.json"):
         record = {"p": a["page"], "i": img(a["image"]), "h": [{"z": h["zh"], "pg": h["page"]} for h in a["homes"]],
@@ -349,6 +355,12 @@ def main():
         with open(os.path.join(ROOT, path), "rb") as f:
             return "data:image/png;base64," + base64.b64encode(f.read()).decode()
 
+    # 条目正文按条目单独写到 prototype/articles/，这里只记下文件名（ar）。
+    articles, article_text = runpy.run_path(os.path.join(ROOT, "scripts", "build_articles.py"))["build"]()
+    for title, key in articles["zh"].items():
+        if title in out_pages:
+            out_pages[title]["ar"] = key
+
     data = {
         "meta": {"generated": manifest["generated_at"], "sources": manifest["sources"], "wiki": manifest["wiki"],
                  "counts": {k.replace(".json", ""): v for k, v in manifest["counts"].items()}},
@@ -358,7 +370,7 @@ def main():
         "pages": out_pages, "items": out_items, "fish": fish, "villagers": villagers, "locations": locations,
         "seeds": seeds, "recipes": recipes, "chains": chains, "buildings": buildings, "bundles": bundles,
         "shops": shops, "pins": pins, "skillUnlocks": skill_unlocks, "progression": progression,
-        "monsters": monsters, "animals": animals,
+        "monsters": monsters, "animals": animals, "trees": trees,
         "guides": guides,
         "schedules": runpy.run_path(os.path.join(ROOT, "scripts", "build_schedules.py"))["build"](ROOT),
     }
@@ -381,17 +393,20 @@ def main():
         f.write("/* 由 scripts/build_prototype.py 生成；数据来自星露谷物语中文 Wiki（CC BY-NC-SA 3.0）的 2025-12-18 归档。 */\n")
         f.write("window.SDV = " + payload + ";\n")
 
-    english = build_english()
-    subset_font(payload + english)
+    english = build_english(articles["en"])
+    subset_font(payload + english + article_text)
     version_assets()
     print(json.dumps({"data_js_mb": round(os.path.getsize(os.path.join(PROTO, "data.js")) / 1e6, 2),
                       "items": len(out_items), "pages": len(out_pages), "pins": len(pins), "recipes": len(recipes),
                       "images_copied": copied, "images_missing": missing}, ensure_ascii=False))
 
 
-def build_english():
+def build_english(articles):
     """英文版：data.en.js（英文 Wiki 的显示文本）、js/strings.en.js（界面词典）和 en/index.html。"""
     data, report = runpy.run_path(os.path.join(ROOT, "scripts", "build_en.py"))["build"]()
+    for title, key in articles.items():
+        if title in data["pages"]:
+            data["pages"][title]["ar"] = key
     missing = report["missing"]
     if missing:
         print("英文资料缺口：", json.dumps(missing, ensure_ascii=False))

@@ -60,6 +60,14 @@ KIND_ZH = {
 }
 # 绑定物品的条目类型；地点、怪物和分类页不能绑定到碰巧同名的家具/物品。
 ITEM_KINDS = {"item", "furniture", "hat", "cooking", "fish", "seed", "weapon", "clothing", "mineral", "crop", "artifact", "tool"}
+# 物品按名称找条目时不对应到这些类型（家具“骷髅”与怪物“骷髅”同名）。
+NOT_ITEM_PAGES = {"monster", "villager", "npc", "animal", "building"}
+# 中文条目的跨语言链接拼错、英文站没有这个标题的。
+EN_TITLE_FIXES = {"Sam Protrait": "Sam Portrait"}
+# 收集“其他条目提到这件物品”时跳过的小节。
+MENTION_SKIP = {"漏洞", "趣闻", "对话", "引用", "历史", "提问", "电影和零食喜好"}
+# 游戏内名称与条目名不同、或与怪物和建筑同名的物品：按条目的跨语言链接（骷髅雕像 = tr:İskelet (mobilya)）对应。
+ITEM_PAGES = {"(F)1304": "骷髅雕像", "(F)JunimoHut": "祝尼魔屋家具"}
 # 武器类型：照 Template:Infobox weapon 的写法，英文值换成中文名。
 WEAPON_TYPES = {"sword": "剑", "dagger": "匕首", "club": "锤", "slingshot": "弹弓"}
 # 怪物出没地点：Template:Infobox monster 把这几种写法（含英文）链接到对应条目。
@@ -187,6 +195,17 @@ def make_renderer(catalog, npc_zh, bundles):
         except ValueError:
             return value
 
+    def tprice(a):
+        """模块:Tcartprice：旅行货车按基础价的 3～5 倍出售，最低 100～1,000 金；家具统一 250～2,500 金。"""
+        value = a.get("1", "").strip()
+        if value.lower() == "furniture":
+            return "250–2,500金"
+        try:
+            base = int(float(value.replace(",", "")))
+        except ValueError:
+            return value
+        return f"{max(base * 3, 100):,}–{max(base * 5, 1000):,}金"
+
     def season(a):
         code = P.SEASONS.get(a.get("1", "").strip().lower())
         text = P.SEASON_ZH.get(code, a.get("1", ""))
@@ -207,11 +226,13 @@ def make_renderer(catalog, npc_zh, bundles):
         return bundles.get(a.get("1", "").strip().lower(), a.get("1", "") + "收集包")
 
     def description(a):
-        hit = catalog.resolve(a.get("1", "")) or {}
-        return (hit.get("id") and catalog.description(hit["id"])) or ""
+        key = a.get("1", "").strip()
+        hit = catalog.resolve(key) or {}
+        # 非物品的说明（“furniture”“decoration”、建筑）在说明覆盖表里按名称查。
+        return (hit.get("id") and catalog.description(hit["id"])) or catalog.override_desc.get(key.lower()) or catalog.override_desc.get(key) or ""
 
     handlers = {
-        "name": name, "price": money, "tprice": money, "qualityprice": lambda a: money({"1": a.get("2", a.get("1", ""))}),
+        "name": name, "price": money, "tprice": tprice, "qualityprice": lambda a: money({"1": a.get("2", a.get("1", ""))}),
         "season": season, "weather inline": weather, "npc": npc, "bundle": bundle, "description": description,
         "!": lambda a: "|", "quote": lambda a: a.get("1", ""), "squote": lambda a: a.get("1", ""),
         "key": lambda a: a.get("1", ""), "nowrap": lambda a: a.get("1", ""), "no wrap": lambda a: a.get("1", ""),
@@ -300,6 +321,7 @@ class Builder:
             interlang = wt.interlanguage(text)
             en = interlang.get("en") or fields.get("eng") or None
             if en:
+                en = EN_TITLE_FIXES.get(en, en)
                 en = self.en_redirects.get(norm_title(en), norm_title(en))
             kind = INFOBOX_KIND.get(infobox_type) if infobox_type else None
             if kind == "item":
@@ -410,8 +432,13 @@ class Builder:
         items = self.catalog.items()
         npc_tastes = defaultdict(lambda: defaultdict(list))
         for item in items:
-            item["page"] = self.page_by_item.get(item["id"]) or (
-                self.resolve(item["zh"]) if self.resolve(item["zh"]) in self.pages else None)
+            title = ITEM_PAGES.get(item["id"]) or self.page_by_item.get(item["id"])
+            if title in ITEM_PAGES.values() and not self.pages[title]["item_id"]:
+                self.pages[title]["item_id"] = item["id"]
+            if not title:
+                named = self.resolve(item["zh"])
+                title = named if named in self.pages and self.pages[named]["kind"] not in NOT_ITEM_PAGES else None
+            item["page"] = title
             for taste, npcs in (item.get("gift_tastes") or {}).items():
                 for npc in npcs:
                     npc_tastes[npc][taste].append(item["id"])
@@ -433,8 +460,16 @@ class Builder:
     def _fallback_pages(self, items):
         """没有中文条目的物品：英文名重定向到的英文条目若有中文对应、且是物品类条目，就用它（如 Copper Pan → 淘盘）。"""
         zh_by_en = {p["en"]: p["title"] for p in self.pages.values() if p["en"]}
+        # 编号写法不同的家具（物品“《太阳#44》”、条目“《太阳 44》”）。
+        squeeze = lambda name: re.sub(r"[\s#]", "", name or "")
+        unbound = {squeeze(t): t for t, p in self.pages.items() if p["kind"] in ITEM_KINDS and not p["item_id"]}
         for item in items:
             if item["page"]:
+                continue
+            title = unbound.get(squeeze(item["zh"]))
+            if title and not self.pages[title]["item_id"]:
+                item["page"] = title
+                self.pages[title]["item_id"] = item["id"]
                 continue
             family = FLAVOR_PAGES.get(item.get("made_by"))
             if family in self.pages:
@@ -444,6 +479,22 @@ class Builder:
             title = zh_by_en.get(target) if target else None
             if title and self.pages[title]["kind"] in ITEM_KINDS:
                 item["page"] = title
+
+    def mentions(self, items, texts):
+        """没有条目、也没有合集页来源的物品：收录其他条目里讲到它的句子（每件最多 3 句），供详情页指向原文。"""
+        # 太短的名字多是常用词（“仙人掌”“树篱”），句子里出现不代表讲的是这件物品。
+        want = {}
+        for i in items:
+            if not i["page"] and not i.get("src") and not i["internal"] and len(i["zh"]) >= 4:
+                want.setdefault(i["zh"], []).append(i)
+        # 居民对话、趣闻、漏洞里随口提到的同名词（“仙人掌糖浆”）不算获取说明。
+        skip_pages = {t for t, p in self.pages.items() if p["kind"] in ("villager", "npc")}
+        sections = ((p["title"], s["title"], s["text"]) for p in texts if "历史" not in p["title"] and p["title"] not in skip_pages
+                    for s in p["sections"] if s["title"] not in MENTION_SKIP)
+        found = SRC.mentions(sections, list(want), {i["zh"] for i in items} | set(self.pages))
+        for name, hits in found.items():
+            for item in want[name]:
+                item["mentions"] = [{"page": page, "text": text} for page, text in hits]
 
     def _collection_items(self, items):
         """墙纸、地板、纸条和通用上衣同名不同款：按 Wiki 的图标编号区分，并从合集页取逐件来源。"""
@@ -1122,6 +1173,9 @@ class Builder:
                         own_desc = self.plain(self.catalog.description(item_id) or "") if item_id else ""
                         notes = []
                         for i, c in enumerate(cells):
+                            if header[i:i + 1] == ["描述"]:
+                                # {{Description|…}} 是物品或动物自己的说明，不是购买备注。
+                                c = re.sub(r"\{\{\s*[Dd]escription\s*\|[^{}]*\}\}", "", c)
                             text = self.plain(c) if i not in skip else ""
                             if text and i in yearly[1:]:
                                 text = re.sub(r"\s+", " ", header[i]) + "：" + text
@@ -1250,6 +1304,7 @@ def main():
     b = Builder()
     pages, texts = b.build_pages()
     items = b.build_items()
+    b.mentions(items, texts)
     outputs = {
         "pages.json": pages,
         "page-text.jsonl": texts,

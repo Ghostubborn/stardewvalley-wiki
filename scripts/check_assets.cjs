@@ -34,7 +34,8 @@ for (const [id, filename] of [
   ['(FL)56', 'Flooring_66_Icon.png'], ['(FL)MoreFloors:0', 'Flooring_57_Icon.png'],
   ['(WP)MoreWalls:0', 'Wallpaper_113_Icon.png'],
   ['(O)348/88', 'Wine.png'], ['(O)398/88', 'Dried_Fruit.png'],
-  ['(F)1557', "'Sun_44'.png"],
+  ['(F)1557', "'Sun_44'.png"], ['(O)180', 'Brown_Egg.png'], ['(O)182', 'Large_Brown_Egg.png'],
+  ['(O)71', 'Springobjects071.png'], ['(S)1259', 'Shirt259a.png'],
 ]) assert.equal(D.items[id]?.i, filename, `Incorrect artwork for ${id}`);
 assert(D.items['(O)348/88'].inote, 'Generic variant artwork must be identified');
 assert(D.items['(O)Book_AnimalCatalogue'], 'Underscore/case normalization lost a book');
@@ -59,5 +60,15 @@ vm.runInNewContext(fs.readFileSync(path.join(root, 'prototype/data.en.js'), 'utf
 vm.runInNewContext(fs.readFileSync(path.join(root, 'prototype/js/strings.en.js'), 'utf8'), english);
 assert(Object.keys(english.window.SDV_EN.names).length > 1000 && english.window.SDV_EN.guides && english.window.SDV_EN.progression, 'English data is incomplete');
 assert(Object.keys(english.window.SDV_UI_EN).length > 800, 'English interface strings are incomplete');
+// Wiki article bodies are fetched per entry from prototype/articles/{zh,en}/.
+let articles = 0;
+for (const [lang, entries] of [['zh', D.pages], ['en', english.window.SDV_EN.pages]]) {
+  for (const [title, page] of Object.entries(entries)) {
+    if (!page.ar) continue;
+    assert(fs.existsSync(path.join(root, 'prototype/articles', lang, page.ar + '.json')), `Missing article file: ${lang}/${title}`);
+    articles++;
+  }
+}
+assert(articles > 3800, 'Article bodies are incomplete');
 console.log(JSON.stringify({ checkedImages: images.size, orphanPageItems: 0, totalItems: Object.keys(D.items).length,
-  itemsWithImages: Object.values(D.items).filter(item => item.i).length, languagePages: pages.length, status: 'passed' }));
+  itemsWithImages: Object.values(D.items).filter(item => item.i).length, languagePages: pages.length, articles, status: 'passed' }));

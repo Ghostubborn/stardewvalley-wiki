@@ -125,7 +125,10 @@ def flooring(text, render):
 
 
 def tailoring(text, render):
-    """{图片键: {'name', 'notes': [获得方式], 'recipe': 配方原文}}，覆盖上衣、下装两张表。"""
+    """{图片键: [{'name', 'notes': [获得方式], 'recipe': 配方原文}]}，覆盖上衣、下装两张表。
+
+    同一张图可能对应几行（圆点上衣与魔法斑点衣、农夫裤与五彩裤子）；男女款写在同一行时两张图都登记。
+    """
     out = {}
     for table in wt.wikitables(text or "")[:2]:
         rows = table["rows"]
@@ -138,18 +141,19 @@ def tailoring(text, render):
             files = wt.files(row[0]["text"]) if row else []
             if not files:
                 continue
-            key = image_key(files[0].split("|")[0])
             notes = []
             if note_col is not None and note_col < len(row):
                 notes = [n for n in P.list_entries(row[note_col]["text"], render) if not CLOTHING_PROPERTY.match(n)]
             recipe = row[recipe_col]["text"] if recipe_col is not None and recipe_col < len(row) else ""
             name = re.sub(r"\s+", " ", render(row[1]["text"])).strip() if len(row) > 1 else ""
-            out.setdefault(key, {"name": name, "notes": notes, "recipe": recipe})
+            entry = {"name": name, "notes": notes, "recipe": recipe}
+            for file in files:
+                out.setdefault(image_key(file.split("|")[0]), []).append(entry)
     return out
 
 
 def match_clothing(rows, items, name):
-    """{物品 ID: 表格行}。五彩裤子等与原款共用图片，同图时按名称认领。"""
+    """{物品 ID: 表格行}。先按图片对应，同图几行时按名称认领；图片对不上的（五彩上衣）再按名称前缀找行。"""
     by_key, by_number = {}, {}
     for item in items:
         if item["type"] in ("S", "P") and item.get("image"):
@@ -157,16 +161,32 @@ def match_clothing(rows, items, name):
         if item["type"] == "S" and item["id"][3:].isdigit():
             by_number.setdefault(int(item["id"][3:]) - 1000, []).append(item)
     out = {}
-    for key, row in rows.items():
+    for key, entries in rows.items():
         # 上衣图片名带变体后缀（Shirt259a.png）时，按编号对应物品 ID（(S)1259）。
         number = re.match(r"shirt(\d+)[a-z]?\.png$", key)
         candidates = by_key.get(key) or (by_number.get(int(number.group(1)), []) if number else [])
-        # 表格名有时带说明（“五彩T恤(短袖，胸前有五彩方块图案)”）：其次按名称前缀认领。
-        prefixed = sorted((i for i in candidates if name(i) and row["name"].startswith(name(i))), key=lambda i: -len(name(i)))
-        target = next((i for i in candidates if name(i) == row["name"]), None) or (prefixed[0] if prefixed else None) \
-            or (candidates[0] if len(candidates) == 1 else None)
-        if target:
-            out[target["id"]] = row
+        for row in entries:
+            # 表格名有时带说明（“五彩T恤(短袖，胸前有五彩方块图案)”）：其次按名称前缀认领。
+            prefixed = sorted((i for i in candidates if name(i) and row["name"].startswith(name(i))), key=lambda i: -len(name(i)))
+            target = next((i for i in candidates if name(i) == row["name"]), None) or (prefixed[0] if prefixed else None) \
+                or (candidates[0] if len(candidates) == 1 and len(entries) == 1 else None)
+            if target:
+                out.setdefault(target["id"], row)
+    named = {}
+    for entries in rows.values():
+        for row in entries:
+            named.setdefault(row["name"], row)
+    for item in items:
+        label = name(item) or ""
+        if item["type"] not in ("S", "P") or item["id"] in out or not label:
+            continue
+        # “五彩上衣”在表里分成“五彩上衣 (白袖子)”等几行，配方相同，取第一行。
+        # 男女款分开的物品（“普通套头衫（男）”）在表里只有一行。
+        base = re.sub(r"\s*[（(](男|女|M|F)[）)]$", "", label)
+        hit = named.get(label) or named.get(base) or next((row for row_name, row in named.items()
+                                                          if re.match(re.escape(label) + r"\s*[（(]", row_name)), None)
+        if hit:
+            out[item["id"]] = hit
     return out
 
 
@@ -209,3 +229,37 @@ def obtain_section(sections, render):
         if entries:
             return entries[:12]
     return []
+
+
+def mentions(sections, names, known, limit=3):
+    """其他条目里讲到这些物品的句子：{名称: [(条目, 句子)]}。sections 逐个给出 (条目, 小节标题, 小节纯文本)。
+
+    以物品名为小节标题的段落取前两句（锻造 · 组合戒指）；否则取第一句直接提到物品名的句子。
+    名字只是更长名称的一部分（“仙人掌”之于“仙人掌果子”）不算；版本历史由调用方排除。
+    """
+    longer = {name: [k for k in known if name in k and k != name] for name in names}
+
+    def standalone(text, name):
+        for m in re.finditer(re.escape(name), text):
+            if not any(m.start() >= k.index(name) and text.startswith(k, m.start() - k.index(name)) for k in longer[name]):
+                return True
+        return False
+
+    def sentences(text):
+        parts = re.split(r"(?<=[。！？])|(?<=[.!?])\s+|\n", text)
+        return [x.strip(" *:：") for x in parts if x and "|" not in x and 6 <= len(x.strip()) <= 220]
+
+    out = {}
+    for page, heading, text in sections:
+        for name in names:
+            found = out.setdefault(name, [])
+            if len(found) >= limit:
+                continue
+            if heading == name:
+                found.extend((page, x) for x in sentences(text)[:2] if (page, x) not in found)
+            elif name in text and standalone(text, name):
+                hit = next((x for x in sentences(text) if standalone(x, name)), None)
+                if hit and all(x != hit for _, x in found):
+                    found.append((page, hit))
+    return {name: found[:limit] for name, found in out.items() if found}
+

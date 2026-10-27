@@ -1,0 +1,78 @@
+// Run with node scripts/test_articles.cjs. Checks the per-article files in prototype/articles/
+// against the packed data: every referenced file exists, has the expected structure, shows no
+// leftover wiki markup, and English articles don't show Chinese text (apart from the few English
+// wiki pages that quote Chinese strings on purpose).
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const root = path.resolve(__dirname, '..', 'prototype');
+const ctx = { window: {} };
+vm.createContext(ctx);
+for (const file of ['data.js', 'data.en.js']) vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), ctx);
+const D = ctx.window.SDV, E = ctx.window.SDV_EN;
+const load = (lang, key) => JSON.parse(fs.readFileSync(path.join(root, 'articles', lang, key + '.json'), 'utf8'));
+const article = (lang, title) => load(lang, (lang === 'en' ? E.pages[title] : D.pages[title]).ar);
+
+// Version histories and the panda hat article quote Chinese strings in the English wiki itself.
+const QUOTES_CHINESE = new Set(['版本历史', '主机版历史', '熊猫帽子']);
+const BLOCKS = new Set(['p', 'n', 'h', 'l', 'q', 't', 'd']);
+const CJK = /[㐀-鿿]/;
+const MARKUP = /\{\{|\}\}|\{\||\|\}|\[\[[^\]]*\]\]|\u000e|\u000f|\u0003/;
+
+function texts(node, out = []) {
+  if (typeof node === 'string') out.push(node);
+  else if (Array.isArray(node)) {
+    // Runs: ["i", item ID, label] / ["l", page key, label]; keys are internal Chinese IDs, labels are shown.
+    if (node.length === 3 && (node[0] === 'i' || node[0] === 'l') && typeof node[1] === 'string' && typeof node[2] === 'string') out.push(node[2]);
+    else node.forEach(child => texts(child, out));
+  } else if (node && typeof node === 'object') Object.values(node).forEach(child => texts(child, out));
+  return out;
+}
+function checkBlocks(blocks, where) {
+  for (const block of blocks) {
+    assert(BLOCKS.has(block[0]), `${where}: unknown block ${block[0]}`);
+    if (block[0] === 'd') checkBlocks(block[2], where);
+    if (block[0] === 't') for (const row of block[1]) for (const cell of row) if (!Array.isArray(cell) && cell.b) checkBlocks(cell.b, where);
+  }
+}
+
+let checked = 0, bytes = { zh: 0, en: 0 };
+for (const [lang, pages] of [['zh', D.pages], ['en', E.pages]]) {
+  const keys = Object.entries(pages).filter(([, p]) => p.ar);
+  assert(keys.length > 1900, `${lang}: articles for most pages (${keys.length})`);
+  const files = new Set(fs.readdirSync(path.join(root, 'articles', lang)));
+  assert.equal(files.size, new Set(keys.map(([, p]) => p.ar)).size, `${lang}: no stray or missing article files`);
+  for (const [title, page] of keys) {
+    assert(files.has(page.ar + '.json'), `${lang}: missing file for ${title}`);
+    const raw = fs.readFileSync(path.join(root, 'articles', lang, page.ar + '.json'), 'utf8');
+    bytes[lang] += raw.length;
+    assert(raw.length < 400000, `${lang}: ${title} stays below 400 KB`);
+    const a = JSON.parse(raw);
+    assert(Array.isArray(a.s), `${lang}: ${title} has sections`);
+    for (const [heading, level, blocks] of a.s) {
+      assert(heading === null || typeof heading === 'string');
+      assert(Number.isInteger(level));
+      checkBlocks(blocks, `${lang}:${title}`);
+    }
+    const shown = texts([a.f || [], a.s.map(([h, , b]) => [h || '', b])]).join('\n');
+    assert(!MARKUP.test(shown.replace(/针对模组作者的更改\]\]/, '')), `${lang}: ${title} shows wiki markup: ${(shown.match(MARKUP) || [''])[0]}`);
+    if (lang === 'en' && !QUOTES_CHINESE.has(title)) assert(!CJK.test(shown), `en: ${title} shows Chinese text: ${shown.match(/.{0,20}[㐀-鿿].{0,20}/)?.[0]}`);
+    checked++;
+  }
+}
+
+// Content that the converter has to keep: infobox facts, transcluded skill tables with item links,
+// collapsible schedules, quotes, recipe rows and English labels.
+const greenhouse = article('zh', '温室');
+assert.deepEqual(greenhouse.f.map(([label]) => label).slice(0, 2), ['建造成本', '建筑材料']);
+const farming = JSON.stringify(article('zh', '耕种'));
+assert(farming.includes('["i","(BC)8","稻草人"]'), 'Farming/Skill is transcluded with item links');
+assert(farming.includes('畜牧人') && farming.includes('农业学家'), 'professions are kept');
+assert(farming.includes('能量 90'), 'recipe rows from {{:Hashbrowns|RecipeRow}}');
+const penny = article('zh', '潘妮');
+assert(penny.s.some(([h, , blocks]) => h === '日程表' && blocks.some(b => b[0] === 'd' && b[1] === '春季')), 'schedules become collapsible details');
+assert(JSON.stringify(article('zh', '夏威夷宴会')).includes('["q",'), 'quotes are kept');
+assert.equal(article('en', '温室').f[0][0], 'Build cost');
+assert(!('ar' in (D.pages['作物生长日历'] || {})), 'image-only calendars are skipped');
+console.log(`Article checks passed: ${checked} files, ${(bytes.zh / 1e6).toFixed(1)} MB zh + ${(bytes.en / 1e6).toFixed(1)} MB en, structure, markup, language and key content.`);

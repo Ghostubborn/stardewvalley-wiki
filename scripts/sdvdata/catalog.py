@@ -55,9 +55,31 @@ class Catalog:
         self.override_names = {k.lower(): v for k, v in load("Items/overrides/name").items()}
         self.override_desc = {k.lower(): v for k, v in load("Items/overrides/description").items()}
         self.objects = load("Object/data")
+        self._split_same_names()
         self.gifts = load("GiftsByItem/data")
         self.furniture = load("Furniture/data")
         self.weapons = load("Weapons/data")
+
+    def _split_same_names(self):
+        """棕色的蛋与白色的蛋在游戏里同名（Egg、Large Egg），只有显示名的本地化键不同（BrownEgg_Name）。
+        Wiki 名称表按这个键写作“蛋|棕色蛋”：同名物品改用这个名称，按名称查物品时也能分开。"""
+        for raw, obj in self.objects.items():
+            qid = f"(O){raw}"
+            en = self.en_by_id.get(qid) or ""
+            m = re.search(r":(\w+)_Name\]", obj.get("DisplayName") or "")
+            if not m or len(self.ids_by_en.get(en.lower(), [])) < 2:
+                continue
+            key = re.sub(r"(?<!^)(?=[A-Z])", " ", m.group(1)).lower()
+            if key == en.lower() or key not in self.override_names:
+                continue
+            zh_old = (self.zh_by_id.get(qid) or "").lower()
+            for table, name in ((self.ids_by_en, en.lower()), (self.ids_by_zh, zh_old)):
+                if qid in table.get(name, []) and len(table[name]) > 1:
+                    table[name] = [x for x in table[name] if x != qid]
+            self.en_by_id[qid] = key.title()
+            self.zh_by_id[qid] = self.override_names[key].split("|")[-1]
+            self.ids_by_en[key] = [qid]
+            self.ids_by_zh[self.zh_by_id[qid].lower()] = [qid]
 
     # —— 名称解析 ——
     def ids_for(self, name):

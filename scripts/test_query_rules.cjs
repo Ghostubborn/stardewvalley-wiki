@@ -227,5 +227,15 @@ assert.deepEqual([...paths('蛋').find(p => p.kind === 'animal').animals.map(a =
 assert.deepEqual([...paths('松露').map(p => p.kind)].sort(), ['animal', 'drop']);
 const chicken = A.animalByName.get('鸡');
 assert.equal(chicken.bp, 800); assert.equal(chicken.h[0].z, '鸡舍');
-assert(chicken.pr.some(x => x.z === '棕色蛋' && x.pg === '蛋'), 'brown eggs share the egg article instead of a guessed item ID');
+assert(chicken.pr.includes('(O)180') && chicken.pr.includes('(O)182'), 'brown eggs resolve by their display-name key, not the shared game name');
+assert.equal(A.D.items['(O)180'].z, '棕色蛋'); assert.equal(A.D.items['(O)180'].i, 'Brown_Egg.png');
+assert.equal(A.D.items['(O)180'].d, '一个普通的棕色鸡蛋。', 'brown egg keeps its own description');
+assert.deepEqual([...paths('棕色蛋').find(p => p.kind === 'animal').animals.map(a => a.title)], ['鸡']);
+// Items whose wiki page name differs ("《太阳#44》" vs 《太阳 44》) or collides with a monster ("骷髅").
+assert.equal(A.D.items['(F)1557'].pg, '《太阳 44》'); assert.equal(A.D.items['(F)1304'].pg, '骷髅雕像');
+assert(A.acquisitions('(S)1998', '五彩上衣').some(p => p.kind === 'tailoring'), 'prismatic shirts match their tailoring rows by name');
+assert(A.D.items['(O)PetLicense'].mn.some(m => m.p === '玛妮的牧场'), 'items without a page cite the articles that mention them');
+assert.equal(A.D.items['(O)803'].mn, undefined, 'no invented mentions for unused items');
+const syrup = paths('枫糖浆').find(p => p.kind === 'tapper');
+assert(syrup && syrup.trees.includes('枫树') && syrup.refs.includes('(BC)105'), 'tapper products name their tree and the tappers');
 console.log('Query rule checks passed: per-water fishing, unknown exceptions, collection methods, acquisition gates, shop hours/stock, ordinary sources, harvest assumptions, Night Market submarine, artifact sources, exception clauses, legendary requirements, crab water, item sources, item properties, monster drops and animal produce.');
