@@ -43,7 +43,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/pixel-subset.woff2?v=87fc65b65f00" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=d26a84e7abe2">
+<link rel="stylesheet" href="styles.css?v=a38b8baba93d">
 <link rel="stylesheet" href="browse.css?v=90899f28765b">
 <link rel="stylesheet" href="guides.css?v=268492097177">
 <link rel="stylesheet" href="collections.css?v=df70116c3653">
@@ -148,8 +148,13 @@
 
   <!-- 路线工具 -->
   <div class="tree-tools frame" id="tree-tools" hidden>
-    <span class="tree-reading">One path per row · later stages to the right</span>
+    <span class="tree-reading">One path per row, later stages to the right · drag or scroll to see it all</span>
     <div class="seg" role="radiogroup" aria-label="Show" id="tree-mode"></div>
+    <div class="zoom tree-zoom">
+      <button id="tree-zoom-in" aria-label="Zoom in">＋</button>
+      <button id="tree-zoom-out" aria-label="Zoom out">－</button>
+      <button id="tree-zoom-fit" aria-label="Fit the full width" title="Fit the full width">Fit</button>
+    </div>
   </div>
 
   <!-- 底部：工具栏 -->
@@ -184,22 +189,22 @@
   </dialog>
 </div>
 
-<script src="data.js?v=5ba820b17b17"></script>
-<script src="js/strings.en.js?v=8d4991c3721d"></script>
-<script src="data.en.js?v=b771d55a7577"></script>
+<script src="data.js?v=4c519652a889"></script>
+<script src="js/strings.en.js?v=8c0fc626656b"></script>
+<script src="data.en.js?v=1b6a45da842d"></script>
 <script src="js/i18n.js?v=a8528ce00f89"></script>
-<script src="js/core.js?v=aa4c25c8db3d"></script>
+<script src="js/core.js?v=31ab130e2468"></script>
 <script src="js/map.js?v=ea89ad22ed18"></script>
-<script src="js/tree.js?v=1b75de8b607d"></script>
+<script src="js/tree.js?v=477fc5f3b17b"></script>
 <script src="js/spoilers.js?v=5bfe7ec8ac50"></script>
-<script src="js/map-content.js?v=b5871b470fa5"></script>
+<script src="js/map-content.js?v=576af11f0dc6"></script>
 <script src="js/browse-home.js?v=15ad9dfd2d6c"></script>
-<script src="js/browse-views.js?v=f55293eed62f"></script>
+<script src="js/browse-views.js?v=07d5890ac07b"></script>
 <script src="js/browse.js?v=98ed160f02d0"></script>
 <script src="js/guides.js?v=f54182cd9425"></script>
 <script src="js/schedules.js?v=d7703b34b5da"></script>
 <script src="js/collections.js?v=dfafae1fbb7b"></script>
-<script src="js/ui.js?v=6ad65ddb56ff"></script>
+<script src="js/ui.js?v=3a601eeca58e"></script>
 <script src="js/music.js?v=7de624dccbd2"></script>
 </body>
 </html>

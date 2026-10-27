@@ -482,6 +482,14 @@
     view.y = 8;
     apply();
   }
+  // 缩到整行宽度：一眼看到每条路线的全部阶段，当前看的那一段保持在中间。
+  function fitWidth() {
+    const w = section.clientWidth, h = section.clientHeight;
+    const left = (App.treeInsetLeft || 0) + 8;
+    const z = Math.min(1, Math.max(0.35, (w - left - 24) / App.treeSize.w));
+    const centerY = (h / 2 - view.y) / view.z;
+    animateTo(left, h / 2 - centerY * z, z);
+  }
   function focusNode(id, opts = {}) {
     const n = nodes.get(id);
     if (!n || !section) return;
@@ -557,7 +565,7 @@
   }
 
   App.tree = {
-    build, refresh, fit, focusNode, focusLane,
+    build, refresh, fit, fitWidth, focusNode, focusLane,
     get built() { return built; },
     select(id) { selected = id; refresh(); },
     setLane(id) { laneFilter = id; refresh(); if (id) focusLane(id); },

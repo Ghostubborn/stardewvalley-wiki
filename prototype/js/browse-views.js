@@ -49,7 +49,8 @@
       return refButton(row, "fish-specimen", el("span", { class: "fish-art" }, img(row.icon)),
         el("strong", null, row.label), seasons(row.seasons),
         note(type === "forage" ? t("海滩采集，不用钓竿") : safe(time || (f.crab ? t("放置蟹笼后收取") : t("时间见详情")))),
-        note(A.fishLocations(f).filter(name => A.spoilers.textAllowed(name) && A.spoilers.textAllowed(N(name))).map(N).join(" · ") || t("水域见详情")));
+        note(A.isSubmarineFish(f) ? t("夜市钓鱼潜艇 · 冬季 15–17 日")
+          : A.fishLocations(f).filter(name => A.spoilers.textAllowed(name) && A.spoilers.textAllowed(N(name))).map(N).join(" · ") || t("水域见详情")));
     }), t("选择一条鱼，查看水域、天气和钓鱼条件。")));
   }
 

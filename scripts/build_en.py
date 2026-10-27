@@ -286,7 +286,11 @@ class English:
             sections = wt.sections(text[end:])
             # Villager pages open with a developer quote; the summary should be the article's own lead.
             lead = self.plain(re.sub(r"^\s*\{\{\s*[Qq]uote\b(?:[^{}]|\{\{[^{}]*\}\})*\}\}", "", sections[0]["body"])) if sections else ""
+            lists = {k: entries for k in ("as", "md", "os", "source", "dr")
+                     if fields.get(k) and (entries := P.list_entries(fields[k], self.plain))}
             record = {
+                "src": [[k, lists[k]] for k in ("as", "md", "os", "source") if lists.get(k)],
+                "dr": lists.get("dr"),
                 "s": sentence_cut(first_paragraph(lead)),
                 "f": {k: v if k == "source" else sentence_cut(v, 160)
                       for k in FIELD_KEYS if fields.get(k) and (v := self.plain(fields[k]))},

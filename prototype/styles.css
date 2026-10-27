@@ -310,6 +310,10 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .d-section > h3 { font-size: 14px; line-height: 1.5; }
 .item-group > .btn { margin-top: 6px; }
 .source-fragments p { margin: 4px 0; overflow-wrap: anywhere; }
+.source-groups { display: grid; gap: 10px; }
+.source-group-label { margin: 0; font-weight: 600; color: var(--bark); }
+.source-list { margin: 4px 0 0; padding-left: 20px; }
+.source-list li { margin: 2px 0; line-height: 1.55; overflow-wrap: anywhere; }
 .mats .chip { padding: 1px 0; border: 0; background: transparent; text-align: left; text-decoration: underline; }
 .mats .chip img { display: none; }
 .mats .concealed-material { display: block; }
@@ -469,6 +473,7 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 
 .tree-tools { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; padding: 10px 12px; z-index: 5; background: var(--panel); }
 .tree-tools .seg button { min-width: 72px; }
+.tree-zoom { padding: 0; background: none; }
 .check { display: inline-flex; gap: 6px; align-items: center; font: 12px/1 var(--pixel); white-space: nowrap; }
 .legend { display: grid; gap: 4px; margin-top: 8px; font-size: 12px; color: var(--ink-soft); }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }

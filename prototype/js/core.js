@@ -136,9 +136,9 @@
   function pageInfo(title) {
     const p = D.pages[title];
     if (!p) return null;
-    if (!EN) return { s: p.s, f: p.f, sec: p.sec, u: p.u, kz: p.kz };
+    if (!EN) return { s: p.s, f: p.f, sec: p.sec, u: p.u, kz: p.kz, src: p.src || [], dr: p.dr || [] };
     const e = EN.pages?.[title] || {};
-    return { s: e.s || "", f: e.f || {}, sec: e.sec || [], u: e.u || null, kz: t(p.kz) };
+    return { s: e.s || "", f: e.f || {}, sec: e.sec || [], u: e.u || null, kz: t(p.kz), src: e.src || [], dr: e.dr || [] };
   }
   function fishText(f) {
     if (!EN) return { lt: f.lt, st: f.st, tt: f.tt, wt: f.wt };
@@ -455,8 +455,22 @@
   const ISLAND_ALL_SEASONS = new Set(["金枪鱼", "河豚", "大海参", "比目鱼", "罗非鱼", "午夜鲤鱼"]);
   const LEGEND_LEVELS = { 传说之鱼: 10, 鮟鱇鱼: 3, 绯红鱼: 5, 冰川鱼: 6 };
   const fishingLevelRequired = f => LEGEND_LEVELS[f.p] || (f.p === "蝎鲤鱼" ? 4 : null);
+  // 归档《夜市》“钓鱼潜艇”：17:00–23:00 可登船，船票 1,000 金，可一直钓到凌晨 2:00；
+  // 午夜鱿鱼、幽灵鱼、水滴鱼只在潜艇里出现，魔法鱼饵是例外（沙滩西南角，站位见各鱼条目）。
+  const SUBMARINE = { open: 1700, close: 2300, end: 2600, fare: 1000 };
+  const isSubmarineFish = f => (f.L || []).includes("夜市");
+  const habitatName = loc => (loc === "夜市" ? t("夜市钓鱼潜艇") : N(loc));
+  function submarineFacts() {
+    return [
+      { text: t("日期：冬季 15–17 日（夜市）") },
+      { text: t("登船：{open}–{close}，船票 {fare}", { open: fmtTime(SUBMARINE.open), close: fmtTime(SUBMARINE.close), fare: money(SUBMARINE.fare) }) },
+      { text: t("可一直钓到 {end}", { end: fmtTime(SUBMARINE.end) }) },
+    ];
+  }
   function fishRequirements(f) {
     const facts = [];
+    if (isSubmarineFish(f)) facts.push({ text: t("只在夜市的钓鱼潜艇里出现，在普通海边钓不到") },
+      { text: t("使用魔法鱼饵时例外：也能在沙滩西南角钓到（站位见原文）") });
     const level = fishingLevelRequired(f);
     if (level) facts.push({ text: t("钓鱼等级至少 {n} 级", { n: level }) });
     if (f.qi) facts.push({ text: t("需在“大家族”特别任务期间捕获；任务鱼的独立要求另见原文") });
@@ -550,7 +564,8 @@
       if (h.level) checks.push(R(level == null ? null : level >= h.level, t("此水域需钓鱼 {n} 级", { n: h.level })));
       if (h.location === "夜市") {
         checks.push(R(C.season === "winter" && C.day >= 15 && C.day <= 17, t("冬季 15–17 日夜市")));
-        checks.push(R(C.time < 2300 ? true : null, t("23:00 前进入钓鱼潜艇"), C.time >= 2300 ? t("当前已过入场时间；是否已在艇内未确认") : null));
+        checks.push(R(C.time < SUBMARINE.close ? true : null, t("23:00 前进入钓鱼潜艇"), C.time >= SUBMARINE.close ? t("当前已过入场时间；是否已在艇内未确认") : null));
+        checks.push(R(undefined, t("船票 {price}", { price: money(SUBMARINE.fare) })));
       } else if (h.seasons?.length) {
         checks.push(R(h.seasons.includes("all") || h.seasons.includes(C.season), h.seasons.includes("all") ? t("任意季节") : L10N.list(h.seasons.map(s => SEASON_ZH[s]))));
       } else checks.push(R(null, t("季节条件资料尚未完整核验")));
@@ -810,6 +825,7 @@
     N, itemName, nameOf, weekdayNote, pageInfo, fishText, locText, itemDesc, areaTitle, skillName, timeSpans, conditionReqs,
     state, setCond, conditionsActive, setConditionsEnabled, setProgress, applyPreset, on: (fn) => listeners.add(fn), emit,
     evalReq, combine, areaState, fishCheck, fishRequirements, fishHabitats, fishLocations, fishMethod, shopCheck, seedCheck, birthdayToday, ccComplete,
+    isSubmarineFish, habitatName, submarineFacts,
     acquisitions, materialTree, rawTotals, itemInfo, canonicalItemId, usedIn, bundleUse, giftsByItem, villagerByName,
     locationByName, fishByName, recipesByOut, shopsByItem, chainByItem, cache: {},
   });

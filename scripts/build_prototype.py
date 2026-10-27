@@ -116,6 +116,13 @@ def main():
                                                   "occupants", "birthday", "marriage", "growth", "produces",
                                                   "craftingstation", "crafttime", "buff", "edibility") and v},
         }
+        # 逐条来源（远古斑点、怪物掉落、其他来源或“来源”）与古物的捐赠奖励。
+        lists = p.get("lists") or {}
+        src = [[k, lists[k]] for k in ("as", "md", "os", "source") if lists.get(k)]
+        if src:
+            out_pages[p["title"]]["src"] = src
+        if lists.get("dr"):
+            out_pages[p["title"]]["dr"] = lists["dr"]
 
     # —— 物品 ——
     referenced = set()

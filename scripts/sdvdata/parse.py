@@ -26,6 +26,33 @@ SKILLS = {"耕种": "farming", "采矿": "mining", "采集": "foraging", "钓鱼
 CURRENCIES = {"walnut": "金色核桃", "qi": "齐币", "gem": "齐钻", "token": "奖券", "calico": "卡利科蛋", "jopk": "JOPK 币"}
 
 
+_ENTRY_SEP = "\u0003"
+# 信息框里的来源清单：列表项、换行、“•”分隔，以及相邻的独立 {{Name}}（class=inline 的嵌在句子里，不拆）。
+_LIST_BREAK = re.compile(r"</?(?:li|ul|ol)\b[^>]*>|<br\s*/?>|</?p\b[^>]*>|\s+•\s+", re.I)
+
+
+def list_entries(raw, render):
+    """把信息框的来源类字段拆成逐条文本，render 为对应语言的 wikitext 渲染函数。"""
+    if not raw or not raw.strip():
+        return []
+    pieces, last = [], 0
+    for tpl, start, end in wt.iter_templates(raw):
+        name, args = wt.parse_template(tpl)
+        pieces.append(raw[last:start])
+        block = name.lower() == "name" and args.get("class", "").strip().lower() != "inline"
+        pieces.append(_ENTRY_SEP + tpl + _ENTRY_SEP if block else tpl)
+        last = end
+    pieces.append(raw[last:])
+    text = _LIST_BREAK.sub(_ENTRY_SEP, "".join(pieces))
+    text = re.sub(r"(?m)^\s*[*#]+\s*", _ENTRY_SEP, text).replace("\n", _ENTRY_SEP)
+    entries = []
+    for part in render(text).split(_ENTRY_SEP):
+        part = re.sub(r"\s+", " ", part).strip(" ,，、;；")
+        if part and part.upper() != "N/A" and part not in entries:
+            entries.append(part)
+    return entries
+
+
 def item_refs(text, catalog):
     """{{name|X|数量|link=…}} → [{'id','en','zh','qty','note','link'}]，按出现顺序。"""
     out = []

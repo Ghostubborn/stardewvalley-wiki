@@ -57,6 +57,8 @@ KIND_ZH = {
     "festival": "节日", "achievement": "成就", "skill": "技能", "disambiguation": "消歧义",
     "guide": "玩法", "article": "条目",
 }
+# 信息框中按条列出的来源：来源、远古斑点、怪物掉落、其他来源、捐赠奖励（古物信息框的 as/md/os/dr）。
+LIST_FIELDS = ("source", "as", "md", "os", "dr")
 
 
 def load_pages(path):
@@ -305,6 +307,7 @@ class Builder:
                 "links": [self.resolve(t) for t in wt.page_links(body)],
                 "item_id": item and item.get("id"), "image": image,
                 "fields": {k: self.plain(v) for k, v in fields.items()},
+                "lists": {k: entries for k in LIST_FIELDS if fields.get(k) and (entries := P.list_entries(fields[k], self.plain))},
                 "map_pins": self._map_pins(text),
                 "url": zh_url(title), "en_url": en_url(en) if en else None,
                 "rev_id": r["rev_id"], "updated": r["timestamp"], "bytes": len(text),

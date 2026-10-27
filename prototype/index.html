@@ -42,7 +42,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/pixel-subset.woff2?v=87fc65b65f00" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=d26a84e7abe2">
+<link rel="stylesheet" href="styles.css?v=a38b8baba93d">
 <link rel="stylesheet" href="browse.css?v=90899f28765b">
 <link rel="stylesheet" href="guides.css?v=268492097177">
 <link rel="stylesheet" href="collections.css?v=df70116c3653">
@@ -147,8 +147,13 @@
 
   <!-- 路线工具 -->
   <div class="tree-tools frame" id="tree-tools" hidden>
-    <span class="tree-reading">每行一条路线 · 向右看后续阶段</span>
+    <span class="tree-reading">每行一条路线，向右看后续阶段 · 拖动或滚动查看全部</span>
     <div class="seg" role="radiogroup" aria-label="显示范围" id="tree-mode"></div>
+    <div class="zoom tree-zoom">
+      <button id="tree-zoom-in" aria-label="放大">＋</button>
+      <button id="tree-zoom-out" aria-label="缩小">－</button>
+      <button id="tree-zoom-fit" aria-label="缩到整行宽度" title="缩到整行宽度">全</button>
+    </div>
   </div>
 
   <!-- 底部：工具栏 -->
@@ -183,20 +188,20 @@
   </dialog>
 </div>
 
-<script src="data.js?v=5ba820b17b17"></script>
+<script src="data.js?v=4c519652a889"></script>
 <script src="js/i18n.js?v=a8528ce00f89"></script>
-<script src="js/core.js?v=aa4c25c8db3d"></script>
+<script src="js/core.js?v=31ab130e2468"></script>
 <script src="js/map.js?v=ea89ad22ed18"></script>
-<script src="js/tree.js?v=1b75de8b607d"></script>
+<script src="js/tree.js?v=477fc5f3b17b"></script>
 <script src="js/spoilers.js?v=5bfe7ec8ac50"></script>
-<script src="js/map-content.js?v=b5871b470fa5"></script>
+<script src="js/map-content.js?v=576af11f0dc6"></script>
 <script src="js/browse-home.js?v=15ad9dfd2d6c"></script>
-<script src="js/browse-views.js?v=f55293eed62f"></script>
+<script src="js/browse-views.js?v=07d5890ac07b"></script>
 <script src="js/browse.js?v=98ed160f02d0"></script>
 <script src="js/guides.js?v=f54182cd9425"></script>
 <script src="js/schedules.js?v=d7703b34b5da"></script>
 <script src="js/collections.js?v=dfafae1fbb7b"></script>
-<script src="js/ui.js?v=6ad65ddb56ff"></script>
+<script src="js/ui.js?v=3a601eeca58e"></script>
 <script src="js/music.js?v=7de624dccbd2"></script>
 </body>
 </html>

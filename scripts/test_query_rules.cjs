@@ -130,4 +130,21 @@ assert.equal(crop.ok, false); assert.equal(crop.harvestDate.season, 'summer'); a
 A.setCond({ season: 'summer', day: 28 });
 crop = A.seedCheck(A.D.seeds.find(s => s.p === '玉米种子'));
 assert.equal(crop.ok, true); assert.equal(crop.harvestDate.season, 'fall'); assert(crop.harvestDates.length > 1);
-console.log('Query rule checks passed: per-water fishing, unknown exceptions, collection methods, acquisition gates, shop hours/stock, ordinary sources and harvest assumptions.');
+// Forum feedback (2026-10-27): the Night Market rule must be visible without a date check,
+// and every artifact needs its wiki-listed sources instead of "no verifiable source data".
+A.setConditionsEnabled(false);
+for (const name of ['午夜鱿鱼', '幽灵鱼', '水滴鱼']) {
+  const rules = A.fishRequirements(fish(name)).map(r => r.text).join(' ');
+  assert(A.isSubmarineFish(fish(name)) && rules.includes('钓鱼潜艇') && rules.includes('魔法鱼饵'), `${name}: submarine rule hidden by default`);
+  assert.equal(A.habitatName(A.fishHabitats(fish(name))[0].location), '夜市钓鱼潜艇');
+}
+assert(A.submarineFacts().some(r => r.text.includes('17:00–23:00') && r.text.includes('1,000 金')));
+assert(!A.isSubmarineFish(fish('沙丁鱼')));
+for (const [title, page] of Object.entries(A.D.pages).filter(([, p]) => ['artifact', 'mineral'].includes(p.k))) {
+  assert(A.pageInfo(title).src.length, `${title}: no wiki-listed sources`);
+}
+const seedSources = Object.fromEntries(A.pageInfo('古代种子').src);
+assert.deepEqual([...seedSources.as], ['煤矿森林（0.7%）', '深山（0.7%）']); // arrays come from the VM context
+assert(seedSources.md.includes('苍蝇（0.5%）') && seedSources.os.includes('古物宝藏'));
+assert.deepEqual([...A.pageInfo('古代种子').dr], ['上古种子×1', '上古种子配方']);
+console.log('Query rule checks passed: per-water fishing, unknown exceptions, collection methods, acquisition gates, shop hours/stock, ordinary sources, harvest assumptions, Night Market submarine and artifact sources.');

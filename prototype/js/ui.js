@@ -472,6 +472,21 @@
       t("其他来源涉及后续内容。"), t("查看其他来源")));
     return box;
   }
+  // Wiki 信息框逐条列出的来源；涉及后续内容的条目按需展开，其余直接显示。
+  function entryList(entries) {
+    return el("ul", { class: "source-list" }, entries.map(x => el("li", null, x)));
+  }
+  function sourceGroups(groups) {
+    const LABELS = { as: t("远古斑点"), md: t("由怪物掉落"), os: t("其他来源"), source: t("来源") };
+    const labelled = groups.length > 1 || groups[0][0] !== "source";
+    return el("div", { class: "source-groups", dataset: { spoilerScoped: "true" } }, groups.map(([key, entries]) => {
+      const shown = entries.filter(x => S.textAllowed(x, S.title(current)));
+      const hidden = entries.filter(x => !S.textAllowed(x, S.title(current)));
+      return el("div", { class: "source-group" }, labelled ? el("p", { class: "source-group-label" }, LABELS[key] || key) : null,
+        shown.length ? entryList(shown) : null,
+        hidden.length ? foldContent(() => entryList(hidden), t("部分来源涉及后续内容。"), t("查看这些来源")) : null);
+    }));
+  }
   function sourceLine(title) {
     const p = D.pages[title];
     if (EN) {
@@ -584,7 +599,8 @@
     const weatherText = f.W?.includes("any") ? t("任意天气") : App.list(f.W?.map(w => App.WEATHER[w]?.zh || w) || []) || text.wt || t("详见原文");
     const habitats = App.fishHabitats(f).filter(h => S.textAllowed(h.location) && S.textAllowed(N(h.location)));
     const rules = el("div", { class: "habitat-list", dataset: { spoilerScoped: "true" } }, habitats.map(h => {
-      const facts = [
+      // 夜市潜艇写明日期、登船时段与船票，不只给季节和时段。
+      const facts = h.location === "夜市" ? [...App.submarineFacts(), { text: t("天气：{value}", { value: weatherText }) }] : [
         { text: t("季节：{value}", { value: App.list(h.seasons?.map(s => App.SEASON_ZH[s]) || []) || t("详见原文") }) },
         { text: t("时段：{value}", { value: (EN ? f.T?.length && App.timeSpans(f.T) : f.tt) || text.tt || t("详见原文") }) },
         { text: t("天气：{value}", { value: weatherText }) },
@@ -593,13 +609,13 @@
         h.winterTotem ? { text: t("冬季需要雨水图腾改变天气") } : null,
         h.unknown ? { text: h.unknown } : null,
       ].filter(Boolean);
-      return el("details", { class: "habitat", open: habitats.length === 1 }, el("summary", null, N(h.location)), checkList(facts));
+      return el("details", { class: "habitat", open: habitats.length === 1 }, el("summary", null, App.habitatName(h.location)), checkList(facts));
     }));
     const desc = App.itemDesc(it);
     fillDetail(
       head(f.i, N(f.p), t("鱼 · 售价 {price}", { price: money(f.pr) }) + (f.d ? t(" · 难度 {n}", { n: f.d }) : "")),
       desc ? el("p", { class: "d-summary" }, desc) : null,
-      section(t("获取条件"), el("p", { class: "d-sub" }, method === "rod" ? t("用钓竿捕获；不同水域的季节或额外要求可能不同。") : method === "crab" ? t("使用蟹笼，需核对水体、放置与诱饵要求。") : t("在海滩采集。")),
+      section(t("获取条件"), el("p", { class: "d-sub" }, method === "rod" ? (App.isSubmarineFish(f) ? t("在夜市的钓鱼潜艇里用钓竿捕获。") : t("用钓竿捕获；不同水域的季节或额外要求可能不同。")) : method === "crab" ? t("使用蟹笼，需核对水体、放置与诱饵要求。") : t("在海滩采集。")),
         App.fishRequirements(f).length ? checkList(App.fishRequirements(f)) : null,
         source ? el("p", { class: "d-sub" }, t("从地图查看：{place}", { place: source.title })) : null,
         method === "rod" && habitats.length ? rules : sourceFragments(original)),
@@ -677,6 +693,10 @@
     const seed = D.seeds.find(s => s.id === it.id);
     const growing = seed && App.seedCheck(seed);
     const desc = App.itemDesc(it);
+    // 古物和矿物以 Wiki 信息框的来源为主；其他物品没有结构化途径时才用它补充。
+    const collectible = ["artifact", "mineral"].includes(D.pages[it.pg]?.k);
+    const wikiSources = page.src?.length && (collectible || !paths.length) ? sourceGroups(page.src) : null;
+    const donation = page.dr?.length ? section(t("捐赠奖励"), entryList(page.dr)) : null;
     fillDetail(
       head(it.i, App.itemName(it), [it.c && t(it.c), it.p ? t("售价 {price}", { price: money(it.p) }) : null, EN ? null : it.e].filter(Boolean).join(" · "), it.inote && (EN ? null : it.inote)),
       desc ? el("p", { class: "d-summary" }, desc) : null,
@@ -685,7 +705,9 @@
         { text: seed.g ? t("基础生长时间：{n} 天", { n: seed.g }) : t("生长时间依具体种植规则而定") },
         seed.rg ? { text: t("首次成熟后，每 {n} 天再收获", { n: seed.rg }) } : null,
       ].filter(Boolean)), seed.crop ? itemChip(seed.crop.id || seed.crop.z) : null) : null,
-      paths.length ? section(t("获取途径（满足任意一条即可）"), renderPaths(paths)) : section(t("获取途径"), page.f?.source ? sourceFragments(page.f.source) : el("p", { class: "d-sub" }, t("暂缺可核对的获取资料，可继续查看原 Wiki。"))),
+      paths.length ? section(t("获取途径（满足任意一条即可）"), renderPaths(paths), wikiSources ? [el("p", { class: "d-sub" }, t("Wiki 还列出这些来源")), wikiSources] : null)
+        : section(t("获取途径"), wikiSources || (page.f?.source ? sourceFragments(page.f.source) : el("p", { class: "d-sub" }, t("暂缺可核对的获取资料，可继续查看原 Wiki。")))),
+      donation && S.active() ? foldContent(donation, t("捐赠奖励按需查看"), t("查看捐赠奖励")) : donation,
       totals.length > 1 ? section(t("原料合计（按第一条制作途径）"), el("div", { class: "chips" }, totals.map((x) => itemChip(x.id || x.z, x.qty)))) : null,
       usageSection(it.id),
       seed ? section(t("收获日期估算（可选）"), growing ? el("div", null, el("p", { class: "d-summary" }, growing.text),
@@ -1200,6 +1222,9 @@
     $("zoom-in").addEventListener("click", () => App.map.zoom(1.5));
     $("zoom-out").addEventListener("click", () => App.map.zoom(1 / 1.5));
     $("zoom-fit").addEventListener("click", () => App.map.fit());
+    $("tree-zoom-in").addEventListener("click", () => App.tree.zoom(1.25));
+    $("tree-zoom-out").addEventListener("click", () => App.tree.zoom(1 / 1.25));
+    $("tree-zoom-fit").addEventListener("click", () => App.tree.fitWidth());
     const mapSeg = $("map-seg");
     for (const [k, label] of [["valley", t("山谷")], ["island", App.areaTitle("ginger_island")]]) {
       mapSeg.append(el("button", { role: "radio", dataset: { v: k }, onclick: () => {
