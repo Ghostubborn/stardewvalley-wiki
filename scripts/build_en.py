@@ -144,6 +144,12 @@ class English:
         self.en = {norm_title(r["title"]): r for r in en_rows}
         self.redirects = {norm_title(r["title"]): norm_title(r["redirect"]) for r in en_rows if r["redirect"]}
         self.descriptions = switch_entries(self.en["Template:Description"]["text"])
+        # Template:Name shows some names differently from the item name ("Speed w" is shown as "Speed").
+        self.name_labels = {}
+        for key, value in switch_entries(self.en["Template:Name"]["text"]).items():
+            link = re.fullmatch(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]", value.strip())
+            if link:
+                self.name_labels[key] = (link.group(2) or link.group(1)).strip()
         # Template:Bundle uses the same switch keys on both wikis; the visible label is the bundle name.
         zh_bundle = self._bundle_labels(zh_templates["Template:Bundle"], r"\[\[收集包#[^|\]]*\|([^\]]+)\]\]")
         self.bundle_en = self._bundle_labels(self.en["Template:Bundle"]["text"], r"\[\[Bundles#[^|\]]*\|([^\]]+)\]\]")
@@ -185,7 +191,7 @@ class English:
             if a.get("link"):
                 label = a["link"].replace("{{!}}", "|").split("|")[-1].split("#")[0]
             hit = catalog.resolve(raw) or {}
-            label = (a.get("alt") or label or hit.get("en") or raw).strip()
+            label = (a.get("alt") or label or self.name_labels.get(raw.lower()) or hit.get("en") or raw).strip()
             extra = a.get("2", "").strip()
             if re.fullmatch(r"[\d\-~–]+", extra):
                 label = f"{label} ×{extra}"
@@ -285,6 +291,7 @@ class English:
                 self.missing["page"] += 1
                 continue
             fields, end = self.infobox(text)
+            infobox = (wt.first_template(text, "Infobox") or [None])[0]
             sections = wt.sections(text[end:])
             # Villager pages open with a developer quote; the summary should be the article's own lead.
             lead = self.plain(re.sub(r"^\s*\{\{\s*[Qq]uote\b(?:[^{}]|\{\{[^{}]*\}\})*\}\}", "", sections[0]["body"])) if sections else ""
@@ -297,8 +304,59 @@ class English:
                       for k in FIELD_KEYS if fields.get(k) and (v := self.plain(fields[k]))},
                 "sec": [s["title"].strip("= ").strip() for s in sections if s["title"]][:14],
                 "u": en_url(title),
+                "pr": self.props(infobox, fields),
             }
             out[p["title"]] = {k: v for k, v in record.items() if v}
+        return out
+
+    def props(self, infobox, fields):
+        """Item stats from the English infobox, with the same rules as the Chinese build."""
+        props = {}
+        eat = P.edibility(fields, infobox)
+        if eat:
+            props["eat"] = eat
+        buff = P.list_entries(fields.get("buff", ""), self.plain)
+        if buff:
+            props["buff"] = buff
+            duration = self.plain(fields.get("buffduration") or fields.get("duration") or "")
+            if duration:
+                props["buff_time"] = duration
+        stats = P.list_entries(fields.get("stats", ""), self.plain)
+        if stats:
+            props["stats"] = stats
+        if (infobox or "").lower() == "infobox weapon":
+            kind = self.plain(fields.get("type", "")).strip()
+            level = self.plain(fields.get("level", "")).strip()
+            weapon = {"type": kind[:1].upper() + kind[1:], "level": level if level.upper() != "N/A" else None,
+                      "damage": self.plain(fields.get("damage", "")).strip(), "crit": P.percent(self.plain(fields.get("csc", "")))}
+            props["weapon"] = {k: v for k, v in weapon.items() if v}
+        return props
+
+    # Template:Infobox monster links these spellings of a location to its article.
+    MONSTER_PLACES = {"the mines": "The Mines", "mines": "The Mines", "the skull cavern": "Skull Cavern",
+                      "skull cavern": "Skull Cavern", "the farm": "The Farm", "farm": "The Farm"}
+
+    def monsters(self, monsters):
+        """Monster location, floors, stats, drops and variations from the English infobox."""
+        out = {}
+        one_line = lambda text: re.sub(r"\s*\n\s*", " ", text or "").strip()
+        for m in monsters:
+            text, _ = self.page(m["en"]) if m["en"] else (None, None)
+            fields, _ = self.infobox(text)
+            if not fields:
+                self.missing["monster"] += 1
+                continue
+            place = fields.get("location", "").strip()
+            place = f"[[{self.MONSTER_PLACES[place.lower()]}]]" if place.lower() in self.MONSTER_PLACES else place
+            drops = []
+            for kind, value in P.ordered_refs(fields.get("drops", ""), self.catalog, self.plain):
+                # “50%, See note”指条目末尾的注释（种子随季节），注释没有收录。
+                note = value["note"] and re.sub(r",?\s*See note\.?$", "", value["note"]) if kind == "i" else None
+                drops.append({"t": value} if kind == "t" else {k: x for k, x in (("id", value["id"]), ("e", None if value["id"] else value["en"]), ("n", note)) if x})
+            rec = {"lt": "; ".join(P.list_entries(place, self.plain)), "lv": "; ".join(P.list_entries(fields.get("levels", ""), self.plain)),
+                   "s": {k: one_line(self.plain(fields.get(k, ""))) for k in ("hp", "dmg", "def", "spd", "exp") if fields.get(k, "").strip()},
+                   "dr": drops, "vr": [v for v in P.list_entries(fields.get("variations", ""), self.plain) if v.lower() != "none"]}
+            out[m["page"]] = {k: v for k, v in rec.items() if v}
         return out
 
     def item_sources(self, items):
@@ -741,6 +799,7 @@ def build():
         "shops": e.shops(load("shops.json")),
         "recipes": e.recipes(load("recipes.json"), pages),
         "schedules": e.schedules(load("villagers.json")),
+        "monsters": e.monsters(load("monsters.json")),
     }
     # Items sold in a shop table that also lists "Other Sources" (Harvey's Clinic): those are the item's sources.
     for item_id, entries in e.shop_other.items():

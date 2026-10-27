@@ -303,7 +303,8 @@
       else if (App.villagerByName.has(title)) ref = { type: "villager", id: title };
       else if (App.locationByName.has(title)) ref = { type: "location", id: title };
       else if (p.id) ref = { type: "item", id: p.id };
-      searchIndex.push(searchEntry(title, EN ? (p.id && D.items[p.id]?.e) || N(title) : p.e, { a: p.a || [], k: t(p.kz), ref, i: p.i || D.items[p.id]?.i }));
+      const icon = p.i || D.items[p.id]?.i || App.monsterByName.get(title)?.i || App.animalByName.get(title)?.i;
+      searchIndex.push(searchEntry(title, EN ? (p.id && D.items[p.id]?.e) || N(title) : p.e, { a: p.a || [], k: t(p.kz), ref, i: icon }));
       if (p.id) seen.add(p.id);
     }
     for (const [id, it] of Object.entries(D.items)) {
@@ -463,6 +464,69 @@
     })), t("{label}涉及后续内容。", { label }), t("查看{title}", { title: label })));
     return box;
   }
+  // 条目链接（怪物、动物、地点、路线节点）：未展示的条目收起，和物品一样按需查看。
+  function titleRef(title) {
+    if (App.fishByName.has(title)) return { type: "fish", id: title };
+    if (App.villagerByName.has(title)) return { type: "villager", id: title };
+    if (App.locationByName.has(title)) return { type: "location", id: title };
+    const id = D.pages[title]?.id;
+    return id && D.items[id] ? { type: "item", id } : { type: "page", id: title };
+  }
+  // 只有一条途径时不写“满足任意一条即可”。
+  const pathsTitle = paths => paths.length > 1 ? t("获取途径（满足任意一条即可）") : t("获取途径");
+  // Wiki 来源条目写的是哪种怪物或动物（“臭虫（危险）（76%）”“铱蟹掉落（50%）”“Truffle Crabs”），取最长的名称。
+  const CREATURE_TAIL = EN ? /^(?:e?s)?(?: drops?)?(?:\s*\(.*\))?$/i : /^(?:掉落物?)?\s*(?:[（(].*[）)])?$/;
+  function creatureIn(entry) {
+    let best = null, size = 0;
+    for (const title of [...App.monsterByName.keys(), ...App.animalByName.keys()]) {
+      const name = N(title);
+      if (name.length > size && entry.startsWith(name) && CREATURE_TAIL.test(entry.slice(name.length))) { best = title; size = name.length; }
+    }
+    return best;
+  }
+  function pageLink(title, note) {
+    const loc = App.locationByName.get(title);
+    const icon = App.monsterByName.get(title)?.i || App.animalByName.get(title)?.i || villagerIcon(loc?.occ?.[0]) || loc?.i || D.pages[title]?.i;
+    return { ref: titleRef(title), label: N(title), icon, note };
+  }
+  // 地点多数没有图标，没有图片时不放“暂无图片”的占位。
+  function linkChip({ ref, label, icon, note }) {
+    return el("button", { class: "chip", type: "button", onclick: () => App.select(ref) }, App.hasImage(icon) ? img(icon) : null, label,
+      note && S.textAllowed(note, S.title(current)) ? el("span", { class: "hint" }, " " + note) : null);
+  }
+  function linkGroup(entries, label) {
+    const known = entries.filter(e => S.canView(e.ref)), hidden = entries.filter(e => !S.canView(e.ref));
+    const box = el("div", { class: "item-group", dataset: { spoilerScoped: "true" } });
+    if (known.length) box.append(el("div", { class: "chips" }, known.map(linkChip)));
+    if (hidden.length) box.append(foldContent(() => el("div", { class: "chips" }, hidden.map(linkChip)),
+      t("{label}涉及后续内容。", { label }), t("查看{title}", { title: label })));
+    return box;
+  }
+  // 物品属性：食物的能量与生命值和增益，武器与饰品的属性。数值与写法来自 Wiki 信息框。
+  function propsSection(pr) {
+    const eat = pr?.eat, weapon = pr?.weapon || {};
+    if (!eat && !pr?.buff?.length && !pr?.stats?.length && !pr?.weapon) return null;
+    const signed = v => typeof v !== "number" ? v : v > 0 ? "+" + v.toLocaleString(App.locale) : v < 0 ? "−" + Math.abs(v).toLocaleString(App.locale) : "0";
+    const parts = [];
+    // 能分品质的食物照 Wiki 列出四档品质；料理等只有一档。
+    if (eat?.q?.length) parts.push(el("table", { class: "eat-grid" },
+      el("thead", null, el("tr", null, el("th", null, t("品质")), el("th", null, t("能量")), el("th", null, t("生命值")))),
+      el("tbody", null, [[t("普通"), eat.e, eat.h], [t("银星"), ...eat.q[0]], [t("金星"), ...eat.q[1]], [t("铱星"), ...eat.q[2]]]
+        .map(([quality, energy, health]) => el("tr", null, el("td", null, quality), el("td", null, signed(energy)), el("td", null, signed(health)))))));
+    const rows = [
+      eat && !eat.q?.length ? { text: t("能量 {energy}，生命值 {health}", { energy: signed(eat.e), health: signed(eat.h) }) } : null,
+      pr.buff?.length ? { text: t("增益：{list}", { list: App.list(pr.buff) }) } : null,
+      pr.buff_time ? { text: t("持续时间：{time}", { time: pr.buff_time }) } : null,
+      weapon.type ? { text: t("类型：{value}", { value: weapon.type }) } : null,
+      weapon.level ? { text: t("等级：{value}", { value: weapon.level }) } : null,
+      weapon.damage ? { text: t("伤害：{value}", { value: weapon.damage }) } : null,
+      weapon.crit ? { text: t("暴击率：{value}", { value: weapon.crit }) } : null,
+      pr.stats?.length ? { text: t("属性：{list}", { list: App.list(pr.stats) }) } : null,
+    ].filter(Boolean);
+    if (rows.length) parts.push(checkList(rows));
+    const food = eat || pr.buff?.length;
+    return section(pr.weapon ? t("武器属性") : food && pr.stats?.length ? t("属性") : food ? t("食用效果") : t("装备效果"), ...parts);
+  }
   function sourceFragments(text, { joined = false } = {}) {
     const box = el("div", { class: "source-fragments", dataset: { spoilerScoped: "true" } });
     // 中文按句号、分号切分；英文按句末标点切分，避免把完整句子拆碎。
@@ -491,14 +555,17 @@
         hidden.length ? foldContent(() => entryList(hidden), t("部分来源涉及后续内容。"), t("查看这些来源")) : null);
     }));
   }
-  function sourceLine(title) {
+  function wikiUrl(title) {
     const p = D.pages[title];
+    if (EN) return App.pageInfo(title)?.u || (p?.e ? "https://stardewvalleywiki.com/" + encodeURIComponent(p.e.replace(/ /g, "_")) : null);
+    return p ? p.u : "https://zh.stardewvalleywiki.com/" + encodeURIComponent(title);
+  }
+  function sourceLine(title) {
+    const url = wikiUrl(title);
     if (EN) {
-      const url = App.pageInfo(title)?.u || (p?.e ? "https://stardewvalleywiki.com/" + encodeURIComponent(p.e.replace(/ /g, "_")) : null);
       if (!url) return el("p", { class: "d-source" }, t("资料来源：Stardew Valley Wiki 2025-12-18 归档快照。原站内容未作防剧透处理。"));
       return el("p", { class: "d-source" }, t("资料：Stardew Valley Wiki"), " “", el("a", { href: url, target: "_blank", rel: "noopener" }, N(title)), "”", t("，2025-12-18 归档快照。原站内容未作防剧透处理。"));
     }
-    const url = p ? p.u : "https://zh.stardewvalleywiki.com/" + encodeURIComponent(title);
     return el("p", { class: "d-source" }, "资料：中文 Wiki《", el("a", { href: url, target: "_blank", rel: "noopener" }, title), "》，2025-12-18 归档快照。原站内容未作防剧透处理。");
   }
   function actions(...btns) { return el("div", { class: "d-actions" }, btns.filter(Boolean)); }
@@ -550,6 +617,8 @@
       if (p.inputs?.length) div.append(matTree(App.materialTree(p.inputs)));
       if (p.options?.length) div.append(el("p", { class: "d-sub" }, t("可用物品（任选一种）")), itemGroup(p.options, t("可用物品")));
       if (p.refs?.length) div.append(itemGroup(p.refs, t("相关物品")));
+      if (p.monsters?.length) div.append(linkGroup(p.monsters.map(m => pageLink(m.title, m.note)), t("掉落这件物品的怪物")));
+      if (p.animals?.length) div.append(linkGroup(p.animals.map(a => pageLink(a.title)), t("产出这件物品的动物")));
       if (p.recipe && App.LEARNED_KINDS.has(p.recipe.k) && !(p.recipe.uc || []).some(c => c.group === "initial")) {
         const select = el("select", { "aria-label": t("此配方的学习状态"), class: "recipe-status" },
           [["unknown", t("未确认")], ["yes", t("我已学会")], ["no", t("尚未学会")]].map(([value, label]) => el("option", { value }, label)));
@@ -629,6 +698,7 @@
         source ? el("p", { class: "d-sub" }, t("从地图查看：{place}", { place: source.title })) : null,
         method === "rod" ? (habitats.length ? rules : sourceFragments(original)) : method === "crab" ? null : sourceFragments(original)),
       original ? el("details", { class: "reference-original" }, el("summary", null, t("核对 Wiki 原文条件")), sourceFragments(original)) : null,
+      propsSection(App.itemProps(it)),
       usageSection(f.id),
       method === "rod" ? section(t("条件对照（可选）"), App.conditionsActive() ? el("div", null,
         el("div", { class: "path-head" }, el("span", { class: "d-sub" }, condText()), stateChip(c.ok, [t("符合已核验条件"), t("条件不符"), t("待确认")])),
@@ -707,8 +777,9 @@
     const itemSrc = (EN ? EN.isrc?.[it.id] : it.src) || [];
     const pageAbout = !!it.id && D.pages[it.pg]?.id === it.id;
     const shops = paths.filter(p => p.kind === "buy").map(p => N(p.shop || p.where)).filter(Boolean);
+    const creatures = new Set(paths.flatMap(p => [...(p.monsters || []), ...(p.animals || [])]).map(x => x.title));
     const groups = (itemSrc.length ? [["source", itemSrc]] : pageAbout || !paths.length ? page.src || [] : [])
-      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)))]).filter(([, entries]) => entries.length);
+      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)) && !creatures.has(creatureIn(x)))]).filter(([, entries]) => entries.length);
     const wikiSources = groups.length ? sourceGroups(groups) : null;
     // 没有结构化途径时，依次用条目的“获取途径”章节、信息框来源原文和导言补充。
     const fallback = !paths.length && !wikiSources ? (page.ob?.length ? sourceGroups([["source", page.ob]]) : page.f?.source ? sourceFragments(page.f.source) : null) : null;
@@ -718,13 +789,14 @@
     fillDetail(
       head(it.i, App.itemName(it), [it.c && t(it.c), it.p ? t("售价 {price}", { price: money(it.p) }) : null, EN ? null : it.e].filter(Boolean).join(" · "), it.inote && (EN ? null : it.inote)),
       desc ? el("p", { class: "d-summary" }, desc) : null,
+      propsSection(App.itemProps(it)),
       seed ? section(t("种植规则"), checkList([
         { text: t("适生季节：{value}", { value: App.list(seed.S.map(s => App.SEASON_ZH[s])) || t("见原文") }) },
         { text: seed.g ? t("基础生长时间：{n} 天", { n: seed.g }) : t("生长时间依具体种植规则而定") },
         seed.rg ? { text: t("首次成熟后，每 {n} 天再收获", { n: seed.rg }) } : null,
         ...App.latestPlanting(seed).map(date => ({ text: t("最晚播种：{date}（按基础生长天数，未计肥料和职业加速）", { date }) })),
       ].filter(Boolean)), seed.crop ? itemChip(seed.crop.id || seed.crop.z) : null) : null,
-      paths.length ? section(t("获取途径（满足任意一条即可）"), renderPaths(paths), wikiSources ? [el("p", { class: "d-sub" }, t("Wiki 还列出这些来源")), wikiSources] : null)
+      paths.length ? section(pathsTitle(paths), renderPaths(paths), wikiSources ? [el("p", { class: "d-sub" }, t("Wiki 还列出这些来源")), wikiSources] : null)
         : section(t("获取途径"), wikiSources, fallback, lead, wikiSources || fallback || lead ? null : el("p", { class: "d-sub" }, t("暂缺可核对的获取资料，可继续查看原 Wiki。"))),
       donation && S.active() ? foldContent(donation, t("捐赠奖励按需查看"), t("查看捐赠奖励")) : donation,
       totals.length > 1 ? section(t("原料合计（按第一条制作途径）"), el("div", { class: "chips" }, totals.map((x) => itemChip(x.id || x.z, x.qty)))) : null,
@@ -736,9 +808,83 @@
       it.pg ? sourceLine(it.pg) : null);
   }
 
+  // 怪物：属性、出没地点与掉落物，取自信息框原文；英文版取英文 Wiki 的同一信息框。
+  function renderMonster(title) {
+    const m = App.monsterByName.get(title), info = App.monsterInfo(m), page = App.pageInfo(title) || {}, s = info.s;
+    const pins = D.pins.filter((x) => x.t === title);
+    const stats = [
+      // 信息框写的是基础数值（中文 Wiki“基础HP”，英文 Wiki“Base HP”）。
+      s.hp && { text: t("基础生命值：{value}", { value: s.hp }) },
+      s.dmg && { text: t("基础伤害：{value}", { value: s.dmg }) },
+      s.def && { text: t("基础防御：{value}", { value: s.def }) },
+      s.spd && { text: t("移速：{value}", { value: s.spd }) },
+      s.exp && { text: t("经验值：{value}", { value: s.exp }) },
+    ].filter(Boolean);
+    // 掉落物按信息框顺序：说明文字（“战斗技能达到5级之后:”）只管它后面的物品。
+    const drops = el("div", { class: "drop-list", dataset: { spoilerScoped: "true" } });
+    const note = n => n && S.textAllowed(n, title) ? el("span", { class: "hint" }, " " + n) : "";
+    // “见下文中的表格”“See tables”指 Wiki 条目里的变种表，本站没有收录，改为链接到原文。
+    const TABLE_REF = /表格|见变种|\btables?\b/i, url = wikiUrl(title);
+    let chips = null;
+    for (const d of info.dr) {
+      if (d.t && TABLE_REF.test(d.t) && url) { chips = null; drops.append(el("p", { class: "d-sub" }, el("a", { href: url, target: "_blank", rel: "noopener" }, t("各变种的特殊掉落见原 Wiki 的表格 ↗")))); continue; }
+      if (d.t) { chips = null; drops.append(protectContent(el("p", { class: "d-sub" }, d.t))); continue; }
+      if (!chips) drops.append(chips = el("div", { class: "chips" }));
+      const chip = d.id ? itemChip(d.id) : el("span", { class: "chip static" }, EN ? d.e : d.z);
+      chip.append(note(d.n));
+      chips.append(chip);
+    }
+    // 信息框模板给每种有掉落物的怪物都附上这两项（钻石、五彩碎片）。
+    if (info.dr.length) drops.append(el("p", { class: "d-sub" }, t("如果到达过矿井底部：")),
+      el("div", { class: "chips" }, ["(O)72", "(O)74"].map(id => { const chip = itemChip(id); chip.append(note("0.05%")); return chip; })));
+    const places = (m.L || []).filter(name => D.pages[name] || App.locationByName.has(name)).map(name => pageLink(name));
+    const placeText = info.lt && !info.lt.split(EN ? /\s*(?:[;,&]|\band\b)\s*/ : /[、；]/).filter(Boolean)
+      .every(part => places.some(p => p.label === part.trim())) ? info.lt : null;
+    const variants = m.vr?.length && m.vr.every(v => App.monsterByName.has(v)) ? m.vr.map(v => pageLink(v)) : null;
+    fillDetail(
+      head(m.i || D.pages[title]?.i, N(title), page.kz),
+      page.s ? el("p", { class: "d-summary" }, page.s) : null,
+      stats.length ? section(t("属性"), checkList(stats)) : null,
+      info.lt || places.length ? section(t("出没地点"), placeText ? el("p", null, placeText) : null,
+        places.length ? linkGroup(places, t("相关地点")) : null,
+        info.lv ? el("p", { class: "d-sub" }, t("层数：{value}", { value: TABLE_REF.test(info.lv) ? t("各变种不同，见原 Wiki 的表格") : info.lv })) : null) : null,
+      info.dr.length ? section(t("掉落物"), drops) : null,
+      variants ? section(t("变种"), linkGroup(variants, t("变种怪物"))) : info.vr.length ? section(t("变种"), el("p", null, App.list(info.vr))) : null,
+      actions(pins.length ? btn(t("在地图上查看"), () => showOnMap(null, { type: "page", id: title })) : null, planBtn({ type: "page", id: title })),
+      sourceLine(title));
+  }
+
+  // 动物：居住建筑、产物，以及玛妮的牧场商品表里的购买途径（营业与休息日同物品）。
+  function renderAnimal(title) {
+    const a = App.animalByName.get(title), page = App.pageInfo(title) || {};
+    const paths = App.acquisitions(null, title);
+    const homes = (a.h || []).map(h => {
+      const node = [...P().nodes.values()].find(n => n.title === h.z);
+      return node ? { ref: { type: "node", id: node.id }, label: nodeName(node), icon: node.icon } : { ...pageLink(h.pg), label: N(h.z) };
+    });
+    const produce = (a.pr || []).map(x => {
+      if (typeof x === "string") return itemChip(x);
+      const label = EN ? x.e : x.z, ref = x.pg && D.pages[x.pg] ? titleRef(x.pg) : null;
+      if (ref && !S.canView(ref)) return btn(t("后续物品 · 按需查看"), () => App.select(ref));
+      return ref ? linkChip({ ref, label, icon: x.i }) : el("span", { class: "chip static" }, img(x.i), label);
+    });
+    fillDetail(
+      head(a.i || D.pages[title]?.i, N(title), [page.kz, a.bp ? t("购买价格 {price}", { price: money(a.bp) }) : null].filter(Boolean).join(" · ")),
+      page.s ? el("p", { class: "d-summary" }, page.s) : null,
+      homes.length || produce.length ? section(t("饲养"),
+        homes.length ? [el("p", { class: "d-sub" }, t("居住建筑")), linkGroup(homes, t("需要的建筑"))] : null,
+        produce.length ? [el("p", { class: "d-sub" }, t("产物")), el("div", { class: "chips", dataset: { spoilerScoped: "true" } }, produce)] : null) : null,
+      paths.length ? section(pathsTitle(paths), renderPaths(paths))
+        : page.ob?.length ? section(t("获取途径"), sourceGroups([["source", page.ob]])) : null,
+      actions(planBtn({ type: "page", id: title })),
+      sourceLine(title));
+  }
+
   function renderPage(title) {
     const raw = D.pages[title];
     if (!raw) return renderItem(title);
+    if (App.monsterByName.has(title)) return renderMonster(title);
+    if (App.animalByName.has(title)) return renderAnimal(title);
     const p = { ...App.pageInfo(title), i: raw.i, e: raw.e };
     const pins = D.pins.filter((x) => x.t === title);
     const guideIcon = { 新手指南: "Spring.png", 控制: "Controls_Icon.png", 钓鱼攻略: "Fishing_Skill_Icon.png", 物品栏: "Chest.png",
@@ -751,7 +897,7 @@
       heading,
       App.guides?.has(title) ? App.guides.render(title) : null,
       p.s && !App.guides?.has(title) ? el("p", { class: "d-summary" }, p.s) : null,
-      Object.keys(p.f).length ? section(t("要点"), el("dl", { class: "kv" }, Object.entries(p.f).slice(0, 8).map(([k, v]) => [el("dt", null, FIELD_ZH[k] || k), el("dd", null, v)]))) : null,
+      Object.keys(p.f).length ? section(t("要点"), el("dl", { class: "kv" }, Object.entries(p.f).slice(0, 8).flatMap(([k, v]) => [el("dt", null, FIELD_ZH[k] || k), el("dd", null, v)]))) : null,
       p.sec.length && !App.guides?.has(title) ? (S.active() ? foldContent(section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec))), t("完整章节可能包含事件、秘密或后续奖励"), t("查看完整章节目录")) : section(t("条目章节"), el("p", { class: "d-sub" }, App.list(p.sec)))) : null,
       actions(pins.length ? btn(t("在地图上查看"), () => showOnMap(null, { type: "page", id: title })) : null, planBtn({ type: "page", id: title })),
       sourceLine(title));
@@ -1087,7 +1233,7 @@
     if (ref.type === "villager") return App.villagerByName.get(ref.id)?.i;
     if (ref.type === "item") return App.itemInfo(ref.id)?.i;
     if (ref.type === "location") return villagerIcon(App.locationByName.get(ref.id)?.occ?.[0]) || D.pages[ref.id]?.i;
-    return D.pages[ref.id]?.i;
+    return D.pages[ref.id]?.i || App.monsterByName.get(ref.id)?.i || App.animalByName.get(ref.id)?.i;
   }
   function refName(ref) {
     if (!S.canView(ref)) return t("受保护的条目");

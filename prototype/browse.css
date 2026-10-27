@@ -2,7 +2,10 @@
 .home-heading { margin-bottom: 18px; }
 .home-heading .eyebrow { margin: 0 0 5px; color: var(--ink-soft); font-size: 11px; letter-spacing: 2px; }
 .home-heading h2 { margin: 0 0 6px; font: 26px/1.4 var(--pixel); }
-.home-heading > p:last-child { margin: 0; color: var(--ink-soft); font-size: 12px; }
+.home-heading > p:not(.eyebrow) { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.7; }
+.home-heading > p.home-views { margin-top: 4px; }
+.home-view-link { color: var(--bark); text-underline-offset: 3px; }
+.home-view-link:hover { color: var(--walnut); }
 .home-categories { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .home-category { min-width: 0; padding: 12px; border: 2px solid var(--bark); background: var(--parchment-hi); box-shadow: inset 0 3px var(--panel); }
 .home-category-head { width: 100%; padding: 0; display: flex; align-items: center; gap: 8px; border: 0; background: transparent; text-align: left; }

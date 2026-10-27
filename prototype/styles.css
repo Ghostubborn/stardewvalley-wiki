@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SDV Pixel";
-  src: url("assets/fonts/pixel-subset.woff2?v=9b92728f24d2") format("woff2");
+  src: url("assets/fonts/pixel-subset.woff2?v=570d6d8df6b9") format("woff2");
   font-display: swap;
 }
 
@@ -363,6 +363,12 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 0; font-size: 13px; }
 .kv dt { color: var(--ink-soft); }
 .kv dd { margin: 0; }
+/* 食物按品质列能量与生命值（同 Wiki 信息框）。 */
+.eat-grid { border-collapse: collapse; margin: 2px 0 8px; font-size: 13px; }
+.eat-grid th, .eat-grid td { padding: 3px 18px 3px 0; text-align: left; font-weight: normal; }
+.eat-grid th { color: var(--ink-soft); font-size: 12px; border-bottom: 1px solid var(--parchment-lo); }
+.eat-grid td + td { font-variant-numeric: tabular-nums; }
+.drop-list > .chips + .d-sub { margin-top: 10px; }
 
 /* —— 地图工具 —— */
 .map-tools { position: absolute; left: 350px; bottom: 100px; display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; z-index: 4; }

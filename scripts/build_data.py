@@ -60,6 +60,11 @@ KIND_ZH = {
 }
 # 绑定物品的条目类型；地点、怪物和分类页不能绑定到碰巧同名的家具/物品。
 ITEM_KINDS = {"item", "furniture", "hat", "cooking", "fish", "seed", "weapon", "clothing", "mineral", "crop", "artifact", "tool"}
+# 武器类型：照 Template:Infobox weapon 的写法，英文值换成中文名。
+WEAPON_TYPES = {"sword": "剑", "dagger": "匕首", "club": "锤", "slingshot": "弹弓"}
+# 怪物出没地点：Template:Infobox monster 把这几种写法（含英文）链接到对应条目。
+MONSTER_PLACES = {"the mines": "矿井", "mines": "矿井", "矿井": "矿井", "the skull cavern": "骷髅洞穴",
+                  "skull cavern": "骷髅洞穴", "骷髅洞穴": "骷髅洞穴", "the farm": "农场", "farm": "农场", "农场": "农场"}
 # 带口味的工匠物品（“(O)342/16” = 用野山葵做的腌菜）：组合 ID 的前半是产品系列，对应的中文条目写着设备、材料数量和耗时。
 # 398 在组合 ID 里表示果干（单独的 (O)398 是葡萄），见 sdvdata/images.py。
 FLAVOR_PAGES = {
@@ -169,7 +174,8 @@ def make_renderer(catalog, npc_zh, bundles):
             label = a["link"].replace("{{!}}", "|").split("|")[-1].split("#")[0]
         label = a.get("alt") or label or catalog.zh_name(raw)
         extra = a.get("2", "").strip()
-        if re.fullmatch(r"[\d\-~–]+", extra):
+        # “+1”“-1”是属性增减（{{name|Defense|+1}}），不是数量。
+        if re.fullmatch(r"[\d~–]+(?:-\d+)?", extra):
             return f"{label}×{extra}"
         return f"{label}（{extra}）" if extra else label
 
@@ -324,6 +330,7 @@ class Builder:
                 "src": P.infobox_sources(kind, fields, self.plain, "zh"),
                 "dr": P.list_entries(fields.get("dr", ""), self.plain),
                 "obtain": SRC.obtain_section(sections, self.plain),
+                "props": self._props(info[0] if info else None, fields),
                 "map_pins": self._map_pins(text),
                 "url": zh_url(title), "en_url": en_url(en) if en else None,
                 "rev_id": r["rev_id"], "updated": r["timestamp"], "bytes": len(text),
@@ -338,6 +345,32 @@ class Builder:
             if p["item_id"] and p["item_id"] not in self.page_by_item:
                 self.page_by_item[p["item_id"]] = p["title"]
         return pages, texts
+
+    def _props(self, infobox, fields):
+        """信息框里的物品属性：能量与生命值、增益与持续时间、武器与饰品属性。"""
+        props = {}
+        eat = P.edibility(fields, infobox)
+        if eat:
+            props["eat"] = eat
+        buff = P.list_entries(fields.get("buff", ""), self.plain)
+        if buff:
+            props["buff"] = buff
+            # 普通信息框写 buffduration，料理信息框写 duration（只在有增益时显示）。
+            duration = self.plain(fields.get("buffduration") or fields.get("duration") or "")
+            if duration:
+                props["buff_time"] = _zh_duration(duration)
+        stats = P.list_entries(fields.get("stats", ""), self.plain)
+        if stats:
+            props["stats"] = stats
+        if (infobox or "").lower() == "infobox weapon":
+            kind = self.plain(fields.get("type", "")).strip()
+            level = self.plain(fields.get("level", "")).strip()
+            weapon = {"type": WEAPON_TYPES.get(kind.lower(), kind) or None,
+                      "level": level if level and level.upper() != "N/A" else None,
+                      "damage": self.plain(fields.get("damage", "")).strip() or None,
+                      "crit": P.percent(self.plain(fields.get("csc", "")))}
+            props["weapon"] = {k: v for k, v in weapon.items() if v}
+        return props
 
     def _page_item(self, title, en, fields):
         for name in (fields.get("eng"), en, title):
@@ -385,6 +418,10 @@ class Builder:
         self.image_resolver.resolve_items(items, self.pages, self.en_redirects)
         self._fallback_pages(items)
         self._collection_items(items)
+        for item in items:
+            edibility = item.get("edibility")
+            if isinstance(edibility, int) and edibility not in (-300, 0):
+                item["eat"] = dict(zip(("e", "h"), P.calc_edibility(edibility)))
         for item in items:
             # 矿井里的石头、杂草等是地图物件，不是可放进背包的物品；没有条目且没译名的是游戏内部占位。
             item["internal"] = (item.get("obj_type") == "Litter" or item["zh"] == "???"
@@ -499,7 +536,7 @@ class Builder:
                 extra = [x for x in P.item_refs(fields.get("ingredients", ""), self.catalog) if x.get("id") != "(O)812"]
                 families[family] = {"stations": P.item_refs(fields["craftingstation"], self.catalog),
                                     "qty": int(qty.group(1)) if qty and not extra else 1, "extra": extra,
-                                    "time": self.plain(fields.get("crafttime", "")) or None, "title": title}
+                                    "time": _simplified(self.plain(fields.get("crafttime", ""))) or None, "title": title}
         out = []
         for item in self.items.values():
             family = families.get(item.get("made_by"))
@@ -547,7 +584,7 @@ class Builder:
             "output": {"page": page["title"], "id": page["item_id"], "zh": page["title"], "qty": yield_qty or 1},
             "inputs": ingredients,
             "stations": stations,
-            "time": self.plain(fields.get("crafttime", "")) or None,
+            "time": _simplified(self.plain(fields.get("crafttime", ""))) or None,
             "unlock_text": unlock_text or None,
             "unlock": P.unlock_conditions(unlock_text) if unlock_text else [],
             "source": page["url"],
@@ -923,10 +960,18 @@ class Builder:
                 continue
             f = info[1]
             if p["kind"] == "monster":
+                place = f.get("location", "").strip()
+                place = f"[[{MONSTER_PLACES[place.lower()]}]]" if place.lower() in MONSTER_PLACES else place
                 monsters.append({
                     "page": p["title"], "en": p["en"], "image": self.image(f.get("portrait"), p["en"]),
-                    "locations": [self.resolve(t) for t in wt.page_links(f.get("location", ""))],
-                    "location_text": self.plain(f.get("location", "")),
+                    # 括号里是出现条件（“接受[[任务]]或激活挑战之神庙”），不算地点。
+                    "locations": [self.resolve(t) for t in wt.page_links(re.sub(r"（[^）]*）|\([^)]*\)", "", place))],
+                    "location_text": "；".join(P.list_entries(place, self.plain)),
+                    "levels": "；".join(P.list_entries(f.get("levels", ""), self.plain)) or None,
+                    # 信息框原文：多数是数值，史莱姆等写“各不相同”或按变种列出。
+                    "stats": {k: _one_line(self.plain(f.get(k, ""))) for k in ("hp", "dmg", "def", "spd", "exp") if f.get(k, "").strip()},
+                    "drops_seq": P.ordered_refs(f.get("drops", ""), self.catalog, self.plain),
+                    "variations": [v for v in P.list_entries(f.get("variations", ""), self.plain) if v != "无"],
                     "hp": _int(self.plain(f.get("hp", ""))), "damage": self.plain(f.get("dmg", "")) or None,
                     "defense": _int(self.plain(f.get("def", ""))), "speed": _int(self.plain(f.get("spd", ""))),
                     "xp": _int(self.plain(f.get("exp", ""))),
@@ -934,9 +979,26 @@ class Builder:
                     "slayer_group": self.plain(f.get("killable", "")) or None,
                 })
             elif p["kind"] == "animal":
+                # {{name|Deluxe Barn}} 在名称表里写作“畜棚|高级畜棚”：前半是条目，后半是显示名。
+                homes = []
+                for ref in P.item_refs(f.get("building", ""), self.catalog):
+                    override = self.catalog.override_names.get((ref["en"] or "").lower(), "")
+                    homes.append({"zh": ref["zh"], "page": override.split("|")[0] if "|" in override else ref["zh"]})
+                # 棕色蛋等在游戏数据里与白色的蛋同名，查不到物品 ID：保留 Wiki 的名称，链接到名称表写的所属条目。
+                # “Large Goat Milk”在游戏里叫“L. Goat Milk”，Wiki 名称就是条目名，取条目对应的物品。
+                produce = []
+                for ref in P.item_refs(f.get("produce", ""), self.catalog):
+                    qid = ref["id"] or (self.pages.get(ref["zh"]) or {}).get("item_id")
+                    if qid:
+                        produce.append({"id": qid})
+                        continue
+                    override = self.catalog.override_names.get((ref["en"] or "").lower(), "")
+                    page = override.split("|")[0] if "|" in override else (ref["zh"] if ref["zh"] in self.pages else None)
+                    produce.append({"zh": ref["zh"], "en": ref["en"], "page": page, "image": self.image(ref["en"])})
                 animals.append({
                     "page": p["title"], "en": p["en"], "image": self.image(f.get("image"), p["en"]),
                     "building": [self.resolve(t) for t in wt.page_links(f.get("building", ""))],
+                    "homes": homes, "produce_list": produce,
                     "produce": P.item_refs(f.get("produce", ""), self.catalog),
                     "buy_price": _int(self.plain(f.get("buyprice", ""))),
                 })
@@ -1100,6 +1162,23 @@ def _first_paragraph(text):
         if len(para) > 8 and not para.startswith(("{|", "|", "!", ":")):
             return para[:400]
     return text[:400] if text else ""
+
+
+def _simplified(text):
+    """个别字段混入繁体（咖啡的“120分鐘（2小時）”），换成本站使用的简体。"""
+    return (text or "").translate(str.maketrans("鐘時間製", "钟时间制"))
+
+
+def _one_line(text):
+    return re.sub(r"\s*\n\s*", " ", text or "").strip()
+
+
+def _zh_duration(text):
+    """“1m 23s”“30s”“7m”换成中文单位；其他写法（“8分钟24秒”“永久”）原样保留。"""
+    m = re.fullmatch(r"\s*(?:(\d+)\s*m)?\s*(?:(\d+)\s*s)?\s*", text or "")
+    if not m or not (m.group(1) or m.group(2)):
+        return text
+    return (f"{m.group(1)}分" if m.group(1) else "") + (f"{m.group(2)}秒" if m.group(2) else "")
 
 
 def _clean_heading(title):

@@ -1,5 +1,6 @@
 """把条目字段解析成结构化值：物品列表、季节、时间段、天气、价格和解锁条件。"""
 
+import math
 import re
 
 from . import wikitext as wt
@@ -126,6 +127,86 @@ def infobox_sources(kind, fields, render, lang):
         return [["source", entries]] if entries else []
     groups = [[k, entries] for k in ("as", "md", "os", "source") if fields.get(k) and (entries := list_entries(fields[k], render))]
     return groups
+
+
+# 能量与生命值：照 Wiki 的“模块:Calcedibility”与 Template:EdibilityGrid（2025-12-18 归档）。
+# 品质系数：普通 0、银星 1、金星 2、铱星 4；这些物品在 Wiki 上只列普通品质。
+EDIBILITY_QUALITIES = (1, 2, 4)
+EDIBILITY_BASE_ONLY = {"juice", "oil", "cave carrot", "green tea", "ginger", "sap", "green algae", "white algae", "qi fruit"}
+
+
+def calc_edibility(edibility, quality=0):
+    """返回 (能量, 生命值)。可食用度为负时扣能量，生命值按 Wiki 记 0。"""
+    if edibility == 0:
+        return 0, 0
+    energy = math.floor(math.ceil(edibility * 2.5) + edibility * quality)
+    return energy, (0 if edibility < 0 else math.floor(energy * 0.45))
+
+
+def edibility(fields, infobox):
+    """信息框的“能量 / 生命值”一栏：{'e': 能量, 'h': 生命值, 'q': [[银星], [金星], [铱星]]}；不可食用或没有这一栏时为 None。
+
+    规则与 Wiki 模板一致：料理只列普通品质，可指定生命值；普通物品写了 quality=false 时只列普通品质；
+    星之果实的能量写作 100%。
+    """
+    try:
+        value = int((fields.get("edibility") or "").strip())
+    except ValueError:
+        return None
+    kind = (infobox or "").strip().lower()
+    eng = (fields.get("eng") or "").strip().lower()
+    if value == -300:
+        return None
+    if kind == "infobox" and eng == "stardrop":
+        return {"e": "100%", "h": 0}
+    energy, health = calc_edibility(value)
+    out = {"e": energy, "h": health}
+    if kind == "infobox cooking" and (fields.get("health") or "").strip():
+        override = fields["health"].strip()
+        out["h"] = int(override) if override.isdigit() else override
+    graded = kind == "infobox fish" or (kind == "infobox" and (fields.get("quality") or "").strip().lower() not in ("false", "normal"))
+    if graded and value and eng not in EDIBILITY_BASE_ONLY:
+        out["q"] = [list(calc_edibility(value, q)) for q in EDIBILITY_QUALITIES]
+    return out if (out["e"] or out["h"]) else None
+
+
+def percent(text):
+    """暴击率写作小数（0.02、.02），显示为百分比；不是数字时原样返回。"""
+    text = (text or "").strip()
+    try:
+        return f"{float(text) * 100:g}%"
+    except ValueError:
+        return text or None
+
+
+def ordered_refs(raw, catalog, render):
+    """掉落物一类字段：{{name}} 物品和夹在中间的说明文字，按原顺序返回 [['i', ref] | ['t', 文本]]。"""
+    out, last = [], 0
+
+    def text(chunk):
+        chunk = re.sub(r"(?m)^\s*-{4,}\s*$", "", chunk)
+        chunk = re.sub(r"\s+", " ", render(chunk)).strip(" ，,、;；")
+        chunk = re.sub(r"(?<=[\u4e00-\u9fff]):$", "：", chunk)
+        if chunk:
+            out.append(["t", chunk])
+
+    for tpl, start, end in wt.iter_templates(raw or ""):
+        text(raw[last:start])
+        name, _ = wt.parse_template(tpl)
+        refs = item_refs(tpl, catalog) if name.lower() == "name" else []
+        if refs:
+            ref = refs[0]
+            note = re.sub(r"\s+", " ", render(ref["note"] or "")).strip() or None
+            # “1-3,10%”与“1-3, 10%”混写：逗号后补空格，千位分隔符不动。
+            note = note and re.sub(r",(?!\s)(?!\d{3}(?!\d))", ", ", note)
+            if ref["qty"] and not note:
+                note = str(ref["qty"])
+            out.append(["i", {"id": ref["id"], "zh": ref["zh"], "en": ref["en"], "note": note}])
+        else:
+            text(tpl)
+        last = end
+    text((raw or "")[last:])
+    return out
 
 
 def item_refs(text, catalog):

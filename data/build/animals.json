@@ -4,6 +4,17 @@
   "en": "Sheep",
   "image": "Sheep.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "高级畜棚",
+    "page": "畜棚"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)440"
+   }
+  ],
   "produce": [
    {
     "id": "(O)440",
@@ -21,6 +32,32 @@
   "en": "Chicken",
   "image": "White_Chicken.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "鸡舍",
+    "page": "鸡舍"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)176"
+   },
+   {
+    "zh": "棕色蛋",
+    "en": "Brown Egg",
+    "page": "蛋",
+    "image": "Brown_Egg.png"
+   },
+   {
+    "id": "(O)174"
+   },
+   {
+    "zh": "棕色大鸡蛋",
+    "en": "Large Brown Egg",
+    "page": "大鸡蛋",
+    "image": "Large_Brown_Egg.png"
+   }
+  ],
   "produce": [
    {
     "id": "(O)176",
@@ -62,6 +99,20 @@
   "en": "Cow",
   "image": "White_Cow.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "畜棚",
+    "page": "畜棚"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)184"
+   },
+   {
+    "id": "(O)186"
+   }
+  ],
   "produce": [
    {
     "id": "(O)184",
@@ -87,6 +138,17 @@
   "en": "Void Chicken",
   "image": "Void_Chicken.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "大鸡舍",
+    "page": "鸡舍"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)305"
+   }
+  ],
   "produce": [
    {
     "id": "(O)305",
@@ -104,6 +166,17 @@
   "en": "Pig",
   "image": "Pig.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "高级畜棚",
+    "page": "畜棚"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)430"
+   }
+  ],
   "produce": [
    {
     "id": "(O)430",
@@ -121,6 +194,20 @@
   "en": "Rabbit",
   "image": "Rabbit.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "高级鸡舍",
+    "page": "鸡舍"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)446"
+   },
+   {
+    "id": "(O)440"
+   }
+  ],
   "produce": [
    {
     "id": "(O)446",
@@ -146,6 +233,20 @@
   "en": "Duck",
   "image": "Duck.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "大鸡舍",
+    "page": "鸡舍"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)442"
+   },
+   {
+    "id": "(O)444"
+   }
+  ],
   "produce": [
    {
     "id": "(O)442",
@@ -171,6 +272,20 @@
   "en": "Goat",
   "image": "Goat.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "大畜棚",
+    "page": "畜棚"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)436"
+   },
+   {
+    "id": "(O)438"
+   }
+  ],
   "produce": [
    {
     "id": "(O)436",
@@ -196,6 +311,17 @@
   "en": "Dinosaur",
   "image": "Dinosaur.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "大鸡舍",
+    "page": "鸡舍"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)107"
+   }
+  ],
   "produce": [
    {
     "id": "(O)107",
@@ -213,6 +339,17 @@
   "en": "Ostrich",
   "image": "Ostrich.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "畜棚",
+    "page": "畜棚"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)289"
+   }
+  ],
   "produce": [
    {
     "id": "(O)289",
@@ -230,6 +367,17 @@
   "en": "Golden Chicken",
   "image": "Golden_Chicken.png",
   "building": [],
+  "homes": [
+   {
+    "zh": "大鸡舍",
+    "page": "鸡舍"
+   }
+  ],
+  "produce_list": [
+   {
+    "id": "(O)928"
+   }
+  ],
   "produce": [
    {
     "id": "(O)928",

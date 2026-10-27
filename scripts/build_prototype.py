@@ -126,7 +126,7 @@ def main():
                                                   "craftingstation", "crafttime", "buff", "edibility") and v},
         }
         # 逐条来源（远古斑点、怪物掉落、其他来源或“来源”）、古物的捐赠奖励，以及“获取途径”一类章节。
-        for key, field in (("src", "src"), ("dr", "dr"), ("ob", "obtain")):
+        for key, field in (("src", "src"), ("dr", "dr"), ("ob", "obtain"), ("pr", "props")):
             if p.get(field):
                 out_pages[p["title"]][key] = p[field]
 
@@ -146,7 +146,10 @@ def main():
             "p": it.get("price"), "d": (it["desc"] or "")[:90], "pg": it["page"],
             "inote": it.get("image_note"),
         }
-        extra = {"src": it.get("src") or None, "x": 1 if it.get("internal") else None}
+        # 能量与生命值以条目信息框为准；条目不是写这件物品（如哈维的诊所里的药），才用游戏数据按同一公式补算。
+        page = page_by_title.get(it["page"]) or {}
+        own_eat = page.get("item_id") == it["id"] and (page.get("props") or {}).get("eat")
+        extra = {"src": it.get("src") or None, "x": 1 if it.get("internal") else None, "eat": None if own_eat else it.get("eat")}
         # 蜂蜜随附近的花、鱼籽随鱼塘里的鱼而不同：保留口味来源，详情据此说明产出方式。
         if it.get("made_by") in ("(O)340", "(O)812"):
             extra.update(fo=it["flavor_of"], mb=it["made_by"])
@@ -294,6 +297,21 @@ def main():
     if unresolved:
         raise ValueError(f"页面引用的物品未打包：{sorted(unresolved)}")
 
+    # —— 怪物与动物 ——
+    monsters = []
+    for m in load("monsters.json"):
+        drops = [{"t": v} if kind == "t" else {k: x for k, x in (("id", v["id"]), ("z", None if v["id"] else v["zh"]), ("n", v["note"])) if x}
+                 for kind, v in m["drops_seq"]]
+        record = {"p": m["page"], "i": img(m["image"]), "lt": m["location_text"], "L": list(dict.fromkeys(m["locations"])),
+                  "lv": m["levels"], "s": m["stats"], "dr": drops, "vr": m["variations"]}
+        monsters.append({k: v for k, v in record.items() if v})
+    animals = []
+    for a in load("animals.json"):
+        record = {"p": a["page"], "i": img(a["image"]), "h": [{"z": h["zh"], "pg": h["page"]} for h in a["homes"]],
+                  "pr": [x["id"] if x.get("id") else {"z": x["zh"], "e": x["en"], "pg": x["page"], "i": img(x["image"])} for x in a["produce_list"]],
+                  "bp": a["buy_price"]}
+        animals.append({k: v for k, v in record.items() if v})
+
     # —— 地图点位 ——
     pins = []
     seen = set()
@@ -340,6 +358,7 @@ def main():
         "pages": out_pages, "items": out_items, "fish": fish, "villagers": villagers, "locations": locations,
         "seeds": seeds, "recipes": recipes, "chains": chains, "buildings": buildings, "bundles": bundles,
         "shops": shops, "pins": pins, "skillUnlocks": skill_unlocks, "progression": progression,
+        "monsters": monsters, "animals": animals,
         "guides": guides,
         "schedules": runpy.run_path(os.path.join(ROOT, "scripts", "build_schedules.py"))["build"](ROOT),
     }
@@ -396,9 +415,9 @@ def build_english():
 
 # 英文页只改显示文字与语言相关的属性；脚本和注释原样保留。
 EN_HEAD = {
-    "title": "Stardew Valley Interactive Guide · Prototype",
-    "description": "A Stardew Valley reference: browse fish, villager gifts, crops, bundles and upgrade paths by category, with spoiler protection on by default. Data from the Stardew Valley Wiki.",
-    "og_description": "Browse fish, villager gifts, crops, bundles and upgrade paths by category, with spoiler protection on by default. Data from the Stardew Valley Wiki.",
+    "title": "Stardew Valley Interactive Guide – a spoiler-safe reference",
+    "description": "A spoiler-safe Stardew Valley reference: how to get items, where and when fish bite, and what each upgrade needs, plus a valley map and progression tree. Built from the Stardew Valley Wiki. Free, no ads, no sign-up.",
+    "og_description": "How to get items, where and when fish bite, and what each upgrade needs, spoiler-safe by default. Built from the Stardew Valley Wiki.",
 }
 TEXT_ATTRS = ("aria-label", "title", "placeholder", "alt", "data-title")
 
@@ -434,7 +453,7 @@ def english_page(ui):
         chunk = re.sub(r"<title>.*?</title>", f"<title>{EN_HEAD['title']}</title>", chunk)
         chunk = re.sub(r'(<meta name="description" content=")[^"]*"', lambda m: m.group(1) + html.escape(EN_HEAD["description"]) + '"', chunk)
         chunk = re.sub(r'(<meta property="og:site_name" content=")[^"]*"', r'\1Stardew Valley Interactive Guide"', chunk)
-        chunk = re.sub(r'(<meta property="og:title" content=")[^"]*"', r'\1Stardew Valley Interactive Guide"', chunk)
+        chunk = re.sub(r'(<meta property="og:title" content=")[^"]*"', lambda m: m.group(1) + html.escape(EN_HEAD["title"]) + '"', chunk)
         chunk = re.sub(r'(<meta property="og:description" content=")[^"]*"', lambda m: m.group(1) + html.escape(EN_HEAD["og_description"]) + '"', chunk)
         chunk = chunk.replace(f'<meta property="og:url" content="{SITE}">', f'<meta property="og:url" content="{SITE}en/">')
         chunk = chunk.replace('<meta property="og:locale" content="zh_CN">', '<meta property="og:locale" content="en_US">')
@@ -504,6 +523,10 @@ def version_assets():
         if not name.endswith((".js", ".css", ".woff2")) or not os.path.isfile(path):
             return match.group(0)
         return f'{attr}="{name}?v={digest(path)}"'
+    def social(match):
+        # 分享预览图写在 meta 的绝对地址里；带上指纹，换图后各平台不再沿用旧缓存。
+        path = os.path.join(PROTO, match.group(2))
+        return f'{match.group(1)}{match.group(2)}?v={digest(path)}"' if os.path.isfile(path) else match.group(0)
     # 两个语言版本的页面引用同一批根目录资源（英文页通过 <base href="../">）。
     for html_path in (os.path.join(PROTO, "index.html"), os.path.join(PROTO, "en", "index.html")):
         if not os.path.isfile(html_path):
@@ -511,6 +534,7 @@ def version_assets():
         with open(html_path, encoding="utf-8") as f:
             page = f.read()
         page = re.sub(r'(src|href)="([^"?]+)(?:\?[^\"]*)?"', replace, page)
+        page = re.sub(r'(content="%s)(assets/social/[^"?]+)(?:\?[^"]*)?"' % re.escape(SITE), social, page)
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(page)
 

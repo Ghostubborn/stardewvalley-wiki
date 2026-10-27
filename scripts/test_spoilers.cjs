@@ -31,6 +31,11 @@ assert.equal(S.mapPoint({ type: 'fish', id: '鲤鱼' }, [134, 194, 'valley']), f
 assert.equal(S.mapPoint({ type: 'fish', id: '鲤鱼' }, [114, 201, 'valley']), false, '校准后的内部地点入口保持保护');
 assert.equal(S.mapPoint({ type: 'fish', id: '鲶鱼' }, [138, 165, 'valley']), true, '校准后的森林河流保持可读');
 assert.equal(S.mapPoint({ type: 'fish', id: '鬼鱼' }, [275, 40, 'valley']), false, '双地图解析补回的内部鱼类坐标不能越过保护');
+for (const name of ['苍蝇', '史莱姆（怪物）', '荒野石魔']) assert.equal(S.canView(ref(name)), false, `未到矿井时怪物默认保护：${name}`);
+A.setProgress(p => { p.mineDepth = 40; });
+for (const name of ['苍蝇', '臭虫', '石魔', '灰尘精灵']) assert.equal(S.canView(ref(name)), true, `到过的矿井层数内的怪物可查看：${name}`);
+for (const name of ['幽灵', '灰尘精灵（危险）', '蜘蛛', '史莱姆（怪物）', '蝙蝠', '荒野石魔']) assert.equal(S.canView(ref(name)), false, `更深层、危险矿井与跨地区怪物仍保护：${name}`);
+A.setProgress(p => { p.mineDepth = 0; });
 A.setProgress(p => { p.tools.斧头 = 2; });
 assert.equal(A.areaState('secret_woods').state, 'open');
 assert.equal(S.area('secret_woods'), false, '具备进入能力不等于已探索');

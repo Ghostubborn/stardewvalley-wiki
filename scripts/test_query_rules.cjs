@@ -204,4 +204,28 @@ assert(A.pageInfo('祝尼魔帽子').src.flat(2).some(x => x.includes('成就'))
 assert.equal(A.D.items['(WP)12'].z, '壁纸 #13'); assert(A.D.items['(WP)12'].src.some(x => x.includes('法师目录')));
 assert(A.pageInfo('秘密纸条').ob.some(x => x.startsWith('清除杂草')));
 assert(!A.browse.records('items').some(r => /Stone$/.test(r.label) || r.label === '杂草'), 'mine stones and weeds are map objects, not catalogue items');
-console.log('Query rule checks passed: per-water fishing, unknown exceptions, collection methods, acquisition gates, shop hours/stock, ordinary sources, harvest assumptions, Night Market submarine, artifact sources, exception clauses, legendary requirements, crab water and item sources.');
+
+// 3. Item properties, monster drops and animal produce come from the wiki infoboxes.
+const props = name => JSON.parse(JSON.stringify(A.itemProps(A.itemInfo(name)))); // plain objects: the vm realm has its own Array
+assert.deepEqual(props('野山葵').eat, { e: 13, h: 5, q: [[18, 8], [23, 10], [33, 14]] }, 'Calcedibility: energy, health and each quality');
+assert.deepEqual(props('咖啡').buff, ['速度（+1）']); assert.equal(props('咖啡').buff_time, '1分23秒');
+assert.deepEqual(props('啤酒').buff, ['眩晕', '速度（-1）'], 'negative buffs keep their sign');
+assert.deepEqual(props('星之果实').eat, { e: '100%', h: 0 });
+assert.equal(props('生命药水').eat.h, '100%'); assert.equal(props('能量滋补水').eat.e, 500);
+assert.deepEqual(props('生锈的剑').weapon, { type: '剑', level: '1', damage: '2-5', crit: '2%' });
+assert.deepEqual(props('运动鞋').stats, ['防御（+1）']);
+assert.equal(props('煤炭').eat, null, 'inedible items have no eating row');
+const golem = A.monsterInfo(A.monsterByName.get('荒野石魔'));
+assert.equal(golem.s.hp, '30');
+assert.deepEqual([...golem.dr.slice(0, 2).map(d => d.id)], ['(O)382', '(O)72'], 'drops keep the infobox order');
+assert(golem.dr.some(d => d.t === '战斗技能达到5级之后：'), 'conditions between drops are kept in place');
+assert.deepEqual([...A.monsterByName.get('蓝鱿鱼').L], ['矿井'], 'links inside a condition are not places');
+const coal = paths('煤炭').find(p => p.kind === 'drop');
+assert(coal.monsters.some(m => m.title === '荒野石魔' && m.note === '10%'), 'drop chance comes from the monster infobox');
+assert(coal.monsters.some(m => m.title === '暗影狙击手' && m.note === '1-3, 10%'), 'mixed comma spacing is normalised');
+assert.deepEqual([...paths('蛋').find(p => p.kind === 'animal').animals.map(a => a.title)], ['鸡']);
+assert.deepEqual([...paths('松露').map(p => p.kind)].sort(), ['animal', 'drop']);
+const chicken = A.animalByName.get('鸡');
+assert.equal(chicken.bp, 800); assert.equal(chicken.h[0].z, '鸡舍');
+assert(chicken.pr.some(x => x.z === '棕色蛋' && x.pg === '蛋'), 'brown eggs share the egg article instead of a guessed item ID');
+console.log('Query rule checks passed: per-water fishing, unknown exceptions, collection methods, acquisition gates, shop hours/stock, ordinary sources, harvest assumptions, Night Market submarine, artifact sources, exception clauses, legendary requirements, crab water, item sources, item properties, monster drops and animal produce.');

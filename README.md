@@ -1,8 +1,8 @@
 # 星露谷交互手册
 
-**English:** A Stardew Valley reference site — browse fish, villager gifts, crops, bundles, shops and upgrade paths by category, on a map, or as a progression tree, with spoiler protection on by default. Open the English version at <https://stardewvalley-wiki.pages.dev/en/>. The English text comes from the [Stardew Valley Wiki](https://stardewvalleywiki.com/) archive (2025-12-18); feedback is welcome in [Issues](https://github.com/Ghostubborn/stardewvalley-wiki/issues).
+**English:** A spoiler-safe Stardew Valley reference — how to get items, where and when fish bite, and what each upgrade needs, plus a valley map and progression tree. Later-game content stays folded until you choose to open it. Open the English version at <https://stardewvalley-wiki.pages.dev/en/>. The English text comes from the [Stardew Valley Wiki](https://stardewvalleywiki.com/) archive (2025-12-18); feedback is welcome in [Issues](https://github.com/Ghostubborn/stardewvalley-wiki/issues).
 
-基于星露谷 Wiki 资料的查询站：按分类查内容、按地点浏览地图、理解物品用途与升级路线。默认保护未探索内容，查阅无需连接游戏或维护游戏时间。提供中文版（`/`）与英文版（`/en/`），首次访问按浏览器语言自动进入，页头可切换。
+基于星露谷 Wiki 资料、默认不剧透的查询站：物品怎么获得、鱼在哪片水域什么时候出现、升级前要准备什么，都能直接查；也可以在山谷地图上按地点浏览，或在成长路线里看升级和解锁的先后。还没到的内容先收起，想看再点开；查阅无需连接游戏或维护游戏时间。提供中文版（`/`）与英文版（`/en/`），首次访问按浏览器语言自动进入，页头可切换。
 
 ## 本地运行
 

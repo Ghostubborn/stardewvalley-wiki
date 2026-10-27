@@ -43,6 +43,7 @@ window.__enScan = { done: false, step: "starting" };
       ...D.fish.map(f => ({ type: "fish", id: f.p })),
       ...D.villagers.map(v => ({ type: "villager", id: v.p })),
       ...D.locations.map(l => ({ type: "location", id: l.p })),
+      ...[...D.monsters, ...D.animals].map(m => ({ type: "page", id: m.p })),
       ...[...A.progression.nodes.keys()].map(id => ({ type: "node", id })),
       ...A.browse.records("bundles").filter(r => r.ref.type === "bundle").map(r => r.ref),
       ...A.browse.records("basics").map(r => r.ref),

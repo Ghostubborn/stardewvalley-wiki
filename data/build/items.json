@@ -272,6 +272,10 @@
   "image": "Wild_Horseradish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -450,6 +454,10 @@
   "image": "Leek.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 40,
+   "h": 18
+  },
   "internal": false
  },
  {
@@ -538,6 +546,10 @@
   "image": "Dandelion.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -624,6 +636,10 @@
   "image": "Parsnip.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -682,6 +698,10 @@
   "image": null,
   "image_kind": "missing",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": true
  },
  {
@@ -1601,6 +1621,10 @@
   "image": "Cave_Carrot.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 30,
+   "h": 13
+  },
   "internal": false
  },
  {
@@ -2485,6 +2509,10 @@
   "image": "Cactus_Fruit.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -2595,6 +2623,10 @@
   "image": "Sap.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -2,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -5074,6 +5106,10 @@
   "image": "Pufferfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -100,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -5178,6 +5214,10 @@
   "image": "Anchovy.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -5281,6 +5321,10 @@
   "image": "Tuna.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -5386,6 +5430,10 @@
   "image": "Sardine.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -5488,6 +5536,10 @@
   "image": "Bream.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -5590,6 +5642,10 @@
   "image": "Largemouth_Bass.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -5694,6 +5750,10 @@
   "image": "Smallmouth_Bass.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -5796,6 +5856,10 @@
   "image": "Rainbow_Trout.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -5898,6 +5962,10 @@
   "image": "Salmon.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -6003,6 +6071,10 @@
   "image": "Walleye.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 30,
+   "h": 13
+  },
   "internal": false
  },
  {
@@ -6107,6 +6179,10 @@
   "image": "Perch.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -6211,6 +6287,10 @@
   "image": "Carp.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -6319,6 +6399,10 @@
   "image": "Catfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -6424,6 +6508,10 @@
   "image": "Pike.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -6527,6 +6615,10 @@
   "image": "Sunfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -6630,6 +6722,10 @@
   "image": "Red_Mullet.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -6734,6 +6830,10 @@
   "image": "Herring.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -6839,6 +6939,10 @@
   "image": "Eel.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 30,
+   "h": 13
+  },
   "internal": false
  },
  {
@@ -7050,6 +7154,10 @@
   "image": "Red_Snapper.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -7155,6 +7263,10 @@
   "image": "Squid.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -7254,6 +7366,10 @@
   "image": "Seaweed.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -7323,6 +7439,10 @@
   "image": "Green_Algae.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -7399,6 +7519,10 @@
   "image": "Sea_Cucumber.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -25,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -7505,6 +7629,10 @@
   "image": "Super_Cucumber.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -7607,6 +7735,10 @@
   "image": "Ghostfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -7706,6 +7838,10 @@
   "image": "White_Algae.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 20,
+   "h": 9
+  },
   "internal": false
  },
  {
@@ -7881,6 +8017,10 @@
   "image": "Crimsonfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -7983,6 +8123,10 @@
   "image": "Angler.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -8087,6 +8231,10 @@
   "image": "Ice_Pip.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -8193,6 +8341,10 @@
   "image": "Lava_Eel.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -8294,6 +8446,10 @@
   "image": "Legend.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 500,
+   "h": 225
+  },
   "internal": false
  },
  {
@@ -8398,6 +8554,10 @@
   "image": "Sandfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -8501,6 +8661,10 @@
   "image": "Scorpion_Carp.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -125,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -8700,6 +8864,10 @@
   "image": "Joja_Cola.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -9107,6 +9275,10 @@
   "image": "Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -9180,6 +9352,10 @@
   "image": "Large_Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -9317,6 +9493,10 @@
   "image": "Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -9390,6 +9570,10 @@
   "image": "Large_Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -9464,6 +9648,10 @@
   "image": "Milk.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -9539,6 +9727,10 @@
   "image": "Large_Milk.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -9608,6 +9800,10 @@
   "image": "Green_Bean.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -9709,6 +9905,10 @@
   "image": "Cauliflower.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -9835,6 +10035,10 @@
   "image": "Potato.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -9933,6 +10137,10 @@
   "image": "Fried_Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -10003,6 +10211,10 @@
   "image": "Omelet.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -10073,6 +10285,10 @@
   "image": "Salad.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 113,
+   "h": 50
+  },
   "internal": false
  },
  {
@@ -10142,6 +10358,10 @@
   "image": "Cheese_Cauliflower.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 138,
+   "h": 62
+  },
   "internal": false
  },
  {
@@ -10209,6 +10429,10 @@
   "image": "Baked_Fish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -10280,6 +10504,10 @@
   "image": "Parsnip_Soup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 85,
+   "h": 38
+  },
   "internal": false
  },
  {
@@ -10349,6 +10577,10 @@
   "image": "Vegetable_Medley.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 165,
+   "h": 74
+  },
   "internal": false
  },
  {
@@ -10453,6 +10685,10 @@
   "image": "Complete_Breakfast.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -10522,6 +10758,10 @@
   "image": "Fried_Calamari.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 80,
+   "h": 36
+  },
   "internal": false
  },
  {
@@ -10591,6 +10831,10 @@
   "image": "Strange_Bun.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -10690,6 +10934,10 @@
   "image": "Lucky_Lunch.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -10791,6 +11039,10 @@
   "image": "Fried_Mushroom.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 135,
+   "h": 60
+  },
   "internal": false
  },
  {
@@ -10863,6 +11115,10 @@
   "image": "Pizza.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 150,
+   "h": 67
+  },
   "internal": false
  },
  {
@@ -10964,6 +11220,10 @@
   "image": "Bean_Hotpot.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -11033,6 +11293,10 @@
   "image": "Glazed_Yams.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -11101,6 +11365,10 @@
   "image": "Carp_Surprise.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 90,
+   "h": 40
+  },
   "internal": false
  },
  {
@@ -11203,6 +11471,10 @@
   "image": "Hashbrowns.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 90,
+   "h": 40
+  },
   "internal": false
  },
  {
@@ -11307,6 +11579,10 @@
   "image": "Pancakes.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 90,
+   "h": 40
+  },
   "internal": false
  },
  {
@@ -11379,6 +11655,10 @@
   "image": "Salmon_Dinner.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -11484,6 +11764,10 @@
   "image": "Fish_Taco.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 165,
+   "h": 74
+  },
   "internal": false
  },
  {
@@ -11586,6 +11870,10 @@
   "image": "Crispy_Bass.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 90,
+   "h": 40
+  },
   "internal": false
  },
  {
@@ -11688,6 +11976,10 @@
   "image": "Pepper_Poppers.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 130,
+   "h": 58
+  },
   "internal": false
  },
  {
@@ -11758,6 +12050,10 @@
   "image": "Bread.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -11860,6 +12156,10 @@
   "image": "Tom_Kha_Soup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -11963,6 +12263,10 @@
   "image": "Trout_Soup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -12035,6 +12339,10 @@
   "image": "Chocolate_Cake.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 150,
+   "h": 67
+  },
   "internal": false
  },
  {
@@ -12106,6 +12414,10 @@
   "image": "Pink_Cake.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 250,
+   "h": 112
+  },
   "internal": false
  },
  {
@@ -12177,6 +12489,10 @@
   "image": "Rhubarb_Pie.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 215,
+   "h": 96
+  },
   "internal": false
  },
  {
@@ -12246,6 +12562,10 @@
   "image": "Cookie.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 90,
+   "h": 40
+  },
   "internal": false
  },
  {
@@ -12317,6 +12637,10 @@
   "image": "Spaghetti.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -12421,6 +12745,10 @@
   "image": "Fried_Eel.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -12526,6 +12854,10 @@
   "image": "Spicy_Eel.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 115,
+   "h": 51
+  },
   "internal": false
  },
  {
@@ -12601,6 +12933,10 @@
   "image": "Sashimi.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -12674,6 +13010,10 @@
   "image": "Maki_Roll.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -12743,6 +13083,10 @@
   "image": "Tortilla.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -12844,6 +13188,10 @@
   "image": "Red_Plate.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 240,
+   "h": 108
+  },
   "internal": false
  },
  {
@@ -12947,6 +13295,10 @@
   "image": "Eggplant_Parmesan.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -13017,6 +13369,10 @@
   "image": "Rice_Pudding.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 115,
+   "h": 51
+  },
   "internal": false
  },
  {
@@ -13087,6 +13443,10 @@
   "image": "Ice_Cream.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -13158,6 +13518,10 @@
   "image": "Blueberry_Tart.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -13259,6 +13623,10 @@
   "image": "Autumn's_Bounty.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 220,
+   "h": 99
+  },
   "internal": false
  },
  {
@@ -13361,6 +13729,10 @@
   "image": "Pumpkin_Soup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -13462,6 +13834,10 @@
   "image": "Super_Meal.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 160,
+   "h": 72
+  },
   "internal": false
  },
  {
@@ -13563,6 +13939,10 @@
   "image": "Cranberry_Sauce.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -13665,6 +14045,10 @@
   "image": "Stuffing.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 170,
+   "h": 76
+  },
   "internal": false
  },
  {
@@ -13768,6 +14152,10 @@
   "image": "Farmer's_Lunch.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -13870,6 +14258,10 @@
   "image": "Survival_Burger.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -13974,6 +14366,10 @@
   "image": "Dish_O'_The_Sea.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 150,
+   "h": 67
+  },
   "internal": false
  },
  {
@@ -14076,6 +14472,10 @@
   "image": "Miner's_Treat.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -14177,6 +14577,10 @@
   "image": "Roots_Platter.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -14245,6 +14649,10 @@
   "image": "Sugar.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -14310,6 +14718,10 @@
   "image": "Wheat_Flour.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -14377,6 +14789,10 @@
   "image": "Oil.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -14449,6 +14865,10 @@
   "image": "Garlic.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 20,
+   "h": 9
+  },
   "internal": false
  },
  {
@@ -14548,6 +14968,10 @@
   "image": "Kale.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -14860,6 +15284,10 @@
   "image": "Triple_Shot_Espresso.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 8,
+   "h": 3
+  },
   "internal": false
  },
  {
@@ -14933,6 +15361,10 @@
   "image": "Melon.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 113,
+   "h": 50
+  },
   "internal": false
  },
  {
@@ -15047,6 +15479,10 @@
   "image": "Tomato.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 20,
+   "h": 9
+  },
   "internal": false
  },
  {
@@ -15153,6 +15589,10 @@
   "image": "Morel.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 20,
+   "h": 9
+  },
   "internal": false
  },
  {
@@ -15254,6 +15694,10 @@
   "image": "Blueberry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -15370,6 +15814,10 @@
   "image": "Fiddlehead_Fern.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -15473,6 +15921,10 @@
   "image": "Hot_Pepper.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -15749,6 +16201,10 @@
   "image": "Radish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -15849,6 +16305,10 @@
   "image": "Red_Cabbage.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -15948,6 +16408,10 @@
   "image": "Starfruit.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -16065,6 +16529,10 @@
   "image": "Corn.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -16164,6 +16632,10 @@
   "image": "Unmilled_Rice.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 3,
+   "h": 1
+  },
   "internal": false
  },
  {
@@ -16263,6 +16735,10 @@
   "image": "Eggplant.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 20,
+   "h": 9
+  },
   "internal": false
  },
  {
@@ -16426,6 +16902,10 @@
   "image": "Artichoke.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 30,
+   "h": 13
+  },
   "internal": false
  },
  {
@@ -16775,6 +17255,10 @@
   "image": "Bok_Choy.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -16900,6 +17384,10 @@
   "image": "Magic_Rock_Candy.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 500,
+   "h": 225
+  },
   "internal": false
  },
  {
@@ -16971,6 +17459,10 @@
   "image": "Yam.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -17075,6 +17567,10 @@
   "image": "Chanterelle.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -17176,6 +17672,10 @@
   "image": "Cranberries.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -17292,6 +17792,10 @@
   "image": "Holly.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -37,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -17378,6 +17882,10 @@
   "image": "Beet.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 30,
+   "h": 13
+  },
   "internal": false
  },
  {
@@ -17813,6 +18321,10 @@
   "image": "Salmonberry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -18120,6 +18632,10 @@
   "image": "Amaranth.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -18358,6 +18874,10 @@
   "image": "Pale_Ale.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -18425,6 +18945,10 @@
   "image": "Hops.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -18525,6 +19049,10 @@
   "image": "Void_Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -37,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -18595,6 +19123,10 @@
   "image": "Mayonnaise.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -18666,6 +19198,10 @@
   "image": "Duck_Mayonnaise.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -18735,6 +19271,10 @@
   "image": "Void_Mayonnaise.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -75,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -20505,6 +21045,10 @@
   "image": "Beer.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -20652,6 +21196,10 @@
   "image": "Wine.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -20718,6 +21266,10 @@
   "image": "Energy_Tonic.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 500,
+   "h": 225
+  },
   "internal": false
  },
  {
@@ -20788,6 +21340,10 @@
   "image": "Juice.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -20854,6 +21410,10 @@
   "image": "Muscle_Remedy.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -22091,6 +22651,10 @@
   "image": "Coffee.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 3,
+   "h": 1
+  },
   "internal": false
  },
  {
@@ -22164,6 +22728,10 @@
   "image": "Spice_Berry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -22355,6 +22923,10 @@
   "image": "Grape.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -22454,6 +23026,10 @@
   "image": "Spring_Onion.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -22542,6 +23118,10 @@
   "image": "Strawberry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -22805,6 +23385,10 @@
   "image": "Field_Snack.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -22878,6 +23462,10 @@
   "image": "Common_Mushroom.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -23042,6 +23630,10 @@
   "image": "Wild_Plum.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -23221,6 +23813,10 @@
   "image": "Hazelnut.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 30,
+   "h": 13
+  },
   "internal": false
  },
  {
@@ -23370,6 +23966,10 @@
   "image": "Blackberry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -23550,6 +24150,10 @@
   "image": "Winter_Root.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -23704,6 +24308,10 @@
   "image": "Crystal_Fruit.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 63,
+   "h": 28
+  },
   "internal": false
  },
  {
@@ -23883,6 +24491,10 @@
   "image": "Snow_Yam.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 30,
+   "h": 13
+  },
   "internal": false
  },
  {
@@ -24117,6 +24729,10 @@
   "image": "Vinegar.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -24189,6 +24805,10 @@
   "image": "Red_Mushroom.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -50,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -24277,6 +24897,10 @@
   "image": "Sunflower.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -24366,6 +24990,10 @@
   "image": "Purple_Mushroom.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -24461,6 +25089,10 @@
   "image": "Rice.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -24530,6 +25162,10 @@
   "image": "Cheese.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -24601,6 +25237,10 @@
   "image": "Goat_Cheese.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -24741,6 +25381,10 @@
   "image": "Truffle.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -24810,6 +25454,10 @@
   "image": "Truffle_Oil.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -24901,6 +25549,10 @@
   "image": "Stardrop.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 250,
+   "h": 112
+  },
   "internal": false
  },
  {
@@ -24974,6 +25626,10 @@
   "image": "Goat_Milk.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 63,
+   "h": 28
+  },
   "internal": false
  },
  {
@@ -25116,6 +25772,10 @@
   "image": "Large_Goat_Milk.png",
   "image_kind": "page",
   "image_note": null,
+  "eat": {
+   "e": 88,
+   "h": 39
+  },
   "internal": false
  },
  {
@@ -25392,6 +26052,10 @@
   "image": "Duck_Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -25598,6 +26262,10 @@
   "image": "Aged_Roe.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -25831,6 +26499,10 @@
   "image": "Algae_Soup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -25898,6 +26570,10 @@
   "image": "Pale_Broth.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -26007,6 +26683,10 @@
   "image": "Mead.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -32949,6 +33629,10 @@
   "image": "Tulip.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -33036,6 +33720,10 @@
   "image": "Summer_Spangle.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -33123,6 +33811,10 @@
   "image": "Fairy_Rose.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -33208,6 +33900,10 @@
   "image": "Blue_Jazz.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -33356,6 +34052,10 @@
   "image": "Poppy.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -33441,6 +34141,10 @@
   "image": "Plum_Pudding.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -33510,6 +34214,10 @@
   "image": "Artichoke_Dip.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -33579,6 +34287,10 @@
   "image": "Stir_Fry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -33648,6 +34360,10 @@
   "image": "Roasted_Hazelnuts.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -33719,6 +34435,10 @@
   "image": "Pumpkin_Pie.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -33787,6 +34507,10 @@
   "image": "Radish_Salad.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -33857,6 +34581,10 @@
   "image": "Fruit_Salad.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 263,
+   "h": 118
+  },
   "internal": false
  },
  {
@@ -33928,6 +34656,10 @@
   "image": "Blackberry_Cobbler.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -33999,6 +34731,10 @@
   "image": "Cranberry_Candy.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -34066,6 +34802,10 @@
   "image": "Apple.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -34212,6 +34952,10 @@
   "image": "Green_Tea.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 13,
+   "h": 5
+  },
   "internal": false
  },
  {
@@ -34280,6 +35024,10 @@
   "image": "Bruschetta.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 113,
+   "h": 50
+  },
   "internal": false
  },
  {
@@ -34475,6 +35223,10 @@
   "image": "Coleslaw.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 213,
+   "h": 95
+  },
   "internal": false
  },
  {
@@ -34545,6 +35297,10 @@
   "image": "Fiddlehead_Risotto.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -34616,6 +35372,10 @@
   "image": "Poppyseed_Muffin.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 150,
+   "h": 67
+  },
   "internal": false
  },
  {
@@ -35062,6 +35822,10 @@
   "image": "Apricot.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -35177,6 +35941,10 @@
   "image": "Orange.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -35292,6 +36060,10 @@
   "image": "Peach.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -35407,6 +36179,10 @@
   "image": "Pomegranate.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -35520,6 +36296,10 @@
   "image": "Cherry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -35921,6 +36701,10 @@
   "image": "Mutant_Carp.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -36798,6 +37582,10 @@
   "image": "Sturgeon.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -36903,6 +37691,10 @@
   "image": "Tiger_Trout.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37005,6 +37797,10 @@
   "image": "Bullhead.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37108,6 +37904,10 @@
   "image": "Tilapia.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37211,6 +38011,10 @@
   "image": "Chub.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37377,6 +38181,10 @@
   "image": "Dorado.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37480,6 +38288,10 @@
   "image": "Albacore.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37584,6 +38396,10 @@
   "image": "Shad.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37690,6 +38506,10 @@
   "image": "Lingcod.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -37794,6 +38614,10 @@
   "image": "Halibut.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -38960,6 +39784,10 @@
   "image": "Maple_Syrup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -39196,6 +40024,10 @@
   "image": "Chowder.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -39297,6 +40129,10 @@
   "image": "Lobster_Bisque.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -39398,6 +40234,10 @@
   "image": "Fish_Stew.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -39499,6 +40339,10 @@
   "image": "Escargot.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -39602,6 +40446,10 @@
   "image": "Maple_Bar.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -39704,6 +40552,10 @@
   "image": "Crab_Cakes.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -39804,6 +40656,10 @@
   "image": "Shrimp_Cocktail.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 225,
+   "h": 101
+  },
   "internal": false
  },
  {
@@ -39877,6 +40733,10 @@
   "image": "Woodskip.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -40939,6 +41799,10 @@
   "image": "Oil_of_Garlic.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -41007,6 +41871,10 @@
   "image": "Life_Elixir.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 200,
+   "h": 90
+  },
   "internal": false
  },
  {
@@ -41144,6 +42012,10 @@
   "image": "Glacierfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -41587,6 +42459,10 @@
   "image": "Void_Salmon.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 63,
+   "h": 28
+  },
   "internal": false
  },
  {
@@ -41690,6 +42566,10 @@
   "image": "Slimejack.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -41860,6 +42740,10 @@
   "image": "Midnight_Squid.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -41962,6 +42846,10 @@
   "image": "Spook_Fish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -42064,6 +42952,10 @@
   "image": "Blobfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -42211,6 +43103,10 @@
   "image": null,
   "image_kind": "missing",
   "image_note": null,
+  "eat": {
+   "e": -5,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -42347,6 +43243,10 @@
   "image": "Dinosaur_Mayonnaise.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -42559,6 +43459,10 @@
   "image": "Roe.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -44771,6 +45675,10 @@
   "image": "Caviar.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -45010,6 +45918,10 @@
   "image": "Flounder.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -45140,6 +46052,10 @@
   "image": "Seafoam_Pudding.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -45213,6 +46129,10 @@
   "image": "Midnight_Carp.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 50,
+   "h": 22
+  },
   "internal": false
  },
  {
@@ -45384,6 +46304,10 @@
   "image": "Ostrich_Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -45570,6 +46494,10 @@
   "image": "Banana.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -46554,6 +47482,10 @@
   "image": "Ginger.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -46636,6 +47568,10 @@
   "image": "Taro_Root.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -46799,6 +47735,10 @@
   "image": "Pineapple.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 138,
+   "h": 62
+  },
   "internal": false
  },
  {
@@ -46980,6 +47920,10 @@
   "image": "Mango.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 100,
+   "h": 45
+  },
   "internal": false
  },
  {
@@ -47161,6 +48105,10 @@
   "image": "Stingray.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -47264,6 +48212,10 @@
   "image": "Lionfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -47366,6 +48318,10 @@
   "image": "Blue_Discus.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -47954,6 +48910,10 @@
   "image": "Magma_Cap.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 175,
+   "h": 78
+  },
   "internal": false
  },
  {
@@ -48678,6 +49638,10 @@
   "image": "Piña_Colada.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -48743,6 +49707,10 @@
   "image": "Bug_Steak.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 45,
+   "h": 20
+  },
   "internal": false
  },
  {
@@ -49351,6 +50319,10 @@
   "image": "Qi_Fruit.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 3,
+   "h": 1
+  },
   "internal": false
  },
  {
@@ -49912,6 +50884,10 @@
   "image": "Son_of_Crimsonfish.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 38,
+   "h": 17
+  },
   "internal": false
  },
  {
@@ -50015,6 +50991,10 @@
   "image": "Ms._Angler.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -50117,6 +51097,10 @@
   "image": "Legend_II.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 500,
+   "h": 225
+  },
   "internal": false
  },
  {
@@ -50219,6 +51203,10 @@
   "image": "Radioactive_Carp.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -50321,6 +51309,10 @@
   "image": "Glacierfish_Jr..png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -50454,6 +51446,10 @@
   "image": "Ginger_Ale.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 63,
+   "h": 28
+  },
   "internal": false
  },
  {
@@ -50556,6 +51552,10 @@
   "image": "Banana_Pudding.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -50658,6 +51658,10 @@
   "image": "Mango_Sticky_Rice.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 113,
+   "h": 50
+  },
   "internal": false
  },
  {
@@ -50727,6 +51731,10 @@
   "image": "Poi.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -50828,6 +51836,10 @@
   "image": "Tropical_Curry.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 150,
+   "h": 67
+  },
   "internal": false
  },
  {
@@ -51551,6 +52563,10 @@
   "image": "Squid_Ink_Ravioli.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -51810,6 +52826,10 @@
   "image": "Golden_Egg.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 25,
+   "h": 11
+  },
   "internal": false
  },
  {
@@ -52880,6 +53900,10 @@
   "image": "Mystic_Syrup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 500,
+   "h": 225
+  },
   "internal": false
  },
  {
@@ -52949,6 +53973,10 @@
   "image": "Raisins.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 125,
+   "h": 56
+  },
   "internal": false
  },
  {
@@ -53293,6 +54321,10 @@
   "image": "Carrot.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -53457,6 +54489,10 @@
   "image": "Summer_Squash.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 63,
+   "h": 28
+  },
   "internal": false
  },
  {
@@ -53621,6 +54657,10 @@
   "image": "Broccoli.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 63,
+   "h": 28
+  },
   "internal": false
  },
  {
@@ -53787,6 +54827,10 @@
   "image": "Powdermelon.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 63,
+   "h": 28
+  },
   "internal": false
  },
  {
@@ -55753,6 +56797,10 @@
   "image": "Sea_Jelly.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 88,
+   "h": 39
+  },
   "internal": false
  },
  {
@@ -55853,6 +56901,10 @@
   "image": "Cave_Jelly.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -55953,6 +57005,10 @@
   "image": "River_Jelly.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 75,
+   "h": 33
+  },
   "internal": false
  },
  {
@@ -56027,6 +57083,10 @@
   "image": "Goby.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": -62,
+   "h": 0
+  },
   "internal": false
  },
  {
@@ -56462,6 +57522,10 @@
   "image": "Moss_Soup.png",
   "image_kind": "exact",
   "image_note": null,
+  "eat": {
+   "e": 70,
+   "h": 31
+  },
   "internal": false
  },
  {

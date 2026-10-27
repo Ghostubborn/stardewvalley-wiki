@@ -99,8 +99,16 @@
       el("p", null, t("本手册的游戏资料主要整理自星露谷 Wiki 的中英文归档。感谢 Wiki 的编辑者、翻译者和所有贡献者，持续整理、核对与分享这些资料，让更多玩家能够了解星露谷。")),
       el("div", { class: "wiki-credit-links" }, zh ? wikiLinks : wikiLinks.reverse()),
       el("p", { class: "home-credit-note" }, t("各条目保留原文来源，便于继续查阅与核对。原 Wiki 未作本站的防剧透处理。")));
+    // 地图和路线平时只在底部标签里，首页点明这两种查法；{map}、{tree} 换成打开对应视图的链接。
+    // 用链接而不是按钮，中文换行时“「”不会和名称分开；地址写全路径，英文页的 <base> 不会把它解析到中文页。
+    const viewLink = (view, label) => el("a", { class: "home-view-link", href: `${location.pathname}#view=${view}`,
+      onclick: e => { e.preventDefault(); A.select(null); A.setView(view); } }, label);
+    const views = t("也可以换种查法：「{map}」按地点看鱼、商店和住处；「{tree}」看升级和解锁的先后。").split(/\{(map|tree)\}/)
+      .map((part, i) => (i % 2 ? viewLink(part, part === "map" ? t("山谷地图") : t("成长路线")) : part));
     return [el("header", { class: "home-heading" }, el("p", { class: "eyebrow" }, t("星露谷交互手册")),
-      el("h2", null, t("想查什么，直接开始")), el("p", null, t("查条件、看用途、理清升级路线。无需填写存档，也不必连接游戏。"))), grid, reading, feedback, credits];
+      el("h2", null, t("想查什么，直接开始")),
+      el("p", null, t("物品怎么获得、东西在哪里、升级前要准备什么，都能直接查到。默认不剧透：还没到的内容先收起，想看再点开。不用填存档，也不用连接游戏。")),
+      el("p", { class: "home-views" }, views)), grid, reading, feedback, credits];
   }
   A.browseHome = { render };
 })();

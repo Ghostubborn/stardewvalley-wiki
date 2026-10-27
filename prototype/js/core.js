@@ -193,6 +193,38 @@
   }
   const locationByName = new Map(D.locations.map((l) => [l.p, l]));
   const fishByName = new Map(D.fish.map((f) => [f.p, f]));
+  const monsterByName = new Map((D.monsters || []).map((m) => [m.p, m]));
+  const animalByName = new Map((D.animals || []).map((a) => [a.p, a]));
+  // 怪物信息框：地点、层数、属性、掉落物与变种。英文版取英文 Wiki 的同一信息框，缺失时不显示中文。
+  function monsterInfo(m) {
+    if (!m) return null;
+    const e = EN ? EN.monsters?.[m.p] || {} : m;
+    return { lt: e.lt || "", lv: e.lv || "", s: e.s || {}, dr: e.dr || [], vr: e.vr || [] };
+  }
+  // 反查：哪些怪物会掉落、哪些动物会产出这件物品（同一怪物的几行掉落合并说明）。
+  const droppedBy = new Map();
+  for (const m of D.monsters || []) {
+    for (const d of monsterInfo(m).dr) {
+      if (!d.id) continue;
+      const list = droppedBy.get(d.id) || droppedBy.set(d.id, []).get(d.id);
+      const same = list.find(x => x.title === m.p);
+      if (same) same.note = L10N.list([same.note, d.n], " / ") || null;
+      else list.push({ title: m.p, note: d.n || null });
+    }
+  }
+  const producedBy = new Map();
+  for (const a of D.animals || []) for (const x of a.pr || []) {
+    if (typeof x === "string") (producedBy.get(x) || producedBy.set(x, []).get(x)).push({ title: a.p });
+  }
+  // 物品属性：能量与生命值、增益、武器与饰品属性。只用写的就是这件物品的条目；英文版取英文 Wiki 的同一栏。
+  // 能量数值与语言无关，英文条目缺这一栏时沿用中文条目，再没有才用游戏数据按 Wiki 公式补算的值。
+  function itemProps(it) {
+    if (!it?.id) return {};
+    const own = !!it.pg && D.pages[it.pg]?.id === it.id;
+    const zh = own ? D.pages[it.pg]?.pr || {} : {};
+    const pr = EN ? (own ? EN.pages?.[it.pg]?.pr || {} : {}) : zh;
+    return { ...pr, eat: pr.eat || zh.eat || D.items[it.id]?.eat || null };
+  }
   const oreHint = new Map(D.progression.ore_hints.map((h) => [h.zh, h]));
 
   function itemInfo(idOrZh) {
@@ -843,6 +875,11 @@
       paths.push({ kind: "produce", label: t("鱼塘产出"), refs: [item.fo], reqs: [],
         checks: [R(undefined, t("饲养{fish}的鱼塘会产出这种鱼籽", { fish: nameOf(item.fo) }))] });
     }
+    // 怪物掉落与动物产出：来自怪物、动物条目信息框的掉落物与产物。
+    if (id && droppedBy.has(id)) paths.push({ kind: "drop", label: t("怪物掉落"), monsters: droppedBy.get(id), random: true, reqs: [],
+      checks: [R(undefined, t("击败下列怪物时有几率掉落，几率写在名称后面"))] });
+    if (id && producedBy.has(id)) paths.push({ kind: "animal", label: t("动物产出"), animals: producedBy.get(id), reqs: [],
+      checks: [R(undefined, t("饲养下列动物会产出"))] });
     const ct = id && chainByItem.get(id);
     // 斧头、十字镐、锄头、喷壶的基础款是开局自带的工具。
     if (ct && ct.tier === 0 && ct.chain.kind === "blacksmith_upgrade") {
@@ -881,7 +918,7 @@
       p.scope = t("已收录的条件");
       p.verifiedOnly = true;
       // 开局自带、种植和自然产出没有库存、营业或材料需要核对。
-      p.assumptions = ["initial", "grow", "produce"].includes(p.kind) ? [] : [t("未核对背包材料、金币、剩余库存或实际设备摆放"), t("可达和常规营业不保证已满足全部事件条件")];
+      p.assumptions = ["initial", "grow", "produce", "drop", "animal"].includes(p.kind) ? [] : [t("未核对背包材料、金币、剩余库存或实际设备摆放"), t("可达和常规营业不保证已满足全部事件条件")];
     }
     return paths;
   }
@@ -921,12 +958,13 @@
   Object.assign(App, {
     SEASONS, SEASON_ZH, SEASON_SHORT, SEASON_ICON, WEATHER, SEASON_WEATHER, WEEKDAY_ZH, SKILLS, ROOMS,
     TOOL_FAMILIES, ROD_CHAIN, BUILDING_CHAINS, AREAS, LOCATION_AREA, BUSINESSES, PRESETS,
-    el, img, iconSrc, money, fmtTime, minutesToTime, timeToMinutes, weekday, qtyText, matsText,
+    el, img, hasImage: (name) => availableImages.has(name), iconSrc, money, fmtTime, minutesToTime, timeToMinutes, weekday, qtyText, matsText,
     N, itemName, nameOf, weekdayNote, pageInfo, fishText, locText, itemDesc, areaTitle, skillName, timeSpans, conditionReqs,
     state, setCond, conditionsActive, setConditionsEnabled, setProgress, applyPreset, on: (fn) => listeners.add(fn), emit,
     evalReq, combine, areaState, fishCheck, fishRequirements, fishHabitats, fishLocations, fishMethod, shopCheck, seedCheck, latestPlanting, birthdayToday, ccComplete,
     isSubmarineFish, habitatName, submarineFacts, fishRules, fishTimeText, fishWeatherText, crabFacts, LEARNED_KINDS,
     acquisitions, materialTree, rawTotals, itemInfo, canonicalItemId, usedIn, bundleUse, giftsByItem, villagerByName,
     locationByName, fishByName, recipesByOut, shopsByItem, chainByItem, cache: {},
+    monsterByName, animalByName, monsterInfo, itemProps,
   });
 })();

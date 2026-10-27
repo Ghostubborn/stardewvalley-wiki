@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T04:46:33+00:00",
+ "generated_at": "2026-10-27T10:34:27+00:00",
  "sources": {
   "zh": {
    "archive": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
@@ -44,9 +44,9 @@
   "names.json": 3
  },
  "bytes": {
-  "pages.json": 2609022,
-  "page-text.jsonl": 5209876,
-  "items.json": 1633024,
+  "pages.json": 2683999,
+  "page-text.jsonl": 5209992,
+  "items.json": 1643467,
   "recipes.json": 685844,
   "tool-chains.json": 13664,
   "fish.json": 69724,
@@ -58,8 +58,8 @@
   "seeds.json": 41306,
   "crops.json": 17804,
   "trees.json": 4640,
-  "monsters.json": 68931,
-  "animals.json": 3724,
+  "monsters.json": 130700,
+  "animals.json": 5494,
   "minerals.json": 20089,
   "images.json": 1362295,
   "image-coverage.json": 12671,

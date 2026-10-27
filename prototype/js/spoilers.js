@@ -77,6 +77,10 @@
     }
     const l = A.locationByName.get(name);
     if (l?.map?.startsWith("island")) return false;
+    // 只在普通矿井出现的怪物按到过的最深层数开放（“1-29”层的苍蝇，到过第 1 层即可）；
+    // 危险矿井、挑战之神庙和跨地区的怪物仍需单独确认。
+    const mon = A.monsterByName.get(name);
+    if (mon) return mon.L?.length === 1 && mon.L[0] === "矿井" && !/危险|神庙|地牢/.test(name + (mon.lt || "")) && parseInt(mon.lv, 10) <= (A.state.progress.mineDepth || 0);
     if (page && storyType.test(page.k)) return false;
     if (page?.k === "villager") return !protectedSource.test([page.f?.location, page.f?.address].join(" "));
     const source = [page?.f?.source, page?.f?.recipe, page?.f?.location, page?.f?.address].filter(Boolean).join(" · ");
