@@ -375,9 +375,16 @@
     let results = [], active = -1;
     const close = () => { list.hidden = true; active = -1; };
     const choose = (e) => { close(); input.value = ""; App.select(e.ref, { from: "search" }); };
+    // 下拉列表不超出手账面板（手机上手账是底部面板，窗口矮时也一样）：按面板里剩下的高度限制，多出来的在列表里滚动。
+    const fit = () => {
+      if (list.hidden) return;
+      const room = $("journal").getBoundingClientRect().bottom - 12 - list.getBoundingClientRect().top;
+      list.style.maxHeight = Math.max(96, Math.min(360, Math.floor(room))) + "px";
+    };
+    addEventListener("resize", fit);
     const paint = () => {
       list.replaceChildren();
-      if (!results.length) { list.append(el("li", { class: "empty" }, S.active() ? t("未找到可展示结果。可输入完整名称查阅；防剧透已开启。") : t("没有找到。试试中文全名或英文名。"))); list.hidden = false; return; }
+      if (!results.length) { list.append(el("li", { class: "empty" }, S.active() ? t("未找到可展示结果。可输入完整名称查阅；防剧透已开启。") : t("没有找到。试试中文全名或英文名。"))); list.hidden = false; fit(); return; }
       if (results[0].near) list.append(el("li", { class: "empty" }, t("没有完全相同的名称，下面是相近的：")));
       results.forEach((e, i) => {
         // 英文版不显示中文副名；中文仍可用于检索。
@@ -388,6 +395,7 @@
         list.append(li);
       });
       list.hidden = false;
+      fit();
     };
     input.addEventListener("input", () => { results = search(input.value); active = results.length ? 0 : -1; input.value.trim() ? paint() : close(); });
     input.addEventListener("keydown", (e) => {

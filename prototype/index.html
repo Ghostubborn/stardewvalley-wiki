@@ -42,7 +42,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/pixel-subset.woff2?v=4f7bdc5df87b" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=787bd3aa1dae">
+<link rel="stylesheet" href="styles.css?v=40a9b9cdc917">
 <link rel="stylesheet" href="browse.css?v=57c26cf9bd57">
 <link rel="stylesheet" href="guides.css?v=268492097177">
 <link rel="stylesheet" href="collections.css?v=df70116c3653">
@@ -52,7 +52,7 @@
 
   <canvas id="map" role="img" aria-label="星露谷地图。地点有可聚焦按钮，点击或回车查看资料。"></canvas>
   <div class="map-keyboard" id="map-keyboard" role="group" aria-label="地图地点，使用方向键选择，回车查看"></div>
-  <section id="browse" class="browse-view frame" aria-label="分类查询"></section>
+  <section id="browse" class="browse-view frame frame-scroll" aria-label="分类查询"></section>
 
   <section id="tree" class="tree" aria-label="成长路线" hidden>
     <div class="tree-stage" id="tree-stage"></div>
@@ -67,7 +67,7 @@
       <img class="clock-weather pix" id="clock-weather" alt="">
     </button>
   </header>
-    <section class="clock-controls frame" id="clock-controls" aria-label="条件对照设置" hidden>
+    <section class="clock-controls frame frame-scroll" id="clock-controls" aria-label="条件对照设置" hidden>
       <div class="condition-panel-head">
         <strong>条件对照</strong>
         <button type="button" id="conditions-close" aria-label="关闭条件对照">×</button>
@@ -112,7 +112,7 @@
     </div>
     <div class="search">
       <input id="search" type="search" placeholder="搜物品、人物、地点（中文或英文）" autocomplete="off" aria-label="搜索" aria-controls="search-results">
-      <ul class="search-results frame" id="search-results" role="listbox" hidden></ul>
+      <ul class="search-results frame frame-scroll" id="search-results" role="listbox" hidden></ul>
     </div>
     <label class="spoiler-control check"><input type="checkbox" id="spoiler" checked> 防剧透 <span>按需查看后续内容</span></label>
     <div class="journal-body" id="journal-body"></div>
@@ -124,7 +124,7 @@
 
   <!-- 默认居中阅读；主动定位时可并排对照地图或路线。 -->
   <div class="detail-shade" id="detail-shade" aria-hidden="true" hidden></div>
-  <aside class="detail frame" id="detail" data-mode="reading" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden>
+  <aside class="detail frame frame-scroll" id="detail" data-mode="reading" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden>
     <div class="detail-toolbar">
       <span class="detail-caption" id="detail-caption">资料阅读</span>
       <button type="button" class="btn" id="detail-mode" hidden>居中阅读</button>
@@ -171,7 +171,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <audio id="background-music" data-src="assets/audio/spring-big-world-outside.mp3" data-title="星露谷 OST · Spring (It's A Big World Outside)" preload="none" loop hidden></audio>
 
-  <dialog class="progress frame" id="progress-dialog" aria-labelledby="progress-title">
+  <dialog class="progress frame frame-scroll" id="progress-dialog" aria-labelledby="progress-title">
     <form method="dialog" class="progress-inner">
       <header class="progress-head">
         <h2 id="progress-title">已有进度 · 可选对照</h2>
@@ -202,7 +202,7 @@
 <script src="js/guides.js?v=f54182cd9425"></script>
 <script src="js/schedules.js?v=d7703b34b5da"></script>
 <script src="js/collections.js?v=dfafae1fbb7b"></script>
-<script src="js/ui.js?v=514bbdef8bff"></script>
+<script src="js/ui.js?v=68b6cfd2b8b5"></script>
 <script src="js/music.js?v=7de624dccbd2"></script>
 </body>
 </html>

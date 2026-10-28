@@ -43,7 +43,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/pixel-subset.woff2?v=4f7bdc5df87b" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=787bd3aa1dae">
+<link rel="stylesheet" href="styles.css?v=40a9b9cdc917">
 <link rel="stylesheet" href="browse.css?v=57c26cf9bd57">
 <link rel="stylesheet" href="guides.css?v=268492097177">
 <link rel="stylesheet" href="collections.css?v=df70116c3653">
@@ -53,7 +53,7 @@
 
   <canvas id="map" role="img" aria-label="Stardew Valley map. Places have focusable buttons; click or press Enter to view an entry."></canvas>
   <div class="map-keyboard" id="map-keyboard" role="group" aria-label="Map places; use the arrow keys to choose and Enter to open"></div>
-  <section id="browse" class="browse-view frame" aria-label="Browse"></section>
+  <section id="browse" class="browse-view frame frame-scroll" aria-label="Browse"></section>
 
   <section id="tree" class="tree" aria-label="Progression" hidden>
     <div class="tree-stage" id="tree-stage"></div>
@@ -68,7 +68,7 @@
       <img class="clock-weather pix" id="clock-weather" alt="">
     </button>
   </header>
-    <section class="clock-controls frame" id="clock-controls" aria-label="Date check settings" hidden>
+    <section class="clock-controls frame frame-scroll" id="clock-controls" aria-label="Date check settings" hidden>
       <div class="condition-panel-head">
         <strong>Date check</strong>
         <button type="button" id="conditions-close" aria-label="Close date check">×</button>
@@ -113,7 +113,7 @@
     </div>
     <div class="search">
       <input id="search" type="search" placeholder="Search items, villagers, places" autocomplete="off" aria-label="Search" aria-controls="search-results">
-      <ul class="search-results frame" id="search-results" role="listbox" hidden></ul>
+      <ul class="search-results frame frame-scroll" id="search-results" role="listbox" hidden></ul>
     </div>
     <label class="spoiler-control check"><input type="checkbox" id="spoiler" checked> Spoiler protection <span>show later content on demand</span></label>
     <div class="journal-body" id="journal-body"></div>
@@ -125,7 +125,7 @@
 
   <!-- 默认居中阅读；主动定位时可并排对照地图或路线。 -->
   <div class="detail-shade" id="detail-shade" aria-hidden="true" hidden></div>
-  <aside class="detail frame" id="detail" data-mode="reading" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden>
+  <aside class="detail frame frame-scroll" id="detail" data-mode="reading" role="dialog" aria-modal="false" aria-labelledby="detail-title" hidden>
     <div class="detail-toolbar">
       <span class="detail-caption" id="detail-caption">Entry</span>
       <button type="button" class="btn" id="detail-mode" hidden>Reading view</button>
@@ -172,7 +172,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <audio id="background-music" data-src="assets/audio/spring-big-world-outside.mp3" data-title="Stardew Valley OST · Spring (It&#x27;s A Big World Outside)" preload="none" loop hidden></audio>
 
-  <dialog class="progress frame" id="progress-dialog" aria-labelledby="progress-title">
+  <dialog class="progress frame frame-scroll" id="progress-dialog" aria-labelledby="progress-title">
     <form method="dialog" class="progress-inner">
       <header class="progress-head">
         <h2 id="progress-title">Your progress · optional</h2>
@@ -205,7 +205,7 @@
 <script src="js/guides.js?v=f54182cd9425"></script>
 <script src="js/schedules.js?v=d7703b34b5da"></script>
 <script src="js/collections.js?v=dfafae1fbb7b"></script>
-<script src="js/ui.js?v=514bbdef8bff"></script>
+<script src="js/ui.js?v=68b6cfd2b8b5"></script>
 <script src="js/music.js?v=7de624dccbd2"></script>
 </body>
 </html>
