@@ -543,13 +543,19 @@
     if (!eat && !pr?.buff?.length && !pr?.stats?.length && !pr?.weapon) return null;
     const signed = v => typeof v !== "number" ? v : v > 0 ? "+" + v.toLocaleString(App.locale) : v < 0 ? "−" + Math.abs(v).toLocaleString(App.locale) : "0";
     const parts = [];
-    // 能分品质的食物照 Wiki 列出四档品质；料理等只有一档。
-    if (eat?.q?.length) parts.push(el("table", { class: "eat-grid" },
-      el("thead", null, el("tr", null, el("th", null, t("品质")), el("th", null, t("能量")), el("th", null, t("生命值")))),
-      el("tbody", null, [[t("普通"), eat.e, eat.h], [t("银星"), ...eat.q[0]], [t("金星"), ...eat.q[1]], [t("铱星"), ...eat.q[2]]]
-        .map(([quality, energy, health]) => el("tr", null, el("td", null, quality), el("td", null, signed(energy)), el("td", null, signed(health)))))));
+    // 能量、生命值各一行，行首是游戏物品说明里的图标（绿色加号、红色 H）；能分品质的食物按 Wiki 列出四档品质，
+    // 品质星作列头，料理等只有一列。
+    if (eat) {
+      const cols = eat.q?.length ? [[null, t("普通"), [eat.e, eat.h]], ["Silver_Quality.png", t("银星"), eat.q[0]],
+        ["Gold_Quality.png", t("金星"), eat.q[1]], ["Iridium_Quality.png", t("铱星"), eat.q[2]]] : [[null, null, [eat.e, eat.h]]];
+      const row = (icon, label, i) => el("tr", null, el("th", { scope: "row" }, img(icon, "eat-icon"), label),
+        cols.map(([, , values]) => el("td", { class: values[i] < 0 ? "loss" : null }, signed(values[i]))));
+      parts.push(el("table", { class: "eat-grid" + (cols.length > 1 ? "" : " single") },
+        cols.length > 1 ? el("thead", null, el("tr", null, el("td"), cols.map(([star, label]) => el("th", { scope: "col" },
+          star ? img(star, "eat-star") : el("span", { class: "eat-star", "aria-hidden": "true" }), label)))) : null,
+        el("tbody", null, row("Energy.png", t("能量"), 0), row("Health.png", t("生命值"), 1))));
+    }
     const rows = [
-      eat && !eat.q?.length ? { text: t("能量 {energy}，生命值 {health}", { energy: signed(eat.e), health: signed(eat.h) }) } : null,
       pr.buff?.length ? { text: t("增益：{list}", { list: App.list(pr.buff) }) } : null,
       pr.buff_time ? { text: t("持续时间：{time}", { time: pr.buff_time }) } : null,
       weapon.type ? { text: t("类型：{value}", { value: weapon.type }) } : null,

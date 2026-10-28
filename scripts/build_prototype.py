@@ -47,6 +47,8 @@ UI_IMAGES = [
     "Quest_Icon.png", "Gift_Icon.png", "Birthday_Icon.png", "Time_Icon.png", "Chest.png", "Joja_Icon.png",
     "Greenhouse.png", "Minecart.png", "Bus.png", "Ginger_Island.png", "Secret_Woods_Icon.png", "Sewer.png",
     "TV.png", "Scroll.png", "Museum.png", "Daffodil.png", "Fishing_Treasure_Chest.png",
+    # 食用效果：游戏物品说明里的能量（绿色加号）、生命值（红色 H）图标和品质星。
+    "Energy.png", "Health.png", "Silver_Quality.png", "Gold_Quality.png", "Iridium_Quality.png",
 ]
 
 WEEKDAYS = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "日": 0, "天": 0}

@@ -129,6 +129,9 @@
     assert(body.textContent.includes("用于建造") && [...body.querySelectorAll(".chip")].some(c => c.textContent.includes("鸡舍")), "the list also names the buildings an item is used for");
     A.select({ type: "fish", id: "黄貂鱼" }); await settle();
     assert([...body.querySelectorAll(".d-section > h3")].some(h => h.textContent === "鱼塘产出") && body.textContent.includes("9 条起"), "fish lists show pond produce");
+    const eat = body.querySelector(".eat-grid");
+    assert(eat && [...eat.querySelectorAll("tbody th")].map(th => th.textContent).join("|") === "能量|生命值" && eat.querySelectorAll("tbody img").length === 2
+      && eat.querySelectorAll("thead img").length === 3 && eat.querySelectorAll("tbody tr:first-child td").length === 4, "eating effects: energy and health rows with game icons, quality stars as columns");
     A.select({ type: "item", id: id("电池组") }); await settle();
     assert(body.textContent.includes("鱼塘产出") && [...body.querySelectorAll(".chip")].some(c => c.textContent.includes("黄貂鱼")), "item lists show which pond fish produce it");
     return JSON.stringify({ result: "switch, groups and lines, stacked when narrow, recentring with a path, history and links, long groups, flavour families, crafting chain, places/monsters/fish/animals/buildings, spoiler placeholders", layout, viewport: [innerWidth, innerHeight] });
