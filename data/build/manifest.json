@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-28T17:54:41+00:00",
+ "generated_at": "2026-10-28T18:31:34+00:00",
  "sources": {
   "zh": {
    "site": "星露谷物语 BWIKI",
@@ -25,7 +25,7 @@
   "pages.json": 2078,
   "page-text.jsonl": 2078,
   "items.json": 2905,
-  "recipes.json": 1110,
+  "recipes.json": 1112,
   "tool-chains.json": 6,
   "fish.json": 71,
   "villagers.json": 49,
@@ -46,12 +46,12 @@
   "names.json": 3
  },
  "bytes": {
-  "pages.json": 2814508,
+  "pages.json": 2815030,
   "page-text.jsonl": 4510879,
   "items.json": 1671734,
-  "recipes.json": 701558,
+  "recipes.json": 702801,
   "tool-chains.json": 13713,
-  "fish.json": 66252,
+  "fish.json": 66246,
   "villagers.json": 363597,
   "locations.json": 17448,
   "buildings.json": 18742,
@@ -66,8 +66,8 @@
   "minerals.json": 24580,
   "images.json": 1362295,
   "image-coverage.json": 8609,
-  "search-index.json": 850503,
-  "names.json": 74038
+  "search-index.json": 850629,
+  "names.json": 74401
  },
  "page_kinds": {
   "furniture": 616,

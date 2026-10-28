@@ -79,6 +79,8 @@ WEAPON_TYPES = {"sword": "剑", "dagger": "匕首", "club": "锤", "slingshot": 
 # 怪物出没地点：Template:Infobox monster 把这几种写法（含英文）链接到对应条目。
 MONSTER_PLACES = {"the mines": "矿井", "mines": "矿井", "矿井": "矿井", "the skull cavern": "骷髅洞穴",
                   "skull cavern": "骷髅洞穴", "骷髅洞穴": "骷髅洞穴", "the farm": "农场", "farm": "农场", "农场": "农场"}
+# BWIKI 新增的姜岛分区条目（官方中文 Wiki 归档里只有“姜岛”）。
+ISLAND_PARTS = {"姜岛西部": "姜岛", "姜岛东部": "姜岛", "姜岛北部": "姜岛", "姜岛南部": "姜岛"}
 # 带口味的工匠物品（“(O)342/16” = 用野山葵做的腌菜）：组合 ID 的前半是产品系列，对应的中文条目写着设备、材料数量和耗时。
 # 398 在组合 ID 里表示果干（单独的 (O)398 是葡萄），见 sdvdata/images.py。
 FLAVOR_PAGES = {
@@ -320,7 +322,8 @@ class Builder:
                 info = wt.first_template(r["text"], "Infobox")
                 fields = info[1] if info else {}
                 self.legacy[self.resolve(r["title"])] = {"pins": self._map_pins(r["text"]),
-                                                         "xy": (_int(fields.get("mapx")), _int(fields.get("mapy")))}
+                                                         "xy": (_int(fields.get("mapx")), _int(fields.get("mapy"))),
+                                                         "en": wt.interlanguage(r["text"]).get("en")}
 
     @staticmethod
     def _npc_names(module_text):
@@ -357,7 +360,9 @@ class Builder:
             fields = info[1] if info else {}
             cats = wt.categories(text)
             interlang = wt.interlanguage(text)
-            en = interlang.get("en") or fields.get("eng") or None
+            # 原文里括号没配对时（“被[闪电]]击中”）链接解析会漏掉末尾补上的 [[en:…]]，直接读 {{EN|…}}；
+            # BWIKI 没写英文名的，用官方中文 Wiki 归档的跨语言链接。
+            en = interlang.get("en") or bwiki.en_title(text) or fields.get("eng") or (self.legacy.get(title) or {}).get("en") or None
             if en:
                 en = EN_TITLE_FIXES.get(en, en)
                 en = self.en_redirects.get(norm_title(en), norm_title(en))
@@ -588,6 +593,8 @@ class Builder:
         # “石英×1 煤炭×1 或 火水晶×1 煤炭×1”：每个替代做法各算一条配方；
         # BWIKI 写“以下任意一个：{{Name|Egg}}{{Name|Large Egg}}…”时，每种材料各是一种做法。
         raw = fields["ingredients"]
+        # “任意[[蔬菜]]及部分[[采集品]]（1）”：两类原料任选其一，拆成两种做法。
+        raw = re.sub(r"(任意|任何)\s*(\[\[[^\]]+\]\])\s*及部分\s*(\[\[[^\]]+\]\])\s*([（(]\d+[）)])", r"\1\2\4或\1\3\4", raw)
         if re.search(r"任意一个|任一", raw):
             alternatives = [tpl for _, _, tpl in P._ordered_templates(raw, {"name"})]
         else:
@@ -871,7 +878,8 @@ class Builder:
             parent = None if own else next((t for t in links if t != p["title"] and bullets.get(t, ([],))[0]), None)
             fish.append({
                 "page": p["title"], "id": p["item_id"], "en": p["en"], "image": p["image"],
-                "locations": [self.resolve(t) for t in wt.page_links(loc_raw)],
+                # BWIKI 把姜岛分成东西南北几个条目；鱼的水域仍按“姜岛”这一个地区记（防剧透和条件对照按地区判断）。
+                "locations": list(dict.fromkeys(ISLAND_PARTS.get(t, t) for t in (self.resolve(x) for x in wt.page_links(loc_raw)))),
                 "location_text": self.plain(loc_raw) or None,
                 "seasons": P.seasons(info.get("season", "")),
                 "season_text": self.plain(info.get("season", "")) or None,

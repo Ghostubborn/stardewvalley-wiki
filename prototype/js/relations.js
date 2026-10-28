@@ -385,10 +385,21 @@
   }
 
   // 同一次渲染里会问好几次（切换按钮、关系图、地址栏），结果记在 App.cache；数据或设置一变就清空。
+  // 英文版只显示英文 Wiki 有的内容：只有中文名的节点（BWIKI 独有的条目，如“人鱼”“宠物”）不列出，
+  // 条目本身只有中文名时不画关系图。
+  const CJK = /[㐀-鿿]/;
+  function englishOnly(rel) {
+    if (!rel || !EN) return rel;
+    if (CJK.test(rel.center.label)) return null;
+    for (const part of [rel.left, rel.right]) {
+      part.groups = part.groups.map(g => ({ ...g, nodes: g.nodes.filter(n => !CJK.test(n.label || "")) })).filter(g => g.nodes.length);
+    }
+    return rel.left.groups.length || rel.right.groups.length ? rel : null;
+  }
   function relations(ref) {
     if (!ref) return null;
     const memo = App.cache.relations || (App.cache.relations = new Map()), key = ref.type + ":" + ref.id;
-    if (!memo.has(key)) memo.set(key, compute(ref));
+    if (!memo.has(key)) memo.set(key, englishOnly(compute(ref)));
     return memo.get(key);
   }
   function compute(ref) {

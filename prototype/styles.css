@@ -1,6 +1,6 @@
 @font-face {
   font-family: "SDV Pixel";
-  src: url("assets/fonts/pixel-subset.woff2?v=c861fb300d6a") format("woff2");
+  src: url("assets/fonts/pixel-subset.woff2?v=95851f674a4e") format("woff2");
   font-display: swap;
 }
 
@@ -179,17 +179,18 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
   position: absolute; top: 16px; left: 16px; width: 318px; max-height: calc(100% - 108px);
   display: flex; flex-direction: column; z-index: 6; padding: 14px 14px 8px;
 }
-/* 标题较长（如英文 “Progression”）时，操作按钮换到下一行右侧，不挤出面板。 */
-.journal-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 8px; }
+/* 第一行是标题和“反馈”，语言、GitHub、音乐等操作在第二行靠右，标题较长（如英文 “Progression”）也不挤出面板；
+   窗口宽 600–760 像素时三者放在同一行。 */
+.journal-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 8px; }
 .journal-title { margin: 0; font: 24px/1.2 var(--pixel); font-weight: normal; white-space: nowrap; }
-.journal-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.journal-actions { grid-column: 1 / -1; justify-self: end; display: flex; align-items: center; gap: 6px; }
 .repo-link { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 5px; border: 1px solid var(--bark); background: var(--parchment-hi); color: var(--bark); font-size: 11px; white-space: nowrap; text-decoration: none; }
 .repo-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .lang-switch { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; min-height: 32px; padding: 0 6px; border: 2px solid var(--bark); background: var(--parchment-hi); color: var(--bark); font-size: 12px; white-space: nowrap; text-decoration: none; }
 .lang-switch:hover, .lang-switch:focus-visible { background: var(--walnut); color: var(--parchment-hi); }
-.music-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 7px; border: 2px solid var(--bark); background: var(--parchment-hi); font-size: 12px; white-space: nowrap; }
+.music-toggle, .feedback-open { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 7px; border: 2px solid var(--bark); background: var(--parchment-hi); font-size: 12px; white-space: nowrap; }
 .music-toggle[aria-pressed="true"] { background: var(--walnut); color: var(--parchment-hi); }
-.music-toggle svg { flex: none; }
+.music-toggle svg, .feedback-open svg, .detail-feedback svg { flex: none; }
 .sheet-handle { display: none; }
 .search { position: relative; margin: 10px 0 8px; }
 .search input {
@@ -210,7 +211,6 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .journal-body { overflow: auto; padding-right: 4px; margin-right: -4px; scrollbar-width: thin; }
 .wiki-credit { flex: none; margin-top: 10px; padding: 8px 0 4px; border-top: 1px solid var(--parchment-lo); font-size: 11px; line-height: 1.6; color: var(--ink-soft); }
 .wiki-credit a { color: var(--bark); text-underline-offset: 3px; }
-.wiki-credit .feedback-link { display: block; padding-top: 4px; }
 .group { border-top: 2px dotted var(--bark); padding: 8px 0 6px; }
 .group:first-child { border-top: 0; }
 .group > summary {
@@ -259,6 +259,10 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
 .detail-caption { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 13px/1.4 var(--pixel); color: var(--ink-soft); }
 .detail-toolbar .btn { flex: none; min-height: 34px; font-size: 12px; }
 .detail-toolbar .detail-close { position: static; flex: none; width: 36px; height: 36px; }
+/* 放不下时（窄屏上较长的英文按钮）“反馈”只留图标、按钮间距收窄，由 ui.js 按实际宽度切换。 */
+.detail[data-mode] .detail-toolbar.compact { gap: 4px; }
+.detail-toolbar.compact .btn { padding-inline: 7px; }
+.detail-toolbar.compact .detail-feedback span { display: none; }
 .detail[data-mode="context"] .detail-toolbar { margin: 0 -10px 14px; padding: 8px 6px; }
 .detail[data-mode="reading"] .d-head { padding-right: 0; }
 .detail[data-mode="reading"] .d-title { font-size: 28px; }
@@ -604,7 +608,7 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
   }
   .journal.collapsed { transform: translateY(calc(100% - 96px)); }
   .sheet-handle { display: block; min-width: 56px; height: 32px; border: 2px solid var(--bark); background: var(--parchment-hi); font: 12px/1 var(--pixel); }
-  .music-toggle { min-height: 40px; }
+  .music-toggle, .feedback-open { min-height: 40px; }
   .detail[data-mode="reading"] { width: calc(100vw - 16px); height: calc(100vh - 16px); height: calc(100dvh - 16px); padding: 0 10px 14px; }
   .detail[data-mode="reading"] .detail-toolbar { margin: 0 -10px 16px; padding: 8px 6px; gap: 6px; }
   .detail[data-mode="reading"] .d-title { font-size: 24px; }
@@ -628,6 +632,10 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 16px; background: v
   .category-card strong { font-size: 15px; }
   .browse-results { grid-template-columns: 1fr; }
   .browse-filters > input { flex-basis: 100%; }
+}
+@media (min-width: 600px) and (max-width: 760px) {
+  .journal-head { grid-template-columns: minmax(0, 1fr) auto auto; }
+  .journal-actions { grid-column: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

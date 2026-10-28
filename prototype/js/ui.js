@@ -425,6 +425,13 @@
     detail.setAttribute("role", detailMode === "reading" ? "dialog" : "region");
     if (detailMode === "reading") detail.setAttribute("aria-modal", "false");
     else detail.removeAttribute("aria-modal");
+    fitToolbar();
+  }
+  // 工具栏放不下、或标题只剩不到 4 个字宽时（窄屏上较长的英文按钮），“反馈”只显示图标。
+  function fitToolbar() {
+    const bar = detail.querySelector(".detail-toolbar");
+    bar.classList.remove("compact");
+    if (!detail.hidden && (bar.scrollWidth > bar.clientWidth || $("detail-caption").clientWidth < 64)) bar.classList.add("compact");
   }
   function setDetailMode(mode) {
     detailMode = mode === "context" && state.view !== "browse" ? "context" : "reading";
@@ -1503,6 +1510,8 @@
   // 鱼也是物品：从材料、礼物或收集包点进来时，打开鱼的详情（水域、时段与天气），而不是通用物品页。
   const fishByItem = new Map(D.fish.filter(f => f.id).map(f => [f.id, f.p]));
   const canonicalRef = ref => ref?.type === "item" && fishByItem.has(App.canonicalItemId(ref.id)) ? { type: "fish", id: fishByItem.get(App.canonicalItemId(ref.id)) } : ref;
+  // 当前打开的条目（反馈对话框附上它的引用）。
+  App.currentRef = () => current;
   App.select = (ref, opts = {}) => {
     ref = canonicalRef(ref);
     const same = ref && current && ref.type === current.type && ref.id === current.id;
@@ -1914,8 +1923,9 @@
       $("journal-handle").setAttribute("aria-expanded", String(!collapsed));
     });
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && ($("progress-dialog").open || $("spoiler-dialog").open)) return;
-      if (e.key === "Escape" && !$("clock-controls").hidden && !$("progress-dialog").open && !$("spoiler-dialog").open) {
+      // 对话框（进度、防剧透、反馈）打开时，Esc 只关对话框，快捷键也不作用于后面的页面。
+      if (document.querySelector("dialog[open]")) return;
+      if (e.key === "Escape" && !$("clock-controls").hidden) {
         setConditionsOpen(false); e.preventDefault(); return;
       }
       if (e.key === "Escape" && current) { pointReturn ? returnToPoints() : App.select(null); e.preventDefault(); return; }
@@ -1924,7 +1934,7 @@
       else if (e.key === "m") setView("map");
       else if (e.key === "t") setView("tree");
     });
-    window.addEventListener("resize", updateInsets);
+    window.addEventListener("resize", () => { updateInsets(); fitToolbar(); });
     window.addEventListener("hashchange", readHash);
   }
   function paintModes() {

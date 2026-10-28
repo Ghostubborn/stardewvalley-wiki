@@ -49,7 +49,9 @@ EXTRA_NAMES = {
     "薯餅": "Hashbrowns", "煎蛋捲": "Omelet", "薄煎餅": "Pancakes", "麵包": "Bread", "碎木機": "Wood Chipper",
     "紅磚地板": "Brick Floor", "魚塘": "Fish Pond", "小鎮鑰匙": "Key To The Town", "棕色大鸡蛋": "Large Brown Egg",
     "高级鱼饵（30）": "Deluxe Bait ×30", "传送图腾：海滩（5）": "Warp Totem: Beach ×5",
-    "任意鱼": "Any Fish", "任意水果": "Any Fruit", "任意蔬菜": "Any Vegetable", "蘑菇": "Any Mushroom",
+    "任意鱼": "Any Fish", "任意水果": "Any Fruit", "任意蔬菜": "Any Vegetable", "蘑菇": "Any Mushroom", "任意蘑菇": "Any Mushroom",
+    # BWIKI 把果汁的原料写成“任意蔬菜及部分采集品”；英文 Wiki 写作“Any positive energy foraged item”。
+    "任意采集品": "Any foraged item",
     "装修房屋": "House Renovations", "粉刷建筑物": "Painting", "Joja可乐罐": "Joja Cola Cans", "可食用性": "Edibility",
 }
 # Tool families are page titles on both wikis ("Axes"); rows read better with the tool name.

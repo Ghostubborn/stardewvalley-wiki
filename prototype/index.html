@@ -41,12 +41,13 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=c861fb300d6a" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=133f68214b39">
+<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=95851f674a4e" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=8c06700e7465">
 <link rel="stylesheet" href="browse.css?v=57c26cf9bd57">
 <link rel="stylesheet" href="guides.css?v=268492097177">
 <link rel="stylesheet" href="collections.css?v=df70116c3653">
 <link rel="stylesheet" href="graph.css?v=b61584e0a012">
+<link rel="stylesheet" href="feedback.css?v=3ff8a9106199">
 </head>
 <body>
 <div id="app" data-view="browse">
@@ -101,6 +102,10 @@
   <aside class="journal frame" id="journal" aria-label="今日手账">
     <div class="journal-head">
       <h1 class="journal-title" id="journal-title">今日手账</h1>
+      <button class="feedback-open" id="feedback-open" type="button" aria-haspopup="dialog" title="指出资料错误、剧透或不好用的地方">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H10l-6 4z"/><path d="M12 7v4M12 13v1"/></svg>
+        <span>反馈</span>
+      </button>
       <div class="journal-actions">
         <a class="lang-switch" id="lang-switch" href="en/" hreflang="en" lang="en" data-lang="en" title="Switch to English">EN</a>
         <a class="repo-link" href="https://github.com/Ghostubborn/stardewvalley-wiki" target="_blank" rel="noopener noreferrer" aria-label="GitHub 仓库" title="查看源码或提出建议（在新标签页打开）"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 5-6 7 6 7M16 5l6 7-6 7M14 3l-4 18"/></svg><span>GitHub ↗</span></a>
@@ -119,7 +124,6 @@
     <div class="journal-body" id="journal-body"></div>
     <footer class="wiki-credit">
       感谢 <a href="https://wiki.biligame.com/stardewvalley/" data-href-en="https://stardewvalleywiki.com/" target="_blank" rel="noopener noreferrer" title="在新标签页打开星露谷物语中文维基">星露谷 Wiki</a> 社区的资料整理与分享
-      <a class="feedback-link" href="https://github.com/Ghostubborn/stardewvalley-wiki/issues/new" target="_blank" rel="noopener noreferrer">反馈建议 ↗</a>
     </footer>
   </aside>
 
@@ -130,6 +134,7 @@
       <span class="detail-caption" id="detail-caption">资料阅读</span>
       <button type="button" class="btn" id="detail-mode" hidden>居中阅读</button>
       <button type="button" class="btn" id="detail-conditions" aria-label="打开条件对照">条件</button>
+      <button type="button" class="btn detail-feedback" id="detail-feedback" aria-haspopup="dialog" title="反馈这个条目的问题"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H10l-6 4z"/><path d="M12 7v4M12 13v1"/></svg><span>反馈</span></button>
       <button type="button" class="detail-close" id="detail-close" aria-label="关闭详情">×</button>
     </div>
     <div id="detail-body"></div>
@@ -188,24 +193,60 @@
     <p>搜索、地图和路线将显示尚未探索的地点、人物和奖励。也可以保持防剧透，只展开想查的条目。</p>
     <div class="d-actions"><button type="button" class="btn primary" id="keep-spoilers">保持防剧透</button><button type="button" class="btn" id="show-spoilers">显示全部内容</button></div>
   </dialog>
+  <!-- 访客反馈：提交到 api/feedback（functions/api/feedback.js），见 js/feedback.js -->
+  <dialog class="feedback frame frame-scroll" id="feedback-dialog" role="dialog" aria-modal="true" aria-labelledby="feedback-dialog-title">
+    <header class="feedback-head">
+      <h2 id="feedback-dialog-title" tabindex="-1">反馈问题或建议</h2>
+      <button type="button" class="detail-close" id="feedback-close" aria-label="关闭反馈">×</button>
+    </header>
+    <form class="feedback-form" id="feedback-form" novalidate>
+      <fieldset class="feedback-kinds">
+        <legend>问题类型（可选）</legend>
+        <label><input type="radio" name="kind" value="error"> 资料有误</label>
+        <label><input type="radio" name="kind" value="missing"> 缺少内容</label>
+        <label><input type="radio" name="kind" value="spoiler"> 被剧透了</label>
+        <label><input type="radio" name="kind" value="display"> 显示或操作问题</label>
+        <label><input type="radio" name="kind" value="idea"> 建议</label>
+        <label><input type="radio" name="kind" value="other"> 其他</label>
+      </fieldset>
+      <label class="feedback-label" for="feedback-message">想告诉我们什么？</label>
+      <textarea id="feedback-message" name="message" rows="5" maxlength="2000" required aria-describedby="feedback-status" placeholder="例如：哪条资料和游戏里不一样、缺了什么、哪里看不清或点不动。写清楚在哪里看到的，我们能更快找到并修正。"></textarea>
+      <label class="feedback-label" for="feedback-contact">联系方式（可选）</label>
+      <input type="text" id="feedback-contact" name="contact" maxlength="100" autocomplete="off" placeholder="QQ、邮箱等，方便追问">
+      <label class="feedback-about check" id="feedback-about" hidden><input type="checkbox" id="feedback-attach" checked> <span id="feedback-about-text"></span></label>
+      <p class="feedback-privacy">内容会连同页面地址、屏幕尺寸和浏览器信息保存给维护者，用来改进本站；联系方式只用于追问，请不要填写其他个人信息。</p>
+      <div class="feedback-trap" aria-hidden="true"><input type="text" id="feedback-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <p class="feedback-status" id="feedback-status" role="status" aria-live="polite"></p>
+      <div class="d-actions">
+        <button type="submit" class="btn primary" id="feedback-send">发送</button>
+        <button type="button" class="btn" id="feedback-copy" hidden>复制内容</button>
+        <button type="button" class="btn" id="feedback-cancel">取消</button>
+      </div>
+    </form>
+    <div class="feedback-done" id="feedback-done" hidden>
+      <p id="feedback-done-text">谢谢！反馈已经收到。我们会逐条查看，据此修正资料或调整页面。</p>
+      <div class="d-actions"><button type="button" class="btn primary" id="feedback-done-close" aria-describedby="feedback-done-text">关闭</button></div>
+    </div>
+  </dialog>
 </div>
 
-<script src="data.js?v=15b14906084f"></script>
+<script src="data.js?v=66472c2d7140"></script>
 <script src="js/i18n.js?v=a8528ce00f89"></script>
-<script src="js/core.js?v=b8ca1099fa59"></script>
+<script src="js/core.js?v=8fc820c9be78"></script>
 <script src="js/map.js?v=ea89ad22ed18"></script>
 <script src="js/tree.js?v=9d8dbfb5f83f"></script>
-<script src="js/spoilers.js?v=9aa6646e25c4"></script>
+<script src="js/spoilers.js?v=b909fc84d550"></script>
 <script src="js/map-content.js?v=40e8407fed14"></script>
-<script src="js/browse-home.js?v=f21506f64346"></script>
+<script src="js/browse-home.js?v=5c99607f2486"></script>
 <script src="js/browse-views.js?v=6b3eb4604471"></script>
 <script src="js/browse.js?v=8304430d7ff7"></script>
 <script src="js/guides.js?v=f54182cd9425"></script>
 <script src="js/schedules.js?v=d7703b34b5da"></script>
 <script src="js/collections.js?v=dfafae1fbb7b"></script>
-<script src="js/relations.js?v=b27b4aa9891a"></script>
+<script src="js/relations.js?v=b80d3e7516ee"></script>
 <script src="js/graph.js?v=8a0ab9c20179"></script>
-<script src="js/ui.js?v=689bac7b544c"></script>
+<script src="js/ui.js?v=6402ed2d4e0b"></script>
+<script src="js/feedback.js?v=d0f1a8e3cfee"></script>
 <script src="js/music.js?v=7de624dccbd2"></script>
 </body>
 </html>

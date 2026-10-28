@@ -114,6 +114,13 @@
   const normalizedItemIds = new Map(Object.keys(D.items).map(id => [id.toLowerCase().replace(/ /g, "_"), id]));
   const canonicalItemId = id => typeof id === "string" ? normalizedItemIds.get(id.toLowerCase().replace(/ /g, "_")) || id : id;
 
+  // 英文版只列英文 Wiki 有对应条目的居民和地点：BWIKI 独有的条目（“人鱼”、姜岛的东西北分区）只在中文版出现。
+  if (EN) {
+    const hasEnglish = title => !!(EN.names?.[title] || D.pages[title]?.e);
+    D.villagers = D.villagers.filter(v => hasEnglish(v.p));
+    D.locations = D.locations.filter(l => hasEnglish(l.p));
+  }
+
   // —— 显示名：英文版取英文 Wiki 的名称，没有对应时如实保留原名并记录，便于补齐。 ——
   const missingNames = (L10N.missingNames = new Set());
   function N(zh) {

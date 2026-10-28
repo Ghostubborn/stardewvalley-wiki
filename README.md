@@ -2,7 +2,7 @@
 
 **English:** A spoiler-safe Stardew Valley reference — how to get items, where and when fish bite, and what each upgrade needs, plus a valley map and progression tree. Later-game content stays folded until you choose to open it. Open the English version at <https://stardewvalley-wiki.pages.dev/en/>. The English text comes from the [Stardew Valley Wiki](https://stardewvalleywiki.com/) archive (2025-12-18); feedback is welcome in [Issues](https://github.com/Ghostubborn/stardewvalley-wiki/issues).
 
-基于星露谷 Wiki 资料、默认不剧透的查询站：物品怎么获得、鱼在哪片水域什么时候出现、升级前要准备什么，都能直接查；也可以在山谷地图上按地点浏览，或在成长路线里看升级和解锁的先后。还没到的内容先收起，想看再点开；查阅无需连接游戏或维护游戏时间。提供中文版（`/`）与英文版（`/en/`），首次访问按浏览器语言自动进入，页头可切换。
+基于星露谷 Wiki 资料（中文取自星露谷物语中文百科 BWIKI，英文取自 Stardew Valley Wiki）、默认不剧透的查询站：物品怎么获得、鱼在哪片水域什么时候出现、升级前要准备什么，都能直接查；也可以在山谷地图上按地点浏览，或在成长路线里看升级和解锁的先后。还没到的内容先收起，想看再点开；查阅无需连接游戏或维护游戏时间。提供中文版（`/`）与英文版（`/en/`），首次访问按浏览器语言自动进入，页头可切换。
 
 ## 本地运行
 
@@ -16,7 +16,7 @@ python3 -I -m http.server 8765 --bind 127.0.0.1 --directory prototype
 
 ## Cloudflare Pages
 
-连接本仓库的 `main` 分支，框架选择 `None`，构建命令填写 `node scripts/check_assets.cjs`，输出目录填写 `prototype`。不需要环境变量。完整设置与直接上传方式见[部署说明](docs/cloudflare-pages.md)。
+连接本仓库的 `main` 分支，框架选择 `None`，构建命令填写 `node scripts/check_assets.cjs`，输出目录填写 `prototype`。不需要环境变量。访客反馈由 `functions/` 里的 Pages Function 写入 D1 数据库。完整设置、反馈数据库与直接上传方式见[部署说明](docs/cloudflare-pages.md)。
 
 ## 项目内容
 
@@ -29,6 +29,6 @@ python3 -I -m http.server 8765 --bind 127.0.0.1 --directory prototype
 
 ## 来源与致谢
 
-感谢[星露谷物语中文维基](https://zh.stardewvalleywiki.com/)及 [Stardew Valley Wiki](https://stardewvalleywiki.com/) 的编辑者、翻译者与贡献者。本站根据归档资料重新整理查询界面，各条目保留原文来源。
+感谢[星露谷物语中文百科（BWIKI）](https://wiki.biligame.com/stardewvalley/)、[星露谷物语中文维基](https://zh.stardewvalleywiki.com/)及 [Stardew Valley Wiki](https://stardewvalleywiki.com/) 的编辑者、翻译者与贡献者。中文资料取自 BWIKI（2026-10-29 抓取），英文资料取自英文 Wiki 的 2025-12-18 归档；本站重新整理查询界面，各条目保留原文来源。
 
 游戏美术与音乐版权归 ConcernedApe。Wiki 内容、字体与音频的来源和许可说明分别见[数据说明](data/README.md)、[`prototype/assets/fonts/`](prototype/assets/fonts/)及[音频说明](prototype/assets/audio/README.md)；本仓库没有为这些第三方素材另行授予许可。

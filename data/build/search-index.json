@@ -7610,7 +7610,7 @@
  },
  {
   "t": "方形Joja地毯",
-  "en": null,
+  "en": "Square Joja Rug",
   "k": "furniture",
   "a": [
    "Square Joja Rug"
@@ -11182,7 +11182,7 @@
  },
  {
   "t": "灰色Joja书架",
-  "en": null,
+  "en": "Gray Joja Bookcase",
   "k": "furniture",
   "a": [
    "Gray Joja Bookcase"
@@ -11193,7 +11193,7 @@
  },
  {
   "t": "灰色Joja咖啡桌",
-  "en": null,
+  "en": "Gray Joja Coffee Table",
   "k": "furniture",
   "a": [
    "Gray Joja Coffee Table"
@@ -11204,7 +11204,7 @@
  },
  {
   "t": "灰色Joja垫子",
-  "en": null,
+  "en": "Gray Joja Cushion",
   "k": "furniture",
   "a": [
    "Gray Joja Cushion"
@@ -11215,7 +11215,7 @@
  },
  {
   "t": "灰色Joja小茶几",
-  "en": null,
+  "en": "Gray Joja End Table",
   "k": "furniture",
   "a": [
    "Gray Joja End Table"
@@ -11226,7 +11226,7 @@
  },
  {
   "t": "灰色Joja抽屉柜",
-  "en": null,
+  "en": "Gray Joja Dresser",
   "k": "furniture",
   "a": [
    "Gray Joja Dresser"
@@ -15718,7 +15718,7 @@
  },
  {
   "t": "肥料",
-  "en": null,
+  "en": "Fertilizer",
   "k": "article",
   "a": [
    "Fertilizer"
@@ -22396,7 +22396,7 @@
  },
  {
   "t": "家具",
-  "en": null,
+  "en": "Furniture",
   "k": "article",
   "a": [
    "Furniture",
@@ -22448,7 +22448,7 @@
  },
  {
   "t": "礼物列表",
-  "en": null,
+  "en": "List of All Gifts",
   "k": "article",
   "a": [
    "List of All Gifts",

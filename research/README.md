@@ -248,6 +248,8 @@ Canvas 回退需针对版本和特性验证：PixiJS 8.16.0 官方公告宣布�
 
 **授权标注有实际冲突。** 中文首页页脚文字及链接写 CC BY-SA 3.0，许可图标却链接 CC BY-NC-SA 3.0；中文版权页又指向标注 BY-NC-SA 3.0 的英文说明。现有证据无法把这些标注统一，商业化或批量复用前应向站方澄清。图像、美术和 lore 还被英文 About 列为例外，需要独立核验。原创前端代码与复用内容应分别处理，不能直接推定整个网站代码适用同一许可。[中文首页](https://zh.stardewvalleywiki.com/Stardew_Valley_Wiki)、[中文版权页](https://zh.stardewvalleywiki.com/Stardew_Valley_Wiki:版权)、[英文版权页](https://stardewvalleywiki.com/Stardew_Valley_Wiki:Copyrights)、[About](https://stardewvalleywiki.com/Stardew_Valley_Wiki:About)
 
+**2026-10-29 起中文资料改取 BWIKI。** 中文编辑团队 2024 年 10 月起在星露谷物语中文百科（BWIKI，B站托管）编辑，官方中文 Wiki 落后于它；两站由同一团队管理，计划日后合并回官方中文 Wiki。BWIKI 的页面和 siteinfo 都没有声明内容许可，页脚只有 B站的版权声明；其内容是在官方中文 Wiki（CC BY-NC-SA 3.0）基础上继续编写的。本站按署名、非商业的方式使用，并在页面上注明 BWIKI 来源；正式推广或任何商业用途之前，应向 BWIKI 管理员（官方中文 Wiki 管理员布告板或中文社区 QQ 群）确认授权。抓取细节与限流情况见 [`data/README.md`](../data/README.md)。[BWIKI 互通站说明](https://wiki.biligame.com/stardewvalley/站务:互通站)、[官方中文 Wiki 管理员布告板](https://zh.stardewvalleywiki.com/Stardew_Valley_Wiki:管理员布告板)
+
 ## 下一轮如何验证方向
 
 先测试三个目标：从现有铜斧头规划进入秘密森林；耕种不足 9 级时找铱制洒水器的可用获取路线；根据已确认的世界进度规划前往姜岛。验证用户是否理解箭头、条件分组和地图状态，能否解释下一步。再扩展查鱼、送礼、献祭和作物场景。邀请新手与熟练玩家分别操作，记录完成时间、误判、跳页次数和是否需要解释。

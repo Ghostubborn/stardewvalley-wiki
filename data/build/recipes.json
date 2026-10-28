@@ -4591,11 +4591,46 @@
    {
     "id": null,
     "en": null,
-    "zh": "采集品",
+    "zh": "任意蔬菜",
+    "qty": 1,
+    "note": null,
+    "link": "蔬菜",
+    "generic": true
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)12",
+    "en": "Keg",
+    "zh": "小桶",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": "6000 分钟\n（3 天 20 小时）",
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://wiki.biligame.com/stardewvalley/果汁"
+ },
+ {
+  "id": "recipe:果汁:processing#2",
+  "kind": "processing",
+  "output": {
+   "page": "果汁",
+   "id": "(O)350",
+   "zh": "果汁",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": null,
+    "en": null,
+    "zh": "任意采集品",
     "qty": 1,
     "note": null,
     "link": "采集",
-    "generic": false
+    "generic": true
    }
   ],
   "stations": [
@@ -8562,11 +8597,46 @@
    {
     "id": null,
     "en": null,
-    "zh": "采集品",
+    "zh": "任意蔬菜",
+    "qty": 1,
+    "note": null,
+    "link": "蔬菜",
+    "generic": true
+   }
+  ],
+  "stations": [
+   {
+    "id": "(BC)15",
+    "en": "Preserves Jar",
+    "zh": "罐头瓶",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "time": "4000 分钟\n（约 2 天 13 小时）",
+  "unlock_text": null,
+  "unlock": [],
+  "source": "https://wiki.biligame.com/stardewvalley/腌菜"
+ },
+ {
+  "id": "recipe:腌菜:processing#2",
+  "kind": "processing",
+  "output": {
+   "page": "腌菜",
+   "id": "(O)342",
+   "zh": "腌菜",
+   "qty": 1
+  },
+  "inputs": [
+   {
+    "id": null,
+    "en": null,
+    "zh": "任意采集品",
     "qty": 1,
     "note": null,
     "link": "采集",
-    "generic": false
+    "generic": true
    }
   ],
   "stations": [
