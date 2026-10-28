@@ -212,6 +212,11 @@
       else list.push({ title: m.p, note: d.n || null });
     }
   }
+  // 鱼塘产物（《鱼塘》产物表）：物品 → [{fish, q 数量, n 需要的鱼数, c 物品概率, d 每日产出概率}]；鱼籽另有说明，不在此列。
+  const pondByItem = new Map();
+  for (const f of D.fish) for (const x of f.pond || []) {
+    if (x.id && !x.id.startsWith("(O)812")) (pondByItem.get(x.id) || pondByItem.set(x.id, []).get(x.id)).push({ fish: f.p, ...x });
+  }
   const tappedFrom = new Map(); // 树液采集器产物 → [树]
   for (const tree of D.trees || []) for (const id of tree.pr) (tappedFrom.get(id) || tappedFrom.set(id, []).get(id)).push(tree.p);
   const producedBy = new Map();
@@ -883,6 +888,8 @@
     if (id && producedBy.has(id)) paths.push({ kind: "animal", label: t("动物产出"), animals: producedBy.get(id), reqs: [],
       checks: [R(undefined, t("饲养下列动物会产出"))] });
     // 树液采集器：放在对应的树上定期产出（间隔天数见树的条目）。说明里不提重型树液采集器（精通后才有），它只在物品列表里按防剧透规则显示。
+    if (id && pondByItem.has(id)) paths.push({ kind: "pond", label: t("鱼塘产出"), pond: pondByItem.get(id), random: true, reqs: [],
+      checks: [R(undefined, t("在鱼塘里养下列鱼，达到所写数量后有几率产出"))] });
     if (id && tappedFrom.has(id)) paths.push({ kind: "tapper", label: t("树木产出"), trees: tappedFrom.get(id), refs: ["(BC)105", "(BC)264"], reqs: [],
       checks: [R(undefined, t("在下列树上放置树液采集器，会定期产出"))] });
     const ct = id && chainByItem.get(id);
@@ -923,7 +930,7 @@
       p.scope = t("已收录的条件");
       p.verifiedOnly = true;
       // 开局自带、种植和自然产出没有库存、营业或材料需要核对。
-      p.assumptions = ["initial", "grow", "produce", "drop", "animal", "tapper"].includes(p.kind) ? [] : [t("未核对背包材料、金币、剩余库存或实际设备摆放"), t("可达和常规营业不保证已满足全部事件条件")];
+      p.assumptions = ["initial", "grow", "produce", "drop", "animal", "tapper", "pond"].includes(p.kind) ? [] : [t("未核对背包材料、金币、剩余库存或实际设备摆放"), t("可达和常规营业不保证已满足全部事件条件")];
     }
     return paths;
   }

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T11:56:34+00:00",
+ "generated_at": "2026-10-28T09:28:06+00:00",
  "sources": {
   "zh": {
    "archive": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
@@ -30,6 +30,7 @@
   "villagers.json": 48,
   "locations.json": 48,
   "buildings.json": 29,
+  "fish-pond.json": 218,
   "bundles.json": 7,
   "shops.json": 21,
   "seeds.json": 69,
@@ -52,7 +53,8 @@
   "fish.json": 69724,
   "villagers.json": 363011,
   "locations.json": 16717,
-  "buildings.json": 17993,
+  "buildings.json": 18025,
+  "fish-pond.json": 29094,
   "bundles.json": 36747,
   "shops.json": 129602,
   "seeds.json": 41734,

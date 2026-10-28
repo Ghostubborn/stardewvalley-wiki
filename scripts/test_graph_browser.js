@@ -91,6 +91,10 @@
     assert(title() === "高级鸡舍" && graph(), "tiers link to each other");
     A.select({ type: "page", id: "磨坊" }); await settle();
     assert(graph()?.textContent.includes("大麦粉"), "a building that processes shows its products");
+    A.select({ type: "page", id: "土之图腾柱" }); await settle();
+    assert(graph()?.textContent.includes("法师塔") && graph().textContent.includes("取回魔法墨水后开放"), "magic buildings name the Wizard's Tower");
+    A.select({ type: "fish", id: "黄貂鱼" }); await settle();
+    assert([...graph().querySelectorAll(".g-group")].some(g => g.querySelector(".g-kind").textContent === "鱼塘产出" && g.textContent.includes("电池组")), "fish graphs list pond produce");
     A.select({ type: "page", id: "新手指南" }); await settle();
     assert(!graph() && !body.querySelector(".view-switch"), "entries without relations keep the plain page");
 
@@ -123,6 +127,10 @@
     assert(!graph() && !location.hash.includes("g=1") && body.querySelector(".acquisition-paths, .d-section"), "the switch returns to the list");
     A.select({ type: "item", id: id("木材") }); await settle();
     assert(body.textContent.includes("用于建造") && [...body.querySelectorAll(".chip")].some(c => c.textContent.includes("鸡舍")), "the list also names the buildings an item is used for");
+    A.select({ type: "fish", id: "黄貂鱼" }); await settle();
+    assert([...body.querySelectorAll(".d-section > h3")].some(h => h.textContent === "鱼塘产出") && body.textContent.includes("9 条起"), "fish lists show pond produce");
+    A.select({ type: "item", id: id("电池组") }); await settle();
+    assert(body.textContent.includes("鱼塘产出") && [...body.querySelectorAll(".chip")].some(c => c.textContent.includes("黄貂鱼")), "item lists show which pond fish produce it");
     return JSON.stringify({ result: "switch, groups and lines, stacked when narrow, recentring with a path, history and links, long groups, flavour families, crafting chain, places/monsters/fish/animals/buildings, spoiler placeholders", layout, viewport: [innerWidth, innerHeight] });
   } finally {
     A.select(null);

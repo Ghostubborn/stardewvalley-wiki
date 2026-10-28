@@ -974,10 +974,32 @@ class Builder:
                 rec["sold_by"] = "木匠的商店"
                 files = wt.files(row[0]["text"])
                 rec["image"] = rec["image"] or self.image(files[0].split("|")[0] if files else None)
+        self._wizard_buildings(out)
+        # 用金色核桃买的建筑（姜岛农舍、农场图腾柱）：金色核桃只在姜岛上交给鹦鹉用，两个条目都写明在姜岛修复或建造。
+        for rec in out.values():
+            if rec.get("currency") == "金色核桃" and not rec.get("sold_by"):
+                rec["sold_by"] = "姜岛"
         for name, rec in out.items():
             rec.setdefault("name", name)
             rec.setdefault("upgrade_from", _upgrade_from(rec))
         return list(out.values())
+
+    def _wizard_buildings(self, out):
+        """《法师塔》“建筑”一节的表格：取回法师的魔法墨水后开放，用塔里的魔法书建造，法师施法立即建成。"""
+        tower = self.zh.get("法师塔")
+        for table in wt.wikitables(tower["text"]) if tower else []:
+            if not table["rows"]:
+                continue
+            header = [self.plain(c["text"]) for c in table["rows"][0]]
+            if "名字" not in header or "成本" not in header:
+                continue
+            col = header.index("名字")
+            for row in table["rows"][1:]:
+                link = next(iter(wt.iter_links(row[col]["text"])), None) if len(row) > col else None
+                title = self.resolve(link[0]) if link else None
+                if title in out:
+                    out[title]["sold_by"] = "法师塔"
+                    out[title]["build_days"] = 0
 
     def _house_upgrades(self, table, out):
         """木匠的商店里的农舍升级表：初始农舍 → 第一次 → 第二次 → 第三次升级。"""
@@ -1001,6 +1023,48 @@ class Builder:
                           "capacity": None, "upgrade_text": None, "build_days": 3,
                           "description": self.plain(row[2]["text"]), "sold_by": "木匠的商店", "upgrade_from": prev}
             prev = title
+
+    # —— 鱼塘产物 ——
+    def build_fish_pond(self):
+        """《鱼塘》“产物”一节的表格：每种鱼在鱼塘里达到多少条时可能产出什么、数量、物品概率和每日产出概率。
+        每组第一行先写鱼名（几种产出相同的鱼写在同一格，用 rowspan 管同组的几行）；物品按排序值里的英文名对应。"""
+        page = self.zh.get("鱼塘")
+        out = []
+        for table in wt.wikitables(page["text"]) if page else []:
+            rows = table["rows"]
+            if not rows or [self.plain(c["text"]) for c in rows[0]][:2] != ["鱼", "物品产出"]:
+                continue
+            fish, left = [], 0
+            for row in rows[1:]:
+                cells = list(row)
+                if left <= 0 and cells:
+                    first = cells.pop(0)
+                    fish = [self.resolve(target) for target, _, _ in wt.iter_links(first["text"])]
+                    span = re.search(r'rowspan\s*=\s*"?(\d+)', first["attrs"] or "")
+                    left = int(span.group(1)) if span else 1
+                left -= 1
+                if len(cells) < 4:
+                    self.issues["fish_pond_row_unparsed"] += 1
+                    continue
+                produce, pop, chance, daily = cells[:4]
+                sort = re.search(r'data-sort-value\s*=\s*"([^"]+)"', produce["attrs"] or "")
+                hit = self.catalog.resolve(sort.group(1)) if sort else None
+                link = next(iter(wt.iter_links(produce["text"])), None)
+                if not (hit and hit["id"]) and link:
+                    hit = self.catalog.resolve(link[1] or link[0])
+                # 英文名对不上的（“Trash”）按链接的条目找物品：[[垃圾（物品）|垃圾]]。
+                page_id = link and self.pages.get(self.resolve(link[0]), {}).get("item_id")
+                if not (hit and hit["id"]) and page_id:
+                    hit = {"id": page_id, "zh": self.catalog.zh_by_id.get(page_id) or link[1] or link[0]}
+                if not (hit and hit["id"]):
+                    self.issues["fish_pond_item_unresolved"] += 1
+                qty = re.match(r"\s*(\d+(?:\s*[-–]\s*\d+)?)", self.plain(produce["text"]))
+                pop_n = re.search(r"\d+", self.plain(pop["text"]))
+                for f in fish:
+                    out.append({"fish": f, "id": hit and hit["id"], "zh": (hit and hit["zh"]) or (link and (link[1] or link[0])),
+                                "qty": re.sub(r"\s*[-–]\s*", "-", qty.group(1)) if qty else None, "pop": int(pop_n.group(0)) if pop_n else None,
+                                "chance": self.plain(chance["text"]).strip() or None, "daily": self.plain(daily["text"]).strip() or None})
+        return out
 
     # —— 怪物、动物、矿物与古物 ——
     def build_misc(self):
@@ -1315,6 +1379,7 @@ def main():
         "villagers.json": b.build_villagers(),
         "locations.json": b.build_locations(),
         "buildings.json": b.build_buildings(),
+        "fish-pond.json": b.build_fish_pond(),
         "bundles.json": b.build_bundles(),
         "shops.json": b.build_shops(),
     }

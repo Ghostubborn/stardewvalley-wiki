@@ -1038,5 +1038,13 @@
  "怎么建": "How to build it",
  "有什么用": "What it does",
  "开局就有": "From the start",
- "建造材料": "Build materials"
+ "建造材料": "Build materials",
+ "在鱼塘里养下列鱼，达到所写数量后有几率产出": "A fish pond with these fish can produce it once it reaches the listed population",
+ "{n} 条起": "{n}+ fish",
+ "立即建成": "built instantly",
+ "取回魔法墨水后开放": "Available after retrieving the Wizard's Magic Ink",
+ "可以养的鱼": "Fish it can hold",
+ "{n} 种鱼": "{n} fish",
+ "鱼塘里的鱼": "Fish in ponds",
+ "在鱼塘里养这种鱼，养到所写的条数后有几率产出；百分比是产出时为这件物品的概率。": "A fish pond with this fish can produce these once it holds the listed number of fish; the percentage is the chance that a produced item is this one."
 }

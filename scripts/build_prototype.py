@@ -181,6 +181,14 @@ def main():
             r = json.loads(line)
             fish_text[r["title"]] = " ".join(s["text"] for s in r["sections"][:2])
     fish = []
+    # 鱼塘产物（《鱼塘》产物表）：鱼籽写的是通用的“鱼籽”，换成这种鱼自己的鱼籽（“河豚鱼籽”）。
+    item_ids = {i["id"] for i in items}
+    pond = defaultdict(list)
+    fish_ids = {f["page"]: f["id"] for f in load("fish.json")}
+    for r in load("fish-pond.json"):
+        fid, pid = fish_ids.get(r["fish"]), r["id"]
+        own = fid and pid == "(O)812" and "(O)812/" + fid.split(")", 1)[-1]
+        pond[r["fish"]].append({"id": own if own in item_ids else pid, "z": r["zh"], "q": r["qty"], "n": r["pop"], "c": r["chance"], "d": r["daily"]})
     # 地点写成纯文字、没有链接的鱼：“河流”指小镇与森林两段河，虾虎鱼在森林河流下游的瀑布。
     river_text = {"河流": ["鹈鹕镇河流", "煤矿森林河流"], "煤矿森林下方瀑布": ["煤矿森林河流"]}
     for f in load("fish.json"):
@@ -196,6 +204,7 @@ def main():
             "crab": "蟹笼鱼类" in cats,
             "legend": "传奇鱼" in cats,
             "qi": "大家族" in text and "任务期间" in text,
+            "pond": pond.get(f["page"]) or None,
             **{k: v for k, v in rules.items() if v},
         })
         ref({"id": f["id"]})

@@ -130,6 +130,28 @@ assert.equal(woodBuilds.nodes.length, D.buildings.filter(b => b.materials.some(m
 assert(woodBuilds.nodes.some(n => n.label === '鸡舍' && n.note === '用 300 个'));
 assert.deepEqual(plain(group(A.relations({ type: 'page', id: '鸭' }), 'left', '居住建筑').nodes[0].ref), { type: 'node', id: 'bld:鸡舍:1' });
 
+// The Wizard's Tower builds the magic buildings instantly once the Magic Ink is back; walnut buildings are built on the island.
+const earth = group(A.relations({ type: 'page', id: '土之图腾柱' }), 'left', '建造');
+assert.deepEqual(plain([earth.note, earth.nodes[0].label, earth.nodes[0].note]), ['取回魔法墨水后开放', '法师塔', '500,000 金；立即建成']);
+assert.deepEqual(plain(D.buildings.filter(b => b.sold_by === '法师塔').map(b => b.name).sort()), ['黄金时钟', '祝尼魔屋', '土之图腾柱', '水之图腾柱', '沙漠图腾柱', '姜岛图腾柱'].sort());
+assert.equal(group(A.relations({ type: 'page', id: '农场图腾柱' }), 'left', '建造').nodes[0].label, '姜岛');
+
+// Fish ponds (the produce table on the Fish Pond page): every row resolves to an item; each fish lists its produce with
+// population and chance (roe becomes the fish's own roe); products list the fish; the pond lists fish and products.
+const pondRows = D.fish.flatMap(f => f.pond || []);
+assert(pondRows.length > 200 && pondRows.every(x => x.id && D.items[x.id]), 'every pond product is a known item');
+const stingray = group(A.relations({ type: 'fish', id: '黄貂鱼' }), 'right', '鱼塘产出');
+assert.deepEqual(plain(stingray.nodes.map(n => [n.label, n.note])), [
+  ['黄貂鱼籽', '1 条起 · 80-100%'], ['熔岩菇', '4 条起 · 5%'], ['火山晶石', '×2-5 · 7 条起 · 8-10%'], ['龙牙', '9 条起 · 5%'], ['电池组', '9 条起 · 10%'],
+]);
+const battery = A.relations({ type: 'item', id: id('电池组') });
+assert.deepEqual(plain(group(battery, 'left', '鱼塘产出').nodes.map(n => [n.label, n.ref.type, n.note])), [['黄貂鱼', 'fish', '9 条起 · 10%']]);
+assert(!JSON.stringify(plain(battery.left.groups.filter(g => g.kind === 'source'))).includes('鱼塘'), 'wiki source lines about ponds are not repeated');
+assert(!JSON.stringify(plain(A.relations({ type: 'item', id: id('鱿鱼墨汁') }).left.groups.filter(g => g.kind === 'source'))).includes('鱼塘'));
+const pondBuilding = A.relations({ type: 'page', id: '鱼塘' });
+assert.equal(group(pondBuilding, 'right', '可以养的鱼').nodes.length, D.fish.filter(f => f.pond?.length).length);
+assert(group(pondBuilding, 'right', '产出').nodes.some(n => n.label === '鱼籽' && /种鱼$/.test(n.note)), 'all roe collapses into one product');
+
 // Entries without relations get no graph; occupants' portraits are marked so the view can hide protected ones.
 assert.equal(A.relations({ type: 'page', id: '新手指南' }), null);
 assert.deepEqual(plain(A.relations({ type: 'location', id: '拖车' }).center.iconRef), { type: 'villager', id: '潘姆' });

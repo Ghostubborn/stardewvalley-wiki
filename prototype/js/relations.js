@@ -50,6 +50,8 @@
     return page ? titleRef(page) : null;
   }
   const buildingNode = (name, extra) => ({ ref: buildingRef(name), label: buildingName(name), icon: buildingByName.get(name)?.image, ...extra });
+  // 鱼塘产物的说明：数量、需要养到几条、产出时是这件物品的概率。
+  const pondNote = x => [x.q && x.q !== "1" ? "×" + x.q : null, x.n ? t("{n} 条起", { n: x.n }) : null, x.c].filter(Boolean).join(" · ");
   const stations = list => (list || []).length ? App.list(list.map(s => App.nameOf(s.id || s.z)), t("或")) : null;
   const price = (cost, currency) => (cost != null ? App.money(cost, currency) : null);
 
@@ -71,8 +73,10 @@
     const shops = paths.filter(p => p.kind === "buy").map(p => N(p.shop || p.where)).filter(Boolean);
     const creatures = new Set(paths.flatMap(p => [...(p.monsters || []), ...(p.animals || [])]).map(x => x.title));
     const trees = new Set(paths.flatMap(p => p.trees || []).map(N));
+    // 原文写的“鱼塘（黄貂鱼）”“鱿鱼（鱼塘）”已经按鱼塘产物表列出。
+    const pond = paths.some(p => p.kind === "pond") ? N("鱼塘") : null;
     return (itemSrc.length ? [["source", itemSrc]] : pageAbout || !paths.length ? page.src || [] : [])
-      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)) && !creatures.has(creatureIn(x)) && !trees.has(x))])
+      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)) && !creatures.has(creatureIn(x)) && !trees.has(x) && !(pond && x.includes(pond)))])
       .filter(([, entries]) => entries.length);
   }
   // 原文来源能对上条目名（或“怪物名（几率）”）时可以点开，其余照原文显示。
@@ -109,6 +113,8 @@
         left.push({ kind: p.kind, edge: "find", label: p.label, nodes: p.monsters.map(m => pageNode(m.title, { note: m.note })) });
       } else if (p.kind === "animal") {
         left.push({ kind: p.kind, edge: "find", label: p.label, nodes: p.animals.map(a => pageNode(a.title)) });
+      } else if (p.kind === "pond") {
+        left.push({ kind: p.kind, edge: "make", label: p.label, nodes: p.pond.map(x => ({ ...pageNode(x.fish), note: pondNote(x) })) });
       } else if (p.kind === "tapper") {
         left.push({ kind: p.kind, edge: "find", label: p.label, via: App.nameOf("(BC)105"), nodes: p.trees.map(title => pageNode(title)) });
       } else if (p.kind === "buy") {
@@ -201,6 +207,7 @@
       return { ...node, label: App.habitatName(h.location), note: App.list((h.seasons || []).map(s => App.SEASON_ZH[s]).filter(Boolean)) || null };
     });
     if (places.length) rel.left.groups.unshift({ kind: "fishing", edge: "find", label: App.fishMethod(f) === "crab" ? t("蟹笼") : t("钓鱼"), nodes: places });
+    if (f.pond?.length) rel.right.groups.push({ kind: "pond", edge: "make", label: t("鱼塘产出"), nodes: f.pond.map(x => itemNode(x.id || x.z, { note: pondNote(x) })) });
     rel.center = { label: N(f.p), icon: f.i, sub: t("鱼 · 售价 {price}", { price: App.money(f.pr) }) };
     return rel;
   }
@@ -306,9 +313,12 @@
   }
   function buildingRelations(b) {
     const left = [], right = [];
-    const cost = b.cost ? App.money(b.cost, b.currency) : null, days = b.build_days ? t("建造 {n} 天", { n: b.build_days }) : null;
+    const cost = b.cost ? App.money(b.cost, b.currency) : null;
+    const days = b.build_days ? t("建造 {n} 天", { n: b.build_days }) : b.build_days === 0 ? t("立即建成") : null;
     const costText = EN ? EN.buildings?.[b.name]?.cost_text : b.cost_text;
-    if (b.sold_by) left.push({ kind: "build", edge: "buy", label: t("建造"), nodes: [{ ...pageNode(b.sold_by), note: App.clauses([cost, days]) || null }] });
+    // 法师塔的魔法建筑（《法师塔》建筑表）：取回魔法墨水后开放，施法立即建成；用金色核桃的在姜岛上建造。
+    if (b.sold_by) left.push({ kind: "build", edge: "buy", label: t("建造"), note: b.sold_by === "法师塔" ? t("取回魔法墨水后开放") : null,
+      nodes: [{ ...pageNode(b.sold_by), note: App.clauses([cost, days]) || null }] });
     else if (!b.cost && !b.upgrade_from) left.push({ kind: "initial", edge: "find", label: t("开局就有"), nodes: [textNode(EN ? EN.buildings?.[b.name]?.desc || t("开局就有") : b.description || t("开局就有"))] });
     // 没写建造者的（温室、图腾柱、祝尼魔屋）照原文写获得方式或花费，不猜是谁建的。温室有两种获得方式，
     // 英文资料没有这段原文时不只写一个花费，免得看起来只能花钱买。
@@ -330,6 +340,17 @@
       return title ? pageNode(title) : EN ? null : textNode(x);
     }).filter(Boolean);
     if (animals.length || named.length) right.push({ kind: "animals", edge: "link", label: t("可以养"), nodes: [...animals.map(a => pageNode(a.p)), ...named] });
+    // 鱼塘：能养的鱼和产物（《鱼塘》产物表）；各种鱼的鱼籽合成一项。
+    if (b.name === "鱼塘") {
+      const ponds = D.fish.filter(f => f.pond?.length);
+      right.push({ kind: "fish", edge: "link", label: t("可以养的鱼"), nodes: ponds.map(f => ({ ref: { type: "fish", id: f.p }, label: N(f.p), icon: f.i })) });
+      const made = new Map();
+      for (const f of ponds) for (const x of f.pond) {
+        const key = x.id?.startsWith("(O)812") ? "(O)812" : x.id || x.z;
+        (made.get(key) || made.set(key, new Set()).get(key)).add(f.p);
+      }
+      right.push({ kind: "pond", edge: "make", label: t("产出"), nodes: [...made].map(([key, fish]) => itemNode(key, { note: fish.size > 1 ? t("{n} 种鱼", { n: fish.size }) : N([...fish][0]) })) });
+    }
     const recipes = D.recipes.filter(r => (r.st || []).some(st => st.z === b.name));
     if (recipes.length) right.push({ kind: "processing", edge: "make", label: t("加工"), nodes: recipes.map(r => itemNode(r.out.id || r.out.z, {
       note: App.matsText(r.in.map(x => ({ id: x.id, zh: x.z, qty: x.q }))) })) });
@@ -384,5 +405,5 @@
     return rel.left.groups.length + rel.right.groups.length ? rel : null;
   }
 
-  Object.assign(App, { titleRef, relations, relationChain, itemSources, buildingRef, buildingName, buildingsUsing });
+  Object.assign(App, { titleRef, relations, relationChain, itemSources, buildingRef, buildingName, buildingsUsing, pondNote });
 })();

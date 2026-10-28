@@ -1001,6 +1001,7 @@
       if (p.monsters?.length) div.append(linkGroup(p.monsters.map(m => pageLink(m.title, m.note)), t("掉落这件物品的怪物")));
       if (p.animals?.length) div.append(linkGroup(p.animals.map(a => pageLink(a.title)), t("产出这件物品的动物")));
       if (p.trees?.length) div.append(linkGroup(p.trees.map(title => pageLink(title)), t("产出这件物品的树")));
+      if (p.pond?.length) div.append(linkGroup(p.pond.map(x => pageLink(x.fish, App.pondNote(x))), t("鱼塘里的鱼")));
       if (p.recipe && App.LEARNED_KINDS.has(p.recipe.k) && !(p.recipe.uc || []).some(c => c.group === "initial")) {
         const select = el("select", { "aria-label": t("此配方的学习状态"), class: "recipe-status" },
           [["unknown", t("未确认")], ["yes", t("我已学会")], ["no", t("尚未学会")]].map(([value, label]) => el("option", { value }, label)));
@@ -1145,6 +1146,12 @@
         method === "rod" ? (habitats.length ? rules : sourceFragments(original)) : method === "crab" ? null : sourceFragments(original)),
       original ? el("details", { class: "reference-original" }, el("summary", null, t("核对 Wiki 原文条件")), sourceFragments(original)) : null,
       propsSection(App.itemProps(it)),
+      f.pond?.length ? section(t("鱼塘产出"), el("p", { class: "d-sub" }, t("在鱼塘里养这种鱼，养到所写的条数后有几率产出；百分比是产出时为这件物品的概率。")),
+        el("div", { class: "chips", dataset: { spoilerScoped: "true" } }, f.pond.map(x => {
+          const chip = x.id ? itemChip(x.id) : el("span", { class: "chip static" }, x.z);
+          if (chip.classList.contains("chip")) chip.append(el("span", { class: "hint" }, " " + App.pondNote(x)));
+          return chip;
+        }))) : null,
       usageSection(f.id),
       method === "rod" ? section(t("条件对照（可选）"), App.conditionsActive() ? el("div", null,
         el("div", { class: "path-head" }, el("span", { class: "d-sub" }, condText()), stateChip(c.ok, [t("符合已核验条件"), t("条件不符"), t("待确认")])),
