@@ -220,8 +220,8 @@
     const biz = D.locations.filter((l) => visible("location", l.p) && App.BUSINESSES.has(l.p) && l.R?.length && !(App.AREAS.desert && ["赌场", "绿洲"].includes(l.p) && App.areaState("desert").state !== "open"));
     const shops = biz.map((l) => ({ l, s: App.shopCheck(l) })).filter((x) => x.s);
     const open = shops.filter((x) => x.s.ok === true);
-    const shopRows = open.map(({ l, s }) => row({ icon: villagerIcon(l.occ?.[0]) || l.i, name: N(l.p), sub: s.text, tail: s.soon ? t("快打烊") : t("营业中"), tailClass: s.soon ? "bad" : "good", ref: { type: "location", id: l.p } }));
-    shops.filter((x) => x.s.ok !== true).forEach(({ l, s }) => shopRows.push(row({ icon: villagerIcon(l.occ?.[0]) || l.i, name: N(l.p), sub: s.text,
+    const shopRows = open.map(({ l, s }) => row({ icon: occupantIcon(l) || l.i, name: N(l.p), sub: s.text, tail: s.soon ? t("快打烊") : t("营业中"), tailClass: s.soon ? "bad" : "good", ref: { type: "location", id: l.p } }));
+    shops.filter((x) => x.s.ok !== true).forEach(({ l, s }) => shopRows.push(row({ icon: occupantIcon(l) || l.i, name: N(l.p), sub: s.text,
       tail: s.ok === false ? t("关门") : t("待确认"), tailClass: s.ok === false ? "bad" : "", ref: { type: "location", id: l.p } })));
     body.append(group(t("按常规时段查店铺"), open.length, t("{weekday} {time}；节日、事件与店主施工需另行核对", { weekday: App.WEEKDAY_ZH[App.weekday(C.day)], time: fmtTime(C.time) }), shopRows, { limit: Math.max(4, open.length) }));
 
@@ -253,6 +253,11 @@
   function villagerIcon(name) {
     const v = name && App.villagerByName.get(name);
     return v ? v.i : null;
+  }
+  // 地点多数没有自己的图标，借用第一位住户的头像；住户受保护时不借，免得头像先露出来。
+  function occupantIcon(location) {
+    const occ = location?.occ?.[0];
+    return occ && visible("villager", occ) ? villagerIcon(occ) : null;
   }
 
   function renderLaneList(body) {
@@ -510,29 +515,13 @@
     })), t("{label}涉及后续内容。", { label }), t("查看{title}", { title: label })));
     return box;
   }
-  // 条目链接（怪物、动物、地点、路线节点）：未展示的条目收起，和物品一样按需查看。
-  function titleRef(title) {
-    if (App.fishByName.has(title)) return { type: "fish", id: title };
-    if (App.villagerByName.has(title)) return { type: "villager", id: title };
-    if (App.locationByName.has(title)) return { type: "location", id: title };
-    const id = D.pages[title]?.id;
-    return id && D.items[id] ? { type: "item", id } : { type: "page", id: title };
-  }
+  // 条目链接（怪物、动物、地点、路线节点）：未展示的条目收起，和物品一样按需查看。条目名到引用的对应见 relations.js。
+  const titleRef = App.titleRef;
   // 只有一条途径时不写“满足任意一条即可”。
   const pathsTitle = paths => paths.length > 1 ? t("获取途径（满足任意一条即可）") : t("获取途径");
-  // Wiki 来源条目写的是哪种怪物或动物（“臭虫（危险）（76%）”“铱蟹掉落（50%）”“Truffle Crabs”），取最长的名称。
-  const CREATURE_TAIL = EN ? /^(?:e?s)?(?: drops?)?(?:\s*\(.*\))?$/i : /^(?:掉落物?)?\s*(?:[（(].*[）)])?$/;
-  function creatureIn(entry) {
-    let best = null, size = 0;
-    for (const title of [...App.monsterByName.keys(), ...App.animalByName.keys()]) {
-      const name = N(title);
-      if (name.length > size && entry.startsWith(name) && CREATURE_TAIL.test(entry.slice(name.length))) { best = title; size = name.length; }
-    }
-    return best;
-  }
   function pageLink(title, note) {
     const loc = App.locationByName.get(title);
-    const icon = App.monsterByName.get(title)?.i || App.animalByName.get(title)?.i || villagerIcon(loc?.occ?.[0]) || loc?.i || D.pages[title]?.i;
+    const icon = App.monsterByName.get(title)?.i || App.animalByName.get(title)?.i || occupantIcon(loc) || loc?.i || D.pages[title]?.i;
     return { ref: titleRef(title), label: N(title), icon, note };
   }
   // 地点多数没有图标，没有图片时不放“暂无图片”的占位。
@@ -1059,6 +1048,62 @@
     return parts.length ? section(t("用途"), ...parts) : null;
   }
 
+  // —— 条目抬头与摘要：列表和关系图共用 ——
+  function itemHead(it) {
+    const desc = App.itemDesc(it);
+    return [head(it.i, App.itemName(it), [it.c && t(it.c), it.p ? t("售价 {price}", { price: money(it.p) }) : null, EN ? null : it.e].filter(Boolean).join(" · "), it.inote && (EN ? null : it.inote)),
+      desc ? el("p", { class: "d-summary" }, desc) : null];
+  }
+  function fishHead(f) {
+    const desc = App.itemDesc({ id: f.id, ...(D.items[f.id] || {}) });
+    return [head(f.i, N(f.p), t("鱼 · 售价 {price}", { price: money(f.pr) }) + (f.d ? t(" · 难度 {n}", { n: f.d }) : "")),
+      desc ? el("p", { class: "d-summary" }, desc) : null];
+  }
+  function villagerHead(v) {
+    const bd = v.bd ? t("{season} {day} 日", { season: App.SEASON_ZH[v.bd.season], day: v.bd.day }) : t("未知");
+    const isBd = App.conditionsActive() && v.bd && v.bd.season === state.cond.season && v.bd.day === state.cond.day;
+    const addr = EN ? EN.villagers?.[v.p]?.addr : v.addr;
+    const summary = App.pageInfo(v.p)?.s;
+    return [head(v.i, N(v.p), t("生日：{date}", { date: bd }) + (addr ? t(" · 住在{place}", { place: addr }) : "")),
+      isBd ? el("p", { class: "d-summary" }, el("b", null, t("所设日期是生日。")), t("送最爱的礼物，好感度变化是平时的 8 倍。")) : (summary ? el("p", { class: "d-summary" }, summary) : null)];
+  }
+  function locationHead(name) {
+    const l = App.locationByName.get(name), page = App.pageInfo(name) || {}, lt = App.locText(l);
+    return [head(occupantIcon(l) || D.pages[name]?.i, N(name), [page.kz, lt.addr].filter(Boolean).join(" · ")),
+      page.s ? el("p", { class: "d-summary" }, page.s) : null];
+  }
+  function monsterHead(title) {
+    const m = App.monsterByName.get(title), page = App.pageInfo(title) || {};
+    return [head(m.i || D.pages[title]?.i, N(title), page.kz), page.s ? el("p", { class: "d-summary" }, page.s) : null];
+  }
+  function animalHead(title) {
+    const a = App.animalByName.get(title), page = App.pageInfo(title) || {};
+    return [head(a.i || D.pages[title]?.i, N(title), [page.kz, a.bp ? t("购买价格 {price}", { price: money(a.bp) }) : null].filter(Boolean).join(" · ")),
+      page.s ? el("p", { class: "d-summary" }, page.s) : null];
+  }
+  function pageHeading(title) {
+    const p = { ...App.pageInfo(title), i: D.pages[title].i, e: D.pages[title].e };
+    const guideIcon = { 新手指南: "Spring.png", 控制: "Controls_Icon.png", 钓鱼攻略: "Fishing_Skill_Icon.png", 物品栏: "Chest.png",
+      游戏内时间: "Time_Icon.png", 季节: "Calendar.png", 天气: "Sunny.png", 能量: "Farming_Skill_Icon.png", 生命值: "Combat_Skill_Icon.png",
+      技能: "Farming_Skill_Icon.png", 友谊: "HeartIconLarge.png", 合作: "Maplocation.png" }[title];
+    const heading = head(p.i || guideIcon, N(title), [p.kz, EN ? null : p.e].filter(Boolean).join(" · "));
+    if (title === "存档" && !p.i) heading.replaceChild(el("span", { role: "img", "aria-label": N("存档"), style: "display:grid;place-items:center;width:48px;height:48px;flex:none;color:var(--bark)",
+      html: '<svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h13l4 4v14H3V3h1zm3 0v6h9V3M7 21v-8h10v8"/><path d="M13 3v4"/></svg>' }), heading.firstChild);
+    return heading;
+  }
+  // 关系图里的条目：抬头、摘要和页尾（收藏、条目全文、资料来源）与列表相同。
+  function entryHead(ref) {
+    if (ref.type === "item") return itemHead(App.itemInfo(ref.id) || { z: ref.id });
+    if (ref.type === "fish") return fishHead(App.fishByName.get(ref.id));
+    if (ref.type === "villager") return villagerHead(App.villagerByName.get(ref.id));
+    if (ref.type === "location") return locationHead(ref.id);
+    if (App.monsterByName.has(ref.id)) return monsterHead(ref.id);
+    if (App.animalByName.has(ref.id)) return animalHead(ref.id);
+    const summary = App.pageInfo(ref.id)?.s;
+    return [pageHeading(ref.id), summary ? el("p", { class: "d-summary" }, summary) : null];
+  }
+  const articleOf = ref => (ref.type === "item" ? App.itemInfo(ref.id)?.pg : ref.id);
+
   function renderFish(f) {
     const source = pointReturn?.pointId && App.mapContents.find(pointReturn.pointId);
     const c = source ? App.mapContents.fishStatus(f, [source.x, source.y, source.map]) : App.fishCheck(f);
@@ -1081,10 +1126,8 @@
       ].filter(Boolean);
       return el("details", { class: "habitat", open: habitats.length === 1 }, el("summary", null, App.habitatName(h.location)), checkList(facts));
     }));
-    const desc = App.itemDesc(it);
     fillDetail(
-      head(f.i, N(f.p), t("鱼 · 售价 {price}", { price: money(f.pr) }) + (f.d ? t(" · 难度 {n}", { n: f.d }) : "")),
-      desc ? el("p", { class: "d-summary" }, desc) : null,
+      ...fishHead(f),
       section(t("获取条件"), el("p", { class: "d-sub" }, method === "rod" ? (App.isSubmarineFish(f) ? t("在夜市的钓鱼潜艇里用钓竿捕获。") : t("用钓竿捕获；不同水域的季节或额外要求可能不同。")) : method === "crab" ? t("使用蟹笼捕获。") : t("在海滩采集。")),
         method === "crab" ? checkList(App.crabFacts(f)) : null,
         App.fishRequirements(f).length ? checkList(App.fishRequirements(f)) : null,
@@ -1110,13 +1153,15 @@
     const nodesHere = [...P().nodes.values()].filter((n) => n.place === name && S.node(n.id));
     const shop = D.shops.find((x) => x.p === name || (name === "下水道" && x.p === "科罗布斯"));
     fillDetail(
-      head(villagerIcon(l?.occ?.[0]) || D.pages[name]?.i, N(name), [page.kz, lt.addr].filter(Boolean).join(" · ")),
-      page.s ? el("p", { class: "d-summary" }, page.s) : null,
+      ...locationHead(name),
       s ? section(t("营业规则"), App.conditionsActive() ? el("div", { class: "path-head" }, el("span", { class: "d-sub" }, condText()), stateChip(s.ok, [t("常规时段内"), t("没开门"), t("未确认")])) : null,
         checkList([App.conditionsActive() ? { ok: s.ok, text: s.text } : null, lt.hours ? { ok: undefined, text: t("营业时间：{hours}", { hours: lt.hours.replace(/\n/g, EN ? "; " : "；") }) } : null,
           lt.closed && !["无", "Never", "None"].includes(lt.closed) ? { ok: undefined, text: t("休息：{days}", { days: lt.closed }) } : null].filter(Boolean))) : null,
       area ? areaSection(area.id) : null,
-      l?.occ?.length ? section(t("住在这里"), el("div", { class: "chips" }, l.occ.map((n) => el("button", { class: "chip", type: "button", onclick: () => App.select({ type: "villager", id: n }) }, img(villagerIcon(n)), N(n))))) : null,
+      // 住户里也有不是居民的（达斯迪、沙漠商人）：按条目打开，没有条目的只写名字。
+      l?.occ?.length ? section(t("住在这里"), el("div", { class: "chips" }, l.occ.filter(n => n !== name).map((n) => App.villagerByName.has(n) || D.pages[n]
+        ? el("button", { class: "chip", type: "button", onclick: () => App.select(titleRef(n)) }, App.hasImage(villagerIcon(n)) ? img(villagerIcon(n)) : null, N(n))
+        : el("span", { class: "chip static" }, N(n))))) : null,
       nodesHere.length ? section(t("相关升级与解锁"), el("ul", { class: "checks" }, nodesHere.slice(0, 10).map((n) => {
         const st = P().status(n.id).status;
         const [cls, sym] = App.conditionsActive() ? { done: ["ok", "✓"], ready: ["unk", "★"], locked: ["no", "✗"], unknown: ["unk", "?"] }[st] : ["info", "·"];
@@ -1140,13 +1185,8 @@
 
   function renderVillager(name) {
     const v = App.villagerByName.get(name);
-    const bd = v.bd ? t("{season} {day} 日", { season: App.SEASON_ZH[v.bd.season], day: v.bd.day }) : t("未知");
-    const isBd = App.conditionsActive() && v.bd && v.bd.season === state.cond.season && v.bd.day === state.cond.day;
-    const addr = EN ? EN.villagers?.[name]?.addr : v.addr;
-    const summary = App.pageInfo(name)?.s;
     fillDetail(
-      head(v.i, N(v.p), t("生日：{date}", { date: bd }) + (addr ? t(" · 住在{place}", { place: addr }) : "")),
-      isBd ? el("p", { class: "d-summary" }, el("b", null, t("所设日期是生日。")), t("送最爱的礼物，好感度变化是平时的 8 倍。")) : (summary ? el("p", { class: "d-summary" }, summary) : null),
+      ...villagerHead(v),
       v.love.length ? section(t("最爱的礼物"), itemGroup(v.love, t("其他最爱礼物"))) : null,
       v.like.length ? section(t("喜欢的礼物"), itemGroup(v.like, t("其他喜欢礼物"))) : null,
       App.schedules?.render(name),
@@ -1165,16 +1205,9 @@
     const seed = D.seeds.find(s => s.id === it.id);
     const growing = seed && App.seedCheck(seed);
     const desc = App.itemDesc(it);
-    // Wiki 列出的来源：墙纸、服装等按件取合集页表格；条目若写的就是这件物品，取信息框的来源。
-    // 与购买途径重复的商店条目不再列出。
-    const itemSrc = (EN ? EN.isrc?.[it.id] : it.src) || [];
+    // Wiki 列出的来源（墙纸、服装按件取合集页表格，与购买途径重复的商店等不再列出），见 relations.js。
     const pageAbout = !!it.id && D.pages[it.pg]?.id === it.id;
-    const shops = paths.filter(p => p.kind === "buy").map(p => N(p.shop || p.where)).filter(Boolean);
-    const creatures = new Set(paths.flatMap(p => [...(p.monsters || []), ...(p.animals || [])]).map(x => x.title));
-    const trees = new Set(paths.flatMap(p => p.trees || []).map(N));
-    const groups = (itemSrc.length ? [["source", itemSrc]] : pageAbout || !paths.length ? page.src || [] : [])
-      .map(([key, entries]) => [key, entries.filter(x => !shops.some(name => x.startsWith(name)) && !creatures.has(creatureIn(x)) && !trees.has(x))])
-      .filter(([, entries]) => entries.length);
+    const groups = App.itemSources(it, paths);
     const wikiSources = groups.length ? sourceGroups(groups) : null;
     // 没有结构化途径时，依次用条目的“获取途径”章节、信息框来源原文和导言补充。
     const fallback = !paths.length && !wikiSources ? (page.ob?.length ? sourceGroups([["source", page.ob]]) : page.f?.source ? sourceFragments(page.f.source) : null) : null;
@@ -1184,8 +1217,7 @@
     const mentions = !paths.length && !wikiSources && !fallback && !lead ? mentionList((EN ? EN.mentions?.[it.id] : it.mn) || []) : null;
     const donation = page.dr?.length ? section(t("捐赠奖励"), entryList(page.dr)) : null;
     fillDetail(
-      head(it.i, App.itemName(it), [it.c && t(it.c), it.p ? t("售价 {price}", { price: money(it.p) }) : null, EN ? null : it.e].filter(Boolean).join(" · "), it.inote && (EN ? null : it.inote)),
-      desc ? el("p", { class: "d-summary" }, desc) : null,
+      ...itemHead(it),
       propsSection(App.itemProps(it)),
       seed ? section(t("种植规则"), checkList([
         { text: t("适生季节：{value}", { value: App.list(seed.S.map(s => App.SEASON_ZH[s])) || t("见原文") }) },
@@ -1250,8 +1282,7 @@
       .every(part => places.some(p => p.label === part.trim())) ? info.lt : null;
     const variants = m.vr?.length && m.vr.every(v => App.monsterByName.has(v)) ? m.vr.map(v => pageLink(v)) : null;
     fillDetail(
-      head(m.i || D.pages[title]?.i, N(title), page.kz),
-      page.s ? el("p", { class: "d-summary" }, page.s) : null,
+      ...monsterHead(title),
       stats.length ? section(t("属性"), checkList(stats)) : null,
       info.lt || places.length ? section(t("出没地点"), placeText ? el("p", null, placeText) : null,
         places.length ? linkGroup(places, t("相关地点")) : null,
@@ -1277,8 +1308,7 @@
       return ref ? linkChip({ ref, label, icon: x.i }) : el("span", { class: "chip static" }, img(x.i), label);
     });
     fillDetail(
-      head(a.i || D.pages[title]?.i, N(title), [page.kz, a.bp ? t("购买价格 {price}", { price: money(a.bp) }) : null].filter(Boolean).join(" · ")),
-      page.s ? el("p", { class: "d-summary" }, page.s) : null,
+      ...animalHead(title),
       homes.length || produce.length ? section(t("饲养"),
         homes.length ? [el("p", { class: "d-sub" }, t("居住建筑")), linkGroup(homes, t("需要的建筑"))] : null,
         produce.length ? [el("p", { class: "d-sub" }, t("产物")), el("div", { class: "chips", dataset: { spoilerScoped: "true" } }, produce)] : null) : null,
@@ -1295,12 +1325,7 @@
     if (App.animalByName.has(title)) return renderAnimal(title);
     const p = { ...App.pageInfo(title), i: raw.i, e: raw.e };
     const pins = D.pins.filter((x) => x.t === title);
-    const guideIcon = { 新手指南: "Spring.png", 控制: "Controls_Icon.png", 钓鱼攻略: "Fishing_Skill_Icon.png", 物品栏: "Chest.png",
-      游戏内时间: "Time_Icon.png", 季节: "Calendar.png", 天气: "Sunny.png", 能量: "Farming_Skill_Icon.png", 生命值: "Combat_Skill_Icon.png",
-      技能: "Farming_Skill_Icon.png", 友谊: "HeartIconLarge.png", 合作: "Maplocation.png" }[title];
-    const heading = head(p.i || guideIcon, N(title), [p.kz, EN ? null : p.e].filter(Boolean).join(" · "));
-    if (title === "存档" && !p.i) heading.replaceChild(el("span", { role: "img", "aria-label": N("存档"), style: "display:grid;place-items:center;width:48px;height:48px;flex:none;color:var(--bark)",
-      html: '<svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h13l4 4v14H3V3h1zm3 0v6h9V3M7 21v-8h10v8"/><path d="M13 3v4"/></svg>' }), heading.firstChild);
+    const heading = pageHeading(title);
     const guide = App.guides?.has(title);
     // 有正文的条目直接显示正文（信息框写在最前）；简明指南另有整理好的内容，正文放在页尾按需展开。
     const inline = !guide && articleKey(title);
@@ -1398,6 +1423,28 @@
     if (done) App.toast(opened.length && !S.active() ? t("{name} 完成，{places} 已开放", { name: nodeName(n), places: App.list(opened.map(nodeName)) }) : t("{name} 已标记完成", { name: nodeName(n) }));
   }
 
+  // 关系图：从关系图一路点过来的条目记成路径（graphTrail），点前面的可以退回去。
+  let graphTrail = [];
+  function renderGraph(ref) {
+    const title = articleOf(ref);
+    const graph = App.graph.render(ref, { title: S.title(ref), trail: graphTrail, refName, pick: r => App.select(r, { from: "graph" }) });
+    fillDetail(...entryHead(ref), viewSwitch(), graph, actions(planBtn(ref)), title ? [articleFold(title), sourceLine(title)] : null);
+  }
+  // 列表与关系图：选择会记住，之后打开的条目沿用。
+  function viewSwitch() {
+    const pick = graph => () => {
+      if (!!state.graph === graph) return;
+      state.graph = graph;
+      graphTrail = current ? [current] : [];
+      App.emit("graph");
+      writeHash();
+      dbody.querySelector(`.view-switch button[aria-pressed="true"]`)?.focus();
+    };
+    return el("div", { class: "view-switch", role: "group", "aria-label": t("查看方式") },
+      el("button", { type: "button", "aria-pressed": String(!state.graph), onclick: pick(false) }, t("列表")),
+      el("button", { type: "button", "aria-pressed": String(!!state.graph), onclick: pick(true) }, t("关系图")));
+  }
+
   function renderDetail() {
     const ref = current;
     if (!ref) { detail.hidden = true; updateDetailPresentation(); updateInsets(); return; }
@@ -1410,6 +1457,7 @@
         actions(btn(t("仅查看此条（可能剧透）"), () => S.reveal(ref), true), btn(t("我已了解此内容"), () => S.reveal(ref, true))),
         el("p", { class: "d-sub" }, t("“仅查看”在本次浏览有效；“已了解”会保存在这台设备，不修改游戏完成进度。")));
     }
+    else if (state.graph && App.graph.supports(ref)) renderGraph(ref);
     else if (ref.type === "fish") renderFish(App.fishByName.get(ref.id));
     else if (ref.type === "location") renderLocation(ref.id);
     else if (ref.type === "villager") renderVillager(ref.id);
@@ -1418,6 +1466,10 @@
     else if (ref.type === "bundle") renderBundle(ref.id);
     else if (ref.type === "area") P().nodes.has("area:" + ref.id) ? renderNode("area:" + ref.id) : renderLocation(App.AREAS[ref.id].title);
     else renderPage(ref.id);
+    // 能画关系图的条目，在抬头（和摘要）下面放“列表 / 关系图”切换。
+    if (!state.graph && !["point", "find"].includes(ref.type) && S.canView(ref) && App.graph.supports(ref)) {
+      (dbody.querySelector(":scope > .d-head + .d-summary") || dbody.querySelector(":scope > .d-head"))?.after(viewSwitch());
+    }
     if (pointReturn && ref.type !== "point") {
       dbody.prepend(btn(t("← 返回地点列表"), returnToPoints));
     }
@@ -1434,6 +1486,11 @@
   App.select = (ref, opts = {}) => {
     ref = canonicalRef(ref);
     const same = ref && current && ref.type === current.type && ref.id === current.id;
+    // 关系图路径：从关系图点过来的接在后面，退回到路径里已有的条目时截断，从别处打开时重新开始。
+    if (ref && !same) {
+      const at = graphTrail.findIndex(r => r.type === ref.type && r.id === ref.id);
+      graphTrail = at >= 0 && ["graph", "hash"].includes(opts.from) ? graphTrail.slice(0, at + 1) : opts.from === "graph" ? [...graphTrail, ref].slice(-8) : [ref];
+    }
     if (ref && detail.hidden) detailReturnFocus = document.activeElement;
     if (ref) detailMode = "reading";
     current = ref;
@@ -1646,7 +1703,7 @@
     if (ref.type === "fish") return App.fishByName.get(ref.id)?.i;
     if (ref.type === "villager") return App.villagerByName.get(ref.id)?.i;
     if (ref.type === "item") return App.itemInfo(ref.id)?.i;
-    if (ref.type === "location") return villagerIcon(App.locationByName.get(ref.id)?.occ?.[0]) || D.pages[ref.id]?.i;
+    if (ref.type === "location") return occupantIcon(App.locationByName.get(ref.id)) || D.pages[ref.id]?.i;
     return D.pages[ref.id]?.i || App.monsterByName.get(ref.id)?.i || App.animalByName.get(ref.id)?.i;
   }
   function refName(ref) {
@@ -1760,6 +1817,7 @@
     const parts = [`view=${state.view}`];
     if (state.view === "browse" && App.browse.category) parts.push(`cat=${App.browse.category}`);
     if (current) parts.push(`sel=${current.type}:${encodeURIComponent(current.id)}`);
+    if (current && state.graph && App.graph.supports(current)) parts.push("g=1");
     const hash = "#" + parts.join("&");
     // 英文页有 <base href="../">，只写 "#…" 会被解析到中文页路径。
     if (location.hash !== hash) history[hashReady ? "pushState" : "replaceState"](null, "", location.pathname + location.search + hash);
@@ -1782,6 +1840,8 @@
         : ref.type === "villager" ? App.villagerByName.has(ref.id) : ref.type === "location" ? App.locationByName.has(ref.id)
         : ref.type === "bundle" ? !!App.browse.bundle(ref.id) : ref.type === "page" && !!D.pages[ref.id];
       if (!exists) { App.select(null); return; }
+      // g=1：关系图；能画关系图的条目按链接决定，其他条目不改变已记住的选择。
+      if (App.graph.supports(ref)) state.graph = h.get("g") === "1";
       App.select(ref, { from: "hash" });
     } else App.select(null);
     } finally { readingHash = false; writeHash(); hashReady = true; }

@@ -1,6 +1,7 @@
 // Run on /en/ with agent-browser eval --stdin < scripts/test_english_browser.js, then poll
 // `window.__enScan` until it has a result (the walk yields to the page so the browser stays responsive).
 // Walks every category, detail type, map, progression and dialog with spoiler protection on and off,
+// then every entry again as a relation graph (groups, flavour families and crafting chains opened),
 // and reports any Chinese text or attribute that would be visible on the English page.
 window.__enScan = { done: false, step: "starting" };
 (async () => {
@@ -57,6 +58,9 @@ window.__enScan = { done: false, step: "starting" };
       // Expand folded spoiler sections and schedules, so their contents are checked too.
       for (const b of document.querySelectorAll("#detail-body .spoiler-fold button, #detail-body .schedule-protected button")) b.click();
       for (const d of document.querySelectorAll("#detail-body details")) d.open = true;
+      // Relation graphs: open long groups, flavour families and the first crafting chain.
+      for (const b of document.querySelectorAll("#detail-body .g-more, #detail-body .g-family, #detail-body .g-locked")) b.click();
+      document.querySelector("#detail-body .g-chain-toggle")?.click();
       scan(`${label}:${ref.type}:${ref.id}`);
     }
     A.select(null);
@@ -74,6 +78,9 @@ window.__enScan = { done: false, step: "starting" };
   A.setConditionsEnabled(false);
   S.setEnabled(false);
   await pass("unprotected");
+  A.state.graph = true;
+  await pass("graph");
+  A.state.graph = false;
   S.setEnabled(true);
   document.getElementById("spoiler").click(); scan("spoiler-dialog"); document.getElementById("spoiler-dialog").close();
   window.__enScan = { done: true, result: {
