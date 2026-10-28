@@ -90,7 +90,7 @@ assert(farming.includes('["i","(BC)8","稻草人"]'), 'Farming/Skill is transclu
 assert(farming.includes('畜牧人') && farming.includes('农业学家'), 'professions are kept');
 assert(farming.includes('能量 90'), 'recipe rows from {{:Hashbrowns|RecipeRow}}');
 const penny = article('zh', '潘妮');
-assert(penny.s.some(([h, , blocks]) => h === '日程表' && blocks.some(b => b[0] === 'd' && b[1] === '春季')), 'schedules become collapsible details');
+assert(penny.s.some(([h, , blocks]) => /^日程/.test(h || '') && blocks.some(b => b[0] === 'd' && b[1].includes('春季'))), 'schedules become collapsible details');
 assert(JSON.stringify(article('zh', '夏威夷宴会')).includes('["q",'), 'quotes are kept');
 assert.equal(article('en', '温室').f[0][0], 'Build cost');
 const calendar = JSON.stringify(article('zh', '作物生长日历'));
@@ -99,7 +99,8 @@ assert(JSON.stringify(article('zh', '樱桃树')).includes('["f","Cherry_Stage_1
 assert(JSON.stringify(article('zh', '温室')).includes('Optimaliridiumgreenhouse.png'), 'layout figures are kept as images or links');
 // Version history rows link to the version's section; portraits and galleries are figure groups.
 const parsnip = article('zh', '防风草').s.find(([h]) => h === '历史');
-assert(parsnip && JSON.stringify(parsnip).includes('["l","版本历史#1.4","1.4"]'), 'version history rows link to the version section');
+// BWIKI 的版本历史按大版本分页（版本历史/1.4），链接带上版本号小节。
+assert(parsnip && JSON.stringify(parsnip).includes('["l","版本历史/1.4#1.4","1.4"]'), 'version history rows link to the version section');
 assert(article('en', '防风草').s.some(([h]) => h === 'History'), 'English articles keep their History section');
 const portraits = article('zh', '潘妮').s.find(([h]) => h === '肖像');
 assert(portraits && portraits[2].flatMap(b => b[0] === 'g' ? b[1] : []).filter(([file, width]) => file && width === 64).length >= 20, 'villager portraits are shown at 64 px');

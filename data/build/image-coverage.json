@@ -397,12 +397,6 @@
    "page": null
   },
   {
-   "id": "(BC)95",
-   "zh": "石猫头鹰（随机事件）",
-   "en": "Stone Owl (random event)",
-   "page": null
-  },
-  {
    "id": "(BC)106",
    "zh": "相机",
    "en": "Camera",
@@ -545,6 +539,12 @@
    "zh": "灯笼",
    "en": "Lantern",
    "page": null
+  },
+  {
+   "id": "(TR)FrogEgg",
+   "zh": "青蛙蛋",
+   "en": "Frog Egg",
+   "page": "青蛙蛋"
   }
  ]
 }

@@ -495,7 +495,6 @@
  "星露谷 Wiki": "Stardew Valley Wiki",
  "星露谷交互手册": "Stardew Valley Interactive Guide",
  "星露谷地图。地点有可聚焦按钮，点击或回车查看资料。": "Stardew Valley map. Places have focusable buttons; click or press Enter to view an entry.",
- "星露谷物语中文维基 ↗": "Chinese Stardew Valley Wiki ↗",
  "春": "Spring",
  "春季": "Spring",
  "春季 5 日": "Spring 5",
@@ -540,7 +539,6 @@
  "未记录可用设备": "No available equipment recorded",
  "本包所需项目均已记录提交。": "Every required item in this bundle is recorded as submitted.",
  "本季剩下的天数不够任何作物成熟。": "Not enough days left this season for any crop to mature.",
- "本手册的游戏资料主要整理自星露谷 Wiki 的中英文归档。感谢 Wiki 的编辑者、翻译者和所有贡献者，持续整理、核对与分享这些资料，让更多玩家能够了解星露谷。": "The game information in this guide comes from archives of the English and Chinese Stardew Valley Wikis. Thank you to the wiki editors, translators and every contributor who keeps gathering, checking and sharing it so more players can enjoy Stardew Valley.",
  "杂物": "Litter",
  "材料": "Ingredients",
  "材料与其他物品": "Materials & other items",
@@ -989,7 +987,6 @@
  "没有条目的正文提到“{q}”。": "No article mentions “{q}”.",
  "只列出前 {n} 个结果，可以换更具体的词。": "Showing the first {n} results; try a more specific word.",
  "另有 {n} 个条目的相关内容涉及后续内容，开启防剧透时不列出。": "{n} more {n|article mentions|articles mention} it only in later content, which stays hidden while spoiler protection is on.",
- "正文来自中文 Wiki 2025-12-18 归档，按小节查找；同一小节里包含全部关键词才算命中。": "Text from the Stardew Valley Wiki archive (2025-12-18). A section matches when it contains every word you typed.",
  "没有完全相同的名称，下面是相近的：": "No exact match. Similar names:",
  "同时查找了：{list}": "Also searched for: {list}",
  "是不是要找：": "Did you mean: ",
@@ -1046,5 +1043,8 @@
  "可以养的鱼": "Fish it can hold",
  "{n} 种鱼": "{n} fish",
  "鱼塘里的鱼": "Fish in ponds",
- "在鱼塘里养这种鱼，养到所写的条数后有几率产出；百分比是产出时为这件物品的概率。": "A fish pond with this fish can produce these once it holds the listed number of fish; the percentage is the chance that a produced item is this one."
+ "在鱼塘里养这种鱼，养到所写的条数后有几率产出；百分比是产出时为这件物品的概率。": "A fish pond with this fish can produce these once it holds the listed number of fish; the percentage is the chance that a produced item is this one.",
+ "本手册的中文资料整理自星露谷物语中文百科（BWIKI），英文资料整理自 Stardew Valley Wiki 的归档。感谢两站的编辑者、翻译者和所有贡献者，持续整理、核对与分享这些资料，让更多玩家能够了解星露谷。": "The English text in this guide comes from an archive of the Stardew Valley Wiki, and the Chinese text from the Chinese Stardew Valley wiki on BWIKI. Thank you to the editors, translators and every contributor on both wikis who keep gathering, checking and sharing it so more players can enjoy Stardew Valley.",
+ "星露谷物语中文百科（BWIKI）↗": "Chinese Stardew Valley Wiki (BWIKI) ↗",
+ "正文来自星露谷物语 BWIKI（2026-10-29 抓取），按小节查找；同一小节里包含全部关键词才算命中。": "Text from the Stardew Valley Wiki archive (2025-12-18). A section matches when it contains every word you typed."
 }

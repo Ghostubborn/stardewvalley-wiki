@@ -91,12 +91,12 @@
         el("a", { href: "https://github.com/Ghostubborn/stardewvalley-wiki", target: "_blank", rel: "noopener noreferrer" }, t("查看 GitHub 仓库 ↗"))));
     // 英文版的资料取自英文 Wiki，致谢先列英文站。
     const wikiLinks = [
-      el("a", { href: "https://zh.stardewvalleywiki.com/", target: "_blank", rel: "noopener noreferrer", title: t("在新标签页打开") }, t("星露谷物语中文维基 ↗")),
+      el("a", { href: "https://wiki.biligame.com/stardewvalley/", target: "_blank", rel: "noopener noreferrer", title: t("在新标签页打开") }, t("星露谷物语中文百科（BWIKI）↗")),
       el("a", { href: "https://stardewvalleywiki.com/", target: "_blank", rel: "noopener noreferrer", title: t("在新标签页打开") }, t("Stardew Valley Wiki（英文）↗")),
     ];
     const credits = el("footer", { class: "home-credits", "aria-labelledby": "wiki-thanks-title" },
       el("h2", { id: "wiki-thanks-title" }, t("资料来源与致谢")),
-      el("p", null, t("本手册的游戏资料主要整理自星露谷 Wiki 的中英文归档。感谢 Wiki 的编辑者、翻译者和所有贡献者，持续整理、核对与分享这些资料，让更多玩家能够了解星露谷。")),
+      el("p", null, t("本手册的中文资料整理自星露谷物语中文百科（BWIKI），英文资料整理自 Stardew Valley Wiki 的归档。感谢两站的编辑者、翻译者和所有贡献者，持续整理、核对与分享这些资料，让更多玩家能够了解星露谷。")),
       el("div", { class: "wiki-credit-links" }, zh ? wikiLinks : wikiLinks.reverse()),
       el("p", { class: "home-credit-note" }, t("各条目保留原文来源，便于继续查阅与核对。原 Wiki 未作本站的防剧透处理。")));
     // 地图和路线平时只在底部标签里，首页点明这两种查法；{map}、{tree} 换成打开对应视图的链接。

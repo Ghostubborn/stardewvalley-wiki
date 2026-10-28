@@ -610,7 +610,7 @@
   function wikiUrl(title) {
     const p = D.pages[title];
     if (EN) return App.pageInfo(title)?.u || (p?.e ? "https://stardewvalleywiki.com/" + encodeURIComponent(p.e.replace(/ /g, "_")) : null);
-    return p ? p.u : "https://zh.stardewvalleywiki.com/" + encodeURIComponent(title);
+    return p ? p.u : "https://wiki.biligame.com/stardewvalley/" + encodeURIComponent(title);
   }
   function sourceLine(title) {
     const url = wikiUrl(title);
@@ -618,7 +618,7 @@
       if (!url) return el("p", { class: "d-source" }, t("资料来源：Stardew Valley Wiki 2025-12-18 归档快照。原站内容未作防剧透处理。"));
       return el("p", { class: "d-source" }, t("资料：Stardew Valley Wiki"), " “", el("a", { href: url, target: "_blank", rel: "noopener" }, N(title)), "”", t("，2025-12-18 归档快照。原站内容未作防剧透处理。"));
     }
-    return el("p", { class: "d-source" }, "资料：中文 Wiki《", el("a", { href: url, target: "_blank", rel: "noopener" }, title), "》，2025-12-18 归档快照。原站内容未作防剧透处理。");
+    return el("p", { class: "d-source" }, "资料：星露谷物语 BWIKI《", el("a", { href: url, target: "_blank", rel: "noopener" }, title), "》，2026-10-29 抓取。原站内容未作防剧透处理。");
   }
   // ———————————————————— Wiki 条目正文 ————————————————————
   // 正文按条目单独存放（articles/zh、articles/en），打开时才载入；英文版只有英文 Wiki 有的条目才显示。
@@ -755,8 +755,8 @@
     }
     return out;
   }
-  // 爱心事件、秘密一类章节写的是剧情，开启防剧透时整节收起。
-  const STORY_SECTION = /心事件|Heart Events?|秘密|Secrets?$/i;
+  // 爱心事件（BWIKI 写作“好感度事件”）、秘密一类章节写的是剧情，开启防剧透时整节收起。
+  const STORY_SECTION = /心事件|好感度事件|Heart Events?|秘密|Secrets?$/i;
   function articleBody(article, title, { facts = true, base = 3 } = {}) {
     const out = [];
     if (facts && article.f?.length) {
@@ -952,7 +952,7 @@
           el("p", { class: "find-snippet" }, markTerms(hit.snippet, terms))))) : null,
         hits.length > shown.length ? el("p", { class: "d-sub" }, t("只列出前 {n} 个结果，可以换更具体的词。", { n: shown.length })) : null,
         hidden ? el("p", { class: "d-sub" }, t("另有 {n} 个条目的相关内容涉及后续内容，开启防剧透时不列出。", { n: hidden })) : null,
-        el("p", { class: "d-sub" }, t("正文来自中文 Wiki 2025-12-18 归档，按小节查找；同一小节里包含全部关键词才算命中。"))].filter(Boolean));
+        el("p", { class: "d-sub" }, t("正文来自星露谷物语 BWIKI（2026-10-29 抓取），按小节查找；同一小节里包含全部关键词才算命中。"))].filter(Boolean));
     });
   }
   function actions(...btns) { return el("div", { class: "d-actions" }, btns.filter(Boolean)); }

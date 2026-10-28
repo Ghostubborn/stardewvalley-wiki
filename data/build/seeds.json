@@ -1,80 +1,25 @@
 [
  {
-  "page": "混合种子",
-  "id": "(O)770",
-  "image": "Mixed_Seeds.png",
-  "crop": null,
-  "seasons": [
-   "all"
-  ],
-  "season_text": "所有",
-  "growth_days": null,
-  "growth_text": "不固定",
-  "regrow_days": null,
-  "sell_price": 0,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   }
+  "page": "上古种子",
+  "id": "(O)499",
+  "image": "Ancient_Seeds.png",
+  "crop": {
+   "id": "(O)454",
+   "en": "Ancient Fruit",
+   "zh": "上古水果",
+   "qty": null,
+   "note": null,
+   "link": null
   },
-  "night_market_day": null
- },
- {
-  "page": "秋季种子",
-  "id": "(O)497",
-  "image": "Fall_Seeds.png",
-  "crop": null,
   "seasons": [
+   "spring",
+   "summer",
    "fall"
   ],
-  "season_text": "Fall",
-  "growth_days": 7,
-  "growth_text": "7天",
-  "regrow_days": null,
-  "sell_price": 45,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 45,
-    "currency": "金",
-    "text": "135–1,000金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "冬季种子",
-  "id": "(O)498",
-  "image": "Winter_Seeds.png",
-  "crop": null,
-  "seasons": [
-   "winter"
-  ],
-  "season_text": "Winter",
-  "growth_days": 7,
-  "growth_text": "7天",
-  "regrow_days": null,
+  "season_text": "春季 • 夏季 • 秋季",
+  "growth_days": 28,
+  "growth_text": "28 天",
+  "regrow_days": 7,
   "sell_price": 30,
   "buy": {
    "皮埃尔的杂货店": {
@@ -88,6 +33,64 @@
     "text": "不出售"
    },
    "旅行货车": {
+    "amount": null,
+    "currency": null,
+    "text": "不出售"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "仙人掌种子",
+  "id": "(O)802",
+  "image": "Cactus_Seeds.png",
+  "crop": {
+   "id": "(O)90",
+   "en": "Cactus Fruit",
+   "zh": "仙人掌果子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": 12,
+  "growth_text": "12 天",
+  "regrow_days": null,
+  "sell_price": 0,
+  "buy": {
+   "绿洲": {
+    "amount": 150,
+    "currency": "金",
+    "text": "150金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "冬季种子",
+  "id": "(O)498",
+  "image": "Winter_Seeds.png",
+  "crop": {
+   "id": "(O)412",
+   "en": "Winter Root",
+   "zh": "冬根",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "winter"
+  ],
+  "season_text": "冬季",
+  "growth_days": 7,
+  "growth_text": "7 天",
+  "regrow_days": null,
+  "sell_price": 30,
+  "buy": {
+   "旅行货车": {
     "amount": 30,
     "currency": "金",
     "text": "100–1,000金"
@@ -96,87 +99,43 @@
   "night_market_day": null
  },
  {
-  "page": "夏季种子",
-  "id": "(O)496",
-  "image": "Summer_Seeds.png",
-  "crop": null,
-  "seasons": [
-   "summer"
-  ],
-  "season_text": "Summer",
-  "growth_days": 7,
-  "growth_text": "7天",
-  "regrow_days": null,
-  "sell_price": 55,
-  "buy": {
-   "旅行货车": {
-    "amount": 55,
-    "currency": "金",
-    "text": "165–1,000金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "春季种子",
-  "id": "(O)495",
-  "image": "Spring_Seeds.png",
-  "crop": null,
-  "seasons": [
-   "spring"
-  ],
-  "season_text": "Spring",
-  "growth_days": 7,
-  "growth_text": "7天",
-  "regrow_days": null,
-  "sell_price": 35,
-  "buy": {
-   "旅行货车": {
-    "amount": 35,
-    "currency": "金",
-    "text": "105–1,000金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "花椰菜种子",
-  "id": "(O)474",
-  "image": "Cauliflower_Seeds.png",
+  "page": "南瓜种子",
+  "id": "(O)490",
+  "image": "Pumpkin_Seeds.png",
   "crop": {
-   "id": "(O)190",
-   "en": "Cauliflower",
-   "zh": "花椰菜",
+   "id": "(O)276",
+   "en": "Pumpkin",
+   "zh": "南瓜",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "spring"
+   "fall"
   ],
-  "season_text": "Spring",
-  "growth_days": 12,
-  "growth_text": "12天",
+  "season_text": "秋季",
+  "growth_days": 13,
+  "growth_text": "13 天",
   "regrow_days": null,
-  "sell_price": 40,
+  "sell_price": 50,
   "buy": {
    "皮埃尔的杂货店": {
-    "amount": 80,
-    "currency": "金",
-    "text": "80金"
-   },
-   "Joja超市": {
     "amount": 100,
     "currency": "金",
     "text": "100金"
    },
-   "旅行货车": {
-    "amount": 40,
+   "Joja超市": {
+    "amount": 125,
     "currency": "金",
-    "text": "120–1,000金"
+    "text": "125金"
+   },
+   "旅行货车": {
+    "amount": 50,
+    "currency": "金",
+    "text": "150–1,000金"
    }
   },
-  "night_market_day": 15
+  "night_market_day": 17
  },
  {
   "page": "向日葵种子",
@@ -196,7 +155,7 @@
   ],
   "season_text": "夏季 • 秋季",
   "growth_days": 8,
-  "growth_text": "8天",
+  "growth_text": "8 天",
   "regrow_days": null,
   "sell_price": 20,
   "buy": {
@@ -219,210 +178,24 @@
   "night_market_day": 16
  },
  {
-  "page": "防风草种子",
-  "id": "(O)472",
-  "image": "Parsnip_Seeds.png",
-  "crop": {
-   "id": "(O)24",
-   "en": "Parsnip",
-   "zh": "防风草",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
+  "page": "咖啡豆",
+  "id": "(O)433",
+  "image": "Coffee_Bean.png",
+  "crop": null,
   "seasons": [
-   "spring"
+   "spring",
+   "summer"
   ],
-  "season_text": "Spring",
-  "growth_days": 4,
-  "growth_text": "4天",
-  "regrow_days": null,
-  "sell_price": 10,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 20,
-    "currency": "金",
-    "text": "20金"
-   },
-   "Joja超市": {
-    "amount": 25,
-    "currency": "金",
-    "text": "25金"
-   },
-   "旅行货车": {
-    "amount": 10,
-    "currency": "金",
-    "text": "100–1,000金"
-   }
-  },
-  "night_market_day": 15
- },
- {
-  "page": "土豆种子",
-  "id": "(O)475",
-  "image": "Potato_Seeds.png",
-  "crop": {
-   "id": "(O)192",
-   "en": "Potato",
-   "zh": "土豆",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "season_text": "Spring",
-  "growth_days": 6,
-  "growth_text": "6天",
-  "regrow_days": null,
-  "sell_price": 25,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 50,
-    "currency": "金",
-    "text": "50金"
-   },
-   "Joja超市": {
-    "amount": 62,
-    "currency": "金",
-    "text": "62金"
-   },
-   "旅行货车": {
-    "amount": 25,
-    "currency": "金",
-    "text": "100–1,000金"
-   }
-  },
-  "night_market_day": 15
- },
- {
-  "page": "大蒜种子",
-  "id": "(O)476",
-  "image": "Garlic_Seeds.png",
-  "crop": {
-   "id": "(O)248",
-   "en": "Garlic",
-   "zh": "蒜",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "season_text": "Spring",
-  "growth_days": 4,
-  "growth_text": "4天",
-  "regrow_days": null,
-  "sell_price": 20,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 40,
-    "currency": "金",
-    "text": "40金"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 20,
-    "currency": "金",
-    "text": "100–1,000金"
-   }
-  },
-  "night_market_day": 15
- },
- {
-  "page": "大黄种子",
-  "id": "(O)478",
-  "image": "Rhubarb_Seeds.png",
-  "crop": {
-   "id": "(O)252",
-   "en": "Rhubarb",
-   "zh": "大黄",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "season_text": "Spring",
-  "growth_days": 13,
-  "growth_text": "13天",
-  "regrow_days": null,
-  "sell_price": 50,
+  "season_text": "春季 • 夏季",
+  "growth_days": 10,
+  "growth_text": "10 天",
+  "regrow_days": 2,
+  "sell_price": 15,
   "buy": {
    "旅行货车": {
-    "amount": 50,
+    "amount": 2500,
     "currency": "金",
-    "text": "150–1,000金"
-   },
-   "绿洲": {
-    "amount": 100,
-    "currency": "金",
-    "text": "100金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "草莓种子",
-  "id": "(O)745",
-  "image": "Strawberry_Seeds.png",
-  "crop": {
-   "id": "(O)400",
-   "en": "Strawberry",
-   "zh": "草莓",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "season_text": "Spring",
-  "growth_days": 8,
-  "growth_text": "8天",
-  "regrow_days": 4,
-  "sell_price": 0,
-  "buy": {
-   "其他": {
-    "amount": 100,
-    "currency": "金",
-    "text": "复活节：100金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "仙人掌种子",
-  "id": "(O)802",
-  "image": "Cactus_Seeds.png",
-  "crop": {
-   "id": "(O)90",
-   "en": "Cactus Fruit",
-   "zh": "仙人掌果子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "all"
-  ],
-  "season_text": "任意季节",
-  "growth_days": 12,
-  "growth_text": "12天",
-  "regrow_days": 3,
-  "sell_price": 0,
-  "buy": {
-   "绿洲": {
-    "amount": 150,
-    "currency": "金",
-    "text": "150金"
+    "text": "*2,500金（25%，秋季和冬季）\n*100–1,000金（1.26% 的概率，不限季节）"
    }
   },
   "night_market_day": null
@@ -442,7 +215,7 @@
   "seasons": [
    "summer"
   ],
-  "season_text": "Summer",
+  "season_text": "夏季",
   "growth_days": 11,
   "growth_text": "11 天",
   "regrow_days": null,
@@ -467,382 +240,43 @@
   "night_market_day": 16
  },
  {
-  "page": "杏子树苗",
-  "id": "(O)629",
-  "image": "Apricot_Sapling.png",
+  "page": "土豆种子",
+  "id": "(O)475",
+  "image": "Potato_Seeds.png",
   "crop": {
-   "id": "(O)634",
-   "en": "Apricot",
-   "zh": "杏子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Spring",
-  "growth_days": 28,
-  "growth_text": "28 天",
-  "regrow_days": null,
-  "sell_price": null,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 2000,
-    "currency": "金",
-    "text": "2,000金"
-   },
-   "旅行货车": {
-    "amount": 500,
-    "currency": "金",
-    "text": "1,500–2,500金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "樱桃树苗",
-  "id": "(O)628",
-  "image": "Cherry_Sapling.png",
-  "crop": {
-   "id": "(O)638",
-   "en": "Cherry",
-   "zh": "樱桃",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Spring",
-  "growth_days": 28,
-  "growth_text": "28 天",
-  "regrow_days": null,
-  "sell_price": null,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 3400,
-    "currency": "金",
-    "text": "3,400金"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 850,
-    "currency": "金",
-    "text": "2,550–4,250金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "玉米种子",
-  "id": "(O)487",
-  "image": "Corn_Seeds.png",
-  "crop": {
-   "id": "(O)270",
-   "en": "Corn",
-   "zh": "玉米",
+   "id": "(O)192",
+   "en": "Potato",
+   "zh": "土豆",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "summer",
-   "fall"
+   "spring"
   ],
-  "season_text": "夏季 • 秋季",
-  "growth_days": 14,
-  "growth_text": "14 天",
-  "regrow_days": 4,
-  "sell_price": 75,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 150,
-    "currency": "金",
-    "text": "150金"
-   },
-   "Joja超市": {
-    "amount": 187,
-    "currency": "金",
-    "text": "187金"
-   },
-   "旅行货车": {
-    "amount": 75,
-    "currency": "金",
-    "text": "225–1,000金"
-   }
-  },
-  "night_market_day": 16
- },
- {
-  "page": "甜瓜种子",
-  "id": "(O)479",
-  "image": "Melon_Seeds.png",
-  "crop": {
-   "id": "(O)254",
-   "en": "Melon",
-   "zh": "甜瓜",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "season_text": "Summer",
-  "growth_days": 12,
-  "growth_text": "12 天",
-  "regrow_days": null,
-  "sell_price": 40,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 80,
-    "currency": "金",
-    "text": "80金"
-   },
-   "Joja超市": {
-    "amount": 100,
-    "currency": "金",
-    "text": "100金"
-   },
-   "旅行货车": {
-    "amount": 40,
-    "currency": "金",
-    "text": "120–1,000金"
-   }
-  },
-  "night_market_day": 16
- },
- {
-  "page": "橙子树苗",
-  "id": "(O)630",
-  "image": "Orange_Sapling.png",
-  "crop": {
-   "id": "(O)635",
-   "en": "Orange",
-   "zh": "橙子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Summer",
-  "growth_days": 28,
-  "growth_text": "28天",
-  "regrow_days": null,
-  "sell_price": null,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 4000,
-    "currency": "金",
-    "text": "4,000金"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 1000,
-    "currency": "金",
-    "text": "3,000–5,000金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "桃子树苗",
-  "id": "(O)631",
-  "image": "Peach_Sapling.png",
-  "crop": {
-   "id": "(O)636",
-   "en": "Peach",
-   "zh": "桃子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Summer",
-  "growth_days": 28,
-  "growth_text": "28 天",
-  "regrow_days": null,
-  "sell_price": null,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 6000,
-    "currency": "金",
-    "text": "6,000金"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 1500,
-    "currency": "金",
-    "text": "4,500–7,500金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "辣椒种子",
-  "id": "(O)482",
-  "image": "Pepper_Seeds.png",
-  "crop": {
-   "id": "(O)260",
-   "en": "Hot Pepper",
-   "zh": "辣椒",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "season_text": "Summer",
-  "growth_days": 5,
-  "growth_text": "5天",
-  "regrow_days": 3,
-  "sell_price": 20,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 40,
-    "currency": "金",
-    "text": "40金"
-   },
-   "Joja超市": {
-    "amount": 50,
-    "currency": "金",
-    "text": "50金"
-   },
-   "旅行货车": {
-    "amount": 20,
-    "currency": "金",
-    "text": "100–1,000金"
-   }
-  },
-  "night_market_day": 16
- },
- {
-  "page": "虞美人种子",
-  "id": "(O)453",
-  "image": "Poppy_Seeds.png",
-  "crop": {
-   "id": "(O)376",
-   "en": "Poppy",
-   "zh": "虞美人花",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "season_text": "Summer",
-  "growth_days": 7,
-  "growth_text": "7天",
-  "regrow_days": null,
-  "sell_price": 50,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 100,
-    "currency": "金",
-    "text": "100金"
-   },
-   "Joja超市": {
-    "amount": 125,
-    "currency": "金",
-    "text": "125金"
-   },
-   "旅行货车": {
-    "amount": 50,
-    "currency": "金",
-    "text": "150–1,000金"
-   }
-  },
-  "night_market_day": 16
- },
- {
-  "page": "萝卜种子",
-  "id": "(O)484",
-  "image": "Radish_Seeds.png",
-  "crop": {
-   "id": "(O)264",
-   "en": "Radish",
-   "zh": "萝卜",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "season_text": "Summer",
+  "season_text": "春季",
   "growth_days": 6,
-  "growth_text": "6天",
+  "growth_text": "6 天",
   "regrow_days": null,
-  "sell_price": 20,
+  "sell_price": 25,
   "buy": {
    "皮埃尔的杂货店": {
-    "amount": 40,
-    "currency": "金",
-    "text": "40金"
-   },
-   "Joja超市": {
     "amount": 50,
     "currency": "金",
     "text": "50金"
    },
+   "Joja超市": {
+    "amount": 62,
+    "currency": "金",
+    "text": "62金"
+   },
    "旅行货车": {
-    "amount": 20,
+    "amount": 25,
     "currency": "金",
     "text": "100–1,000金"
    }
   },
-  "night_market_day": 16
- },
- {
-  "page": "红叶卷心菜种子",
-  "id": "(O)485",
-  "image": "Red_Cabbage_Seeds.png",
-  "crop": {
-   "id": "(O)266",
-   "en": "Red Cabbage",
-   "zh": "红叶卷心菜",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "season_text": "Summer",
-  "growth_days": 9,
-  "growth_text": "9天",
-  "regrow_days": null,
-  "sell_price": 50,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 100,
-    "currency": "金",
-    "text": "100金 （第2年及以后）"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 50,
-    "currency": "金",
-    "text": "150–1,000金"
-   }
-  },
-  "night_market_day": 16
+  "night_market_day": 15
  },
  {
   "page": "夏季亮片种子",
@@ -859,9 +293,9 @@
   "seasons": [
    "summer"
   ],
-  "season_text": "Summer",
+  "season_text": "夏季",
   "growth_days": 8,
-  "growth_text": "8天",
+  "growth_text": "8 天",
   "regrow_days": null,
   "sell_price": 25,
   "buy": {
@@ -884,52 +318,42 @@
   "night_market_day": 16
  },
  {
-  "page": "蓝爵士种子",
-  "id": "(O)429",
-  "image": "Jazz_Seeds.png",
+  "page": "夏季种子",
+  "id": "(O)496",
+  "image": "Summer_Seeds.png",
   "crop": {
-   "id": "(O)597",
-   "en": "Blue Jazz",
-   "zh": "蓝爵",
+   "id": "(O)396",
+   "en": "Spice Berry",
+   "zh": "香味浆果",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "spring"
+   "summer"
   ],
-  "season_text": "Spring",
+  "season_text": "夏季",
   "growth_days": 7,
   "growth_text": "7 天",
   "regrow_days": null,
-  "sell_price": 15,
+  "sell_price": 55,
   "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 30,
-    "currency": "金",
-    "text": "30金"
-   },
-   "Joja超市": {
-    "amount": 37,
-    "currency": "金",
-    "text": "37金"
-   },
    "旅行货车": {
-    "amount": 15,
+    "amount": 55,
     "currency": "金",
-    "text": "100–1,000金"
+    "text": "165–1,000金"
    }
   },
-  "night_market_day": 15
+  "night_market_day": null
  },
  {
-  "page": "甘蓝种子",
-  "id": "(O)477",
-  "image": "Kale_Seeds.png",
+  "page": "大蒜种子",
+  "id": "(O)476",
+  "image": "Garlic_Seeds.png",
   "crop": {
-   "id": "(O)250",
-   "en": "Kale",
-   "zh": "甘蓝菜",
+   "id": "(O)248",
+   "en": "Garlic",
+   "zh": "蒜",
    "qty": null,
    "note": null,
    "link": null
@@ -937,384 +361,78 @@
   "seasons": [
    "spring"
   ],
-  "season_text": "Spring",
-  "growth_days": 6,
-  "growth_text": "6天",
+  "season_text": "春季",
+  "growth_days": 4,
+  "growth_text": "4 天",
   "regrow_days": null,
-  "sell_price": 35,
+  "sell_price": 20,
   "buy": {
    "皮埃尔的杂货店": {
-    "amount": 70,
-    "currency": "金",
-    "text": "70金"
-   },
-   "Joja超市": {
-    "amount": 87,
-    "currency": "金",
-    "text": "87金"
-   },
-   "旅行货车": {
-    "amount": 35,
-    "currency": "金",
-    "text": "105–1,000金"
-   }
-  },
-  "night_market_day": 15
- },
- {
-  "page": "郁金香球茎",
-  "id": "(O)427",
-  "image": "Tulip_Bulb.png",
-  "crop": {
-   "id": "(O)591",
-   "en": "Tulip",
-   "zh": "郁金香",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "season_text": "Spring",
-  "growth_days": 6,
-  "growth_text": "6天",
-  "regrow_days": null,
-  "sell_price": 10,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 20,
-    "currency": "金",
-    "text": "20金"
-   },
-   "Joja超市": {
-    "amount": 25,
-    "currency": "金",
-    "text": "25金"
-   },
-   "旅行货车": {
-    "amount": 10,
-    "currency": "金",
-    "text": "100–1,000金"
-   }
-  },
-  "night_market_day": 15
- },
- {
-  "page": "蓝莓种子",
-  "id": "(O)481",
-  "image": "Blueberry_Seeds.png",
-  "crop": {
-   "id": "(O)258",
-   "en": "Blueberry",
-   "zh": "蓝莓",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "season_text": "Summer",
-  "growth_days": 13,
-  "growth_text": "13天",
-  "regrow_days": 4,
-  "sell_price": 40,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 80,
-    "currency": "金",
-    "text": "80金"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
     "amount": 40,
     "currency": "金",
-    "text": "120–1,000金"
+    "text": "40金（第二年起）"
+   },
+   "旅行货车": {
+    "amount": 20,
+    "currency": "金",
+    "text": "100–1,000金"
    }
   },
-  "night_market_day": 16
+  "night_market_day": 15
  },
  {
-  "page": "杨桃种子",
-  "id": "(O)486",
-  "image": "Starfruit_Seeds.png",
+  "page": "大黄种子",
+  "id": "(O)478",
+  "image": "Rhubarb_Seeds.png",
   "crop": {
-   "id": "(O)268",
-   "en": "Starfruit",
-   "zh": "杨桃",
+   "id": "(O)252",
+   "en": "Rhubarb",
+   "zh": "大黄",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "summer"
+   "spring"
   ],
-  "season_text": "Summer",
+  "season_text": "春季",
   "growth_days": 13,
-  "growth_text": "13天",
-  "regrow_days": null,
-  "sell_price": 200,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 200,
-    "currency": "金",
-    "text": "600–1,000金"
-   },
-   "绿洲": {
-    "amount": 400,
-    "currency": "金",
-    "text": "400金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "蔓越莓种子",
-  "id": "(O)493",
-  "image": "Cranberry_Seeds.png",
-  "crop": {
-   "id": "(O)282",
-   "en": "Cranberries",
-   "zh": "蔓越莓",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "season_text": "Fall",
-  "growth_days": 7,
-  "growth_text": "7天",
-  "regrow_days": null,
-  "sell_price": 60,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 240,
-    "currency": "金",
-    "text": "240金"
-   },
-   "Joja超市": {
-    "amount": 300,
-    "currency": "金",
-    "text": "300金"
-   },
-   "旅行货车": {
-    "amount": 120,
-    "currency": "金",
-    "text": "360–1,000金"
-   }
-  },
-  "night_market_day": 17
- },
- {
-  "page": "稀有种子",
-  "id": "(O)347",
-  "image": "Rare_Seed.png",
-  "crop": {
-   "id": "(O)417",
-   "en": "Sweet Gem Berry",
-   "zh": "宝石甜莓",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Fall",
-  "growth_days": 24,
-  "growth_text": "24 天",
-  "regrow_days": null,
-  "sell_price": 200,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 1000,
-    "currency": "金",
-    "text": "*1,000金（春季和夏季）\n*600–1,000金（1.26% 的概率，不限季节）"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "上古种子",
-  "id": "(O)499",
-  "image": "Ancient_Seeds.png",
-  "crop": {
-   "id": "(O)454",
-   "en": "Ancient Fruit",
-   "zh": "上古水果",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring",
-   "summer",
-   "fall"
-  ],
-  "season_text": "春季 • 夏季 • 秋季",
-  "growth_days": 28,
-  "growth_text": "28天",
-  "regrow_days": null,
-  "sell_price": 30,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "茶苗",
-  "id": "(O)251",
-  "image": "Tea_Sapling.png",
-  "crop": {
-   "id": "(O)815",
-   "en": "Tea Leaves",
-   "zh": "茶叶",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "全季节",
-  "growth_days": 20,
-  "growth_text": "20天",
-  "regrow_days": null,
-  "sell_price": 250,
-  "buy": {
-   "旅行货车": {
-    "amount": 250,
-    "currency": "金",
-    "text": "750–1,250金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "草籽",
-  "id": "(O)297",
-  "image": "Grass_Starter.png",
-  "crop": null,
-  "seasons": [
-   "spring",
-   "summer",
-   "fall"
-  ],
-  "season_text": "春季 • 夏季 • 秋季",
-  "growth_days": null,
-  "growth_text": "立即",
+  "growth_text": "13 天",
   "regrow_days": null,
   "sell_price": 50,
   "buy": {
-   "皮埃尔的杂货店": {
+   "旅行货车": {
+    "amount": 50,
+    "currency": "金",
+    "text": "150–1,000金"
+   },
+   "绿洲": {
     "amount": 100,
     "currency": "金",
     "text": "100金"
-   },
-   "Joja超市": {
-    "amount": 125,
-    "currency": "金",
-    "text": "125金"
-   },
-   "旅行货车": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
    }
   },
   "night_market_day": null
  },
  {
-  "page": "石榴树苗",
-  "id": "(O)632",
-  "image": "Pomegranate_Sapling.png",
+  "page": "小白菜种子",
+  "id": "(O)491",
+  "image": "Bok_Choy_Seeds.png",
   "crop": {
-   "id": "(O)637",
-   "en": "Pomegranate",
-   "zh": "石榴",
+   "id": "(O)278",
+   "en": "Bok Choy",
+   "zh": "小白菜",
    "qty": null,
    "note": null,
    "link": null
   },
-  "seasons": [],
-  "season_text": "Fall",
-  "growth_days": 28,
-  "growth_text": "28 天",
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 4,
+  "growth_text": "4 天",
   "regrow_days": null,
-  "sell_price": null,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 6000,
-    "currency": "金",
-    "text": "6,000金"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 1500,
-    "currency": "金",
-    "text": "4,500–7,500金"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "西红柿种子",
-  "id": "(O)480",
-  "image": "Tomato_Seeds.png",
-  "crop": {
-   "id": "(O)256",
-   "en": "Tomato",
-   "zh": "西红柿",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Summer",
-  "growth_days": 11,
-  "growth_text": "11 天",
-  "regrow_days": 4,
   "sell_price": 25,
   "buy": {
    "皮埃尔的杂货店": {
@@ -1333,7 +451,7 @@
     "text": "100–1,000金"
    }
   },
-  "night_market_day": 16
+  "night_market_day": 17
  },
  {
   "page": "小麦种子",
@@ -1376,46 +494,145 @@
   "night_market_day": 16
  },
  {
-  "page": "苋菜种子",
-  "id": "(O)299",
-  "image": "Amaranth_Seeds.png",
+  "page": "山药种子",
+  "id": "(O)492",
+  "image": "Yam_Seeds.png",
   "crop": {
-   "id": "(O)300",
-   "en": "Amaranth",
-   "zh": "苋菜",
+   "id": "(O)280",
+   "en": "Yam",
+   "zh": "山药",
    "qty": null,
    "note": null,
    "link": null
   },
-  "seasons": [],
-  "season_text": "Fall",
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 10,
+  "growth_text": "10 天",
+  "regrow_days": null,
+  "sell_price": 30,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 60,
+    "currency": "金",
+    "text": "60金"
+   },
+   "Joja超市": {
+    "amount": 75,
+    "currency": "金",
+    "text": "75金"
+   },
+   "旅行货车": {
+    "amount": 30,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 17
+ },
+ {
+  "page": "春季种子",
+  "id": "(O)495",
+  "image": "Spring_Seeds.png",
+  "crop": {
+   "id": "(O)16",
+   "en": "Wild Horseradish",
+   "zh": "野山葵",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
   "growth_days": 7,
   "growth_text": "7 天",
   "regrow_days": null,
   "sell_price": 35,
   "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 70,
-    "currency": "金",
-    "text": "70金"
-   },
-   "Joja超市": {
-    "amount": 87,
-    "currency": "金",
-    "text": "87金"
-   },
    "旅行货车": {
     "amount": 35,
     "currency": "金",
     "text": "105–1,000金"
    }
   },
-  "night_market_day": 17
+  "night_market_day": null
  },
  {
-  "page": "橡子",
-  "id": "(O)309",
-  "image": "Acorn.png",
+  "page": "杏子树苗",
+  "id": "(O)629",
+  "image": "Apricot_Sapling.png",
+  "crop": {
+   "id": "(O)634",
+   "en": "Apricot",
+   "zh": "杏子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
+  "growth_days": 28,
+  "growth_text": "28 天",
+  "regrow_days": null,
+  "sell_price": 500,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 2000,
+    "currency": "金",
+    "text": "2,000金"
+   },
+   "旅行货车": {
+    "amount": 500,
+    "currency": "金",
+    "text": "1,500–2,500金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "杨桃种子",
+  "id": "(O)486",
+  "image": "Starfruit_Seeds.png",
+  "crop": {
+   "id": "(O)268",
+   "en": "Starfruit",
+   "zh": "杨桃",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 13,
+  "growth_text": "13 天",
+  "regrow_days": null,
+  "sell_price": 200,
+  "buy": {
+   "旅行货车": {
+    "amount": 200,
+    "currency": "金",
+    "text": "600–1,000金"
+   },
+   "绿洲": {
+    "amount": 400,
+    "currency": "金",
+    "text": "400金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "松果",
+  "id": "(O)311",
+  "image": "Pine_Cone.png",
   "crop": null,
   "seasons": [
    "all"
@@ -1424,20 +641,10 @@
   "growth_days": null,
   "growth_text": "不定",
   "regrow_days": null,
-  "sell_price": 20,
+  "sell_price": 5,
   "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
    "旅行货车": {
-    "amount": 20,
+    "amount": 5,
     "currency": "金",
     "text": "100–1,000金"
    }
@@ -1458,16 +665,6 @@
   "regrow_days": null,
   "sell_price": 5,
   "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
    "旅行货车": {
     "amount": 5,
     "currency": "金",
@@ -1477,9 +674,43 @@
   "night_market_day": null
  },
  {
-  "page": "松果",
-  "id": "(O)311",
-  "image": "Pine_Cone.png",
+  "page": "桃子树苗",
+  "id": "(O)631",
+  "image": "Peach_Sapling.png",
+  "crop": {
+   "id": "(O)636",
+   "en": "Peach",
+   "zh": "桃子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 28,
+  "growth_text": "28 天",
+  "regrow_days": null,
+  "sell_price": 1500,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 6000,
+    "currency": "金",
+    "text": "6,000金"
+   },
+   "旅行货车": {
+    "amount": 1500,
+    "currency": "金",
+    "text": "4,500–7,500金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "桃花心木种子",
+  "id": "(O)292",
+  "image": "Mahogany_Seed.png",
   "crop": null,
   "seasons": [
    "all"
@@ -1488,59 +719,102 @@
   "growth_days": null,
   "growth_text": "不定",
   "regrow_days": null,
-  "sell_price": 5,
+  "sell_price": 100,
   "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": 5,
+   "姜岛商人": {
+    "amount": 1,
     "currency": "金",
-    "text": "100–1,000金"
+    "text": "1金"
    }
   },
   "night_market_day": null
  },
  {
-  "page": "苹果树苗",
-  "id": "(O)633",
-  "image": "Apple_Sapling.png",
+  "page": "樱桃树苗",
+  "id": "(O)628",
+  "image": "Cherry_Sapling.png",
   "crop": {
-   "id": "(O)613",
-   "en": "Apple",
-   "zh": "苹果",
+   "id": "(O)638",
+   "en": "Cherry",
+   "zh": "樱桃",
    "qty": null,
    "note": null,
    "link": null
   },
-  "seasons": [],
-  "season_text": "Fall",
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
   "growth_days": 28,
   "growth_text": "28 天",
   "regrow_days": null,
-  "sell_price": null,
+  "sell_price": 850,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 3400,
+    "currency": "金",
+    "text": "3,400金"
+   },
+   "旅行货车": {
+    "amount": 850,
+    "currency": "金",
+    "text": "2,550–4,250金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "橙子树苗",
+  "id": "(O)630",
+  "image": "Orange_Sapling.png",
+  "crop": {
+   "id": "(O)635",
+   "en": "Orange",
+   "zh": "橙子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 28,
+  "growth_text": "28 天",
+  "regrow_days": null,
+  "sell_price": 1000,
   "buy": {
    "皮埃尔的杂货店": {
     "amount": 4000,
     "currency": "金",
     "text": "4,000金"
    },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
    "旅行货车": {
     "amount": 1000,
     "currency": "金",
     "text": "3,000–5,000金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "橡子",
+  "id": "(O)309",
+  "image": "Acorn.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "不定",
+  "regrow_days": null,
+  "sell_price": 20,
+  "buy": {
+   "旅行货车": {
+    "amount": 20,
+    "currency": "金",
+    "text": "100–1,000金"
    }
   },
   "night_market_day": null
@@ -1569,12 +843,7 @@
    "皮埃尔的杂货店": {
     "amount": 30,
     "currency": "金",
-    "text": "30金 (第二年开始)"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
+    "text": "30金"
    },
    "旅行货车": {
     "amount": 15,
@@ -1585,122 +854,76 @@
   "night_market_day": 17
  },
  {
-  "page": "甜菜种子",
-  "id": "(O)494",
-  "image": "Beet_Seeds.png",
+  "page": "混合种子",
+  "id": "(O)770",
+  "image": "Mixed_Seeds.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "不固定",
+  "regrow_days": null,
+  "sell_price": 0,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "混合花卉种子",
+  "id": "(O)MixedFlowerSeeds",
+  "image": "Mixed_Flower_Seeds.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "不固定",
+  "regrow_days": null,
+  "sell_price": 0,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "玉米种子",
+  "id": "(O)487",
+  "image": "Corn_Seeds.png",
   "crop": {
-   "id": "(O)284",
-   "en": "Beet",
-   "zh": "甜菜",
+   "id": "(O)270",
+   "en": "Corn",
+   "zh": "玉米",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
+   "summer",
    "fall"
   ],
-  "season_text": "秋季",
-  "growth_days": 6,
-  "growth_text": "6 天",
+  "season_text": "夏季 • 秋季",
+  "growth_days": 14,
+  "growth_text": "14 天",
   "regrow_days": null,
-  "sell_price": 10,
+  "sell_price": 75,
   "buy": {
    "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
+    "amount": 150,
+    "currency": "金",
+    "text": "150金"
    },
    "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
+    "amount": 187,
+    "currency": "金",
+    "text": "187金"
    },
    "旅行货车": {
-    "amount": 10,
+    "amount": 75,
     "currency": "金",
-    "text": "100–1,000金"
-   },
-   "绿洲": {
-    "amount": 20,
-    "currency": "金",
-    "text": "20金"
+    "text": "225–1,000金"
    }
   },
-  "night_market_day": null
- },
- {
-  "page": "小白菜种子",
-  "id": "(O)491",
-  "image": "Bok_Choy_Seeds.png",
-  "crop": {
-   "id": "(O)278",
-   "en": "Bok Choy",
-   "zh": "小白菜",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Fall",
-  "growth_days": 4,
-  "growth_text": "4 天",
-  "regrow_days": null,
-  "sell_price": 25,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 50,
-    "currency": "金",
-    "text": "50金"
-   },
-   "Joja超市": {
-    "amount": 62,
-    "currency": "金",
-    "text": "62金"
-   },
-   "旅行货车": {
-    "amount": 25,
-    "currency": "金",
-    "text": "100–1,000金"
-   }
-  },
-  "night_market_day": 17
- },
- {
-  "page": "茄子种子",
-  "id": "(O)488",
-  "image": "Eggplant_Seeds.png",
-  "crop": {
-   "id": "(O)272",
-   "en": "Eggplant",
-   "zh": "茄子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "season_text": "Fall",
-  "growth_days": 5,
-  "growth_text": "5 天",
-  "regrow_days": 5,
-  "sell_price": 10,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 20,
-    "currency": "金",
-    "text": "20金"
-   },
-   "Joja超市": {
-    "amount": 25,
-    "currency": "金",
-    "text": "25金"
-   },
-   "旅行货车": {
-    "amount": 10,
-    "currency": "金",
-    "text": "100–1,000金"
-   }
-  },
-  "night_market_day": 17
+  "night_market_day": 16
  },
  {
   "page": "玫瑰仙子种子",
@@ -1714,8 +937,10 @@
    "note": null,
    "link": null
   },
-  "seasons": [],
-  "season_text": "Fall",
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
   "growth_days": 12,
   "growth_text": "12 天",
   "regrow_days": null,
@@ -1740,87 +965,91 @@
   "night_market_day": 17
  },
  {
-  "page": "葡萄种子",
-  "id": "(O)301",
-  "image": "Grape_Starter.png",
+  "page": "甘蓝种子",
+  "id": "(O)477",
+  "image": "Kale_Seeds.png",
   "crop": {
-   "id": "(O)398",
-   "en": "Grape",
-   "zh": "葡萄",
+   "id": "(O)250",
+   "en": "Kale",
+   "zh": "甘蓝菜",
    "qty": null,
    "note": null,
    "link": null
   },
-  "seasons": [],
-  "season_text": "Fall",
-  "growth_days": 10,
-  "growth_text": "10 天",
-  "regrow_days": 3,
-  "sell_price": 30,
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
+  "growth_days": 6,
+  "growth_text": "6 天",
+  "regrow_days": null,
+  "sell_price": 35,
   "buy": {
    "皮埃尔的杂货店": {
-    "amount": 60,
+    "amount": 70,
     "currency": "金",
-    "text": "60金"
+    "text": "70金"
    },
    "Joja超市": {
-    "amount": 75,
+    "amount": 87,
     "currency": "金",
-    "text": "75金"
+    "text": "87金"
    },
    "旅行货车": {
-    "amount": 30,
+    "amount": 35,
     "currency": "金",
-    "text": "100–1,000金"
+    "text": "105–1,000金"
    }
   },
-  "night_market_day": 17
+  "night_market_day": 15
  },
  {
-  "page": "南瓜种子",
-  "id": "(O)490",
-  "image": "Pumpkin_Seeds.png",
+  "page": "甜瓜种子",
+  "id": "(O)479",
+  "image": "Melon_Seeds.png",
   "crop": {
-   "id": "(O)276",
-   "en": "Pumpkin",
-   "zh": "南瓜",
+   "id": "(O)254",
+   "en": "Melon",
+   "zh": "甜瓜",
    "qty": null,
    "note": null,
    "link": null
   },
-  "seasons": [],
-  "season_text": "Fall",
-  "growth_days": 13,
-  "growth_text": "13 天",
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 12,
+  "growth_text": "12 天",
   "regrow_days": null,
-  "sell_price": 50,
+  "sell_price": 40,
   "buy": {
    "皮埃尔的杂货店": {
+    "amount": 80,
+    "currency": "金",
+    "text": "80金"
+   },
+   "Joja超市": {
     "amount": 100,
     "currency": "金",
     "text": "100金"
    },
-   "Joja超市": {
-    "amount": 125,
-    "currency": "金",
-    "text": "125金"
-   },
    "旅行货车": {
-    "amount": 50,
+    "amount": 40,
     "currency": "金",
-    "text": "150–1,000金"
+    "text": "120–1,000金"
    }
   },
-  "night_market_day": 17
+  "night_market_day": 16
  },
  {
-  "page": "山药种子",
-  "id": "(O)492",
-  "image": "Yam_Seeds.png",
+  "page": "甜菜种子",
+  "id": "(O)494",
+  "image": "Beet_Seeds.png",
   "crop": {
-   "id": "(O)280",
-   "en": "Yam",
-   "zh": "山药",
+   "id": "(O)284",
+   "en": "Beet",
+   "zh": "甜菜",
    "qty": null,
    "note": null,
    "link": null
@@ -1828,29 +1057,132 @@
   "seasons": [
    "fall"
   ],
-  "season_text": "Fall",
-  "growth_days": 10,
-  "growth_text": "10 天",
+  "season_text": "秋季",
+  "growth_days": 6,
+  "growth_text": "6 天",
   "regrow_days": null,
-  "sell_price": 30,
+  "sell_price": 10,
   "buy": {
-   "皮埃尔的杂货店": {
-    "amount": 60,
-    "currency": "金",
-    "text": "60金"
-   },
-   "Joja超市": {
-    "amount": 75,
-    "currency": "金",
-    "text": "75金"
-   },
    "旅行货车": {
-    "amount": 30,
+    "amount": 10,
     "currency": "金",
     "text": "100–1,000金"
+   },
+   "绿洲": {
+    "amount": 20,
+    "currency": "金",
+    "text": "20金"
    }
   },
-  "night_market_day": 17
+  "night_market_day": null
+ },
+ {
+  "page": "石榴树苗",
+  "id": "(O)632",
+  "image": "Pomegranate_Sapling.png",
+  "crop": {
+   "id": "(O)637",
+   "en": "Pomegranate",
+   "zh": "石榴",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 28,
+  "growth_text": "28 天",
+  "regrow_days": null,
+  "sell_price": 1500,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 6000,
+    "currency": "金",
+    "text": "6,000金"
+   },
+   "旅行货车": {
+    "amount": 1500,
+    "currency": "金",
+    "text": "4,500–7,500金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "神秘树种",
+  "id": "(O)MysticTreeSeed",
+  "image": "Mystic_Tree_Seed.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "不定",
+  "regrow_days": null,
+  "sell_price": 100,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "秋季种子",
+  "id": "(O)497",
+  "image": "Fall_Seeds.png",
+  "crop": {
+   "id": "(O)404",
+   "en": "Common Mushroom",
+   "zh": "普通蘑菇",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 7,
+  "growth_text": "7 天",
+  "regrow_days": null,
+  "sell_price": 45,
+  "buy": {
+   "旅行货车": {
+    "amount": 45,
+    "currency": "金",
+    "text": "135–1,000金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "稀有种子",
+  "id": "(O)347",
+  "image": "Rare_Seed.png",
+  "crop": {
+   "id": "(O)417",
+   "en": "Sweet Gem Berry",
+   "zh": "宝石甜莓",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 24,
+  "growth_text": "24 天",
+  "regrow_days": null,
+  "sell_price": 200,
+  "buy": {
+   "旅行货车": {
+    "amount": 1000,
+    "currency": "金",
+    "text": "*1,000金（春季和夏季）\n*600–1,000金（1.26% 的概率，不限季节）"
+   }
+  },
+  "night_market_day": null
  },
  {
   "page": "稻苗",
@@ -1867,19 +1199,19 @@
   "seasons": [
    "spring"
   ],
-  "season_text": "Spring",
+  "season_text": "春季",
   "growth_days": 8,
-  "growth_text": "8 天（灌溉后 6 天）",
+  "growth_text": "8 天（临近水源 6 天）",
   "regrow_days": null,
   "sell_price": 20,
   "buy": {
    "皮埃尔的杂货店": {
     "amount": 40,
     "currency": "金",
-    "text": "40金"
+    "text": "40金（第二年起）"
    },
    "旅行货车": {
-    "amount": 10,
+    "amount": 20,
     "currency": "金",
     "text": "100–1,000金"
    }
@@ -1887,65 +1219,47 @@
   "night_market_day": null
  },
  {
-  "page": "蘑菇树种子",
-  "id": "(O)891",
-  "image": "Mushroom_Tree_Seed.png",
-  "crop": null,
-  "seasons": [
-   "all"
-  ],
-  "season_text": "任意季节",
-  "growth_days": null,
-  "growth_text": "不定",
-  "regrow_days": null,
-  "sell_price": 100,
-  "buy": {
-   "其他": {
-    "amount": 5,
-    "currency": "齐钻",
-    "text": "齐先生的核桃房：5齐钻"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "菠萝种子",
-  "id": "(O)833",
-  "image": "Pineapple_Seeds.png",
+  "page": "红叶卷心菜种子",
+  "id": "(O)485",
+  "image": "Red_Cabbage_Seeds.png",
   "crop": {
-   "id": "(O)832",
-   "en": "Pineapple",
-   "zh": "菠萝",
+   "id": "(O)266",
+   "en": "Red Cabbage",
+   "zh": "红叶卷心菜",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "summer",
-   "all"
+   "summer"
   ],
-  "season_text": "夏季（农场）\n任意季节（姜岛）",
-  "growth_days": 14,
-  "growth_text": "14 天",
+  "season_text": "夏季",
+  "growth_days": 9,
+  "growth_text": "9 天",
   "regrow_days": null,
-  "sell_price": 240,
+  "sell_price": 50,
   "buy": {
-   "姜岛商人": {
-    "amount": null,
-    "currency": null,
-    "text": "熔岩菇×1"
+   "皮埃尔的杂货店": {
+    "amount": 100,
+    "currency": "金",
+    "text": "100金（第二年起）"
+   },
+   "旅行货车": {
+    "amount": 50,
+    "currency": "金",
+    "text": "150–1,000金"
    }
   },
-  "night_market_day": null
+  "night_market_day": 16
  },
  {
-  "page": "齐豆",
-  "id": "(O)890",
-  "image": "Qi_Bean.png",
+  "page": "纤维种子",
+  "id": "(O)885",
+  "image": "Fiber_Seeds.png",
   "crop": {
-   "id": "(O)889",
-   "en": "Qi Fruit",
-   "zh": "齐瓜",
+   "id": "(O)771",
+   "en": "Fiber",
+   "zh": "纤维",
    "qty": null,
    "note": null,
    "link": null
@@ -1954,39 +1268,61 @@
    "all"
   ],
   "season_text": "任意季节",
-  "growth_days": 4,
-  "growth_text": "4 天",
+  "growth_days": 7,
+  "growth_text": "7 天",
   "regrow_days": null,
-  "sell_price": 1,
+  "sell_price": 5,
   "buy": {},
   "night_market_day": null
  },
  {
-  "page": "香蕉树苗",
-  "id": "(O)69",
-  "image": "Banana_Sapling.png",
+  "page": "胡萝卜种子",
+  "id": "(O)CarrotSeeds",
+  "image": "Carrot_Seeds.png",
   "crop": {
-   "id": "(O)91",
-   "en": "Banana",
-   "zh": "香蕉",
+   "id": "(O)Carrot",
+   "en": "Carrot",
+   "zh": "胡萝卜",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "all",
+   "spring"
+  ],
+  "season_text": "春季",
+  "growth_days": 3,
+  "growth_text": "3 天",
+  "regrow_days": null,
+  "sell_price": 15,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "芋头块茎",
+  "id": "(O)831",
+  "image": "Taro_Tuber.png",
+  "crop": {
+   "id": "(O)830",
+   "en": "Taro Root",
+   "zh": "芋头",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
    "summer"
   ],
-  "season_text": "姜岛的任意季节\n星露谷的夏季",
-  "growth_days": 28,
-  "growth_text": "28 天",
+  "season_text": "夏季",
+  "growth_days": 10,
+  "growth_text": "10 天（临近水源 7 天）",
   "regrow_days": null,
-  "sell_price": null,
+  "sell_price": 20,
   "buy": {
    "姜岛商人": {
-    "amount": null,
-    "currency": null,
-    "text": "龙牙×5"
+    "amount": 2,
+    "currency": "金",
+    "text": "2金"
    }
   },
   "night_market_day": null
@@ -2011,120 +1347,24 @@
   "growth_days": 28,
   "growth_text": "28 天",
   "regrow_days": null,
-  "sell_price": null,
+  "sell_price": 850,
   "buy": {
    "姜岛商人": {
-    "amount": null,
-    "currency": null,
-    "text": "蚌×75"
+    "amount": 75,
+    "currency": "金",
+    "text": "75金"
    }
   },
   "night_market_day": null
  },
  {
-  "page": "芋头块茎",
-  "id": "(O)831",
-  "image": "Taro_Tuber.png",
+  "page": "花椰菜种子",
+  "id": "(O)474",
+  "image": "Cauliflower_Seeds.png",
   "crop": {
-   "id": "(O)830",
-   "en": "Taro Root",
-   "zh": "芋头",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer",
-   "all"
-  ],
-  "season_text": "夏季（农场）\n任意季节（姜岛）",
-  "growth_days": 10,
-  "growth_text": "10 天",
-  "regrow_days": null,
-  "sell_price": 20,
-  "buy": {
-   "姜岛商人": {
-    "amount": null,
-    "currency": null,
-    "text": "骨头碎片×2"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "桃花心木种子",
-  "id": "(O)292",
-  "image": "Mahogany_Seed.png",
-  "crop": null,
-  "seasons": [
-   "all"
-  ],
-  "season_text": "任意季节",
-  "growth_days": null,
-  "growth_text": "不定",
-  "regrow_days": null,
-  "sell_price": 100,
-  "buy": {
-   "姜岛商人": {
-    "amount": null,
-    "currency": null,
-    "text": "黄貂鱼×1"
-   },
-   "其他": {
-    "amount": null,
-    "currency": null,
-    "text": "浣熊妻子的商店：煤炭×20"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "纤维种子",
-  "id": "(O)885",
-  "image": "Fiber_Seeds.png",
-  "crop": {
-   "id": "(O)771",
-   "en": "Fiber",
-   "zh": "纤维",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "all"
-  ],
-  "season_text": "任意季节",
-  "growth_days": 7,
-  "growth_text": "7天",
-  "regrow_days": null,
-  "sell_price": 5,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "青豆种子",
-  "id": "(O)473",
-  "image": "Bean_Starter.png",
-  "crop": {
-   "id": "(O)188",
-   "en": "Green Bean",
-   "zh": "青豆",
+   "id": "(O)190",
+   "en": "Cauliflower",
+   "zh": "花椰菜",
    "qty": null,
    "note": null,
    "link": null
@@ -2132,10 +1372,317 @@
   "seasons": [
    "spring"
   ],
-  "season_text": "Spring",
+  "season_text": "春季",
+  "growth_days": 12,
+  "growth_text": "12 天",
+  "regrow_days": null,
+  "sell_price": 40,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 80,
+    "currency": "金",
+    "text": "80金"
+   },
+   "Joja超市": {
+    "amount": 100,
+    "currency": "金",
+    "text": "100金"
+   },
+   "旅行货车": {
+    "amount": 40,
+    "currency": "金",
+    "text": "120–1,000金"
+   }
+  },
+  "night_market_day": 15
+ },
+ {
+  "page": "苋菜种子",
+  "id": "(O)299",
+  "image": "Amaranth_Seeds.png",
+  "crop": {
+   "id": "(O)300",
+   "en": "Amaranth",
+   "zh": "苋菜",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 7,
+  "growth_text": "7 天",
+  "regrow_days": null,
+  "sell_price": 35,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 70,
+    "currency": "金",
+    "text": "70金"
+   },
+   "Joja超市": {
+    "amount": 87,
+    "currency": "金",
+    "text": "87金"
+   },
+   "旅行货车": {
+    "amount": 35,
+    "currency": "金",
+    "text": "105–1,000金"
+   }
+  },
+  "night_market_day": 17
+ },
+ {
+  "page": "苹果树苗",
+  "id": "(O)633",
+  "image": "Apple_Sapling.png",
+  "crop": {
+   "id": "(O)613",
+   "en": "Apple",
+   "zh": "苹果",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 28,
+  "growth_text": "28 天",
+  "regrow_days": null,
+  "sell_price": 1000,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 4000,
+    "currency": "金",
+    "text": "4,000金"
+   },
+   "旅行货车": {
+    "amount": 1000,
+    "currency": "金",
+    "text": "3,000–5,000金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "茄子种子",
+  "id": "(O)488",
+  "image": "Eggplant_Seeds.png",
+  "crop": {
+   "id": "(O)272",
+   "en": "Eggplant",
+   "zh": "茄子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 5,
+  "growth_text": "5 天",
+  "regrow_days": null,
+  "sell_price": 10,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 20,
+    "currency": "金",
+    "text": "20金"
+   },
+   "Joja超市": {
+    "amount": 25,
+    "currency": "金",
+    "text": "25金"
+   },
+   "旅行货车": {
+    "amount": 10,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 17
+ },
+ {
+  "page": "茶苗",
+  "id": "(O)251",
+  "image": "Tea_Sapling.png",
+  "crop": {
+   "id": "(O)815",
+   "en": "Tea Leaves",
+   "zh": "茶叶",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "season_text": "春季 • 夏季 • 秋季\n冬季（仅室内）",
+  "growth_days": 20,
+  "growth_text": "20 天",
+  "regrow_days": null,
+  "sell_price": 250,
+  "buy": {
+   "旅行货车": {
+    "amount": 250,
+    "currency": "金",
+    "text": "750–1,250金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "草籽",
+  "id": "(O)297",
+  "image": "Grass_Starter.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "立即",
+  "regrow_days": null,
+  "sell_price": 50,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 100,
+    "currency": "金",
+    "text": "100金"
+   },
+   "Joja超市": {
+    "amount": 125,
+    "currency": "金",
+    "text": "125金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "草莓种子",
+  "id": "(O)745",
+  "image": "Strawberry_Seeds.png",
+  "crop": {
+   "id": "(O)400",
+   "en": "Strawberry",
+   "zh": "草莓",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
+  "growth_days": 8,
+  "growth_text": "8 天",
+  "regrow_days": null,
+  "sell_price": 0,
+  "buy": {
+   "其他": {
+    "amount": 100,
+    "currency": "金",
+    "text": "复活节：100金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "菠萝种子",
+  "id": "(O)833",
+  "image": "Pineapple_Seeds.png",
+  "crop": {
+   "id": "(O)832",
+   "en": "Pineapple",
+   "zh": "菠萝",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 14,
+  "growth_text": "14 天",
+  "regrow_days": null,
+  "sell_price": 240,
+  "buy": {
+   "姜岛商人": {
+    "amount": 1,
+    "currency": "金",
+    "text": "1金"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "萝卜种子",
+  "id": "(O)484",
+  "image": "Radish_Seeds.png",
+  "crop": {
+   "id": "(O)264",
+   "en": "Radish",
+   "zh": "萝卜",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 6,
+  "growth_text": "6 天",
+  "regrow_days": null,
+  "sell_price": 20,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 40,
+    "currency": "金",
+    "text": "40金"
+   },
+   "Joja超市": {
+    "amount": 50,
+    "currency": "金",
+    "text": "50金"
+   },
+   "旅行货车": {
+    "amount": 20,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 16
+ },
+ {
+  "page": "葡萄种子",
+  "id": "(O)301",
+  "image": "Grape_Starter.png",
+  "crop": {
+   "id": "(O)398",
+   "en": "Grape",
+   "zh": "葡萄",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
   "growth_days": 10,
-  "growth_text": "10天",
-  "regrow_days": 3,
+  "growth_text": "10 天",
+  "regrow_days": null,
   "sell_price": 30,
   "buy": {
    "皮埃尔的杂货店": {
@@ -2150,6 +1697,413 @@
    },
    "旅行货车": {
     "amount": 30,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 17
+ },
+ {
+  "page": "蓝爵士种子",
+  "id": "(O)429",
+  "image": "Jazz_Seeds.png",
+  "crop": {
+   "id": "(O)597",
+   "en": "Blue Jazz",
+   "zh": "蓝爵",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
+  "growth_days": 7,
+  "growth_text": "7 天",
+  "regrow_days": null,
+  "sell_price": 15,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 30,
+    "currency": "金",
+    "text": "30金"
+   },
+   "Joja超市": {
+    "amount": 37,
+    "currency": "金",
+    "text": "37金"
+   },
+   "旅行货车": {
+    "amount": 15,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 15
+ },
+ {
+  "page": "蓝色草籽",
+  "id": "(O)BlueGrassStarter",
+  "image": "Blue_Grass_Starter.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "立即",
+  "regrow_days": null,
+  "sell_price": 50,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "蓝莓种子",
+  "id": "(O)481",
+  "image": "Blueberry_Seeds.png",
+  "crop": {
+   "id": "(O)258",
+   "en": "Blueberry",
+   "zh": "蓝莓",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 13,
+  "growth_text": "13 天",
+  "regrow_days": null,
+  "sell_price": 40,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 80,
+    "currency": "金",
+    "text": "80金"
+   },
+   "旅行货车": {
+    "amount": 40,
+    "currency": "金",
+    "text": "120–1,000金"
+   }
+  },
+  "night_market_day": 16
+ },
+ {
+  "page": "蔓越莓种子",
+  "id": "(O)493",
+  "image": "Cranberry_Seeds.png",
+  "crop": {
+   "id": "(O)282",
+   "en": "Cranberries",
+   "zh": "蔓越莓",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 7,
+  "growth_text": "7 天",
+  "regrow_days": null,
+  "sell_price": 60,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 240,
+    "currency": "金",
+    "text": "240金"
+   },
+   "Joja超市": {
+    "amount": 300,
+    "currency": "金",
+    "text": "300金"
+   },
+   "旅行货车": {
+    "amount": 120,
+    "currency": "金",
+    "text": "360–1,000金"
+   }
+  },
+  "night_market_day": 17
+ },
+ {
+  "page": "蘑菇树种子",
+  "id": "(O)891",
+  "image": "Mushroom_Tree_Seed.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "不定",
+  "regrow_days": null,
+  "sell_price": 100,
+  "buy": {
+   "其他": {
+    "amount": 5,
+    "currency": "齐钻",
+    "text": "齐先生的核桃房：5齐钻"
+   }
+  },
+  "night_market_day": null
+ },
+ {
+  "page": "虞美人种子",
+  "id": "(O)453",
+  "image": "Poppy_Seeds.png",
+  "crop": {
+   "id": "(O)376",
+   "en": "Poppy",
+   "zh": "虞美人花",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 7,
+  "growth_text": "7 天",
+  "regrow_days": null,
+  "sell_price": 50,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 100,
+    "currency": "金",
+    "text": "100金"
+   },
+   "Joja超市": {
+    "amount": 125,
+    "currency": "金",
+    "text": "125金"
+   },
+   "旅行货车": {
+    "amount": 50,
+    "currency": "金",
+    "text": "150–1,000金"
+   }
+  },
+  "night_market_day": 16
+ },
+ {
+  "page": "西红柿种子",
+  "id": "(O)480",
+  "image": "Tomato_Seeds.png",
+  "crop": {
+   "id": "(O)256",
+   "en": "Tomato",
+   "zh": "西红柿",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 11,
+  "growth_text": "11 天",
+  "regrow_days": null,
+  "sell_price": 25,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 50,
+    "currency": "金",
+    "text": "50金"
+   },
+   "Joja超市": {
+    "amount": 62,
+    "currency": "金",
+    "text": "62金"
+   },
+   "旅行货车": {
+    "amount": 25,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 16
+ },
+ {
+  "page": "西蓝花种子",
+  "id": "(O)BroccoliSeeds",
+  "image": "Broccoli_Seeds.png",
+  "crop": {
+   "id": "(O)Broccoli",
+   "en": "Broccoli",
+   "zh": "西蓝花",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "season_text": "秋季",
+  "growth_days": 8,
+  "growth_text": "8 天",
+  "regrow_days": null,
+  "sell_price": 40,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "辣椒种子",
+  "id": "(O)482",
+  "image": "Pepper_Seeds.png",
+  "crop": {
+   "id": "(O)260",
+   "en": "Hot Pepper",
+   "zh": "辣椒",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 5,
+  "growth_text": "5 天",
+  "regrow_days": null,
+  "sell_price": 20,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 40,
+    "currency": "金",
+    "text": "40金"
+   },
+   "Joja超市": {
+    "amount": 50,
+    "currency": "金",
+    "text": "50金"
+   },
+   "旅行货车": {
+    "amount": 20,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 16
+ },
+ {
+  "page": "郁金香球茎",
+  "id": "(O)427",
+  "image": "Tulip_Bulb.png",
+  "crop": {
+   "id": "(O)591",
+   "en": "Tulip",
+   "zh": "郁金香",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
+  "growth_days": 6,
+  "growth_text": "6 天",
+  "regrow_days": null,
+  "sell_price": 10,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 20,
+    "currency": "金",
+    "text": "20金"
+   },
+   "Joja超市": {
+    "amount": 25,
+    "currency": "金",
+    "text": "25金"
+   },
+   "旅行货车": {
+    "amount": 10,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 15
+ },
+ {
+  "page": "金皮西葫芦种子",
+  "id": "(O)SummerSquashSeeds",
+  "image": "Summer_Squash_Seeds.png",
+  "crop": {
+   "id": "(O)SummerSquash",
+   "en": "Summer Squash",
+   "zh": "金皮西葫芦",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "season_text": "夏季",
+  "growth_days": 6,
+  "growth_text": "6 天",
+  "regrow_days": null,
+  "sell_price": 20,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "长满苔藓的种子",
+  "id": "(O)MossySeed",
+  "image": "Mossy_Seed.png",
+  "crop": null,
+  "seasons": [
+   "all"
+  ],
+  "season_text": "任意季节",
+  "growth_days": null,
+  "growth_text": "不定",
+  "regrow_days": null,
+  "sell_price": 100,
+  "buy": {},
+  "night_market_day": null
+ },
+ {
+  "page": "防风草种子",
+  "id": "(O)472",
+  "image": "Parsnip_Seeds.png",
+  "crop": {
+   "id": "(O)24",
+   "en": "Parsnip",
+   "zh": "防风草",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "season_text": "春季",
+  "growth_days": 4,
+  "growth_text": "4 天",
+  "regrow_days": null,
+  "sell_price": 10,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 20,
+    "currency": "金",
+    "text": "20金"
+   },
+   "Joja超市": {
+    "amount": 25,
+    "currency": "金",
+    "text": "25金"
+   },
+   "旅行货车": {
+    "amount": 10,
     "currency": "金",
     "text": "100–1,000金"
    }
@@ -2171,7 +2125,7 @@
   "seasons": [
    "winter"
   ],
-  "season_text": "Winter",
+  "season_text": "冬季",
   "growth_days": 7,
   "growth_text": "7 天",
   "regrow_days": null,
@@ -2180,45 +2134,13 @@
   "night_market_day": null
  },
  {
-  "page": "混合花卉种子",
-  "id": "(O)MixedFlowerSeeds",
-  "image": "Mixed_Flower_Seeds.png",
-  "crop": null,
-  "seasons": [
-   "all"
-  ],
-  "season_text": "所有",
-  "growth_days": null,
-  "growth_text": "不固定",
-  "regrow_days": null,
-  "sell_price": 0,
-  "buy": {
-   "皮埃尔的杂货店": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "Joja超市": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   },
-   "旅行货车": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
-   }
-  },
-  "night_market_day": null
- },
- {
-  "page": "胡萝卜种子",
-  "id": "(O)CarrotSeeds",
-  "image": "Carrot_Seeds.png",
+  "page": "青豆种子",
+  "id": "(O)473",
+  "image": "Bean_Starter.png",
   "crop": {
-   "id": "(O)Carrot",
-   "en": "Carrot",
-   "zh": "胡萝卜",
+   "id": "(O)188",
+   "en": "Green Bean",
+   "zh": "青豆",
    "qty": null,
    "note": null,
    "link": null
@@ -2226,113 +2148,80 @@
   "seasons": [
    "spring"
   ],
-  "season_text": "Spring",
-  "growth_days": 3,
-  "growth_text": "3 天",
+  "season_text": "春季",
+  "growth_days": 10,
+  "growth_text": "10 天",
   "regrow_days": null,
-  "sell_price": 15,
-  "buy": {},
-  "night_market_day": null
+  "sell_price": 30,
+  "buy": {
+   "皮埃尔的杂货店": {
+    "amount": 60,
+    "currency": "金",
+    "text": "60金"
+   },
+   "Joja超市": {
+    "amount": 75,
+    "currency": "金",
+    "text": "75金"
+   },
+   "旅行货车": {
+    "amount": 30,
+    "currency": "金",
+    "text": "100–1,000金"
+   }
+  },
+  "night_market_day": 15
  },
  {
-  "page": "金皮西葫芦种子",
-  "id": "(O)SummerSquashSeeds",
-  "image": "Summer_Squash_Seeds.png",
+  "page": "香蕉树苗",
+  "id": "(O)69",
+  "image": "Banana_Sapling.png",
   "crop": {
-   "id": "(O)SummerSquash",
-   "en": "Summer Squash",
-   "zh": "金皮西葫芦",
+   "id": "(O)91",
+   "en": "Banana",
+   "zh": "香蕉",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
+   "all",
    "summer"
   ],
-  "season_text": "Summer",
-  "growth_days": 6,
-  "growth_text": "6 天",
-  "regrow_days": 3,
-  "sell_price": 20,
-  "buy": {},
-  "night_market_day": null
- },
- {
-  "page": "西蓝花种子",
-  "id": "(O)BroccoliSeeds",
-  "image": "Broccoli_Seeds.png",
-  "crop": {
-   "id": "(O)Broccoli",
-   "en": "Broccoli",
-   "zh": "西蓝花",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "season_text": "Fall",
-  "growth_days": 8,
-  "growth_text": "8 天",
-  "regrow_days": 4,
-  "sell_price": 40,
-  "buy": {},
-  "night_market_day": null
- },
- {
-  "page": "神秘树种",
-  "id": "(O)MysticTreeSeed",
-  "image": "Mystic_Tree_Seed.png",
-  "crop": null,
-  "seasons": [
-   "all"
-  ],
-  "season_text": "任意季节",
-  "growth_days": null,
-  "growth_text": "不定",
+  "season_text": "任意季节（姜岛）\n夏季（星露谷）",
+  "growth_days": 28,
+  "growth_text": "28 天",
   "regrow_days": null,
-  "sell_price": 100,
-  "buy": {},
-  "night_market_day": null
- },
- {
-  "page": "蓝色草籽",
-  "id": "(O)BlueGrassStarter",
-  "image": "Blue_Grass_Starter.png",
-  "crop": null,
-  "seasons": [
-   "spring",
-   "summer",
-   "fall"
-  ],
-  "season_text": "春季 • 夏季 • 秋季",
-  "growth_days": null,
-  "growth_text": "立即",
-  "regrow_days": null,
-  "sell_price": 50,
+  "sell_price": 850,
   "buy": {
-   "旅行货车": {
-    "amount": null,
-    "currency": null,
-    "text": "不出售"
+   "姜岛商人": {
+    "amount": 5,
+    "currency": "金",
+    "text": "5金"
    }
   },
   "night_market_day": null
  },
  {
-  "page": "长满苔藓的种子",
-  "id": "(O)MossySeed",
-  "image": "Mossy_Seed.png",
-  "crop": null,
+  "page": "齐豆",
+  "id": "(O)890",
+  "image": "Qi_Bean.png",
+  "crop": {
+   "id": "(O)889",
+   "en": "Qi Fruit",
+   "zh": "齐瓜",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
   "seasons": [
    "all"
   ],
   "season_text": "任意季节",
-  "growth_days": null,
-  "growth_text": "不定",
+  "growth_days": 4,
+  "growth_text": "4 天",
   "regrow_days": null,
-  "sell_price": 100,
+  "sell_price": 1,
   "buy": {},
   "night_market_day": null
  }

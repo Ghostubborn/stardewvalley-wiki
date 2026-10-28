@@ -13,17 +13,17 @@ assert set(data["entries"]) == expected, "The thirteen existing basics entries m
 pages = {row["title"] for row in json.loads((ROOT / "data/build/pages.json").read_text())}
 assert expected <= pages, "A guide must open through an existing page entry"
 
+# 指南引用的是官方中文 Wiki 与英文 Wiki 2025-12-18 归档的确切修订（中文站的正文现在取自 BWIKI，
+# 归档另存为 data/wiki/zh-official-20251218.jsonl，按 localSource 读对应的文件）。
 raw = {}
-for language in ("zh", "en"):
-    for line in (ROOT / f"data/wiki/{language}-pages.jsonl").open():
+for local in {source["localSource"] for source in data["sources"].values()}:
+    for line in (ROOT / local).open():
         record = json.loads(line)
-        key = (language, record["title"])
         if record["title"] in data["sources"] and record["ns"] == 0:
-            raw[key] = record
+            raw[(local, record["title"])] = record
 
 for title, source in data["sources"].items():
-    language = "en" if source["localSource"].endswith("en-pages.jsonl") else "zh"
-    original = raw[(language, title)]
+    original = raw[(source["localSource"], title)]
     assert original["rev_id"] == source["revisionId"], title
     assert original["timestamp"] == source["revisionAt"], title
     assert original["sha1"] == source["sourceSha1"], title

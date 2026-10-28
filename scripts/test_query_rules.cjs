@@ -67,11 +67,10 @@ reset({ weather: 'sun' });
 A.setProgress(p => { p.rooms = ['金库']; });
 assert.equal(A.fishCheck(fish('蝎鲤鱼')).ok, false, 'scorpion carp has a fishing-level requirement too');
 
+// BWIKI 把沙滩采集物写成采集品信息框，不再列进鱼类：它们不出现在鱼的列表和钓鱼判断里。
 for (const name of ['珊瑚', '海胆', '彩虹贝壳', '鹦鹉螺']) {
-  assert.equal(A.fishMethod(fish(name)), 'forage');
-  assert.notEqual(A.fishCheck(fish(name)).ok, true);
-  const row = A.browse.records('fish').find(r => r.label === name);
-  if (row) assert.equal(row.type, 'forage');
+  assert.equal(fish(name), undefined, `${name} is a beach forageable, not a fish`);
+  assert(!A.browse.records('fish').some(r => r.label === name));
 }
 assert.equal(A.fishCheck(fish('螃蟹')).crab, true);
 assert.equal(A.fishCheck(fish('螃蟹')).ok, null, 'crab-pot prerequisites remain separate from rod conditions');
@@ -145,18 +144,17 @@ for (const [title, page] of Object.entries(A.D.pages).filter(([, p]) => ['artifa
 }
 const seedSources = Object.fromEntries(A.pageInfo('古代种子').src);
 assert.deepEqual([...seedSources.as], ['煤矿森林（0.7%）', '深山（0.7%）']); // arrays come from the VM context
-assert(seedSources.md.includes('苍蝇（0.5%）') && seedSources.os.includes('古物宝藏'));
+assert(seedSources.md.includes('苍蝇（0.5%）') && seedSources.os.some(s => s.startsWith('古物宝藏')));
 assert.deepEqual([...A.pageInfo('古代种子').dr], ['上古种子×1', '上古种子配方']);
 
 // Follow-up (2026-10-27): the same classes of problem across the site.
 // 1. Key conditions must be visible in default reading mode and must not be overwritten by exception clauses.
 const trout = fish('虹鳟鱼');
 assert.deepEqual([...trout.W], ['sun'], 'the Trout Derby "any weather" clause must not replace the regular sunny requirement');
-assert(A.fishTimeText(trout).includes('鳟鱼大赛') && A.fishWeatherText(trout).includes('鳟鱼大赛'), 'Trout Derby exception shown');
-assert(A.fishTimeText(fish('鲑鱼')).includes('瀑布') && A.fishTimeText(fish('鱿鱼')).includes('鱿鱼节'));
+// BWIKI 把鳟鱼大赛、瀑布、鱿鱼节这些例外写在条目正文里，信息框只写常规条件，例外不会混进时段和天气。
+assert(!A.fishTimeText(trout).includes('任意') && A.fishWeatherText(trout).includes('晴'), 'the regular time and weather stay as written');
 reset({ season: 'summer', day: 5, weather: 'rain', time: 1000 });
 assert.equal(A.fishCheck(trout).ok, false, 'rain outside the Trout Derby: not catchable');
-assert(A.fishCheck(trout).checks.some(c => c.ok === undefined && c.text.includes('鳟鱼大赛')), 'the exception is listed beside the regular rule');
 A.setConditionsEnabled(false);
 for (const name of ['海参', '大海参', '章鱼']) {
   assert(A.fishHabitats(fish(name)).some(h => h.location === '夜市'), `${name}: also caught in the Night Market submarine`);
@@ -208,17 +206,17 @@ assert(!A.browse.records('items').some(r => /Stone$/.test(r.label) || r.label ==
 // 3. Item properties, monster drops and animal produce come from the wiki infoboxes.
 const props = name => JSON.parse(JSON.stringify(A.itemProps(A.itemInfo(name)))); // plain objects: the vm realm has its own Array
 assert.deepEqual(props('野山葵').eat, { e: 13, h: 5, q: [[18, 8], [23, 10], [33, 14]] }, 'Calcedibility: energy, health and each quality');
-assert.deepEqual(props('咖啡').buff, ['速度（+1）']); assert.equal(props('咖啡').buff_time, '1分23秒');
+assert.deepEqual(props('咖啡').buff, ['速度（+1）']); assert.equal(props('咖啡').buff_time, '1分24秒'); // BWIKI 按游戏数据写 1 分 24 秒
 assert.deepEqual(props('啤酒').buff, ['眩晕', '速度（-1）'], 'negative buffs keep their sign');
 assert.deepEqual(props('星之果实').eat, { e: '100%', h: 0 });
-assert.equal(props('生命药水').eat.h, '100%'); assert.equal(props('能量滋补水').eat.e, 500);
+assert.equal(props('生命药水').eat.h, '100%'); assert.equal(props('能量滋补水').eat.e, '100%'); // BWIKI 写“恢复全部”
 assert.deepEqual(props('生锈的剑').weapon, { type: '剑', level: '1', damage: '2-5', crit: '2%' });
 assert.deepEqual(props('运动鞋').stats, ['防御（+1）']);
 assert.equal(props('煤炭').eat, null, 'inedible items have no eating row');
 const golem = A.monsterInfo(A.monsterByName.get('荒野石魔'));
 assert.equal(golem.s.hp, '30');
-assert.deepEqual([...golem.dr.slice(0, 2).map(d => d.id)], ['(O)382', '(O)72'], 'drops keep the infobox order');
-assert(golem.dr.some(d => d.t === '战斗技能达到5级之后：'), 'conditions between drops are kept in place');
+assert.deepEqual([...golem.dr.slice(0, 3).map(d => d.id)], ['(O)771', '(O)771', '(O)770'], 'drops keep the infobox order');
+assert(golem.dr.some(d => /^战斗 ?5 ?级(之)?后：$/.test(d.t || '')), 'conditions between drops are kept in place');
 assert.deepEqual([...A.monsterByName.get('蓝鱿鱼').L], ['矿井'], 'links inside a condition are not places');
 const coal = paths('煤炭').find(p => p.kind === 'drop');
 assert(coal.monsters.some(m => m.title === '荒野石魔' && m.note === '10%'), 'drop chance comes from the monster infobox');

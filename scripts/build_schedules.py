@@ -14,9 +14,27 @@ SEASONS = {"spring": "spring", "summer": "summer", "fall": "fall", "winter": "wi
 LEAF_TABLE = re.compile(r"\{\|(?:(?!\{\|).)*?\|\}", re.S)
 SEASON_HEADER = re.compile(r"\{\{\s*ScheduleHeader\s*\|\s*([^}|]+)[^}]*\}\}", re.I)
 CLOCK = re.compile(r"^(\d{1,2})[:：](\d{2})$")
+SNAPSHOT = "2026-10-29"  # 星露谷物语 BWIKI 的抓取日期（scripts/fetch_bwiki.py）
+
+
+def daily_tables(body, wt):
+    """BWIKI 的 {{Daily|时间|地点|…}}（模块:Schedule 把成对的参数排成两列的时间表）换成同样的表格写法。"""
+    out, last = [], 0
+    for raw, start, end in wt.iter_templates(body):
+        name, args = wt.parse_template(raw)
+        if name.strip().lower() != "daily":
+            continue
+        count = max((int(k) for k in args if k.isdigit()), default=0)
+        cells = [args.get(str(i), "").strip() for i in range(1, count + 1)] + [""]
+        rows = [f"|{cells[i]}\n|{cells[i + 1]}" for i in range(0, count, 2) if cells[i]]
+        out.append(body[last:start] + "\n{|\n" + "\n|-\n".join(rows) + "\n|}\n")
+        last = end
+    out.append(body[last:])
+    return "".join(out)
 
 
 def parse(text, wt):
+    text = daily_tables(text, wt)
     sections = wt.sections(text)
     relevant = [s for s in sections if s["title"] and re.fullmatch(r"(?:日程|行程)(?:表)?", s["title"].strip())]
     if not relevant:
@@ -100,8 +118,8 @@ def build(root):
             if groups or notes:
                 result[page["title"]] = {
                     "groups": groups, "notes": notes,
-                    "source": "https://zh.stardewvalleywiki.com/" + quote(page["title"]) + "#日程表",
-                    "revision": page["rev_id"], "updated": page["timestamp"], "snapshot": "2025-12-18",
+                    "source": "https://wiki.biligame.com/stardewvalley/" + quote(page["title"]) + "#日程",
+                    "revision": page["rev_id"], "updated": page["timestamp"], "snapshot": SNAPSHOT,
                 }
     return result
 

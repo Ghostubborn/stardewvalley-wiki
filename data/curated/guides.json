@@ -17,7 +17,7 @@
       "revisionAt": "2024-12-23T07:42:41Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "1b5f5ccc00b14fd19f0076f6f99d2b6fa7e92017",
       "textSha256": "feb4e07d738c4fcf8af5e8511b4f48340ea349704e8c1810f882820669b6389a"
     },
@@ -29,7 +29,7 @@
       "revisionAt": "2025-10-14T01:20:29Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "985c2f6392c0eb799170ae3d0309d4eb73ba2c37",
       "textSha256": "0fc027e0d785351223f7e71685b163ac801268093804d41882cee090d4bba594"
     },
@@ -41,7 +41,7 @@
       "revisionAt": "2025-12-11T15:15:55Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "d701750ea7aab56fb4d84341033e37a86da3c114",
       "textSha256": "bcab8eb46e72e2bb9df6730f3ea974e773af7a113e36941a596b8e79836d258c"
     },
@@ -53,7 +53,7 @@
       "revisionAt": "2025-10-14T01:20:26Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "1617ae910cf800c1cbc3a9ee115dbb4e61f73db3",
       "textSha256": "a65458cf728cd66290b4afba9dcc305a94fa31d58d76f9e5dcfb0af05acc56cb"
     },
@@ -65,7 +65,7 @@
       "revisionAt": "2025-10-14T01:21:01Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "5f0c26d909e611dbebb3c536668b8ef5db1fbcc8",
       "textSha256": "8cff35b1c7840acff988f30ce8a60daa8ee4963359abd88ca6542deb88738f15"
     },
@@ -77,7 +77,7 @@
       "revisionAt": "2024-11-05T01:57:21Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "75beea2d2e4198df0e5bbb38cfa6fca2d0f0e2b0",
       "textSha256": "327b799350b879e8769e09ecade80804e8d503ad1795cc797810b3df7b03092c"
     },
@@ -89,7 +89,7 @@
       "revisionAt": "2025-12-13T09:54:34Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "0be132541223cf740adf61b98e8e537edf6c7095",
       "textSha256": "cdb26452379d54cf9e5f36d4c6d348f169b863dd1f14ddfa452d9f1a63371e47"
     },
@@ -101,7 +101,7 @@
       "revisionAt": "2025-08-26T10:43:03Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "27a5453c1cac6ab40a345b831219923a25293f2c",
       "textSha256": "a0cec88e0e5c8f1130828698f3bbd96f628b8c82f69dd94acc6bf2a2531628a0"
     },
@@ -113,7 +113,7 @@
       "revisionAt": "2025-06-30T05:18:15Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "a750cacdad3d9e1804fe9f2f481f42d3e458b2c9",
       "textSha256": "7ee25e982b184944a41b9083f12e82226974bbf1dc11acdad7d988515cdc6b32"
     },
@@ -125,7 +125,7 @@
       "revisionAt": "2025-08-27T02:43:47Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "09645c683dbfef5535e198571a260205a4518cb8",
       "textSha256": "eb9575f83849461aa4879f62697a89972c90a1e5db124650baba0c5a2e0cfb06"
     },
@@ -137,7 +137,7 @@
       "revisionAt": "2025-12-11T15:16:36Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "31d7177783239c39fff6256a01c980bcdd399967",
       "textSha256": "fd7830fc7b410f743beebb01bb283113e75c0c5296be29cc380f03bf574c98be"
     },
@@ -149,7 +149,7 @@
       "revisionAt": "2025-10-14T01:20:53Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "b3def3a0770a4b8bc1c5d8998a72fff4d09ea553",
       "textSha256": "40c97233c7401e58c9c13c43d1097a5d87a1a7bd4e03f0e42e9fde395454b8d2"
     },
@@ -161,7 +161,7 @@
       "revisionAt": "2024-08-01T13:19:25Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "c3394704db8232199e367e4d20a967e7e0be1042",
       "textSha256": "e92ff9c66587b9e4bc9e535e5a31ac8864f4eaa4a6506c6cb55dc2a988f15b68"
     },
@@ -173,7 +173,7 @@
       "revisionAt": "2024-02-16T05:57:39Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "82d99d5c8c9c59975e9bd7f40f7039e590116fe5",
       "textSha256": "4b67580f659637883fb96846f52f912ed94494362fb050e4c8ae7ce2f82622f8"
     },
@@ -185,7 +185,7 @@
       "revisionAt": "2025-12-07T23:51:08Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "d60284a3bdf690b97b40634c42cb97b1f1b07f48",
       "textSha256": "2984068456635f1ab97728bb7538966697c167c3e5bdd07411acf11ade924501"
     },
@@ -197,7 +197,7 @@
       "revisionAt": "2024-09-20T02:15:31Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "fbd6c49c7d4a72c7207c317f6d630a3b184fa2a3",
       "textSha256": "fbf5ec77f98044a69297e12e07c8fb79ea6558e3154380343cea889a7c2005f4"
     },
@@ -209,7 +209,7 @@
       "revisionAt": "2025-02-01T12:06:42Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "7b5dc87ddd1e1fda1d805c1de114077fe155bd21",
       "textSha256": "f6e8a588908bd7271ee48b5f5e7c3ccb2a053b203df2136d4160f82d71fc6047"
     },
@@ -221,7 +221,7 @@
       "revisionAt": "2025-10-14T01:21:35Z",
       "archiveDate": "2025-12-18",
       "archiveUrl": "https://archive.org/details/wiki-zh.stardewvalleywiki.com_mediawiki-20251218",
-      "localSource": "data/wiki/zh-pages.jsonl",
+      "localSource": "data/wiki/zh-official-20251218.jsonl",
       "sourceSha1": "66c33e275fc5ec253b994edfd0e632bda29c1a75",
       "textSha256": "df7b5ed0deb57da2a8a4d7861e85a8c7729cff6922234e7cfee1608fe9041f13"
     },

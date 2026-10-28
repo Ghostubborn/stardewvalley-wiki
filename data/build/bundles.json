@@ -112,7 +112,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "秋季采集，秘密森林采集（春季或秋季），农场的洞穴（蘑菇选项），采集蘑菇树"
+      "source_text": "秋季采集，秘密森林采集（春季或秋季），农场的洞穴（蘑菇选项），采集蘑菇树，蘑菇树桩"
      },
      {
       "id": "(O)406",
@@ -121,7 +121,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "秋季采集"
+      "source_text": "秋季采集，农场的洞穴（果蝠选项）"
      },
      {
       "id": "(O)408",
@@ -166,7 +166,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "冬季耕种土地或远古斑点，在矿井41-79层蓝色史莱姆泥掉落"
+      "source_text": "冬季开垦土地或远古斑点，在矿井41-79层蓝色史莱姆掉落"
      },
      {
       "id": "(O)414",
@@ -238,7 +238,7 @@
       "qty": 99,
       "note": null,
       "link": null,
-      "source_text": "用十字镐砸石头"
+      "source_text": "用十字镐凿石头"
      },
      {
       "id": "(O)709",
@@ -301,7 +301,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "矿井采集，秘密森林采集（夏季或秋季），农场的洞穴（蘑菇选项），采集蘑菇树"
+      "source_text": "矿井采集，秘密森林采集（夏季或秋季），农场的洞穴（蘑菇选项），采集蘑菇树，蘑菇树桩"
      },
      {
       "id": "(O)422",
@@ -310,7 +310,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "矿井，农场的洞穴（蘑菇选项），森林农场地图秋季采集"
+      "source_text": "矿井，农场的洞穴（蘑菇选项），森林农场地图秋季采集，蘑菇树桩"
      },
      {
       "id": "(O)724",
@@ -346,7 +346,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "秘密森林采集（春季），农场的洞穴（蘑菇选项）"
+      "source_text": "秘密森林采集（春季），农场的洞穴（蘑菇选项），蘑菇树桩"
      }
     ],
     "slots": 5,
@@ -364,7 +364,7 @@
     ]
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/收集包#工艺室"
+  "source": "https://wiki.biligame.com/stardewvalley/收集包#工艺室"
  },
  {
   "room": "茶水间",
@@ -677,7 +677,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "织布机，回收一个湿透的报纸"
+      "source_text": "织布机、回收一个湿透的报纸、木乃伊掉落物"
      },
      {
       "id": "(O)426",
@@ -704,7 +704,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "蜂房"
+      "source_text": "蜂房、周五绿洲"
      },
      {
       "id": "(O)344",
@@ -785,7 +785,7 @@
     ]
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/收集包#茶水间"
+  "source": "https://wiki.biligame.com/stardewvalley/收集包#茶水间"
  },
  {
   "room": "鱼缸",
@@ -801,7 +801,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于河中，6:00 AM – 7:00 PM，春季和夏季"
+      "source_text": "河流，6:00 AM – 7:00 PM，春季和夏季"
      },
      {
       "id": "(O)143",
@@ -810,7 +810,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于河中，任何时间，春季和秋季；夏季的秘密森林池塘與河中。只有当下雨时"
+      "source_text": "河流，6:00 AM – 0:00 PM，春季和秋季；夏季（仅限秘密森林和河流）；天气要求：下雨"
      },
      {
       "id": "(O)706",
@@ -819,7 +819,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于河中，任何时间，春季、夏季和秋季。只有当下雨时"
+      "source_text": "河流，9:00 AM – 2:00 PM，春季、夏季和秋季；天气要求：下雨"
      },
      {
       "id": "(O)699",
@@ -828,7 +828,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于河中，6:00 AM – 7:00 PM，秋季和冬季"
+      "source_text": "河流，6:00 AM – 7:00 PM，秋季和冬季"
      }
     ],
     "slots": 4,
@@ -850,7 +850,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于湖中，6:00 AM – 7:00 PM，任何季节"
+      "source_text": "湖泊，6:00 AM – 7:00 PM，任意季节"
      },
      {
       "id": "(O)142",
@@ -859,7 +859,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于湖中，任何时间，春季、夏季和秋季"
+      "source_text": "湖泊，全天，春季、夏季和秋季"
      },
      {
       "id": "(O)700",
@@ -868,7 +868,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于湖中，任何时间，任何季节"
+      "source_text": "湖泊，全天，任意季节"
      },
      {
       "id": "(O)698",
@@ -877,7 +877,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于湖中，6:00 AM – 7:00 PM，夏季和冬季"
+      "source_text": "湖泊，6:00 AM – 7:00 PM，夏季和冬季"
      }
     ],
     "slots": 4,
@@ -904,7 +904,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于海中，6:00 AM – 7:00 PM，春季、秋季和冬季"
+      "source_text": "海洋，6:00 AM – 7:00 PM，春季、秋季和冬季"
      },
      {
       "id": "(O)130",
@@ -913,7 +913,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于海中，6:00 AM – 7:00 PM，夏季和冬季"
+      "source_text": "海洋，6:00 AM – 7:00 PM，夏季和冬季"
      },
      {
       "id": "(O)150",
@@ -922,7 +922,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于海中，6:00 AM – 7:00 PM，夏季和秋季。只有当下雨时"
+      "source_text": "海洋，6:00 AM – 7:00 PM，夏季和秋季；天气要求：下雨"
      },
      {
       "id": "(O)701",
@@ -931,7 +931,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于海中，6:00 AM – 2:00 PM，夏季和秋季"
+      "source_text": "海洋，6:00 AM – 2:00 PM，夏季和秋季"
      }
     ],
     "slots": 4,
@@ -953,7 +953,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于河中，12:00 PM – 2:00 AM，秋季。只有当下雨时"
+      "source_text": "湖泊、河流，12:00 PM – 2:00 AM，秋季；天气要求：下雨"
      },
      {
       "id": "(O)132",
@@ -962,7 +962,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于河中，6:00 PM – 2:00 AM，任何季节"
+      "source_text": "河流，6:00 PM – 2:00 AM，任意季节"
      },
      {
       "id": "(O)148",
@@ -971,7 +971,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于海中，4:00 PM – 2:00 AM，春季或秋季。只有当下雨时"
+      "source_text": "海洋，4:00 PM – 2:00 AM，春季或秋季；天气要求：下雨"
      }
     ],
     "slots": 3,
@@ -998,7 +998,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(海洋)"
+      "source_text": "蟹笼（海洋）"
      },
      {
       "id": "(O)716",
@@ -1007,7 +1007,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(淡水)"
+      "source_text": "蟹笼（淡水）"
      },
      {
       "id": "(O)717",
@@ -1016,7 +1016,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(海洋)，矿井里岩石蟹和熔岩蟹掉落"
+      "source_text": "蟹笼（海洋），矿井里岩石蟹和熔岩蟹掉落"
      },
      {
       "id": "(O)718",
@@ -1025,7 +1025,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+      "source_text": "蟹笼（海洋），沙滩采集"
      },
      {
       "id": "(O)719",
@@ -1034,7 +1034,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+      "source_text": "蟹笼（海洋），沙滩采集，开采姜岛西部海滩上的蚌矿"
      },
      {
       "id": "(O)720",
@@ -1043,7 +1043,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(海洋)"
+      "source_text": "蟹笼（海洋）"
      },
      {
       "id": "(O)721",
@@ -1052,7 +1052,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(淡水)"
+      "source_text": "蟹笼（淡水）"
      },
      {
       "id": "(O)722",
@@ -1061,7 +1061,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(淡水)"
+      "source_text": "蟹笼（淡水）"
      },
      {
       "id": "(O)723",
@@ -1070,7 +1070,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+      "source_text": "蟹笼（海洋），沙滩采集"
      },
      {
       "id": "(O)372",
@@ -1079,7 +1079,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "捕获于蟹笼中(海洋)，沙滩采集"
+      "source_text": "蟹笼（海洋），沙滩采集"
      }
     ],
     "slots": 5,
@@ -1106,7 +1106,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于海中，12:00 PM – 4:00 PM，夏季"
+      "source_text": "海洋，12:00 PM – 4:00 PM，夏季"
      },
      {
       "id": "(O)156",
@@ -1115,7 +1115,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于矿井的池塘中，任何时间，任何季节。幽灵掉落"
+      "source_text": "矿井的池塘（第20、60层），全天，任意季节。幽灵掉落"
      },
      {
       "id": "(O)164",
@@ -1124,7 +1124,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于沙漠的池塘中，6:00 AM – 10:00 PM，任何季节"
+      "source_text": "沙漠的池塘，6:00 AM – 8:00 PM，任意季节"
      },
      {
       "id": "(O)734",
@@ -1133,7 +1133,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "发现于秘密森林中，任何时间，任何季节。"
+      "source_text": "秘密森林，全天，任意季节。"
      }
     ],
     "slots": 4,
@@ -1151,7 +1151,7 @@
     ]
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/收集包#鱼缸"
+  "source": "https://wiki.biligame.com/stardewvalley/收集包#鱼缸"
  },
  {
   "room": "锅炉房",
@@ -1266,7 +1266,7 @@
       "qty": 99,
       "note": null,
       "link": null,
-      "source_text": "史莱姆（怪物）掉落"
+      "source_text": "史莱姆掉落，科罗布斯出售（周一）"
      },
      {
       "id": "(O)767",
@@ -1275,7 +1275,7 @@
       "qty": 10,
       "note": null,
       "link": null,
-      "source_text": "矿井中蝙蝠掉落"
+      "source_text": "矿井中蝙蝠掉落，科罗布斯出售（周日）"
      },
      {
       "id": "(O)768",
@@ -1284,7 +1284,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "矿井中幽灵、鱿鱼娃或金属大头掉落，骷髅洞穴中木乃伊掉落"
+      "source_text": "矿井中幽灵、鱿鱼娃或金属大头掉落，骷髅洞穴中木乃伊掉落，科罗布斯出售"
      },
      {
       "id": "(O)769",
@@ -1293,7 +1293,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "矿井中暗影狂徒或骷髅洞穴中飞蛇掉落"
+      "source_text": "矿井中暗影狂徒或骷髅洞穴中飞蛇掉落，科罗布斯出售"
      }
     ],
     "slots": 2,
@@ -1311,7 +1311,7 @@
     ]
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/收集包#锅炉房"
+  "source": "https://wiki.biligame.com/stardewvalley/收集包#锅炉房"
  },
  {
   "room": "布告栏",
@@ -1336,7 +1336,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "秘密森林夏季采集"
+      "source_text": "秘密森林夏季采集、砍伐蕨菜树掉落、从蕨菜树上采集"
      },
      {
       "id": "(O)430",
@@ -1444,7 +1444,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "夏季农作物（在2+年红叶卷心菜种子可以在皮埃尔的杂货店获得）"
+      "source_text": "夏季农作物（红叶卷心菜种子可以在2+年从皮埃尔的杂货店获得，或由骷髅洞穴的飞蛇掉落）"
      }
     ],
     "slots": 6,
@@ -1471,7 +1471,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "矿井，农场的洞穴（蘑菇选项），森林农场地图秋季采集"
+      "source_text": "矿井，农场的洞穴（蘑菇选项），收集蘑菇树，森林农场地图秋季采集"
      },
      {
       "id": "(O)392",
@@ -1489,7 +1489,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "任意季节在山上的湖泊和河流中发现"
+      "source_text": "任意季节在深山湖泊和煤矿森林河流中发现"
      },
      {
       "id": "(O)536",
@@ -1498,7 +1498,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "矿井40-79层"
+      "source_text": "矿井40-79层，60+天敲开矿井外石头，开采山顶农场和四角农场采矿区的冰封晶球矿点"
      }
     ],
     "slots": 4,
@@ -1534,7 +1534,7 @@
       "qty": 10,
       "note": null,
       "link": null,
-      "source_text": "玛妮的牧场购买，或一旦你拥有筒仓后使用镰刀收割草地，一旦你拥有鸡舍或畜棚可以收回喂料斗里的干草（高级鸡舍畜棚不能）"
+      "source_text": "玛妮的牧场购买，或在玩家拥有筒仓后使用镰刀收割草地，拥有鸡舍或畜棚后可以收回喂料斗里的干草（高级鸡舍/畜棚不能）"
      },
      {
       "id": "(O)613",
@@ -1543,7 +1543,7 @@
       "qty": 3,
       "note": null,
       "link": null,
-      "source_text": "秋季的苹果树"
+      "source_text": "秋季的苹果树，农场的洞穴（果蝠选项）"
      }
     ],
     "slots": 3,
@@ -1615,7 +1615,7 @@
     ]
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/收集包#布告栏"
+  "source": "https://wiki.biligame.com/stardewvalley/收集包#布告栏"
  },
  {
   "room": "金库",
@@ -1690,7 +1690,7 @@
     ]
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/收集包#金库"
+  "source": "https://wiki.biligame.com/stardewvalley/收集包#金库"
  },
  {
   "room": "废弃Joja超市",
@@ -1706,7 +1706,7 @@
       "qty": 1,
       "quality": "silver",
       "note": "银星品质",
-      "source_text": "木桶"
+      "source_text": "木桶、姜岛度假村"
      },
      {
       "id": "(O)807",
@@ -1742,7 +1742,7 @@
       "qty": 1,
       "quality": "gold",
       "note": "金星品质",
-      "source_text": "钓鱼，巫婆沼泽"
+      "source_text": "巫婆沼泽钓鱼"
      },
      {
       "id": "(O)445",
@@ -1751,7 +1751,7 @@
       "qty": null,
       "note": null,
       "link": null,
-      "source_text": "罐头瓶"
+      "source_text": "将鲟鱼鱼籽放入罐头瓶"
      }
     ],
     "slots": 5,
@@ -1760,6 +1760,6 @@
     "reward": []
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/收集包#废弃Joja超市"
+  "source": "https://wiki.biligame.com/stardewvalley/收集包#废弃Joja超市"
  }
 ]

@@ -12,7 +12,11 @@
     if (n.itemId) nodesByItem.set(n.itemId, n);
   }
   const areaTitles = new Map(Object.values(A.AREAS).map(a => [a.title, a.id]));
-  const publicTopics = new Set([...A.SKILLS.map(s => s.zh), "技能", "打造", "烹饪", "工具", "钓竿", "农作物", "建筑", "家具", "收集包", "任务", "金币", "新手指南", "控制", "游戏内时间", "季节", "天气", "能量", "生命值", "物品栏", "钓鱼攻略", "友谊", "合作", "存档"]);
+  const publicTopics = new Set([...A.SKILLS.map(s => s.zh), "技能", "打造", "烹饪", "工具", "钓竿", "农作物", "建筑", "家具", "收集包", "任务", "金币", "新手指南", "控制", "游戏内时间", "季节", "天气", "能量", "生命值", "物品栏", "钓鱼攻略", "友谊", "合作", "存档", "怪物"]);
+  // 太常用的词不按名称遮挡文字：BWIKI 的怪物条目就叫“史莱姆”（原来是“史莱姆（怪物）”），句子里提到史莱姆不等于透露这个条目。
+  const textExempt = new Set(["怪物", "史莱姆"]);
+  // 官方中文 Wiki 归档里来源提到后期内容的条目（data/curated/legacy-late-sources.json）：两站写法不同，仍按后期内容保护。
+  const legacyLate = new Set(D.legacyLate || []);
   const places = {
     科罗布斯: "sewers", 矮人: "mines", 桑迪: "desert", 绿洲: "desert", 沙漠商人: "desert",
     雷欧: "ginger_island", 姜岛商人: "ginger_island", 贝啼: "ginger_island", 蜗牛教授: "ginger_island",
@@ -29,7 +33,8 @@
   const lateTitle = /姜岛|火山|核桃|齐先生|齐钻|精通|完美|无限|银河|附魔|女巫|巫婆|金色谜之盒|失落|秘密纸条|秘密森林|骷髅|头骨钥匙|生锈的钥匙|传送塔|传送图腾|沙漠|下水道|海盗湾|宝石鸟|饕餮|锻造|科罗布斯/;
   const storyType = /quest|event|achievement|monster|special/i;
   const earlySources = /皮埃尔|铁匠铺|木匠|玛妮|旅行货车|鱼店|星之果实酒吧|农场|鹈鹕镇|煤矿森林|沙滩|河流|海洋|深山|高山湖泊|初始|商店购买/;
-  const protectedSource = /姜岛|火山|核桃|齐先生|齐钻|精通|完美|骷髅|巫婆|女巫|沙漠|下水道|科罗布斯|桑迪|矮人|秘密森林|特别任务|爱心事件|剧情|附魔|锻造/;
+  // “海盗的妻子”是姜岛的任务；BWIKI 给它的奖励物品和秘密纸条里的物品都建了条目，来源只写任务名。
+  const protectedSource = /姜岛|火山|核桃|齐先生|齐钻|精通|完美|骷髅|巫婆|女巫|沙漠|下水道|科罗布斯|桑迪|矮人|秘密森林|特别任务|爱心事件|剧情|附魔|锻造|海盗|秘密纸条/;
 
   function title(ref) {
     if (!ref) return "";
@@ -86,6 +91,7 @@
     const source = [page?.f?.source, page?.f?.recipe, page?.f?.location, page?.f?.address].filter(Boolean).join(" · ");
     if (protectedSource.test(source) && !earlySources.test(source)) return false;
     if (!source && protectedSource.test(page?.s || "") && !earlySources.test(page?.s || "")) return false;
+    if (legacyLate.has(name)) return false;
     const recipes = it?.id ? A.recipesByOut.get(it.id) || [] : [];
     if (recipes.length && !earlySources.test(source)) {
       return recipes.some(r => (r.uc || []).every(c => c.group === "initial" || (c.group === "skill" && (A.state.progress.skills[c.skill] || 0) >= c.level)));
@@ -124,7 +130,7 @@
     const names = new Set([...Object.keys(D.pages), ...Object.values(D.items).map(i => i.z), ...nodesByTitle.keys(), ...discoveries]);
     // A numeric skill requirement is a rule, not a future reward or place.
     // It may be needed to explain a currently requested item or basic control.
-    blockedNames = [...names].filter(name => name.length >= 2 && nodesByTitle.get(name)?.kind !== "skill" && !canView({ type: "page", id: name }));
+    blockedNames = [...names].filter(name => name.length >= 2 && !textExempt.has(name) && nodesByTitle.get(name)?.kind !== "skill" && !canView({ type: "page", id: name }));
     blockedEnglish = null;
     if (A.EN) {
       const english = new Set(blockedNames.flatMap(name => [...englishNames(name)]));

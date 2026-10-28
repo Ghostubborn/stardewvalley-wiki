@@ -24,11 +24,11 @@ const members = nodes => nodes.flatMap(n => n.family || [n]);
 
 // Dandelion: wiki sources on the left; recipes by kind and machine, bundle and gifts on the right.
 const dandelion = A.relations({ type: 'item', id: id('蒲公英') });
-assert.deepEqual(labels(group(dandelion, 'left', 'Wiki 列出的来源')), ['采集', '春季种子', '花舞节']);
-assert.deepEqual(plain(group(dandelion, 'left', 'Wiki 列出的来源').nodes.map(n => n.ref?.type)), ['page', 'item', 'page'], 'sources that name an entry can be opened');
+assert.deepEqual(labels(group(dandelion, 'left', 'Wiki 列出的来源')), ['采集', '春季种子']);
+assert.deepEqual(plain(group(dandelion, 'left', 'Wiki 列出的来源').nodes.map(n => n.ref?.type)), ['page', 'item'], 'sources that name an entry can be opened');
 assert.deepEqual(plain(dandelion.right.groups.map(g => [g.label, g.via || '', labels(g).join('、')])), [
   ['打造', '', '春季种子'], ['烹饪', '', '沙拉'], ['裁缝', '缝纫机', '薄荷女式衬衫'], ['加工', '罐头瓶', '腌制蒲公英'],
-  ['收集包', '', '春季采集收集包'], ['喜欢这件礼物', '', '潘妮、莉亚、哈维、皮埃尔、莱纳斯'],
+  ['收集包', '', '春季采集收集包'], ['喜欢这件礼物', '', '哈维、皮埃尔、莉亚、莱纳斯、潘妮'],
 ]);
 
 // Every item: the graph lists exactly what the list view lists (uses, bundles, gifts, ways to make it).
@@ -104,7 +104,7 @@ assert.equal(group(town, 'right', '能钓到的鱼').nodes.length, D.fish.filter
 assert(group(A.relations({ type: 'location', id: '矿井' }), 'right', '出没的怪物').nodes.length > 10);
 
 // Monsters and animals.
-const slime = A.relations({ type: 'page', id: '史莱姆（怪物）' });
+const slime = A.relations({ type: 'page', id: '史莱姆' });
 assert.deepEqual(labels(group(slime, 'left', '出没地点')), ['矿井', '骷髅洞穴', '采石场矿井', '秘密森林', '火山地牢', '姜岛']);
 assert.deepEqual(labels(group(slime, 'right', '到达过矿井底部后')), ['钻石', '五彩碎片']);
 const sheep = A.relations({ type: 'page', id: '绵羊' });
@@ -119,10 +119,10 @@ assert.deepEqual(plain([coop.left.groups[0].nodes[0].label, coop.left.groups[0].
 assert.deepEqual(plain(group(coop, 'right', '升级为').nodes.map(n => [n.label, n.ref])), [['大鸡舍', { type: 'node', id: 'bld:鸡舍:1' }]]);
 const bigCoop = A.relations({ type: 'node', id: 'bld:鸡舍:1' });
 assert.deepEqual(labels(group(bigCoop, 'left', '升级前')), ['鸡舍']);
-assert.deepEqual(labels(group(bigCoop, 'right', '可以养')), ['鸡', '虚空鸡', '鸭', '恐龙', '金色的鸡']);
-assert.deepEqual(labels(group(A.relations({ type: 'page', id: '磨坊' }), 'right', '加工')), ['大麦粉', '糖', '大米']);
+assert.deepEqual(labels(group(bigCoop, 'right', '可以养')).sort(), ['鸡', '虚空鸡', '鸭', '恐龙', '金色的鸡'].sort());
+assert.deepEqual(labels(group(A.relations({ type: 'page', id: '磨坊' }), 'right', '加工')).sort(), ['大麦粉', '糖', '大米'].sort());
 assert(A.relationChain(group(A.relations({ type: 'page', id: '史莱姆屋' }), 'left', '建造材料').chain).deep, 'building materials expand into a chain');
-assert.deepEqual(labels(group(A.relations({ type: 'page', id: '温室' }), 'left', '建造')), ['完成茶水间收集包', '在Joja社区发展申请书中花35,000金购入']);
+assert.deepEqual(labels(group(A.relations({ type: 'page', id: '温室' }), 'left', '建造')), ['完成茶水间收集包', '在Joja社区发展申请书中花费35,000金 购买']);
 assert.deepEqual(labels(group(A.relations({ type: 'node', id: 'bld:农舍:0' }), 'left', '开局就有')), ['游戏开始时就有的农舍。']);
 for (const b of D.buildings) assert(A.relations(A.buildingRef(b.name)), `${b.name}: graph`);
 const woodBuilds = group(A.relations({ type: 'item', id: id('木材') }), 'right', '用于建造');
@@ -142,7 +142,8 @@ const pondRows = D.fish.flatMap(f => f.pond || []);
 assert(pondRows.length > 200 && pondRows.every(x => x.id && D.items[x.id]), 'every pond product is a known item');
 const stingray = group(A.relations({ type: 'fish', id: '黄貂鱼' }), 'right', '鱼塘产出');
 assert.deepEqual(plain(stingray.nodes.map(n => [n.label, n.note])), [
-  ['黄貂鱼籽', '1 条起 · 80-100%'], ['熔岩菇', '4 条起 · 5%'], ['火山晶石', '×2-5 · 7 条起 · 8-10%'], ['龙牙', '9 条起 · 5%'], ['电池组', '9 条起 · 10%'],
+  // BWIKI 的《鱼塘》按游戏数据算到一位小数。
+  ['黄貂鱼籽', '1 条起 · 72.3-95%'], ['熔岩菇', '4 条起 · 3.8-5%'], ['火山晶石', '×2-5 · 7 条起 · 8.5-10%'], ['电池组', '9 条起 · 10%'], ['龙牙', '9 条起 · 5.4%'],
 ]);
 const battery = A.relations({ type: 'item', id: id('电池组') });
 assert.deepEqual(plain(group(battery, 'left', '鱼塘产出').nodes.map(n => [n.label, n.ref.type, n.note])), [['黄貂鱼', 'fish', '9 条起 · 10%']]);

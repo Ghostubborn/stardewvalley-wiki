@@ -17,6 +17,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 from sdvdata import article as AR  # noqa: E402
+from sdvdata import bwiki  # noqa: E402
+from sdvdata.html_article import HtmlArticle  # noqa: E402
 from sdvdata.webp import WebP  # noqa: E402
 
 OUT = os.path.join(ROOT, "prototype", "articles")
@@ -24,13 +26,19 @@ CJK = re.compile(r"[㐀-鿿]")
 IMG_OUT = os.path.join(ROOT, "prototype", "assets", "img")
 # Wiki 首页只是导航。
 SKIP_PAGES = {"Stardew Valley Wiki"}
+# BWIKI 还没抓到渲染结果、且部分章节由 Lua 模块生成的条目：暂时用官方中文 Wiki 2025-12-18 归档的正文补上
+# （提交 f618b71 时的 prototype/articles/zh），整篇几乎都是模块内容的整篇替换。见 data/README.md。
+LEGACY_DIR = os.path.join(ROOT, "data", "raw", "legacy-articles-20251218")
+LEGACY_SECTIONS = re.compile(r"心事件|对话|提问|电影和零食喜好|观影|生长日历")
+LEGACY_NOTE = {"section": "这一节暂用官方中文 Wiki 2025-12-18 归档的内容；B站 Wiki 的这部分由模块生成，之后补上。",
+               "page": "本条正文暂用官方中文 Wiki 2025-12-18 归档；B站 Wiki 的版本由模块生成，之后补上。"}
 
 LABELS = {
     "zh": {
         "main": "主条目：", "see_also": "另见：", "list_sep": "、", "details": "详情", "energy": "能量", "health": "生命值",
         "none": "无", "inedible": "不可食用", "friendship": "好感度 {n}", "no_friendship": "不影响好感度",
         "crafting_source": "配方来源", "friendship_page": "友谊", "gift_list_page": "礼物列表",
-        "version_page": "版本历史", "history_sep": "：",
+        "version_page": "版本历史", "history_sep": "：", "player": "玩家",
         # Template:Recipes 的表头（hide= 里写的列不显示）。
         "recipe_cols": [("name", "名称"), ("description", "描述"), ("ingredients", "所需原料"), ("restores", "能量 / 生命值"),
                         ("buff", "增益效果"), ("duration", "增益时长"), ("recipe", "食谱来源"), ("sellprice", "售出价格")],
@@ -117,7 +125,9 @@ def image_index():
     with open(os.path.join(ROOT, "data", "build", "images.json"), encoding="utf-8") as f:
         images = json.load(f)
     index = {name.strip().replace(" ", "_").casefold(): meta for name, meta in images.items()}
-    return lambda name: index.get((name or "").strip().replace(" ", "_").casefold())
+    key = lambda name: (name or "").strip().replace(" ", "_").casefold()
+    # BWIKI 自己上传的果树阶段图叫“Cherry Tree Stage 1.png”，英文 Wiki 的同一张图是“Cherry_Stage_1.png”。
+    return lambda name: index.get(key(name)) or index.get(key(re.sub(r" Tree Stage ", " Stage ", name or "")))
 
 
 def webp_images(image, webp):
@@ -130,18 +140,41 @@ def article_key(title):
 
 
 def zh_articles(image, derive):
+    """中文正文取星露谷物语 BWIKI 渲染后的页面（scripts/fetch_bwiki.py --html）；某个条目还没抓到渲染结果时，
+    退回按原文转换（Lua 模块生成的部分会缺），构建时报告数量。"""
     import build_data as BD
     b = BD.Builder()
     pages, _ = b.build_pages()
     titles = {p["title"] for p in pages}
+    by_title = {p["title"]: p for p in pages}
 
     def link_key(target):
-        t = target.split("#")[0].strip()
+        t, _, anchor = target.partition("#")
+        t = t.strip()
         if not t:
             return None
+        # 版本历史按大版本分页（“版本历史/1.4”）；按原文转换时 {{History}} 链到“版本历史#1.4.3”，换成所在的分页。
+        if t == "版本历史" and anchor:
+            t = bwiki.version_page(anchor)
         t = b.resolve(BD.norm_title(t))
+        # 被所属条目整页引用的子页面（版本历史/1.6）不单独收录，链到所属条目的同一节。
+        if t not in titles and "/" in t and t.rsplit("/", 1)[0] in titles:
+            t = t.rsplit("/", 1)[0]
         return t if t in titles else None
 
+    def item_of(title, file, label=None):
+        # {{Name}} 的链接条目绑定了物品就用它；没有条目时按图标文件名（英文物品名）找，名称对得上才算。
+        key = link_key(title) if title else None
+        if key and by_title[key].get("item_id"):
+            return by_title[key]["item_id"]
+        if file:
+            hit = b.catalog.resolve(re.sub(r"\.(png|gif|jpe?g)$", "", file, flags=re.I)) or {}
+            if hit.get("id") and (not label or hit.get("zh") == label):
+                return hit["id"]
+        return None
+
+    html = bwiki.load_html(ROOT)
+    converter = HtmlArticle(link_key, item_of, image, derive, LABELS["zh"])
     handlers = dict(BD.make_renderer(b.catalog, b.npc_zh, b.bundle_zh).handlers)
     icons = _icons("zh")
     render = _rich_render(handlers, b.catalog, link_key, image, derive, lambda en: b.npc_zh.get(en, en),
@@ -152,19 +185,96 @@ def zh_articles(image, derive):
         r = b.zh.get(b.resolve(BD.norm_title(title)))
         return r["text"] if r else None
 
-    builder = AR.ArticleBuilder("zh", get_page, render, LABELS["zh"], link_key, None, INFOBOX["zh"], image, derive)
-    out = {}
+    fallback = AR.ArticleBuilder("zh", get_page, render, LABELS["zh"], link_key, None, INFOBOX["zh"], image, derive)
+    legacy, legacy_images = load_legacy(), set()
+    snippets = bwiki.snippet_table(b.zh.get("模块:Snippets", {}).get("text", ""))
+    items = {i["id"]: i for i in b.build_items()}
+
+    def gifts(title):
+        item = items.get((by_title.get(title) or {}).get("item_id"))
+        tastes = (item or {}).get("gift_tastes") or {}
+        return {k: tastes[k] for k in ("love", "like", "neutral", "dislike", "hate") if tastes.get(k)}
+    out, from_text = {}, []
     for p in pages:
         if p["title"] in SKIP_PAGES:
             continue
-        article = builder.build(p["title"], get_page(p["title"]))
+        markup = html.get(p["title"])
+        if markup:
+            article = converter.build(markup, facts_from_infobox=(p["infobox"] or "").strip().lower() in INFOBOX["zh"])
+        else:
+            from_text.append(p["title"])
+            text = bwiki.expand_article_templates(get_page(p["title"]) or "", p["title"], snippets, gifts, get_page)
+            article = fallback.build(p["title"], text)
+            if p["title"] in legacy and p["title"] != "版本历史":  # 版本历史按大版本分页，归档的整页不再适用
+                article, used_legacy = patch_legacy(article, legacy[p["title"]], link_key, image)
+                legacy_images |= used_legacy
         if article:
             out[p["title"]] = article
+    if from_text:
+        print("条目正文：", len(from_text), "个条目还没有 BWIKI 的渲染结果，按原文转换：", "、".join(from_text[:12]))
     # 整页重定向的中文名（“体力”→“能量”）；英文名另有对照，不算在内。
     synonyms = _synonyms((BD.norm_title(r["title"]), b.resolve(BD.norm_title(r["redirect"])))
                          for r in b.zh_all if r["ns"] == 0 and r["redirect"] and not r.get("redirect_fragment"))
     synonyms = {t: [n for n in names if CJK.search(n)] for t, names in synonyms.items() if t in out}
-    return out, builder.used_images | render.used_images, render.dropped_images, synonyms
+    used = converter.used_images | fallback.used_images | render.used_images | legacy_images
+    return out, used, converter.dropped_images | render.dropped_images, synonyms
+
+
+def load_legacy():
+    out = {}
+    if os.path.isdir(LEGACY_DIR):
+        for name in os.listdir(LEGACY_DIR):
+            if name.endswith(".json"):
+                with open(os.path.join(LEGACY_DIR, name), encoding="utf-8") as f:
+                    rec = json.load(f)
+                out[rec["title"]] = rec["article"]
+    return out
+
+
+def patch_legacy(article, legacy, link_key, image):
+    """按原文转换的正文缺了由模块生成的章节（好感度事件、对话、观影、生长日历）时，用归档正文补上。
+    归档里的链接按 BWIKI 的条目名重新对应（对不上的只留文字），图片只保留归档原图（派生的 WebP 不保证还在）。"""
+    if not legacy:
+        return article, set()
+    used, drop = set(), object()
+
+    def fix(node):
+        if isinstance(node, list):
+            if len(node) == 3 and node[0] == "l" and isinstance(node[1], str):
+                page, _, anchor = node[1].partition("#")
+                key = link_key(page)
+                return ["l", key + ("#" + anchor if anchor else ""), node[2]] if key else node[2]
+            if len(node) == 3 and node[0] == "f" and isinstance(node[1], str):
+                if not image(node[1]):
+                    return ""
+                used.add(image(node[1])["file"])
+                return node
+            if node and node[0] == "g":
+                entries = [e for e in node[1] if e[0] and image(e[0])]
+                used.update(image(e[0])["file"] for e in entries)
+                return ["g", [[e[0], e[1], fix(e[2])] for e in entries]] if entries else drop
+            return [x for x in (fix(child) for child in node) if x is not drop]
+        if isinstance(node, dict):
+            return {k: fix(v) for k, v in node.items()}
+        return node
+
+    def text(a):
+        return "\n".join(_block_text(b) for _, _, blocks in a["s"] for b in blocks)
+
+    legacy = fix(legacy)
+    if not article or len(text(article)) < 0.4 * len(text(legacy)):
+        lead = legacy["s"][0] if legacy["s"] and legacy["s"][0][0] is None else [None, 1, []]
+        rest = legacy["s"][1:] if legacy["s"] and legacy["s"][0][0] is None else legacy["s"]
+        out = {**legacy, "s": [[None, 1, [["n", [LEGACY_NOTE["page"]]], *lead[2]]], *rest]}
+        return out, used
+    have = {h for h, _, _ in article["s"] if h}
+    extra = [[h, level, [["n", [LEGACY_NOTE["section"]]], *blocks]] for h, level, blocks in legacy["s"]
+             if h and LEGACY_SECTIONS.search(h) and h not in have and blocks]
+    if not extra:
+        return article, set()
+    # 放在“历史”“肖像”这类收尾章节之前。
+    tail = next((i for i, (h, _, _) in enumerate(article["s"]) if h in ("任务", "肖像", "你知道吗", "设定演变", "历史")), len(article["s"]))
+    return {**article, "s": article["s"][:tail] + extra + article["s"][tail:]}, used
 
 
 def en_articles(image, derive):

@@ -1,28 +1,14 @@
 [
  {
-  "page": "枫树",
-  "kind": "tree",
-  "image": "Maple_tree_portrait.png",
-  "sapling": {
-   "id": "(O)310",
-   "en": "Maple Seed",
-   "zh": "枫树种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "produce": [
-   {
-    "id": "(O)724",
-    "en": "Maple Syrup",
-    "zh": "枫糖浆",
-    "qty": null,
-    "note": null,
-    "link": null
-   }
+  "page": "杏子树",
+  "kind": "fruit_tree",
+  "image": "Apricot_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "spring"
   ],
-  "seasons": [],
-  "growth_days": null,
+  "growth_days": 28,
   "price": null
  },
  {
@@ -48,7 +34,105 @@
    }
   ],
   "seasons": [],
-  "growth_days": null,
+  "growth_days": 25,
+  "price": null
+ },
+ {
+  "page": "枫树",
+  "kind": "tree",
+  "image": "Maple_tree_portrait.png",
+  "sapling": {
+   "id": "(O)310",
+   "en": "Maple Seed",
+   "zh": "枫树种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)724",
+    "en": "Maple Syrup",
+    "zh": "枫糖浆",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": 25,
+  "price": null
+ },
+ {
+  "page": "桃子树",
+  "kind": "fruit_tree",
+  "image": "Peach_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 28,
+  "price": null
+ },
+ {
+  "page": "桃花心木树",
+  "kind": "tree",
+  "image": "Mahogany_Tree_Portrait.png",
+  "sapling": {
+   "id": "(O)292",
+   "en": "Mahogany Seed",
+   "zh": "桃花心木种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)92",
+    "en": "Sap",
+    "zh": "树液",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [],
+  "growth_days": 3,
+  "price": null
+ },
+ {
+  "page": "棕榈树",
+  "kind": "tree",
+  "image": "Palm_tree_portrait.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [],
+  "growth_days": 20,
+  "price": null
+ },
+ {
+  "page": "樱桃树",
+  "kind": "fruit_tree",
+  "image": "Cherry_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 28,
+  "price": null
+ },
+ {
+  "page": "橙子树",
+  "kind": "fruit_tree",
+  "image": "Orange_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 28,
   "price": null
  },
  {
@@ -74,17 +158,117 @@
    }
   ],
   "seasons": [],
-  "growth_days": null,
+  "growth_days": 25,
   "price": null
  },
  {
-  "page": "棕榈树",
-  "kind": "tree",
-  "image": "Palm_tree_portrait.png",
+  "page": "石榴树",
+  "kind": "fruit_tree",
+  "image": "Pomegranate_Stage_5_Fruit.png",
   "sapling": null,
   "produce": [],
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 28,
+  "price": null
+ },
+ {
+  "page": "神秘树",
+  "kind": "tree",
+  "image": "Mystic_Tree_Portrait.png",
+  "sapling": {
+   "id": "(O)MysticTreeSeed",
+   "en": "Mystic Tree Seed",
+   "zh": "神秘树种",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)MysticSyrup",
+    "en": "Mystic Syrup",
+    "zh": "神秘糖浆",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
   "seasons": [],
-  "growth_days": null,
+  "growth_days": 3,
+  "price": null
+ },
+ {
+  "page": "芒果树",
+  "kind": "fruit_tree",
+  "image": "Mango_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 28,
+  "price": null
+ },
+ {
+  "page": "绿雨树",
+  "kind": "tree",
+  "image": null,
+  "sapling": {
+   "id": "(O)MossySeed",
+   "en": "Mossy Seed",
+   "zh": "长满苔藓的种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [],
+  "seasons": [],
+  "growth_days": 25,
+  "price": null
+ },
+ {
+  "page": "苹果树",
+  "kind": "fruit_tree",
+  "image": "Apple_Stage_5_Fruit.png",
+  "sapling": null,
+  "produce": [],
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 28,
+  "price": null
+ },
+ {
+  "page": "茶树",
+  "kind": "tree",
+  "image": "Tea_Stage_4.png",
+  "sapling": {
+   "id": "(O)251",
+   "en": "Tea Sapling",
+   "zh": "茶苗",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "produce": [
+   {
+    "id": "(O)815",
+    "en": "Tea Leaves",
+    "zh": "茶叶",
+    "qty": null,
+    "note": null,
+    "link": null
+   }
+  ],
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "growth_days": 20,
   "price": null
  },
  {
@@ -126,80 +310,8 @@
    }
   ],
   "seasons": [],
-  "growth_days": null,
+  "growth_days": 25,
   "price": null
- },
- {
-  "page": "杏子树",
-  "kind": "fruit_tree",
-  "image": "Apricot_Stage_5_Fruit.png",
-  "sapling": null,
-  "produce": [],
-  "seasons": [
-   "spring"
-  ],
-  "growth_days": 28,
-  "price": 500
- },
- {
-  "page": "苹果树",
-  "kind": "fruit_tree",
-  "image": "Apple_Stage_5_Fruit.png",
-  "sapling": null,
-  "produce": [],
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 28,
-  "price": 1000
- },
- {
-  "page": "樱桃树",
-  "kind": "fruit_tree",
-  "image": "Cherry_Stage_5_Fruit.png",
-  "sapling": null,
-  "produce": [],
-  "seasons": [
-   "spring"
-  ],
-  "growth_days": 28,
-  "price": 850
- },
- {
-  "page": "橙子树",
-  "kind": "fruit_tree",
-  "image": "Orange_Stage_5_Fruit.png",
-  "sapling": null,
-  "produce": [],
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 28,
-  "price": 1000
- },
- {
-  "page": "桃子树",
-  "kind": "fruit_tree",
-  "image": "Peach_Stage_5_Fruit.png",
-  "sapling": null,
-  "produce": [],
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 28,
-  "price": 1500
- },
- {
-  "page": "石榴树",
-  "kind": "fruit_tree",
-  "image": "Pomegranate_Stage_5_Fruit.png",
-  "sapling": null,
-  "produce": [],
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 28,
-  "price": 1500
  },
  {
   "page": "香蕉树",
@@ -208,75 +320,9 @@
   "sapling": null,
   "produce": [],
   "seasons": [
-   "all",
    "summer"
   ],
   "growth_days": 28,
-  "price": null
- },
- {
-  "page": "芒果树",
-  "kind": "fruit_tree",
-  "image": "Mango_Stage_5_Fruit.png",
-  "sapling": null,
-  "produce": [],
-  "seasons": [
-   "summer",
-   "all"
-  ],
-  "growth_days": 28,
-  "price": null
- },
- {
-  "page": "桃花心木树",
-  "kind": "tree",
-  "image": "Mahogany_Tree_Portrait.png",
-  "sapling": {
-   "id": "(O)292",
-   "en": "Mahogany Seed",
-   "zh": "桃花心木种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "produce": [
-   {
-    "id": "(O)92",
-    "en": "Sap",
-    "zh": "树液",
-    "qty": null,
-    "note": null,
-    "link": null
-   }
-  ],
-  "seasons": [],
-  "growth_days": null,
-  "price": null
- },
- {
-  "page": "神秘树",
-  "kind": "tree",
-  "image": "Mystic_Tree_Portrait.png",
-  "sapling": {
-   "id": "(O)MysticTreeSeed",
-   "en": "Mystic Tree Seed",
-   "zh": "神秘树种",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "produce": [
-   {
-    "id": "(O)MysticSyrup",
-    "en": "Mystic Syrup",
-    "zh": "神秘糖浆",
-    "qty": null,
-    "note": null,
-    "link": null
-   }
-  ],
-  "seasons": [],
-  "growth_days": null,
   "price": null
  }
 ]

@@ -10,7 +10,7 @@ function boot(saved) {
 const A = boot(), fish = A.fishByName.get('沙丁鱼'), seed = A.D.seeds.find(s => s.p === '防风草种子');
 assert.equal(A.conditionsActive(), false);
 assert.equal(A.fishCheck(fish).ok, null, 'An unset scenario must not claim a fish is catchable now');
-assert(A.fishRequirements(A.fishByName.get('传说之鱼')).some(c => /钓鱼等级达到\s*10/.test(c.text)), 'Static skill requirements must remain available independently of scenario evaluation');
+assert(A.fishRequirements(A.fishByName.get('传说之鱼')).some(c => /钓鱼(?:等级达到)?\s*10/.test(c.text)), 'Static skill requirements must remain available independently of scenario evaluation');
 assert.equal(A.shopCheck(A.locationByName.get('鱼店')).ok, null);
 assert.equal(A.seedCheck(seed), null);
 assert.equal(A.birthdayToday().length, 0);

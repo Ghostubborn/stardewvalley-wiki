@@ -14,7 +14,7 @@
     "cost": null,
     "currency": null,
     "materials": [],
-    "effect": "10下砍倒一棵树，5下切开砍倒树留下的大树桩。",
+    "effect": "10 下砍倒一棵成长完全树，5 下切开砍倒树留下的树桩。",
     "image": "Axe.png"
    },
    {
@@ -34,7 +34,7 @@
       "link": null
      }
     ],
-    "effect": "可以砍伐大树桩。8下砍倒一棵成长完全的树，4下切开大树桩。",
+    "effect": "可以砍伐大树桩。8 下砍倒一棵成长完全的树，4 下切开树桩。",
     "image": "Copper_Axe.png"
    },
    {
@@ -54,7 +54,7 @@
       "link": null
      }
     ],
-    "effect": "可以砍伐大圆木。6下砍倒一棵成长完全的树，3下切开大树桩。",
+    "effect": "可以砍伐大圆木。6 下砍倒一棵成长完全的树，3 下切开树桩。",
     "image": "Steel_Axe.png"
    },
    {
@@ -74,7 +74,7 @@
       "link": null
      }
     ],
-    "effect": "4下砍倒一棵完全成长的树，2下切开大树桩。",
+    "effect": "4 下砍倒一棵完全成长的树，2 下切开树桩。",
     "image": "Gold_Axe.png"
    },
    {
@@ -94,11 +94,11 @@
       "link": null
      }
     ],
-    "effect": "2下砍倒一棵完全成长的树，1下切开大树桩。",
+    "effect": "2 下砍倒一棵完全成长的树，1 下切开树桩。",
     "image": "Iridium_Axe.png"
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/斧头"
+  "source": "https://wiki.biligame.com/stardewvalley/斧头"
  },
  {
   "family": "十字镐",
@@ -115,7 +115,7 @@
     "cost": null,
     "currency": null,
     "materials": [],
-    "effect": "可以敲碎小石头。\n敲碎矿井1-39层中较硬的石头需要两次敲击，多次敲击可以破坏矿井圆石。敲碎铜矿需要三次敲击。\n注意：无法破坏农场中的圆石。",
+    "effect": "可以敲碎小石头。\n敲碎矿井 1~39 层中较硬的石头需要两次敲击，敲碎铜矿需要三次敲击。多次敲击可以破坏矿井圆石。\n注意：无法破坏农场中的圆石。",
     "image": "Pickaxe.png"
    },
    {
@@ -135,7 +135,7 @@
       "link": null
      }
     ],
-    "effect": "可以一击敲碎矿井1-39层中的所有石头，敲碎铜矿与40-79层中的石头需要两次敲击。",
+    "effect": "可以一击敲碎矿井 1~39 层中的所有石头，两击敲碎铜矿与 41~79 层中的石头。",
     "image": "Copper_Pickaxe.png"
    },
    {
@@ -155,7 +155,7 @@
       "link": null
      }
     ],
-    "effect": "农场中的圆石只有钢十字镐能够破坏。\n可以一击敲碎矿井40-79层中的石头，两击敲碎采石场矿井中的石头。\n敲碎铜矿需要一次敲击，铁矿需要两次，金矿需要三次，铱矿需要六次。破坏圆石需要四次敲击。\n可以破坏矿井中阻碍与矮人交谈的障碍物。",
+    "effect": "农场中的圆石只有钢十字镐能够破坏。\n可以一击敲碎矿井 41~79 层中的石头，两击敲碎采石场矿井中的石头。\n敲碎铜矿需要一次敲击，铁矿需要两次，金矿需要三次，铱矿需要六次。敲碎圆石需要四次敲击。\n可以破坏矿井中阻碍与矮人交谈的障碍物。",
     "image": "Steel_Pickaxe.png"
    },
    {
@@ -175,7 +175,7 @@
       "link": null
      }
     ],
-    "effect": "可以敲碎陨石。\n可以一击敲碎矿井80-120层中的石头。\n敲碎铁矿需要一次敲击，金矿需要两次，铱矿需要四次。破坏采石场矿井中的圆石需要四次敲击。",
+    "effect": "可以敲碎陨石。\n可以一击敲碎矿井 81~119 层中的石头。\n敲碎铁矿需要一次敲击，金矿需要两次，铱矿需要四次。破坏采石场矿井中的圆石需要四次敲击。",
     "image": "Gold_Pickaxe.png"
    },
    {
@@ -195,11 +195,11 @@
       "link": null
      }
     ],
-    "effect": "可以一击敲碎采石场矿井与骷髅洞穴中的石头。\n敲碎钻石矿需要两次敲击，其他宝石矿则只需一次。破坏采石场矿井中的圆石只需要三次敲击。",
+    "effect": "可以一击敲碎采石场矿井与骷髅洞穴中的石头。\n可以两击敲碎钻石矿石，一击敲碎所有其他宝石矿石。三击敲碎采石场矿井中的圆石。",
     "image": "Iridium_Pickaxe.png"
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/十字镐"
+  "source": "https://wiki.biligame.com/stardewvalley/十字镐"
  },
  {
   "family": "锄头",
@@ -216,7 +216,7 @@
     "cost": null,
     "currency": null,
     "materials": [],
-    "effect": "玩家面朝方向1格",
+    "effect": "玩家面朝方向 1 格",
     "image": "Hoe.png"
    },
    {
@@ -236,7 +236,7 @@
       "link": null
      }
     ],
-    "effect": "最大范围为玩家面朝方向直线3格",
+    "effect": "最大范围为玩家面朝方向直线 3 格",
     "image": "Copper_Hoe.png"
    },
    {
@@ -256,7 +256,7 @@
       "link": null
      }
     ],
-    "effect": "最大范围为玩家面朝方向直线5格",
+    "effect": "最大范围为玩家面朝方向直线 5 格",
     "image": "Steel_Hoe.png"
    },
    {
@@ -276,7 +276,7 @@
       "link": null
      }
     ],
-    "effect": "最大范围为3x3格",
+    "effect": "最大范围为 3x3 格",
     "image": "Gold_Hoe.png"
    },
    {
@@ -296,11 +296,11 @@
       "link": null
      }
     ],
-    "effect": "最大范围为6x3格",
+    "effect": "最大范围为 6x3 格",
     "image": "Iridium_Hoe.png"
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/锄头"
+  "source": "https://wiki.biligame.com/stardewvalley/锄头"
  },
  {
   "family": "喷壶",
@@ -317,7 +317,7 @@
     "cost": null,
     "currency": null,
     "materials": [],
-    "effect": "灌满的喷壶一次可以浇灌40次。",
+    "effect": "灌满的初始喷壶容量为 40。",
     "image": "Watering_Can.png"
    },
    {
@@ -337,7 +337,7 @@
       "link": null
      }
     ],
-    "effect": "容量提高到55次。\n增大最大浇水面积到直线3格。",
+    "effect": "容量提高到 55。\n增大最大浇水面积到直线 3 格。",
     "image": "Copper_Watering_Can.png"
    },
    {
@@ -357,7 +357,7 @@
       "link": null
      }
     ],
-    "effect": "容量提高到70次。\n增大最大浇水面积到直线5格。",
+    "effect": "容量提高到 70。\n增大最大浇水面积到直线 5 格。",
     "image": "Steel_Watering_Can.png"
    },
    {
@@ -377,7 +377,7 @@
       "link": null
      }
     ],
-    "effect": "容量提高到85次。\n增大最大浇水面积到3*3（相当于9格）。",
+    "effect": "容量提高到 85 。\n增大最大浇水面积到 3×3（相当于 9 格）。",
     "image": "Gold_Watering_Can.png"
    },
    {
@@ -397,11 +397,11 @@
       "link": null
      }
     ],
-    "effect": "容量提高到100次。\n增大最大浇水面积到3*6（相当于18格）。",
+    "effect": "容量提高到 100。\n增大最大浇水面积到 3×6（相当于 18 格）。",
     "image": "Iridium_Watering_Can.png"
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/喷壶"
+  "source": "https://wiki.biligame.com/stardewvalley/喷壶"
  },
  {
   "family": "垃圾桶（工具）",
@@ -438,7 +438,7 @@
       "link": null
      }
     ],
-    "effect": "回收物品价值的15%",
+    "effect": "回收物品价值的 15%",
     "image": "Trash_Can_Copper.png"
    },
    {
@@ -458,7 +458,7 @@
       "link": null
      }
     ],
-    "effect": "回收物品价值的30%",
+    "effect": "回收物品价值的 30%",
     "image": "Trash_Can_Steel.png"
    },
    {
@@ -478,7 +478,7 @@
       "link": null
      }
     ],
-    "effect": "回收物品价值的45%",
+    "effect": "回收物品价值的 45%",
     "image": "Trash_Can_Gold.png"
    },
    {
@@ -498,11 +498,11 @@
       "link": null
      }
     ],
-    "effect": "回收物品价值的60%",
+    "effect": "回收物品价值的 60%",
     "image": "Trash_Can_Iridium.png"
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/垃圾桶（工具）"
+  "source": "https://wiki.biligame.com/stardewvalley/垃圾桶（工具）"
  },
  {
   "family": "训练用鱼竿",
@@ -592,6 +592,6 @@
     "image": "Advanced_Iridium_Rod.png"
    }
   ],
-  "source": "https://zh.stardewvalleywiki.com/训练用鱼竿"
+  "source": "https://wiki.biligame.com/stardewvalley/训练用鱼竿"
  }
 ]

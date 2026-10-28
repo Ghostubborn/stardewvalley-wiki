@@ -1,45 +1,5 @@
 [
  {
-  "page": "虞美人花",
-  "id": "(O)376",
-  "image": "Poppy.png",
-  "seed": {
-   "id": "(O)453",
-   "en": "Poppy Seeds",
-   "zh": "虞美人种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 7,
-  "regrow_days": null,
-  "sell_price": 140,
-  "xp": "20 耕种经验值‎"
- },
- {
-  "page": "红叶卷心菜",
-  "id": "(O)266",
-  "image": "Red_Cabbage.png",
-  "seed": {
-   "id": "(O)485",
-   "en": "Red Cabbage Seeds",
-   "zh": "红叶卷心菜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 9,
-  "regrow_days": null,
-  "sell_price": 260,
-  "xp": "28 耕种经验值‎"
- },
- {
   "page": "上古水果",
   "id": "(O)454",
   "image": "Ancient_Fruit.png",
@@ -59,47 +19,47 @@
   "growth_days": 28,
   "regrow_days": 7,
   "sell_price": 550,
-  "xp": "38 耕种经验值‎"
+  "xp": "38 点耕种经验值"
  },
  {
-  "page": "草莓",
-  "id": "(O)400",
-  "image": "Strawberry.png",
+  "page": "仙人掌果子",
+  "id": "(O)90",
+  "image": "Cactus_Fruit.png",
   "seed": {
-   "id": "(O)745",
-   "en": "Strawberry Seeds",
-   "zh": "草莓种子",
+   "id": "(O)802",
+   "en": "Cactus Seeds",
+   "zh": "仙人掌种子",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "spring"
+   "all"
   ],
-  "growth_days": 8,
-  "regrow_days": 4,
-  "sell_price": 120,
-  "xp": "18 耕种经验值‎"
+  "growth_days": 12,
+  "regrow_days": 3,
+  "sell_price": 75,
+  "xp": "*采集：7 点采集经验值\n*仙人掌种子：14 点耕种经验值\n*绿洲：无"
  },
  {
-  "page": "啤酒花",
-  "id": "(O)304",
-  "image": "Hops.png",
+  "page": "南瓜",
+  "id": "(O)276",
+  "image": "Pumpkin.png",
   "seed": {
-   "id": "(O)302",
-   "en": "Hops Starter",
-   "zh": "啤酒花种子",
+   "id": "(O)490",
+   "en": "Pumpkin Seeds",
+   "zh": "南瓜种子",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "summer"
+   "fall"
   ],
-  "growth_days": 11,
-  "regrow_days": 1,
-  "sell_price": 25,
-  "xp": "6 耕种经验值‎"
+  "growth_days": 13,
+  "regrow_days": null,
+  "sell_price": 320,
+  "xp": "31 点耕种经验值"
  },
  {
   "page": "向日葵",
@@ -120,108 +80,27 @@
   "growth_days": 8,
   "regrow_days": null,
   "sell_price": 80,
-  "xp": "14 耕种经验值"
+  "xp": "14 点耕种经验值"
  },
  {
-  "page": "蓝爵",
-  "id": "(O)597",
-  "image": "Blue_Jazz.png",
+  "page": "啤酒花",
+  "id": "(O)304",
+  "image": "Hops.png",
   "seed": {
-   "id": "(O)429",
-   "en": "Jazz Seeds",
-   "zh": "蓝爵士种子",
+   "id": "(O)302",
+   "en": "Hops Starter",
+   "zh": "啤酒花种子",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "spring"
-  ],
-  "growth_days": 7,
-  "regrow_days": null,
-  "sell_price": 50,
-  "xp": "10 耕种经验值"
- },
- {
-  "page": "花椰菜",
-  "id": "(O)190",
-  "image": "Cauliflower.png",
-  "seed": {
-   "id": "(O)474",
-   "en": "Cauliflower Seeds",
-   "zh": "花椰菜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "growth_days": 12,
-  "regrow_days": null,
-  "sell_price": 175,
-  "xp": "23 耕种经验值"
- },
- {
-  "page": "郁金香",
-  "id": "(O)591",
-  "image": "Tulip.png",
-  "seed": {
-   "id": "(O)427",
-   "en": "Tulip Bulb",
-   "zh": "郁金香球茎",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "growth_days": 6,
-  "regrow_days": null,
-  "sell_price": 30,
-  "xp": "7 耕种经验值"
- },
- {
-  "page": "咖啡豆",
-  "id": "(O)433",
-  "image": "Coffee_Bean.png",
-  "seed": {
-   "id": "(O)433",
-   "en": "Coffee Bean",
-   "zh": "咖啡豆",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring",
    "summer"
   ],
-  "growth_days": 10,
-  "regrow_days": 2,
-  "sell_price": 15,
-  "xp": "4 耕种经验值"
- },
- {
-  "page": "防风草",
-  "id": "(O)24",
-  "image": "Parsnip.png",
-  "seed": {
-   "id": "(O)472",
-   "en": "Parsnip Seeds",
-   "zh": "防风草种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "growth_days": 4,
+  "growth_days": 11,
   "regrow_days": null,
-  "sell_price": 35,
-  "xp": "8 耕种经验值"
+  "sell_price": 25,
+  "xp": "6 点耕种经验值"
  },
  {
   "page": "土豆",
@@ -241,47 +120,27 @@
   "growth_days": 6,
   "regrow_days": null,
   "sell_price": 80,
-  "xp": "14 耕种经验值"
+  "xp": "14 点耕种经验值"
  },
  {
-  "page": "蒜",
-  "id": "(O)248",
-  "image": "Garlic.png",
+  "page": "夏季亮片",
+  "id": "(O)593",
+  "image": "Summer_Spangle.png",
   "seed": {
-   "id": "(O)476",
-   "en": "Garlic Seeds",
-   "zh": "大蒜种子",
+   "id": "(O)455",
+   "en": "Spangle Seeds",
+   "zh": "夏季亮片种子",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "spring"
+   "summer"
   ],
-  "growth_days": 4,
+  "growth_days": 8,
   "regrow_days": null,
-  "sell_price": 60,
-  "xp": "12 耕种经验值"
- },
- {
-  "page": "甘蓝菜",
-  "id": "(O)250",
-  "image": "Kale.png",
-  "seed": {
-   "id": "(O)477",
-   "en": "Kale Seeds",
-   "zh": "甘蓝种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring"
-  ],
-  "growth_days": 6,
-  "regrow_days": null,
-  "sell_price": 110,
-  "xp": "17 耕种经验值"
+  "sell_price": 90,
+  "xp": "15 点耕种经验值"
  },
  {
   "page": "大黄",
@@ -301,7 +160,47 @@
   "growth_days": 13,
   "regrow_days": null,
   "sell_price": 220,
-  "xp": "26 耕种经验值"
+  "xp": "26 点耕种经验值"
+ },
+ {
+  "page": "宝石甜莓",
+  "id": "(O)417",
+  "image": "Sweet_Gem_Berry.png",
+  "seed": {
+   "id": "(O)347",
+   "en": "Rare Seed",
+   "zh": "稀有种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 24,
+  "regrow_days": null,
+  "sell_price": 3000,
+  "xp": "64 点耕种经验值"
+ },
+ {
+  "page": "小白菜",
+  "id": "(O)278",
+  "image": "Bok_Choy.png",
+  "seed": {
+   "id": "(O)491",
+   "en": "Bok Choy Seeds",
+   "zh": "小白菜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 4,
+  "regrow_days": null,
+  "sell_price": 80,
+  "xp": "14 点耕种经验值"
  },
  {
   "page": "小麦",
@@ -322,309 +221,7 @@
   "growth_days": 4,
   "regrow_days": null,
   "sell_price": 25,
-  "xp": "6 耕种经验值"
- },
- {
-  "page": "辣椒",
-  "id": "(O)260",
-  "image": "Hot_Pepper.png",
-  "seed": {
-   "id": "(O)482",
-   "en": "Pepper Seeds",
-   "zh": "辣椒种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 5,
-  "regrow_days": 3,
-  "sell_price": 40,
-  "xp": "9 耕种经验值"
- },
- {
-  "page": "玉米",
-  "id": "(O)270",
-  "image": "Corn.png",
-  "seed": {
-   "id": "(O)487",
-   "en": "Corn Seeds",
-   "zh": "玉米种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer",
-   "fall"
-  ],
-  "growth_days": 14,
-  "regrow_days": 4,
-  "sell_price": 50,
-  "xp": "10 耕种经验值"
- },
- {
-  "page": "西红柿",
-  "id": "(O)256",
-  "image": "Tomato.png",
-  "seed": {
-   "id": "(O)480",
-   "en": "Tomato Seeds",
-   "zh": "西红柿种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 11,
-  "regrow_days": 4,
-  "sell_price": 60,
-  "xp": "12 耕种经验值"
- },
- {
-  "page": "蓝莓",
-  "id": "(O)258",
-  "image": "Blueberry.png",
-  "seed": {
-   "id": "(O)481",
-   "en": "Blueberry Seeds",
-   "zh": "蓝莓种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 13,
-  "regrow_days": 4,
-  "sell_price": 50,
-  "xp": "10 耕种经验值"
- },
- {
-  "page": "萝卜",
-  "id": "(O)264",
-  "image": "Radish.png",
-  "seed": {
-   "id": "(O)484",
-   "en": "Radish Seeds",
-   "zh": "萝卜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 6,
-  "regrow_days": null,
-  "sell_price": 90,
-  "xp": "15 耕种经验值"
- },
- {
-  "page": "夏季亮片",
-  "id": "(O)593",
-  "image": "Summer_Spangle.png",
-  "seed": {
-   "id": "(O)455",
-   "en": "Spangle Seeds",
-   "zh": "夏季亮片种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 8,
-  "regrow_days": null,
-  "sell_price": 90,
-  "xp": "15 耕种经验值"
- },
- {
-  "page": "甜瓜",
-  "id": "(O)254",
-  "image": "Melon.png",
-  "seed": {
-   "id": "(O)479",
-   "en": "Melon Seeds",
-   "zh": "甜瓜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 12,
-  "regrow_days": null,
-  "sell_price": 250,
-  "xp": "27 耕种经验值"
- },
- {
-  "page": "杨桃",
-  "id": "(O)268",
-  "image": "Starfruit.png",
-  "seed": {
-   "id": "(O)486",
-   "en": "Starfruit Seeds",
-   "zh": "杨桃种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer"
-  ],
-  "growth_days": 13,
-  "regrow_days": null,
-  "sell_price": 750,
-  "xp": "44 耕种经验值"
- },
- {
-  "page": "茄子",
-  "id": "(O)272",
-  "image": "Eggplant.png",
-  "seed": {
-   "id": "(O)488",
-   "en": "Eggplant Seeds",
-   "zh": "茄子种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 5,
-  "regrow_days": 5,
-  "sell_price": 60,
-  "xp": "12 耕种经验值"
- },
- {
-  "page": "小白菜",
-  "id": "(O)278",
-  "image": "Bok_Choy.png",
-  "seed": {
-   "id": "(O)491",
-   "en": "Bok Choy Seeds",
-   "zh": "小白菜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 4,
-  "regrow_days": null,
-  "sell_price": 80,
-  "xp": "14 耕种经验值"
- },
- {
-  "page": "葡萄",
-  "id": "(O)398",
-  "image": "Grape.png",
-  "seed": {
-   "id": "(O)496",
-   "en": "Summer Seeds",
-   "zh": "夏季种子",
-   "qty": null,
-   "note": "夏季",
-   "link": null
-  },
-  "seasons": [
-   "summer",
-   "fall"
-  ],
-  "growth_days": 7,
-  "regrow_days": 3,
-  "sell_price": 80,
-  "xp": "夏季种子: 7 采集经验值‎\n采集: 7 采集经验值‎\n葡萄种子: 14 耕种经验值"
- },
- {
-  "page": "甜菜",
-  "id": "(O)284",
-  "image": "Beet.png",
-  "seed": {
-   "id": "(O)494",
-   "en": "Beet Seeds",
-   "zh": "甜菜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 6,
-  "regrow_days": null,
-  "sell_price": 100,
-  "xp": "16 耕种经验值"
- },
- {
-  "page": "蔓越莓",
-  "id": "(O)282",
-  "image": "Cranberries.png",
-  "seed": {
-   "id": "(O)493",
-   "en": "Cranberry Seeds",
-   "zh": "蔓越莓种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 7,
-  "regrow_days": 5,
-  "sell_price": 75,
-  "xp": "14 耕种经验值"
- },
- {
-  "page": "苋菜",
-  "id": "(O)300",
-  "image": "Amaranth.png",
-  "seed": {
-   "id": "(O)299",
-   "en": "Amaranth Seeds",
-   "zh": "苋菜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 7,
-  "regrow_days": null,
-  "sell_price": 150,
-  "xp": "21 耕种经验值"
- },
- {
-  "page": "洋蓟",
-  "id": "(O)274",
-  "image": "Artichoke.png",
-  "seed": {
-   "id": "(O)489",
-   "en": "Artichoke Seeds",
-   "zh": "洋蓟种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 8,
-  "regrow_days": null,
-  "sell_price": 160,
-  "xp": "22 耕种经验值"
+  "xp": "6 点耕种经验值"
  },
  {
   "page": "山药",
@@ -644,67 +241,7 @@
   "growth_days": 10,
   "regrow_days": null,
   "sell_price": 160,
-  "xp": "22 耕种经验值"
- },
- {
-  "page": "玫瑰仙子",
-  "id": "(O)595",
-  "image": "Fairy_Rose.png",
-  "seed": {
-   "id": "(O)425",
-   "en": "Fairy Seeds",
-   "zh": "玫瑰仙子种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 12,
-  "regrow_days": null,
-  "sell_price": 290,
-  "xp": "29 耕种经验值"
- },
- {
-  "page": "南瓜",
-  "id": "(O)276",
-  "image": "Pumpkin.png",
-  "seed": {
-   "id": "(O)490",
-   "en": "Pumpkin Seeds",
-   "zh": "南瓜种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 13,
-  "regrow_days": null,
-  "sell_price": 320,
-  "xp": "31 耕种经验值"
- },
- {
-  "page": "宝石甜莓",
-  "id": "(O)417",
-  "image": "Sweet_Gem_Berry.png",
-  "seed": {
-   "id": "(O)347",
-   "en": "Rare Seed",
-   "zh": "稀有种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "fall"
-  ],
-  "growth_days": 24,
-  "regrow_days": null,
-  "sell_price": 3000,
-  "xp": "64 耕种经验值"
+  "xp": "22 点耕种经验值"
  },
  {
   "page": "未碾米",
@@ -724,81 +261,52 @@
   "growth_days": 8,
   "regrow_days": null,
   "sell_price": 30,
-  "xp": "7 耕种经验值"
+  "xp": "7 点耕种经验值"
  },
  {
-  "page": "茶树",
-  "id": null,
-  "image": null,
-  "seed": {
-   "id": "(O)251",
-   "en": "Tea Sapling",
-   "zh": "茶苗",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring",
-   "summer",
-   "fall"
-  ],
-  "growth_days": 20,
-  "regrow_days": null,
-  "sell_price": null,
-  "xp": null
- },
- {
-  "page": "茶叶",
-  "id": "(O)815",
-  "image": "Tea_Leaves.png",
-  "seed": {
-   "id": "(O)251",
-   "en": "Tea Sapling",
-   "zh": "茶苗",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring",
-   "summer",
-   "fall"
-  ],
-  "growth_days": 20,
-  "regrow_days": null,
-  "sell_price": 50,
-  "xp": "0"
- },
- {
-  "page": "纤维",
-  "id": "(O)771",
-  "image": "Fiber.png",
-  "seed": {
-   "id": "(O)885",
-   "en": "Fiber Seeds",
-   "zh": "纤维种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [],
-  "growth_days": null,
-  "regrow_days": null,
-  "sell_price": 1,
-  "xp": null
- },
- {
-  "page": "苹果",
-  "id": "(O)613",
-  "image": "Apple.png",
+  "page": "杏子",
+  "id": "(O)634",
+  "image": "Apricot.png",
   "seed": null,
   "seasons": [
-   "fall"
+   "spring"
   ],
   "growth_days": 28,
   "regrow_days": null,
-  "sell_price": 100,
+  "sell_price": 50,
+  "xp": null
+ },
+ {
+  "page": "杨桃",
+  "id": "(O)268",
+  "image": "Starfruit.png",
+  "seed": {
+   "id": "(O)486",
+   "en": "Starfruit Seeds",
+   "zh": "杨桃种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 13,
+  "regrow_days": null,
+  "sell_price": 750,
+  "xp": "43 点耕种经验值"
+ },
+ {
+  "page": "桃子",
+  "id": "(O)636",
+  "image": "Peach.png",
+  "seed": null,
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 28,
+  "regrow_days": null,
+  "sell_price": 140,
   "xp": null
  },
  {
@@ -828,17 +336,125 @@
   "xp": null
  },
  {
-  "page": "桃子",
-  "id": "(O)636",
-  "image": "Peach.png",
-  "seed": null,
+  "page": "洋蓟",
+  "id": "(O)274",
+  "image": "Artichoke.png",
+  "seed": {
+   "id": "(O)489",
+   "en": "Artichoke Seeds",
+   "zh": "洋蓟种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 8,
+  "regrow_days": null,
+  "sell_price": 160,
+  "xp": "22 点耕种经验值"
+ },
+ {
+  "page": "玉米",
+  "id": "(O)270",
+  "image": "Corn.png",
+  "seed": {
+   "id": "(O)487",
+   "en": "Corn Seeds",
+   "zh": "玉米种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "growth_days": 14,
+  "regrow_days": 4,
+  "sell_price": 50,
+  "xp": "10 点耕种经验值"
+ },
+ {
+  "page": "玫瑰仙子",
+  "id": "(O)595",
+  "image": "Fairy_Rose.png",
+  "seed": {
+   "id": "(O)425",
+   "en": "Fairy Seeds",
+   "zh": "玫瑰仙子种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 12,
+  "regrow_days": null,
+  "sell_price": 290,
+  "xp": "29 点耕种经验值"
+ },
+ {
+  "page": "甘蓝菜",
+  "id": "(O)250",
+  "image": "Kale.png",
+  "seed": {
+   "id": "(O)477",
+   "en": "Kale Seeds",
+   "zh": "甘蓝种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 6,
+  "regrow_days": null,
+  "sell_price": 110,
+  "xp": "17 点耕种经验值"
+ },
+ {
+  "page": "甜瓜",
+  "id": "(O)254",
+  "image": "Melon.png",
+  "seed": {
+   "id": "(O)479",
+   "en": "Melon Seeds",
+   "zh": "甜瓜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
   "seasons": [
    "summer"
   ],
-  "growth_days": 28,
+  "growth_days": 12,
   "regrow_days": null,
-  "sell_price": 140,
-  "xp": null
+  "sell_price": 250,
+  "xp": "27 点耕种经验值"
+ },
+ {
+  "page": "甜菜",
+  "id": "(O)284",
+  "image": "Beet.png",
+  "seed": {
+   "id": "(O)494",
+   "en": "Beet Seeds",
+   "zh": "甜菜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 6,
+  "regrow_days": null,
+  "sell_price": 100,
+  "xp": "16 点耕种经验值"
  },
  {
   "page": "石榴",
@@ -854,108 +470,64 @@
   "xp": null
  },
  {
-  "page": "杏子",
-  "id": "(O)634",
-  "image": "Apricot.png",
-  "seed": null,
+  "page": "红叶卷心菜",
+  "id": "(O)266",
+  "image": "Red_Cabbage.png",
+  "seed": {
+   "id": "(O)485",
+   "en": "Red Cabbage Seeds",
+   "zh": "红叶卷心菜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 9,
+  "regrow_days": null,
+  "sell_price": 260,
+  "xp": "28 点耕种经验值"
+ },
+ {
+  "page": "纤维",
+  "id": "(O)771",
+  "image": "Fiber.png",
+  "seed": {
+   "id": "(O)885",
+   "en": "Fiber Seeds",
+   "zh": "纤维种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "all"
+  ],
+  "growth_days": 7,
+  "regrow_days": null,
+  "sell_price": 1,
+  "xp": "0 点耕种经验值"
+ },
+ {
+  "page": "胡萝卜",
+  "id": "(O)Carrot",
+  "image": "Carrot.png",
+  "seed": {
+   "id": "(O)CarrotSeeds",
+   "en": "Carrot Seeds",
+   "zh": "胡萝卜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
   "seasons": [
    "spring"
   ],
-  "growth_days": 28,
+  "growth_days": 3,
   "regrow_days": null,
-  "sell_price": 50,
-  "xp": null
- },
- {
-  "page": "草",
-  "id": null,
-  "image": null,
-  "seed": {
-   "id": "(O)297",
-   "en": "Grass Starter",
-   "zh": "草籽",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "spring",
-   "summer",
-   "fall"
-  ],
-  "growth_days": null,
-  "regrow_days": null,
-  "sell_price": null,
-  "xp": null
- },
- {
-  "page": "芒果",
-  "id": "(O)834",
-  "image": "Mango.png",
-  "seed": null,
-  "seasons": [
-   "summer",
-   "all"
-  ],
-  "growth_days": 28,
-  "regrow_days": null,
-  "sell_price": 130,
-  "xp": null
- },
- {
-  "page": "香蕉",
-  "id": "(O)91",
-  "image": "Banana.png",
-  "seed": null,
-  "seasons": [
-   "all",
-   "summer"
-  ],
-  "growth_days": 28,
-  "regrow_days": null,
-  "sell_price": 150,
-  "xp": null
- },
- {
-  "page": "菠萝",
-  "id": "(O)832",
-  "image": "Pineapple.png",
-  "seed": {
-   "id": "(O)833",
-   "en": "Pineapple Seeds",
-   "zh": "菠萝种子",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "summer",
-   "all"
-  ],
-  "growth_days": 14,
-  "regrow_days": 7,
-  "sell_price": 300,
-  "xp": "30 耕种经验值"
- },
- {
-  "page": "齐瓜",
-  "id": "(O)889",
-  "image": "Qi_Fruit.png",
-  "seed": {
-   "id": "(O)890",
-   "en": "Qi Bean",
-   "zh": "齐豆",
-   "qty": null,
-   "note": null,
-   "link": null
-  },
-  "seasons": [
-   "all"
-  ],
-  "growth_days": 4,
-  "regrow_days": null,
-  "sell_price": 1,
-  "xp": null
+  "sell_price": 35,
+  "xp": "8 点耕种经验值"
  },
  {
   "page": "芋头",
@@ -976,16 +548,30 @@
   "growth_days": 10,
   "regrow_days": null,
   "sell_price": 100,
-  "xp": "16 耕种经验值"
+  "xp": "16 点耕种经验值"
  },
  {
-  "page": "青豆",
-  "id": "(O)188",
-  "image": "Green_Bean.png",
+  "page": "芒果",
+  "id": "(O)834",
+  "image": "Mango.png",
+  "seed": null,
+  "seasons": [
+   "all",
+   "summer"
+  ],
+  "growth_days": 28,
+  "regrow_days": null,
+  "sell_price": 130,
+  "xp": null
+ },
+ {
+  "page": "花椰菜",
+  "id": "(O)190",
+  "image": "Cauliflower.png",
   "seed": {
-   "id": "(O)473",
-   "en": "Bean Starter",
-   "zh": "青豆种子",
+   "id": "(O)474",
+   "en": "Cauliflower Seeds",
+   "zh": "花椰菜种子",
    "qty": null,
    "note": null,
    "link": null
@@ -993,30 +579,288 @@
   "seasons": [
    "spring"
   ],
-  "growth_days": 10,
-  "regrow_days": 3,
-  "sell_price": 40,
-  "xp": "9 耕种经验值"
+  "growth_days": 12,
+  "regrow_days": null,
+  "sell_price": 175,
+  "xp": "23 点耕种经验值"
  },
  {
-  "page": "霜瓜",
-  "id": "(O)Powdermelon",
-  "image": "Powdermelon.png",
+  "page": "苋菜",
+  "id": "(O)300",
+  "image": "Amaranth.png",
   "seed": {
-   "id": "(O)PowdermelonSeeds",
-   "en": "Powdermelon Seeds",
-   "zh": "霜瓜种子",
+   "id": "(O)299",
+   "en": "Amaranth Seeds",
+   "zh": "苋菜种子",
    "qty": null,
    "note": null,
    "link": null
   },
   "seasons": [
-   "winter"
+   "fall"
   ],
   "growth_days": 7,
   "regrow_days": null,
+  "sell_price": 150,
+  "xp": "21 点耕种经验值"
+ },
+ {
+  "page": "苹果",
+  "id": "(O)613",
+  "image": "Apple.png",
+  "seed": null,
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 28,
+  "regrow_days": null,
+  "sell_price": 100,
+  "xp": null
+ },
+ {
+  "page": "茄子",
+  "id": "(O)272",
+  "image": "Eggplant.png",
+  "seed": {
+   "id": "(O)488",
+   "en": "Eggplant Seeds",
+   "zh": "茄子种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 5,
+  "regrow_days": 5,
   "sell_price": 60,
-  "xp": "12 耕种经验值"
+  "xp": "12 点耕种经验值"
+ },
+ {
+  "page": "茶叶",
+  "id": "(O)815",
+  "image": "Tea_Leaves.png",
+  "seed": {
+   "id": "(O)251",
+   "en": "Tea Sapling",
+   "zh": "茶苗",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring",
+   "summer",
+   "fall",
+   "winter"
+  ],
+  "growth_days": 20,
+  "regrow_days": null,
+  "sell_price": 50,
+  "xp": null
+ },
+ {
+  "page": "草莓",
+  "id": "(O)400",
+  "image": "Strawberry.png",
+  "seed": {
+   "id": "(O)745",
+   "en": "Strawberry Seeds",
+   "zh": "草莓种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 8,
+  "regrow_days": 4,
+  "sell_price": 120,
+  "xp": "18 点耕种经验值"
+ },
+ {
+  "page": "菠萝",
+  "id": "(O)832",
+  "image": "Pineapple.png",
+  "seed": {
+   "id": "(O)833",
+   "en": "Pineapple Seeds",
+   "zh": "菠萝种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "all",
+   "summer"
+  ],
+  "growth_days": 14,
+  "regrow_days": 7,
+  "sell_price": 300,
+  "xp": "30 点耕种经验值"
+ },
+ {
+  "page": "萝卜",
+  "id": "(O)264",
+  "image": "Radish.png",
+  "seed": {
+   "id": "(O)484",
+   "en": "Radish Seeds",
+   "zh": "萝卜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 6,
+  "regrow_days": null,
+  "sell_price": 90,
+  "xp": "15 点耕种经验值"
+ },
+ {
+  "page": "葡萄",
+  "id": "(O)398",
+  "image": "Grape.png",
+  "seed": {
+   "id": "(O)496",
+   "en": "Summer Seeds",
+   "zh": "夏季种子",
+   "qty": null,
+   "note": "夏季",
+   "link": null
+  },
+  "seasons": [
+   "summer",
+   "fall"
+  ],
+  "growth_days": 7,
+  "regrow_days": 3,
+  "sell_price": 80,
+  "xp": "葡萄种子：14 点耕种经验值\n采集：7 点采集经验值"
+ },
+ {
+  "page": "蒜",
+  "id": "(O)248",
+  "image": "Garlic.png",
+  "seed": {
+   "id": "(O)476",
+   "en": "Garlic Seeds",
+   "zh": "大蒜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 4,
+  "regrow_days": null,
+  "sell_price": 60,
+  "xp": "12 点耕种经验值"
+ },
+ {
+  "page": "蓝爵",
+  "id": "(O)597",
+  "image": "Blue_Jazz.png",
+  "seed": {
+   "id": "(O)429",
+   "en": "Jazz Seeds",
+   "zh": "蓝爵士种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 7,
+  "regrow_days": null,
+  "sell_price": 50,
+  "xp": "10 点耕种经验值"
+ },
+ {
+  "page": "蓝莓",
+  "id": "(O)258",
+  "image": "Blueberry.png",
+  "seed": {
+   "id": "(O)481",
+   "en": "Blueberry Seeds",
+   "zh": "蓝莓种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 13,
+  "regrow_days": 4,
+  "sell_price": 50,
+  "xp": "10 点耕种经验值"
+ },
+ {
+  "page": "蔓越莓",
+  "id": "(O)282",
+  "image": "Cranberries.png",
+  "seed": {
+   "id": "(O)493",
+   "en": "Cranberry Seeds",
+   "zh": "蔓越莓种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "fall"
+  ],
+  "growth_days": 7,
+  "regrow_days": 5,
+  "sell_price": 75,
+  "xp": "14 点耕种经验值"
+ },
+ {
+  "page": "虞美人花",
+  "id": "(O)376",
+  "image": "Poppy.png",
+  "seed": {
+   "id": "(O)453",
+   "en": "Poppy Seeds",
+   "zh": "虞美人种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 7,
+  "regrow_days": null,
+  "sell_price": 140,
+  "xp": "20 点耕种经验值"
+ },
+ {
+  "page": "西红柿",
+  "id": "(O)256",
+  "image": "Tomato.png",
+  "seed": {
+   "id": "(O)480",
+   "en": "Tomato Seeds",
+   "zh": "西红柿种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 11,
+  "regrow_days": 4,
+  "sell_price": 60,
+  "xp": "12 点耕种经验值"
  },
  {
   "page": "西蓝花",
@@ -1036,7 +880,47 @@
   "growth_days": 8,
   "regrow_days": 4,
   "sell_price": 70,
-  "xp": "13 耕种经验值"
+  "xp": "13 点耕种经验值"
+ },
+ {
+  "page": "辣椒",
+  "id": "(O)260",
+  "image": "Hot_Pepper.png",
+  "seed": {
+   "id": "(O)482",
+   "en": "Pepper Seeds",
+   "zh": "辣椒种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "summer"
+  ],
+  "growth_days": 5,
+  "regrow_days": 3,
+  "sell_price": 40,
+  "xp": "9 点耕种经验值"
+ },
+ {
+  "page": "郁金香",
+  "id": "(O)591",
+  "image": "Tulip.png",
+  "seed": {
+   "id": "(O)427",
+   "en": "Tulip Bulb",
+   "zh": "郁金香球茎",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 6,
+  "regrow_days": null,
+  "sell_price": 30,
+  "xp": "7 点耕种经验值"
  },
  {
   "page": "金皮西葫芦",
@@ -1056,16 +940,16 @@
   "growth_days": 6,
   "regrow_days": 3,
   "sell_price": 45,
-  "xp": "9 耕种经验值"
+  "xp": "9 点耕种经验值"
  },
  {
-  "page": "胡萝卜",
-  "id": "(O)Carrot",
-  "image": "Carrot.png",
+  "page": "防风草",
+  "id": "(O)24",
+  "image": "Parsnip.png",
   "seed": {
-   "id": "(O)CarrotSeeds",
-   "en": "Carrot Seeds",
-   "zh": "胡萝卜种子",
+   "id": "(O)472",
+   "en": "Parsnip Seeds",
+   "zh": "防风草种子",
    "qty": null,
    "note": null,
    "link": null
@@ -1073,9 +957,83 @@
   "seasons": [
    "spring"
   ],
-  "growth_days": 3,
+  "growth_days": 4,
   "regrow_days": null,
   "sell_price": 35,
-  "xp": "8 耕种经验值"
+  "xp": "8 点耕种经验值"
+ },
+ {
+  "page": "霜瓜",
+  "id": "(O)Powdermelon",
+  "image": "Powdermelon.png",
+  "seed": {
+   "id": "(O)PowdermelonSeeds",
+   "en": "Powdermelon Seeds",
+   "zh": "霜瓜种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "winter"
+  ],
+  "growth_days": 7,
+  "regrow_days": null,
+  "sell_price": 60,
+  "xp": "12 点耕种经验值"
+ },
+ {
+  "page": "青豆",
+  "id": "(O)188",
+  "image": "Green_Bean.png",
+  "seed": {
+   "id": "(O)473",
+   "en": "Bean Starter",
+   "zh": "青豆种子",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "spring"
+  ],
+  "growth_days": 10,
+  "regrow_days": 3,
+  "sell_price": 40,
+  "xp": "9 点耕种经验值"
+ },
+ {
+  "page": "香蕉",
+  "id": "(O)91",
+  "image": "Banana.png",
+  "seed": null,
+  "seasons": [
+   "all",
+   "summer"
+  ],
+  "growth_days": 28,
+  "regrow_days": null,
+  "sell_price": 150,
+  "xp": null
+ },
+ {
+  "page": "齐瓜",
+  "id": "(O)889",
+  "image": "Qi_Fruit.png",
+  "seed": {
+   "id": "(O)890",
+   "en": "Qi Bean",
+   "zh": "齐豆",
+   "qty": null,
+   "note": null,
+   "link": null
+  },
+  "seasons": [
+   "all"
+  ],
+  "growth_days": 4,
+  "regrow_days": null,
+  "sell_price": 1,
+  "xp": null
  }
 ]

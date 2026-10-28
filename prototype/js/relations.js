@@ -249,7 +249,7 @@
   function placeRelations(name) {
     const left = [], right = [];
     const loc = App.locationByName.get(name);
-    // 住户里也有不是居民的（老师傅香炸奶酪卷、达斯迪、沙漠商人），按条目链接；没有条目的只写名字。
+    // 住户里也有不是居民的（老坎诺利大师、达斯迪、沙漠商人），按条目链接；没有条目的只写名字。
     const resident = n => App.villagerByName.has(n) ? villagerNode(n) : D.pages[n] ? pageNode(n) : textNode(N(n));
     if (loc?.occ?.length) left.push({ kind: "people", edge: "link", label: t("住在这里"), nodes: loc.occ.filter(n => n !== name).map(resident) });
     const unlocks = App.progression ? [...App.progression.nodes.values()].filter(n => n.place === name) : [];
@@ -322,7 +322,7 @@
     else if (!b.cost && !b.upgrade_from) left.push({ kind: "initial", edge: "find", label: t("开局就有"), nodes: [textNode(EN ? EN.buildings?.[b.name]?.desc || t("开局就有") : b.description || t("开局就有"))] });
     // 没写建造者的（温室、图腾柱、祝尼魔屋）照原文写获得方式或花费，不猜是谁建的。温室有两种获得方式，
     // 英文资料没有这段原文时不只写一个花费，免得看起来只能花钱买。
-    else if (/\n/.test(costText || "")) left.push({ kind: "build", edge: "buy", label: t("建造"), nodes: costText.split(/\n+(?:或|or)?\n*/i).filter(x => x.trim()).map(x => textNode(x.trim())) });
+    else if (/\n/.test(costText || "")) left.push({ kind: "build", edge: "buy", label: t("建造"), nodes: costText.split(/\s*(?:或|or)?\s*\n+\s*(?:或|or)?\s*/i).filter(x => x.trim()).map(x => textNode(x.trim())) });
     else if (cost && !/\n/.test(b.cost_text || "")) left.push({ kind: "build", edge: "buy", label: t("建造"), nodes: [textNode(t("花费 {cost}", { cost }))] });
     if (b.materials.length) left.push({ kind: "materials", edge: "make", label: t("建造材料"), nodes: b.materials.map(m => itemNode(m.id || m.zh, { qty: m.qty })),
       chain: b.materials.map(m => ({ id: m.id, z: m.zh, q: m.qty })) });
@@ -339,7 +339,10 @@
       const title = [x + "（怪物）", x].find(p => D.pages[p] && D.pages[p].k !== "disambiguation");
       return title ? pageNode(title) : EN ? null : textNode(x);
     }).filter(Boolean);
-    if (animals.length || named.length) right.push({ kind: "animals", edge: "link", label: t("可以养"), nodes: [...animals.map(a => pageNode(a.p)), ...named] });
+    // BWIKI 的建筑信息框把各种动物都写在 animals 里，和动物资料重复的只列一次。
+    const listed = new Set(animals.map(a => a.p));
+    const extra = named.filter(n => !(n.ref?.type === "page" && listed.has(n.ref.id)));
+    if (animals.length || extra.length) right.push({ kind: "animals", edge: "link", label: t("可以养"), nodes: [...animals.map(a => pageNode(a.p)), ...extra] });
     // 鱼塘：能养的鱼和产物（《鱼塘》产物表）；各种鱼的鱼籽合成一项。
     if (b.name === "鱼塘") {
       const ponds = D.fish.filter(f => f.pond?.length);

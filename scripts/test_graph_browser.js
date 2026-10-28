@@ -80,7 +80,7 @@
     assert(graph().querySelector(".g-chain-panel").hidden, "the chain closes again");
 
     // Places, monsters, fish and animals get graphs too.
-    for (const ref of [{ type: "location", id: "皮埃尔的杂货店" }, { type: "page", id: "鹈鹕镇" }, { type: "page", id: "史莱姆（怪物）" }, { type: "fish", id: "鲶鱼" }, { type: "page", id: "绵羊" }]) {
+    for (const ref of [{ type: "location", id: "皮埃尔的杂货店" }, { type: "page", id: "鹈鹕镇" }, { type: "page", id: "史莱姆" }, { type: "fish", id: "鲶鱼" }, { type: "page", id: "绵羊" }]) {
       A.select(ref); await settle();
       assert(graph()?.querySelectorAll(".g-group").length, `${ref.id}: graph`);
     }
@@ -117,7 +117,7 @@
     assert(box.querySelectorAll(".g-node.is-protected").length === count, "the locked box opens into one placeholder per entry");
     box.querySelector("button.g-node.is-protected").click(); await settle();
     assert(!graph() && body.textContent.includes("仅查看此条"), "a placeholder opens the usual on-demand view");
-    A.select({ type: "page", id: "史莱姆（怪物）" }); await settle();
+    A.select({ type: "page", id: "史莱姆" }); await settle();
     assert(!graph() && body.textContent.includes("仅查看此条"), "a protected entry keeps its gate");
 
     // Back to the list.

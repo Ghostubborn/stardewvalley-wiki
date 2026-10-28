@@ -493,7 +493,8 @@
   // 校正规则依据 data/build/page-text.jsonl 同名条目的导言（2025-12-18 归档）。
   // 保留原始 Wiki 字段供核对；未建模的例外只给未确认，不猜测为满足。
   const FORAGE_COLLECTION = new Set(["珊瑚", "海胆", "彩虹贝壳", "鹦鹉螺"]);
-  const ISLAND_ALL_SEASONS = new Set(["金枪鱼", "河豚", "大海参", "比目鱼", "罗非鱼", "午夜鲤鱼"]);
+  // BWIKI 的季节字段分水域写明：这些鱼在姜岛（章鱼是姜岛西部海洋）全年可钓。
+  const ISLAND_ALL_SEASONS = new Set(["金枪鱼", "河豚", "大海参", "比目鱼", "罗非鱼", "午夜鲤鱼", "章鱼"]);
   const LEGEND_LEVELS = { 传说之鱼: 10, 鮟鱇鱼: 3, 绯红鱼: 5, 冰川鱼: 6 };
   const fishingLevelRequired = f => LEGEND_LEVELS[f.p] || (f.p === "蝎鲤鱼" ? 4 : null);
   // 归档《夜市》“钓鱼潜艇”：17:00–23:00 可登船，船票 1,000 金，可一直钓到凌晨 2:00；
@@ -581,7 +582,6 @@
       h.area = LOCATION_AREA[h.location] || null;
       if (h.location === "夜市") h.seasons = ["winter"];
       h.seasons ||= (["珊瑚", "海胆"].includes(f.p) || (h.location === "姜岛" && ISLAND_ALL_SEASONS.has(f.p))) ? ["all"] : f.S;
-      if (h.location === "姜岛" && f.p === "章鱼") h.unknown = t("姜岛水域的独立季节条件尚未核验");
       if (f.p === "鲶鱼" || f.p === "大眼鱼" || f.p === "红鲷鱼") h.winterTotem = true;
       if (h.location === "矿井") h.depth = ({ 鬼鱼: 20, 石鱼: 20, 冰柱鱼: 60, 岩浆鳗鱼: 100, 白藻: 20 })[f.p];
       if (h.location === "火山地牢" || (f.p === "岩浆鳗鱼" && h.location === "姜岛")) {
@@ -590,7 +590,8 @@
       if (h.location === "突变虫穴") h.unknown = t("突变虫穴任务准入尚未记录；能进下水道不代表可进虫穴");
       if (f.p === "黄貂鱼") h.unknown = t("海岛度假村与海盗湾准入尚未记录");
       if (f.p === "虾虎鱼") h.unknown = t("需在煤矿森林南部瀑布底部的特定水域抛竿");
-      if (f.var && !["金枪鱼", "鲶鱼"].includes(f.p)) h.unknown = t("不同水域的特殊规则尚未核验");
+      // 分水域写明的季节已按上面的规则拆开（鲶鱼、鲤鱼逐条列出，姜岛全年的见 ISLAND_ALL_SEASONS）。
+      if (f.var && !["金枪鱼", "鲶鱼", "鲤鱼"].includes(f.p) && !ISLAND_ALL_SEASONS.has(f.p)) h.unknown = t("不同水域的特殊规则尚未核验");
     }
     return list;
   }

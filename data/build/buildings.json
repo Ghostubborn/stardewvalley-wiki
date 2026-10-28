@@ -1,23 +1,496 @@
 [
  {
+  "name": "农场图腾柱",
+  "page": "农场图腾柱",
+  "en": "Farm Obelisk",
+  "image": "Farm_Obelisk.png",
+  "cost": 20,
+  "currency": "金色核桃",
+  "cost_text": "20金色核桃",
+  "materials": [],
+  "size": "3x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": null,
+  "description": null,
+  "sold_by": "姜岛",
+  "upgrade_from": null
+ },
+ {
+  "name": "出货箱",
+  "page": "出货箱",
+  "en": "Shipping Box",
+  "image": "ShippingBox.png",
+  "cost": 250,
+  "currency": "金",
+  "cost_text": "250金",
+  "materials": [
+   {
+    "id": "(O)388",
+    "en": "Wood",
+    "zh": "木材",
+    "qty": 150,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "2x1",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "把物品扔到里面，以便在夜间售出。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": null
+ },
+ {
+  "name": "史莱姆屋",
+  "page": "史莱姆屋",
+  "en": "Slime Hutch",
+  "image": "Slime_Hutch.png",
+  "cost": 10000,
+  "currency": "金",
+  "cost_text": "10,000金",
+  "materials": [
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": 500,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)338",
+    "en": "Refined Quartz",
+    "zh": "精炼石英",
+    "qty": 10,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": 1,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "7x4",
+  "animals": "史莱姆",
+  "capacity": "20",
+  "upgrade_text": null,
+  "build_days": 2,
+  "description": "可饲养 20 只史莱姆。装满饮水槽，史莱姆就会制造史莱姆球。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": null
+ },
+ {
+  "name": "土之图腾柱",
+  "page": "土之图腾柱",
+  "en": "Earth Obelisk",
+  "image": "Earth_Obelisk.png",
+  "cost": 500000,
+  "currency": "金",
+  "cost_text": "500,000金",
+  "materials": [
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": 10,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)86",
+    "en": "Earth Crystal",
+    "zh": "地晶",
+    "qty": 10,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "3x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "将你传送到山岭。",
+  "sold_by": "法师塔",
+  "upgrade_from": null
+ },
+ {
+  "name": "姜岛农舍",
+  "page": "姜岛农舍",
+  "en": "Island Farmhouse",
+  "image": "SleepingHut_AfterRepair.png",
+  "cost": 20,
+  "currency": "金色核桃",
+  "cost_text": "20金色核桃 个金色核桃",
+  "materials": [],
+  "size": "7x5",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": null,
+  "description": null,
+  "sold_by": "姜岛",
+  "upgrade_from": null
+ },
+ {
+  "name": "姜岛图腾柱",
+  "page": "姜岛图腾柱",
+  "en": "Island Obelisk",
+  "image": "Island_Obelisk.png",
+  "cost": 1000000,
+  "currency": "金",
+  "cost_text": "1,000,000金",
+  "materials": [
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": 10,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)852",
+    "en": "Dragon Tooth",
+    "zh": "龙牙",
+    "qty": 10,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)91",
+    "en": "Banana",
+    "zh": "香蕉",
+    "qty": 10,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "3x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "将你传送到姜岛。",
+  "sold_by": "法师塔",
+  "upgrade_from": null
+ },
+ {
+  "name": "宠物碗",
+  "page": "宠物碗",
+  "en": "Pet Bowl",
+  "image": "Pet_Bowl_Wood.png",
+  "cost": 5000,
+  "currency": "金",
+  "cost_text": "5,000金",
+  "materials": [
+   {
+    "id": "(O)709",
+    "en": "Hardwood",
+    "zh": "硬木",
+    "qty": 25,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "2x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "为一只宠物提供专属的家园。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": null
+ },
+ {
+  "name": "小屋",
+  "page": "小屋",
+  "en": "Shed",
+  "image": "Shed.png",
+  "cost": 15000,
+  "currency": "金",
+  "cost_text": "15,000金",
+  "materials": [
+   {
+    "id": "(O)388",
+    "en": "Wood",
+    "zh": "木材",
+    "qty": 300,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "7x3",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 2,
+  "description": "一栋空的建筑。装入任何你想装的东西！可以装饰内部。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": null
+ },
+ {
+  "name": "水之图腾柱",
+  "page": "水之图腾柱",
+  "en": "Water Obelisk",
+  "image": "Water_Obelisk.png",
+  "cost": 500000,
+  "currency": "金",
+  "cost_text": "500,000金",
+  "materials": [
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": 5,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)372",
+    "en": "Clam",
+    "zh": "蛤",
+    "qty": 10,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)393",
+    "en": "Coral",
+    "zh": "珊瑚",
+    "qty": 10,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "3x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "将你传送到海滩。",
+  "sold_by": "法师塔",
+  "upgrade_from": null
+ },
+ {
+  "name": "水井",
+  "page": "水井",
+  "en": "Well",
+  "image": "Well.png",
+  "cost": 1000,
+  "currency": "金",
+  "cost_text": "1,000金",
+  "materials": [
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": 75,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "3x3",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 2,
+  "description": "用来重装你的喷壶。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": null
+ },
+ {
+  "name": "沙漠图腾柱",
+  "page": "沙漠图腾柱",
+  "en": "Desert Obelisk",
+  "image": "Desert_Obelisk.png",
+  "cost": 1000000,
+  "currency": "金",
+  "cost_text": "1,000,000金",
+  "materials": [
+   {
+    "id": "(O)337",
+    "en": "Iridium Bar",
+    "zh": "铱锭",
+    "qty": 20,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)88",
+    "en": "Coconut",
+    "zh": "椰子",
+    "qty": 10,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)90",
+    "en": "Cactus Fruit",
+    "zh": "仙人掌果子",
+    "qty": 10,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "3x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "将你传送到沙漠。",
+  "sold_by": "法师塔",
+  "upgrade_from": null
+ },
+ {
+  "name": "温室",
   "page": "温室",
   "en": "Greenhouse",
   "image": "Greenhouse.png",
   "cost": 35000,
   "currency": "金",
-  "cost_text": "完成茶水间收集包\n或\n在Joja社区发展申请书中花35,000金购入",
+  "cost_text": "完成茶水间收集包 或\n在Joja社区发展申请书中花费35,000金 购买",
   "materials": [],
   "size": "7x6 + 3x2",
   "animals": null,
   "capacity": null,
   "upgrade_text": null,
   "build_days": null,
-  "description": null,
+  "description": "可全年种植任何季节的作物的地方！",
   "sold_by": null,
-  "name": "温室",
   "upgrade_from": null
  },
  {
+  "name": "畜棚",
+  "page": "畜棚",
+  "en": "Barn",
+  "image": "Barn.png",
+  "cost": 6000,
+  "currency": "金",
+  "cost_text": "6,000金",
+  "materials": [
+   {
+    "id": "(O)388",
+    "en": "Wood",
+    "zh": "木材",
+    "qty": 350,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": 150,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "7x4",
+  "animals": "牛、鸵鸟",
+  "capacity": "4",
+  "upgrade_text": null,
+  "build_days": 3,
+  "description": "可容纳 4 只家畜。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": null
+ },
+ {
+  "name": "磨坊",
+  "page": "磨坊",
+  "en": "Mill",
+  "image": "Mill.png",
+  "cost": 2500,
+  "currency": "金",
+  "cost_text": "2,500金",
+  "materials": [
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": 50,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)388",
+    "en": "Wood",
+    "zh": "木材",
+    "qty": 150,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)428",
+    "en": "Cloth",
+    "zh": "布料",
+    "qty": 4,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "4x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 2,
+  "description": "可以研磨小麦、甜菜、大米。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": null
+ },
+ {
+  "name": "祝尼魔屋",
+  "page": "祝尼魔屋",
+  "en": "Junimo Hut",
+  "image": "Junimo_Hut.png",
+  "cost": 20000,
+  "currency": "金",
+  "cost_text": "20,000金",
+  "materials": [
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": 200,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)268",
+    "en": "Starfruit",
+    "zh": "杨桃",
+    "qty": 9,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)771",
+    "en": "Fiber",
+    "zh": "纤维",
+    "qty": 100,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "3x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "可以作为装饰品摆放。",
+  "sold_by": "法师塔",
+  "upgrade_from": null
+ },
+ {
+  "name": "筒仓",
   "page": "筒仓",
   "en": "Silo",
   "image": "Silo.png",
@@ -57,98 +530,30 @@
   "build_days": 2,
   "description": "让你把割下来的草料储存起来。",
   "sold_by": "木匠的商店",
-  "name": "筒仓",
   "upgrade_from": null
  },
  {
-  "page": "史莱姆屋",
-  "en": "Slime Hutch",
-  "image": "Slime_Hutch.png",
-  "cost": 10000,
+  "name": "联机小屋",
+  "page": "联机小屋",
+  "en": "Cabin",
+  "image": "Plank_Cabin_Stage_1.png",
+  "cost": 100,
   "currency": "金",
-  "cost_text": "10,000金",
-  "materials": [
-   {
-    "id": "(O)390",
-    "en": "Stone",
-    "zh": "石头",
-    "qty": 500,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)338",
-    "en": "Refined Quartz",
-    "zh": "精炼石英",
-    "qty": 10,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)337",
-    "en": "Iridium Bar",
-    "zh": "铱锭",
-    "qty": 1,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "7x4",
-  "animals": "史莱姆",
-  "capacity": "20",
-  "upgrade_text": null,
-  "build_days": 2,
-  "description": "可饲养20只史莱姆。装满饮水槽，史莱姆就会制造史莱姆球。",
-  "sold_by": "木匠的商店",
-  "name": "史莱姆屋",
-  "upgrade_from": null
- },
- {
-  "page": "磨坊",
-  "en": "Mill",
-  "image": "Mill.png",
-  "cost": 2500,
-  "currency": "金",
-  "cost_text": "2,500金",
-  "materials": [
-   {
-    "id": "(O)390",
-    "en": "Stone",
-    "zh": "石头",
-    "qty": 50,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)388",
-    "en": "Wood",
-    "zh": "木材",
-    "qty": 150,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)428",
-    "en": "Cloth",
-    "zh": "布料",
-    "qty": 4,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "4x2",
+  "cost_text": "100金",
+  "materials": [],
+  "size": "5x3",
   "animals": null,
   "capacity": null,
   "upgrade_text": null,
-  "build_days": 2,
-  "description": "让你将小麦制成面粉，将甜菜根制成糖。",
+  "build_days": 0,
+  "description": "朋友的家！由城镇农业基金补贴。",
   "sold_by": "木匠的商店",
-  "name": "磨坊",
   "upgrade_from": null
  },
  {
+  "name": "马厩",
   "page": "马厩",
-  "en": "Stable",
+  "en": "Horse Stable",
   "image": "Horse_Stable.png",
   "cost": 10000,
   "currency": "金",
@@ -178,177 +583,11 @@
   "build_days": 2,
   "description": "让你饲养马匹。包括马匹。",
   "sold_by": "木匠的商店",
-  "name": "马厩",
   "upgrade_from": null
  },
  {
-  "page": "水井",
-  "en": "Well",
-  "image": "Well.png",
-  "cost": 1000,
-  "currency": "金",
-  "cost_text": "1,000金",
-  "materials": [
-   {
-    "id": "(O)390",
-    "en": "Stone",
-    "zh": "石头",
-    "qty": 75,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "3x3",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 2,
-  "description": "用来重装你的喷壶。",
-  "sold_by": "木匠的商店",
-  "name": "水井",
-  "upgrade_from": null
- },
- {
-  "page": "黄金时钟",
-  "en": "Gold Clock",
-  "image": "Gold_Clock.png",
-  "cost": 10000000,
-  "currency": "金",
-  "cost_text": "10,000,000金",
-  "materials": [],
-  "size": "3x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": null,
-  "sold_by": "法师塔",
-  "name": "黄金时钟",
-  "upgrade_from": null
- },
- {
-  "page": "祝尼魔屋",
-  "en": "Junimo Hut",
-  "image": "Junimo_Hut.png",
-  "cost": 20000,
-  "currency": "金",
-  "cost_text": "20,000金",
-  "materials": [
-   {
-    "id": "(O)390",
-    "en": "Stone",
-    "zh": "石头",
-    "qty": 200,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)268",
-    "en": "Starfruit",
-    "zh": "杨桃",
-    "qty": 9,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)771",
-    "en": "Fiber",
-    "zh": "纤维",
-    "qty": 100,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "3x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": null,
-  "sold_by": "法师塔",
-  "name": "祝尼魔屋",
-  "upgrade_from": null
- },
- {
-  "page": "土之图腾柱",
-  "en": "Earth Obelisk",
-  "image": "Earth_Obelisk.png",
-  "cost": 500000,
-  "currency": "金",
-  "cost_text": "500,000金",
-  "materials": [
-   {
-    "id": "(O)337",
-    "en": "Iridium Bar",
-    "zh": "铱锭",
-    "qty": 10,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)86",
-    "en": "Earth Crystal",
-    "zh": "地晶",
-    "qty": 10,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "3x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": null,
-  "sold_by": "法师塔",
-  "name": "土之图腾柱",
-  "upgrade_from": null
- },
- {
-  "page": "水之图腾柱",
-  "en": "Water Obelisk",
-  "image": "Water_Obelisk.png",
-  "cost": 500000,
-  "currency": "金",
-  "cost_text": "500,000金",
-  "materials": [
-   {
-    "id": "(O)337",
-    "en": "Iridium Bar",
-    "zh": "铱锭",
-    "qty": 5,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)372",
-    "en": "Clam",
-    "zh": "蛤",
-    "qty": 10,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)393",
-    "en": "Coral",
-    "zh": "珊瑚",
-    "qty": 10,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "3x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": null,
-  "sold_by": "法师塔",
-  "name": "水之图腾柱",
-  "upgrade_from": null
- },
- {
-  "page": "魚塘",
+  "name": "鱼塘",
+  "page": "鱼塘",
   "en": "Fish Pond",
   "image": "Fish_Pond.png",
   "cost": 5000,
@@ -385,290 +624,18 @@
   "capacity": null,
   "upgrade_text": null,
   "build_days": 2,
-  "description": "養魚並收穫水產品。魚會隨著時間的推移而繁殖。",
-  "sold_by": "木匠的商店",
-  "name": "鱼塘",
-  "upgrade_from": null
- },
- {
-  "page": "沙漠图腾柱",
-  "en": "Desert Obelisk",
-  "image": "Desert_Obelisk.png",
-  "cost": 1000000,
-  "currency": "金",
-  "cost_text": "1,000,000金",
-  "materials": [
-   {
-    "id": "(O)337",
-    "en": "Iridium Bar",
-    "zh": "铱锭",
-    "qty": 20,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)88",
-    "en": "Coconut",
-    "zh": "椰子",
-    "qty": 10,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)90",
-    "en": "Cactus Fruit",
-    "zh": "仙人掌果子",
-    "qty": 10,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "3x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": null,
-  "sold_by": "法师塔",
-  "name": "沙漠图腾柱",
-  "upgrade_from": null
- },
- {
-  "page": "姜岛图腾柱",
-  "en": "Island Obelisk",
-  "image": "Island_Obelisk.png",
-  "cost": 1000000,
-  "currency": "金",
-  "cost_text": "1,000,000金",
-  "materials": [
-   {
-    "id": "(O)337",
-    "en": "Iridium Bar",
-    "zh": "铱锭",
-    "qty": 10,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)852",
-    "en": "Dragon Tooth",
-    "zh": "龙牙",
-    "qty": 10,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)91",
-    "en": "Banana",
-    "zh": "香蕉",
-    "qty": 10,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "3x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": null,
-  "sold_by": "法师塔",
-  "name": "姜岛图腾柱",
-  "upgrade_from": null
- },
- {
-  "page": "农场图腾柱",
-  "en": "Farm Obelisk",
-  "image": "Farm_Obelisk.png",
-  "cost": 20,
-  "currency": "金色核桃",
-  "cost_text": "20金色核桃",
-  "materials": [],
-  "size": "3x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": null,
-  "description": null,
-  "sold_by": "姜岛",
-  "name": "农场图腾柱",
-  "upgrade_from": null
- },
- {
-  "page": "联机小屋",
-  "en": "Cabin",
-  "image": "Plank_Cabin_Stage_1.png",
-  "cost": 100,
-  "currency": "金",
-  "cost_text": "100金",
-  "materials": [],
-  "size": "5x3",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": "朋友的家！由城镇农业基金补贴。",
-  "sold_by": "木匠的商店",
-  "name": "联机小屋",
-  "upgrade_from": null
- },
- {
-  "page": "姜岛农舍",
-  "en": "Island Farmhouse",
-  "image": "SleepingHut_AfterRepair.png",
-  "cost": 20,
-  "currency": "金色核桃",
-  "cost_text": "20金色核桃 个金色核桃",
-  "materials": [],
-  "size": "7x5",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": null,
-  "description": null,
-  "sold_by": "姜岛",
-  "name": "姜岛农舍",
-  "upgrade_from": null
- },
- {
-  "page": "宠物碗",
-  "en": "Pet Bowl",
-  "image": "Pet_Bowl_Wood.png",
-  "cost": 5000,
-  "currency": "金",
-  "cost_text": "5,000金",
-  "materials": [
-   {
-    "id": "(O)709",
-    "en": "Hardwood",
-    "zh": "硬木",
-    "qty": 25,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": "2x2",
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": 0,
-  "description": "为一只宠物提供专属的家园。",
-  "sold_by": "木匠的商店",
-  "name": "宠物碗",
-  "upgrade_from": null
- },
- {
-  "page": "畜棚",
-  "en": "Barn",
-  "image": "Barn.png",
-  "cost": 6000,
-  "currency": "金",
-  "cost_text": "6,000金木材×350石头×150",
-  "materials": [
-   {
-    "id": "(O)388",
-    "en": "Wood",
-    "zh": "木材",
-    "qty": 350,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)390",
-    "en": "Stone",
-    "zh": "石头",
-    "qty": 150,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": null,
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "name": "畜棚",
-  "build_days": 3,
-  "description": "可容纳4只家畜。",
+  "description": "养鱼并收获水产品。鱼会随着时间的推移而繁殖。",
   "sold_by": "木匠的商店",
   "upgrade_from": null
  },
  {
-  "page": "畜棚",
-  "en": null,
-  "image": "Big_Barn.png",
-  "cost": 12000,
-  "currency": "金",
-  "cost_text": "12,000金木材×450石头×200",
-  "materials": [
-   {
-    "id": "(O)388",
-    "en": "Wood",
-    "zh": "木材",
-    "qty": 450,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)390",
-    "en": "Stone",
-    "zh": "石头",
-    "qty": 200,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": null,
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "name": "大畜棚",
-  "build_days": 2,
-  "description": "由畜棚升级\n可容纳8只家畜。可让家畜产子。解锁山羊。",
-  "upgrade_from": "畜棚",
-  "sold_by": "木匠的商店"
- },
- {
-  "page": "畜棚",
-  "en": null,
-  "image": "Deluxe_Barn.png",
-  "cost": 25000,
-  "currency": "金",
-  "cost_text": "25,000金木材×550石头×300",
-  "materials": [
-   {
-    "id": "(O)388",
-    "en": "Wood",
-    "zh": "木材",
-    "qty": 550,
-    "note": null,
-    "link": null
-   },
-   {
-    "id": "(O)390",
-    "en": "Stone",
-    "zh": "石头",
-    "qty": 300,
-    "note": null,
-    "link": null
-   }
-  ],
-  "size": null,
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "name": "高级畜棚",
-  "build_days": 2,
-  "description": "由大畜棚升级\n可容纳12只家畜。附带自动喂养系统。解锁绵羊和猪。",
-  "upgrade_from": "大畜棚",
-  "sold_by": "木匠的商店"
- },
- {
+  "name": "鸡舍",
   "page": "鸡舍",
   "en": "Coop",
   "image": "Coop.png",
   "cost": 4000,
   "currency": "金",
-  "cost_text": "4,000金木材×300石头×100",
+  "cost_text": "4,000金",
   "materials": [
    {
     "id": "(O)388",
@@ -687,23 +654,41 @@
     "link": null
    }
   ],
-  "size": null,
-  "animals": null,
-  "capacity": null,
+  "size": "6x3",
+  "animals": "鸡",
+  "capacity": "4",
   "upgrade_text": null,
-  "name": "鸡舍",
   "build_days": 3,
-  "description": "可容纳4只家禽。",
+  "description": "可容纳 4 只家禽。",
   "sold_by": "木匠的商店",
   "upgrade_from": null
  },
  {
+  "name": "黄金时钟",
+  "page": "黄金时钟",
+  "en": "Gold Clock",
+  "image": "Gold_Clock.png",
+  "cost": 10000000,
+  "currency": "金",
+  "cost_text": "10,000,000金",
+  "materials": [],
+  "size": "3x2",
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": 0,
+  "description": "阻止杂物出现在你的农场。防止篱笆腐烂。",
+  "sold_by": "法师塔",
+  "upgrade_from": null
+ },
+ {
+  "name": "大鸡舍",
   "page": "鸡舍",
-  "en": null,
+  "en": "Big Coop",
   "image": "Big_Coop.png",
   "cost": 10000,
   "currency": "金",
-  "cost_text": "10,000金木材×400石头×150",
+  "cost_text": "10,000金",
   "materials": [
    {
     "id": "(O)388",
@@ -722,23 +707,23 @@
     "link": null
    }
   ],
-  "size": null,
-  "animals": null,
-  "capacity": null,
+  "size": "6x3",
+  "animals": "鸡、鸭、恐龙、虚空鸡、金色的鸡",
+  "capacity": "8",
   "upgrade_text": null,
-  "name": "大鸡舍",
   "build_days": 2,
-  "description": "由鸡舍升级\n可容纳8只家禽。附带孵化器。解锁鸭。",
-  "upgrade_from": "鸡舍",
-  "sold_by": "木匠的商店"
+  "description": "可容纳 8 只家禽。附带孵化器。解锁鸭。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": "鸡舍"
  },
  {
+  "name": "高级鸡舍",
   "page": "鸡舍",
-  "en": null,
+  "en": "Deluxe Coop",
   "image": "Deluxe_Coop.png",
   "cost": 20000,
   "currency": "金",
-  "cost_text": "20,000金木材×500石头×200",
+  "cost_text": "20,000金",
   "materials": [
    {
     "id": "(O)388",
@@ -757,50 +742,58 @@
     "link": null
    }
   ],
-  "size": null,
-  "animals": null,
-  "capacity": null,
+  "size": "6x3",
+  "animals": "鸡、鸭、恐龙、虚空鸡、金色的鸡、兔子",
+  "capacity": "12",
   "upgrade_text": null,
-  "name": "高级鸡舍",
   "build_days": 2,
-  "description": "由大鸡舍升级\n可容纳12只家禽。附带自动喂养系统。解锁兔子。",
-  "upgrade_from": "大鸡舍",
-  "sold_by": "木匠的商店"
+  "description": "可容纳 12 只家禽。附带自动喂养系统。解锁兔子。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": "大鸡舍"
  },
  {
-  "page": "小屋",
-  "en": "Shed",
-  "image": "Shed.png",
-  "cost": 15000,
+  "name": "大畜棚",
+  "page": "畜棚",
+  "en": "Big Barn",
+  "image": "Big_Barn.png",
+  "cost": 12000,
   "currency": "金",
-  "cost_text": "15,000金木材×300",
+  "cost_text": "12,000金",
   "materials": [
    {
     "id": "(O)388",
     "en": "Wood",
     "zh": "木材",
-    "qty": 300,
+    "qty": 450,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": 200,
     "note": null,
     "link": null
    }
   ],
-  "size": null,
-  "animals": null,
-  "capacity": null,
+  "size": "7x4",
+  "animals": "牛、山羊、鸵鸟",
+  "capacity": "8",
   "upgrade_text": null,
-  "name": "小屋",
   "build_days": 2,
-  "description": "一栋空的建筑。装入任何你想装的东西！可以装饰内部。",
+  "description": "可容纳 8 只家畜。可让家畜产子。解锁山羊。",
   "sold_by": "木匠的商店",
-  "upgrade_from": null
+  "upgrade_from": "畜棚"
  },
  {
-  "page": "小屋",
-  "en": null,
-  "image": "Big_Shed.png",
-  "cost": 20000,
+  "name": "高级畜棚",
+  "page": "畜棚",
+  "en": "Deluxe Barn",
+  "image": "Deluxe_Barn.png",
+  "cost": 25000,
   "currency": "金",
-  "cost_text": "20,000金木材×550石头×300",
+  "cost_text": "25,000金",
   "materials": [
    {
     "id": "(O)388",
@@ -819,33 +812,49 @@
     "link": null
    }
   ],
-  "size": null,
+  "size": "7x4",
+  "animals": "牛、山羊、绵羊、猪、鸵鸟",
+  "capacity": "12",
+  "upgrade_text": null,
+  "build_days": 2,
+  "description": "可容纳 12 只家畜。附带自动喂养系统。解锁绵羊和猪。",
+  "sold_by": "木匠的商店",
+  "upgrade_from": "大畜棚"
+ },
+ {
+  "name": "大屋子",
+  "page": "小屋",
+  "en": "Big Shed",
+  "image": "Big_Shed.png",
+  "cost": 20000,
+  "currency": "金",
+  "cost_text": "20,000金",
+  "materials": [
+   {
+    "id": "(O)388",
+    "en": "Wood",
+    "zh": "木材",
+    "qty": 550,
+    "note": null,
+    "link": null
+   },
+   {
+    "id": "(O)390",
+    "en": "Stone",
+    "zh": "石头",
+    "qty": 300,
+    "note": null,
+    "link": null
+   }
+  ],
+  "size": "7x3",
   "animals": null,
   "capacity": null,
   "upgrade_text": null,
-  "name": "大屋子",
   "build_days": 2,
   "description": "让屋子的尺寸翻倍。内部可以装饰。",
   "sold_by": "木匠的商店",
   "upgrade_from": "小屋"
- },
- {
-  "name": "农舍",
-  "page": "农舍",
-  "en": "Farmhouse",
-  "image": "House_(tier_1).png",
-  "cost": null,
-  "currency": null,
-  "cost_text": "初始",
-  "materials": [],
-  "size": null,
-  "animals": null,
-  "capacity": null,
-  "upgrade_text": null,
-  "build_days": null,
-  "description": "游戏开始时就有的农舍。",
-  "sold_by": null,
-  "upgrade_from": null
  },
  {
   "name": "农舍（第一次升级）",
@@ -900,6 +909,24 @@
   "description": "增添两个新屋子，一个是空房间，另一间里有婴儿床和两个单人床，允许玩家生儿育女。厨房和卧室变得更大。解锁装修房屋和粉刷建筑物。",
   "sold_by": "木匠的商店",
   "upgrade_from": "农舍（第一次升级）"
+ },
+ {
+  "name": "农舍",
+  "page": "农舍",
+  "en": "Farmhouse",
+  "image": "House_(tier_1).png",
+  "cost": null,
+  "currency": null,
+  "cost_text": "初始",
+  "materials": [],
+  "size": null,
+  "animals": null,
+  "capacity": null,
+  "upgrade_text": null,
+  "build_days": null,
+  "description": "游戏开始时就有的农舍。",
+  "sold_by": null,
+  "upgrade_from": null
  },
  {
   "name": "农舍（第三次升级）",

@@ -21,6 +21,8 @@ WEATHER = {
     "storm": "storm", "暴风雨": "storm", "风暴": "storm",
     "snow": "snow", "下雪": "snow", "雪天": "snow",
     "springwind": "wind", "fallwind": "wind",
+    # BWIKI 的信息框写英文关键词（Template:Weather inline 认 rainy、sunny）。
+    "rainy": "rain", "stormy": "storm", "snowy": "snow", "windy": "wind",
 }
 WEATHER_ZH = {"any": "任意天气", "sun": "晴天", "rain": "雨天", "storm": "暴风雨", "snow": "下雪", "wind": "刮风"}
 SKILLS = {"耕种": "farming", "采矿": "mining", "采集": "foraging", "钓鱼": "fishing", "战斗": "combat"}
@@ -161,9 +163,11 @@ def edibility(fields, infobox):
         return {"e": "100%", "h": 0}
     energy, health = calc_edibility(value)
     out = {"e": energy, "h": health}
-    if kind == "infobox cooking" and (fields.get("health") or "").strip():
-        override = fields["health"].strip()
-        out["h"] = int(override) if override.isdigit() else override
+    # 写明的能量、生命值优先（料理的生命值；BWIKI 的生命药水、能量滋补水写“100%”）。
+    for key, field in (("e", "energy"), ("h", "health")):
+        override = (fields.get(field) or "").strip()
+        if override and (kind == "infobox cooking" or field == "energy" or not value or override.endswith("%")):
+            out[key] = int(override) if override.isdigit() else override
     graded = kind == "infobox fish" or (kind == "infobox" and (fields.get("quality") or "").strip().lower() not in ("false", "normal"))
     if graded and value and eng not in EDIBILITY_BASE_ONLY:
         out["q"] = [list(calc_edibility(value, q)) for q in EDIBILITY_QUALITIES]
@@ -174,9 +178,11 @@ def percent(text):
     """暴击率写作小数（0.02、.02），显示为百分比；不是数字时原样返回。"""
     text = (text or "").strip()
     try:
-        return f"{float(text) * 100:g}%"
+        return f"{round(float(text) * 100, 4):g}%"
     except ValueError:
-        return text or None
+        # BWIKI 直接写百分比（“2.0%”）：去掉多余的小数位。
+        m = re.fullmatch(r"(\d+(?:\.\d+)?)\s*%", text)
+        return f"{float(m.group(1)):g}%" if m else (text or None)
 
 
 def ordered_refs(raw, catalog, render):
@@ -186,9 +192,13 @@ def ordered_refs(raw, catalog, render):
     def text(chunk):
         chunk = re.sub(r"(?m)^\s*-{4,}\s*$", "", chunk)
         chunk = re.sub(r"\s+", " ", render(chunk)).strip(" ，,、;；")
+        if not chunk:
+            return
+        # 说明被别的模板隔开（BWIKI 写“{{Skill level|战斗|5}}后:”）时接成一句。
+        if out and out[-1][0] == "t" and not out[-1][1].endswith(("：", ":")):
+            chunk = out.pop()[1] + chunk
         chunk = re.sub(r"(?<=[\u4e00-\u9fff]):$", "：", chunk)
-        if chunk:
-            out.append(["t", chunk])
+        out.append(["t", chunk])
 
     for tpl, start, end in wt.iter_templates(raw or ""):
         text(raw[last:start])
@@ -229,8 +239,14 @@ def item_refs(text, catalog):
         elif extra:
             note = extra
         link = args.get("link")
+        label = None
         if link:
-            link = link.replace("{{!}}", "|").split("|")[0].strip()
+            link, _, label = link.replace("{{!}}", "|").partition("|")
+            link, label = link.strip(), label.strip()
+        # {{Name|Sunfish|1|link=鱼{{!}}任意鱼}}：图标借用一种鱼，材料其实是“任意鱼”。
+        if label and label.startswith(("任意", "任何")):
+            out.append({"id": None, "en": None, "zh": label, "qty": qty, "note": note, "link": link, "generic": True})
+            continue
         zh = hit.get("zh") or (args.get("alt") or "").strip() or None
         if not zh and link:
             zh = link.split("#")[0]
@@ -277,13 +293,14 @@ def seasons(text):
 
 
 def season_day(text):
-    """{{Season|Spring|14}} → ('spring', 14)。"""
+    """{{Season|Spring|14}} → ('spring', 14)；也认直接写出的“[[秋季]]18日”。"""
     for _, args, _ in _ordered_templates(text, {"season"}):
         code = SEASONS.get(args.get("1", "").strip().lower())
         day = args.get("2", "").strip()
         if code and day.isdigit():
             return code, int(day)
-    return None
+    m = re.search(r"\[\[(春季|夏季|秋季|冬季)(?:\|[^\]]*)?\]\]\s*(\d{1,2})\s*日", text or "")
+    return (SEASONS[m.group(1)], int(m.group(2))) if m else None
 
 
 _CLOCK = r"(上午|早上|中午|下午|晚上|凌晨|午夜)?\s*(\d{1,2})(?:[:：](\d{2})|点(?:(\d{1,2})分)?)"

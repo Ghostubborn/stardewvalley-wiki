@@ -748,7 +748,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "神秘石",
   "image": "Mystic_Stone.png",
   "image_kind": "exact",
   "image_note": null,
@@ -1337,21 +1337,11 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "幸运紫色短裤",
   "image": "Springobjects071.png",
   "image_kind": "indexed",
   "image_note": null,
-  "internal": false,
-  "mentions": [
-   {
-    "page": "渔具",
-    "text": "此现象对镶边幸运紫色短裤无效。"
-   },
-   {
-    "page": "彩蛋",
-    "text": "将金锭与幸运紫色短裤放在缝纫机中，可以制作出镶边幸运紫色短裤，镶边幸运紫色短裤依然可以作为任务物品交还或者触发以上其他彩蛋。"
-   }
-  ]
+  "internal": false
  },
  {
   "id": "(O)72",
@@ -20900,7 +20890,7 @@
     "Vincent"
    ]
   },
-  "page": "果酱和腌菜",
+  "page": "腌菜",
   "image": "Pickles.png",
   "image_kind": "exact",
   "image_note": null,
@@ -20969,7 +20959,7 @@
     "Sebastian"
    ]
   },
-  "page": "果酱和腌菜",
+  "page": "果酱",
   "image": "Jelly.png",
   "image_kind": "exact",
   "image_note": null,
@@ -21272,7 +21262,7 @@
     "Wizard"
    ]
   },
-  "page": "哈维的诊所",
+  "page": "能量滋补水",
   "image": "Energy_Tonic.png",
   "image_kind": "exact",
   "image_note": null,
@@ -21416,7 +21406,7 @@
     "Wizard"
    ]
   },
-  "page": "哈维的诊所",
+  "page": "肌肉回复药",
   "image": "Muscle_Remedy.png",
   "image_kind": "exact",
   "image_note": null,
@@ -42219,7 +42209,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": "任务",
+  "page": "丢失的斧子",
   "image": "Springobjects788.png",
   "image_kind": "indexed",
   "image_note": null,
@@ -42285,7 +42275,7 @@
     "Wizard"
    ]
   },
-  "page": "任务",
+  "page": "幸运紫色短裤",
   "image": "Springobjects789.png",
   "image_kind": "indexed",
   "image_note": null,
@@ -42313,7 +42303,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "浆果篮",
   "image": "Springobjects790.png",
   "image_kind": "indexed",
   "image_note": null,
@@ -43109,7 +43099,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "铱奶",
   "image": "Springobjects803.png",
   "image_kind": "indexed",
   "image_note": null,
@@ -49338,7 +49328,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "战争纪念物",
   "image": "War_Memento.png",
   "image_kind": "exact",
   "image_note": null,
@@ -49366,7 +49356,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "美食家番茄盐",
   "image": "Gourmet_Tomato_Salt.png",
   "image_kind": "exact",
   "image_note": null,
@@ -49394,7 +49384,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "星露谷玫瑰",
   "image": "Stardew_Valley_Rose.png",
   "image_kind": "exact",
   "image_note": null,
@@ -49422,7 +49412,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "高级电视遥控器",
   "image": "Advanced_TV_Remote.png",
   "image_kind": "exact",
   "image_note": null,
@@ -49450,7 +49440,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "极寒碎片",
   "image": "Arctic_Shard.png",
   "image_kind": "exact",
   "image_note": null,
@@ -49478,7 +49468,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "蠕动蚯蚓",
   "image": "Wriggling_Worm.png",
   "image_kind": "exact",
   "image_note": null,
@@ -49506,7 +49496,7 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "海盗项链",
   "image": "Pirate's_Locket.png",
   "image_kind": "exact",
   "image_note": null,
@@ -49926,25 +49916,11 @@
   "geode_drops": null,
   "artifact_spot_chances": null,
   "can_be_gift": true,
-  "page": null,
+  "page": "锻造",
   "image": "Combined_Ring.png",
   "image_kind": "exact",
   "image_note": null,
-  "internal": false,
-  "mentions": [
-   {
-    "page": "锻造",
-    "text": "姜岛火山地牢火山口的矮人锻造台和迷你锻造台可以让你强化武器，为你的武器和工具附魔，组合戒指，改变武器外形。"
-   },
-   {
-    "page": "锻造",
-    "text": "你可以将两枚不同的戒指合而为一并拥有两者的叠加效果。"
-   },
-   {
-    "page": "锻造",
-    "text": "这会花费20个火山晶石。"
-   }
-  ]
+  "internal": false
  },
  {
   "id": "(O)881",
@@ -57416,8 +57392,8 @@
   "internal": false,
   "mentions": [
    {
-    "page": "动物",
-    "text": "在初始宠物达到最大好感度，或在第二年还没有宠物的情况下，玩家可在玛妮的牧场购买宠物饲养证以领养新的宠物。"
+    "page": "宠物",
+    "text": "当初始宠物达到最大好感度，并且在第二天收到了关于宠物领养的信之后，玛妮的牧场中的商店将会新增一个“领养宠物”的选项，玩家可以在这里购买宠物饲养证领养新的宠物；若游戏进行到了第二年且玩家还没有拥有宠物，那么即使玩家还没有收到过前述的信件，也可以在玛妮的牧场中购买宠物饲养证来领养宠物。"
    },
    {
     "page": "玛妮的牧场",
@@ -58606,7 +58582,7 @@
   "type_name": "大型物品",
   "en": "Wicked Statue",
   "zh": "邪恶雕像",
-  "desc": "这个雕像有点不太对劲。",
+  "desc": "这个雕像看上去有点瘆人。",
   "flavor_of": null,
   "page": "邪恶雕像",
   "image": "Wicked_Statue.png",
@@ -58620,7 +58596,7 @@
   "type_name": "大型物品",
   "en": "Wicked Statue",
   "zh": "邪恶雕像",
-  "desc": "这个雕像有点不太对劲。",
+  "desc": "这个雕像看上去有点瘆人。",
   "flavor_of": null,
   "page": "邪恶雕像",
   "image": "Wicked_Statue.png",
@@ -58720,11 +58696,11 @@
   "zh": "石猫头鹰（随机事件）",
   "desc": "不知道从哪儿来，但是挺耐看。",
   "flavor_of": null,
-  "page": null,
-  "image": null,
-  "image_kind": "missing",
+  "page": "石猫头鹰（随机事件）",
+  "image": "Stone_Owl_Random.png",
+  "image_kind": "page",
   "image_note": null,
-  "internal": true
+  "internal": false
  },
  {
   "id": "(BC)96",
@@ -58734,7 +58710,7 @@
   "zh": "奇怪的胶囊",
   "desc": "里面的液体有点不对劲……",
   "flavor_of": null,
-  "page": "随机事件",
+  "page": "奇怪的胶囊",
   "image": "Strange_Capsule.png",
   "image_kind": "exact",
   "image_note": null,
@@ -70811,7 +70787,7 @@
   "type": "F",
   "type_name": "家具",
   "en": "Wine Table",
-  "zh": "酒桶（长）",
+  "zh": "酒桌（长）",
   "desc": "可以作为装饰品摆放。",
   "flavor_of": null,
   "furniture": {
@@ -76021,12 +75997,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "橙子",
-    "text": "橙子可通过缝纫机使用布料制成可染色的 休闲短裤。"
-   },
-   {
     "page": "桃子",
     "text": "桃子可通过缝纫机使用布料制成可染色的 休闲短裤。"
+   },
+   {
+    "page": "橙子",
+    "text": "橙子可通过缝纫机使用布料制成可染色的 休闲短裤。"
    }
   ]
  },
@@ -76053,22 +76029,12 @@
   "zh": "镶边幸运紫色短裤",
   "desc": "镶了金边的紫色丝织短裤……",
   "flavor_of": null,
-  "page": null,
+  "page": "幸运紫色短裤",
   "image": "Springobjects071.png",
   "image_kind": "alias",
   "image_note": null,
   "src": [],
-  "internal": false,
-  "mentions": [
-   {
-    "page": "渔具",
-    "text": "此现象对镶边幸运紫色短裤无效。"
-   },
-   {
-    "page": "彩蛋",
-    "text": "将金锭与幸运紫色短裤放在缝纫机中，可以制作出镶边幸运紫色短裤，镶边幸运紫色短裤依然可以作为任务物品交还或者触发以上其他彩蛋。"
-   }
-  ]
+  "internal": false
  },
  {
   "id": "(P)998",
@@ -76086,12 +76052,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "温泉",
-    "text": "如果玩家身穿五彩裤子或五彩神怪裤，则泳衣也会变换颜色。"
-   },
-   {
     "page": "五彩碎片",
     "text": "五彩裤子"
+   },
+   {
+    "page": "温泉",
+    "text": "如果玩家身穿五彩裤子或五彩神怪裤，则泳衣也会变换颜色。"
    }
   ]
  },
@@ -76111,12 +76077,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "温泉",
-    "text": "如果玩家身穿五彩裤子或五彩神怪裤，则泳衣也会变换颜色。"
-   },
-   {
     "page": "五彩碎片",
     "text": "五彩神怪裤"
+   },
+   {
+    "page": "温泉",
+    "text": "如果玩家身穿五彩裤子或五彩神怪裤，则泳衣也会变换颜色。"
    }
   ]
  },
@@ -76372,8 +76338,7 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [
-   "可在创建角色时选择。",
-   "可通过幽灵头骨掉落。"
+   "可在创建角色时选择。"
   ],
   "internal": false
  },
@@ -78128,9 +78093,7 @@
   "image": "Shirt118.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [
-   "在绿洲随机出售"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -78145,9 +78108,7 @@
   "image": "Shirt119.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [
-   "在绿洲随机出售"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -78162,9 +78123,7 @@
   "image": "Shirt120.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [
-   "在绿洲随机出售"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -78179,9 +78138,7 @@
   "image": "Shirt121.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [
-   "在绿洲随机出售"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -78451,7 +78408,7 @@
   "internal": false,
   "mentions": [
    {
-    "page": "哈维的诊所",
+    "page": "能量滋补水",
     "text": "能量滋补水可通过缝纫机使用布料制成可染色的 运动员夹克衫。"
    }
   ]
@@ -78480,8 +78437,8 @@
     "text": "果酒可通过缝纫机使用布料制成 黑皮夹克。"
    },
    {
-    "page": "蜜蜂酒",
-    "text": "蜜蜂酒可通过缝纫机使用布料制成 黑皮夹克。"
+    "page": "椰林飘香",
+    "text": "椰林飘香可通过缝纫机使用布料制成 黑皮夹克。"
    }
   ]
  },
@@ -78501,12 +78458,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "珊瑚",
-    "text": "珊瑚可通过缝纫机使用布料制成可染色的 吊带上衣。"
-   },
-   {
     "page": "海胆",
     "text": "海胆可通过缝纫机使用布料制成可染色的 吊带上衣。"
+   },
+   {
+    "page": "珊瑚",
+    "text": "珊瑚可通过缝纫机使用布料制成可染色的 吊带上衣。"
    },
    {
     "page": "鹦鹉螺",
@@ -78530,16 +78487,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "茄子",
-    "text": "茄子可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
+    "page": "南瓜",
+    "text": "南瓜可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
    },
    {
     "page": "小白菜",
     "text": "小白菜可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
    },
    {
-    "page": "甜菜",
-    "text": "甜菜可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
+    "page": "山药",
+    "text": "山药可通过缝纫机使用布料制成可染色的 纽扣衬衫。"
    }
   ]
  },
@@ -78574,12 +78531,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "海参",
-    "text": "海参可通过缝纫机使用布料制成可染色的 抹胸背心。"
-   },
-   {
     "page": "大海参",
     "text": "大海参可通过缝纫机使用布料制成可染色的 抹胸背心。"
+   },
+   {
+    "page": "海参",
+    "text": "海参可通过缝纫机使用布料制成可染色的 抹胸背心。"
    }
   ]
  },
@@ -78595,9 +78552,7 @@
   "image": "Shirt143.png",
   "image_kind": "clothing-table",
   "image_note": null,
-  "src": [
-   "仅可作为随机装饰物品获得"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -78751,12 +78706,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "哈维的诊所",
-    "text": "肌肉回复药可通过缝纫机使用布料制成可染色的 冒充肌肉T恤。"
-   },
-   {
     "page": "图腾面具",
     "text": "带有图腾面具的一套服装还包括 冒充肌肉T恤（染色RGB值249,174,137） 和 短裤（染色RGB值18,140,23）。"
+   },
+   {
+    "page": "肌肉回复药",
+    "text": "肌肉回复药可通过缝纫机使用布料制成可染色的 冒充肌肉T恤。"
    }
   ]
  },
@@ -78797,16 +78752,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "超级炸弹",
-    "text": "超级炸弹可通过缝纫机使用布料制成 轰炸机夹克。"
-   },
-   {
     "page": "樱桃炸弹",
     "text": "樱桃炸弹可通过缝纫机使用布料制成 轰炸机夹克。"
    },
    {
     "page": "炸弹",
     "text": "炸弹可通过缝纫机使用布料制成 轰炸机夹克。"
+   },
+   {
+    "page": "超级炸弹",
+    "text": "超级炸弹可通过缝纫机使用布料制成 轰炸机夹克。"
    }
   ]
  },
@@ -78855,16 +78810,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "河鲈",
-    "text": "河鲈可通过缝纫机使用布料制成 钓鱼背心。"
-   },
-   {
     "page": "大嘴鲈鱼",
     "text": "大嘴鲈鱼可通过缝纫机使用布料制成 钓鱼背心。"
    },
    {
-    "page": "小嘴鲈鱼",
-    "text": "小嘴鲈鱼可通过缝纫机使用布料制成 钓鱼背心。"
+    "page": "大头鱼",
+    "text": "大头鱼可通过缝纫机使用布料制成 钓鱼背心。"
+   },
+   {
+    "page": "大眼鱼",
+    "text": "大眼鱼可通过缝纫机使用布料制成 钓鱼背心。"
    }
   ]
  },
@@ -78903,12 +78858,12 @@
     "text": "啤酒花可通过缝纫机使用布料制成可染色的 衬衫皮带。"
    },
    {
-    "page": "花椰菜",
-    "text": "花椰菜可通过缝纫机使用布料制成可染色的 衬衫皮带。"
+    "page": "土豆",
+    "text": "土豆可通过缝纫机使用布料制成可染色的 衬衫皮带。"
    },
    {
-    "page": "防风草",
-    "text": "防风草可通过缝纫机使用布料制成可染色的 衬衫皮带。"
+    "page": "未碾米",
+    "text": "未碾米可通过缝纫机使用布料制成可染色的 衬衫皮带。"
    }
   ]
  },
@@ -79197,9 +79152,7 @@
   "image": "Shirt173.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [
-   "仅可作为随机装饰物品获得"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -79218,16 +79171,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "高级肥料",
-    "text": "高级肥料可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
-   },
-   {
-    "page": "高级保湿土壤",
-    "text": "高级保湿土壤可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
+    "page": "初级保湿土壤",
+    "text": "初级保湿土壤可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
    },
    {
     "page": "初级肥料",
     "text": "初级肥料可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
+   },
+   {
+    "page": "树肥",
+    "text": "树肥可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
    }
   ]
  },
@@ -79247,16 +79200,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "高级肥料",
-    "text": "高级肥料可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
-   },
-   {
-    "page": "高级保湿土壤",
-    "text": "高级保湿土壤可通过缝纫机使用布料制成上半部分可染色的 高腰上衣。"
+    "page": "初级保湿土壤",
+    "text": "初级保湿土壤可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
    },
    {
     "page": "初级肥料",
     "text": "初级肥料可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
+   },
+   {
+    "page": "树肥",
+    "text": "树肥可通过缝纫机使用布料制成下半部分可染色的 高腰上衣。"
    }
   ]
  },
@@ -79272,10 +79225,14 @@
   "image": "Shirt176.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [
-   "沙漠节艾米丽的服装服务处可获得男款变体。"
-  ],
-  "internal": false
+  "src": [],
+  "internal": false,
+  "mentions": [
+   {
+    "page": "沙漠节",
+    "text": "普通套头衫（男）的“软边”变体可以从一套仅限男性的服装中获得。"
+   }
+  ]
  },
  {
   "id": "(S)1177",
@@ -79289,9 +79246,7 @@
   "image": "Shirt177.png",
   "image_kind": "indexed",
   "image_note": null,
-  "src": [
-   "沙漠节艾米丽的服装服务处可获得男款变体。"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -79310,12 +79265,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "铁矿石",
-    "text": "铁矿石可通过缝纫机使用布料制成可染色的 龟脖毛衣。"
+    "page": "放射性矿石",
+    "text": "放射性矿石可通过缝纫机使用布料制成可染色的 龟脖毛衣。"
    },
    {
-    "page": "黄金矿石",
-    "text": "黄金矿石可通过缝纫机使用布料制成可染色的 龟脖毛衣。"
+    "page": "铁矿石",
+    "text": "铁矿石可通过缝纫机使用布料制成可染色的 龟脖毛衣。"
    },
    {
     "page": "铜矿石",
@@ -79512,10 +79467,14 @@
   "image": "Shirt188.png",
   "image_kind": "clothing-table",
   "image_note": null,
-  "src": [
-   "可以在沙漠节期间从玛鲁的商铺购买。"
-  ],
-  "internal": false
+  "src": [],
+  "internal": false,
+  "mentions": [
+   {
+    "page": "酸性月岩",
+    "text": "酸性月岩可通过缝纫机使用布料制成 晚安睡衣。"
+   }
+  ]
  },
  {
   "id": "(S)1189",
@@ -79554,12 +79513,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "派对帽（红色）",
-    "text": "带有派对帽（红色）的一套服装还包括 笑脸T恤 和 农夫裤（染色RGB值 226,27,27）。"
-   },
-   {
     "page": "柠檬石",
     "text": "柠檬石可通过缝纫机使用布料制成 笑脸T恤。"
+   },
+   {
+    "page": "派对帽（红色）",
+    "text": "带有派对帽（红色）的一套服装还包括 笑脸T恤 和 农夫裤（染色RGB值 226,27,27）。"
    }
   ]
  },
@@ -79600,12 +79559,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "黄铁矿",
-    "text": "黄铁矿可通过缝纫机使用布料制成 丑角上衣。"
-   },
-   {
     "page": "螺旋桨帽",
     "text": "带有螺旋桨帽的一套中性服装还包括 丑角上衣 和 农夫裤（染色RGB值 2,184,224）。"
+   },
+   {
+    "page": "黄铁矿",
+    "text": "黄铁矿可通过缝纫机使用布料制成 丑角上衣。"
    }
   ]
  },
@@ -79661,16 +79620,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "裁缝",
-    "text": "注意：有三种上衣都叫“丝巾上衣”，均不可染色。"
-   },
-   {
     "page": "氟磷灰石",
     "text": "氟磷灰石可通过缝纫机使用布料制成 丝巾上衣。"
    },
    {
     "page": "碧玉",
     "text": "碧玉可通过缝纫机使用布料制成 丝巾上衣。"
+   },
+   {
+    "page": "蓝晶石",
+    "text": "蓝晶石可通过缝纫机使用布料制成 丝巾上衣。"
    }
   ]
  },
@@ -79835,16 +79794,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "裁缝",
-    "text": "注意：有三种上衣都叫“丝巾上衣”，均不可染色。"
-   },
-   {
     "page": "氟磷灰石",
     "text": "氟磷灰石可通过缝纫机使用布料制成 丝巾上衣。"
    },
    {
     "page": "碧玉",
     "text": "碧玉可通过缝纫机使用布料制成 丝巾上衣。"
+   },
+   {
+    "page": "蓝晶石",
+    "text": "蓝晶石可通过缝纫机使用布料制成 丝巾上衣。"
    }
   ]
  },
@@ -79906,16 +79865,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "裁缝",
-    "text": "注意：有三种上衣都叫“丝巾上衣”，均不可染色。"
-   },
-   {
     "page": "氟磷灰石",
     "text": "氟磷灰石可通过缝纫机使用布料制成 丝巾上衣。"
    },
    {
     "page": "碧玉",
     "text": "碧玉可通过缝纫机使用布料制成 丝巾上衣。"
+   },
+   {
+    "page": "蓝晶石",
+    "text": "蓝晶石可通过缝纫机使用布料制成 丝巾上衣。"
    }
   ]
  },
@@ -79956,8 +79915,8 @@
   "internal": false,
   "mentions": [
    {
-    "page": "鹦鹉螺化石",
-    "text": "鹦鹉螺化石可通过缝纫机使用布料制成 挖掘机上衣。"
+    "page": "三叶虫",
+    "text": "三叶虫可通过缝纫机使用布料制成 挖掘机上衣。"
    },
    {
     "page": "两栖动物化石",
@@ -80233,21 +80192,7 @@
   "image_kind": "clothing-table",
   "image_note": null,
   "src": [],
-  "internal": false,
-  "mentions": [
-   {
-    "page": "矮人卷轴 I",
-    "text": "矮人卷轴 I可通过缝纫机使用布料制成可染色的 金边T恤。"
-   },
-   {
-    "page": "矮人卷轴 II",
-    "text": "矮人卷轴 II可通过缝纫机使用布料制成可染色的 金边T恤。"
-   },
-   {
-    "page": "矮人卷轴 III",
-    "text": "矮人卷轴 III可通过缝纫机使用布料制成可染色的 金边T恤。"
-   }
-  ]
+  "internal": false
  },
  {
   "id": "(S)1223",
@@ -80454,16 +80399,16 @@
   "internal": false,
   "mentions": [
    {
-    "page": "破损的眼镜",
-    "text": "破损的眼镜可通过缝纫机使用布料制成 垃圾桶T恤。"
-   },
-   {
     "page": "垃圾（物品）",
     "text": "垃圾可通过缝纫机使用布料制成 垃圾桶T恤。"
    },
    {
     "page": "浮木",
     "text": "浮木可通过缝纫机使用布料制成 垃圾桶T恤。"
+   },
+   {
+    "page": "湿透的报纸",
+    "text": "湿透的报纸可通过缝纫机使用布料制成 垃圾桶T恤。"
    }
   ]
  },
@@ -80504,12 +80449,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "生锈的齿轮",
-    "text": "生锈的齿轮可通过缝纫机使用布料制成 电路板T恤。"
-   },
-   {
     "page": "护目镜",
     "text": "带有护目镜的一套中性服装还包括 电路板T恤 和 宽松裤（染色RGB值 60,99,62）。"
+   },
+   {
+    "page": "生锈的齿轮",
+    "text": "生锈的齿轮可通过缝纫机使用布料制成 电路板T恤。"
    }
   ]
  },
@@ -80784,12 +80729,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "绿藻",
-    "text": "绿藻可通过缝纫机使用布料制成可染色的 有领衬衫。"
-   },
-   {
     "page": "白藻",
     "text": "白藻可通过缝纫机使用布料制成可染色的有领衬衫。"
+   },
+   {
+    "page": "绿藻",
+    "text": "绿藻可通过缝纫机使用布料制成可染色的 有领衬衫。"
    }
   ]
  },
@@ -80914,12 +80859,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "糖",
-    "text": "糖可通过缝纫机使用布料制成 砂糖T恤。"
-   },
-   {
     "page": "标志帽",
     "text": "带有标志帽的一套服装还包括 砂糖T恤 和 短裙（染色RGB值 249,172,186）。"
+   },
+   {
+    "page": "糖",
+    "text": "糖可通过缝纫机使用布料制成 砂糖T恤。"
    }
   ]
  },
@@ -81058,10 +81003,18 @@
   "image": "Shirt262b.png",
   "image_kind": "clothing-table",
   "image_note": null,
-  "src": [
-   "可通过幽灵头骨掉落。"
-  ],
-  "internal": false
+  "src": [],
+  "internal": false,
+  "mentions": [
+   {
+    "page": "松露",
+    "text": "松露可通过缝纫机使用布料制成可染色的 男款深色丝巾上衣 或 女款深色丝巾上衣。"
+   },
+   {
+    "page": "松露油",
+    "text": "松露油可通过缝纫机使用布料制成可染色的 男款深色丝巾上衣 或 女款深色丝巾上衣。"
+   }
+  ]
  },
  {
   "id": "(S)1263",
@@ -81075,10 +81028,18 @@
   "image": "Shirt263b.png",
   "image_kind": "clothing-table",
   "image_note": null,
-  "src": [
-   "可通过幽灵头骨掉落。"
-  ],
-  "internal": false
+  "src": [],
+  "internal": false,
+  "mentions": [
+   {
+    "page": "生命药水",
+    "text": "生命药水可通过缝纫机使用布料制成可染色的 男款深色荧光衬衫 或 女款深色荧光衬衫。"
+   },
+   {
+    "page": "蒜油",
+    "text": "蒜油可通过缝纫机使用布料制成可染色的 男款深色荧光衬衫 或 女款深色荧光衬衫。"
+   }
+  ]
  },
  {
   "id": "(S)1264",
@@ -81205,12 +81166,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "咖啡",
-    "text": "咖啡可通过缝纫机使用布料制成 手冲咖啡T恤。"
-   },
-   {
     "page": "三倍浓缩咖啡",
     "text": "三倍浓缩咖啡可通过缝纫机使用布料制成 手冲咖啡T恤。"
+   },
+   {
+    "page": "咖啡",
+    "text": "咖啡可通过缝纫机使用布料制成 手冲咖啡T恤。"
    }
   ]
  },
@@ -81266,12 +81227,12 @@
   "internal": false,
   "mentions": [
    {
-    "page": "鱼籽",
-    "text": "鱼籽可通过缝纫机使用布料制成可染色的 圆点上衣。"
-   },
-   {
     "page": "虚空蛋黄酱",
     "text": "虚空蛋黄酱可通过缝纫机使用布料制成可染色的 圆点上衣。"
+   },
+   {
+    "page": "鱼籽",
+    "text": "鱼籽可通过缝纫机使用布料制成可染色的 圆点上衣。"
    }
   ]
  },
@@ -81428,9 +81389,7 @@
   "image": "Shirt280b.png",
   "image_kind": "clothing-table",
   "image_note": null,
-  "src": [
-   "仅可作为随机装饰物品获得。"
-  ],
+  "src": [],
   "internal": false
  },
  {
@@ -81453,12 +81412,12 @@
     "text": "大黄可通过缝纫机使用布料制成仅袖子可染色的 男款绿色纽扣汗衫 或 女款绿色纽扣汗衫。"
    },
    {
-    "page": "香味浆果",
-    "text": "香味浆果可通过缝纫机使用布料制成仅袖子可染色的 男款绿色纽扣汗衫 或 女款绿色纽扣汗衫。"
-   },
-   {
     "page": "草帽",
     "text": "带有草帽的一套女性服装还包括 绿色纽扣汗衫（袖子染红） 和 短裙（染色RGB值 30,150,71）。"
+   },
+   {
+    "page": "香味浆果",
+    "text": "香味浆果可通过缝纫机使用布料制成仅袖子可染色的 男款绿色纽扣汗衫 或 女款绿色纽扣汗衫。"
    }
   ]
  },
@@ -81892,10 +81851,14 @@
   "image": null,
   "image_kind": "missing",
   "image_note": null,
-  "src": [
-   "沙漠节艾米丽的服装服务处可获得男款变体。"
-  ],
-  "internal": false
+  "src": [],
+  "internal": false,
+  "mentions": [
+   {
+    "page": "沙漠节",
+    "text": "普通套头衫（男）的“软边”变体可以从一套仅限男性的服装中获得。"
+   }
+  ]
  },
  {
   "id": "(T)Axe",
@@ -82403,11 +82366,11 @@
   "mentions": [
    {
     "page": "大圆木",
-    "text": "一个大圆木也将刷新在鹈鹕镇东部在Joja超市和铁匠铺之间的隐藏区域中，阻挡着玩家前往黄金垃圾桶取得小巷自助餐技能书。"
+    "text": "一个大圆木也将刷新在鹈鹕镇东部在 Joja 超市和铁匠铺之间的隐藏区域中，阻挡着玩家前往黄金垃圾桶取得小巷自助餐技能书。"
    },
    {
     "page": "小巷自助餐",
-    "text": "小巷自助餐是一本能力之书，可以在Joja超市和铁匠铺之间被树挡住的黄金垃圾桶中找到，需要通过一个隐藏在栅栏上的洞。"
+    "text": "小巷自助餐是一本能力之书，可以在 Joja 超市和铁匠铺之间被树挡住的黄金垃圾桶中找到，玩家需要通过一个隐藏在栅栏上的入口。"
    }
   ]
  },
@@ -82423,7 +82386,13 @@
   "image": "Trash_Can_Iridium.png",
   "image_kind": "tool-table",
   "image_note": null,
-  "internal": false
+  "internal": false,
+  "mentions": [
+   {
+    "page": "售卖",
+    "text": "其中基础售价从游戏文件中获取，例如往铱垃圾桶中丢弃 3 条垂钓者+工匠铱星烟熏传说之鱼在 25% 利率下能获得18,900金，计算过程如下"
+   }
+  ]
  },
  {
   "id": "(TR)MagicHairDye",
@@ -82448,8 +82417,8 @@
   "desc": "召唤一只跟随你的饥饿青蛙。",
   "flavor_of": null,
   "page": "青蛙蛋",
-  "image": "Green_Frog_Egg.png",
-  "image_kind": "page",
+  "image": null,
+  "image_kind": "missing",
   "image_note": null,
   "internal": false
  },
@@ -86604,7 +86573,7 @@
   "image_note": null,
   "src": [
    "所有种类的地板都可以从目录中获得。",
-   "每晚有0.1%概率被 被诅咒的模特 用来重新装饰脚下地板。"
+   "每晚有0.1%概率被 被诅咒的假人模特 用来重新装饰脚下地板。"
   ],
   "internal": false
  },

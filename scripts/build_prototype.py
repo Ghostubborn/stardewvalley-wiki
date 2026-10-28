@@ -376,6 +376,9 @@ def main():
     manifest = load("manifest.json")
     with open(os.path.join(CURATED, "guides.json"), encoding="utf-8") as f:
         guides = json.load(f)
+    # 防剧透：官方中文 Wiki 归档里来源提到后期内容的条目，仍按后期内容保护（见文件说明）。
+    with open(os.path.join(CURATED, "legacy-late-sources.json"), encoding="utf-8") as f:
+        legacy_late = [name for name in json.load(f)["names"] if name in out_pages]
 
     def data_url(name):
         path = images[name]["path"]
@@ -399,7 +402,7 @@ def main():
         "seeds": seeds, "recipes": recipes, "chains": chains, "buildings": buildings, "bundles": bundles,
         "shops": shops, "pins": pins, "skillUnlocks": skill_unlocks, "progression": progression,
         "monsters": monsters, "animals": animals, "trees": trees,
-        "guides": guides,
+        "guides": guides, "legacyLate": legacy_late,
         "schedules": runpy.run_path(os.path.join(ROOT, "scripts", "build_schedules.py"))["build"](ROOT),
     }
 
@@ -429,7 +432,7 @@ def main():
 
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(PROTO, "data.js"), "w", encoding="utf-8") as f:
-        f.write("/* 由 scripts/build_prototype.py 生成；数据来自星露谷物语中文 Wiki（CC BY-NC-SA 3.0）的 2025-12-18 归档。 */\n")
+        f.write("/* 由 scripts/build_prototype.py 生成；中文资料来自星露谷物语 BWIKI（2026-10-29 抓取），图片来自 Stardew Valley Wiki（CC BY-NC-SA 3.0）的 2025-12-18 归档。 */\n")
         f.write("window.SDV = " + payload + ";\n")
 
     english = build_english(articles["en"])
