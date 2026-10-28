@@ -1,4 +1,11 @@
-# Cloudflare Pages publishes only the generated static website.
+# Cloudflare Pages publishes the generated static website (prototype/) and the Functions in functions/.
 name = "stardewvalley-wiki"
 pages_build_output_dir = "./prototype"
 compatibility_date = "2026-10-26"
+
+# 访客反馈（functions/api/feedback.js）写入的 D1 数据库。database_id 在创建数据库后填写，
+# 建表：wrangler d1 migrations apply stardewvalley-wiki-feedback --remote（见 docs/cloudflare-pages.md）。
+[[d1_databases]]
+binding = "FEEDBACK_DB"
+database_name = "stardewvalley-wiki-feedback"
+database_id = "REPLACE_WITH_D1_ID"

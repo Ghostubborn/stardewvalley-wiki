@@ -59,6 +59,7 @@ python3 -I -m http.server 8765 --bind 127.0.0.1 --directory prototype
 - **少走查询步骤**：搜索优先打开资料，不自动切到地图或路线；具体定位与路线由用户主动进入。详情前后跳转进入浏览器历史，原分类筛选保留。未公开来源逐段保护，展开按钮说明将查看的内容；已有高档工具可以只展开本系列档位后直接填写。
 - 地图和路线共享选中目标、可选对照与收藏条目；支持搜索（中文、英文、别名）和深链接（`#view=tree&sel=node:…`）。
 - **背景音乐**：手账标题旁的“音乐关 / 音乐开”按钮播放 ConcernedApe 的原版 OST《Spring (It's A Big World Outside)》。默认关闭，首次点击才加载本站音频，以 25% 音量循环播放；地图和路线切换时连续播放，刷新后重新关闭。手机端收起手账时也可操作。音源与署名见 [音频说明](assets/audio/README.md)。
+- **访客反馈**：手账标题右侧和详情工具栏各有“反馈”按钮（手机收起手账时也能看到），打开同一个对话框：可选问题类型（资料有误、缺少内容、被剧透了、显示或操作问题、建议、其他），写下问题，联系方式可留可不留，不用注册。正在看条目时附上“关于：条目标题”，可取消勾选；标题只用页面上已显示的那个，受保护条目写作“尚未确认探索的内容”，不露出名称。另附页面地址、语言、窗口尺寸、浏览器和 `js/ui.js` 的版本指纹。提交给 Pages Function `functions/api/feedback.js` 存进 D1，不保存原始 IP，同一来源 10 分钟内最多 5 条；发不出去时可以重试或复制内容，没发出的草稿在关闭后保留。本地静态预览没有后端，会显示发送失败。查看和标记反馈的命令见[部署说明](../docs/cloudflare-pages.md#访客反馈pages-functions--d1)。检查：`node scripts/test_feedback_function.cjs`；浏览器 `scripts/test_feedback_browser.js`（桌面与手机，`/en/` 同样可跑）。
 
 ## 语言版本
 
@@ -108,6 +109,7 @@ js/relations.js 关系图的数据：以条目为中心的两侧分组、合成�
 js/graph.js  关系图的绘制（分组、连线、路径、合成链）；样式在 graph.css
 js/ui.js     可选条件对照、地点索引、搜索、详情、收藏、已有进度
 js/music.js  背景音乐的按需加载、播放与暂停
+js/feedback.js 访客反馈对话框；样式在 feedback.css，后端是仓库根目录的 functions/api/feedback.js
 js/guides.js  基础短指南、平台切换与来源
 js/schedules.js  原文日程条件分支与地点跳转
 js/collections.js  本机收集包提交记录、缺项与撤销

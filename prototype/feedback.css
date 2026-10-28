@@ -1,0 +1,43 @@
+/* 访客反馈对话框：木框、按钮、勾选框沿用页面样式；比窗口高时在框内滚动，手机上不横向滚动。 */
+.feedback {
+  width: min(520px, calc(100vw - 24px)); max-width: none;
+  max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px);
+  padding: 8px 14px 14px; overflow: auto; overscroll-behavior: contain; color: var(--ink);
+}
+.feedback::backdrop { background: rgba(20, 12, 6, .55); }
+.feedback-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.feedback-head h2 { margin: 0; font: 20px/1.3 var(--pixel); font-weight: normal; }
+.feedback-head h2:focus { outline: none; }
+.feedback-head .detail-close { position: static; flex: none; width: 36px; height: 36px; }
+/* 问题类型：单选按钮做成一排可选的格子，选中时和分段按钮一样变深色。 */
+.feedback-kinds { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; margin: 10px 0 0; padding: 0; border: 0; }
+.feedback-kinds legend, .feedback-label { padding: 0; margin: 0 0 6px; font: 12px/1.4 var(--pixel); color: var(--bark); }
+.feedback-kinds label {
+  position: relative; display: inline-flex; align-items: center; min-height: 34px; padding: 4px 10px;
+  border: 2px solid var(--bark); background: var(--parchment-hi); font: 12px/1.2 var(--pixel); cursor: pointer;
+}
+.feedback-kinds input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.feedback-kinds label:has(:checked) { background: var(--walnut); border-color: var(--walnut); color: var(--parchment-hi); }
+.feedback-kinds label:has(:focus-visible) { outline: 3px solid var(--gold); outline-offset: 2px; }
+.feedback-label { display: block; margin-top: 14px; }
+.feedback textarea, .feedback input[type="text"] {
+  display: block; width: 100%; padding: 8px 10px; border: 2px solid var(--bark); border-radius: 0;
+  background: var(--parchment-hi); color: var(--ink); font: 14px/1.6 var(--sans);
+}
+.feedback textarea { min-height: 112px; resize: vertical; }
+.feedback textarea::placeholder, .feedback input::placeholder { color: #9a7a55; }
+.feedback textarea[aria-invalid="true"] { border-color: var(--ember); }
+.feedback-about.check { display: flex; align-items: flex-start; margin-top: 12px; font-size: 13px; line-height: 1.5; white-space: normal; overflow-wrap: anywhere; cursor: pointer; }
+.feedback-about input { flex: none; margin: 2px 0 0; }
+.feedback-about:has(input:not(:checked)) span { color: var(--ink-soft); text-decoration: line-through; }
+.feedback-privacy { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: var(--ink-soft); }
+.feedback-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.feedback-status { margin: 10px 0 0; font-size: 13px; line-height: 1.6; }
+.feedback-status:empty { margin: 0; }
+.feedback-status.is-error { padding: 8px 10px; border: 2px solid var(--ember); background: var(--ember-lo); }
+.feedback-done > p { margin: 14px 0 0; font-size: 15px; line-height: 1.7; }
+@media (max-width: 760px) {
+  .feedback { padding: 6px 10px 12px; }
+  /* 输入框字号小于 16px 时 iOS 会在聚焦时放大页面。 */
+  .feedback textarea, .feedback input[type="text"] { font-size: 16px; }
+}
