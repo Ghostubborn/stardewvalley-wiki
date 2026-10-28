@@ -84,6 +84,13 @@
       A.select(ref); await settle();
       assert(graph()?.querySelectorAll(".g-group").length, `${ref.id}: graph`);
     }
+    // Buildings: route steps and building pages both show the building graph; tiers link to each other.
+    A.select({ type: "node", id: "bld:鸡舍:1" }); await settle();
+    assert(graph() && [...graph().querySelectorAll(".g-kind")].some(k => k.textContent === "升级前"), "building tiers have a graph");
+    [...graph().querySelectorAll("button.g-node")].find(b => b.textContent.includes("高级鸡舍")).click(); await settle();
+    assert(title() === "高级鸡舍" && graph(), "tiers link to each other");
+    A.select({ type: "page", id: "磨坊" }); await settle();
+    assert(graph()?.textContent.includes("大麦粉"), "a building that processes shows its products");
     A.select({ type: "page", id: "新手指南" }); await settle();
     assert(!graph() && !body.querySelector(".view-switch"), "entries without relations keep the plain page");
 
@@ -114,7 +121,9 @@
     A.select({ type: "item", id: id("蒲公英") }); await settle();
     body.querySelector(".view-switch button").click(); await settle();
     assert(!graph() && !location.hash.includes("g=1") && body.querySelector(".acquisition-paths, .d-section"), "the switch returns to the list");
-    return JSON.stringify({ result: "switch, groups and lines, stacked when narrow, recentring with a path, history and links, long groups, flavour families, crafting chain, places/monsters/fish/animals, spoiler placeholders", layout, viewport: [innerWidth, innerHeight] });
+    A.select({ type: "item", id: id("木材") }); await settle();
+    assert(body.textContent.includes("用于建造") && [...body.querySelectorAll(".chip")].some(c => c.textContent.includes("鸡舍")), "the list also names the buildings an item is used for");
+    return JSON.stringify({ result: "switch, groups and lines, stacked when narrow, recentring with a path, history and links, long groups, flavour families, crafting chain, places/monsters/fish/animals/buildings, spoiler placeholders", layout, viewport: [innerWidth, innerHeight] });
   } finally {
     A.select(null);
     Object.assign(A.state, saved);

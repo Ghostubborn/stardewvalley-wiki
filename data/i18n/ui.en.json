@@ -1028,5 +1028,15 @@
  "查看方式": "View",
  "列表": "List",
  "关系图": "Graph",
- "{n} 项后续内容": "{n} later {n|entry|entries}"
+ "{n} 项后续内容": "{n} later {n|entry|entries}",
+ "用于建造": "Used to build",
+ "建造 {n} 天": "{n} {n|day|days} to build",
+ "建造": "Build",
+ "升级前": "Upgraded from",
+ "升级为": "Upgrades to",
+ "可以养": "Houses",
+ "怎么建": "How to build it",
+ "有什么用": "What it does",
+ "开局就有": "From the start",
+ "建造材料": "Build materials"
 }

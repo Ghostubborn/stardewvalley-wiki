@@ -36,6 +36,20 @@
   const villagerNode = (name, extra) => ({ ref: { type: "villager", id: name }, label: N(name), icon: villagerIcon(name), ...extra });
   const bundleNode = (room, bundle, extra) => ({ ref: { type: "bundle", id: `${room}:${bundle.name}` }, label: N(bundle.name), icon: "Bundle_Green.png", ...extra });
   const textNode = (label, extra) => ({ ref: null, label, ...extra });
+
+  // 建筑：有升级链的（农舍、鸡舍、畜棚、小屋）每一级都是成长路线上的节点，其余建筑打开条目页。
+  const buildingByName = new Map(D.buildings.map(b => [b.name, b]));
+  const buildingPage = b => (D.pages[b.page] ? b.page : D.pages[b.name] ? b.name : null);
+  const buildingName = name => (EN ? EN.buildings?.[name]?.name || N(name) : name);
+  function buildingRef(name) {
+    for (const ch of App.BUILDING_CHAINS) {
+      const i = ch.tiers.findIndex(x => x.name === name);
+      if (i >= 0 && App.progression?.nodes.has(`bld:${ch.chain}:${i}`)) return { type: "node", id: `bld:${ch.chain}:${i}` };
+    }
+    const b = buildingByName.get(name), page = b && buildingPage(b);
+    return page ? titleRef(page) : null;
+  }
+  const buildingNode = (name, extra) => ({ ref: buildingRef(name), label: buildingName(name), icon: buildingByName.get(name)?.image, ...extra });
   const stations = list => (list || []).length ? App.list(list.map(s => App.nameOf(s.id || s.z)), t("或")) : null;
   const price = (cost, currency) => (cost != null ? App.money(cost, currency) : null);
 
@@ -136,6 +150,8 @@
     }
     const seed = D.seeds.find(s => s.id === it.id);
     if (seed?.crop) right.push({ kind: "grow", edge: "make", label: t("种出"), nodes: [itemNode(seed.crop.id || seed.crop.z)] });
+    const builds = buildingsUsing(it.id);
+    if (builds.length) right.push({ kind: "build", edge: "make", label: t("用于建造"), nodes: builds.map(({ b, qty }) => buildingNode(b.name, { note: qty > 1 ? t("用 {n} 个", { n: qty }) : null })) });
     const bundles = it.id ? App.bundleUse.get(it.id) || [] : [];
     if (bundles.length) right.push({ kind: "bundle", edge: "bundle", label: t("收集包"), nodes: bundles.map(b => {
       const qty = b.bundle.items.find(x => x.id === it.id)?.qty;
@@ -271,7 +287,7 @@
   function animalRelations(title) {
     const a = App.animalByName.get(title);
     const left = [], right = [];
-    const homes = (a.h || []).map(h => ({ ...pageNode(h.pg || h.z), label: N(h.z) }));
+    const homes = (a.h || []).map(h => buildingByName.has(h.z) ? buildingNode(h.z) : { ...pageNode(h.pg || h.z), label: N(h.z) });
     if (homes.length) left.push({ kind: "home", edge: "link", label: t("居住建筑"), nodes: homes });
     const buys = App.acquisitions(null, title).filter(p => p.kind === "buy");
     if (buys.length) left.push({ kind: "buy", edge: "buy", label: t("购买"), nodes: buys.map(p => ({ ...pageNode(p.shop || p.where), label: N(p.shop || p.where), note: price(p.cost, p.currency) })) });
@@ -282,6 +298,51 @@
       center: { label: N(title), icon: a.i || D.pages[title]?.i, sub: page.kz || "" },
       left: { title: t("饲养"), groups: left }, right: { title: t("产物"), groups: right },
     };
+  }
+
+  // —— 建筑：左边怎么建（建造者、花费与工期、材料、升级前一级），右边有什么用（升级为、能养的动物、加工）——
+  function buildingsUsing(id) {
+    return id ? D.buildings.filter(b => b.materials.some(m => m.id === id)).map(b => ({ b, qty: b.materials.find(m => m.id === id).qty })) : [];
+  }
+  function buildingRelations(b) {
+    const left = [], right = [];
+    const cost = b.cost ? App.money(b.cost, b.currency) : null, days = b.build_days ? t("建造 {n} 天", { n: b.build_days }) : null;
+    const costText = EN ? EN.buildings?.[b.name]?.cost_text : b.cost_text;
+    if (b.sold_by) left.push({ kind: "build", edge: "buy", label: t("建造"), nodes: [{ ...pageNode(b.sold_by), note: App.clauses([cost, days]) || null }] });
+    else if (!b.cost && !b.upgrade_from) left.push({ kind: "initial", edge: "find", label: t("开局就有"), nodes: [textNode(EN ? EN.buildings?.[b.name]?.desc || t("开局就有") : b.description || t("开局就有"))] });
+    // 没写建造者的（温室、图腾柱、祝尼魔屋）照原文写获得方式或花费，不猜是谁建的。温室有两种获得方式，
+    // 英文资料没有这段原文时不只写一个花费，免得看起来只能花钱买。
+    else if (/\n/.test(costText || "")) left.push({ kind: "build", edge: "buy", label: t("建造"), nodes: costText.split(/\n+(?:或|or)?\n*/i).filter(x => x.trim()).map(x => textNode(x.trim())) });
+    else if (cost && !/\n/.test(b.cost_text || "")) left.push({ kind: "build", edge: "buy", label: t("建造"), nodes: [textNode(t("花费 {cost}", { cost }))] });
+    if (b.materials.length) left.push({ kind: "materials", edge: "make", label: t("建造材料"), nodes: b.materials.map(m => itemNode(m.id || m.zh, { qty: m.qty })),
+      chain: b.materials.map(m => ({ id: m.id, z: m.zh, q: m.qty })) });
+    if (b.upgrade_from) left.push({ kind: "from", edge: "link", label: t("升级前"), nodes: [buildingNode(b.upgrade_from)] });
+    const next = D.buildings.find(x => x.upgrade_from === b.name);
+    if (next) right.push({ kind: "to", edge: "link", label: t("升级为"), nodes: [buildingNode(next.name)] });
+    // 能养的动物：动物资料写的是最低一级的居住建筑，高一级的建筑也能养。
+    const chain = App.BUILDING_CHAINS.find(ch => ch.tiers.includes(b));
+    const tier = chain ? chain.tiers.indexOf(b) : -1;
+    const animals = (D.animals || []).filter(a => (a.h || []).some(h => h.z === b.name || (chain && chain.tiers.findIndex(x => x.name === h.z) >= 0 && chain.tiers.findIndex(x => x.name === h.z) <= tier)));
+    // 建筑资料里写的动物名（“史莱姆”“马”）：有条目的链到条目（“史莱姆”是消歧义页，取怪物条目）；
+    // 英文版没有对应英文名的不显示，免得露出中文。
+    const named = (b.animals || "").split(/[、,，]/).map(x => x.trim()).filter(Boolean).map(x => {
+      const title = [x + "（怪物）", x].find(p => D.pages[p] && D.pages[p].k !== "disambiguation");
+      return title ? pageNode(title) : EN ? null : textNode(x);
+    }).filter(Boolean);
+    if (animals.length || named.length) right.push({ kind: "animals", edge: "link", label: t("可以养"), nodes: [...animals.map(a => pageNode(a.p)), ...named] });
+    const recipes = D.recipes.filter(r => (r.st || []).some(st => st.z === b.name));
+    if (recipes.length) right.push({ kind: "processing", edge: "make", label: t("加工"), nodes: recipes.map(r => itemNode(r.out.id || r.out.z, {
+      note: App.matsText(r.in.map(x => ({ id: x.id, zh: x.z, qty: x.q }))) })) });
+    return {
+      center: { label: buildingName(b.name), icon: b.image, sub: [t("建筑"), cost].filter(Boolean).join(" · ") },
+      left: { title: t("怎么建"), groups: left }, right: { title: t("有什么用"), groups: right },
+    };
+  }
+  // 条目页对应的建筑：有升级链的条目页（鸡舍、畜棚、小屋、农舍）对应第一级。
+  const buildingOfPage = title => D.buildings.find(b => buildingPage(b) === title && !b.upgrade_from);
+  function buildingOfNode(id) {
+    const m = /^bld:(.+):(\d+)$/.exec(id || "");
+    return m ? App.BUILDING_CHAINS.find(ch => ch.chain === m[1])?.tiers[+m[2]] : null;
   }
 
   // 合成链：每种中间材料按第一种做法展开到原料（和材料树相同），并注明别的做法。
@@ -312,8 +373,10 @@
     else if (ref.type === "fish") { const f = App.fishByName.get(ref.id); rel = f && fishRelations(f); }
     else if (ref.type === "villager") rel = villagerRelations(ref.id);
     else if (ref.type === "location") rel = placeRelations(ref.id);
+    else if (ref.type === "node") { const b = buildingOfNode(ref.id); rel = b && buildingRelations(b); }
     else if (ref.type === "page" && D.pages[ref.id]) {
-      rel = App.monsterByName.has(ref.id) ? monsterRelations(ref.id) : App.animalByName.has(ref.id) ? animalRelations(ref.id)
+      const b = buildingOfPage(ref.id);
+      rel = b ? buildingRelations(b) : App.monsterByName.has(ref.id) ? monsterRelations(ref.id) : App.animalByName.has(ref.id) ? animalRelations(ref.id)
         : D.pages[ref.id].id ? null : placeRelations(ref.id);
     }
     if (!rel) return null;
@@ -321,5 +384,5 @@
     return rel.left.groups.length + rel.right.groups.length ? rel : null;
   }
 
-  Object.assign(App, { titleRef, relations, relationChain, itemSources });
+  Object.assign(App, { titleRef, relations, relationChain, itemSources, buildingRef, buildingName, buildingsUsing });
 })();

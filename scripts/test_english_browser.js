@@ -46,6 +46,7 @@ window.__enScan = { done: false, step: "starting" };
       ...D.locations.map(l => ({ type: "location", id: l.p })),
       ...[...D.monsters, ...D.animals].map(m => ({ type: "page", id: m.p })),
       ...[...A.progression.nodes.keys()].map(id => ({ type: "node", id })),
+      ...D.buildings.map(b => A.buildingRef(b.name)).filter(Boolean),
       ...A.browse.records("bundles").filter(r => r.ref.type === "bundle").map(r => r.ref),
       ...A.browse.records("basics").map(r => r.ref),
       ...(items ? Object.keys(D.items) : D.seeds.map(s => s.id)).map(id => ({ type: "item", id })),

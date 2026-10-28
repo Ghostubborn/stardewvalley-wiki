@@ -111,6 +111,25 @@ const sheep = A.relations({ type: 'page', id: '绵羊' });
 assert.deepEqual(plain(sheep.left.groups.map(g => g.label)), ['居住建筑', '购买']);
 assert.deepEqual(labels(sheep.right.groups[0]), ['动物毛']);
 
+// Buildings: builder with cost and days, materials (an expandable chain), tiers both ways, animals by tier,
+// machines; items list the buildings they are used for, and animals open the building tier they live in.
+const coop = A.relations({ type: 'page', id: '鸡舍' });
+assert.deepEqual(plain(coop.left.groups.map(g => g.label)), ['建造', '建造材料']);
+assert.deepEqual(plain([coop.left.groups[0].nodes[0].label, coop.left.groups[0].nodes[0].note]), ['木匠的商店', '4,000 金；建造 3 天']);
+assert.deepEqual(plain(group(coop, 'right', '升级为').nodes.map(n => [n.label, n.ref])), [['大鸡舍', { type: 'node', id: 'bld:鸡舍:1' }]]);
+const bigCoop = A.relations({ type: 'node', id: 'bld:鸡舍:1' });
+assert.deepEqual(labels(group(bigCoop, 'left', '升级前')), ['鸡舍']);
+assert.deepEqual(labels(group(bigCoop, 'right', '可以养')), ['鸡', '虚空鸡', '鸭', '恐龙', '金色的鸡']);
+assert.deepEqual(labels(group(A.relations({ type: 'page', id: '磨坊' }), 'right', '加工')), ['大麦粉', '糖', '大米']);
+assert(A.relationChain(group(A.relations({ type: 'page', id: '史莱姆屋' }), 'left', '建造材料').chain).deep, 'building materials expand into a chain');
+assert.deepEqual(labels(group(A.relations({ type: 'page', id: '温室' }), 'left', '建造')), ['完成茶水间收集包', '在Joja社区发展申请书中花35,000金购入']);
+assert.deepEqual(labels(group(A.relations({ type: 'node', id: 'bld:农舍:0' }), 'left', '开局就有')), ['游戏开始时就有的农舍。']);
+for (const b of D.buildings) assert(A.relations(A.buildingRef(b.name)), `${b.name}: graph`);
+const woodBuilds = group(A.relations({ type: 'item', id: id('木材') }), 'right', '用于建造');
+assert.equal(woodBuilds.nodes.length, D.buildings.filter(b => b.materials.some(m => m.id === id('木材'))).length);
+assert(woodBuilds.nodes.some(n => n.label === '鸡舍' && n.note === '用 300 个'));
+assert.deepEqual(plain(group(A.relations({ type: 'page', id: '鸭' }), 'left', '居住建筑').nodes[0].ref), { type: 'node', id: 'bld:鸡舍:1' });
+
 // Entries without relations get no graph; occupants' portraits are marked so the view can hide protected ones.
 assert.equal(A.relations({ type: 'page', id: '新手指南' }), null);
 assert.deepEqual(plain(A.relations({ type: 'location', id: '拖车' }).center.iconRef), { type: 'villager', id: '潘姆' });
@@ -120,11 +139,12 @@ const exists = ref => ref.type === 'item' ? !!D.items[ref.id] : ref.type === 'fi
   : ref.type === 'villager' ? A.villagerByName.has(ref.id) : ref.type === 'location' ? A.locationByName.has(ref.id)
   : ref.type === 'bundle' ? !!A.browse.bundle(ref.id) : ref.type === 'node' ? A.progression.nodes.has(ref.id) : !!D.pages[ref.id];
 const refs = [
+  ...[...A.progression.nodes.keys()].map(x => ({ type: 'node', id: x })),
   ...Object.keys(D.items).map(x => ({ type: 'item', id: x })), ...D.fish.map(f => ({ type: 'fish', id: f.p })),
   ...D.villagers.map(v => ({ type: 'villager', id: v.p })), ...D.locations.map(l => ({ type: 'location', id: l.p })),
   ...Object.keys(D.pages).map(title => ({ type: 'page', id: title })),
 ];
-let nodes = 0, withGraph = { villager: 0, location: 0, page: 0 };
+let nodes = 0, withGraph = { villager: 0, location: 0, page: 0, node: 0 };
 for (const ref of refs) {
   const rel = A.relations(ref);
   if (!rel) continue;
@@ -139,4 +159,4 @@ for (const v of D.villagers) {
   const any = v.love.length || v.like.length || v.fam?.length || D.locations.some(l => (l.occ || []).includes(v.p)) || D.shops.some(x => x.p === v.p);
   if (any) assert(A.relations({ type: 'villager', id: v.p }), `${v.p} has relations but no graph`);
 }
-console.log(`Relation graph checks passed: ${graphs} item graphs, ${withGraph.villager} villagers, ${withGraph.location} locations, ${withGraph.page} other entries, ${nodes} nodes; uses, bundles, gifts, recipes and shops match the list view; flavour families, crafting chains and node targets.`);
+console.log(`Relation graph checks passed: ${graphs} item graphs, ${withGraph.villager} villagers, ${withGraph.location} locations, ${withGraph.node} building steps, ${withGraph.page} other entries, ${nodes} nodes; uses, bundles, gifts, recipes, shops and buildings match the list view; flavour families, crafting chains and node targets.`);

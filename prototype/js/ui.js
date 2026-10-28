@@ -1028,6 +1028,9 @@
     const parts = [];
     const uses = App.usedIn.get(id) || [];
     if (uses.length) parts.push(el("p", { class: "d-sub" }, t("可以用来做")), itemGroup(uses.map(r => r.out.id || r.out.z), t("后续用途")));
+    const builds = App.buildingsUsing(id).filter(({ b }) => App.buildingRef(b.name));
+    if (builds.length) parts.push(el("p", { class: "d-sub" }, t("用于建造")), linkGroup(builds.map(({ b, qty }) => ({
+      ref: App.buildingRef(b.name), label: App.buildingName(b.name), icon: b.image, note: qty > 1 ? t("用 {n} 个", { n: qty }) : null })), t("用于建造")));
     const bundles = App.bundleUse.get(id) || [];
     if (bundles.length) parts.push(el("p", { class: "d-sub" }, t("收集包")), el("div", { class: "chips" }, bundles.filter(b => S.canView({ type: "bundle", id: `${b.room}:${b.bundle.name}` })).map(b => {
       const index = b.bundle.items.findIndex(item => item.id === id);
@@ -1091,8 +1094,15 @@
       html: '<svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h13l4 4v14H3V3h1zm3 0v6h9V3M7 21v-8h10v8"/><path d="M13 3v4"/></svg>' }), heading.firstChild);
     return heading;
   }
+  function nodeHead(id) {
+    const n = P().nodes.get(id), st = P().status(id), laneName = P().lanes.find((l) => l.id === n.lane).name;
+    const STATUS = { done: t("已完成"), ready: t("已知前置满足"), locked: t("条件还没满足"), unknown: t("进度未确认") };
+    return [head(n.icon || App.itemInfo(n.itemId)?.i, nodeName(n), App.conditionsActive() ? `${laneName} · ${STATUS[st.status]}` : t("{lane} · 材料与前置关系", { lane: laneName })),
+      n.info?.what ? el("p", { class: "d-summary" }, n.info.what) : null];
+  }
   // 关系图里的条目：抬头、摘要和页尾（收藏、条目全文、资料来源）与列表相同。
   function entryHead(ref) {
+    if (ref.type === "node") return nodeHead(ref.id);
     if (ref.type === "item") return itemHead(App.itemInfo(ref.id) || { z: ref.id });
     if (ref.type === "fish") return fishHead(App.fishByName.get(ref.id));
     if (ref.type === "villager") return villagerHead(App.villagerByName.get(ref.id));
@@ -1102,7 +1112,7 @@
     const summary = App.pageInfo(ref.id)?.s;
     return [pageHeading(ref.id), summary ? el("p", { class: "d-summary" }, summary) : null];
   }
-  const articleOf = ref => (ref.type === "item" ? App.itemInfo(ref.id)?.pg : ref.id);
+  const articleOf = ref => (ref.type === "item" ? App.itemInfo(ref.id)?.pg : ref.type === "node" ? P().nodes.get(ref.id)?.info?.source : ref.id);
 
   function renderFish(f) {
     const source = pointReturn?.pointId && App.mapContents.find(pointReturn.pointId);
@@ -1347,8 +1357,6 @@
   function renderNode(id) {
     const n = P().nodes.get(id);
     const st = P().status(id);
-    const laneName = P().lanes.find((l) => l.id === n.lane).name;
-    const STATUS = { done: t("已完成"), ready: t("已知前置满足"), locked: t("条件还没满足"), unknown: t("进度未确认") };
     const steps = (App.conditionsActive() ? P().stepsTo(id) : [...P().ancestors(id)]).filter((x) => x !== id);
     const kids = [...(P().children.get(id) || [])].map((x) => P().nodes.get(x));
     const acquisition = n.itemId ? App.acquisitions(n.itemId, App.itemInfo(n.itemId)?.z) : [];
@@ -1364,8 +1372,7 @@
         checkList(p.checks)));
     });
     fillDetail(
-      head(n.icon || App.itemInfo(n.itemId)?.i, nodeName(n), App.conditionsActive() ? `${laneName} · ${STATUS[st.status]}` : t("{lane} · 材料与前置关系", { lane: laneName })),
-      n.info?.what ? el("p", { class: "d-summary" }, n.info.what) : null,
+      ...nodeHead(id),
       n.info?.action || mats ? section(t("怎么做"), n.info?.action ? el("p", null, n.info.action) : null, mats ? matTree(mats) : null) : null,
       pathsBox.childNodes.length ? section(t("需要先满足"), pathsBox) : null,
       steps.length ? section(App.conditionsActive() ? t("待对照的 {n} 个前置", { n: steps.length }) : t("关联前置路线"), el("ol", { class: "steps" }, steps.map((sid) => {
