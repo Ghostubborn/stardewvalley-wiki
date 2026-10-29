@@ -3,7 +3,7 @@ name = "stardewvalley-wiki"
 pages_build_output_dir = "./prototype"
 compatibility_date = "2026-10-26"
 
-# 访客反馈（functions/api/feedback.js）写入的 D1 数据库（2026-10-29 创建，区域 WNAM）。
+# 访客反馈（functions/api/feedback/）读写的 D1 数据库（2026-10-29 创建，区域 WNAM）。
 # 建表：wrangler d1 migrations apply stardewvalley-wiki-feedback --remote（见 docs/cloudflare-pages.md）。
 [[d1_databases]]
 binding = "FEEDBACK_DB"

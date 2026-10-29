@@ -1,4 +1,5 @@
-/* 访客反馈对话框：木框、按钮、勾选框沿用页面样式；比窗口高时在框内滚动，手机上不横向滚动。 */
+/* 访客反馈对话框：木框、按钮、勾选框沿用页面样式；比窗口高时在框内滚动，手机上不横向滚动。
+   “写反馈”和“我的反馈”两个标签；我的反馈是一张张卡片，点开是和维护者的对话。 */
 .feedback {
   width: min(520px, calc(100vw - 24px)); max-width: none;
   max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px);
@@ -36,6 +37,52 @@
 .feedback-status:empty { margin: 0; }
 .feedback-status.is-error { padding: 8px 10px; border: 2px solid var(--ember); background: var(--ember-lo); }
 .feedback-done > p { margin: 14px 0 0; font-size: 15px; line-height: 1.7; }
+/* 标签：和分段按钮一样，选中的变深色。 */
+.feedback-tabs { display: flex; gap: 4px; margin-top: 10px; }
+.feedback-tabs [role="tab"] {
+  position: relative; flex: 1; min-height: 36px; padding: 4px 10px; border: 2px solid var(--bark);
+  background: var(--parchment); color: var(--ink); font: 13px/1.2 var(--pixel);
+}
+.feedback-tabs [aria-selected="true"] { background: var(--walnut); border-color: var(--walnut); color: var(--parchment-hi); }
+/* 新回复的红点：叠在按钮右上角，不改变按钮大小。 */
+.feedback-open { position: relative; }
+.feedback-dot { position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border: 2px solid var(--parchment-hi); background: var(--ember); }
+.feedback-thread .feedback-dot { position: static; flex: none; }
+.feedback-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.feedback-threads { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.feedback-thread {
+  display: grid; gap: 4px; width: 100%; padding: 8px 10px; border: 2px solid var(--bark);
+  background: var(--parchment-hi); color: var(--ink); font: inherit; text-align: left; cursor: pointer;
+}
+.feedback-thread:hover { background: var(--parchment); }
+.feedback-thread-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: 12px/1.3 var(--pixel); color: var(--ink-soft); }
+.feedback-thread-head time { margin-left: auto; }
+.feedback-excerpt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.feedback-thread-foot, .feedback-thread-about { font-size: 12px; line-height: 1.5; color: var(--ink-soft); overflow-wrap: anywhere; }
+/* 处理状态：待处理用纸色，已回复用夜蓝，已处理用祝尼魔绿，暂不处理和重复用暗纸色。 */
+.feedback-chip { flex: none; padding: 1px 6px; border: 2px solid var(--bark); background: var(--parchment); color: var(--bark); font: 11px/1.3 var(--pixel); }
+.feedback-chip.s-replied { border-color: var(--night); background: var(--night-lo); color: var(--night); }
+.feedback-chip.s-done { border-color: var(--junimo); background: var(--junimo-lo); color: var(--ink); }
+.feedback-chip.s-wontfix, .feedback-chip.s-duplicate { border-color: var(--bark); background: var(--parchment-lo); color: var(--ink); }
+.feedback-link { margin-top: 16px; padding-top: 10px; border-top: 2px dashed var(--parchment-lo); }
+.feedback-link > p { margin: 0; font-size: 12px; line-height: 1.6; color: var(--ink-soft); }
+.feedback-link input { margin-top: 8px; font-size: 12px; }
+.feedback-back { margin-top: 12px; }
+.feedback-thread-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.feedback-thread-title h3 { margin: 0; font: 16px/1.3 var(--pixel); font-weight: normal; }
+.feedback-thread-title h3:focus { outline: none; }
+.feedback-thread-about { margin: 4px 0 0; }
+/* 对话：访客的话靠右、纸色；维护者的回复靠左、绿色。 */
+.feedback-messages { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.feedback-messages li { max-width: 88%; padding: 6px 10px 8px; border: 2px solid var(--bark); background: var(--parchment-hi); }
+.feedback-messages .from-visitor { justify-self: end; }
+.feedback-messages .from-team { justify-self: start; border-color: var(--junimo); background: var(--junimo-lo); }
+.feedback-meta { margin: 0; font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
+.feedback-meta b { color: var(--ink); font-weight: 600; }
+.feedback-text { margin: 2px 0 0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.feedback-waiting { margin: 8px 0 0; font-size: 12px; line-height: 1.6; color: var(--ink-soft); }
+.feedback-reply { margin-top: 4px; }
+.feedback-reply textarea { min-height: 80px; }
 @media (max-width: 760px) {
   .feedback { padding: 6px 10px 12px; }
   /* 输入框字号小于 16px 时 iOS 会在聚焦时放大页面。 */

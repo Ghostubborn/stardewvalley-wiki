@@ -85,7 +85,7 @@
     const zh = A.lang !== "en";
     const feedback = el("section", { class: "home-feedback", "aria-labelledby": "feedback-title" },
       el("h2", { id: "feedback-title" }, t("一起把手册做得更好")),
-      el("p", null, t("发现资料错误、缺少的内容、被剧透，或有不顺手的地方？点“反馈”直接告诉我们，不用注册；在条目里点“反馈”会自动附上这个条目。也可以在 GitHub 提出。")),
+      el("p", null, t("发现资料错误、缺少的内容、被剧透，或有不顺手的地方？点“反馈”直接告诉我们，不用注册；在条目里点“反馈”会自动附上这个条目。我们的回复会显示在“我的反馈”里，可以接着追问。也可以在 GitHub 提出。")),
       el("div", { class: "wiki-credit-links" },
         el("button", { type: "button", class: "btn primary", "aria-haspopup": "dialog", onclick: e => A.feedback.open(e.currentTarget) }, t("反馈问题或建议")),
         el("a", { href: "https://github.com/Ghostubborn/stardewvalley-wiki/issues/new", target: "_blank", rel: "noopener noreferrer" }, t("提交反馈（GitHub Issues）↗")),
