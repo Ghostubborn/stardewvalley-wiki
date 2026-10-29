@@ -3,10 +3,9 @@ name = "stardewvalley-wiki"
 pages_build_output_dir = "./prototype"
 compatibility_date = "2026-10-26"
 
-# 访客反馈（functions/api/feedback.js）写入的 D1 数据库。数据库建好后取消下面四行的注释并填上 database_id，
+# 访客反馈（functions/api/feedback.js）写入的 D1 数据库（2026-10-29 创建，区域 WNAM）。
 # 建表：wrangler d1 migrations apply stardewvalley-wiki-feedback --remote（见 docs/cloudflare-pages.md）。
-# 没有绑定时接口回 503，反馈框提示“还在开通中”。
-# [[d1_databases]]
-# binding = "FEEDBACK_DB"
-# database_name = "stardewvalley-wiki-feedback"
-# database_id = "REPLACE_WITH_D1_ID"
+[[d1_databases]]
+binding = "FEEDBACK_DB"
+database_name = "stardewvalley-wiki-feedback"
+database_id = "133cfadd-413b-42c9-8c29-cb77891a7986"

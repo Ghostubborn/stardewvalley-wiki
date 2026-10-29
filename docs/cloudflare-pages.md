@@ -41,6 +41,8 @@ OAuth 授权由账号持有人在 Cloudflare 网页完成，密码和令牌不�
 
 ### 首次启用
 
+已于 2026-10-29 完成：数据库 `stardewvalley-wiki-feedback`（区域 WNAM，`database_id` 见 `wrangler.toml`），表已建好。以下步骤只在换账号或重建时需要。Wrangler 的登录要包含 D1 权限（默认的 `wrangler login` 就有；只授权 Pages 的登录建库会报 “Authentication error”）。
+
 ```sh
 npx --yes wrangler@4.152.0 login
 npx --yes wrangler@4.152.0 d1 create stardewvalley-wiki-feedback
