@@ -1,0 +1,212 @@
+/* 我的速查：钉选卡片、游戏日历式的生日表、营业时间和钓鱼速查表；打印时只留这一页。 */
+#app[data-view="quick"] #map { visibility: hidden; }
+.quick-view { container: quick / inline-size; }
+.quick-head { margin-bottom: 14px; }
+.quick-head .eyebrow { margin: 0 0 5px; color: var(--ink-soft); font-size: 11px; letter-spacing: 2px; }
+.quick-head h2 { margin: 0 0 6px; font: 26px/1.4 var(--pixel); }
+.quick-head > p:not(.eyebrow) { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.7; max-width: 60em; }
+
+.tab-count { display: inline-block; min-width: 18px; margin-left: 5px; padding: 2px 4px 1px; background: var(--junimo); color: var(--parchment-hi); font: 11px/1 var(--pixel); text-align: center; vertical-align: 1px; }
+.tab-count[hidden] { display: none; }
+
+.quick-shared { margin-bottom: 14px; padding: 10px 14px; background: var(--junimo-lo); border: 2px solid var(--junimo); }
+.quick-shared p { margin: 0; font-size: 13px; line-height: 1.7; }
+.quick-shared .d-actions { margin-top: 8px; }
+
+.quick-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; }
+.quick-seasons { flex: 0 1 380px; }
+.quick-seasons button { min-height: 36px; }
+.quick-actions { display: flex; gap: 6px; margin-left: auto; }
+.quick-actions .btn { min-height: 36px; }
+.quick-share-field { flex: 1 1 100%; padding: 6px 8px; border: 2px solid var(--bark); background: var(--parchment-hi); font: 12px var(--sans); }
+.quick-share-field[hidden] { display: none; }
+
+.quick-picker { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 3px double var(--bark); }
+.quick-picker-label { font: 12px/1 var(--pixel); color: var(--ink-soft); margin-right: 4px; }
+.quick-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 4px 10px 4px 6px; border: 2px dashed var(--bark); background: transparent; font: 12px/1.2 var(--pixel); }
+.quick-toggle[aria-pressed="true"] { border-style: solid; background: var(--panel); }
+.quick-check { display: inline-grid; place-items: center; width: 18px; height: 18px; border: 2px solid var(--bark); background: var(--parchment-hi); font: 12px/1 var(--pixel); }
+.quick-toggle[aria-pressed="true"] .quick-check { background: var(--junimo); border-color: var(--junimo); color: var(--parchment-hi); }
+
+.quick-empty { padding: 16px; background: var(--parchment-hi); border: 2px solid var(--bark); box-shadow: inset 0 3px var(--panel); margin-bottom: 16px; }
+.quick-empty h3 { margin: 0 0 6px; font: 17px/1.5 var(--pixel); }
+.quick-empty p { margin: 0 0 12px; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+.quick-starters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.quick-starter { display: grid; gap: 4px; justify-items: start; padding: 10px 12px; border: 2px solid var(--bark); background: var(--parchment); text-align: left; }
+.quick-starter strong { font: 14px/1.4 var(--pixel); }
+.quick-starter small { font-size: 11px; color: var(--ink-soft); }
+.quick-starter:hover { background: var(--panel); }
+
+.quick-sheet, .quick-pins { margin-bottom: 22px; }
+.quick-sheet-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--parchment-lo); }
+.quick-sheet-head h3 { margin: 0; font: 17px/1.5 var(--pixel); }
+.quick-sheet-head p { margin: 0; font-size: 11px; color: var(--ink-soft); }
+.quick-note { margin: 8px 0 0; font-size: 11px; line-height: 1.6; color: var(--ink-soft); }
+
+/* 生日日历：仿游戏日历，奶油色纸、细格线，日期在左上角，生日那天放居民头像。 */
+.quick-calendars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.quick-calendars[data-count="1"] { grid-template-columns: minmax(0, 640px); }
+.quick-calendar { padding: 8px; background: #f2cd8f; border: 2px solid var(--bark); }
+.quick-calendar h4 { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 0 0 6px; font: 15px/1.4 var(--pixel); }
+.quick-calendar h4 .pix { width: 20px; height: 20px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; }
+.calendar-weekday { text-align: center; font: 11px/1.6 var(--pixel); color: var(--bark); }
+.calendar-day { position: relative; min-height: 54px; padding: 14px 2px 2px; background: var(--parchment); border: 1px solid #d9a66b; display: grid; align-content: start; justify-items: center; gap: 2px; }
+.calendar-date { position: absolute; top: 1px; left: 3px; font: 11px/1.2 var(--pixel); color: var(--bark); }
+.calendar-day.has-birthday { background: var(--parchment-hi); }
+.calendar-person { display: grid; justify-items: center; gap: 1px; width: 100%; min-width: 0; padding: 0; border: 0; background: transparent; }
+.calendar-person .pix, .calendar-person .noimg { width: 28px; height: 28px; }
+.calendar-person span { max-width: 100%; font-size: 10px; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.calendar-person:hover span, .calendar-person:focus-visible span { text-decoration: underline; }
+
+/* 营业时间与钓鱼速查：宽屏是表格，窄屏每行折成一张小卡片。 */
+.quick-table { border: 2px solid var(--bark); background: var(--parchment-hi); }
+.quick-tr { display: grid; gap: 4px 12px; align-items: center; padding: 6px 10px; border-top: 1px solid var(--parchment-lo); font-size: 12px; line-height: 1.5; }
+.quick-tr:nth-child(even) { background: #fbefcf; }
+.quick-th { border-top: 0; background: var(--panel) !important; font: 12px/1.4 var(--pixel); color: var(--bark); }
+/* 列宽定在整张表上，每行用 subgrid 共用同一组列：名字长短不同的行，季节、时段和星期也上下对齐。 */
+.quick-shops { display: grid; column-gap: 12px; grid-template-columns: minmax(130px, 1fr) minmax(170px, 1.8fr) max-content minmax(0, 1.3fr); }
+.quick-fish { display: grid; column-gap: 12px; grid-template-columns: minmax(110px, 1fr) max-content minmax(150px, 1.6fr) minmax(76px, .7fr) minmax(0, 1.4fr); }
+.quick-table > .quick-tr { grid-column: 1 / -1; grid-template-columns: subgrid; }
+.quick-th .time-axis { margin-top: 2px; }
+.quick-cell-note { font-size: 12px; color: var(--ink); }
+.quick-line { display: block; }
+.quick-fish-rules { display: block; margin-top: 4px; padding-top: 4px; color: var(--ink-soft); font-size: 11px; border-top: 1px dotted var(--parchment-lo); }
+.quick-link { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; font: 13px/1.4 var(--pixel); text-align: left; }
+.quick-link .pix, .quick-link .noimg { width: 24px; height: 24px; flex: none; }
+.quick-shops .quick-link .pix { width: 36px; height: 24px; object-fit: contain; }
+.quick-link:hover { text-decoration: underline; }
+
+/* 钉选卡片 */
+.quick-groups { columns: 260px 3; column-gap: 12px; }
+.quick-group { margin-bottom: 14px; }
+.quick-group h4 { margin: 0 0 8px; font: 13px/1.4 var(--pixel); color: var(--ink-soft); break-after: avoid; }
+.quick-card + .quick-card { margin-top: 10px; }
+.quick-card { position: relative; min-width: 0; padding: 10px 12px; break-inside: avoid; background: var(--parchment-hi); border: 2px solid var(--bark); box-shadow: inset 0 3px var(--panel); }
+.quick-card-head { display: flex; align-items: center; gap: 8px; width: calc(100% - 28px); padding: 0; border: 0; background: transparent; text-align: left; }
+.quick-card-head strong { display: block; font: 15px/1.4 var(--pixel); }
+.quick-card-head small { display: block; font-size: 10px; color: var(--ink-soft); }
+.quick-card-head:hover strong { text-decoration: underline; }
+.quick-card-art { display: grid; place-items: center; flex: none; width: 40px; height: 40px; background: #efc38b; border: 2px solid var(--bark); box-shadow: inset 2px 2px #c88750, inset -2px -2px #ffe3a1; }
+.quick-card-art > .pix, .quick-card-art > .noimg { width: 32px; height: 32px; }
+.quick-card[data-kind="place"] .quick-card-art > .pix { width: 34px; height: 24px; object-fit: contain; }
+.quick-remove { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; padding: 0; border: 2px solid transparent; background: transparent; color: var(--bark); font: 18px/1 var(--pixel); }
+.quick-remove:hover, .quick-remove:focus-visible { border-color: var(--bark); background: var(--parchment); }
+.quick-facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 3px 10px; margin: 9px 0 0; padding-top: 8px; border-top: 1px dotted var(--parchment-lo); font-size: 12px; line-height: 1.5; }
+.quick-facts dt { color: var(--ink-soft); }
+.quick-facts dd { margin: 0; overflow-wrap: anywhere; }
+.quick-facts dd > .time-fact, .quick-facts dd > .hours { max-width: 260px; }
+.quick-items { margin-top: 8px; }
+.quick-items-label { display: block; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px; }
+.quick-slots { display: flex; flex-wrap: wrap; gap: 4px; }
+.quick-slot { position: relative; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; background: #efc38b; border: 2px solid var(--bark); box-shadow: inset 2px 2px #c88750, inset -2px -2px #ffe3a1; }
+.quick-slot > .pix, .quick-slot > .noimg { width: 28px; height: 28px; }
+.quick-slot > .concealed-slot { font-size: 18px; }
+.quick-slot:hover, .quick-slot:focus-visible { background: var(--parchment-hi); border-color: var(--walnut); }
+.quick-card.locked { background: var(--parchment); border-style: dashed; box-shadow: none; }
+.quick-card.locked .quick-card-art { box-shadow: none; background: var(--parchment-lo); }
+.quick-print-credit { display: none; }
+.quick-footer { margin-top: 16px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 画图的小部件：季节固定四格、时间条（6:00 到凌晨 2:00，傍晚以后是夜色）、天气图标、一周七格、生长、营业时段。 */
+.season-strip { display: inline-grid; grid-template-columns: repeat(4, 34px); gap: 2px; vertical-align: middle; }
+.season-slot { display: grid; justify-items: center; gap: 1px; padding: 2px 0 1px; border: 1px solid transparent; font: 10px/1.1 var(--pixel); opacity: .2; filter: grayscale(1); }
+.season-slot .pix { width: 24px; height: 16px; }
+.season-slot.on { opacity: 1; filter: none; background: var(--parchment); border-color: var(--parchment-lo); }
+.season-slot.current { outline: 2px solid var(--walnut); outline-offset: -1px; }
+.season-legend .season-slot { opacity: 1; filter: none; background: transparent; border-color: transparent; }
+.time-bar { position: relative; display: block; height: 12px; min-width: 110px; border: 1px solid #c9a06c;
+  background: linear-gradient(to right, transparent 29.6%, #c9a06c 29.6% 30%, transparent 30% 59.6%, #8d8fb0 59.6% 60%, transparent 60% 89.6%, #8d8fb0 89.6% 90%, transparent 90%),
+    linear-gradient(to right, #fbefcf 0 60%, var(--night-lo) 60% 100%); }
+.time-span { position: absolute; top: 1px; bottom: 1px; background: var(--junimo); box-shadow: inset 0 -2px rgba(0, 0, 0, .18); }
+.time-axis { position: relative; display: block; height: 14px; min-width: 110px; font: 10px/14px var(--pixel); color: var(--bark); }
+.time-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.time-axis span:first-child { transform: none; }
+.time-fact { display: grid; gap: 3px; width: 100%; }
+.time-text { font-size: 12px; }
+.weather-icons { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.weather-icon { width: 16px; height: 16px; }
+.week-strip { display: inline-grid; grid-template-columns: repeat(7, 20px); gap: 2px; vertical-align: middle; }
+html[lang="en"] .week-strip { grid-template-columns: repeat(7, 27px); }
+.week-day { text-align: center; font: 10px/18px var(--pixel); background: var(--junimo-lo); border: 1px solid #9fc28a; }
+.week-day.closed { background: var(--ember-lo); border-color: var(--ember); color: var(--ember); text-decoration: line-through; }
+.week-day.maybe { border-style: dashed; background: #f8e3d6; }
+.week-fact { display: grid; gap: 4px; justify-items: start; }
+.birthday-chip { display: inline-flex; align-items: center; gap: 6px; }
+.birthday-chip .pix { width: 24px; height: 16px; }
+.growth { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; }
+.growth .pix, .growth .noimg { width: 24px; height: 24px; }
+.growth-days { display: inline-flex; align-items: center; gap: 3px; }
+.growth-days strong { font: 13px/1 var(--pixel); }
+.growth-regrow { padding: 1px 6px; background: var(--junimo-lo); border: 1px solid #9fc28a; font-size: 11px; white-space: nowrap; }
+.hours { display: grid; gap: 6px; width: 100%; }
+.hours-row { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 6px; row-gap: 2px; align-items: baseline; }
+.hours-label { color: var(--ink-soft); font-size: 11px; }
+.hours-row > .hours-text:first-child { grid-column: 1 / -1; }
+.hours-row > .time-bar { grid-column: 1 / -1; }
+
+@container quick (max-width: 820px) {
+  .quick-calendars { grid-template-columns: minmax(0, 1fr); }
+}
+@container quick (max-width: 640px) {
+  .quick-head h2 { font-size: 22px; }
+  .quick-seasons { flex-basis: 100%; min-width: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .quick-seasons button { min-width: 0; padding: 4px 2px; flex-direction: column; gap: 2px; }
+  .quick-actions { margin-left: 0; }
+  .quick-starters { grid-template-columns: 1fr; }
+  .quick-th { display: none !important; }
+  .quick-shops, .quick-fish { display: block; }
+  .quick-shops .quick-tr, .quick-fish .quick-tr { grid-template-columns: minmax(0, 1fr); padding: 8px 10px; }
+  .quick-tr > [role="rowheader"] { grid-column: 1 / -1; }
+  .quick-tr > [role="cell"] { position: relative; grid-column: 1 / -1; padding-left: 64px; min-width: 0; overflow-wrap: anywhere; }
+  .quick-tr > [role="cell"]::before { content: attr(data-label); position: absolute; left: 0; top: 0; width: 60px; color: var(--ink-soft); }
+  .quick-tr .time-fact, .quick-tr .hours { min-width: 0; }
+  .calendar-day { min-height: 46px; padding-top: 13px; }
+  .calendar-person .pix, .calendar-person .noimg { width: 24px; height: 24px; }
+  .calendar-person span { display: none; }
+}
+@media (max-width: 760px) {
+  .hotbar-views { flex: 1; min-width: 0; }
+  .hotbar-views button { flex: 1 1 0; min-width: 0; padding: 0 3px; white-space: normal; line-height: 1.15; }
+  .hotbar-views .tab-count { margin-left: 2px; }
+}
+/* 手机上两张表不写列名：季节格、时间条、天气图标和一周七格本身看得懂（读屏有完整说明）。
+   鱼：名字 / 季节格＋天气 / 时间条 / 水域；商店：名字 / 时段 / 一周七格 / 说明。 */
+@container quick (max-width: 640px) {
+  .quick-fish .quick-tr { grid-template-columns: max-content minmax(0, 1fr); column-gap: 10px; }
+  .quick-fish .quick-tr > [role="cell"], .quick-shops .quick-tr > [role="cell"] { padding-left: 0; }
+  .quick-fish .quick-tr > [role="cell"]::before, .quick-shops .quick-tr > [role="cell"]::before { display: none; }
+  .quick-fish .quick-tr > [data-col="season"] { grid-row: 2; grid-column: 1; align-self: center; }
+  .quick-fish .quick-tr > [data-col="weather"] { grid-row: 2; grid-column: 2; align-self: center; }
+  .quick-fish .quick-tr > [data-col="time"] { grid-row: 3; grid-column: 1 / -1; }
+  .quick-fish .quick-tr > [data-col="water"] { grid-row: 4; grid-column: 1 / -1; }
+}
+@container quick (max-width: 350px) {
+  .quick-tr > [role="cell"] { padding-left: 0; }
+  .quick-tr > [role="cell"]::before { position: static; display: block; width: auto; margin-bottom: 2px; }
+}
+@container quick (max-width: 400px) {
+  html[lang="en"] .quick-facts { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  html[lang="en"] .quick-facts dt { margin-top: 3px; font-size: 11px; }
+  html[lang="en"] .quick-facts dd { margin-bottom: 3px; }
+}
+
+/* 打印（在速查页时）：只留这一页，去掉按钮和背景，卡片不跨页。 */
+@media print {
+  @page { margin: 12mm; }
+  html:has(#app[data-view="quick"]), html:has(#app[data-view="quick"]) body { height: auto; overflow: visible; background: #fff; }
+  #app[data-view="quick"] { position: static; height: auto; overflow: visible; }
+  #app[data-view="quick"] > :not(#quick) { display: none !important; }
+  #app[data-view="quick"] #quick { position: static !important; inset: auto !important; overflow: visible !important; padding: 0 !important; border: 0 !important; border-image: none !important; background: #fff !important; clip-path: none !important; }
+  .quick-toolbar, .quick-picker, .quick-remove, .quick-shared, .quick-empty, .quick-head .eyebrow, .quick-share-field { display: none !important; }
+  .quick-head h2 { font-size: 20px; }
+  .quick-sheet, .quick-pins { margin-bottom: 12px; }
+  .quick-calendar, .quick-card, .quick-tr { break-inside: avoid; }
+  .quick-sheet-head { break-after: avoid; }
+  .quick-groups { columns: 2; }
+  .quick-calendars { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .quick-calendar, .quick-card, .quick-table, .quick-slot, .quick-card-art, .tab-count, .time-bar, .time-span, .season-slot, .week-day, .growth-regrow { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .quick-print-credit { display: block; margin-top: 10px; font-size: 10px; color: #555; }
+  .quick-footer > .quick-note { display: none; }
+}

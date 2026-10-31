@@ -9,7 +9,7 @@
     assert(document.getElementById('clock-time').hidden && document.getElementById('clock-weather').hidden, 'Default header suggests a current game clock');
     assert(!root.querySelector('.home-condition') && root.querySelector('.home-reading'), 'Home should centre reading paths');
     assert(!root.textContent.includes('现在种来得及') && !root.textContent.includes('本季接下来的生日'), 'Home retained a simulated daily dashboard');
-    if (!A.state.plan.length) assert(document.getElementById('plan-slots').hidden, 'Empty bookmark slots should not occupy navigation');
+    if (!A.state.plan.length) assert(document.getElementById('quick-count').hidden, 'An empty cheat sheet should not show a count');
 
     A.openBrowse('fish');
     assert(!root.querySelector('.browse-now'), 'Fresh fish browsing requires a global time filter');
@@ -22,10 +22,10 @@
     A.select({ type: 'item', id: '(O)388' });
     assert(body.textContent.includes('获取途径') && body.textContent.includes('用途'), 'Material provenance and uses must be directly available');
     assert(!body.querySelector('.path-state'), 'Acquisition paths show personal verdicts by default');
-    const bookmark = [...body.querySelectorAll('button')].find(b => b.textContent === '收藏条目');
+    const bookmark = [...body.querySelectorAll('button')].find(b => b.textContent === '钉到速查');
     if (bookmark) bookmark.click();
-    assert(A.state.plan.some(p => p.id === '(O)388'), 'Bookmark action must retain the existing saved-reference model');
-    assert(!document.getElementById('plan-slots').querySelector('.empty'), 'Bookmark strip must not create filler slots');
+    assert(A.state.plan.some(p => p.id === '(O)388'), 'Pinning must keep the existing saved-reference model');
+    assert(document.getElementById('quick-count').textContent === String(A.state.plan.length), 'Cheat sheet tab should count pinned entries');
 
     A.select({ type: 'item', id: A.itemInfo('防风草种子').id });
     assert(body.textContent.includes('种植规则') && body.textContent.includes('基础生长时间：4 天'), 'Crop facts should not require a planting date');

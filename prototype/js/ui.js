@@ -11,6 +11,8 @@
   const safeText = (text, fallback = t("后续说明已收起")) => S.textAllowed(text) ? text : fallback;
   const nodeName = (n) => n?.name || n?.title || "";
   state.view = "browse";
+  // 分类查询和我的速查是阅读页：详情居中打开，不和地图或路线并排。
+  const readingView = (v = state.view) => v === "browse" || v === "quick";
   let current = null; // 当前选中 { type, id }
   let pointReturn = null;
   const pointStates = new Map();
@@ -161,12 +163,13 @@
     const body = $("journal-body");
     const scroll = body.scrollTop;
     body.replaceChildren();
-    if (state.view === "browse") {
-      $("journal-title").textContent = t("资料查询");
+    if (state.view === "browse" || state.view === "quick") {
+      const quick = state.view === "quick";
+      $("journal-title").textContent = quick ? t("我的速查") : t("资料查询");
       $("journal").setAttribute("aria-label", t("资料分类与搜索"));
-      body.append(el("p", { class: "d-sub" }, t("直接查资料，沿着材料、用途和前置条件继续了解。")));
+      body.append(el("p", { class: "d-sub" }, quick ? t("搜索或打开分类找到条目，在详情里点「钉到速查」，就会显示在右边。") : t("直接查资料，沿着材料、用途和前置条件继续了解。")));
       const list = el("div", { class: "browse-nav" });
-      for (const c of App.browse.categories) list.append(el("button", { type: "button", "aria-current": App.browse.category === c.id ? "page" : null,
+      for (const c of App.browse.categories) list.append(el("button", { type: "button", "aria-current": !quick && App.browse.category === c.id ? "page" : null,
         onclick: () => App.openBrowse(c.id) }, img(c.icon), c.title));
       body.append(list); body.scrollTop = scroll; return;
     }
@@ -419,7 +422,7 @@
   function updateDetailPresentation() {
     detail.dataset.mode = detailMode;
     $("detail-shade").hidden = detail.hidden || detailMode !== "reading";
-    $("detail-mode").hidden = state.view === "browse";
+    $("detail-mode").hidden = readingView();
     $("detail-mode").textContent = detailMode === "context" ? t("居中阅读") : state.view === "map" ? t("对照地图") : t("对照路线");
     $("detail-caption").textContent = $("detail-title")?.textContent || t("资料阅读");
     detail.setAttribute("role", detailMode === "reading" ? "dialog" : "region");
@@ -434,7 +437,7 @@
     if (!detail.hidden && (bar.scrollWidth > bar.clientWidth || $("detail-caption").clientWidth < 64)) bar.classList.add("compact");
   }
   function setDetailMode(mode) {
-    detailMode = mode === "context" && state.view !== "browse" ? "context" : "reading";
+    detailMode = mode === "context" && !readingView() ? "context" : "reading";
     updateDetailPresentation(); updateInsets();
   }
   function focusDetailTitle() {
@@ -965,8 +968,10 @@
   function actions(...btns) { return el("div", { class: "d-actions" }, btns.filter(Boolean)); }
   function btn(label, fn, primary) { return el("button", { class: "btn" + (primary ? " primary" : ""), type: "button", onclick: fn }, label); }
   function planBtn(ref) {
-    const inPlan = state.plan.some((p) => p.type === ref.type && p.id === ref.id);
-    return btn(inPlan ? t("取消收藏") : t("收藏条目"), () => { togglePlan(ref); renderDetail(); });
+    const button = btn(App.quick.pinned(ref) ? t("从速查移除") : t("钉到速查"), () => { App.quick.toggle(ref); renderDetail(); });
+    button.classList.add("pin-toggle");
+    button.setAttribute("aria-pressed", String(App.quick.pinned(ref)));
+    return button;
   }
 
   function matTree(nodes) {
@@ -1524,7 +1529,7 @@
     if (ref) detailMode = "reading";
     current = ref;
     if (!same) detail.scrollTop = 0;
-    if (!ref || ["map", "search", "journal", "browse", "hash", "find"].includes(opts.from)) pointReturn = null;
+    if (!ref || ["map", "search", "journal", "browse", "quick", "hash", "find"].includes(opts.from)) pointReturn = null;
     if (ref?.type === "point") {
       setView("map", { preserveDetail: true }); App.map.select(null); App.map.setRelated([]); App.tree.select(null);
       renderDetail(); if (!same) focusDetailTitle(); writeHash(); return;
@@ -1661,12 +1666,13 @@
   }
 
   function setView(v, { preserveDetail = false } = {}) {
-    if (current && !preserveDetail && !readingHash) detailMode = v === "browse" ? "reading" : "context";
+    if (current && !preserveDetail && !readingHash) detailMode = readingView(v) ? "reading" : "context";
     if (state.view === v) { updateDetailPresentation(); updateInsets(); return; }
     state.view = v;
     document.getElementById("app").dataset.view = v;
     $("tree").hidden = v !== "tree";
     $("browse").hidden = v !== "browse";
+    $("quick").hidden = v !== "quick";
     $("map-keyboard").hidden = v !== "map";
     $("map-tools").hidden = v !== "map";
     $("tree-tools").hidden = v !== "tree";
@@ -1677,6 +1683,7 @@
       App.tree.refresh();
       if (current?.type === "node") App.tree.focusNode(current.id, { offsetX: 190 });
     } else if (v === "browse") App.browse.render();
+    else if (v === "quick") App.quick.render();
     else App.map.redraw();
     renderJournal();
     updateInsets();
@@ -1698,7 +1705,7 @@
     detail.style.removeProperty("top"); detail.style.removeProperty("max-height");
     if (window.innerWidth <= 760) {
       detail.style.removeProperty("top"); detail.style.removeProperty("max-height");
-      $("browse").style.removeProperty("right"); $("browse").style.removeProperty("top");
+      for (const id of ["browse", "quick"]) { $(id).style.removeProperty("right"); $(id).style.removeProperty("top"); }
       $("map-tools").style.removeProperty("left"); $("map-tools").style.removeProperty("max-width");
       const top = Math.max(document.querySelector(".clock").getBoundingClientRect().bottom,
         $("map-tools").hidden ? 0 : $("map-tools").getBoundingClientRect().bottom) + 12;
@@ -1713,8 +1720,7 @@
     App.treeInsetLeft = j.right;
     const clockBottom = document.querySelector(".clock").getBoundingClientRect().bottom;
     detail.style.setProperty("--detail-context-top", clockBottom + 10 + "px");
-    $("browse").style.top = `${Math.max(100, clockBottom + 12)}px`;
-    $("browse").style.right = "16px";
+    for (const id of ["browse", "quick"]) { $(id).style.top = `${Math.max(100, clockBottom + 12)}px`; $(id).style.right = "16px"; }
     const left = j.right + 8;
     const right = docked ? detail.getBoundingClientRect().left - 8 : window.innerWidth;
     App.mapInsetX = (left + right) / 2 - window.innerWidth / 2;
@@ -1743,32 +1749,11 @@
     if (ref.type === "area") return App.areaTitle(ref.id);
     return N(ref.id);
   }
-  function refDone(ref) {
-    if (!S.canView(ref)) return null;
-    if (ref.type === "node") { const s = P().status(ref.id).status; return s === "done" ? "ok" : s === "ready" ? "next" : null; }
-    if (ref.type === "fish") return App.fishCheck(App.fishByName.get(ref.id)).ok === true ? "now" : null;
-    if (ref.type === "item") return state.progress.owned?.[ref.id] ? "ok" : null;
-    return null;
-  }
-  function togglePlan(ref) {
-    const i = state.plan.findIndex((p) => p.type === ref.type && p.id === ref.id);
-    if (i >= 0) { state.plan.splice(i, 1); App.toast(t("已取消收藏")); }
-    else if (state.plan.length >= 8) { App.toast(t("快捷收藏最多 8 个条目，先移出一个")); return; }
-    else { state.plan.push({ type: ref.type, id: ref.id }); App.toast(t("已收藏：{name}", { name: refName(ref) })); }
-    App.emit("plan");
-  }
-  function renderPlan() {
-    const ol = $("plan-slots");
-    ol.replaceChildren();
-    ol.hidden = state.plan.length === 0;
-    for (let i = 0; i < state.plan.length; i++) {
-      const ref = state.plan[i];
-      const mark = App.conditionsActive() ? refDone(ref) : null;
-      const b = el("button", { class: "slot", type: "button", title: refName(ref), "aria-label": `${refName(ref)}${mark === "ok" ? t("（已完成）") : mark === "next" ? t("（下一步）") : mark === "now" ? t("（现在能钓）") : ""}` },
-        img(refIcon(ref)), mark ? el("span", { class: "slot-state" + (mark === "ok" ? " ok" : "") }, { ok: "✓", next: "★", now: t("鱼") }[mark]) : null);
-      b.addEventListener("click", () => App.select(ref, { from: "search", switchView: ref.type === "node" }));
-      ol.append(el("li", null, b));
-    }
+  function renderPinCount() {
+    const count = $("quick-count");
+    count.textContent = state.plan.length ? String(state.plan.length) : "";
+    count.hidden = !state.plan.length;
+    $("tab-quick").setAttribute("aria-label", state.plan.length ? t("我的速查（{n} 个钉选条目）", { n: state.plan.length }) : t("我的速查"));
   }
 
   // ———————————————————— 进度对话框 ————————————————————
@@ -1845,6 +1830,8 @@
     if (readingHash) return;
     const parts = [`view=${state.view}`];
     if (state.view === "browse" && App.browse.category) parts.push(`cat=${App.browse.category}`);
+    // 打开的是别人分享的速查：保留分享内容，刷新或返回时仍是同一页。
+    if (state.view === "quick") for (const [key, value] of Object.entries(App.quick.hashParams())) parts.push(`${key}=${value}`);
     if (current) parts.push(`sel=${current.type}:${encodeURIComponent(current.id)}`);
     if (current && state.graph && App.graph.supports(current)) parts.push("g=1");
     const hash = "#" + parts.join("&");
@@ -1855,9 +1842,12 @@
     readingHash = true;
     try {
     const h = new URLSearchParams(location.hash.slice(1));
-    const view = ["map", "tree", "browse"].includes(h.get("view")) ? h.get("view") : "browse";
+    const view = ["map", "tree", "browse", "quick"].includes(h.get("view")) ? h.get("view") : "browse";
     if (view === "browse") App.browse.open(h.get("cat"));
+    App.quick.setShared(view === "quick" && (h.has("pins") || h.has("sheets")) ? App.quick.model.decode(h.get("pins"), h.get("sheets"), h.get("qs")) : null);
     setView(view);
+    // 已经在速查页时打开分享链接，视图没变，需要重画。
+    if (view === "quick") App.quick.render();
     const sel = h.get("sel");
     if (sel) {
       const i = sel.indexOf(":");
@@ -1881,7 +1871,7 @@
     // 切换语言：记住选择，并带上当前查看的条目。
     $("lang-switch")?.addEventListener("click", e => { e.preventDefault(); window.L10N.switchTo(e.currentTarget.dataset.lang); });
     for (const b of document.querySelectorAll(".hotbar-views button")) b.addEventListener("click", () => {
-      if (b.dataset.view === "browse") App.select(null);
+      if (readingView(b.dataset.view)) App.select(null);
       setView(b.dataset.view); b.focus({ preventScroll: true });
     });
     $("detail-close").addEventListener("click", () => App.select(null));
@@ -1958,9 +1948,10 @@
     }
     renderClock();
     renderJournal();
-    renderPlan();
+    renderPinCount();
     paintModes();
     if (state.view === "browse") App.browse.render();
+    if (state.view === "quick") App.quick.render();
     if (current) renderDetail();
     if (collectionFocus != null) ($(`detail-body`).querySelector(`.collection-requirement[data-index="${collectionFocus}"] input`) || $("detail-body").querySelector(".collection-filter input"))?.focus();
     if (App.tree.built) App.tree.refresh();
@@ -1978,7 +1969,7 @@
     updateInsets();
     await App.map.init();
     renderJournal();
-    renderPlan();
+    renderPinCount();
     paintModes();
     readHash();
   }

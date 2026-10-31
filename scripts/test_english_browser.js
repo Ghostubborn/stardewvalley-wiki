@@ -1,6 +1,6 @@
 // Run on /en/ with agent-browser eval --stdin < scripts/test_english_browser.js, then poll
 // `window.__enScan` until it has a result (the walk yields to the page so the browser stays responsive).
-// Walks every category, detail type, map, progression and dialog with spoiler protection on and off,
+// Walks every category, detail type, map, progression, cheat sheet and dialog with spoiler protection on and off,
 // then every entry again as a relation graph (groups, flavour families and crafting chains opened),
 // and reports any Chinese text or attribute that would be visible on the English page.
 window.__enScan = { done: false, step: "starting" };
@@ -26,13 +26,26 @@ window.__enScan = { done: false, step: "starting" };
     }
   }
   const views = () => {
-    for (const view of ["browse", "map", "tree"]) { A.setView(view); scan("view:" + view); }
+    for (const view of ["browse", "map", "tree", "quick"]) { A.setView(view); scan("view:" + view); }
   };
+  // Cheat sheet: one pin of each kind (including a protected one) and all three tables, in every season.
+  function quickSheet(label) {
+    const plan = A.state.plan, sheets = A.state.sheets, season = A.state.quickSeason;
+    A.state.plan = [{ type: "villager", id: "潘妮" }, { type: "villager", id: "科罗布斯" }, { type: "fish", id: "鲶鱼" }, { type: "fish", id: "午夜鱿鱼" },
+      { type: "item", id: A.itemInfo("草莓种子").id }, { type: "item", id: "(O)24" }, { type: "location", id: "皮埃尔的杂货店" }, { type: "item", id: "(O)388" },
+      { type: "node", id: "tool:斧头:1" }, { type: "bundle", id: "茶水间:高品质作物收集包" }, { type: "page", id: "鸡舍" }];
+    A.state.sheets = ["birthdays", "shops", "fish"];
+    A.setView("quick");
+    for (const value of ["all", ...A.SEASONS]) { A.quick.setSeason(value); scan(label + ":quick:" + value); }
+    A.state.plan = []; A.state.sheets = []; A.emit("plan"); scan(label + ":quick:empty");
+    A.state.plan = plan; A.state.sheets = sheets; A.state.quickSeason = season; A.emit("plan");
+  }
   const pause = () => new Promise(resolve => setTimeout(resolve, 0));
   async function pass(label, { items = true } = {}) {
     window.__enScan.step = label;
     A.select(null);
     views();
+    quickSheet(label);
     A.openBrowse(null); scan(label + ":home");
     for (const c of A.browse.categories) {
       A.openBrowse(c.id);

@@ -54,6 +54,24 @@ UI_IMAGES = [
 WEEKDAYS = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "日": 0, "天": 0}
 
 
+# 信息框漏填、正文写明的休息日。cd 单独给出：周五只是 16:00 后不营业，不能按“周五”算整天休息。
+ARTICLE_CLOSURES = {
+    # BWIKI《木匠的商店》：“房子里商店的柜台于每天09:00至17:00可供玩家使用，但周二除外……而在周五，罗宾会在下午 4 点前往星之果实酒吧。”
+    "木匠的商店": {"closed": "周二；周五 16:00 以后", "cd": [2], "cdc": False},
+}
+
+
+def closed_weekdays(text):
+    """休息日（0 是周日）。范围写法“星期一至星期四”展开成每一天，不能只取两端。"""
+    days = set()
+    order = [1, 2, 3, 4, 5, 6, 0]
+    for a, b in re.findall(r"(?:星期|周)([一二三四五六日天])\s*(?:至|到|~|-|–|—)\s*(?:星期|周)?([一二三四五六日天])", text):
+        i, j = order.index(WEEKDAYS[a]), order.index(WEEKDAYS[b])
+        days.update(order[i:j + 1] if i <= j else order[i:] + order[:j + 1])
+    days.update(WEEKDAYS[d] for d in re.findall(r"(?:星期|周)([一二三四五六日天])", text))
+    return sorted(days)
+
+
 def load(name):
     with open(os.path.join(BUILD, name), encoding="utf-8") as f:
         return json.load(f)
@@ -233,14 +251,15 @@ def main():
     # —— 地点 ——
     locations = []
     for l in load("locations.json"):
-        closed = l["closed"] or ""
-        days = sorted({WEEKDAYS[d] for d in re.findall(r"(?:星期|周)([一二三四五六日天])", closed)})
+        fix = ARTICLE_CLOSURES.get(l["page"]) if not l["closed"] else None
+        closed = fix["closed"] if fix else l["closed"] or ""
+        days = fix["cd"] if fix else closed_weekdays(closed)
         x, y, key = position(l, wiki=True) or [None, None, l["map"]]
         locations.append({
             "p": l["page"], "en": l["en"], "map": key, "x": x, "y": y,
             "i": img(l["image"]),
-            "hours": l["open_hours"], "R": l["open_ranges"], "closed": l["closed"], "cd": days,
-            "cdc": bool(days and re.search(r"后|之后|以后|如果|若", closed)),
+            "hours": l["open_hours"], "R": l["open_ranges"], "closed": closed or None, "cd": days,
+            "cdc": fix["cdc"] if fix else bool(days and re.search(r"后|之后|以后|如果|若", closed)),
             "addr": l["address"], "occ": l["occupants"],
         })
 

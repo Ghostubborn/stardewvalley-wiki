@@ -1,6 +1,6 @@
 // Run on /en/ with agent-browser eval --stdin < scripts/test_english_spoilers_browser.js
 // With spoiler protection on and no progress, English names of protected entries must not appear
-// in categories, the home page, map lists, fuzzy search or wiki article bodies.
+// in categories, the home page, map lists, the cheat sheet, fuzzy search or wiki article bodies.
 (async () => {
   const A = App, S = A.spoilers, D = A.D;
   if (A.lang !== "en") throw new Error("Open /en/ first");
@@ -23,6 +23,13 @@
   A.setView("map");
   for (const p of A.mapContents.points("valley")) check("map", p.title + " " + p.entries.map(e => e.label + " " + (e.subtitle || "")).join(" "));
   A.setView("tree"); check("tree", exposed(document.getElementById("tree")));
+  // Cheat sheet: all tables in every season, plus a pinned protected villager and a pinned public one.
+  const plan = A.state.plan, sheets = A.state.sheets;
+  A.state.plan = [{ type: "villager", id: "科罗布斯" }, { type: "villager", id: "潘妮" }, { type: "item", id: "(O)388" }];
+  A.state.sheets = ["birthdays", "shops", "fish"];
+  A.setView("quick");
+  for (const season of ["all", ...A.SEASONS]) { A.quick.setSeason(season); check("quick:" + season, exposed(document.getElementById("quick"))); }
+  A.quick.setSeason("all"); A.state.plan = plan; A.state.sheets = sheets; A.emit("plan");
   const input = document.getElementById("search");
   for (const q of ["is", "gin", "sk", "qi", "gal", "vol", "kro", "inf", "wit", "mov"]) {
     input.value = q; input.dispatchEvent(new Event("input", { bubbles: true }));

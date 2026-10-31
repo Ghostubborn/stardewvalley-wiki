@@ -41,12 +41,13 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=95851f674a4e" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=8c06700e7465">
+<link rel="preload" href="assets/fonts/pixel-subset.woff2?v=be9c0d7e4efd" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=ea8a8bfc3ea4">
 <link rel="stylesheet" href="browse.css?v=57c26cf9bd57">
 <link rel="stylesheet" href="guides.css?v=268492097177">
 <link rel="stylesheet" href="collections.css?v=df70116c3653">
 <link rel="stylesheet" href="graph.css?v=b61584e0a012">
+<link rel="stylesheet" href="quick.css?v=39c7a5a59d33">
 <link rel="stylesheet" href="feedback.css?v=9d3851433110">
 </head>
 <body>
@@ -55,6 +56,8 @@
   <canvas id="map" role="img" aria-label="星露谷地图。地点有可聚焦按钮，点击或回车查看资料。"></canvas>
   <div class="map-keyboard" id="map-keyboard" role="group" aria-label="地图地点，使用方向键选择，回车查看"></div>
   <section id="browse" class="browse-view frame frame-scroll" aria-label="分类查询"></section>
+  <!-- 我的速查：钉选的条目和可开关的速查表，见 js/quick.js -->
+  <section id="quick" class="browse-view quick-view frame frame-scroll" aria-label="我的速查" hidden></section>
 
   <section id="tree" class="tree" aria-label="成长路线" hidden>
     <div class="tree-stage" id="tree-stage"></div>
@@ -164,13 +167,13 @@
   </div>
 
   <!-- 底部：工具栏 -->
-  <nav class="hotbar frame" aria-label="查阅视图与收藏">
+  <nav class="hotbar frame" aria-label="查阅视图">
     <div class="hotbar-views" role="tablist">
       <button role="tab" id="tab-browse" data-view="browse" aria-selected="true">分类查询</button>
       <button role="tab" id="tab-map" data-view="map" aria-selected="false">山谷地图</button>
       <button role="tab" id="tab-tree" data-view="tree" aria-selected="false">成长路线</button>
+      <button role="tab" id="tab-quick" data-view="quick" aria-selected="false">我的速查<span class="tab-count" id="quick-count" aria-hidden="true" hidden></span></button>
     </div>
-    <ol class="hotbar-slots" id="plan-slots" aria-label="收藏条目" hidden></ol>
   </nav>
 
   <div class="tooltip frame" id="tooltip" role="tooltip" hidden></div>
@@ -262,12 +265,12 @@
   </dialog>
 </div>
 
-<script src="data.js?v=66472c2d7140"></script>
+<script src="data.js?v=4c6c5738a77f"></script>
 <script src="js/i18n.js?v=a8528ce00f89"></script>
 <script src="js/core.js?v=8fc820c9be78"></script>
 <script src="js/map.js?v=ea89ad22ed18"></script>
 <script src="js/tree.js?v=9d8dbfb5f83f"></script>
-<script src="js/spoilers.js?v=b909fc84d550"></script>
+<script src="js/spoilers.js?v=367f2a367541"></script>
 <script src="js/map-content.js?v=40e8407fed14"></script>
 <script src="js/browse-home.js?v=7655e9f2990f"></script>
 <script src="js/browse-views.js?v=6b3eb4604471"></script>
@@ -277,7 +280,8 @@
 <script src="js/collections.js?v=dfafae1fbb7b"></script>
 <script src="js/relations.js?v=b80d3e7516ee"></script>
 <script src="js/graph.js?v=8a0ab9c20179"></script>
-<script src="js/ui.js?v=6402ed2d4e0b"></script>
+<script src="js/quick.js?v=6ca93256c3cf"></script>
+<script src="js/ui.js?v=c945f53f269f"></script>
 <script src="js/feedback.js?v=fd5271855aa9"></script>
 <script src="js/music.js?v=7de624dccbd2"></script>
 </body>

@@ -179,6 +179,8 @@
   A.spoilers = {
     active, canView, title, textAllowed, fileAllowed, mapPoint, mapPointArea,
     node: id => canView({ type: "node", id }),
+    // 只是本次临时查看（“仅查看此条”）的条目；钉到速查时改为记住。
+    temporary: ref => revealed.has(title(ref)) && !A.state.spoilers.known.includes(title(ref)),
     area: id => canView({ type: "area", id }),
     reveal(ref, remember = false) {
       const name = title(ref);

@@ -1,6 +1,6 @@
 // Run in the local app (Chinese page) with agent-browser eval --stdin < scripts/test_scroll_areas_browser.js,
 // at desktop, short-window and phone sizes. Opens every scrolling panel (category pages, search, entry
-// details in both modes, conditions, progress, feedback, map and route views) and checks that scrolled content and
+// details in both modes, conditions, progress, feedback, map, route and cheat sheet views) and checks that scrolled content and
 // sticky bars stay inside the wooden frame instead of passing over its inner bands, that the end of each
 // scroll area can be reached, and that the search list fits inside the journal panel.
 (async () => {
@@ -89,6 +89,9 @@
     document.getElementById("feedback-open")?.click(); await pause(300); check("feedback");
     await reset();
     A.setView("tree"); await pause(500); check("route");
+    A.state.plan = [{ type: "villager", id: "潘妮" }, { type: "fish", id: "鲶鱼" }, { type: "item", id: "(O)388" }, { type: "location", id: "皮埃尔的杂货店" }];
+    A.state.sheets = ["birthdays", "shops", "fish"];
+    A.setView("quick"); A.emit("plan"); await pause(500); check("cheat sheet");
     if (issues.length) throw new Error(issues.join("\n"));
     return JSON.stringify({ result: "scrolled content and sticky bars stay inside the frames, every scroll area reaches its end, the search list fits the panel", viewport: [innerWidth, innerHeight] });
   } finally {
@@ -96,6 +99,7 @@
     // Keep the view that is on screen until setView switches back, or setView sees no change and the route stays up.
     const view = A.state.view;
     Object.assign(A.state, saved);
+    if (!("sheets" in saved)) delete A.state.sheets;
     A.state.view = view;
     A.spoilers.setEnabled(saved.spoilers?.enabled !== false);
     A.setView(saved.view || "browse");
